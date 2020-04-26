@@ -1,12 +1,7 @@
 <p align="center">
-    <img width="256px" src="Assets/app_icon.png">
-    <h4 align="center">
-        RocketSim
-    </h4>
-    <p align="center">
-        Enhancing the iOS Simulator
-    </p>
+    <img width="640px" src="Assets/RocketSim_Banner.jpg">
 </p>
+
 
 RocketSim makes it easy to launch universal links in the iOS simulator. Universal links, also known as deeplinks, open directly in your app and can be hard to manage for testing. RocketSim makes this easy!
 
