@@ -9,4 +9,4 @@
 <img width="150" src="Assets/download_mac_app_store.svg"/>
 </p>
 
-
+[![Mac App Store](Assets/download_mac_app_store.svg)](https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12)
