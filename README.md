@@ -8,8 +8,8 @@ RocketSim makes it easy to launch universal links in the iOS simulator. Universa
 [![Mac App Store](Assets/download_mac_app_store.svg)](https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12)
 
 ## Requirements
-- Xcode 11.4 and up
-- MacOS Catalina
+- Xcode 11 and up
+- MacOS 10.14+ (Mojave and up)
 
 ## FAQ
 #### I need another feature!
