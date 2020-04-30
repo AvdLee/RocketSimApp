@@ -9,7 +9,7 @@ RocketSim makes it easy to launch universal links in the iOS simulator. Universa
 
 ## Requirements
 - Xcode 11 and up
-- MacOS 10.15 (Catalina)
+- MacOS 10.14+ (Mojave)
 
 ## FAQ
 #### I need another feature!
