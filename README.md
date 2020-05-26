@@ -4,7 +4,7 @@
     </a>
 </p>
 
-RocketSim makes it easy to launch universal links in the iOS simulator. Universal links, also known as deeplinks, open directly in your app and can be hard to manage for testing. RocketSim makes this easy!
+Record directly into GIF and MP4 with **RocketSim**. Easily manage and launch universal links in the iOS simulator, also known as deeplinks. Shortcuts allow for great productivity.
 
 [![Mac App Store](Assets/download_mac_app_store.svg)](https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12)
 
@@ -20,6 +20,13 @@ RocketSim makes it easy to launch universal links in the iOS simulator. Universa
 - MacOS 10.15+ (Catalina)
 
 ## FAQ
+
+#### How does the recording work?
+
+Like this!
+
+![](assets/RocketSim_recording.gif)
+
 #### I need another feature!
 That's great, I would love to hear your ideas. Please, open an issue with your idea.
 
