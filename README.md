@@ -24,7 +24,11 @@ Record directly into GIF and MP4 with **RocketSim**. Easily manage and launch un
 
 Like this!
 
-![](Assets/RocketSim_recording.gif)
+<p align="center">
+    <a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12">
+      <img width="635px" src="Assets/RocketSim_recording.gif">
+    </a>
+</p>
 
 #### I need another feature!
 That's great, I would love to hear your ideas. Please, open an issue with your idea.
