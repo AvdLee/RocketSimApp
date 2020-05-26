@@ -5,6 +5,8 @@
 </p>
 Record directly into GIF and MP4 with **RocketSim**. Easily manage and launch universal links in the iOS simulator, also known as deeplinks. Shortcuts allow for great productivity.
 
+#### Limited Time Offer - Get 50% Off Now
+
 [![Mac App Store](Assets/download_mac_app_store.svg)](https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12)
 
 ## Features
