@@ -1,0 +1,197 @@
+html, body {
+	margin: 0%;
+	padding: 0%;
+    overflow-x: hidden;
+    
+	/*font-family: 'Josefin Sans', sans-serif;*/
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+body .row {
+	margin-left: 0;
+	margin-right: 0;
+}
+.blue-gradient {
+	background-image: linear-gradient(to bottom right, #58C8FA, #0880FE);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.red-gradient {
+	background-image: linear-gradient(to bottom right, #DA5034, #D94532);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.header-background {
+	/*background: url('background.jpg');*/
+	
+	/*height: 100%;*/
+	background-color: #333333;
+}
+#header-container .lead {
+	text-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+h1#page-title {
+	font-family: FenwayPark;
+}
+h1#page-title a.blog-logo {
+	background: url(assets/RocketSim-logo.svg) no-repeat left;
+    display: block;
+    text-indent: -9999px;
+    background-size: contain;
+}
+.navbar-brand {
+	color: #fff!important;
+	font-size: 2rem;
+	font-weight: 800;
+}
+.bg-light {
+	background-color: transparent!important;
+}
+.nav-link {
+	color: #fff!important;
+	padding: 1.5rem;
+	letter-spacing: 2px;
+	/*    font-weight: 600;*/
+}
+.navbar-brand {
+	color: #fff!important;
+	font-size: 2rem;
+	font-weight: 600;
+	letter-spacing: 4px;
+}
+.navbar-brand :hover {
+	color: black;
+}
+.jumbotron {
+	background-color: transparent;
+	color: #fff;
+	font-size: 1.5rem;
+	padding-right: 0;
+	padding-left: 0;
+}
+.navbar-light .navbar-nav .nav-link {
+	color: #fff;
+	padding: 1.5rem;
+}
+.display-4 {
+	font-size: 4.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+.jumbotron p {
+	margin-top: 0;
+	font-size: 18px;
+	margin-bottom: 1rem;
+}
+.jumbotron img {
+	/*    width: 350px;*/
+	height: auto;
+	padding-left: 0;
+	padding-right: 0;
+}
+.btn-lg {
+	padding: .75rem 1.5rem;
+	font-size: 1.25rem;
+	line-height: 1.5;
+	border-radius: .3rem;
+	margin-top: 2rem;
+	margin-right: 1.5rem;
+}
+.about {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+.about-desc {
+	padding: 0 20%;
+}
+.about-desc h1 {
+	margin-bottom: 2rem;
+}
+.about-features-icon-left {
+	float: right;
+	margin-top: 1.5rem;
+	min-height: 6rem;
+}
+.about-features-details-left {
+	text-align: left;
+}
+.about-features-icon-right {
+	float: left;
+	margin-top: 1.5rem;
+	min-height: 6rem;
+}
+.about-features-details-right {
+	text-align: right;
+}
+.about-features {
+	margin-top: 3.5rem;
+}
+.fa-4 {
+	font-size: 3rem!important;
+}
+.download {
+	color: white;
+}
+.download button {
+	padding: .75rem 1.5rem;
+	font-size: 1.25rem;
+	border-radius: .3rem;
+	margin-top: 2rem;
+	margin-right: 1.5rem;
+}
+.app-store-button {
+	padding: 0;
+    background: none;
+    border: none;
+}
+.parallax-background {
+	background: url('parallax%20background.jpg');
+	background-size: cover;
+}
+.overlay {
+	/*background: rgba(51, 51, 51, 0.71);*/
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}
+.contact-us {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+.contact-us h1 {
+	margin-bottom: 2rem;
+}
+.contact-us p {
+	padding: 0 20%;
+}
+.form-inline {
+	margin-top: 2rem;
+}
+.form-control {
+	padding: 1rem;
+	margin: 1rem;
+	border: 1px solid #333;
+}
+.btn-light {
+	color: #292b2c;
+	background-color: #fff;
+	border-color: #ccc;
+	8f9fa;
+	font-size: 1.5rem;
+}
+.footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: #333;
+    font-size: 13px;
+    color: #fff;
+}
+.footer a {
+	color: white;
+}
+.wow {
+	-webkit-animation-delay: 0.4s;
+}
+@media only screen and (max-width: 600px) {
+	.jumbotron img {
+		width: 100%;
+	}
+}
