@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="59px" height="98px" viewBox="0 0 59 98" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>watermark-icon</title>
+    <g id="watermark-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" stroke="#FFFFFF" stroke-width="5" x="3" y="3" width="53" height="91" rx="5"></rect>
+        <text id="RocketSim" font-family="FenwayParkJF" font-size="8" font-weight="normal" letter-spacing="-0.00319999993" fill="#FFFFFF">
+            <tspan x="14" y="51">RocketSim</tspan>
+        </text>
+        <rect id="Rectangle" fill="#FFFFFF" x="25" y="88" width="10" height="1" rx="0.5"></rect>
+    </g>
+</svg>

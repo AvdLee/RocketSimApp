@@ -1,183 +1,165 @@
-
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
-      <!-- GOOGLE FONTS-->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> -->
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="styleA.css" rel="stylesheet">
-    
-      <!-- FONT AWESOME -->
-      <!-- <link href="https://fastcdn.org/Font-Awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"> -->
-        
-       <!--Animate CSS-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <!--Wow JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-      
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link href="styleA.css" rel="stylesheet" />
+
+        <!--Animate CSS-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+        <!--Wow JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
         <!-- Wow JS Activation -->
-    <script> new WOW().init();  </script>
-      
-  </head>
-  <body>
-  
-   <!--Header and Navbar-->   
-      
-      <div class="container-fluid header-background blue-gradient" >
-      <div class="container">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <!-- <a class="navbar-brand wow fadeInLeft" href="App-landingpage.html"><strong>CRTV</strong></a> -->
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
+        <script>
+            new WOW().init();
+        </script>
+    </head>
+    <body>
+        <!--Header and Navbar-->
+        <div class="container-fluid">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+            </div>
+            <div class="container" id="header-container">
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-md-8 wow">
+                            <h1 class="display-4" id="page-title">
+                                <a class="blog-logo" href="https://www.rocketsim.app/" rel="home">RocketSim</a>
+                            </h1>
+                            <h2>Record the iOS Simulator into GIF or MP4</h2>
+                            <p>Create a recording from the iOS simulator and export it as GIF or MP4. Directly drag it into Slack, GitHub Pull Request, or posts on Twitter.</p>
 
-  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto  wow fadeInRight">
-      <li class="nav-item active">
-        <a class="nav-link" href="App-landingpage.html">HOME<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#about">ABOUT</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#download">DOWNLOAD</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#contactus">CONTACT US</a>
-      </li>
-    </ul>
-    
-  </div> -->
-</nav>
-      </div>
-      <div class="container" id="header-container">
-          <div class="jumbotron">
-              <div class="row">
-	              <div class="col-md-8 wow">
-					  <h1 class="display-4" id="page-title">
-					  	<a class="blog-logo" href="https://www.rocketsim.app/" rel="home">RocketSim</a>
-					  </h1>
-					  <h2>Record the iOS Simulator into GIF or MP4</h2>
-					  <p class="lead">Create a recording from the iOS simulator and export it as GIF or MP4. Directly drag it into Slack, GitHub Pull Request, or posts on Twitter.</p>
-					 
-					  <p class="lead">Recording is not all. Organise and launch Universal Links (deeplinks) with ease.</p>
-					  <p class="lead">
-						  <button class="app-store-button" type="button"><img src="Assets/download_mac_app_store.svg"/></button>
-					  </p>
-	              </div>
-	              <div class=" mobile col-md-4 wow">
-		              <img src="Assets/RocketSim_Header.png" width="475px;">
-	              </div>
-              </div>
-              </div>
-          </div>
-      </div>
-      
-      
-      <!--About-->
-      <div class="container about" id="about">
-          <div class="row">
-			<div class="row about-desc text-center justify-content-center  wow fadeIn">
-				<h1>Everything you need, right from the statusbar</h1>
-				<p class="lead text-center">RocketSim tries to keep things simple. Access all actions right from the statusbar, without any disturbing windows.</p>
-			</div>
-		</div>
-      <div class="row">
-          <div class="col-md-4 wow fadeInRight">
-				<div class="about-features">
-					<div class="about-features-icon-left">
-						<i aria-hidden="true" class="fa fa-camera fa-4"></i>
-					</div>
-					<div class="about-features-details-left">
-						<h3>Launch from clipboard</h3>
-						<p class="lead">Directly launch universal links that you just copied.</p>
-					</div>
-				</div>
-				<div class="about-features">
-					<div class="about-features-icon-left">
-						<i aria-hidden="true" class="fa fa-bolt fa-4"></i>
-					</div>
-					<div class="about-features-details-left">
-						<h3>Deeplink groups</h3>
-						<p class="lead">Save often used deeplinks and access them from custom made groups.</p>
-					</div>
-				</div>
-			</div>
-          <div class="col-md-4 text-center wow fadeInUp">
-        <img src="Assets/statusbar_menu.png" width="250px" style="margin-top:1.5rem;">
-          </div>
-         <div class="col-md-4 wow fadeInLeft">
-				<div class="about-features">
-					<div class="about-features-icon-right">
-						<i aria-hidden="true" class="fa fa-globe fa-4"></i>
-					</div>
-					<div class="about-features-details-right">
-						<h3>Start recording</h3>
-						<p class="lead">Create a recording and export as MP4 or GIF.</p>
-					</div>
-				</div>
-				<div class="about-features">
-					<div class="about-features-icon-right">
-						<i aria-hidden="true" class="fa fa-calendar fa-4"></i>
-					</div>
-					<div class="about-features-details-right">
-						<h3>Using your active simulator</h3>
-						<p class="lead">All actions perform in the visible Simulator, simple as that.</p>
-					</div>
-				</div>
-			</div>
-          </div>
-      </div>
-      <!--Download-->
-	<div class="download" id="download">
-		<div class="red-gradient">
-			<div class="overlay">
-				<div class="container">
-					<div class="row justify-content-center">
-						<h1 class="display-3 wow fadeInUp">RocketSim <b>PRO</b></h1>
-						<p class="lead wow fadeInUp">Help the development of RocketSim by becoming PRO. Enable the option to remove the watermark and enjoy faster export times.</p>
-					</div>
-					<div class="row justify-content-center wow fadeInUp">
-						<p class="lead">
-						  <button class="app-store-button" type="button"><img src="Assets/download_mac_app_store.svg"/></button>
-					  </p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-      
-      <!--Contact Us-->
-	<div class="contact-us" id="contactus">
-		<div class="container">
-			<div class="row justify-content-center text-center wow fadeIn">
-				<h1>Support and Feedback</h1>
-				<p class="lead">If you'd like to report an issue or if you have any ideas or feedback you can open an issue on the <a href="https://github.com/AvdLee/RocketSimApp" target="_blank">RocketSim GitHub Repository</a>.</p>
-			</div>
-		</div>
-	</div>
-      
-      <!--Footer-->
-	<div class="footer">
-		<div class="container">
-			<div class="row justify-content-center">
-				<p>Copyright © 2020 RocketSim. All Rights Reserved. Template by <a href="https://github.com/robinbansal/App-Landing_Page" rel="nofollow" target="_blank">Robin Bansal</a></p>
-			</div>
-		</div>
-	</div>
-      
-      
-      
+                            <p>Recording is not all. Organise and launch Universal Links (deeplinks) with ease.</p>
+                            <p>
+                                <button class="app-store-button" type="button"><img src="Assets/download_mac_app_store.svg" /></button>
+                            </p>
+                        </div>
+                        <div class="mobile col-md-4 wow">
+                            <img src="Assets/RocketSim_Header.png" width="475px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+        <!--About-->
+        <div class="container about" id="about">
+            <div class="row">
+                <div class="row about-desc justify-content-center wow fadeIn">
+                    <h2>Everything you need, right from the statusbar</h2>
+                    <p class="subtitle">RocketSim tries to keep things simple. Access all actions right from the statusbar, without any disturbing windows.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 wow fadeInRight">
+                    <div class="about-features">
+                        <div class="about-features-icon-left">
+                            <i aria-hidden="true" class="fa fa-camera fa-4"></i>
+                        </div>
+                        <div class="about-features-details-left">
+                            <h3>Launch from clipboard</h3>
+                            <p class="lead">Directly launch universal links that you just copied.</p>
+                        </div>
+                    </div>
+                    <div class="about-features">
+                        <div class="about-features-icon-left">
+                            <i aria-hidden="true" class="fa fa-bolt fa-4"></i>
+                        </div>
+                        <div class="about-features-details-left">
+                            <h3>Deeplink groups</h3>
+                            <p class="lead">Save often used deeplinks and access them from custom made groups.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center wow fadeInUp">
+                    <img src="Assets/statusbar_menu.png" width="250px" style="margin-top: 1.5rem;" />
+                </div>
+                <div class="col-md-4 wow fadeInLeft">
+                    <div class="about-features">
+                        <div class="about-features-icon-right">
+                            <i aria-hidden="true" class="fa fa-globe fa-4"></i>
+                        </div>
+                        <div class="about-features-details-right">
+                            <h3>Start recording</h3>
+                            <p class="lead">Create a recording and export as MP4 or GIF.</p>
+                        </div>
+                    </div>
+                    <div class="about-features">
+                        <div class="about-features-icon-right">
+                            <i aria-hidden="true" class="fa fa-calendar fa-4"></i>
+                        </div>
+                        <div class="about-features-details-right">
+                            <h3>Using your active simulator</h3>
+                            <p class="lead">All actions perform in the visible Simulator, simple as that.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--PRO-->
+        <div class="pro" id="pro">
+            <div id="pro-section">
+                <div class="overlay">
+                    <div class="container">
+                        <div class="row ">
+                            <h2 class="display-3 wow fadeInUp">RocketSim <b>PRO</b></h2>
+                            <p class="subtitle wow fadeInUp">Help the development of RocketSim by becoming PRO.</p>
+                            <div id="pro-features">
+								<div>
+									<figure class="watermark-removed-icon"></figure>
+									<h3>No more watermark.</h3>
+									<p>Enable the option to remove the watermark from your recordings.</p>
+								</div>
+								<div>
+									<figure class="performance-icon"></figure>
+									<h3>Better performance.</h3>
+									<p>Recordings are processed faster without having to add the watermark.</p>
+								</div>
+								<div>
+									<figure class="file-sizes-icon"></figure>
+									<h3>Lower filesizes.</h3>
+									<p>Best compression is possible as watermark processing can be skipped.</p>
+								</div>
+							</div>
+                        </div>
+                        <div class="row wow fadeInUp">
+                            <p class="lead">
+                                <button class="app-store-button" type="button"><img src="Assets/download_mac_app_store.svg" /></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Contact Us-->
+        <div class="contact-us" id="contactus">
+            <div class="container">
+                <div class="row justify-content-center text-center wow fadeIn">
+                    <h1>Support and Feedback</h1>
+                    <p class="lead">If you'd like to report an issue or if you have any ideas or feedback you can open an issue on the <a href="https://github.com/AvdLee/RocketSimApp" target="_blank">RocketSim GitHub Repository</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div class="footer">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <p>Copyright © 2020 RocketSim. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
 </html>
