@@ -80,6 +80,7 @@ h2 {
 }
 .jumbotron img {
 	/*    width: 350px;*/
+	width: 100%;
 	height: auto;
 	padding-left: 0;
 	padding-right: 0;
@@ -95,6 +96,9 @@ h2 {
 .about {
 	margin-top: 5rem;
 	margin-bottom: 5rem;
+}
+.about img {
+	width: 100%;
 }
 .subtitle {
 	font-size: 2.0rem;
@@ -138,11 +142,11 @@ h2 {
 #pro-features {
 	margin-top: 90px;
 }
-#pro-features div {
+/*#pro-features div {
 	flex-basis: 33.33333%;
     max-width: 33.33333%;
     float: left;
-}
+}*/
 #pro-features h3 {
 	font-size: 1rem;
 	font-weight: 600;
@@ -158,7 +162,6 @@ h2 {
 	font-size: 1rem;
 	color: #A3A39C;
 	font-weight: 600;
-	width: 80%;
 }
 .watermark-removed-icon {
 	background-image: url(Assets/watermark-icon.svg);
