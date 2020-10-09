@@ -211,9 +211,6 @@ img#floating-thumbnail {
 .support h1 {
 	margin-bottom: 2rem;
 }
-.support p {
-	/*padding: 0 20%;*/
-}
 .form-inline {
 	margin-top: 2rem;
 }
@@ -248,5 +245,8 @@ img#floating-thumbnail {
 	}
 	img#simulator, img#floating-thumbnail {
 		width: 50%;
+	}
+	body {
+		font-size: 14px;
 	}
 }
