@@ -11,10 +11,6 @@ body .row {
 	margin-left: 0;
 	margin-right: 0;
 }
-#header-container p {
-	text-shadow: 0 1px 3px rgba(0,0,0,.15);
-	color: #aaa;
-}
 h1#page-title {
 	font-family: FenwayPark;
 }
@@ -27,9 +23,27 @@ h1#page-title a.blog-logo {
 #header-container h2 {
 	font-size: 2rem;
 }
-h2 {
-	margin-bottom: 1rem;
+.section-headline {
+	/*margin-bottom: 1rem;*/
 	font-size: 4.5rem;
+	line-height: 1.05556;
+    font-weight: 600;
+    letter-spacing: -.006em;
+}
+.section-headline-elevated {
+	line-height: 1.05556;
+    font-weight: 600;
+    letter-spacing: -.006em;
+}
+.typography-section-intro {
+	font-size: 1.5rem;
+    line-height: 1.33341;
+    font-weight: 600;
+    letter-spacing: -.003em;
+    margin-top: 33px;
+}
+.gray-text {
+	color: #aaa;
 }
 #pro-section {
 	background: #111111;
@@ -57,13 +71,6 @@ h2 {
 .navbar-brand :hover {
 	color: black;
 }
-.jumbotron {
-	background-color: transparent;
-	color: #fff;
-	font-size: 1.5rem;
-	padding-right: 0;
-	padding-left: 0;
-}
 .navbar-light .navbar-nav .nav-link {
 	color: #fff;
 	padding: 1.5rem;
@@ -73,16 +80,8 @@ h2 {
 	font-weight: 500;
 	line-height: 1.2;
 }
-.jumbotron p {
-	margin-top: 0;
-	font-size: 18px;
-	margin-bottom: 1rem;
-}
-.jumbotron img {
-	/*    width: 350px;*/
-	height: auto;
-	padding-left: 0;
-	padding-right: 0;
+.jumbotron {
+	background-color: inherit;
 }
 img#simulator {
 	max-width: 188px;
@@ -125,8 +124,9 @@ img#floating-thumbnail {
 #drag-and-drop video {
 	width: 100%;
 	height: auto;
+	margin-top: 3rem;
 }
-.subtitle {
+.section-intro {
 	font-size: 2.0rem;
     font-weight: 600;
 }
@@ -151,9 +151,6 @@ img#floating-thumbnail {
 }
 .feature-item {
 	margin-top: 3.5rem;
-}
-.feature-item .lead {
-	color: #aaa;
 }
 .fa-4 {
 	font-size: 3rem!important;
@@ -207,15 +204,15 @@ img#floating-thumbnail {
 	padding-top: 5rem;
 	padding-bottom: 5rem;
 }
-.contact-us {
+.support {
 	margin-top: 5rem;
 	margin-bottom: 5rem;
 }
-.contact-us h1 {
+.support h1 {
 	margin-bottom: 2rem;
 }
-.contact-us p {
-	padding: 0 20%;
+.support p {
+	/*padding: 0 20%;*/
 }
 .form-inline {
 	margin-top: 2rem;
@@ -246,7 +243,10 @@ img#floating-thumbnail {
 	-webkit-animation-delay: 0.4s;
 }
 @media only screen and (max-width: 600px) {
-	.jumbotron img {
-		width: 100%;
+	.section-desc {
+		padding: 0;
+	}
+	img#simulator, img#floating-thumbnail {
+		width: 50%;
 	}
 }
