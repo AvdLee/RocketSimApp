@@ -15,7 +15,7 @@ h1#page-title {
 	font-family: FenwayPark;
 }
 h1#page-title a.blog-logo {
-	background: url(assets/RocketSim-logo.svg) no-repeat left;
+	background: url(Assets/RocketSim-logo.svg) no-repeat left;
     display: block;
     text-indent: -9999px;
     background-size: contain;
