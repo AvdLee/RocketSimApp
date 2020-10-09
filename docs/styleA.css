@@ -80,10 +80,28 @@ h2 {
 }
 .jumbotron img {
 	/*    width: 350px;*/
-	width: 100%;
 	height: auto;
 	padding-left: 0;
 	padding-right: 0;
+}
+img#simulator {
+	max-width: 188px;
+}
+img#recording-notification {
+	max-width: 240px;
+	float: right;
+	margin-right: 12px;
+}
+img#floating-thumbnail {
+	max-width: 180px;
+	height: 100%;
+}
+#simulator-container {
+	float: left;
+}
+#simulator-container .row {
+	display: flex;
+	align-items: flex-end;
 }
 .btn-lg {
 	padding: .75rem 1.5rem;
@@ -93,40 +111,48 @@ h2 {
 	margin-top: 2rem;
 	margin-right: 1.5rem;
 }
-.about {
+.feature-section {
 	margin-top: 5rem;
 	margin-bottom: 5rem;
 }
-.about img {
+.feature-section img {
+	width: 75%;
+}
+#drag-and-drop img {
+	width: 100px;
+    border-radius: 10px;
+}
+#drag-and-drop video {
 	width: 100%;
+	height: auto;
 }
 .subtitle {
 	font-size: 2.0rem;
     font-weight: 600;
 }
-.about-desc {
+.section-desc {
 	padding: 0 10%;
 }
-.about-features-icon-left {
+.features-icon-left {
 	float: right;
 	margin-top: 1.5rem;
 	min-height: 6rem;
 }
-.about-features-details-left {
+.features-details-left {
 	text-align: left;
 }
-.about-features-icon-right {
+.features-icon-right {
 	float: left;
 	margin-top: 1.5rem;
 	min-height: 6rem;
 }
-.about-features-details-right {
+.features-details-right {
 	text-align: right;
 }
-.about-features {
+.feature-item {
 	margin-top: 3.5rem;
 }
-.about-features .lead {
+.feature-item .lead {
 	color: #aaa;
 }
 .fa-4 {
@@ -142,11 +168,6 @@ h2 {
 #pro-features {
 	margin-top: 90px;
 }
-/*#pro-features div {
-	flex-basis: 33.33333%;
-    max-width: 33.33333%;
-    float: left;
-}*/
 #pro-features h3 {
 	font-size: 1rem;
 	font-weight: 600;
