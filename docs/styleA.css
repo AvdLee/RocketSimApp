@@ -247,7 +247,15 @@ video {
 .wow {
 	-webkit-animation-delay: 0.4s;
 }
-@media only screen and (max-width: 600px) {
+
+/* 2688x1242px at 458ppi */
+@media only screen 
+    and (max-device-width: 600px) {
+
+    .section-headline {
+    	font-size: 3rem;
+    }
+
 	.section-desc {
 		padding: 0;
 	}
