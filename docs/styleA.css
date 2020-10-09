@@ -20,8 +20,19 @@ h1#page-title a.blog-logo {
     text-indent: -9999px;
     background-size: contain;
 }
+#header-container {
+	padding-left: 0;
+    padding-right: 0;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+}
 #header-container h2 {
 	font-size: 2rem;
+}
+#header-container img {
+	max-width: 250px;
+    margin: 0 auto;
+    display: block;
 }
 .section-headline {
 	font-size: 4.5rem;
@@ -172,7 +183,7 @@ video {
 	margin-right: 1.5rem;
 }
 #pro-features {
-	margin-top: 90px;
+	margin-top: 1rem;
 }
 #pro-features h3 {
 	font-size: 1rem;
@@ -183,7 +194,7 @@ video {
     height: 50px;
     background-size: contain;
     background-repeat: no-repeat;
-    margin: 5px 0 15px 0;
+    margin: 2rem 0 15px 0;
 }
 #pro-features p {
 	font-size: 1rem;
@@ -252,10 +263,12 @@ video {
 @media only screen 
     and (max-device-width: 600px) {
 
+	#header-container {
+		margin-top: 1rem;
+	}
     .section-headline {
     	font-size: 3rem;
     }
-
 	.section-desc {
 		padding: 0;
 	}
