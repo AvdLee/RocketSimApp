@@ -19,6 +19,7 @@ h1#page-title a.blog-logo {
     display: block;
     text-indent: -9999px;
     background-size: contain;
+    margin-bottom: 1rem;
 }
 #header-container {
 	padding-left: 0;
