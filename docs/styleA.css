@@ -34,6 +34,9 @@ h1#page-title a.blog-logo {
     margin: 0 auto;
     display: block;
 }
+#header-container .app-store-button img {
+	margin: 0;
+}
 .section-headline {
 	font-size: 4.5rem;
 	line-height: 1.05556;
@@ -175,7 +178,7 @@ video {
 .fa-4 {
 	font-size: 3rem!important;
 }
-.pro button {
+.pro .app-store-button {
 	padding: .75rem 0rem;
 	font-size: 1.25rem;
 	border-radius: .3rem;
