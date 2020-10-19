@@ -237,6 +237,10 @@ video {
 .support h1 {
 	margin-bottom: 2rem;
 }
+.support a {
+	color: white;
+    text-decoration: underline;
+}
 .form-inline {
 	margin-top: 2rem;
 }
