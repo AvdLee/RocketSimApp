@@ -3,6 +3,7 @@
       <img width="635px" src="Assets/promotional_banner.gif">
     </a>
 </p>
+
 Record directly into GIF and MP4 with **RocketSim**. Easily manage and launch universal links in the iOS simulator, also known as deeplinks. Shortcuts allow for great productivity.
 
 #### Available for free in the Mac App Store
