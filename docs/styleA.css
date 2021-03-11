@@ -59,6 +59,9 @@ h1#page-title a.blog-logo {
     letter-spacing: -.003em;
     margin-top: 33px;
 }
+.text-headline {
+	color: white;
+}
 .gray-text {
 	color: #aaa;
 }
@@ -127,8 +130,8 @@ img#floating-thumbnail {
 	margin-right: 1.5rem;
 }
 .feature-section {
-	margin-top: 5rem;
-	margin-bottom: 5rem;
+	margin-top: 8rem;
+	margin-bottom: 8rem;
 }
 .feature-section img {
 	width: 75%;
@@ -152,6 +155,7 @@ video {
 	left: 0;
 	height: auto;
 	margin-top: 3rem;
+	border-radius: 20px;
 }
 .section-intro {
 	font-size: 2.0rem;
@@ -211,11 +215,11 @@ video {
 .watermark-removed-icon {
 	background-image: url(Assets/watermark-icon.svg);
 }
-.performance-icon {
-	background-image: url(Assets/performance-icon.svg);	
+.touches-icon {
+	background-image: url(Assets/touches-icon.svg);	
 }
-.file-sizes-icon {
-	background-image: url(Assets/file-sizes-icon.svg);	
+.comparing-icon {
+	background-image: url(Assets/comparing-icon.svg);	
 }
 .app-store-button {
 	padding: 0;
@@ -268,6 +272,28 @@ video {
 }
 .wow {
 	-webkit-animation-delay: 0.4s;
+}
+
+/* Recording touches */
+#recording-touches img {
+	width: 100%;
+	border-radius: 20px;
+}
+
+/* Reviews */
+#reviews span.author a {
+	color: #aaa;
+	font-style: italic;
+}
+#reviews img {
+	width: 48px;
+	border-radius: 24px;
+    float: left;
+    margin-right: 1em;
+}
+
+#reviews .typography-section-intro {
+	font-size: 1.4rem;
 }
 
 /* 2688x1242px at 458ppi */
