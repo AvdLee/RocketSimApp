@@ -280,6 +280,12 @@ video {
 	border-radius: 20px;
 }
 
+/* Trimming */
+#trimming img {
+	width: 100%;
+    border-radius: 20px;
+}
+
 /* Reviews */
 #reviews span.author a {
 	color: #aaa;
