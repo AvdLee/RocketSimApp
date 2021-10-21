@@ -21,6 +21,9 @@ h1#page-title a.blog-logo {
     background-size: contain;
     margin-bottom: 1rem;
 }
+a {
+	color:  white;
+}
 #header-container {
 	padding-left: 0;
     padding-right: 0;
