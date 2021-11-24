@@ -283,8 +283,23 @@ video {
 	border-radius: 20px;
 }
 
+/* Recording example */
+#recording-example video {
+	position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+
 /* Trimming */
 #trimming img {
+	width: 100%;
+    border-radius: 20px;
+}
+
+/* Screenshots */
+#capturing-screenshots img {
 	width: 100%;
     border-radius: 20px;
 }
