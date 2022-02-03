@@ -224,11 +224,15 @@ video {
 .comparing-icon {
 	background-image: url(Assets/comparing-icon.svg);	
 }
-.app-store-button {
-	padding: 0;
-    background: none;
-    border: none;
+.btn {
+	background: #0089ff;
+	padding: .475rem 1.4rem;
+	border-radius: 20px;
 }
+.paddle_styled_button.green {
+	font-family: inherit !important;
+}
+
 .parallax-background {
 	background: url('parallax%20background.jpg');
 	background-size: cover;
