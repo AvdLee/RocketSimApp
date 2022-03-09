@@ -333,6 +333,14 @@ video {
 #reviews .typography-section-intro {
 	font-size: 1.4rem;
 }
+/* FAQ */
+#faq .question {
+	padding-top: 25px;
+	padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
 
 /* 2688x1242px at 458ppi */
 @media only screen 

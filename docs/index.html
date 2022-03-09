@@ -319,6 +319,59 @@
             </div>
         </div>
 
+        <!--FAQ-->
+        <div class="faq" id="faq">
+            <div class="container">
+                <div class="row justify-content-center wow fadeIn">
+                    <h2>Frequently Asked Questions</h2>
+                    <div id="headingOne" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             Why is my video not accepted by App Store Connect?
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse col-sm-12 gray-text" aria-labelledby="headingOne" data-parent="#faq">
+                        The videos are optimised for App Previews following <a href="https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8" target="_blank">these specifications</a>. App Store Connect does not accept each device, which means that your selected Simulator could not support App Previews. Make sure to use a Simulator matching a device from the App preview specifications.
+                    </div>
+
+                    <div id="headingTwo" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                             Why wouldn't I just use xcrun simctl?
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse col-sm-12 gray-text" aria-labelledby="headingTwo" data-parent="#faq">
+                        Yes, RocketSim uses xcrun simctl as well but enhances the output and provides interfaces for quicker access. Recordings, for example, are enhanced with touches and device bezels that you won't get through the command line tools.
+                    </div>
+
+                    <div id="headingThree" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                             Why does RocketSim need screen recording permissions?
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse col-sm-12 gray-text" aria-labelledby="headingThree" data-parent="#faq">
+                        As a developer, I know how important it is to not just use any permissions. Adding the requirement for screen recording permissions was something I disliked, but it was unavoidable. RocketSim is sandboxed and can't read NSWindow titles without screen recording permissions. RocketSim needs to read the title of Simulator windows to determine the currently active Simulator.
+                    </div>
+
+                    <div id="headingFour" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                             Where can I follow active development?
+                        </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse col-sm-12 gray-text" aria-labelledby="headingFour" data-parent="#faq">
+                        RocketSim is developed by <a href="https://www.twitter.com/twannl" target="_blank">Antoine van der Lee</a>. You can follow him or the official <a href="https://www.twitter.com/rocketsim_app" target="_blank">RocketSim Twitter Account</a> for updates around development.
+                    </div>
+
+                    <div id="headingFive" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                             Where can I report bugs or feature requests?
+                        </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse col-sm-12 gray-text" aria-labelledby="headingFive" data-parent="#faq">
+                        Issues and feature requests are managed on <a href="https://github.com/AvdLee/RocketSimApp/issues" target="_blank">GitHub</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--Support-->
         <div class="support" id="support">
             <div class="container">
@@ -333,7 +386,7 @@
         <div class="footer">
             <div class="container">
                 <div class="row justify-content-center">
-                    <p>Copyright © 2021 RocketSim. All Rights Reserved.</p>
+                    <p>Copyright © 2022 RocketSim. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
