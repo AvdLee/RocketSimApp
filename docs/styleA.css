@@ -41,6 +41,14 @@ a {
 #header-container .app-store-button {
 	float: left;
 }
+#header-container button {
+	background-color: #0093ff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.575rem 1.75rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
 #header-container a img {
 	margin: 0;
 }
@@ -277,6 +285,12 @@ video {
 	-webkit-animation-delay: 0.4s;
 }
 
+/* Recent builds */
+#recent-builds img {
+	width: 100%;
+	border-radius: 20px;
+}
+
 /* Recording touches */
 #recording-touches img {
 	width: 100%;
@@ -298,8 +312,8 @@ video {
     border-radius: 20px;
 }
 
-/* Screenshots */
-#capturing-screenshots img {
+/* Statusbar Menu */
+#statusbar_menu img {
 	width: 100%;
     border-radius: 20px;
 }
