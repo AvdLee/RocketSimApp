@@ -63,11 +63,12 @@
                         <a class="blog-logo" href="https://www.rocketsim.app/" rel="home">RocketSim</a>
                     </h1>
                     <h2 class="section-headline">Enhancing the iOS Simulator</h2>
-                    <p class="gray-text">Compare designs, right in the simulator. Create recordings with touches, trim and export them into MP4 or GIF and share them anywhere using drag & drop. Add bezels to screenshots and videos.</p>
+                    <p class="gray-text">Compare designs, right in the simulator. Create recordings with touches, trim and export them into MP4 or GIF and share them anywhere using drag & drop. Add bezels to screenshots and videos. Perform actions with your latest builds.</p>
 
                     <p class="gray-text">And that's not all. Organise and launch Universal Links (deeplinks) with ease.</p>
                     <p>
-                        <a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12" class="app-store-button"><img src="Assets/download_mac_app_store.svg" /></a>
+                        <a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12" class="app-store-button" target="_blank"><button type="button" class="btn btn-primary">Download now</button></a>
+                        <!-- <a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12" class="app-store-button"><img src="Assets/download_mac_app_store.svg" /></a> -->
                         <!-- <a href="https://www.producthunt.com/posts/rocketsim-for-xcode?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-rocketsim-for-xcode" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=271242&theme=dark" alt="RocketSim for Xcode - Record the iOS Simulator into MP4 or GIF | Product Hunt" style="width: 250px; height: 40px;" width="250" height="40" /></a> -->
                     </p>
                 </div>
@@ -85,6 +86,26 @@
                         </div>
                     </div>
                 </div> -->
+            </div>
+        </div>
+
+        <!--Recent Builds-->
+        <div class="container feature-section" id="recent-builds">
+            <div class="row align-items-center">
+                <div class="col-md-6 wow fadeInUp">
+                    <img src="Assets/recent-builds.png" />
+                </div>
+                <div class="col-md-6 wow fadeInRight">
+                    <span class="align-middle">
+                        <h2>Recent builds</h2>
+                        <p class="gray-text"><span class="text-headline">Quick actions</span> for your recent builds help you increase productivity</p>
+                        <ul class="gray-text">
+                            <li><span class="text-headline">Open common directories</span> like your app's documents folder.</li>
+                            <li>Read and write <span class="text-headline">user defaults</span></li>
+                            <li><span class="text-headline">Grant, revoke, or reset permissions</span> like photo and location access, allowing you to quicker test related implementations</li>
+                        </ul>
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -113,10 +134,35 @@
                 <div class="col-md-6 wow fadeInLeft"><img src="Assets/record_touches.png" /></div>
                 <div class="col-md-6 wow fadeInRight">
                     <span class="align-middle">
-                        <h3>Professional recordings</h3>
-                        <p class="gray-text"><span class="text-headline">Touches</span> make a difference in telling a story. Share professional recordings of a new feature with your friends and colleagues.</p>
-                        <p class="gray-text">You'll blow away your colleagues after <span class="text-headline">adding device bezels</span> to your recordings.</p>
+                        <h3>Professional recordings & screenshots</h3>
+                        <p class="gray-text"><span class="text-headline">Capture</span> MP4, GIF, or PNG.</p>
+                        <ul class="gray-text">
+                            <li>You'll blow away your colleagues after <span class="text-headline">adding device bezels</span> to your recordings</li>
+                            <li><span class="text-headline">Touches</span> make a difference in telling a story. Share professional recordings of a new feature with your friends and colleagues</li>
+                            <li>Optimize for App Store Connect <span class="text-headline">App Previews</span> and stop wasting time using tools like FFmpeg to conform to the <a href="https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8" target="_blank"><u>App Preview specifications</u></a></li>
+                            <li>Add bezels to your <span class="text-headline">screenshots</span> for a professional impression</li>
+                        </ul>
                     </span>
+                </div>
+            </div>
+        </div>
+
+        <!--Trimming videos-->
+        <div class="container feature-section" id="trimming">
+            <div class="row align-items-center">
+                <div class="col-md-8 wow fadeInRight">
+                    <span class="align-middle">
+                        <h2>Floating windows for quick access</h2>
+                        <p class="gray-text">Stack multiple captures in <span class="text-headline">floating windows</span> and drag them into any destination.</p>
+                        <ul class="gray-text">
+                            <li><span class="text-headline">Copy</span> your capture to your clipboard and paste anywhere</li>
+                            <li>Use the <span class="text-headline">trimmer</span> to get the exact result you're looking for</li>
+                            <li>Store your captures in a configurable destination using the <span class="text-headline">save</span> action</li>
+                        </ul>
+                    </span>
+                </div>
+                <div class="col-md-4 wow fadeInUp">
+                    <img src="Assets/trimming.png" />
                 </div>
             </div>
         </div>
@@ -133,34 +179,6 @@
                 <video autoplay loop muted playsinline>
                     <source src="Assets/recording_example.mp4" type="video/mp4">
                 </video>
-            </div>
-        </div>
-
-        <!--Trimming videos-->
-        <div class="container feature-section" id="trimming">
-            <div class="row align-items-center">
-                <div class="col-md-8 wow fadeInRight">
-                    <span class="align-middle">
-                        <h2>Trimming videos</h2>
-                        <p class="gray-text">Actions like <span class="text-headline">trimming, copy, and save</span> allows you to quickly edit and use your Simulator recordings</p>
-                    </span>
-                </div>
-                <div class="col-md-4 wow fadeInUp">
-                    <img src="Assets/trimming.png" />
-                </div>
-            </div>
-        </div>
-
-        <!--Capturing screenshots-->
-        <div class="container feature-section" id="capturing-screenshots">
-            <div class="row align-items-center">
-                <div class="col-md-6 wow fadeInLeft"><img src="Assets/screenshots_functionality.png" /></div>
-                <div class="col-md-6 wow fadeInRight">
-                    <span class="align-middle">
-                        <h3>Professional screenshots</h3>
-                        <p class="gray-text">Snapshots of beautiful pages from your apps will become more real after <span class="text-headline">adding device bezels</span>.</p>
-                    </span>
-                </div>
             </div>
         </div>
 
@@ -184,7 +202,7 @@
 
 
         <!--About-->
-        <div class="container about feature-section" id="about">
+        <div class="container feature-section" id="statusbar_menu">
             <div class="row section-desc wow fadeIn">
                 <h2 class="section-headline">Everything you need, right from the statusbar</h2>
                 <p class="typography-section-intro">RocketSim keeps things simple. Access all actions right from the statusbar, without any disturbing windows.</p>
@@ -193,14 +211,14 @@
                 <div class="col-md-4 wow fadeInRight">
                     <div class="feature-item">
                         <div class="features-details-left">
-                            <h3>Launch from clipboard</h3>
-                            <p class="lead gray-text">Directly launch universal links that you just copied.</p>
+                            <h3>Trigger deeplinks</h3>
+                            <p class="lead gray-text">Directly launch universal links that you just copied or select one from your stored groups.</p>
                         </div>
                     </div>
                     <div class="feature-item">
                         <div class="features-details-left">
-                            <h3>Deeplink groups</h3>
-                            <p class="lead gray-text">Save often used deeplinks and access them from custom made groups.</p>
+                            <h3>Recent builds</h3>
+                            <p class="lead gray-text">Grant, revoke, or reset permissions. Open common folders or edit user defaults.</p>
                         </div>
                     </div>
                 </div>
@@ -210,8 +228,8 @@
                 <div class="col-md-4 wow fadeInLeft">
                     <div class="feature-item">
                         <div class="features-details-right">
-                            <h3>Start recording</h3>
-                            <p class="lead gray-text">Create a recording and export as MP4 or GIF.</p>
+                            <h3>Capture recordings & screenshots</h3>
+                            <p class="lead gray-text">Create MP4 and GIF recordings or capture a screenshot.</p>
                         </div>
                     </div>
                     <div class="feature-item">
@@ -287,12 +305,68 @@
 								<h3>Unlimited compares.</h3>
 								<p>Always reach that pixel-perfect implementation.</p>
 							</div>
+                            <div class="col-xs-12 col-sm-12">
+                                <p  class="gray-text">And much more: Configure windows visibility, minimized capturing window, access to all privacy actions and directories, custom touches color, custom color for captures, optimise for App Previews, optimise recordings for quality or speed.</p>
+                            </div>
 							<div class="col-xs-12 col-sm-12 justify-content-center text-center wow fadeInUp">
 	                            <p class="lead">
 	                            	<a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12" class="app-store-button"><img src="Assets/download_mac_app_store.svg" /></a>
 	                            </p>
 	                        </div>
 						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--FAQ-->
+        <div class="faq" id="faq">
+            <div class="container">
+                <div class="row justify-content-center wow fadeIn">
+                    <h2>Frequently Asked Questions</h2>
+                    <div id="headingOne" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             Why is my video not accepted by App Store Connect?
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse col-sm-12 gray-text" aria-labelledby="headingOne" data-parent="#faq">
+                        The videos are optimised for App Previews following <a href="https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8" target="_blank">these specifications</a>. App Store Connect does not accept each device, which means that your selected Simulator could not support App Previews. Make sure to use a Simulator matching a device from the App preview specifications.
+                    </div>
+
+                    <div id="headingTwo" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                             Why wouldn't I just use xcrun simctl?
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse col-sm-12 gray-text" aria-labelledby="headingTwo" data-parent="#faq">
+                        Yes, RocketSim uses xcrun simctl as well but enhances the output and provides interfaces for quicker access. Recordings, for example, are enhanced with touches and device bezels that you won't get through the command line tools.
+                    </div>
+
+                    <div id="headingThree" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                             Why does RocketSim need screen recording permissions?
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse col-sm-12 gray-text" aria-labelledby="headingThree" data-parent="#faq">
+                        As a developer, I know how important it is to not just use any permissions. Adding the requirement for screen recording permissions was something I disliked, but it was unavoidable. RocketSim is sandboxed and can't read NSWindow titles without screen recording permissions. RocketSim needs to read the title of Simulator windows to determine the currently active Simulator.
+                    </div>
+
+                    <div id="headingFour" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                             Where can I follow active development?
+                        </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse col-sm-12 gray-text" aria-labelledby="headingFour" data-parent="#faq">
+                        RocketSim is developed by <a href="https://www.twitter.com/twannl" target="_blank">Antoine van der Lee</a>. You can follow him or the official <a href="https://www.twitter.com/rocketsim_app" target="_blank">RocketSim Twitter Account</a> for updates around development.
+                    </div>
+
+                    <div id="headingFive" class="col-sm-12 question">
+                        <h5 data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                             Where can I report bugs or feature requests?
+                        </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse col-sm-12 gray-text" aria-labelledby="headingFive" data-parent="#faq">
+                        Issues and feature requests are managed on <a href="https://github.com/AvdLee/RocketSimApp/issues" target="_blank">GitHub</a>.
                     </div>
                 </div>
             </div>
@@ -312,7 +386,7 @@
         <div class="footer">
             <div class="container">
                 <div class="row justify-content-center">
-                    <p>Copyright © 2021 RocketSim. All Rights Reserved.</p>
+                    <p>Copyright © 2022 RocketSim. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
