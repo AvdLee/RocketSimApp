@@ -286,7 +286,7 @@ video {
 }
 
 /* Recent builds */
-#recent-builds img {
+#recent-builds img, #grids img, #rulers img {
 	width: 100%;
 	border-radius: 20px;
 }
