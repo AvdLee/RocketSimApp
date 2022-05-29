@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "details": [{
+            "appIDs": ["4QMDKC8VLJ.com.swiftlee.StockAnalyzer"],
+            "components": [{
+                "/": "/stock/*",
+                "comment": "Matches any URL whose path starts with /stock/"
+            }]
+        }]
+    }
+}
