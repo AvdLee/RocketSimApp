@@ -38,16 +38,26 @@ a {
     margin: 0 auto;
     display: block;
 }
-#header-container .app-store-button {
-	float: left;
+#header-container .team-licenses-button button {
+	background: none;
+    color: #0093ff;
+}
+#header-container .team-licenses-button svg {
+    vertical-align: middle!important;
+    -webkit-transform: translateY(-1.25px)!important;
+    transform: translateY(-1.25px)!important;
+    color: #0093ff;
+    fill: #0093ff;
 }
 #header-container button {
+	float: left;
 	background-color: #0093ff;
     border: none;
     border-radius: 20px;
     padding: 0.575rem 1.75rem;
     font-weight: 600;
     margin-top: 10px;
+    margin-right: 20px;
 }
 #header-container a img {
 	margin: 0;
