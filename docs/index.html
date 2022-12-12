@@ -54,6 +54,33 @@
 
 		  gtag('config', 'UA-62543041-2');
 		</script>
+
+        <script>
+          (function(h,o,u,n,d) {
+            h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+            d=o.createElement(u);d.async=1;d.src=n
+            n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
+          DD_RUM.onReady(function() {
+            DD_RUM.init({
+              clientToken: 'pub403afef4896de0d4c2a701eeb8ee394c',
+              applicationId: 'a0273cb3-0522-4052-b635-3d9fe47b837c',
+              site: 'datadoghq.eu',
+              service: 'rocketsim-website',
+              env: 'production',
+              // Specify a version number to identify the deployed version of your application in Datadog 
+              version: '1.0.0',
+              sampleRate: 100,
+              sessionReplaySampleRate: 0,
+              trackInteractions: true,
+              trackResources: true,
+              trackLongTasks: false,
+              defaultPrivacyLevel: 'mask-user-input',
+            });
+
+            DD_RUM.startSessionReplayRecording();
+          })
+        </script>
     </head>
     <body>
         <!--Header and Navbar-->
