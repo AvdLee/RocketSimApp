@@ -43,10 +43,16 @@ a {
 	margin: 0;
 }
 .header-menu {
-	padding-bottom: 4rem;
+	padding-bottom: 0;
+	margin-bottom: 4rem;
+	top: -1px;
+}
+.header-menu .container {
 	padding-right: 0;
 	padding-left: 0;
-	top: -1px;
+}
+.is-pinned {
+	border-bottom: 1px rgba(255,255,255,0.24) solid;
 }
 .is-pinned #sticky-app-icon {
 	opacity: 1 !important;
