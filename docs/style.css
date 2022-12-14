@@ -28,7 +28,7 @@ a {
 	padding-left: 0;
     padding-right: 0;
     margin-top: 6rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0rem;
 }
 #header-container h2 {
 	font-size: 2rem;
@@ -85,6 +85,18 @@ a {
 }
 .gray-text {
 	color: #aaa;
+}
+#trusted-companies img {
+	max-width: 640px;
+	width: 100%;
+}
+#app-store-badges {
+	margin-bottom: 5rem;
+}
+#app-store-badges img {
+	max-height: 122px;
+	margin: 0 auto;
+    display: block;
 }
 #pro-section {
 	background: #111111;
