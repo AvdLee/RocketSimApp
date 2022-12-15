@@ -2,7 +2,7 @@ html, body {
 	margin: 0%;
 	padding: 0%;
     overflow-x: hidden;
-    
+    overflow: visible;
 	background: #000000;
 	color: #F5F5F7;
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -24,43 +24,69 @@ h1#page-title a.blog-logo {
 a {
 	color:  white;
 }
-#header-container {
+.header-container {
 	padding-left: 0;
     padding-right: 0;
     margin-top: 6rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0rem;
+    padding-bottom: 0;
 }
-#header-container h2 {
+.header-container h2 {
 	font-size: 2rem;
 }
-#header-container img {
+.header-container img {
 	max-width: 250px;
     margin: 0 auto;
     display: block;
 }
-#header-container .team-licenses-button button {
+.header-container a img {
+	margin: 0;
+}
+.header-menu {
+	padding-bottom: 0;
+	margin-bottom: 4rem;
+	top: -1px;
+}
+.header-menu .container {
+	padding-right: 0;
+	padding-left: 0;
+}
+.is-pinned {
+	border-bottom: 1px rgba(255,255,255,0.24) solid;
+}
+.is-pinned #sticky-app-icon {
+	opacity: 1 !important;
+}
+.header-menu #sticky-app-icon {
+	width: 100%;
+	max-width: 44px;
+	opacity: 0;
+}
+.header-menu .row {
+	padding: 1rem 0;
+	backdrop-filter: saturate(180%) blur(20px);
+	background-color: rgba(0,0,0,0.72);
+}
+.header-menu .team-licenses-button button {
 	background: none;
     color: #0093ff;
 }
-#header-container .team-licenses-button svg {
+.header-menu .team-licenses-button svg {
     vertical-align: middle!important;
     -webkit-transform: translateY(-1.25px)!important;
     transform: translateY(-1.25px)!important;
     color: #0093ff;
     fill: #0093ff;
 }
-#header-container button {
+.header-menu button {
 	float: left;
 	background-color: #0093ff;
     border: none;
     border-radius: 20px;
     padding: 0.575rem 1.75rem;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 0;
     margin-right: 20px;
-}
-#header-container a img {
-	margin: 0;
 }
 .section-headline {
 	font-size: 4.5rem;
@@ -85,6 +111,22 @@ a {
 }
 .gray-text {
 	color: #aaa;
+}
+#trusted-companies img {
+	max-width: 640px;
+	width: 100%;
+}
+#trusted-companies h2 {
+	text-align: center;
+}
+#app-store-badges {
+	margin-bottom: 4rem;
+}
+#app-store-badges img {
+	max-height: 122px;
+	margin: 0 auto;
+    display: block;
+    margin-top: 2rem;
 }
 #pro-section {
 	background: #111111;
@@ -356,8 +398,25 @@ video {
 @media only screen 
     and (max-device-width: 600px) {
 
-	#header-container {
+	.header-container {
 		margin-top: 1rem;
+	}
+	.header-container .row img {
+		margin: 0 auto;
+	}
+	.sticky-top {
+		position: relative;
+	}
+	.is-pinned {
+		border-bottom: 0;
+	}
+	#sticky-app-icon {
+		display: none;
+	}
+	.app-store-button button, .team-licenses-button button {
+		display: block;
+		float: none;
+		margin: 0 auto;
 	}
     .section-headline {
     	font-size: 3rem;
@@ -371,7 +430,14 @@ video {
 	body {
 		font-size: 14px;
 	}
+	.feature-section {
+	    margin-top: 4rem;
+	    margin-bottom: 4rem;
+	}
 	.features-details-right {
 		text-align: left;
+	}
+	.row img {
+		margin: 2rem 0;
 	}
 }
