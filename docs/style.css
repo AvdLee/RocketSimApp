@@ -401,6 +401,23 @@ video {
 	.header-container {
 		margin-top: 1rem;
 	}
+	.header-container .row img {
+		margin: 0 auto;
+	}
+	.sticky-top {
+		position: relative;
+	}
+	.is-pinned {
+		border-bottom: 0;
+	}
+	#sticky-app-icon {
+		display: none;
+	}
+	.app-store-button button, .team-licenses-button button {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
     .section-headline {
     	font-size: 3rem;
     }
@@ -413,7 +430,14 @@ video {
 	body {
 		font-size: 14px;
 	}
+	.feature-section {
+	    margin-top: 4rem;
+	    margin-bottom: 4rem;
+	}
 	.features-details-right {
 		text-align: left;
+	}
+	.row img {
+		margin: 2rem 0;
 	}
 }
