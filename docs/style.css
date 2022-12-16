@@ -65,6 +65,7 @@ a {
 .header-menu .row {
 	padding: 1rem 0;
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	background-color: rgba(0,0,0,0.72);
 }
 .header-menu .team-licenses-button button {
