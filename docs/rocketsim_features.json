@@ -1,0 +1,41 @@
+[{
+        "id": "1",
+        "title": "WatchOS Support",
+        "status": "Planned"
+    },
+    {
+        "id": "2",
+        "title": "tvOS Support",
+        "status": "Planned"
+    },
+    {
+        "id": "3",
+        "title": "Add Color Picker to Magnifier",
+        "status": "Planned"
+    },
+    {
+        "id": "4",
+        "title": "Allow to search in Quick Actions",
+        "status": "Planned"
+    },
+    {
+        "id": "5",
+        "title": "Show distance between rulers",
+        "status": "Planned"
+    },
+    {
+        "id": "6",
+        "title": "Allow save as... for captured thumbnails",
+        "status": "Planned"
+    },
+    {
+        "id": "7",
+        "title": "Record mic audio with screen recordings",
+        "status": "Planned"
+    },
+    {
+        "id": "8",
+        "title": "Location Updating",
+        "status": "In Progress"
+    }
+]
