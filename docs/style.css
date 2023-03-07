@@ -344,6 +344,13 @@ video {
 	border-radius: 20px;
 }
 
+/* Location Simulation */
+#location-simulation img {
+	border-radius: 20px;
+	margin: 0 auto;
+	margin-top: 3rem;
+}
+
 /* Recording touches */
 #recording-touches img {
 	width: 100%;
