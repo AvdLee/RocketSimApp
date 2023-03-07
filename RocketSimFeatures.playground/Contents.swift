@@ -1,6 +1,10 @@
 import UIKit
 
 struct Feature: Codable {
+    enum CodingKeys: String, CodingKey {
+        case githubIssueID = "id"
+        case title, description, status, isFinished
+    }
     enum Status: String, Codable {
         case planned = "Planned"
         case inProgress = "In Progress"
@@ -11,6 +15,7 @@ struct Feature: Codable {
     let title: String
     let description: String?
     let status: Status
+    var isFinished: Bool = false
 }
 
 let features: [Feature] = [

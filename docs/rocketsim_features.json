@@ -1,116 +1,135 @@
 [
   {
     "status" : "Planned",
+    "id" : 135,
     "title" : "Apple Watch Support",
-    "githubIssueID" : 135,
+    "isFinished" : false,
     "description" : "Use RocketSim with the Apple Watch Simulator"
   },
   {
     "status" : "Planned",
+    "id" : 87,
     "title" : "tvOS Support",
-    "githubIssueID" : 87,
+    "isFinished" : false,
     "description" : "Use RocketSim with the tvOS Simulator"
   },
   {
     "status" : "Planned",
+    "id" : 263,
     "title" : "Magnifier Color Picker",
-    "githubIssueID" : 263,
+    "isFinished" : false,
     "description" : "Select a color using the Magnifier"
   },
   {
     "status" : "Planned",
+    "id" : 282,
     "title" : "Allow to search Quick Actions",
-    "githubIssueID" : 282,
+    "isFinished" : false,
     "description" : "Filter long lists by searching for a query"
   },
   {
     "status" : "Planned",
+    "id" : 291,
     "title" : "Manually select locations waypoints",
-    "githubIssueID" : 291,
+    "isFinished" : false,
     "description" : "Create a location Quick Action by collecting lon-lat waypoints manually"
   },
   {
     "status" : "Planned",
+    "id" : 278,
     "title" : "Show distance between rulers",
-    "githubIssueID" : 278,
+    "isFinished" : false,
     "description" : "Measure the distance between rulers"
   },
   {
     "status" : "Planned",
+    "id" : 236,
     "title" : "Allow Save as... for captured thumbnails",
-    "githubIssueID" : 236,
+    "isFinished" : false,
     "description" : "Right-click a thumbnail to save as..."
   },
   {
     "status" : "Planned",
+    "id" : 285,
     "title" : "Record Mic audio with recordings",
-    "githubIssueID" : 285,
+    "isFinished" : false,
     "description" : "Screen recordings with your voice as instructions"
   },
   {
     "status" : "Planned",
+    "id" : 299,
     "title" : "Low storage testing",
-    "githubIssueID" : 299,
+    "isFinished" : false,
     "description" : "Simulate low storage on the Simulator to trigger No Space Left errors"
   },
   {
     "status" : "Planned",
+    "id" : 283,
     "title" : "Network Link Conditioner",
-    "githubIssueID" : 283,
+    "isFinished" : false,
     "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection"
   },
   {
     "status" : "Planned",
+    "id" : 289,
     "title" : "Add a wallpaper and padding to screenshots",
-    "githubIssueID" : 289,
+    "isFinished" : false,
     "description" : "Beautify screenshots with a gradient background and extra padding"
   },
   {
     "status" : "Planned",
+    "id" : 280,
     "title" : "Resize screenshots",
-    "githubIssueID" : 280,
+    "isFinished" : false,
     "description" : "Allow resizing the output screenshot to reduce size and resolution"
   },
   {
     "status" : "Planned",
+    "id" : 269,
     "title" : "120hz Simulator Recording",
-    "githubIssueID" : 269,
+    "isFinished" : false,
     "description" : "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off."
   },
   {
     "status" : "Planned",
+    "id" : 193,
     "title" : "Configurable Video Output",
-    "githubIssueID" : 193,
+    "isFinished" : false,
     "description" : "Export to .MOV instead of .MP4"
   },
   {
     "status" : "Planned",
+    "id" : 179,
     "title" : "Display HTTP Traffic",
-    "githubIssueID" : 179,
+    "isFinished" : false,
     "description" : "Show HTTP Traffic directly next to the Simulator"
   },
   {
     "status" : "Planned",
+    "id" : 173,
     "title" : "Configurable status bar",
-    "githubIssueID" : 173,
+    "isFinished" : false,
     "description" : "Change the status bar of the Simulator"
   },
   {
     "status" : "Planned",
+    "id" : 165,
     "title" : "Dynamic Type Control",
-    "githubIssueID" : 165,
+    "isFinished" : false,
     "description" : "Adjust Dynamic Type from the side window"
   },
   {
     "status" : "Planned",
+    "id" : 125,
     "title" : "Constant visible touch indicator",
-    "githubIssueID" : 125,
+    "isFinished" : false,
     "description" : "Always show a mouse-following touch indicator during recordings"
   },
   {
     "status" : "Planned",
+    "id" : 284,
     "title" : "Show comparison overlay when focus is lost",
-    "githubIssueID" : 284,
+    "isFinished" : false,
     "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch"
   }
 ]
