@@ -1,41 +1,116 @@
-[{
-        "id": "1",
-        "title": "WatchOS Support",
-        "status": "Planned"
-    },
-    {
-        "id": "2",
-        "title": "tvOS Support",
-        "status": "Planned"
-    },
-    {
-        "id": "3",
-        "title": "Add Color Picker to Magnifier",
-        "status": "Planned"
-    },
-    {
-        "id": "4",
-        "title": "Allow to search in Quick Actions",
-        "status": "Planned"
-    },
-    {
-        "id": "5",
-        "title": "Show distance between rulers",
-        "status": "Planned"
-    },
-    {
-        "id": "6",
-        "title": "Allow save as... for captured thumbnails",
-        "status": "Planned"
-    },
-    {
-        "id": "7",
-        "title": "Record mic audio with screen recordings",
-        "status": "Planned"
-    },
-    {
-        "id": "8",
-        "title": "Location Updating",
-        "status": "In Progress"
-    }
+[
+  {
+    "status" : "Planned",
+    "title" : "Apple Watch Support",
+    "githubIssueID" : 135,
+    "description" : "Use RocketSim with the Apple Watch Simulator"
+  },
+  {
+    "status" : "Planned",
+    "title" : "tvOS Support",
+    "githubIssueID" : 87,
+    "description" : "Use RocketSim with the tvOS Simulator"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Magnifier Color Picker",
+    "githubIssueID" : 263,
+    "description" : "Select a color using the Magnifier"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Allow to search Quick Actions",
+    "githubIssueID" : 282,
+    "description" : "Filter long lists by searching for a query"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Manually select locations waypoints",
+    "githubIssueID" : 291,
+    "description" : "Create a location Quick Action by collecting lon-lat waypoints manually"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Show distance between rulers",
+    "githubIssueID" : 278,
+    "description" : "Measure the distance between rulers"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Allow Save as... for captured thumbnails",
+    "githubIssueID" : 236,
+    "description" : "Right-click a thumbnail to save as..."
+  },
+  {
+    "status" : "Planned",
+    "title" : "Record Mic audio with recordings",
+    "githubIssueID" : 285,
+    "description" : "Screen recordings with your voice as instructions"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Low storage testing",
+    "githubIssueID" : 299,
+    "description" : "Simulate low storage on the Simulator to trigger No Space Left errors"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Network Link Conditioner",
+    "githubIssueID" : 283,
+    "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Add a wallpaper and padding to screenshots",
+    "githubIssueID" : 289,
+    "description" : "Beautify screenshots with a gradient background and extra padding"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Resize screenshots",
+    "githubIssueID" : 280,
+    "description" : "Allow resizing the output screenshot to reduce size and resolution"
+  },
+  {
+    "status" : "Planned",
+    "title" : "120hz Simulator Recording",
+    "githubIssueID" : 269,
+    "description" : "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off."
+  },
+  {
+    "status" : "Planned",
+    "title" : "Configurable Video Output",
+    "githubIssueID" : 193,
+    "description" : "Export to .MOV instead of .MP4"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Display HTTP Traffic",
+    "githubIssueID" : 179,
+    "description" : "Show HTTP Traffic directly next to the Simulator"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Configurable status bar",
+    "githubIssueID" : 173,
+    "description" : "Change the status bar of the Simulator"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Dynamic Type Control",
+    "githubIssueID" : 165,
+    "description" : "Adjust Dynamic Type from the side window"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Constant visible touch indicator",
+    "githubIssueID" : 125,
+    "description" : "Always show a mouse-following touch indicator during recordings"
+  },
+  {
+    "status" : "Planned",
+    "title" : "Show comparison overlay when focus is lost",
+    "githubIssueID" : 284,
+    "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch"
+  }
 ]
