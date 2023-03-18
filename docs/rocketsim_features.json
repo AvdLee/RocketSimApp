@@ -126,10 +126,10 @@
     "description" : "Always show a mouse-following touch indicator during recordings"
   },
   {
-    "status" : "Planned",
+    "status" : "Implemented",
     "id" : "284",
     "title" : "Show comparison overlay when focus is lost",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch"
   },
   {
