@@ -131,5 +131,12 @@
     "title" : "Show comparison overlay when focus is lost",
     "isFinished" : false,
     "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch"
+  },
+  {
+    "status" : "Planned",
+    "id" : "311",
+    "title" : "Show debugger logs",
+    "isFinished" : false,
+    "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error"
   }
 ]
