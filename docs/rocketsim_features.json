@@ -138,5 +138,12 @@
     "title" : "Show debugger logs",
     "isFinished" : false,
     "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error"
+  },
+  {
+    "status" : "Planned",
+    "id" : "286",
+    "title" : "Locale switcher",
+    "isFinished" : false,
+    "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator."
   }
 ]
