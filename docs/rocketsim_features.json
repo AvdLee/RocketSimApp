@@ -63,10 +63,10 @@
     "description" : "Simulate low storage on the Simulator to trigger No Space Left errors"
   },
   {
-    "status" : "Planned",
+    "status" : "Implemented",
     "id" : "283",
     "title" : "Network Link Conditioner",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection"
   },
   {
@@ -112,7 +112,7 @@
     "description" : "Change the status bar of the Simulator"
   },
   {
-    "status" : "Planned",
+    "status" : "In Progress",
     "id" : "165",
     "title" : "Dynamic Type Control",
     "isFinished" : false,
