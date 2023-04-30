@@ -28,7 +28,7 @@ let features: [Feature] = [
     .init(githubIssueID: "236", title: "Allow Save as... for captured thumbnails", description: "Right-click a thumbnail to save as...", status: .planned),
     .init(githubIssueID: "285", title: "Record Mic audio with recordings", description: "Screen recordings with your voice as instructions", status: .planned),
     .init(githubIssueID: "299", title: "Low storage testing", description: "Simulate low storage on the Simulator to trigger No Space Left errors", status: .planned),
-    .init(githubIssueID: "283", title: "Network Link Conditioner", description: "Disable network connection for a specific Simulator app w/o influencing your Mac's connection", status: .implemented, isFinished: true),
+    .init(githubIssueID: "283", title: "Simulator Airplane Mode", description: "Disable network connection for a specific Simulator app w/o influencing your Mac's connection", status: .implemented, isFinished: true),
     .init(githubIssueID: "289", title: "Add a wallpaper and padding to screenshots", description: "Beautify screenshots with a gradient background and extra padding", status: .planned),
     .init(githubIssueID: "280", title: "Resize screenshots", description: "Allow resizing the output screenshot to reduce size and resolution", status: .planned),
     .init(githubIssueID: "269", title: "120hz Simulator Recording", description: "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off.", status: .planned),
@@ -40,7 +40,8 @@ let features: [Feature] = [
     .init(githubIssueID: "284", title: "Show comparison overlay when focus is lost", description: "Keep the comparison overlay visible when switching to apps like Figma or Sketch", status: .implemented, isFinished: true),
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
     .init(githubIssueID: "286", title: "Locale switcher", description: "Quickly relaunch your app in a different locale w/o the need to restart the Simulator.", status: .planned),
-    .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned)
+    .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
+    .init(githubIssueID: "283b", title: "Network Link Conditioner", description: "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w/o influencing your Mac's connection", status: .planned)
 ]
 
 assert(Set(features.map(\.githubIssueID)).count == features.count, "Duplicate IDs exist!")

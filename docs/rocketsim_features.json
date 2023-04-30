@@ -65,7 +65,7 @@
   {
     "status" : "Implemented",
     "id" : "283",
-    "title" : "Network Link Conditioner",
+    "title" : "Simulator Airplane Mode",
     "isFinished" : true,
     "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection"
   },
@@ -152,5 +152,12 @@
     "title" : "User Defaults Actions",
     "isFinished" : false,
     "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views."
+  },
+  {
+    "status" : "Planned",
+    "id" : "283b",
+    "title" : "Network Link Conditioner",
+    "isFinished" : false,
+    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection"
   }
 ]
