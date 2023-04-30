@@ -159,5 +159,12 @@
     "title" : "Network Link Conditioner",
     "isFinished" : false,
     "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection"
+  },
+  {
+    "status" : "Planned",
+    "id" : "346",
+    "title" : "Dark Mode switcher",
+    "isFinished" : false,
+    "description" : "Allow to switch between dark\/light mode from the side window."
   }
 ]
