@@ -166,5 +166,12 @@
     "title" : "Dark Mode switcher",
     "isFinished" : false,
     "description" : "Allow to switch between dark\/light mode from the side window."
+  },
+  {
+    "status" : "Planned",
+    "id" : "347",
+    "title" : "Username\/Password Quick Action",
+    "isFinished" : false,
+    "description" : "Allow to fill in account details inside a email\/password textfield via a Quick Action."
   }
 ]
