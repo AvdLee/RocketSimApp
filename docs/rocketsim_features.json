@@ -112,10 +112,10 @@
     "description" : "Change the status bar of the Simulator"
   },
   {
-    "status" : "In Progress",
+    "status" : "Implemented",
     "id" : "165",
     "title" : "Dynamic Type Control",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Adjust Dynamic Type from the side window"
   },
   {
@@ -145,5 +145,12 @@
     "title" : "Locale switcher",
     "isFinished" : false,
     "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator."
+  },
+  {
+    "status" : "Planned",
+    "id" : "345",
+    "title" : "User Defaults Actions",
+    "isFinished" : false,
+    "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views."
   }
 ]
