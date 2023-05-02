@@ -14,10 +14,10 @@
     "description" : "Use RocketSim with the tvOS Simulator"
   },
   {
-    "status" : "Planned",
+    "status" : "Implemented",
     "id" : "263",
     "title" : "Magnifier Color Picker",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Select a color using the Magnifier"
   },
   {
