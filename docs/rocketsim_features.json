@@ -1,177 +1,177 @@
 [
   {
     "status" : "Planned",
+    "description" : "Use RocketSim with the Apple Watch Simulator",
     "id" : "135",
     "title" : "Apple Watch Support",
-    "isFinished" : false,
-    "description" : "Use RocketSim with the Apple Watch Simulator"
+    "isFinished" : false
   },
   {
-    "status" : "Planned",
-    "id" : "87",
+    "description" : "Use RocketSim with the tvOS Simulator",
     "title" : "tvOS Support",
+    "id" : "87",
     "isFinished" : false,
-    "description" : "Use RocketSim with the tvOS Simulator"
+    "status" : "Planned"
   },
   {
-    "status" : "Implemented",
+    "isFinished" : true,
     "id" : "263",
     "title" : "Magnifier Color Picker",
-    "isFinished" : true,
-    "description" : "Select a color using the Magnifier"
+    "description" : "Select a color using the Magnifier",
+    "status" : "Implemented"
   },
   {
-    "status" : "Planned",
+    "description" : "Filter long lists by searching for a query",
     "id" : "282",
     "title" : "Allow to search Quick Actions",
-    "isFinished" : false,
-    "description" : "Filter long lists by searching for a query"
+    "status" : "Planned",
+    "isFinished" : false
   },
   {
-    "status" : "Planned",
+    "description" : "Create a location Quick Action by collecting lon-lat waypoints manually",
     "id" : "291",
     "title" : "Manually select locations waypoints",
-    "isFinished" : false,
-    "description" : "Create a location Quick Action by collecting lon-lat waypoints manually"
-  },
-  {
     "status" : "Planned",
-    "id" : "278",
-    "title" : "Show distance between rulers",
-    "isFinished" : false,
-    "description" : "Measure the distance between rulers"
+    "isFinished" : false
   },
   {
-    "status" : "Planned",
-    "id" : "236",
-    "title" : "Allow Save as... for captured thumbnails",
-    "isFinished" : false,
-    "description" : "Right-click a thumbnail to save as..."
-  },
-  {
-    "status" : "Planned",
-    "id" : "285",
-    "title" : "Record Mic audio with recordings",
-    "isFinished" : false,
-    "description" : "Screen recordings with your voice as instructions"
-  },
-  {
-    "status" : "Planned",
-    "id" : "299",
-    "title" : "Low storage testing",
-    "isFinished" : false,
-    "description" : "Simulate low storage on the Simulator to trigger No Space Left errors"
-  },
-  {
-    "status" : "Implemented",
-    "id" : "283",
-    "title" : "Simulator Airplane Mode",
     "isFinished" : true,
-    "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection"
+    "description" : "Measure the distance between rulers",
+    "id" : "278",
+    "status" : "Implemented",
+    "title" : "Show distance between rulers"
   },
   {
+    "id" : "236",
+    "isFinished" : false,
+    "description" : "Right-click a thumbnail to save as...",
     "status" : "Planned",
+    "title" : "Allow Save as... for captured thumbnails"
+  },
+  {
+    "description" : "Screen recordings with your voice as instructions",
+    "title" : "Record Mic audio with recordings",
+    "id" : "285",
+    "isFinished" : false,
+    "status" : "Planned"
+  },
+  {
+    "description" : "Simulate low storage on the Simulator to trigger No Space Left errors",
+    "isFinished" : false,
+    "title" : "Low storage testing",
+    "id" : "299",
+    "status" : "Planned"
+  },
+  {
+    "title" : "Simulator Airplane Mode",
+    "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "isFinished" : true,
+    "id" : "283",
+    "status" : "Implemented"
+  },
+  {
     "id" : "289",
+    "description" : "Beautify screenshots with a gradient background and extra padding",
+    "isFinished" : false,
     "title" : "Add a wallpaper and padding to screenshots",
-    "isFinished" : false,
-    "description" : "Beautify screenshots with a gradient background and extra padding"
+    "status" : "Planned"
   },
   {
     "status" : "Planned",
-    "id" : "280",
+    "isFinished" : false,
     "title" : "Resize screenshots",
-    "isFinished" : false,
-    "description" : "Allow resizing the output screenshot to reduce size and resolution"
+    "description" : "Allow resizing the output screenshot to reduce size and resolution",
+    "id" : "280"
   },
   {
     "status" : "Planned",
+    "description" : "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off.",
+    "isFinished" : false,
     "id" : "269",
-    "title" : "120hz Simulator Recording",
-    "isFinished" : false,
-    "description" : "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off."
+    "title" : "120hz Simulator Recording"
   },
   {
-    "status" : "Planned",
     "id" : "193",
     "title" : "Configurable Video Output",
-    "isFinished" : false,
-    "description" : "Export to .MOV instead of .MP4"
+    "description" : "Export to .MOV instead of .MP4",
+    "status" : "Planned",
+    "isFinished" : false
   },
   {
-    "status" : "Planned",
-    "id" : "179",
     "title" : "Display HTTP Traffic",
+    "id" : "179",
+    "description" : "Show HTTP Traffic directly next to the Simulator",
     "isFinished" : false,
-    "description" : "Show HTTP Traffic directly next to the Simulator"
+    "status" : "Planned"
   },
   {
-    "status" : "Planned",
-    "id" : "173",
     "title" : "Configurable status bar",
+    "description" : "Change the status bar of the Simulator",
     "isFinished" : false,
-    "description" : "Change the status bar of the Simulator"
+    "id" : "173",
+    "status" : "Planned"
   },
   {
+    "isFinished" : true,
+    "description" : "Adjust Dynamic Type from the side window",
     "status" : "Implemented",
     "id" : "165",
-    "title" : "Dynamic Type Control",
-    "isFinished" : true,
-    "description" : "Adjust Dynamic Type from the side window"
+    "title" : "Dynamic Type Control"
   },
   {
-    "status" : "Planned",
+    "isFinished" : false,
     "id" : "125",
     "title" : "Constant visible touch indicator",
-    "isFinished" : false,
-    "description" : "Always show a mouse-following touch indicator during recordings"
+    "description" : "Always show a mouse-following touch indicator during recordings",
+    "status" : "Planned"
   },
   {
-    "status" : "Implemented",
-    "id" : "284",
     "title" : "Show comparison overlay when focus is lost",
     "isFinished" : true,
-    "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch"
+    "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch",
+    "status" : "Implemented",
+    "id" : "284"
   },
   {
-    "status" : "Planned",
-    "id" : "311",
     "title" : "Show debugger logs",
-    "isFinished" : false,
-    "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error"
+    "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error",
+    "id" : "311",
+    "status" : "Planned",
+    "isFinished" : false
   },
   {
     "status" : "Planned",
-    "id" : "286",
     "title" : "Locale switcher",
+    "id" : "286",
     "isFinished" : false,
     "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator."
   },
   {
     "status" : "Planned",
     "id" : "345",
-    "title" : "User Defaults Actions",
     "isFinished" : false,
-    "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views."
+    "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.",
+    "title" : "User Defaults Actions"
   },
   {
-    "status" : "Planned",
-    "id" : "283b",
+    "isFinished" : false,
     "title" : "Network Link Conditioner",
-    "isFinished" : false,
-    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection"
+    "status" : "Planned",
+    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "id" : "283b"
   },
   {
-    "status" : "Planned",
-    "id" : "346",
+    "isFinished" : true,
+    "description" : "Allow to switch between dark\/light mode from the side window.",
     "title" : "Dark Mode switcher",
-    "isFinished" : false,
-    "description" : "Allow to switch between dark\/light mode from the side window."
+    "status" : "Implemented",
+    "id" : "346"
   },
   {
-    "status" : "Planned",
-    "id" : "347",
     "title" : "Username\/Password Quick Action",
+    "description" : "Allow to fill in account details inside a email\/password textfield via a Quick Action.",
     "isFinished" : false,
-    "description" : "Allow to fill in account details inside a email\/password textfield via a Quick Action."
+    "id" : "347",
+    "status" : "Planned"
   }
 ]
