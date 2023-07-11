@@ -58,7 +58,8 @@ let features: [Feature] = [
     .init(githubIssueID: "371", title: "UserDefaults Visual Viewer & Editor", description: "Directly edit and view UserDefaults.", status: .planned),
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
     .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .planned),
-    .init(githubIssueID: "353", title: "Automatically update timezone to match location change", description: "Restarts your app with the requested location and updates the timezone for your app accordingly", status: .planned)
+    .init(githubIssueID: "353", title: "Automatically update timezone to match location change", description: "Restarts your app with the requested location and updates the timezone for your app accordingly", status: .planned),
+    .init(githubIssueID: "304", title: "Xcode Build Statistics", description: "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects.", status: .planned)
 ]
 
 assert(Set(features.map(\.githubIssueID)).count == features.count, "Duplicate IDs exist!")

@@ -208,5 +208,12 @@
     "title" : "Automatically update timezone to match location change",
     "isFinished" : false,
     "description" : "Restarts your app with the requested location and updates the timezone for your app accordingly"
+  },
+  {
+    "status" : "Planned",
+    "id" : "304",
+    "title" : "Xcode Build Statistics",
+    "isFinished" : false,
+    "description" : "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects."
   }
 ]
