@@ -1,9 +1,9 @@
 [
   {
-    "status" : "In Progress",
+    "status" : "Implemented",
     "id" : "135",
     "title" : "Apple Watch Support",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Use RocketSim with the Apple Watch Simulator"
   },
   {
@@ -119,10 +119,10 @@
     "description" : "Adjust Dynamic Type from the side window"
   },
   {
-    "status" : "Planned",
+    "status" : "Implemented",
     "id" : "125",
     "title" : "Constant visible touch indicator",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Always show a mouse-following touch indicator during recordings"
   },
   {

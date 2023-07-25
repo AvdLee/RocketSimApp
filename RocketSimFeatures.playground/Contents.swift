@@ -29,7 +29,7 @@ extension Feature {
 }
 
 let features: [Feature] = [
-    .init(githubIssueID: "135", title: "Apple Watch Support", description: "Use RocketSim with the Apple Watch Simulator", status: .inProgress),
+    .init(githubIssueID: "135", title: "Apple Watch Support", description: "Use RocketSim with the Apple Watch Simulator", status: .implemented),
     .init(githubIssueID: "87", title: "tvOS Support", description: "Use RocketSim with the tvOS Simulator", status: .planned),
     .init(githubIssueID: "263", title: "Magnifier Color Picker", description: "Select a color using the Magnifier", status: .implemented),
     .init(githubIssueID: "282", title: "Allow to search Quick Actions", description: "Filter long lists by searching for a query", status: .planned),
@@ -46,7 +46,7 @@ let features: [Feature] = [
     .init(githubIssueID: "179", title: "Display HTTP Traffic", description: "Show HTTP Traffic directly next to the Simulator", status: .planned),
     .init(githubIssueID: "173", title: "Configurable status bar", description: "Change the status bar of the Simulator", status: .planned),
     .init(githubIssueID: "165", title: "Dynamic Type Control", description: "Adjust Dynamic Type from the side window", status: .implemented),
-    .init(githubIssueID: "125", title: "Constant visible touch indicator", description: "Always show a mouse-following touch indicator during recordings", status: .planned),
+    .init(githubIssueID: "125", title: "Constant visible touch indicator", description: "Always show a mouse-following touch indicator during recordings", status: .implemented),
     .init(githubIssueID: "284", title: "Show comparison overlay when focus is lost", description: "Keep the comparison overlay visible when switching to apps like Figma or Sketch", status: .implemented),
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
     .init(githubIssueID: "286", title: "Locale switcher", description: "Quickly relaunch your app in a different locale w/o the need to restart the Simulator.", status: .planned),
