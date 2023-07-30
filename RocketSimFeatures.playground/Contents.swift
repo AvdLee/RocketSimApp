@@ -49,7 +49,7 @@ let features: [Feature] = [
     .init(githubIssueID: "125", title: "Constant visible touch indicator", description: "Always show a mouse-following touch indicator during recordings", status: .implemented),
     .init(githubIssueID: "284", title: "Show comparison overlay when focus is lost", description: "Keep the comparison overlay visible when switching to apps like Figma or Sketch", status: .implemented),
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
-    .init(githubIssueID: "286", title: "Locale switcher", description: "Quickly relaunch your app in a different locale w/o the need to restart the Simulator.", status: .planned),
+    .init(githubIssueID: "286", title: "Locale switcher", description: "Quickly relaunch your app in a different locale w/o the need to restart the Simulator.", status: .implemented),
     .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
     .init(githubIssueID: "283b", title: "Network Link Conditioner", description: "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w/o influencing your Mac's connection", status: .planned),
     .init(githubIssueID: "346", title: "Dark Mode switcher", description: "Allow to switch between dark/light mode from the side window.", status: .implemented),
@@ -58,7 +58,7 @@ let features: [Feature] = [
     .init(githubIssueID: "371", title: "UserDefaults Visual Viewer & Editor", description: "Directly edit and view UserDefaults.", status: .planned),
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
     .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .planned),
-    .init(githubIssueID: "353", title: "Automatically update timezone to match location change", description: "Restarts your app with the requested location and updates the timezone for your app accordingly", status: .planned),
+    .init(githubIssueID: "353", title: "Automatically update timezone to match location change", description: "Restarts your app with the requested location and updates the timezone for your app accordingly", status: .implemented),
     .init(githubIssueID: "304", title: "Xcode Build Statistics", description: "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects.", status: .planned)
 ]
 

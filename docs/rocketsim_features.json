@@ -140,10 +140,10 @@
     "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error"
   },
   {
-    "status" : "Planned",
+    "status" : "Implemented",
     "id" : "286",
     "title" : "Locale switcher",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator."
   },
   {
@@ -203,10 +203,10 @@
     "description" : "Sync the clipboard between your Mac and the Simulator by using copy from\/to buttons"
   },
   {
-    "status" : "Planned",
+    "status" : "Implemented",
     "id" : "353",
     "title" : "Automatically update timezone to match location change",
-    "isFinished" : false,
+    "isFinished" : true,
     "description" : "Restarts your app with the requested location and updates the timezone for your app accordingly"
   },
   {
