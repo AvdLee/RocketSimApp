@@ -55,7 +55,7 @@ let features: [Feature] = [
     .init(githubIssueID: "346", title: "Dark Mode switcher", description: "Allow to switch between dark/light mode from the side window.", status: .implemented),
     .init(githubIssueID: "347", title: "Username/Password Quick Action", description: "Allow to fill in account details inside a email/password textfield via a Quick Action.", status: .planned),
     .init(githubIssueID: "370", title: "SwiftData Visual Viewer & Editor", description: "Explore and edit SwiftData databases.", status: .planned),
-    .init(githubIssueID: "371", title: "UserDefaults Visual Viewer & Editor", description: "Directly edit and view UserDefaults.", status: .planned),
+    .init(githubIssueID: "371", title: "UserDefaults Visual Viewer & Editor", description: "Directly edit and view UserDefaults.", status: .implemented),
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
     .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .planned),
     .init(githubIssueID: "353", title: "Automatically update timezone to match location change", description: "Restarts your app with the requested location and updates the timezone for your app accordingly", status: .implemented),
