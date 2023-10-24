@@ -70,6 +70,17 @@
           gtag('event', 'conversion', {'send_to': 'AW-1042599472/3iIkCKb90psYELCck_ED'});
         </script>
 
+        <!-- Script to set the button URL using the UTM Campaign -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(event) {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const campaign = urlParams.get('utm_campaign') || "website-header";
+
+                const a = document.getElementById('header-app-store-button');
+                a.href = "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" + campaign + "&mt=8"
+            });
+        </script>
 
 
         <script>
@@ -121,7 +132,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-11 wow">
-                        <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="app-store-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Download Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="download_button"><button type="button" class="btn btn-primary">Download now</button></a>
+                        <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="app-store-button" id="header-app-store-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Download Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="download_button"><button type="button" class="btn btn-primary">Download now</button></a>
                             <a href="https://avanderlee.gumroad.com/l/rocketsim" class="team-licenses-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Team Licenses Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="team_license_button"><button type="button" class="btn btn-primary">Team Licenses <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                   <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
