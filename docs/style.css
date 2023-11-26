@@ -338,6 +338,11 @@ video {
 	-webkit-animation-delay: 0.4s;
 }
 
+/* Testimonials */
+#testimonials .section-headline {
+	margin-bottom: 3rem;
+}
+
 /* Recent builds */
 #recent-builds img, #grids img, #rulers img, #quick-actions img {
 	width: 100%;
