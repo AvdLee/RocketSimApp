@@ -44,7 +44,7 @@ let features: [Feature] = [
     .init(githubIssueID: "269", title: "120hz Simulator Recording", description: "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off.", status: .planned),
     .init(githubIssueID: "193", title: "Configurable Video Output", description: "Export to .MOV instead of .MP4", status: .planned),
     .init(githubIssueID: "179", title: "Display HTTP Traffic", description: "Show HTTP Traffic directly next to the Simulator", status: .planned),
-    .init(githubIssueID: "173", title: "Configurable status bar", description: "Change the status bar of the Simulator", status: .planned),
+    .init(githubIssueID: "173", title: "Configurable status bar", description: "Change the status bar of the Simulator", status: .implemented),
     .init(githubIssueID: "165", title: "Dynamic Type Control", description: "Adjust Dynamic Type from the side window", status: .implemented),
     .init(githubIssueID: "125", title: "Constant visible touch indicator", description: "Always show a mouse-following touch indicator during recordings", status: .implemented),
     .init(githubIssueID: "284", title: "Show comparison overlay when focus is lost", description: "Keep the comparison overlay visible when switching to apps like Figma or Sketch", status: .implemented),

@@ -106,10 +106,10 @@
   },
   {
     "id" : "173",
-    "status" : "Planned",
+    "status" : "Implemented",
     "title" : "Configurable status bar",
     "description" : "Change the status bar of the Simulator",
-    "isFinished" : false
+    "isFinished" : true
   },
   {
     "description" : "Adjust Dynamic Type from the side window",
