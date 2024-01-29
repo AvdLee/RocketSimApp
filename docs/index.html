@@ -82,33 +82,7 @@
             });
         </script>
 
-
-        <script>
-          (function(h,o,u,n,d) {
-            h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-            d=o.createElement(u);d.async=1;d.src=n
-            n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-          })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-          DD_RUM.onReady(function() {
-            DD_RUM.init({
-              clientToken: 'pub403afef4896de0d4c2a701eeb8ee394c',
-              applicationId: 'a0273cb3-0522-4052-b635-3d9fe47b837c',
-              site: 'datadoghq.eu',
-              service: 'rocketsim-website',
-              env: 'production',
-              // Specify a version number to identify the deployed version of your application in Datadog 
-              version: '2.0.0',
-              sampleRate: 20,
-              sessionReplaySampleRate: 0,
-              trackInteractions: true,
-              trackResources: true,
-              trackLongTasks: false,
-              defaultPrivacyLevel: 'mask-user-input',
-            });
-
-            DD_RUM.startSessionReplayRecording();
-          })
-        </script>
+        <script defer data-domain="rocketsim.app" src="https://plausible.io/js/script.js"></script>
     </head>
     <body>
         <!--Header and Navbar-->
@@ -414,6 +388,23 @@
                 </div>
                 <div class="col-md-4 wow fadeInUp">
                     <img src="Assets/trimming.png" />
+                </div>
+            </div>
+        </div>
+
+        <!--Status Bar Overrides-->
+        <div class="container feature-section" id="recording-touches">
+            <div class="row align-items-center">
+                <div class="col-md-6 wow fadeInLeft"><img src="Assets/status_bar_overrides.png" /></div>
+                <div class="col-md-6 wow fadeInRight">
+                    <span class="align-middle">
+                        <h3>09:41 - A historical moment in time</h3>
+                        <p class="gray-text">Did you know <span class="text-headline">all iPhones in Apple's keynotes</span> are set to <span class="text-headline">09:41?</span></p>
+                        <ul class="gray-text">
+                            <li>Configure your Simulator's status bar to <span class="text-headline">match Apple's keynote designs</span></li>
+                            <li><span class="text-headline">Customize</span> the status bar into charging mode or using the 5G network</li>
+                        </ul>
+                    </span>
                 </div>
             </div>
         </div>
