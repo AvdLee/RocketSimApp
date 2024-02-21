@@ -76,7 +76,21 @@
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
                 
-                let referer = urlParams.get('utm_campaign') || urlParams.get('ref');
+                let referer = null;
+
+                // First see if we already have a referer stored. We want to use the first-referer possible.
+                if (!referer) {
+                    const cookies = document.cookie.split(';');
+                    cookies.forEach(cookie => {
+                        const [name, value] = cookie.trim().split('=');
+                        if (name === 'referer') {
+                            referer = decodeURIComponent(value);
+                        }
+                    });
+                }
+
+                // Even if we fetched the cookie value, we want new campaigns or refs to take over.
+                referer = urlParams.get('utm_campaign') || urlParams.get('ref') || referer;
 
                 // If referer is not set, try using referer header as referer.
                 if (!referer) {
@@ -89,22 +103,10 @@
                     }
                 }
 
-                // If referer is not set, try obtaining it from cookies.
-                if (!referer) {
-                    const cookies = document.cookie.split(';');
-                    cookies.forEach(cookie => {
-                        const [name, value] = cookie.trim().split('=');
-                        if (name === 'referer') {
-                            referer = decodeURIComponent(value);
-                        }
-                    });
-                }
-
                 // Remember referer for future usage.
-                let refererCookie = null;
                 if (referer) {
                     // Set cookie expiration time to now + 60 minutes
-                    const expirationTime = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
+                    const expirationTime = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
                     
                     // Format cookie string
                     const cookieString = `referer=${encodeURIComponent(referer)}; expires=${expirationTime}; path=/`;
@@ -113,6 +115,7 @@
                     document.cookie = cookieString;
                 }
 
+                // Use the referer as the campaign or fallback to 'website-header'
                 const campaign = referer || "website-header";
 
                 const a = document.getElementById('header-app-store-button');
