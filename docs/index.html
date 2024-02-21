@@ -119,7 +119,7 @@
                 const campaign = referer || "website-header";
 
                 const a = document.getElementById('header-app-store-button');
-                a.href = "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" + campaign + "&mt=8";
+                a.href = "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" + encodeURIComponent(campaign) + "&mt=8";
 
                 plausible('Stored Referer', {props: {stored_referer: campaign}});
             });
