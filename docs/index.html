@@ -75,14 +75,55 @@
             document.addEventListener("DOMContentLoaded", function(event) {
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
-                const campaign = urlParams.get('utm_campaign') || "website-header";
+                
+                let referer = urlParams.get('utm_campaign') || urlParams.get('ref');
+
+                // If referer is not set, try using referer header as referer.
+                if (!referer) {
+                    const refererHeader = document.referrer;
+                    if (refererHeader) {
+                        const refererHost = new URL(refererHeader).hostname;
+                        if (refererHost) {
+                            referer = refererHost;
+                        }
+                    }
+                }
+
+                // If referer is not set, try obtaining it from cookies.
+                if (!referer) {
+                    const cookies = document.cookie.split(';');
+                    cookies.forEach(cookie => {
+                        const [name, value] = cookie.trim().split('=');
+                        if (name === 'referer') {
+                            referer = decodeURIComponent(value);
+                        }
+                    });
+                }
+
+                // Remember referer for future usage.
+                let refererCookie = null;
+                if (referer) {
+                    // Set cookie expiration time to now + 60 minutes
+                    const expirationTime = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
+                    
+                    // Format cookie string
+                    const cookieString = `referer=${encodeURIComponent(referer)}; expires=${expirationTime}; path=/`;
+
+                    // Set cookie
+                    document.cookie = cookieString;
+                }
+
+                const campaign = referer || "website-header";
 
                 const a = document.getElementById('header-app-store-button');
-                a.href = "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" + campaign + "&mt=8"
+                a.href = "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" + campaign + "&mt=8";
+
+                plausible('Stored Referer', {props: {stored_referer: campaign}});
             });
         </script>
 
         <script defer data-domain="rocketsim.app" src="https://plausible.io/js/script.tagged-events.js"></script>
+        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     </head>
     <body>
         <!--Header and Navbar-->
