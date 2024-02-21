@@ -33,66 +33,36 @@
             new WOW().init();
         </script>
 
-		<!-- Play video when visible -->
-        <script type="text/javascript">
-        	$('video').each(function(){
-			    if ($(this).is(":in-viewport")) {
-			        $(this)[0].play();
-			    } else {
-			        $(this)[0].pause();
-			    }
-			})
-        </script>
-
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62543041-2"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-
-		  gtag('config', 'UA-62543041-2');
-		</script>
     </head>
     <body>
-        <!--Header and Navbar-->
-        <div class="container jumbotron" id="header-container">
-            <div class="row">
-                <div class="col-md-7 wow">
-                    <h1 id="page-title">
-                        <a class="blog-logo" href="https://www.rocketsim.app/" rel="home">RocketSim</a>
-                    </h1>
-                    <h2 class="section-headline">Enhancing the iOS Simulator</h2>
-                    <p class="gray-text">Compare designs, right in the simulator. Create recordings with touches, trim and export them into MP4 or GIF and share them anywhere using drag & drop.</p>
-
-                    <p class="gray-text">And that's not all. Organise and launch Universal Links (deeplinks) with ease.</p>
-                    <p>
-                        <a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12" class="app-store-button"><img src="Assets/download_mac_app_store.svg" /></a>
-                        <!-- <a href="https://www.producthunt.com/posts/rocketsim-for-xcode?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-rocketsim-for-xcode" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=271242&theme=dark" alt="RocketSim for Xcode - Record the iOS Simulator into MP4 or GIF | Product Hunt" style="width: 250px; height: 40px;" width="250" height="40" /></a> -->
-                    </p>
-                </div>
-                <div class="col-md-5 wow">
-                	<img src="Assets/rocketsim-app-icon.png"/>
-                </div>
-            </div>
-        </div>
-
         <!--TERMS-->
         <div class="pro" id="pro">
             <div id="pro-section">
                 <div class="overlay">
                     <div class="container">
                         <div class="row">
-                            <h3 class="section-headline display-3">Terms of Use</h3>
+                            <h1 class="section-headline display-3">RocketSim Terms of Use</h1>
                             
                         </div>
                         <div class="row" id="pro-features">
-							<div class="col-xs-12 col-sm-12">
-							 <p><b>Last updated:</b> October 21st, 2021.</p>	
-								<p>RocketSim enhances the iOS simulator with functionalities like recording into GIF or MP4, comparing designs, and opening universal links.</p>
-                                <p>The app is build as a side-project by <a href="https://www.twitter.com/twannl">Antoine van der Lee</a> who tries his very best to keep the app as up to date as possible. However, it could be that you're running into bugs that aren't directly solved. We hope you understand!</p>
-                                <p>If you run into any issues, it's best to report them on <a href="https://github.com/AvdLee/RocketSimApp/issues">GitHub</a>.</p>
-							</div>
+							<p>Welcome to RocketSim! These Terms of Use govern your use of RocketSim, a developer tool designed to enhance app development experiences. By accessing or using RocketSim, you agree to these Terms. Please read them carefully.</p>
+
+                                <ol>
+                                    <li><strong>Use of RocketSim:</strong> RocketSim is intended for use by app developers to simulate various scenarios and test their applications. You agree to use RocketSim solely for lawful purposes and in accordance with these Terms.</li>
+                                    <li><strong>Data Storage:</strong> RocketSim operates by storing all data locally on your device. We do not collect or store any of your data on external servers. Your data privacy and security are of utmost importance to us.</li>
+                                    <li><strong>Tracking Services:</strong> RocketSim may utilize tracking services for analytics and crash reporting. We use Amplitude for anonymous analytics and Xcode for crash reports. This data helps us improve RocketSim's performance and user experience.</li>
+                                    <li><strong>Email Lists:</strong> Users have the option to opt-in for our email lists to receive product updates. These updates may include information about new features, trial reminders, special offers, and other relevant news related to RocketSim. You can manage your email preferences at any time.</li>
+                                    <li><strong>App Store Distribution:</strong> RocketSim is distributed via the App Store. As such, it operates within the sandbox environment provided by the App Store, which enhances security by restricting access to sensitive system resources and data.</li>
+                                    <li><strong>Intellectual Property:</strong> RocketSim and its content, including but not limited to software, logos, trademarks, and designs, are the property of RocketSim or its licensors and are protected by intellectual property laws. You may not use RocketSim for any unauthorized purpose or reproduce, distribute, or modify its content without our prior written consent.</li>
+                                    <li><strong>Disclaimer of Warranties:</strong> RocketSim is provided "as is" without any warranties, express or implied. We do not guarantee that RocketSim will always be error-free or that it will meet your specific requirements. Your use of RocketSim is at your own risk.</li>
+                                    <li><strong>Limitation of Liability:</strong> In no event shall RocketSim or its affiliates be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of RocketSim.</li>
+                                    <li><strong>Changes to Terms:</strong> RocketSim reserves the right to update or modify these Terms of Use at any time without prior notice. Any changes will be effective immediately upon posting. Your continued use of RocketSim after the posting of changes constitutes your acceptance of such changes.</li>
+                                    <li><strong>Contact Us:</strong> If you have any questions or concerns about these Terms of Use, please contact us at <a href="mailto:support@rocketsim.app">support@rocketsim.app</a>.</li>
+                                </ol>
+
+                                <p>By using RocketSim, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use. If you do not agree to these Terms, please do not use RocketSim. Thank you for choosing RocketSim!</p>
+
+                                <p><i>Last updated: February 21st, 2024.</i></p>
 						</div>
                     </div>
                 </div>
@@ -103,7 +73,7 @@
         <div class="footer">
             <div class="container">
                 <div class="row justify-content-center">
-                    <p>Copyright © 2021 RocketSim. All Rights Reserved.</p>
+                    <p>Copyright © 2024 RocketSim. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
