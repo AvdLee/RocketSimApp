@@ -662,26 +662,17 @@ input[type="radio"] {
   0% {
     width: 0;
   }
-  100% {
-    width: 36%;
-  }
 }
 
 @keyframes show-bar-two {
   0% {
     width: 0;
   }
-  100% {
-    width: 42%;
-  }
 }
 
 @keyframes show-bar-three {
   0% {
     width: 0;
-  }
-  100% {
-    width: 78%;
   }
 }
 
