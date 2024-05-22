@@ -82,6 +82,38 @@
         !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_ei3j6o3ghriw');rdt('track', 'PageVisit');
         </script>
 
+        <script>
+            document.addEventListener('submit', (e) => {
+                // Store reference to form to make later code easier to read
+                const form = e.target;
+
+                // Post data using the Fetch API
+                fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form)
+                })
+
+                    // Now we have a document to work with let's replace the <form>
+                    .then((doc) => {
+                        // Create result message container and copy HTML from doc
+                        const result = document.createElement('div');
+                        result.innerHTML = '<p>Thanks for subscribing. Check your mail!</p>';
+
+                        // Allow focussing this element with JavaScript
+                        result.tabIndex = -1;
+
+                        // And replace the form with the response children
+                        form.parentNode.replaceChild(result, form);
+
+                        // Move focus to the status message
+                        result.focus();
+                    });
+
+                // Prevent the default form submit
+                e.preventDefault();
+            });
+        </script>
+
     </head>
     <body>
         <!--Header and Navbar-->
