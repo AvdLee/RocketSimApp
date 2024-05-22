@@ -21,7 +21,10 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-        <link href="style.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
+
+        <!-- CSS Charts -->
+        <link rel="stylesheet" href="css/charts.min.css">
 
         <!--Animate CSS-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
@@ -160,7 +163,7 @@
                         <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="app-store-button plausible-event-name=App+Store+Install" id="header-app-store-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Download Header', 'value': 1.00,  'non_interaction': true}); rdt('track', 'Lead');" data-dd-action-name="download_button">
                             <button type="button" class="btn btn-primary">Download now</button>
                         </a>
-                        <a href="https://avanderlee.gumroad.com/l/rocketsim" class="team-licenses-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Team Licenses Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="team_license_button">
+                        <a href="https://www.rocketsim.app/team-insights" class="team-licenses-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Team Licenses Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="team_license_button">
                             <button type="button" class="btn btn-primary">Team Licenses</button>
                         </a>
                         <a href="https://docs.rocketsim.app" class="team-licenses-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Docs', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="docs_button">
@@ -286,7 +289,7 @@
         <!--User Defaults Editor-->
         <div class="container feature-section" id="user-defaults-example">
             <div class="row">
-                <div class="row section-descwow fadeIn">
+                <div class="row section-desc wow fadeIn">
                     <h2 class="section-headline gray-text">User Defaults Editor</h2>
                     <div class="section-headline section-headline-elevated">Edit Standard & Group User Defaults in realtime</div>
                     <p class="typography-section-intro">Test how your app responds to User Defaults changes. Quickly switch states like User Defaults-driven experiments.</p>
@@ -324,7 +327,7 @@
         <!--Location Simulation-->
         <div class="container feature-section" id="location-simulation">
             <div class="row">
-                <div class="row section-descwow fadeIn">
+                <div class="row section-desc wow fadeIn">
                     <h2 class="section-headline gray-text">Location Simulation</h2>
                     <div class="section-headline section-headline-elevated">Single locations or automobile and walking routes: Test them right in the Simulator.</div>
                 </div>
@@ -357,7 +360,7 @@
         <!--Airplane Mode example-->
         <div class="container recording-example feature-section" id="recording-example">
             <div class="row">
-                <div class="row section-descwow fadeIn">
+                <div class="row section-desc wow fadeIn">
                     <h2 class="section-headline gray-text">Simulator Airplane Mode</h2>
                     <div class="section-headline section-headline-elevated">How does your app work without a connection?</div>
                     <p class="typography-section-intro">Only your Simulator app gets disconnected. You can still use your Mac's connection to search Stack Overflow or share your progress via Slack.</p>
@@ -373,7 +376,7 @@
         <!--Magnify-->
         <div class="container feature-section" id="magnify-example">
             <div class="row">
-                <div class="row section-descwow fadeIn">
+                <div class="row section-desc wow fadeIn">
                     <h2 class="section-headline gray-text">Magnify for precision</h2>
                     <div class="section-headline section-headline-elevated">Hold ⇧ Shift and move mouse or scroll wheel to magnify</div>
                     <p class="typography-section-intro">Use the Color Picker and copy the value as SwiftUI Color, NSColor, or UIColor code.</p>
@@ -463,7 +466,7 @@
         <!--Recording example-->
         <div class="container recording-example feature-section" id="recording-example">
             <div class="row">
-                <div class="row section-descwow fadeIn">
+                <div class="row section-desc wow fadeIn">
                     <h2 class="section-headline gray-text">A RocketSim recording in action</h2>
                     <div class="section-headline section-headline-elevated">Touches + Bezels = Professional Recording.</div>
                 </div>
@@ -478,7 +481,7 @@
         <!--Drag and Drop-->
         <div class="container drag-and-drop feature-section" id="drag-and-drop">
             <div class="row">
-                <div class="row section-descwow fadeIn">
+                <div class="row section-desc wow fadeIn">
                     <h2 class="section-headline gray-text">The Power of Drag and Drop</h2>
                     <div class="section-headline section-headline-elevated">App Store Connect. GitHub. Slack. Twitter. iMessage.</div>
                     <p class="typography-section-intro">Drag your recorded MP4 or GIF into any destination. Use it as an App Store Preview video or share a visual representation inside GitHub issues and pull requests. Directly share what you're working on in Slack or on Twitter.</p>
@@ -493,6 +496,96 @@
             </div>
         </div>
 
+        <!--RocketSim Insights-->
+        <div class="container-fluid gray-background-container" id="rocketsim-insights">
+            <div class="container feature-section">
+                <div class="row justify-content-start wow fadeIn">
+                    <h2 class="section-headline gray-text">RocketSim Insights</h2>
+                    <div class="section-headline section-headline-elevated">Increase the productivity of your whole team</div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6 wow fadeInLeft">
+                        <span>
+                            <h3>Keep track of Xcode Build Durations</h3>
+                            <p class="gray-text">Unlike Xcode, RocketSim will cache all your builds for months to follow. You'll be able to compare build times and <span class="text-headline">get notified when compilation times increase.</span></p>
+                        </span>
+                    </div>
+                    <div class="col-md-6 wow fadeInRight">
+                        <img src="Assets/build_insights.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RocketSim Team Insights Upsell -->
+        <div class="container-fluid gray-background-container" id="team-insights-upsell">
+            <table class="charts-css line hide-data">
+                <thead>
+                <tr>
+                    <th scope="col"> Date </th>
+                    <th scope="col"> Duration </th>
+                </tr>
+                </thead>
+            
+                <tbody>
+                    <tr>
+                        <th scope="row">22-05-2024</th>
+                        <td style="--start: 0.35; --end: 0.4;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">23-05-2024</th>
+                        <td style="--start: 0.4; --end: 0.5;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">24-05-2024</th>
+                        <td style="--start: 0.5; --end: 0.45;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">25-05-2024</th>
+                        <td style="--start: 0.45; --end: 0.47;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">26-05-2024</th>
+                        <td style="--start: 0.47; --end: 0.45;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">27-05-2024</th>
+                        <td style="--start: 0.45; --end: 0.4;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">28-05-2024</th>
+                        <td style="--start: 0.4; --end: 0.45;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">29-05-2024</th>
+                        <td style="--start: 0.45; --end: 0.5;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">30-05-2024</th>
+                        <td style="--start: 0.5; --end: 0.45;"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">31-05-2024</th>
+                        <td style="--start: 0.45; --end: 0.5;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container feature-section">
+                <div class="row">
+                    <div class="row section-desc wow fadeIn justify-content-center">
+                        
+                        <h2 class="section-headline gray-text">Team Insights</h2>
+                        
+                        <div class="section-headline section-headline-elevated text-center">Build Apps Faster with your whole team</div>
+                        
+                        <p class="typography-section-intro text-center">What's the build duration across the team? Does an M3 Max make a difference in terms of compilation time? With team insights, you'll be able to optimize productivity based on real build data.</p>
+                        <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="plausible-event-name=Explore+Team+Insights" target="_blank" data-dd-action-name="explore_team_insights_button">
+                            <button type="button" class="btn btn-primary">Explore Team Insights</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--About-->
         <div class="container feature-section" id="statusbar_menu">
@@ -565,7 +658,7 @@
         <div class="footer">
             <div class="container">
                 <div class="row justify-content-center">
-                    <p>Copyright © 2023 RocketSim. All Rights Reserved.</p><br/>
+                    <p>Copyright © 2024 RocketSim. All Rights Reserved.</p><br/>
                 </div>
                 <div class="row justify-content-center">
 
