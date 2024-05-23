@@ -120,6 +120,12 @@ a {
 .faded-headline {
 	margin-left: 4rem;
 	color: #86868b;
+	max-width: 1400px;
+}
+@media screen and (min-width: 1500px) {
+	.faded-headline {
+		margin: 0 auto;
+	}
 }
 .text-headline {
 	color: white;
@@ -503,6 +509,9 @@ video {
 #list-of-insights {
 	margin-top: 2rem;
 }
+#online-team-manager .container {
+	max-width: 1400px;
+}
 #online-team-manager .video-container {
 	height: auto;
 	position: inherit;
@@ -525,7 +534,6 @@ video {
 .newsletter_subscribe_form .form-fields {
     background: white;
     border-radius: 10px;
-    width: 320px;
     margin-bottom: 4rem;
     display: flex;
     font-size: 1.2rem;
@@ -685,11 +693,7 @@ input[type="radio"] {
   }
 }
 
-
-
-/* 2688x1242px at 458ppi */
-@media only screen 
-    and (max-device-width: 600px) {
+@media only screen and (max-device-width: 768px) {
 
 	.header-container {
 		margin-top: 1rem;
@@ -732,5 +736,13 @@ input[type="radio"] {
 	}
 	.row img {
 		margin: 2rem 0;
+	}
+	.faded-headline { 
+		font-size: 2rem;
+        margin: 0;
+	}
+	.benchmark-bar .charts-css.bar th {
+		padding-right: 0;
+		font-size: .8rem;
 	}
 }
