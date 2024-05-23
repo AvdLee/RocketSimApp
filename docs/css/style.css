@@ -698,6 +698,7 @@ input[type="radio"] {
 	.header-container {
 		margin-top: 1rem;
 	}
+	.header-container img { max-width: 64px; }
 	.header-container .row img {
 		margin: 0 auto;
 	}
