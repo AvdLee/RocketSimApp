@@ -665,24 +665,60 @@ input[type="radio"] {
   width: 0%;
 }
 
+.benchmark-bar .charts-css.bar .xcode-bar-one {
+	-webkit-animation: show-xcode-bar-one 1.2s 0.1s forwards;
+	-moz-animation: show-xcode-bar-one 1.2s 0.1s forwards;
+	animation: show-xcode-bar-one 1.2s 0.1s forwards;
+	animation-delay: 0s;
+	width: 0%;
+  }
+  
+  .benchmark-bar .charts-css.bar .xcode-bar-two {
+	-webkit-animation: show-xcode-bar-two 1.2s 0.2s forwards;
+	-moz-animation: show-xcode-bar-two 1.2s 0.2s forwards;
+	animation: show-xcode-bar-two 1.2s 0.2s forwards;
+	animation-delay: 0.3s;
+	width: 0%;
+  }
+  
+  .benchmark-bar .charts-css.bar .xcode-bar-three {
+	-webkit-animation: show-xcode-bar-three 1.2s 0.3s forwards;
+	-moz-animation: show-xcode-bar-three 1.2s 0.3s forwards;
+	animation: show-xcode-bar-three 1.2s 0.3s forwards;
+	animation-delay: 0.6s;
+	width: 0%;
+  }
+
 /* Bar Graph Horizontal Animations */
 @keyframes show-bar-one {
-  0% {
-    width: 0;
-  }
+  0% { width: 0; }
+  100% { width: 36%; }
 }
 
 @keyframes show-bar-two {
-  0% {
-    width: 0;
-  }
+  0% { width: 0; }
+  100% { width: 42%; }
 }
 
 @keyframes show-bar-three {
-  0% {
-    width: 0;
-  }
+  0% { width: 0; }
+  100% { width: 78%; }
 }
+
+@keyframes show-xcode-bar-one {
+	0% { width: 0; }
+	100% { width: 68%; }
+  }
+  
+  @keyframes show-xcode-bar-two {
+	0% { width: 0; }
+	100% { width: 76%; }
+  }
+  
+  @keyframes show-xcode-bar-three {
+	0% { width: 0; }
+	100% { width: 78%; }
+  }
 
 @keyframes fade-in-text {
   0% {
