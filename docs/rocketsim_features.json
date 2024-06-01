@@ -1,261 +1,261 @@
 [
   {
-    "status" : "Implemented",
-    "isFinished" : true,
+    "description" : "Use RocketSim with the Apple Watch Simulator",
     "id" : "135",
-    "title" : "Apple Watch Support",
-    "description" : "Use RocketSim with the Apple Watch Simulator"
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Apple Watch Support"
   },
   {
     "description" : "Select a color using the Magnifier",
     "id" : "263",
-    "title" : "Magnifier Color Picker",
-    "status" : "Implemented",
-    "isFinished" : true
-  },
-  {
-    "id" : "278",
-    "title" : "Show distance between rulers",
-    "description" : "Measure the distance between rulers",
-    "status" : "Implemented",
-    "isFinished" : true
-  },
-  {
-    "title" : "Simulator Airplane Mode",
     "isFinished" : true,
     "status" : "Implemented",
-    "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection",
-    "id" : "283"
+    "title" : "Magnifier Color Picker"
   },
   {
+    "description" : "Measure the distance between rulers",
+    "id" : "278",
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Show distance between rulers"
+  },
+  {
+    "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "id" : "283",
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Simulator Airplane Mode"
+  },
+  {
+    "description" : "Change the status bar of the Simulator",
     "id" : "173",
     "isFinished" : true,
     "status" : "Implemented",
-    "title" : "Configurable status bar",
-    "description" : "Change the status bar of the Simulator"
+    "title" : "Configurable status bar"
   },
   {
-    "title" : "Dynamic Type Control",
+    "description" : "Adjust Dynamic Type from the side window",
     "id" : "165",
     "isFinished" : true,
     "status" : "Implemented",
-    "description" : "Adjust Dynamic Type from the side window"
+    "title" : "Dynamic Type Control"
   },
   {
     "description" : "Always show a mouse-following touch indicator during recordings",
-    "isFinished" : true,
     "id" : "125",
-    "title" : "Constant visible touch indicator",
-    "status" : "Implemented"
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Constant visible touch indicator"
   },
   {
     "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch",
     "id" : "284",
-    "title" : "Show comparison overlay when focus is lost",
+    "isFinished" : true,
     "status" : "Implemented",
-    "isFinished" : true
+    "title" : "Show comparison overlay when focus is lost"
   },
   {
-    "status" : "Implemented",
+    "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator.",
     "id" : "286",
-    "title" : "Locale switcher",
     "isFinished" : true,
-    "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator."
+    "status" : "Implemented",
+    "title" : "Locale switcher"
   },
   {
-    "title" : "Dark Mode switcher",
-    "isFinished" : true,
     "description" : "Allow to switch between dark\/light mode from the side window.",
+    "id" : "346",
+    "isFinished" : true,
     "status" : "Implemented",
-    "id" : "346"
+    "title" : "Dark Mode switcher"
   },
   {
-    "status" : "Implemented",
-    "isFinished" : true,
-    "id" : "371",
     "description" : "Directly edit and view UserDefaults.",
+    "id" : "371",
+    "isFinished" : true,
+    "status" : "Implemented",
     "title" : "UserDefaults Visual Viewer & Editor"
   },
   {
-    "title" : "Automatically update timezone to match location change",
     "description" : "Restarts your app with the requested location and updates the timezone for your app accordingly",
     "id" : "353",
+    "isFinished" : true,
     "status" : "Implemented",
-    "isFinished" : true
+    "title" : "Automatically update timezone to match location change"
   },
   {
     "description" : "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects.",
     "id" : "304",
     "isFinished" : true,
-    "title" : "Xcode Build Statistics",
-    "status" : "Implemented"
+    "status" : "Implemented",
+    "title" : "Xcode Build Statistics"
   },
   {
-    "status" : "Implemented",
     "description" : "Filter long lists by searching for a query",
     "id" : "282",
-    "title" : "Allow to search Quick Actions",
-    "isFinished" : true
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Allow to search Quick Actions"
   },
   {
-    "id" : "368",
-    "title" : "Show Magnifier boundaries",
     "description" : "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
+    "id" : "368",
+    "isFinished" : false,
     "status" : "Planned",
-    "isFinished" : false
+    "title" : "Show Magnifier boundaries"
   },
   {
-    "isFinished" : false,
-    "title" : "Clipboard copy to\/from buttons",
     "description" : "Sync the clipboard between your Mac and the Simulator by using copy from\/to buttons",
     "id" : "357",
-    "status" : "Planned"
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Clipboard copy to\/from buttons"
   },
   {
     "description" : "Explore and edit SwiftData databases.",
+    "id" : "370",
     "isFinished" : false,
     "status" : "Planned",
-    "id" : "370",
     "title" : "SwiftData Visual Viewer & Editor"
   },
   {
-    "id" : "347",
-    "status" : "Planned",
     "description" : "Allow to fill in account details inside a email\/password textfield via a Quick Action.",
+    "id" : "347",
     "isFinished" : false,
+    "status" : "Planned",
     "title" : "Username\/Password Quick Action"
   },
   {
-    "title" : "User Defaults Actions",
+    "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.",
     "id" : "345",
     "isFinished" : false,
-    "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.",
-    "status" : "Planned"
-  },
-  {
     "status" : "Planned",
-    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
-    "title" : "Network Link Conditioner",
-    "id" : "283b",
-    "isFinished" : false
+    "title" : "User Defaults Actions"
   },
   {
+    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "id" : "283b",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Network Link Conditioner"
+  },
+  {
+    "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error",
     "id" : "311",
     "isFinished" : false,
     "status" : "Planned",
-    "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error",
     "title" : "Show debugger logs"
   },
   {
-    "status" : "Planned",
-    "title" : "Add a wallpaper and padding to screenshots",
-    "isFinished" : false,
     "description" : "Beautify screenshots with a gradient background and extra padding",
-    "id" : "289"
+    "id" : "289",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Add a wallpaper and padding to screenshots"
   },
   {
-    "isFinished" : false,
-    "title" : "Resize screenshots",
     "description" : "Allow resizing the output screenshot to reduce size and resolution",
     "id" : "280",
-    "status" : "Planned"
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Resize screenshots"
   },
   {
     "description" : "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off.",
     "id" : "269",
-    "title" : "120hz Simulator Recording",
+    "isFinished" : false,
     "status" : "Planned",
-    "isFinished" : false
+    "title" : "120hz Simulator Recording"
   },
   {
-    "status" : "Planned",
+    "description" : "Export to .MOV instead of .MP4",
     "id" : "193",
     "isFinished" : false,
-    "title" : "Configurable Video Output",
-    "description" : "Export to .MOV instead of .MP4"
+    "status" : "Planned",
+    "title" : "Configurable Video Output"
   },
   {
+    "description" : "Show HTTP Traffic directly next to the Simulator",
     "id" : "179",
-    "title" : "Display HTTP Traffic",
     "isFinished" : false,
     "status" : "Planned",
-    "description" : "Show HTTP Traffic directly next to the Simulator"
+    "title" : "Display HTTP Traffic"
   },
   {
     "description" : "Right-click a thumbnail to save as...",
-    "status" : "Planned",
     "id" : "236",
-    "title" : "Allow Save as... for captured thumbnails",
-    "isFinished" : false
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Allow Save as... for captured thumbnails"
   },
   {
-    "title" : "Record Mic audio with recordings",
-    "id" : "285",
-    "status" : "Planned",
     "description" : "Screen recordings with your voice as instructions",
-    "isFinished" : false
+    "id" : "285",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Record Mic audio with recordings"
   },
   {
     "description" : "Simulate low storage on the Simulator to trigger No Space Left errors",
-    "isFinished" : false,
     "id" : "299",
-    "title" : "Low storage testing",
-    "status" : "Planned"
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Low storage testing"
   },
   {
-    "id" : "291",
     "description" : "Create a location Quick Action by collecting lon-lat waypoints manually",
-    "title" : "Manually select locations waypoints",
+    "id" : "291",
+    "isFinished" : false,
     "status" : "Planned",
-    "isFinished" : false
+    "title" : "Manually select locations waypoints"
   },
   {
-    "title" : "tvOS Support",
-    "status" : "Planned",
     "description" : "Use RocketSim with the tvOS Simulator",
+    "id" : "87",
     "isFinished" : false,
-    "id" : "87"
-  },
-  {
-    "title" : "Fullscreen Support",
-    "id" : "301",
-    "description" : "Use RocketSim with Xcode in fullscreen mode",
     "status" : "Planned",
-    "isFinished" : false
+    "title" : "tvOS Support"
   },
   {
+    "description" : "Use RocketSim with Xcode in fullscreen mode",
+    "id" : "301",
     "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Fullscreen Support"
+  },
+  {
     "description" : "Add items from within the User Defaults editor",
     "id" : "497",
-    "title" : "Allow adding items to User Defaults",
-    "status" : "Planned"
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Allow adding items to User Defaults"
   },
   {
-    "title" : "Allow right-click -> Edit on any action",
     "description" : "Directly access App Action editor via right-click",
     "id" : "483",
+    "isFinished" : false,
     "status" : "Planned",
-    "isFinished" : false
+    "title" : "Allow right-click -> Edit on any action"
   },
   {
-    "title" : "Support GPX files for location simulation",
-    "isFinished" : false,
-    "id" : "480",
     "description" : "Simulate locations using GPX files",
-    "status" : "Planned"
+    "id" : "480",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Support GPX files for location simulation"
   },
   {
-    "isFinished" : false,
-    "id" : "464",
     "description" : "Group long lists of app actions based on configured tags",
+    "id" : "464",
+    "isFinished" : false,
     "status" : "Planned",
     "title" : "Introduce App Action tags for grouping"
   },
   {
-    "id" : "397",
     "description" : "Simulator Airplane Mode support for NWPathFilter, which is often used in accessibility libraries",
-    "title" : "Support reachability libraries (NWPathFilter) with Airplane Mode",
+    "id" : "397",
+    "isFinished" : false,
     "status" : "Planned",
-    "isFinished" : false
+    "title" : "Support reachability libraries (NWPathFilter) with Airplane Mode"
   }
 ]

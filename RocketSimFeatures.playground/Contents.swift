@@ -47,7 +47,7 @@ let features: [Feature] = [
     
     /// Planned
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
-    .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .planned),
+    .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .implemented),
     .init(githubIssueID: "370", title: "SwiftData Visual Viewer & Editor", description: "Explore and edit SwiftData databases.", status: .planned),
     .init(githubIssueID: "347", title: "Username/Password Quick Action", description: "Allow to fill in account details inside a email/password textfield via a Quick Action.", status: .planned),
     .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
@@ -74,7 +74,7 @@ let features: [Feature] = [
 assert(Set(features.map(\.githubIssueID)).count == features.count, "Duplicate IDs exist!")
 
 let encoder = JSONEncoder()
-encoder.outputFormatting = .prettyPrinted
+encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 
 if let json = try? encoder.encode(features) {
     print(String(data: json, encoding: .utf8)!)
