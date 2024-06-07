@@ -98,18 +98,18 @@
     "title" : "Allow to search Quick Actions"
   },
   {
-    "description" : "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
-    "id" : "368",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Show Magnifier boundaries"
-  },
-  {
     "description" : "Sync the clipboard between your Mac and the Simulator by using copy from\/to buttons",
     "id" : "357",
     "isFinished" : true,
     "status" : "Implemented",
     "title" : "Clipboard copy to\/from buttons"
+  },
+  {
+    "description" : "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
+    "id" : "368",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Show Magnifier boundaries"
   },
   {
     "description" : "Explore and edit SwiftData databases.",
@@ -161,11 +161,11 @@
     "title" : "Resize screenshots"
   },
   {
-    "description" : "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off.",
+    "description" : "Advanced configuration for Simulator recordings, allowing to record in 60FPS, 120FPS or to configure compression.",
     "id" : "269",
     "isFinished" : false,
     "status" : "Planned",
-    "title" : "120hz Simulator Recording"
+    "title" : "Advanced Simulator Recordings (60FPS, 120FPS, compression config)"
   },
   {
     "description" : "Export to .MOV instead of .MP4",
@@ -257,5 +257,47 @@
     "isFinished" : false,
     "status" : "Planned",
     "title" : "Support reachability libraries (NWPathFilter) with Airplane Mode"
+  },
+  {
+    "description" : "Select a Sketch artboard and show it on top of the simulator for design comparison",
+    "id" : "435",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Integrate Sketch App to use artboards for design comparison"
+  },
+  {
+    "description" : "Select a Figma artboard and show it on top of the simulator for design comparison",
+    "id" : "520",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Integrate Figma Connect to use artboards for design comparison"
+  },
+  {
+    "description" : "Inspect on-screen elements for accessibility. Show a tree of accessibility elements.",
+    "id" : "521",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Accessibility Inspector"
+  },
+  {
+    "description" : "Toggle slow animations using a shortcut.",
+    "id" : "519",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Slow Animations Shortcut"
+  },
+  {
+    "description" : "Make rulers sticky to on-screen element boundaries.",
+    "id" : "522",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Align rulers to elements"
+  },
+  {
+    "description" : "A screenshot of the Simulator will be diffed against a selected design overlay, resulting in an implementation score.",
+    "id" : "523",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Show a score & diff image of the implementation compared to a selected design overlay"
   }
 ]

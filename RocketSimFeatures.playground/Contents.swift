@@ -44,10 +44,10 @@ let features: [Feature] = [
     .init(githubIssueID: "353", title: "Automatically update timezone to match location change", description: "Restarts your app with the requested location and updates the timezone for your app accordingly", status: .implemented),
     .init(githubIssueID: "304", title: "Xcode Build Statistics", description: "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects.", status: .implemented),
     .init(githubIssueID: "282", title: "Allow to search Quick Actions", description: "Filter long lists by searching for a query", status: .implemented),
+    .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .implemented),
     
     /// Planned
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
-    .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .implemented),
     .init(githubIssueID: "370", title: "SwiftData Visual Viewer & Editor", description: "Explore and edit SwiftData databases.", status: .planned),
     .init(githubIssueID: "347", title: "Username/Password Quick Action", description: "Allow to fill in account details inside a email/password textfield via a Quick Action.", status: .planned),
     .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
@@ -55,7 +55,7 @@ let features: [Feature] = [
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
     .init(githubIssueID: "289", title: "Add a wallpaper and padding to screenshots", description: "Beautify screenshots with a gradient background and extra padding", status: .planned),
     .init(githubIssueID: "280", title: "Resize screenshots", description: "Allow resizing the output screenshot to reduce size and resolution", status: .planned),
-    .init(githubIssueID: "269", title: "120hz Simulator Recording", description: "An alternative recording solution that drastically improves the recordings. Bezels can't be turned off.", status: .planned),
+    .init(githubIssueID: "269", title: "Advanced Simulator Recordings (60FPS, 120FPS, compression config)", description: "Advanced configuration for Simulator recordings, allowing to record in 60FPS, 120FPS or to configure compression.", status: .planned),
     .init(githubIssueID: "193", title: "Configurable Video Output", description: "Export to .MOV instead of .MP4", status: .planned),
     .init(githubIssueID: "179", title: "Display HTTP Traffic", description: "Show HTTP Traffic directly next to the Simulator", status: .planned),
     .init(githubIssueID: "236", title: "Allow Save as... for captured thumbnails", description: "Right-click a thumbnail to save as...", status: .planned),
@@ -68,7 +68,13 @@ let features: [Feature] = [
     .init(githubIssueID: "483", title: "Allow right-click -> Edit on any action", description: "Directly access App Action editor via right-click", status: .planned),
     .init(githubIssueID: "480", title: "Support GPX files for location simulation", description: "Simulate locations using GPX files", status: .planned),
     .init(githubIssueID: "464", title: "Introduce App Action tags for grouping", description: "Group long lists of app actions based on configured tags", status: .planned),
-    .init(githubIssueID: "397", title: "Support reachability libraries (NWPathFilter) with Airplane Mode", description: "Simulator Airplane Mode support for NWPathFilter, which is often used in accessibility libraries", status: .planned)
+    .init(githubIssueID: "397", title: "Support reachability libraries (NWPathFilter) with Airplane Mode", description: "Simulator Airplane Mode support for NWPathFilter, which is often used in accessibility libraries", status: .planned),
+    .init(githubIssueID: "435", title: "Integrate Sketch App to use artboards for design comparison", description: "Select a Sketch artboard and show it on top of the simulator for design comparison", status: .planned),
+    .init(githubIssueID: "520", title: "Integrate Figma Connect to use artboards for design comparison", description: "Select a Figma artboard and show it on top of the simulator for design comparison", status: .planned),
+    .init(githubIssueID: "521", title: "Accessibility Inspector", description: "Inspect on-screen elements for accessibility. Show a tree of accessibility elements.", status: .planned),
+    .init(githubIssueID: "519", title: "Slow Animations Shortcut", description: "Toggle slow animations using a shortcut.", status: .planned),
+    .init(githubIssueID: "522", title: "Align rulers to elements", description: "Make rulers sticky to on-screen element boundaries.", status: .planned),
+    .init(githubIssueID: "523", title: "Show a score & diff image of the implementation compared to a selected design overlay", description: "A screenshot of the Simulator will be diffed against a selected design overlay, resulting in an implementation score.", status: .planned)
 ]
 
 assert(Set(features.map(\.githubIssueID)).count == features.count, "Duplicate IDs exist!")
