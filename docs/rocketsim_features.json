@@ -105,6 +105,13 @@
     "title" : "Clipboard copy to\/from buttons"
   },
   {
+    "description" : "Show HTTP Traffic directly next to the Simulator",
+    "id" : "179",
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Display HTTP Traffic"
+  },
+  {
     "description" : "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
     "id" : "368",
     "isFinished" : false,
@@ -173,13 +180,6 @@
     "isFinished" : false,
     "status" : "Planned",
     "title" : "Configurable Video Output"
-  },
-  {
-    "description" : "Show HTTP Traffic directly next to the Simulator",
-    "id" : "179",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Display HTTP Traffic"
   },
   {
     "description" : "Right-click a thumbnail to save as...",
