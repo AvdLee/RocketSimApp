@@ -1,8 +1,4 @@
-<p align="center">
-    <a href="https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12">
-      <img width="635px" src="docs/Assets/network_monitoring_demo.mp4">
-    </a>
-</p>
+![Network Monitoring Demo](docs/Assets/network_monitoring_demo.gif)
 
 # Enhancing the Xcode Simulators
 Boost your productivity and streamline your workflow with our **powerful Xcode Simulator tools**. Developers report building, testing, and verifying apps **up to 2x faster** with RocketSim.
