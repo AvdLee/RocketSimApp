@@ -143,7 +143,7 @@
     "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
     "id" : "283b",
     "isFinished" : false,
-    "status" : "Planned",
+    "status" : "In Progress",
     "title" : "Network Link Conditioner"
   },
   {
@@ -299,5 +299,47 @@
     "isFinished" : false,
     "status" : "Planned",
     "title" : "Show a score & diff image of the implementation compared to a selected design overlay"
+  },
+  {
+    "description" : "Adding Push notifications permissions to the other existing permission revoke, grant, reset actions.",
+    "id" : "218",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Grant\/Revoke push notifications permissions"
+  },
+  {
+    "description" : "Adding HealthKit permissions to the other existing permission revoke, grant, reset actions.",
+    "id" : "374",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Grant\/Revoke HealthKit permissions"
+  },
+  {
+    "description" : "Allow resetting the keychain without completely resetting the Simulator.",
+    "id" : "561",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Reset Kechain action"
+  },
+  {
+    "description" : "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.",
+    "id" : "607",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Simulator Camera"
+  },
+  {
+    "description" : "Create deeplinks for app directories. For example, open .app\/caches\/db.sqlite with a single click.",
+    "id" : "606",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Directory Actions"
+  },
+  {
+    "description" : "In addition to specific locations, the option to specify a latitude and longitude.",
+    "id" : "564",
+    "isFinished" : false,
+    "status" : "Planned",
+    "title" : "Allow copy pasting lat\/long values"
   }
 ]
