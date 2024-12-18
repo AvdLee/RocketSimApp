@@ -477,93 +477,13 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-md-center">
-        <div class="newsletter_subscribe_form">
-          <form
-            action="https://www.avanderlee.com/sendy/subscribe"
-            method="POST"
-            accept-charset="utf-8"
-          >
-            <fieldset>
-              <legend>How big is your team?</legend>
-              <div>
-                <input
-                  type="radio"
-                  id="small"
-                  name="team-size"
-                  value="1-5"
-                  checked
-                />
-                <label for="small">1-5</label>
-              </div>
-              <div>
-                <input type="radio" id="dewey" name="team-size" value="5-15" />
-                <label for="dewey">5-15</label>
-              </div>
-              <div>
-                <input type="radio" id="louie" name="team-size" value="15-30" />
-                <label for="louie">15-30</label>
-              </div>
-              <div>
-                <input type="radio" id="louie" name="team-size" value="30+" />
-                <label for="louie">30+</label>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend>Is your team already using RocketSim?</legend>
-              <div>
-                <input
-                  type="radio"
-                  id="small"
-                  name="existing-user"
-                  value="Yes"
-                  checked
-                />
-                <label for="small">Yes</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="dewey"
-                  name="existing-user"
-                  value="No"
-                />
-                <label for="dewey">No</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="louie"
-                  name="existing-user"
-                  value="Partly"
-                />
-                <label for="louie">Only some of our developers</label>
-              </div>
-            </fieldset>
-            <div class="form-fields">
-              <input
-                class="newsletter-email"
-                type="email"
-                name="email"
-                placeholder="Your email address"
-                required=""
-              />
-              <input type="submit" value="Sign up" />
-            </div>
-            <div style="display: none">
-              <label for="hp">HP</label><br />
-              <input type="text" name="hp" id="hp" />
-            </div>
-            <input type="hidden" name="list" value="TL7gGQ1OxQPYFKkwsAP3892Q" />
-            <input type="hidden" name="subform" value="yes" />
-            <input
-              type="hidden"
-              name="source"
-              value="rocketsim-teams-page"
-              style="display: none"
-            />
-          </form>
-        </div>
+      <div class="pricing-table-wrapper">
+        <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+        <stripe-pricing-table
+          pricing-table-id="prctbl_1QXPD3AprKYhJoSqYHAc7Uqn"
+          publishable-key="pk_live_51QT1gdAprKYhJoSqnISZjmO3BIfZpA01ZXMM697LzdrkD6LqrqlNvx2Y5SzgazuUoq7iOgN4iAbSvSpV4Jvc6Gcl00D4hvBbyO"
+        >
+        </stripe-pricing-table>
       </div>
     </div>
 

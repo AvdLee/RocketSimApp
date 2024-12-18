@@ -525,51 +525,8 @@ video {
 }
 
 /* Newsletter Subscribe Form */
-.newsletter_subscribe_form {
+.pricing-table-wrapper {
 	margin-top: 2rem;
-}
-.newsletter_subscribe_form fieldset {
-	margin: 1rem 0 2rem;
-}
-.newsletter_subscribe_form .form-fields {
-    background: white;
-    border-radius: 10px;
-    margin-bottom: 4rem;
-    display: flex;
-    font-size: 1.2rem;
-    font-weight: 300;
-	margin: 0 auto;
-}
-
-.newsletter_subscribe_form .form-fields p {
-    margin: 0;
-    width: 100%;
-}
-
-.newsletter_subscribe_form .form-fields .newsletter-email {
-    display: block;
-    float: left;
-    color: black !important;
-    padding: 0 1rem;
-    margin: 0;
-    flex-grow: 1;
-    border-bottom: none !important;
-	border: none;
-	background: none;
-	font-size: 0.9rem;
-}
-
-.newsletter_subscribe_form .form-fields input[type=submit] {
-    border-radius: 6px !important;
-    padding-left: 0.6rem;
-    font-weight: bold;
-    background-image: url(../Assets/arrow-right.svg);
-    background-repeat: no-repeat;
-    background-position: right 0.6rem center;
-    background-size: 0.85rem;
-    padding-right: 1.9rem;
-    height: 36px;
-    margin: 0.4rem;
 }
 
 input::placeholder {
