@@ -1,395 +1,666 @@
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
 
-		<title>RocketSim - Build Apps Faster with Insights</title>
-		<meta name="description" content="Simulator Airplane Mode, Location Simulation, Accessibility Testing, Compare designs inside the iOS simulator. Test deeplinks, push notifications.">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>RocketSim - Build Apps Faster with Insights</title>
+    <meta
+      name="description"
+      content="Simulator Airplane Mode, Location Simulation, Accessibility Testing, Compare designs inside the iOS simulator. Test deeplinks, push notifications."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-        <meta name=”robots” content="index, follow">
+    <meta name="”robots”" content="index, follow" />
 
-		<meta property="og:site_name" content="RocketSim">
-        <meta property="og:title" content="RocketSim - Team Insights">
-		<meta property="og:description" content="Should you get an M3 Max for your Xcode project? How much does Xcode 16 improve build times?">
-		<meta property="og:image" content="https://www.rocketsim.app/Assets/og_banner_rocketsim.jpg">
-		<meta property="og:url" content="https://www.rocketsim.app">
-		<meta name="twitter:card" content="https://www.rocketsim.app/Assets/og_banner_rocketsim.jpg">
-		<meta name="twitter:site" content="@rocketsim_app">
+    <meta property="og:site_name" content="RocketSim" />
+    <meta property="og:title" content="RocketSim - Team Insights" />
+    <meta
+      property="og:description"
+      content="Should you get an M3 Max for your Xcode project? How much does Xcode 16 improve build times?"
+    />
+    <meta
+      property="og:image"
+      content="https://www.rocketsim.app/Assets/og_banner_rocketsim.jpg"
+    />
+    <meta property="og:url" content="https://www.rocketsim.app" />
+    <meta
+      name="twitter:card"
+      content="https://www.rocketsim.app/Assets/og_banner_rocketsim.jpg"
+    />
+    <meta name="twitter:site" content="@rocketsim_app" />
 
-        <link rel="icon" type="image/png" sizes="64x64" href="https://www.rocketsim.app/Assets/favicon.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="https://www.rocketsim.app/Assets/favicon.png"
+    />
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-        
-        <!-- CSS Charts -->
-        <link rel="stylesheet" href="css/charts.min.css">
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
 
-        <link href="css/style.css" rel="stylesheet" />
+    <!-- CSS Charts -->
+    <link rel="stylesheet" href="css/charts.min.css" />
 
-        <!--Animate CSS-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-        <!--Wow JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script src="js/plausible-form-events.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
 
-        <!-- Wow JS Activation -->
-        <script>
-            new WOW().init();
-        </script>
+    <!--Animate CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+    <!--Wow JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="js/plausible-form-events.js"></script>
 
-		<!-- Play video when visible -->
-        <script type="text/javascript">
-            window.onload = (function () {
-                const el = document.getElementById("header-menu");
-                const observer = new IntersectionObserver( 
-                  ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
-                  { threshold: [1] }
-                );
+    <!-- Wow JS Activation -->
+    <script>
+      new WOW().init();
+    </script>
 
-                observer.observe(el);
-            });
-        </script>
+    <!-- Play video when visible -->
+    <script type="text/javascript">
+      window.onload = function () {
+        const el = document.getElementById("header-menu");
+        const observer = new IntersectionObserver(
+          ([e]) =>
+            e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
+          { threshold: [1] }
+        );
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62543041-2"></script>
-        <script async src="https://www.googleoptimize.com/optimize.js?id=OPT-P3SN7Z7"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+        observer.observe(el);
+      };
+    </script>
 
-		  gtag('config', 'UA-62543041-2');
-		</script>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1042599472"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-62543041-2"
+    ></script>
+    <script
+      async
+      src="https://www.googleoptimize.com/optimize.js?id=OPT-P3SN7Z7"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-          gtag('config', 'AW-1042599472');
-        </script>
-        <!-- Event snippet for Website traffic conversion page -->
-        <script>
-          gtag('event', 'conversion', {'send_to': 'AW-1042599472/3iIkCKb90psYELCck_ED'});
-        </script>
+      gtag("config", "UA-62543041-2");
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-1042599472"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        <script defer data-domain="rocketsim.app" src="https://plausible.io/js/script.tagged-events.js"></script>
-        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+      gtag("config", "AW-1042599472");
+    </script>
+    <!-- Event snippet for Website traffic conversion page -->
+    <script>
+      gtag("event", "conversion", {
+        send_to: "AW-1042599472/3iIkCKb90psYELCck_ED",
+      });
+    </script>
 
-        <!-- Reddit Pixel -->
-        <script>
-        !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_ei3j6o3ghriw');rdt('track', 'PageVisit');
-        </script>
+    <script
+      defer
+      data-domain="rocketsim.app"
+      src="https://plausible.io/js/script.tagged-events.js"
+    ></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+    </script>
 
-    </head>
-    <body>
-        <!--Header and Navbar-->
-        <div class="container jumbotron header-container">
-            <div class="row">
-                <div class="col-md-7 wow">
-                    <h1 id="page-title">
-                        <a class="blog-logo insights-logo" href="https://www.rocketsim.app/" rel="home">RocketSim</a>
-                    </h1>
-                    <h2 class="section-headline">Make your whole team Build Apps Faster</h2>
-                    <p class="gray-text">Connect your team using the same license key and gather team insights like p75 build duration, machine benchmarks, and more.</p>
-                </div>
-                <div class="col-md-5 wow">
-                	<img src="Assets/rocketsim-app-icon.png"/>
-                </div>
-            </div>
+    <!-- Reddit Pixel -->
+    <script>
+      !(function (w, d) {
+        if (!w.rdt) {
+          var p = (w.rdt = function () {
+            p.sendEvent
+              ? p.sendEvent.apply(p, arguments)
+              : p.callQueue.push(arguments);
+          });
+          p.callQueue = [];
+          var t = d.createElement("script");
+          (t.src = "https://www.redditstatic.com/ads/pixel.js"), (t.async = !0);
+          var s = d.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(t, s);
+        }
+      })(window, document);
+      rdt("init", "a2_ei3j6o3ghriw");
+      rdt("track", "PageVisit");
+    </script>
+  </head>
+  <body>
+    <!--Header and Navbar-->
+    <div class="container jumbotron header-container">
+      <div class="row">
+        <div class="col-md-7 wow">
+          <h1 id="page-title">
+            <a
+              class="blog-logo insights-logo"
+              href="https://www.rocketsim.app/"
+              rel="home"
+              >RocketSim</a
+            >
+          </h1>
+          <h2 class="section-headline">
+            Make your whole team Build Apps Faster
+          </h2>
+          <p class="gray-text">
+            Connect your team using the same license key and gather team
+            insights like p75 build duration, machine benchmarks, and more.
+          </p>
         </div>
-        <div class="sticky-top header-menu" id="header-menu">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-11 wow">
-                        
-                        <a href="https://avanderlee.gumroad.com/l/rocketsim" class="app-store-button" id="header-app-store-button" target="_blank">
-                            <button type="button" class="btn btn-primary">Get Team Licenses</button>
-                        </a>
-                        <a href="https://www.rocketsim.app" class="team-licenses-button">
-                            <button type="button" class="btn btn-primary">All Features</button>
-                        </a>
-                        <a href="https://docs.rocketsim.app" class="team-licenses-button" target="_blank">
-                            <button type="button" class="btn btn-primary">Documentation</button>
-                        </a>
-                        <a href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9" class="team-licenses-button" target="_blank">
-                            <button type="button" class="btn btn-primary">FAQ</button>
-                        </a>
-                    </div>
-                    <div class="col-md-1">
-                        <img id="sticky-app-icon" src="Assets/rocketsim-app-icon.png"/>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-5 wow">
+          <img src="Assets/rocketsim-app-icon.png" />
+        </div>
+      </div>
+    </div>
+    <div class="sticky-top header-menu" id="header-menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-11 wow">
+            <a
+              href="https://avanderlee.gumroad.com/l/rocketsim"
+              class="app-store-button"
+              id="header-app-store-button"
+              target="_blank"
+            >
+              <button type="button" class="btn btn-primary">
+                Get Team Licenses
+              </button>
+            </a>
+            <a href="https://www.rocketsim.app" class="team-licenses-button">
+              <button type="button" class="btn btn-primary">
+                All Features
+              </button>
+            </a>
+            <a
+              href="https://docs.rocketsim.app"
+              class="team-licenses-button"
+              target="_blank"
+            >
+              <button type="button" class="btn btn-primary">
+                Documentation
+              </button>
+            </a>
+            <a
+              href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+              class="team-licenses-button"
+              target="_blank"
+            >
+              <button type="button" class="btn btn-primary">FAQ</button>
+            </a>
+          </div>
+          <div class="col-md-1">
+            <img id="sticky-app-icon" src="Assets/rocketsim-app-icon.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--RocketSim Insights-->
+    <div class="container feature-section" id="rocketsim-insights">
+      <div class="row">
+        <div class="row section-desc wow fadeIn justify-content-center">
+          <h2 class="section-headline gray-text text-center">
+            RocketSim Insights
+          </h2>
+          <div class="section-headline section-headline-elevated text-center">
+            Increase the productivity of your whole team
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-md-6 wow fadeInLeft">
+          <img src="Assets/build_insights.png" />
+        </div>
+        <div class="col-md-6 wow fadeInRight">
+          <span>
+            <h3>Keep track of Xcode Build Durations</h3>
+            <p class="gray-text">
+              Unlike Xcode, RocketSim will cache all your builds for months to
+              follow. You'll be able to compare build times and
+              <span class="text-headline"
+                >get notified when compilation times increase.</span
+              >
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Machine Benchmark -->
+    <div class="container-fluid">
+      <h2 class="section-headline faded-headline wow fadeInUp">
+        Is it worth getting an M3 Max?
+      </h2>
+    </div>
+    <div class="container feature-section">
+      <div class="row align-items-start">
+        <div class="col-md-6 wow fadeInLeft">
+          <div class="benchmark-bar">
+            <table
+              class="charts-css bar data-outside show-heading show-labels data-spacing-20"
+              id="benchmark-chart"
+            >
+              <caption>
+                Build Duration by Machine
+              </caption>
+
+              <thead>
+                <tr>
+                  <th scope="col">Machine</th>
+                  <th scope="col">Duration</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    Mac Studio 2023 / M2 Ultra 24-core / 192 RAM
+                  </th>
+                  <td class="wow bar-one">
+                    <span class="data outside">12s</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM
+                  </th>
+                  <td class="wow bar-two">
+                    <span class="data outside">14s</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM
+                  </th>
+                  <td class="wow bar-three">
+                    <span class="data outside">26s</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 wow fadeInRight">
+          <span>
+            <h3>Benchmark your team's project</h3>
+            <p class="gray-text">
+              With team licenses, your builds will be synced. You'll find out
+              <span class="text-headline"
+                >which machine setup performs best</span
+              >
+              for your Xcode project.
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Xcode Benchmark -->
+    <div class="container-fluid">
+      <h2 class="section-headline faded-headline wow fadeInUp">
+        Does Xcode 16 improve our project's build times?
+      </h2>
+    </div>
+    <div class="container feature-section">
+      <div class="row align-items-start">
+        <div class="col-md-6 wow fadeInLeft">
+          <div class="benchmark-bar">
+            <table
+              class="charts-css bar data-outside show-heading show-labels data-spacing-20"
+              id="benchmark-chart"
+            >
+              <caption>
+                Build Duration by Xcode Version
+              </caption>
+
+              <thead>
+                <tr>
+                  <th scope="col">Machine</th>
+                  <th scope="col">Duration</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <th scope="row">Xcode 16.0 (16F3233f)</th>
+                  <td class="wow xcode-bar-one">
+                    <span class="data outside">13.5s</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Xcode 15.4 (15F31d)</th>
+                  <td class="wow xcode-bar-two">
+                    <span class="data outside">15s</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Xcode 15.3 (15E204a)</th>
+                  <td class="wow xcode-bar-three">
+                    <span class="data outside">15.3s</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 wow fadeInRight">
+          <span>
+            <h3>Build duration grouped by Xcode version</h3>
+            <p class="gray-text">
+              RocketSim Insights automatically benchmarks your team's build
+              durations to tell you
+              <span class="text-headline"
+                >how much an Xcode version improves build times</span
+              >
+              for your Xcode project.
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actionable Insights -->
+    <div class="container feature-section" id="actionable-insights">
+      <div class="row align-items-center">
+        <div class="row section-desc wow fadeIn justify-content-center">
+          <h2 class="section-headline gray-text text-center">
+            Actionable Insights
+          </h2>
+          <div class="section-headline section-headline-elevated text-center">
+            Take action based on data
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center" id="list-of-insights">
+        <div class="col-md-6">
+          <div
+            class="alert alert-dark wow fadeInRight"
+            role="alert"
+            data-wow-delay="0.3s"
+          >
+            <span class="gauge"></span>
+            <p>
+              Save up to 2 hours per month by upgrading Jordi & Hidde's machine
+              to an M3 Max.
+            </p>
+          </div>
+          <div
+            class="alert alert-dark wow fadeInRight"
+            role="alert"
+            data-wow-delay="0.6s"
+          >
+            <span class="gauge-alert"></span>
+            <p>
+              Antoine is the only one building with Xcode 15.3 which can lead to
+              different build results.
+            </p>
+          </div>
+          <div
+            class="alert alert-dark wow fadeInRight"
+            role="alert"
+            data-wow-delay="0.9s"
+          >
+            <span class="gauge"></span>
+            <p>
+              Xcode 16.0 seems to improve build times by 10%. Consider upgrading
+              your whole team.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Web Preview -->
+    <div
+      class="container-fluid gray-background-container"
+      id="online-team-manager"
+    >
+      <div class="container">
+        <div class="row section-desc wow fadeIn">
+          <h2 class="section-headline gray-text">Online Team Manager</h2>
+          <div class="section-headline section-headline-elevated">
+            Browse insights and manage seats
+          </div>
+          <p class="typography-section-intro">
+            Configure workspaces, select specific schemes, browse build
+            durations and benchmarks. RocketSim's Team Manager puts you in full
+            control of your team's productivity.
+          </p>
         </div>
 
-        <!--RocketSim Insights-->
-        <div class="container feature-section" id="rocketsim-insights">
-            <div class="row">
-                <div class="row section-desc wow fadeIn justify-content-center">
-                    <h2 class="section-headline gray-text text-center">RocketSim Insights</h2>
-                    <div class="section-headline section-headline-elevated text-center">Increase the productivity of your whole team</div>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-6 wow fadeInLeft">
-                    <img src="Assets/build_insights.png" />
-                </div>
-                <div class="col-md-6 wow fadeInRight">
-                    <span>
-                        <h3>Keep track of Xcode Build Durations</h3>
-                        <p class="gray-text">Unlike Xcode, RocketSim will cache all your builds for months to follow. You'll be able to compare build times and <span class="text-headline">get notified when compilation times increase.</span></p>
-                    </span>
-                </div>
-            </div>
+        <div class="row wow fadeIn">
+          <div class="video-container">
+            <video autoplay loop muted playsinline>
+              <source
+                src="Assets/team_insights_dashboard.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Machine Benchmark -->
-        <div class="container-fluid"><h2 class="section-headline faded-headline wow fadeInUp">Is it worth getting an M3 Max?</h2></div>
-        <div class="container feature-section">
-            <div class="row align-items-start">
-                <div class="col-md-6 wow fadeInLeft">
-                    <div class="benchmark-bar">
-                        <table class="charts-css bar data-outside show-heading show-labels data-spacing-20" id="benchmark-chart">
-                            <caption>Build Duration by Machine</caption>
-                        
-                            <thead>
-                            <tr>
-                                <th scope="col"> Machine </th>
-                                <th scope="col"> Duration </th>
-                            </tr>
-                            </thead>
-                        
-                            <tbody>
-                            <tr>
-                                <th scope="row"> Mac Studio 2023 / M2 Ultra 24-core / 192 RAM </th>
-                                <td class="wow bar-one"> <span class="data outside">12s</span> </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"> MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM </th>
-                                <td class="wow bar-two"> <span class="data outside">14s</span> </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"> MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM </th>
-                                <td class="wow bar-three"> <span class="data outside">26s</span> </td>
-                            </tr>
-                            </tbody>
-                    </table>
-                </div>
-                </div>
-                <div class="col-md-6 wow fadeInRight">
-                    <span>
-                        <h3>Benchmark your team's project</h3>
-                        <p class="gray-text">With team licenses, your builds will be synced. You'll find out <span class="text-headline">which machine setup performs best</span> for your Xcode project.</p>
-                    </span>
-                </div>
-            </div>
+    <!-- Sign up for the beta -->
+    <div class="container feature-section" id="beta-signup">
+      <div class="row align-items-center">
+        <div class="row section-desc wow fadeIn justify-content-center">
+          <h2 class="section-headline gray-text">Ready to get started?</h2>
+          <div class="section-headline section-headline-elevated">
+            Sign up now
+          </div>
         </div>
-
-        <!-- Xcode Benchmark -->
-        <div class="container-fluid"><h2 class="section-headline faded-headline wow fadeInUp">Does Xcode 16 improve our project's build times?</h2></div>
-        <div class="container feature-section">
-            <div class="row align-items-start">
-                <div class="col-md-6 wow fadeInLeft">
-                    <div class="benchmark-bar">
-                        <table class="charts-css bar data-outside show-heading show-labels data-spacing-20" id="benchmark-chart">
-                            <caption>Build Duration by Xcode Version</caption>
-                        
-                            <thead>
-                            <tr>
-                                <th scope="col"> Machine </th>
-                                <th scope="col"> Duration </th>
-                            </tr>
-                            </thead>
-                        
-                            <tbody>
-                            <tr>
-                                <th scope="row"> Xcode 16.0 (16F3233f) </th>
-                                <td class="wow xcode-bar-one"> <span class="data outside">13.5s</span> </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"> Xcode 15.4 (15F31d) </th>
-                                <td class="wow xcode-bar-two"> <span class="data outside">15s</span> </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"> Xcode 15.3 (15E204a) </th>
-                                <td class="wow xcode-bar-three"> <span class="data outside">15.3s</span> </td>
-                            </tr>
-                            </tbody>
-                    </table>
-                </div>
-                </div>
-                <div class="col-md-6 wow fadeInRight">
-                    <span>
-                        <h3>Build duration grouped by Xcode version</h3>
-                        <p class="gray-text">RocketSim Insights automatically benchmarks your team's build durations to tell you <span class="text-headline">how much an Xcode version improves build times</span> for your Xcode project.</p>
-                    </span>
-                </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="newsletter_subscribe_form">
+          <form
+            action="https://www.avanderlee.com/sendy/subscribe"
+            method="POST"
+            accept-charset="utf-8"
+          >
+            <fieldset>
+              <legend>How big is your team?</legend>
+              <div>
+                <input
+                  type="radio"
+                  id="small"
+                  name="team-size"
+                  value="1-5"
+                  checked
+                />
+                <label for="small">1-5</label>
+              </div>
+              <div>
+                <input type="radio" id="dewey" name="team-size" value="5-15" />
+                <label for="dewey">5-15</label>
+              </div>
+              <div>
+                <input type="radio" id="louie" name="team-size" value="15-30" />
+                <label for="louie">15-30</label>
+              </div>
+              <div>
+                <input type="radio" id="louie" name="team-size" value="30+" />
+                <label for="louie">30+</label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Is your team already using RocketSim?</legend>
+              <div>
+                <input
+                  type="radio"
+                  id="small"
+                  name="existing-user"
+                  value="Yes"
+                  checked
+                />
+                <label for="small">Yes</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="dewey"
+                  name="existing-user"
+                  value="No"
+                />
+                <label for="dewey">No</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="louie"
+                  name="existing-user"
+                  value="Partly"
+                />
+                <label for="louie">Only some of our developers</label>
+              </div>
+            </fieldset>
+            <div class="form-fields">
+              <input
+                class="newsletter-email"
+                type="email"
+                name="email"
+                placeholder="Your email address"
+                required=""
+              />
+              <input type="submit" value="Sign up" />
             </div>
+            <div style="display: none">
+              <label for="hp">HP</label><br />
+              <input type="text" name="hp" id="hp" />
+            </div>
+            <input type="hidden" name="list" value="TL7gGQ1OxQPYFKkwsAP3892Q" />
+            <input type="hidden" name="subform" value="yes" />
+            <input
+              type="hidden"
+              name="source"
+              value="rocketsim-teams-page"
+              style="display: none"
+            />
+          </form>
         </div>
+      </div>
+    </div>
 
-        <!-- Actionable Insights -->
-        <div class="container feature-section" id="actionable-insights">
-            <div class="row align-items-center">
-                <div class="row section-desc wow fadeIn justify-content-center">
-                    <h2 class="section-headline gray-text text-center">Actionable Insights</h2>
-                    <div class="section-headline section-headline-elevated text-center">Take action based on data</div>
-                </div>
-                
-            </div>
-            <div class="row justify-content-md-center" id="list-of-insights">
-                <div class="col-md-6">
-                    <div class="alert alert-dark wow fadeInRight" role="alert" data-wow-delay="0.3s">
-                        <span class="gauge"></span>
-                        <p>Save up to 2 hours per month by upgrading Jordi & Hidde's machine to an M3 Max.</p>
-                    </div>
-                    <div class="alert alert-dark wow fadeInRight" role="alert" data-wow-delay="0.6s">
-                        <span class="gauge-alert"></span>
-                        <p>Antoine is the only one building with Xcode 15.3 which can lead to different build results.</p>
-                    </div>
-                    <div class="alert alert-dark wow fadeInRight" role="alert" data-wow-delay="0.9s">
-                        <span class="gauge"></span>
-                        <p>Xcode 16.0 seems to improve build times by 10%. Consider upgrading your whole team.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="container" id="app-store-badges">
+      <div class="row justify-content-center wow fadeIn">
+        <div class="col-sm-3">
+          <img src="Assets/app_store_rating.jpg" />
         </div>
-
-        <!-- Web Preview -->
-        <div class="container-fluid gray-background-container" id="online-team-manager">
-            <div class="container">
-                <div class="row section-desc wow fadeIn">
-                    <h2 class="section-headline gray-text">Online Team Manager</h2>
-                    <div class="section-headline section-headline-elevated">Browse insights and manage seats</div>
-                    <p class="typography-section-intro">Configure workspaces, select specific schemes, browse build durations and benchmarks. RocketSim's Team Manager puts you in full control of your team's productivity.</p>
-                </div>
-            
-                <div class="row wow fadeIn">
-                    <div class="video-container">
-                        <video autoplay loop muted playsinline>
-                            <source src="Assets/team_insights_dashboard.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-            </div>
+        <div class="col-sm-3">
+          <img src="Assets/app_store_featured.jpg" />
         </div>
+      </div>
+    </div>
 
-        <!-- Sign up for the beta -->
-        <div class="container feature-section" id="beta-signup">
-            <div class="row align-items-center">
-                <div class="row section-desc wow fadeIn justify-content-center">
-                    <h2 class="section-headline gray-text">Ready to get started?</h2>
-                    <div class="section-headline section-headline-elevated">Sign up now</div>
-                </div>
-                
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="newsletter_subscribe_form">
-                    <form action="https://www.avanderlee.com/sendy/subscribe" method="POST" accept-charset="utf-8">
-                        <fieldset>
-                            <legend>How big is your team?</legend>
-                            <div>
-                              <input type="radio" id="small" name="team-size" value="1-5" checked />
-                              <label for="small">1-5</label>
-                            </div>
-                            <div>
-                              <input type="radio" id="dewey" name="team-size" value="5-15" />
-                              <label for="dewey">5-15</label>
-                            </div>
-                            <div>
-                              <input type="radio" id="louie" name="team-size" value="15-30" />
-                              <label for="louie">15-30</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="louie" name="team-size" value="30+" />
-                                <label for="louie">30+</label>
-                              </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Is your team already using RocketSim?</legend>
-                            <div>
-                              <input type="radio" id="small" name="existing-user" value="Yes" checked />
-                              <label for="small">Yes</label>
-                            </div>
-                            <div>
-                              <input type="radio" id="dewey" name="existing-user" value="No" />
-                              <label for="dewey">No</label>
-                            </div>
-                            <div>
-                              <input type="radio" id="louie" name="existing-user" value="Partly" />
-                              <label for="louie">Only some of our developers</label>
-                            </div>
-                        </fieldset>
-                        <div class="form-fields">
-                            <input class="newsletter-email" type="email" name="email" placeholder="Your email address" required="">
-                            <input type="submit" value="Sign up"/>
-                        </div>
-                        <div style="display:none;">
-                            <label for="hp">HP</label><br/>
-                            <input type="text" name="hp" id="hp"/>
-                        </div>
-                        <input type="hidden" name="list" value="TL7gGQ1OxQPYFKkwsAP3892Q"/>
-                        <input type="hidden" name="subform" value="yes"/>
-                        <input type="hidden" name="source" value="rocketsim-teams-page" style="display:none">
-                    </form>
-                </div>
-            </div>
+    <!--Footer-->
+    <div class="footer">
+      <div class="container">
+        <div class="row justify-content-center">
+          <p>Copyright © 2024 RocketSim. All Rights Reserved.</p>
+          <br />
         </div>
-
-        <div class="container" id="app-store-badges">
-            <div class="row justify-content-center wow fadeIn">
-                <div class="col-sm-3">
-                    <img src="Assets/app_store_rating.jpg"/>
-                </div>
-                <div class="col-sm-3">
-                    <img src="Assets/app_store_featured.jpg"/>
-                </div>
-            </div>
+        <div class="row justify-content-center">
+          <p>
+            <a href="https://www.rocketsim.app/terms.html">Terms</a> and
+            <a href="https://www.rocketsim.app/privacy.html">Privacy Policy</a>
+          </p>
         </div>
+      </div>
+    </div>
 
-        <!--Footer-->
-        <div class="footer">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <p>Copyright © 2024 RocketSim. All Rights Reserved.</p><br/>
-                </div>
-                <div class="row justify-content-center">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
-                    <p><a href="https://www.rocketsim.app/terms.html">Terms</a> and 
-                    <a href="https://www.rocketsim.app/privacy.html">Privacy Policy</a></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-        <!-- LinkedIn Insights Tag -->
-        <script type="text/javascript">
-        _linkedin_partner_id = "5900860";
-        window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-        window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-        </script><script type="text/javascript">
-        (function(l) {
-        if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
-        window.lintrk.q=[]}
+    <!-- LinkedIn Insights Tag -->
+    <script type="text/javascript">
+      _linkedin_partner_id = "5900860";
+      window._linkedin_data_partner_ids =
+        window._linkedin_data_partner_ids || [];
+      window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script>
+    <script type="text/javascript">
+      (function (l) {
+        if (!l) {
+          window.lintrk = function (a, b) {
+            window.lintrk.q.push([a, b]);
+          };
+          window.lintrk.q = [];
+        }
         var s = document.getElementsByTagName("script")[0];
         var b = document.createElement("script");
-        b.type = "text/javascript";b.async = true;
+        b.type = "text/javascript";
+        b.async = true;
         b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-        s.parentNode.insertBefore(b, s);})(window.lintrk);
-        </script>
-        <noscript>
-        <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=5900860&fmt=gif" />
-        </noscript>
-        <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
-            o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-            o.onload=function(){window.trackingFunctions.onLoad({appId:"66b37a1730cbf001b45e103f"})},
-            document.head.appendChild(o)}initApollo();</script>
-    </body>
+        s.parentNode.insertBefore(b, s);
+      })(window.lintrk);
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        alt=""
+        src="https://px.ads.linkedin.com/collect/?pid=5900860&fmt=gif"
+      />
+    </noscript>
+    <script>
+      function initApollo() {
+        var n = Math.random().toString(36).substring(7),
+          o = document.createElement("script");
+        (o.src =
+          "https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache=" +
+          n),
+          (o.async = !0),
+          (o.defer = !0),
+          (o.onload = function () {
+            window.trackingFunctions.onLoad({
+              appId: "66b37a1730cbf001b45e103f",
+            });
+          }),
+          document.head.appendChild(o);
+      }
+      initApollo();
+    </script>
+  </body>
 </html>
