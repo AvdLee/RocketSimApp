@@ -142,8 +142,8 @@
   {
     "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
     "id" : "283b",
-    "isFinished" : false,
-    "status" : "In Progress",
+    "isFinished" : true,
+    "status" : "Implemented",
     "title" : "Network Link Conditioner"
   },
   {
