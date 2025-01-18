@@ -50,29 +50,29 @@
             });
         </script>
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62543041-2"></script>
-        <script async src="https://www.googleoptimize.com/optimize.js?id=OPT-P3SN7Z7"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-
-		  gtag('config', 'UA-62543041-2');
-		</script>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1042599472"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11565948565"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-          gtag('config', 'AW-1042599472');
+        gtag('config', 'AW-11565948565');
         </script>
-        <!-- Event snippet for Website traffic conversion page -->
+
+        <!-- Event snippet for Purchase conversion page
+        In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
         <script>
-          gtag('event', 'conversion', {'send_to': 'AW-1042599472/3iIkCKb90psYELCck_ED'});
+            function gtag_report_conversion() {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-11565948565/hoJVCPzfyYsaEJW9iYsr',
+                    'transaction_id': ''
+                });
+                return true;
+            }
         </script>
+    
+
 
         <!-- Script to set the button URL using the UTM Campaign -->
         <script type="text/javascript">
@@ -161,8 +161,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-11 wow">
-                        
-                        <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="app-store-button plausible-event-name=App+Store+Install" id="header-app-store-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Download Header', 'value': 1.00,  'non_interaction': true}); rdt('track', 'Lead');" data-dd-action-name="download_button">
+                        <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="app-store-button plausible-event-name=App+Store+Install" id="header-app-store-button" target="_blank" onclick="gtag_report_conversion(); rdt('track', 'Lead');" data-dd-action-name="download_button">
                             <button type="button" class="btn btn-primary">Download now</button>
                         </a>
                         <a href="https://www.rocketsim.app/team-insights" class="team-licenses-button" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Team Licenses Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="team_license_button">
