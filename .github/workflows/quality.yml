@@ -1,0 +1,47 @@
+name: Quality
+
+on:
+  push:
+    branches:
+      - master
+      - new-website
+    paths:
+      - docs/**
+  pull_request:
+    branches: 
+      - master
+      - new-website
+    paths:
+      - docs/**
+
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22.x"
+          cache: "npm"
+          cache-dependency-path: docs/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Detect unused files and dependencies
+        run: npm run knip
