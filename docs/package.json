@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --check .",
+    "format:check": "prettier --check .",
     "lint": "eslint src",
     "knip": "knip"
   },
