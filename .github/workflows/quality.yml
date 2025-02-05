@@ -14,13 +14,13 @@ on:
     paths:
       - docs/**
 
-defaults:
-  run:
-    working-directory: ./docs
 
 jobs:
   quality:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
     steps:
       - uses: actions/checkout@v3
 
@@ -29,6 +29,7 @@ jobs:
         with:
           node-version: "22.x"
           cache: "npm"
+          cache-dependency-path: docs/package-lock.json
 
       - name: Install dependencies
         run: npm ci
