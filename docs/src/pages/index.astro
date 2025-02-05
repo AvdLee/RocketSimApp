@@ -1,11 +1,33 @@
 ---
-import Welcome from "../components/Welcome.astro";
-import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+
+const rawFeatures = await getCollection("feature");
+const features = await Promise.all(
+  rawFeatures.map(async (feature) => {
+    const { Content } = await render(feature);
+    return {
+      ...feature,
+      Content,
+    };
+  }),
+);
 ---
 
-<Layout>
-  <Welcome />
-</Layout>
+<BaseLayout pageTitle="Build Apps Faster - RocketSim">
+  <header>
+    <Navigation />
+  </header>
+  <main>
+    {
+      features.map((feature) => (
+        <>
+          <h2>{feature.data.title}</h2>
+          <feature.Content />
+        </>
+      ))
+    }
+  </main>
+</BaseLayout>
