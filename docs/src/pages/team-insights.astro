@@ -1,9 +1,34 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import NavigationLink from "../components/NavigationLink.astro";
+import Header from "../components/Header.astro";
+
+import logoImage from "../assets/rocketsim-insights-logo.svg";
 ---
 
 <BaseLayout pageTitle="Team Insights - RocketSim">
-  <Navigation />
-  Team insights
+  <Header
+    title="Make your whole team Build Apps Faster"
+    logo={logoImage}
+    logoAlt='Written logo spelling: "RocketSim Insights"'
+  >
+    Connect your team using the same license key and gather team insights like
+    p75 build duration, machine benchmarks, and more.
+  </Header>
+  <Navigation>
+    <NavigationLink href="#get-team-license" asButton>
+      Get Team Licenses
+    </NavigationLink>
+    <NavigationLink href="/">All Features</NavigationLink>
+    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+      Documentation
+    </NavigationLink>
+    <NavigationLink
+      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      target="_blank"
+    >
+      FAQ
+    </NavigationLink>
+  </Navigation>
 </BaseLayout>

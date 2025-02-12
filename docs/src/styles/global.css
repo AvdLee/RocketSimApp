@@ -1,8 +1,21 @@
+:root {
+  --text-color: #aaa;
+  --text-color-light: #f5f5f7;
+  --primary-color: #0093ff;
+  --primary-color-accent: #3961d0;
+  --primary-color-active: #0062cc;
+  --ring: #0069d9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
-  color: #f5f5f7;
+  color: var(--text-color);
 
   background: #000000;
 
@@ -15,4 +28,69 @@ html {
 body {
   padding: 0;
   margin: 0;
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+strong {
+  color: var(--text-color-light);
+}
+
+.button {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.5;
+  text-decoration: none;
+
+  background-color: var(--primary-color);
+  border: 0.0625rem solid var(--primary-color);
+  border-radius: 1.685rem;
+  box-shadow: 0 3px 5px rgb(0 0 0 / 10%);
+
+  transition: background-color 0.15s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary-color-accent);
+    border-color: var(--primary-color-accent);
+  }
+
+  &:active {
+    background-color: var(--primary-color-active);
+    border-color: var(--primary-color-active);
+  }
+
+  &:focus-visible {
+    outline: 0.25rem solid var(--ring);
+  }
+}
+
+.button--xsmall {
+  padding: 0.25rem 0.75rem;
+
+  font-size: 0.625rem;
+}
+
+.button--small {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+
+  font-size: 0.875rem;
+}
+
+.button--full-width {
+  width: 100%;
 }

@@ -1,29 +1,118 @@
 ---
+import { Image } from "astro:assets";
 
+import appIcon from "../assets/rocketsim-app-icon.png";
 ---
 
-<nav aria-labelledby="primary-navigation">
-  <ul>
-    <li>
-      <a
-        href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
-        target="_blank">Download now</a
-      >
-    </li>
-    <li>
-      <a href="/team-insights">Team Licenses</a>
-    </li>
-    <li>
-      <a href="https://docs.rocketsim.app" target="_blank">Documentation</a>
-    </li>
-    <li>
-      <a
-        href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
-        target="_blank">FAQ</a
-      >
-    </li>
-  </ul>
-  <div>
-    <img src="Assets/rocketsim-app-icon.png" />
+<style>
+  .navigation-wrapper {
+    padding: 1rem 0;
+
+    background-color: #000;
+    border-bottom: 0.0625rem solid transparent;
+
+    transition: border-bottom-color 0.3s;
+    box-sizing: content-box;
+
+    @media (min-width: 768px) {
+      position: sticky;
+      top: -1px;
+    }
+  }
+
+  .navigation-wrapper--sticky {
+    @media (min-width: 768px) {
+      border-bottom-color: rgba(255, 255, 255, 0.24);
+
+      .navigation__logo {
+        opacity: 1;
+      }
+    }
+  }
+
+  .navigation {
+    padding: 0 1rem;
+
+    @media (min-width: 576px) {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 720px;
+    }
+
+    @media (min-width: 992px) {
+      max-width: 960px;
+    }
+
+    @media (min-width: 1200px) {
+      max-width: 1140px;
+    }
+  }
+
+  .navigation__logo {
+    width: 2.75rem;
+    height: auto;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.125rem;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      gap: 3rem;
+    }
+  }
+</style>
+
+<div class="navigation-wrapper" id="navigation-menu">
+  <div class="navigation">
+    <nav aria-label="Main navigation">
+      <ul>
+        <slot />
+      </ul>
+    </nav>
+    <Image
+      src={appIcon}
+      alt="RocketSim app icon"
+      width="88"
+      height="88"
+      class="navigation__logo"
+    />
   </div>
-</nav>
+</div>
+
+<script>
+  window.onload = function () {
+    const el = document.getElementById("navigation-menu");
+
+    if (!el) {
+      return null;
+    }
+
+    const observer = new IntersectionObserver(
+      ([e]) =>
+        e.target.classList.toggle(
+          "navigation-wrapper--sticky",
+          e.intersectionRatio < 1,
+        ),
+      { threshold: [1] },
+    );
+
+    observer.observe(el);
+  };
+</script>

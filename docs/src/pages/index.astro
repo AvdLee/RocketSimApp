@@ -3,6 +3,10 @@ import { getCollection, render } from "astro:content";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import NavigationLink from "../components/NavigationLink.astro";
+import Header from "../components/Header.astro";
+
+import logoImage from "../assets/rocketsim-logo.svg";
 
 const rawFeatures = await getCollection("feature");
 const features = await Promise.all(
@@ -17,9 +21,36 @@ const features = await Promise.all(
 ---
 
 <BaseLayout pageTitle="Build Apps Faster - RocketSim">
-  <header>
-    <Navigation />
-  </header>
+  <Header
+    title="Enhancing the Xcode Simulators"
+    logo={logoImage}
+    logoAlt='Written logo spelling: "RocketSim"'
+  >
+    Boost your productivity and streamline your workflow with our <strong
+      >powerful Xcode Simulator tools</strong
+    >. Developers report building, testing, and verifying apps <strong
+      >up to 2x faster</strong
+    > with RocketSim.
+  </Header>
+  <Navigation>
+    <NavigationLink
+      href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
+      asButton
+      target="_blank"
+    >
+      Download now
+    </NavigationLink>
+    <NavigationLink href="/team-insights">Team Licenses</NavigationLink>
+    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+      Documentation
+    </NavigationLink>
+    <NavigationLink
+      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      target="_blank"
+    >
+      FAQ
+    </NavigationLink>
+  </Navigation>
   <main>
     {
       features.map((feature) => (
