@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+
+import appIcon from "../assets/rocketsim-app-icon.png";
+
+interface Props {
+  title: string;
+  logo: ImageMetadata;
+  logoAlt: string;
+}
+
+const { title, logo, logoAlt } = Astro.props;
+---
+
+<style>
+  header {
+    padding: 0 1rem;
+    margin: 3rem 0 0;
+
+    @media (min-width: 576px) {
+      max-width: 540px;
+      margin: 5rem auto 0;
+    }
+
+    @media (min-width: 768px) {
+      display: flex;
+      max-width: 720px;
+      margin-top: 10rem;
+      padding: 0 1rem;
+    }
+
+    @media (min-width: 992px) {
+      max-width: 960px;
+    }
+
+    @media (min-width: 1200px) {
+      max-width: 1140px;
+    }
+  }
+
+  .header__content {
+    @media (min-width: 768px) {
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+    }
+  }
+
+  h1 {
+    display: inline-flex;
+    margin: 0 0 1rem;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem;
+
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.006rem;
+  }
+
+  a {
+    display: inline-flex;
+  }
+
+  p {
+    margin: 0 0 1rem;
+
+    text-wrap: balance;
+  }
+
+  .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .logo-image {
+    width: 4rem;
+    height: auto;
+
+    @media (min-width: 768px) {
+      width: 16rem;
+    }
+  }
+</style>
+<header>
+  <div class="header__content">
+    <h1>
+      <a href="/" aria-label="RocketSim"
+        ><Image src={logo} alt={logoAlt} height="48" /></a
+      >
+    </h1>
+    <h2>{title}</h2>
+    <p>
+      <slot />
+    </p>
+    <p>Scroll down to explore all features ↓</p>
+  </div>
+  <div class="logo-wrapper">
+    <Image
+      src={appIcon}
+      widths={[128, 512]}
+      sizes={"(max-width: 767px) 4rem, 16rem"}
+      alt="RocketSim app icon"
+      class="logo-image"
+    />
+  </div>
+</header>

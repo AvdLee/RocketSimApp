@@ -1,8 +1,17 @@
+:root {
+  --text-color: #aaa;
+  --text-color-light: #f5f5f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
-  color: #f5f5f7;
+  color: var(--text-color);
 
   background: #000000;
 
@@ -15,4 +24,20 @@ html {
 body {
   padding: 0;
   margin: 0;
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+strong {
+  color: var(--text-color-light);
 }
