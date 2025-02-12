@@ -1,0 +1,32 @@
+---
+interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
+  asButton?: boolean;
+}
+
+const { asButton, ...rest } = Astro.props;
+---
+
+<style>
+  .link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 0.125rem solid var(--ring);
+      border-radius: 0.25rem;
+    }
+  }
+
+  .button {
+    padding: 0.575rem 1.75rem;
+  }
+</style>
+<li>
+  <a {...rest} class={asButton ? "button" : "link"}><slot /></a>
+</li>

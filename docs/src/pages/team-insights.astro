@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import NavigationLink from "../components/NavigationLink.astro";
 import Header from "../components/Header.astro";
 
 import logoImage from "../assets/rocketsim-insights-logo.svg";
@@ -15,6 +16,19 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
     Connect your team using the same license key and gather team insights like
     p75 build duration, machine benchmarks, and more.
   </Header>
-  <Navigation />
-  Team insights
+  <Navigation>
+    <NavigationLink href="#get-team-license" asButton>
+      Get Team Licenses
+    </NavigationLink>
+    <NavigationLink href="/">All Features</NavigationLink>
+    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+      Documentation
+    </NavigationLink>
+    <NavigationLink
+      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      target="_blank"
+    >
+      FAQ
+    </NavigationLink>
+  </Navigation>
 </BaseLayout>

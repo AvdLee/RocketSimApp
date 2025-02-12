@@ -13,7 +13,7 @@ const { title, logo, logoAlt } = Astro.props;
 ---
 
 <style>
-  header {
+  .hero {
     padding: 0 1rem;
     margin: 3rem 0 0;
 
@@ -38,10 +38,10 @@ const { title, logo, logoAlt } = Astro.props;
     }
   }
 
-  .header__content {
+  .hero__content {
     @media (min-width: 768px) {
-    flex: 0 0 58.333333%;
-    max-width: 58.333333%;
+      flex: 0 0 58.333333%;
+      max-width: 58.333333%;
     }
   }
 
@@ -69,9 +69,17 @@ const { title, logo, logoAlt } = Astro.props;
     text-wrap: balance;
   }
 
-  .logo-wrapper {
+  .hero__rocketsim {
+    &:focus-visible {
+      outline: 0.125rem solid var(--ring);
+      border-radius: 0.25rem;
+    }
+  }
+
+  .hero__logo {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex: 1;
   }
 
@@ -85,25 +93,27 @@ const { title, logo, logoAlt } = Astro.props;
   }
 </style>
 <header>
-  <div class="header__content">
-    <h1>
-      <a href="/" aria-label="RocketSim"
-        ><Image src={logo} alt={logoAlt} height="48" /></a
-      >
-    </h1>
-    <h2>{title}</h2>
-    <p>
-      <slot />
-    </p>
-    <p>Scroll down to explore all features ↓</p>
-  </div>
-  <div class="logo-wrapper">
-    <Image
-      src={appIcon}
-      widths={[128, 512]}
-      sizes={"(max-width: 767px) 4rem, 16rem"}
-      alt="RocketSim app icon"
-      class="logo-image"
-    />
+  <div class="hero">
+    <div class="hero__content">
+      <h1>
+        <a href="/" aria-label="RocketSim" class="hero__rocketsim"
+          ><Image src={logo} alt={logoAlt} height="48" /></a
+        >
+      </h1>
+      <h2>{title}</h2>
+      <p>
+        <slot />
+      </p>
+      <p>Scroll down to explore all features ↓</p>
+    </div>
+    <div class="hero__logo">
+      <Image
+        src={appIcon}
+        widths={[128, 512]}
+        sizes="(max-width: 767px) 4rem, 16rem"
+        alt="RocketSim app icon"
+        class="logo-image"
+      />
+    </div>
   </div>
 </header>
