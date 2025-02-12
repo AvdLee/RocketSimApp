@@ -13,10 +13,10 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
     "astro": "^5.2.5"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.4",
     "@types/node": "^22.13.1",
     "@typescript-eslint/parser": "^8.24.0",
     "eslint": "^9.19.0",
