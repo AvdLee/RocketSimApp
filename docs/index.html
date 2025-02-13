@@ -73,6 +73,25 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
             }
         </script>
 
+        <!-- Monitor any form submissions and send it to gtag -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll("form").forEach(function (form) {
+                    form.addEventListener("submit", function () {
+                        gtag_report_form_conversion();
+                    });
+                });
+            });
+            
+            function gtag_report_form_conversion() {
+                gtag("event", "conversion", {
+                    send_to: "AW-11565948565/pN4iCPKCwp0aEJW9iYsr",
+                    value: 0.35,
+                    currency: "EUR"
+                });
+            }
+        </script>
+
         <!-- Script to set the button URL using the UTM Campaign -->
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function(event) {
