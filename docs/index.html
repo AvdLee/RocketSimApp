@@ -76,19 +76,26 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         <!-- Monitor any form submissions and send it to gtag -->
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                document.querySelectorAll("form").forEach(function (form) {
-                    form.addEventListener("submit", function () {
-                        gtag_report_form_conversion();
-                    });
-                });
+              // Wait for the form to be added to the page
+              const observer = new MutationObserver(function (mutations, obs) {
+                const form = document.querySelector("form.formkit-form");
+                if (form) {
+                  form.addEventListener("submit", function () {
+                    gtag_report_form_conversion();
+                  });
+                  obs.disconnect(); // Stop observing once the form is found
+                }
+              });
+            
+              observer.observe(document.body, { childList: true, subtree: true });
             });
             
             function gtag_report_form_conversion() {
-                gtag("event", "conversion", {
-                    send_to: "AW-11565948565/pN4iCPKCwp0aEJW9iYsr",
-                    value: 0.35,
-                    currency: "EUR"
-                });
+              gtag("event", "conversion", {
+                send_to: "AW-11565948565/pN4iCPKCwp0aEJW9iYsr",
+                value: 0.35,
+                currency: "EUR"
+              });
             }
         </script>
 
