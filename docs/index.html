@@ -53,26 +53,25 @@
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11565948565"></script>
         <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-        gtag('config', 'AW-11565948565');
+            gtag('config', 'AW-11565948565');
         </script>
 
-        <!-- Event snippet for Purchase conversion page
-        In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+        <!-- Event snippet for App Store Install conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
         <script>
             function gtag_report_conversion() {
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-11565948565/hoJVCPzfyYsaEJW9iYsr',
-                    'transaction_id': ''
+                    'send_to': 'AW-11565948565/qBx6CIq9wp0aEJW9iYsr',
+                    'value': 0.8,
+                    'currency': 'EUR'
                 });
-                return true;
+                return false;
             }
         </script>
-    
-
 
         <!-- Script to set the button URL using the UTM Campaign -->
         <script type="text/javascript">
