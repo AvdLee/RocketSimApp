@@ -99,6 +99,19 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
             }
         </script>
 
+        <!-- Show email confirmation banner if query parameter exists. -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get("show_email_confirmation") === "1") {
+                    const notification = document.querySelector(".notification-container");
+                    if (notification) {
+                        notification.style.display = "block"; // Ensure it's visible
+                    }
+                }
+            });
+        </script>
+
         <!-- Script to set the button URL using the UTM Campaign -->
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function(event) {
@@ -164,6 +177,15 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
 
     </head>
     <body>
+        <!--Notifications-->
+        <div class="container notification-container" style="display: none;">
+            <div class="row">
+                <div class="col notification">
+                    <strong>You're now subscribed</strong>
+                    <p>Check your email to confirm your subscription—don’t forget to check your spam folder too!</p>
+                </div>
+            </div>
+        </div>
         <!--Header and Navbar-->
         <div class="container jumbotron header-container">
             <div class="row">

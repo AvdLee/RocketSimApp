@@ -135,6 +135,17 @@ a {
 .gray-text {
 	color: #aaa;
 }
+/* Notifications */
+.notification {
+	border: 1px solid #0093ff;
+	background-color: rgba(0, 147, 255, 0.2);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-top: 2rem;
+}
+.notification p {
+	margin-bottom: 0;
+}
 #trusted-companies img {
 	max-width: 640px;
 	width: 100%;
