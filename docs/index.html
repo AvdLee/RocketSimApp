@@ -177,6 +177,56 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
 
     </head>
     <body>
+        <style>
+            /* customizable snowflake styling */
+            .snowflake {
+              color: #fff;
+              font-size: 1em;
+              font-family: Arial, sans-serif;
+              text-shadow: 0 0 5px #000;
+            }
+            
+            .snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;pointer-events:none;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}
+            </style>
+            <div class="snowflakes" aria-hidden="true">
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+              <div class="snowflake">
+                <div class="inner">❅</div>
+              </div>
+            </div>
+            
         <!--Notifications-->
         <div class="container notification-container" style="display: none;">
             <div class="row">
@@ -193,7 +243,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     <h1 id="page-title">
                         <a class="blog-logo" href="https://www.rocketsim.app/" rel="home">RocketSim</a>
                     </h1>
-                    <h2 class="section-headline">Enhancing the Xcode Simulators</h2>
+                    <h2 class="section-headline">Surviving the Cold, One Feature at a Time</h2>
                     <p class="gray-text">Boost your productivity and streamline your workflow with our <span class="text-headline"><strong>powerful Xcode Simulator tools</strong></span>.
                         Developers report building, testing, and verifying apps <span class="text-headline"><strong>up to 2x faster</strong></span> with RocketSim.</p>
 
@@ -211,7 +261,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                         <a href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8" class="app-store-button plausible-event-name=App+Store+Install" id="header-app-store-button" target="_blank" onclick="gtag_report_conversion(); rdt('track', 'Lead');" data-dd-action-name="download_button">
                             <button type="button" class="btn btn-primary">Download now</button>
                         </a>
-                        <a href="https://www.rocketsim.app/team-insights" class="team-licenses-button" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Team Licenses Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="team_license_button">
+                        <a href="team-insights.html" class="team-licenses-button" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Team Licenses Header', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="team_license_button">
                             <button type="button" class="btn btn-primary">Team Licenses</button>
                         </a>
                         <a href="https://docs.rocketsim.app" class="team-licenses-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'Buttons', 'event_label': 'Docs', 'value': 1.00,  'non_interaction': true});" data-dd-action-name="docs_button">
@@ -252,33 +302,33 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         <div class="container feature-section" id="reviews">
             <div class="row">
                 <div class="col-md-4 wow fadeInUp">
-                    <p class="gray-text typography-section-intro">"I use <span class="text-headline">RocketSim</span> a lot to create recordings for my articles. The touches now make it even easier to share my learnings."</p>
+                    <p class="gray-text typography-section-intro">"I use <span class="text-headline">RocketSim</span> a to simulate locations so I can test my app on the North Pole."</p>
                     <span class="author">
-                        <img src="Assets/majid.jpeg"/>
+                        <img src="Assets/jesse_sipola.jpg"/>
                         <div>
-                            <div>Majid Jabrayilov</div>
-                            <a href="https://www.swiftwithmajid.com" target="_blank">swiftwithmajid.com</a>
+                            <div>Jesse Sipola</div>
+                            <a href="https://www.swiftwithmajid.com" target="_blank">arcticonference.com</a>
                         </div>
                     </span>
                 </div>
 
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="1s">
-                    <p class="gray-text typography-section-intro">"<span class="text-headline">RocketSim</span> helps me to create localized preview videos for Soosee, ready to upload to App Store Connect.”</p>
+                    <p class="gray-text typography-section-intro">"<span class="text-headline">RocketSim</span>'s Network Speed Control helps me slow down network requests so I have more time to write Swift over Coffee.”</p>
                     <span class="author">
-                        <img src="Assets/jordi.jpeg"/>
+                        <img src="Assets/Mikaela_Caron.jpg"/>
                         <div>
-                            <div>Jordi Bruin</div>
-                            <a href="https://www.soosee.app" target="_blank">soosee.app</a>
+                            <div>Mikaela Caron</div>
+                            <a href="https://x.com/swiftovercoffee" target="_blank">x.com/swiftovercoffee</a>
                         </div>
                     </span>
                 </div>
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="2s">
-                    <p class="gray-text typography-section-intro">"Recordings with touches and high-quality GIFs from <span class="text-headline">RocketSim</span> are exactly what I need to show what I’m working on."</p>
+                    <p class="gray-text typography-section-intro">"Recordings with touches and high-quality GIFs from <span class="text-headline">RocketSim</span> are exactly what I need to show what I’ve worked on, while I was actually baking bread."</p>
                     <span class="author">
-                        <img src="Assets/josh.jpeg"/>
+                        <img src="Assets/daniel_steinberg.jpeg"/>
                         <div>
-                            <div>Josh Holtz</div>
-                            <a href="https://www.joshholtz.com/" target="_blank">joshholtz.com</a>
+                            <div>Daniel Steinberg</div>
+                            <a href="https://dimsumthinking.com" target="_blank">dimsumthinking.com</a>
                         </div>
                     </span>
                 </div>
@@ -321,6 +371,17 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
             </div>
         </div>
 
+        <div class="container feature-section" id="network-speed-control">
+            <div class="row align-items-center">
+                <div class="col wow fadeInRight">
+                    <span class="align-middle">
+                        <h2><i>“RocketSim makes you develop so fast, even arctic winds can’t catch It”</i></h2>
+                        <p class="gray-text">— Tim Frost</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <!--Comparing-->
         <div class="container feature-section" id="comparing">
             <div class="row align-items-center">
@@ -344,7 +405,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         <div class="container feature-section" id="grids">
             <div class="row align-items-center">
                 <div class="col-md-8 wow fadeInUp">
-                    <img src="Assets/grids.jpg" />
+                    <img src="Assets/grids.png" />
                 </div>
                 <div class="col-md-4 wow fadeInRight">
                     <span class="align-middle">
@@ -365,7 +426,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     </span>
                 </div>
                 <div class="col-md-8 wow fadeInUp">
-                    <img src="Assets/rulers.jpg" />
+                    <img src="Assets/rulers.png" />
                 </div>
             </div>
         </div>
@@ -417,7 +478,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                 </div>
             </div>
             <div class="row wow fadeInUp">
-                <img src="Assets/location_routes.jpg" />
+                <img src="Assets/location_routes.png" />
             </div>
         </div>
 
@@ -425,7 +486,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         <div class="container feature-section" id="recent-builds">
             <div class="row align-items-center">
                 <div class="col-md-6 wow fadeInUp">
-                    <img src="Assets/recent-builds.jpg" />
+                    <img src="Assets/recent-builds.png" />
                 </div>
                 <div class="col-md-6 wow fadeInRight">
                     <span class="align-middle">
@@ -485,7 +546,7 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
                     </span>
                 </div>
                 <div class="col-md-8 wow fadeInUp">
-                    <img src="Assets/environment_overrides.jpg" />
+                    <img src="Assets/environment_overrides.png" />
                 </div>
             </div>
         </div>
