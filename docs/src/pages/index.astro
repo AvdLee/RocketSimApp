@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import NavigationLink from "../components/NavigationLink.astro";
 import Header from "../components/Header.astro";
+import AppStore from "../components/AppStore.astro";
 
 import logoImage from "../assets/rocketsim-logo.svg";
 
@@ -16,7 +17,7 @@ const features = await Promise.all(
       ...feature,
       Content,
     };
-  }),
+  })
 );
 ---
 
@@ -52,13 +53,17 @@ const features = await Promise.all(
     </NavigationLink>
   </Navigation>
   <main>
-    {
-      features.map((feature) => (
-        <>
-          <h2>{feature.data.title}</h2>
-          <feature.Content />
-        </>
-      ))
-    }
+    <div class="grid">
+      <AppStore />
+
+      {
+        features.map((feature) => (
+          <>
+            <h2>{feature.data.title}</h2>
+            <feature.Content />
+          </>
+        ))
+      }
+    </div>
   </main>
 </BaseLayout>
