@@ -54,7 +54,7 @@ strong {
   margin: 0 2rem;
 
   @media (min-width: 600px) {
-    grid-template-columns: repeat(9, [col-start] 1fr);
+    grid-template-columns: repeat(12, [col-start] 1fr);
     grid-gap: 0 1rem;
     margin: 0 5rem;
   }
@@ -64,7 +64,6 @@ strong {
   }
 
   @media (min-width: 1300px) {
-    grid-template-columns: repeat(12, [col-start] 1fr);
     margin-right: auto;
     margin-left: auto;
   }

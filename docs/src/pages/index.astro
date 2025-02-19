@@ -1,25 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
-
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import NavigationLink from "../components/NavigationLink.astro";
 import Header from "../components/Header.astro";
 import AppStore from "../components/AppStore.astro";
 import Reviews from "../components/Reviews.astro";
+import Features from "../components/Features.astro";
 
 import logoImage from "../assets/rocketsim-logo.svg";
-
-const rawFeatures = await getCollection("feature");
-const features = await Promise.all(
-  rawFeatures.map(async (feature) => {
-    const { Content } = await render(feature);
-    return {
-      ...feature,
-      Content,
-    };
-  }),
-);
 ---
 
 <BaseLayout pageTitle="Build Apps Faster - RocketSim">
@@ -57,13 +45,6 @@ const features = await Promise.all(
     <AppStore />
     <Reviews />
 
-    {
-      features.map((feature) => (
-        <>
-          <h2>{feature.data.title}</h2>
-          <feature.Content />
-        </>
-      ))
-    }
+    <Features />
   </main>
 </BaseLayout>

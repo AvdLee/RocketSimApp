@@ -27,10 +27,6 @@ const { title, logo, logoAlt } = Astro.props;
 
   .hero__content {
     @media (min-width: 800px) {
-      grid-column: 1 / span 5;
-    }
-
-    @media (min-width: 1300px) {
       grid-column: 1 / span 7;
     }
   }
@@ -70,10 +66,6 @@ const { title, logo, logoAlt } = Astro.props;
     align-items: center;
 
     @media (min-width: 800px) {
-      grid-column: span 3 / -1;
-    }
-
-    @media (min-width: 1300px) {
       grid-column: span 5 / -1;
     }
   }
