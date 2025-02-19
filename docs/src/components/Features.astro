@@ -12,14 +12,14 @@ const features = await Promise.all(
         ...feature,
         Content,
       };
-    })
+    }),
 );
 ---
 
 <style>
-    article {
-row-gap: 2rem;
-    }
+  article {
+    row-gap: 2rem;
+  }
 
   .image {
     width: 100%;
@@ -56,7 +56,7 @@ row-gap: 2rem;
   }
 
   .title {
-    margin: 0 0 .5rem;
+    margin: 0 0 0.5rem;
 
     font-size: 2rem;
     font-weight: 500;
@@ -71,9 +71,12 @@ row-gap: 2rem;
         <Image
           src={feature.data.image}
           alt={feature.data.imageAlt}
-          class:list={["image", {"image--after-content": feature.data.imageAlignment === 'right'}]}
+          class:list={[
+            "image",
+            { "image--after-content": feature.data.imageAlignment === "right" },
+          ]}
           widths={[640, 800, 1200, 1500]}
-            sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
+          sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
           style={{
             "--image-column": `${feature.data.imageAlignment === "left" ? 1 : `span ${feature.data.imageColumnSpan}`} / ${feature.data.imageAlignment === "left" ? `span ${feature.data.imageColumnSpan}` : -1}`,
           }}
