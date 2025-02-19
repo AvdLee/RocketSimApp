@@ -14,14 +14,14 @@ import appIcon from "../assets/rocketsim-app-icon.png";
     transition: border-bottom-color 0.3s;
     box-sizing: content-box;
 
-    @media (min-width: 768px) {
+    @media (min-width: 850px) {
       position: sticky;
       top: -1px;
     }
   }
 
   .navigation-wrapper--sticky {
-    @media (min-width: 768px) {
+    @media (min-width: 850px) {
       border-bottom-color: rgba(255, 255, 255, 0.24);
 
       .navigation__logo {
@@ -30,27 +30,9 @@ import appIcon from "../assets/rocketsim-app-icon.png";
     }
   }
 
-  .navigation {
-    padding: 0 1rem;
-
-    @media (min-width: 576px) {
-      max-width: 540px;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 768px) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 720px;
-    }
-
-    @media (min-width: 992px) {
-      max-width: 960px;
-    }
-
-    @media (min-width: 1200px) {
-      max-width: 1140px;
+  nav {
+    @media (min-width: 850px) {
+      grid-column: 1 / -2;
     }
   }
 
@@ -60,6 +42,11 @@ import appIcon from "../assets/rocketsim-app-icon.png";
 
     opacity: 0;
     transition: opacity 0.3s;
+
+    @media (min-width: 850px) {
+      grid-column: span 1 / -1;
+      justify-self: end;
+    }
   }
 
   ul {
@@ -72,7 +59,7 @@ import appIcon from "../assets/rocketsim-app-icon.png";
 
     list-style: none;
 
-    @media (min-width: 768px) {
+    @media (min-width: 850px) {
       flex-direction: row;
       gap: 3rem;
     }
@@ -80,7 +67,7 @@ import appIcon from "../assets/rocketsim-app-icon.png";
 </style>
 
 <div class="navigation-wrapper" id="navigation-menu">
-  <div class="navigation">
+  <div class="navigation grid">
     <nav aria-label="Main navigation">
       <ul>
         <slot />
@@ -108,9 +95,9 @@ import appIcon from "../assets/rocketsim-app-icon.png";
       ([e]) =>
         e.target.classList.toggle(
           "navigation-wrapper--sticky",
-          e.intersectionRatio < 1,
+          e.intersectionRatio < 1
         ),
-      { threshold: [1] },
+      { threshold: [1] }
     );
 
     observer.observe(el);

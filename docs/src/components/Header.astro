@@ -14,34 +14,24 @@ const { title, logo, logoAlt } = Astro.props;
 
 <style>
   .hero {
-    padding: 0 1rem;
-    margin: 3rem 0 0;
+    margin-top: 3rem;
 
-    @media (min-width: 576px) {
-      max-width: 540px;
-      margin: 5rem auto 0;
+    @media (min-width: 600px) {
+      margin-top: 5rem;
     }
 
-    @media (min-width: 768px) {
-      display: flex;
-      max-width: 720px;
+    @media (min-width: 800px) {
       margin-top: 10rem;
-      padding: 0 1rem;
-    }
-
-    @media (min-width: 992px) {
-      max-width: 960px;
-    }
-
-    @media (min-width: 1200px) {
-      max-width: 1140px;
     }
   }
 
   .hero__content {
-    @media (min-width: 768px) {
-      flex: 0 0 58.333333%;
-      max-width: 58.333333%;
+    @media (min-width: 800px) {
+      grid-column: 1 / span 5;
+    }
+
+    @media (min-width: 1300px) {
+      grid-column: 1 / span 7;
     }
   }
 
@@ -65,8 +55,6 @@ const { title, logo, logoAlt } = Astro.props;
 
   p {
     margin: 0 0 1rem;
-
-    text-wrap: balance;
   }
 
   .hero__rocketsim {
@@ -80,20 +68,27 @@ const { title, logo, logoAlt } = Astro.props;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
+
+    @media (min-width: 800px) {
+      grid-column: span 3 / -1;
+    }
+
+    @media (min-width: 1300px) {
+      grid-column: span 5 / -1;
+    }
   }
 
   .logo-image {
     width: 4rem;
     height: auto;
 
-    @media (min-width: 768px) {
+    @media (min-width: 800px) {
       width: 16rem;
     }
   }
 </style>
 <header>
-  <div class="hero">
+  <div class="grid hero">
     <div class="hero__content">
       <h1>
         <a href="/" aria-label="RocketSim" class="hero__rocketsim"

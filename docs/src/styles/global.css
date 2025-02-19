@@ -46,6 +46,30 @@ strong {
   color: var(--text-color-light);
 }
 
+.grid {
+  display: grid;
+  grid-gap: 0 0.625rem;
+  grid-template-columns: repeat(4, [col-start] 1fr);
+  max-width: 1140px;
+  margin: 0 2rem;
+
+  @media (min-width: 600px) {
+    grid-gap: 0 1rem;
+    grid-template-columns: repeat(8, [col-start] 1fr);
+    margin: 0 5rem;
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(12, [col-start] 1fr);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  > * {
+    grid-column: col-start / -1;
+  }
+}
+
 .button {
   display: inline-block;
   padding: 0.875rem 2rem;
