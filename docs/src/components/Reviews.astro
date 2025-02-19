@@ -1,0 +1,146 @@
+---
+import { Image } from "astro:assets";
+
+import majidImage from "../assets/majid.jpeg";
+import jordiImage from "../assets/jordi.jpeg";
+import joshImage from "../assets/josh.jpeg";
+---
+
+<style>
+  section {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+
+  ul {
+    row-gap: 4rem;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  li {
+    @media (min-width: 800px) {
+      grid-column: span 3;
+    }
+
+    @media (min-width: 1300px) {
+      grid-column: span 4;
+    }
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  blockquote {
+    margin: 0 0 1rem;
+
+    font-size: 1.375rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .image {
+    width: 3rem;
+    height: 3rem;
+
+    border-radius: 50%;
+  }
+
+  cite {
+    display: block;
+
+    color: var(--text-color-light);
+    font-style: normal;
+  }
+
+  a {
+    display: block;
+
+    font-style: italic;
+    color: var(--text-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<section>
+  <ul class="grid">
+    <li>
+      <figure>
+        <blockquote>
+          <p>
+            "I use <strong>RocketSim</strong> a lot to create recordings for my articles.
+            The touches now make it even easier to share my learnings."
+          </p>
+        </blockquote>
+        <figcaption>
+          <Image
+            src={majidImage}
+            alt="Majid Jabrayilov"
+            width="96"
+            class="image"
+          />
+          <div class="cite-wrapper">
+            <cite>Majid Jabrayilov</cite>
+            <a href="https://swiftwithmajid.com" target="_blank"
+              >swiftwithmajid.com</a
+            >
+          </div>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <blockquote>
+          <p>
+            "<strong>RocketSim</strong> helps me to create localized preview videos
+            for Soosee, ready to upload to App Store Connect."
+          </p>
+        </blockquote>
+        <figcaption>
+          <Image src={jordiImage} alt="Jordi Bruin" width="96" class="image" />
+          <div class="cite-wrapper">
+            <cite>Jordi Bruin</cite>
+            <a href="https://soosee.app" target="_blank">soosee.app</a>
+          </div>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <blockquote>
+          <p>
+            "Recordings with touches and high-quality GIFs from <strong
+              >RocketSim</strong
+            > are exactly what I need to show what I’m working on."
+          </p>
+        </blockquote>
+        <figcaption>
+          <Image src={joshImage} alt="Josh Holtz" width="96" class="image" />
+          <div class="cite-wrapper">
+            <cite>Josh Holtz</cite>
+            <a href="https://joshholtz.com">joshholtz.com</a>
+          </div>
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
+</section>
