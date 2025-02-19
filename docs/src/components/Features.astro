@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+
+const rawFeatures = await getCollection("feature");
+const features = await Promise.all(
+  rawFeatures
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map(async (feature) => {
+      const { Content } = await render(feature);
+      return {
+        ...feature,
+        Content,
+      };
+    })
+);
+---
+
+<style>
+    article {
+row-gap: 2rem;
+    }
+
+  .image {
+    width: 100%;
+    height: auto;
+
+    border-radius: 1.25rem;
+
+    @media (min-width: 800px) {
+      grid-column: var(--image-column);
+    }
+  }
+
+  .image--after-content {
+    grid-row: 2;
+
+    @media (min-width: 800px) {
+      grid-row: 1;
+    }
+  }
+
+  .feature-content {
+    @media (min-width: 800px) {
+      grid-column: var(--content-column);
+      align-self: center;
+    }
+
+    & :global(strong) {
+      font-weight: 400;
+    }
+
+    & :global(p) {
+      margin: 0 0 1rem;
+    }
+  }
+
+  .title {
+    margin: 0 0 .5rem;
+
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+</style>
+
+<section aria-label="RocketSim features">
+  {
+    features.map((feature) => (
+      <article class="grid">
+        <Image
+          src={feature.data.image}
+          alt={feature.data.imageAlt}
+          class:list={["image", {"image--after-content": feature.data.imageAlignment === 'right'}]}
+          widths={[640, 800, 1200, 1500]}
+            sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
+          style={{
+            "--image-column": `${feature.data.imageAlignment === "left" ? 1 : `span ${feature.data.imageColumnSpan}`} / ${feature.data.imageAlignment === "left" ? `span ${feature.data.imageColumnSpan}` : -1}`,
+          }}
+        />
+        <div
+          class="feature-content"
+          style={{
+            "--content-column": `${feature.data.imageAlignment === "left" ? `span ${12 - feature.data.imageColumnSpan}` : 1} / ${feature.data.imageAlignment === "left" ? -1 : `span ${12 - feature.data.imageColumnSpan}`}`,
+          }}
+        >
+          <h3 class="title">{feature.data.title}</h3>
+          <feature.Content />
+        </div>
+      </article>
+    ))
+  }
+</section>
