@@ -37,6 +37,7 @@ import appIcon from "../assets/rocketsim-app-icon.png";
   }
 
   .navigation__logo {
+    display: none;
     width: 2.75rem;
     height: auto;
 
@@ -44,6 +45,7 @@ import appIcon from "../assets/rocketsim-app-icon.png";
     transition: opacity 0.3s;
 
     @media (min-width: 850px) {
+      display: block;
       grid-column: span 1 / -1;
       justify-self: end;
     }
@@ -95,9 +97,9 @@ import appIcon from "../assets/rocketsim-app-icon.png";
       ([e]) =>
         e.target.classList.toggle(
           "navigation-wrapper--sticky",
-          e.intersectionRatio < 1
+          e.intersectionRatio < 1,
         ),
-      { threshold: [1] }
+      { threshold: [1] },
     );
 
     observer.observe(el);
