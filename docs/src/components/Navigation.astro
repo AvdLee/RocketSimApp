@@ -97,9 +97,9 @@ import appIcon from "../assets/rocketsim-app-icon.png";
       ([e]) =>
         e.target.classList.toggle(
           "navigation-wrapper--sticky",
-          e.intersectionRatio < 1
+          e.intersectionRatio < 1,
         ),
-      { threshold: [1] }
+      { threshold: [1] },
     );
 
     observer.observe(el);
