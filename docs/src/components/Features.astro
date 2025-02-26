@@ -12,7 +12,7 @@ const features = await Promise.all(
         ...feature,
         Content,
       };
-    }),
+    })
 );
 ---
 
@@ -73,29 +73,51 @@ const features = await Promise.all(
 
 <section aria-label="RocketSim features">
   {
-    features.map((feature) => (
+    features.map(({ data: { asset, title }, Content }) => (
       <article class="grid">
-        <Image
-          src={feature.data.image}
-          alt={feature.data.imageAlt}
-          class:list={[
-            "image",
-            { "image--after-content": feature.data.imageAlignment === "right" },
-          ]}
-          widths={[640, 800, 1200, 1500]}
-          sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
-          style={{
-            "--image-column": `${feature.data.imageAlignment === "left" ? 1 : `span ${feature.data.imageColumnSpan}`} / ${feature.data.imageAlignment === "left" ? `span ${feature.data.imageColumnSpan}` : -1}`,
-          }}
-        />
+        {asset.type === "image" ? (
+          <Image
+            src={asset.path}
+            alt={asset.alt}
+            class:list={[
+              "image",
+              {
+                "image--after-content": asset.alignment === "right",
+              },
+            ]}
+            widths={[640, 800, 1200, 1500]}
+            sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
+            style={{
+              "--image-column": `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
+            }}
+          />
+        ) : (
+          <video
+            class:list={[
+              "image",
+              {
+                "image--after-content": asset.alignment === "right",
+              },
+            ]}
+
+            style={{
+              "--image-column": `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
+            }}
+            src={asset.path}
+            aria-label={asset.alt}
+            autoplay
+            muted
+            playsinline
+          />
+        )}
         <div
           class="feature-content"
           style={{
-            "--content-column": `${feature.data.imageAlignment === "left" ? `span ${12 - feature.data.imageColumnSpan}` : 1} / ${feature.data.imageAlignment === "left" ? -1 : `span ${12 - feature.data.imageColumnSpan}`}`,
+            "--content-column": `${asset.alignment === "left" ? `span ${12 - asset.columnSpan}` : 1} / ${asset.alignment === "left" ? -1 : `span ${12 - asset.columnSpan}`}`,
           }}
         >
-          <h3 class="title">{feature.data.title}</h3>
-          <feature.Content />
+          <h3 class="title">{title}</h3>
+          <Content />
         </div>
       </article>
     ))

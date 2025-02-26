@@ -1,10 +1,12 @@
 ---
 title: "Quick Actions"
-image: "../../assets/features/quick-actions.jpg"
-imageAlt: "RocketSim panel that shows configurable actions for locations, push notifications and deeplinks."
-imageAlignment: "right"
-imageColumnSpan: 6
-sortOrder: 2
+asset:
+    type: 'image'
+    path: "../../assets/features/quick-actions.jpg"
+    alt: "RocketSim panel that shows configurable actions for locations, push notifications and deeplinks."
+    alignment: "right"
+    columnSpan: 6
+sortOrder: 3
 ---
 
 **Configurable actions** for Deeplinks (Universal Links) and Push Notifications. Control permissions.
