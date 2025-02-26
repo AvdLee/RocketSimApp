@@ -1,11 +1,11 @@
 ---
-title: "Quick Actions"
+name: "Quick Actions"
 asset:
-    type: 'image'
-    path: "../../assets/features/quick-actions.jpg"
-    alt: "RocketSim panel that shows configurable actions for locations, push notifications and deeplinks."
-    alignment: "right"
-    columnSpan: 6
+  type: "image"
+  path: "../../assets/features/quick-actions.jpg"
+  alt: "RocketSim panel that shows configurable actions for locations, push notifications and deeplinks."
+  alignment: "right"
+  columnSpan: 6
 sortOrder: 3
 ---
 

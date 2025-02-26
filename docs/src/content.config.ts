@@ -1,14 +1,15 @@
 import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
-const alignment = z.enum(["left", "right"]);
+const alignment = z.enum(["left", "right", "full-width"]);
 const columnSpan = z.union([z.literal(6), z.literal(8)]);
 
 const feature = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/collections/feature" }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
+      name: z.string(),
+      tagLine: z.string().optional(),
       asset: z.discriminatedUnion("type", [
         z.object({
           type: z.literal("image"),

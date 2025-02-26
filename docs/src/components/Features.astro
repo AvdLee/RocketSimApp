@@ -12,7 +12,7 @@ const features = await Promise.all(
         ...feature,
         Content,
       };
-    })
+    }),
 );
 ---
 
@@ -39,12 +39,8 @@ const features = await Promise.all(
     }
   }
 
-  .image--after-content {
-    grid-row: 2;
-
-    @media (min-width: 800px) {
-      grid-row: 1;
-    }
+  .image--before-content {
+    grid-row: 1;
   }
 
   .feature-content {
@@ -52,13 +48,27 @@ const features = await Promise.all(
       grid-column: var(--content-column);
       align-self: center;
     }
+  }
 
+  .feature-content__content {
     & :global(strong) {
       font-weight: 400;
     }
 
     & :global(p) {
       margin: 0 0 1rem;
+    }
+  }
+
+  .feature-content__content--big {
+    & :global(p) {
+      margin-top: 2rem;
+
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-color-light);
+      line-height: 1.33341;
+      letter-spacing: -0.003em;
     }
   }
 
@@ -69,12 +79,66 @@ const features = await Promise.all(
     font-weight: 500;
     line-height: 1.2;
   }
+
+  .title--big {
+    font-size: 4.5rem;
+    line-height: 1.05556;
+    font-weight: 600;
+    letter-spacing: -0.006em;
+  }
+
+  .title--dim {
+    color: var(--text-color);
+  }
 </style>
 
 <section aria-label="RocketSim features">
   {
-    features.map(({ data: { asset, title }, Content }) => (
+    features.map(({ data: { asset, name, tagLine }, Content }) => (
       <article class="grid">
+        <div
+          class="feature-content"
+          style={{
+            "--content-column":
+              asset.alignment === "full-width"
+                ? "1 / -1"
+                : `${asset.alignment === "left" ? `span ${12 - asset.columnSpan}` : 1} / ${asset.alignment === "left" ? -1 : `span ${12 - asset.columnSpan}`}`,
+          }}
+        >
+          <h3
+            class:list={[
+              "title",
+              {
+                "title--dim": !!tagLine,
+                "title--big": asset.alignment === "full-width",
+              },
+            ]}
+          >
+            {name}
+          </h3>
+          {tagLine ? (
+            <h4
+              class:list={[
+                "title",
+                "title--big",
+                asset.alignment === "full-width",
+              ]}
+            >
+              {tagLine}
+            </h4>
+          ) : null}
+          <div
+            class:list={[
+              "feature-content__content",
+              {
+                "feature-content__content--big":
+                  asset.alignment === "full-width",
+              },
+            ]}
+          >
+            <Content />
+          </div>
+        </div>
         {asset.type === "image" ? (
           <Image
             src={asset.path}
@@ -82,13 +146,16 @@ const features = await Promise.all(
             class:list={[
               "image",
               {
-                "image--after-content": asset.alignment === "right",
+                "image--before-content": asset.alignment === "left",
               },
             ]}
             widths={[640, 800, 1200, 1500]}
             sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
             style={{
-              "--image-column": `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
+              "--image-column":
+                asset.alignment === "full-width"
+                  ? "1 / -1"
+                  : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
             }}
           />
         ) : (
@@ -96,12 +163,14 @@ const features = await Promise.all(
             class:list={[
               "image",
               {
-                "image--after-content": asset.alignment === "right",
+                "image--before-content": asset.alignment === "left",
               },
             ]}
-
             style={{
-              "--image-column": `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
+              "--image-column":
+                asset.alignment === "full-width"
+                  ? "1 / -1"
+                  : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
             }}
             src={asset.path}
             aria-label={asset.alt}
@@ -110,15 +179,6 @@ const features = await Promise.all(
             playsinline
           />
         )}
-        <div
-          class="feature-content"
-          style={{
-            "--content-column": `${asset.alignment === "left" ? `span ${12 - asset.columnSpan}` : 1} / ${asset.alignment === "left" ? -1 : `span ${12 - asset.columnSpan}`}`,
-          }}
-        >
-          <h3 class="title">{title}</h3>
-          <Content />
-        </div>
       </article>
     ))
   }
