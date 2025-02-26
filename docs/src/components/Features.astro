@@ -28,19 +28,29 @@ const features = await Promise.all(
     }
   }
 
-  .image {
-    width: 100%;
-    height: auto;
-
-    border-radius: 1.25rem;
+  .figure {
+    margin: 0;
 
     @media (min-width: 800px) {
       grid-column: var(--image-column);
     }
   }
 
-  .image--before-content {
+  .figure--before-content {
     grid-row: 1;
+  }
+
+  figcaption {
+    margin-top: 1rem;
+
+    text-align: center;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+
+    border-radius: 1.25rem;
   }
 
   .feature-content {
@@ -139,46 +149,38 @@ const features = await Promise.all(
             <Content />
           </div>
         </div>
-        {asset.type === "image" ? (
-          <Image
-            src={asset.path}
-            alt={asset.alt}
-            class:list={[
-              "image",
-              {
-                "image--before-content": asset.alignment === "left",
-              },
-            ]}
-            widths={[640, 800, 1200, 1500]}
-            sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
-            style={{
-              "--image-column":
-                asset.alignment === "full-width"
-                  ? "1 / -1"
-                  : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
-            }}
-          />
-        ) : (
-          <video
-            class:list={[
-              "image",
-              {
-                "image--before-content": asset.alignment === "left",
-              },
-            ]}
-            style={{
-              "--image-column":
-                asset.alignment === "full-width"
-                  ? "1 / -1"
-                  : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
-            }}
-            src={asset.path}
-            aria-label={asset.alt}
-            autoplay
-            muted
-            playsinline
-          />
-        )}
+        <figure
+          class:list={[
+            "figure",
+            { "figure--before-content": asset.alignment === "left" },
+          ]}
+          style={{
+            "--image-column":
+              asset.alignment === "full-width"
+                ? "1 / -1"
+                : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
+          }}
+        >
+          {asset.type === "image" ? (
+            <Image
+              src={asset.path}
+              alt={asset.alt}
+              class="image"
+              widths={[640, 800, 1200, 1500]}
+              sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
+            />
+          ) : (
+            <video
+              class="image"
+              src={asset.path}
+              aria-label={asset.alt}
+              autoplay
+              muted
+              playsinline
+            />
+          )}
+          {asset.caption ? <figcaption>{asset.caption}</figcaption> : null}
+        </figure>
       </article>
     ))
   }

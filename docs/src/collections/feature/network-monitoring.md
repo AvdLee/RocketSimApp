@@ -7,6 +7,7 @@ asset:
   alt: "Clicking through network requests that are done while using the Stock Analyzer app."
   alignment: "full-width"
   columnSpan: 6
+  caption: "Network Monitoring is made possible by Pulse, an open-source project created by Alex Grebenyuk."
 sortOrder: 1
 ---
 
