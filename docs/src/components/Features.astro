@@ -16,11 +16,13 @@ const features = await Promise.all(
           ...feature.data,
           asset: {
             ...feature.data.asset,
-            caption: feature.data.asset.caption ? marked.parseInline(feature.data.asset.caption) : undefined,
+            caption: feature.data.asset.caption
+              ? marked.parseInline(feature.data.asset.caption)
+              : undefined,
           },
         },
       };
-    })
+    }),
 );
 ---
 
@@ -119,7 +121,7 @@ const features = await Promise.all(
           style={{
             "--content-column":
               asset.alignment === "full-width"
-                ? "1 / -1"
+                ? "2 / -2"
                 : `${asset.alignment === "left" ? `span ${12 - asset.columnSpan}` : 1} / ${asset.alignment === "left" ? -1 : `span ${12 - asset.columnSpan}`}`,
           }}
         >
@@ -187,7 +189,7 @@ const features = await Promise.all(
               playsinline
             />
           )}
-          {asset.caption ? <figcaption set:html={asset.caption}/> : null}
+          {asset.caption ? <figcaption set:html={asset.caption} /> : null}
         </figure>
       </article>
     ))
