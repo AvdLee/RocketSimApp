@@ -7,6 +7,11 @@ import statusbarMenuImage from "../assets/statusbar-menu.jpg";
 ---
 
 <style>
+  article {
+    row-gap: 2rem;
+    margin-top: 2rem;
+  }
+
   article > * {
     @media (min-width: 800px) {
       grid-column: span 4;
@@ -16,6 +21,34 @@ import statusbarMenuImage from "../assets/statusbar-menu.jpg";
   .image {
     width: 100%;
     height: auto;
+
+    border-radius: 1.25rem;
+  }
+
+  h4 {
+    margin: 0 0 0.5rem;
+
+    font-size: 1.75rem;
+  }
+
+  p {
+    margin: 0;
+
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3.5rem;
+  }
+
+  .column--right {
+    @media (min-width: 800px) {
+      text-align: right;
+    }
   }
 </style>
 
@@ -25,7 +58,7 @@ import statusbarMenuImage from "../assets/statusbar-menu.jpg";
     text="RocketSim keeps things simple. Access all actions right from the statusbar, without any disturbing windows."
   />
   <article class="grid">
-    <div>
+    <div class="column">
       <div class="feature">
         <h4>Trigger deeplinks</h4>
         <p>
@@ -41,14 +74,14 @@ import statusbarMenuImage from "../assets/statusbar-menu.jpg";
         </p>
       </div>
     </div>
-    <div>
+    <div class="column">
       <Image
         class="image"
         src={statusbarMenuImage}
         alt="RocketSim opened from the MacOS menu bar. It shows a dropdown with navigation towards: deeplinks, screen recordings, screen captures, recent builds, deleting derived data, permissions, sandbox user data and more."
       />
     </div>
-    <div>
+    <div class="column column--right">
       <div class="feature">
         <h4>Capture recordings & screenshots</h4>
         <p>Create MP4 and GIF recordings or capture a screenshot.</p>

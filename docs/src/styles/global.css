@@ -41,7 +41,12 @@ h1,
 h2,
 h3,
 h4,
-h5,
+h5 {
+  font-weight: 500;
+  color: var(--text-color-light);
+  line-height: 1.2;
+}
+
 strong {
   color: var(--text-color-light);
 }
@@ -62,7 +67,7 @@ a {
   grid-gap: 0 0.625rem;
   grid-template-columns: repeat(4, [col-start] 1fr);
   max-width: 1140px;
-  margin: 0 2rem;
+  margin: 0 1rem;
 
   @media (min-width: 600px) {
     grid-template-columns: repeat(12, [col-start] 1fr);

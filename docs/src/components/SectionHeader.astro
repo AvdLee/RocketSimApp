@@ -16,6 +16,8 @@ const { title, subtitle, text } = Astro.props;
   }
 
   .title {
+    margin: 0 0 0.5rem;
+
     font-size: 3rem;
     line-height: 1.05556;
     font-weight: 600;
@@ -31,12 +33,13 @@ const { title, subtitle, text } = Astro.props;
   }
 
   p {
-    .section-headline {
-      font-size: 4.5rem;
-      line-height: 1.05556;
-      font-weight: 600;
-      letter-spacing: -0.006em;
-    }
+    margin: 2rem 0 0;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color-light);
+    line-height: 1.33341;
+    letter-spacing: -0.003em;
   }
 </style>
 
@@ -46,6 +49,6 @@ const { title, subtitle, text } = Astro.props;
       {title}
     </h3>
     {!!subtitle ? <h4 class:list={["title"]}>{subtitle}</h4> : null}
-    <p></p>
+    <p>{text}</p>
   </div>
 </header>
