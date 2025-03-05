@@ -15,6 +15,21 @@ import FeatureImage from "../assets/features/build-insights.png";
   .feature-wrapper {
     margin-top: 4rem;
   }
+
+  .team-insights {
+    background-image: url("/teams-line.svg");
+    background-repeat: no-repeat;
+    background-position: center 35%;
+    text-align: center;
+
+    @media (min-width: 1600px) {
+      background-size: contain;
+    }
+  }
+
+  a {
+    margin-top: 2rem;
+  }
 </style>
 
 <section>
@@ -42,4 +57,12 @@ import FeatureImage from "../assets/features/build-insights.png";
       >
     </Feature>
   </div>
+</section>
+<section class="team-insights">
+  <SectionHeader
+    title="Team Insights"
+    subtitle="Build Apps Faster with your whole team"
+    text="What's the build duration across the team? Does an M3 Max make a difference in terms of compilation time? With team insights, you'll be able to optimize productivity based on real build data"
+  />
+  <a href="/team-insights" class="button">Explore Team Insights</a>
 </section>

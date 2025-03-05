@@ -100,7 +100,6 @@ a {
   text-decoration: none;
 
   background-color: var(--primary-color);
-  border: 0.0625rem solid var(--primary-color);
   border-radius: 1.685rem;
   box-shadow: 0 3px 5px rgb(0 0 0 / 10%);
 
@@ -108,12 +107,11 @@ a {
 
   &:hover {
     background-color: var(--primary-color-accent);
-    border-color: var(--primary-color-accent);
+    text-decoration: none;
   }
 
   &:active {
     background-color: var(--primary-color-active);
-    border-color: var(--primary-color-active);
   }
 
   &:focus-visible {
