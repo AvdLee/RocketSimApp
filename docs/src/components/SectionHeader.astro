@@ -2,7 +2,7 @@
 interface Props {
   title: string;
   subtitle?: string;
-  text: string;
+  text?: string;
 }
 
 const { title, subtitle, text } = Astro.props;
@@ -48,7 +48,7 @@ const { title, subtitle, text } = Astro.props;
     <h3 class:list={["title", { "title--dim": !!subtitle }]}>
       {title}
     </h3>
-    {!!subtitle ? <h4 class:list={["title"]}>{subtitle}</h4> : null}
-    <p>{text}</p>
+    {subtitle ? <h4 class:list={["title"]}>{subtitle}</h4> : null}
+    {text ? <p>{text}</p> : null}
   </div>
 </header>
