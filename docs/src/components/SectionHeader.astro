@@ -3,9 +3,10 @@ interface Props {
   title: string;
   subtitle?: string;
   text?: string;
+  smallTitle?: boolean;
 }
 
-const { title, subtitle, text } = Astro.props;
+const { title, subtitle, text, smallTitle } = Astro.props;
 ---
 
 <style>
@@ -32,6 +33,10 @@ const { title, subtitle, text } = Astro.props;
     color: var(--text-color);
   }
 
+  .title--small {
+    font-size: 1.75rem;
+  }
+
   p {
     margin: 2rem 0 0;
 
@@ -45,7 +50,12 @@ const { title, subtitle, text } = Astro.props;
 
 <header class="grid">
   <div>
-    <h3 class:list={["title", { "title--dim": !!subtitle }]}>
+    <h3
+      class:list={[
+        "title",
+        { "title--dim": !!subtitle, "title--small": smallTitle },
+      ]}
+    >
       {title}
     </h3>
     {subtitle ? <h4 class:list={["title"]}>{subtitle}</h4> : null}
