@@ -17,12 +17,26 @@ const features = await Promise.all(
 );
 ---
 
+<style>
+  .feature-wrapper {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+</style>
+
 <section aria-label="RocketSim features">
   {
     features.map(({ data, Content }) => (
-      <Feature data={data}>
-        <Content />
-      </Feature>
+      <div class="feature-wrapper">
+        <Feature data={data}>
+          <Content />
+        </Feature>
+      </div>
     ))
   }
 </section>
