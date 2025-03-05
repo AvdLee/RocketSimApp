@@ -39,41 +39,42 @@ type Alignment = "left" | "right" | "full-width";
 type columnSpan = 6 | 8;
 
 type Photo = {
-    type: 'photo';
-    /** Path to asset INSIDE src folder */
-    path: string;
-    alt: string;
-    /** Optional caption to be shown underneath the asset (supports inline markdown) */
-    caption?: string;
-    /** Placement of the asset related to the content */
-    alignment: Alignment;
-    /** Width of the asset. Choose between 6 (50%) or 8 (66.67%) */
-    columnSpan: ColumnSpan;
-}
+  type: "photo";
+  /** Path to asset INSIDE src folder */
+  path: string;
+  alt: string;
+  /** Optional caption to be shown underneath the asset (supports inline markdown) */
+  caption?: string;
+  /** Placement of the asset related to the content */
+  alignment: Alignment;
+  /** Width of the asset. Choose between 6 (50%) or 8 (66.67%) */
+  columnSpan: ColumnSpan;
+};
 
 type Video = {
-    type: 'video';
-    /** Path to asset public folder */
-    path: string;
-    alt: string;
-    caption?: string;
-    alignment: Alignment;
-    columnSpan: ColumnSpan;
-}
+  type: "video";
+  /** Path to asset public folder */
+  path: string;
+  alt: string;
+  caption?: string;
+  alignment: Alignment;
+  columnSpan: ColumnSpan;
+};
 
 type Feature = {
-    name: string;
-    tagLine?: string;
-    /** Asset can be a photo or a video */
-    asset: Photo | Video;
-    /** Order the features will be shown on the landing page */
-    sortOrder: number;
-}
+  name: string;
+  tagLine?: string;
+  /** Asset can be a photo or a video */
+  asset: Photo | Video;
+  /** Order the features will be shown on the landing page */
+  sortOrder: number;
+};
 ```
 
 **NOTE:** Video assets need to be placed in the `public/` folder, while image assets need to be placed inside the `src/` folder. Assets in the `public/` folder won't be processed during the building of the project. Astro does not support video processing. We should take care of that ourselves (filesize, quality and resolution). For images this is done automatically. Feel free to use big image assets.
 
 An example feature:
+
 ```md
 ---
 name: "Quick Actions"

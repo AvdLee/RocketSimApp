@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  text: string;
+}
+
+const { title, subtitle, text } = Astro.props;
+---
+
+<style>
+  div {
+    @media (min-width: 800px) {
+      grid-column: 2 / -2;
+    }
+  }
+
+  .title {
+    margin: 0 0 0.5rem;
+
+    font-size: 3rem;
+    line-height: 1.05556;
+    font-weight: 600;
+    letter-spacing: -0.006em;
+
+    @media (min-width: 800px) {
+      font-size: 4.5rem;
+    }
+  }
+
+  .title--dim {
+    color: var(--text-color);
+  }
+
+  p {
+    margin: 2rem 0 0;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color-light);
+    line-height: 1.33341;
+    letter-spacing: -0.003em;
+  }
+</style>
+
+<header class="grid">
+  <div>
+    <h3 class:list={["title", { "title--dim": !!subtitle }]}>
+      {title}
+    </h3>
+    {!!subtitle ? <h4 class:list={["title"]}>{subtitle}</h4> : null}
+    <p>{text}</p>
+  </div>
+</header>

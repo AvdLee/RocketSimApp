@@ -101,10 +101,14 @@ const features = await Promise.all(
   }
 
   .title--big {
-    font-size: 4.5rem;
+    font-size: 3rem;
     line-height: 1.05556;
     font-weight: 600;
     letter-spacing: -0.006em;
+
+    @media (min-width: 800px) {
+      font-size: 4.5rem;
+    }
   }
 
   .title--dim {
@@ -137,15 +141,7 @@ const features = await Promise.all(
             {name}
           </h3>
           {tagLine ? (
-            <h4
-              class:list={[
-                "title",
-                "title--big",
-                asset.alignment === "full-width",
-              ]}
-            >
-              {tagLine}
-            </h4>
+            <h4 class:list={["title", "title--big"]}>{tagLine}</h4>
           ) : null}
           <div
             class:list={[
@@ -187,6 +183,7 @@ const features = await Promise.all(
               autoplay
               muted
               playsinline
+              loop
             />
           )}
           {asset.caption ? <figcaption set:html={asset.caption} /> : null}

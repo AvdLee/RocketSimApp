@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+
+import SectionHeader from "./SectionHeader.astro";
+
+import statusbarMenuImage from "../assets/statusbar-menu.jpg";
+---
+
+<style>
+  article {
+    row-gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  article > * {
+    @media (min-width: 800px) {
+      grid-column: span 4;
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+
+    border-radius: 1.25rem;
+  }
+
+  h4 {
+    margin: 0 0 0.5rem;
+
+    font-size: 1.75rem;
+  }
+
+  p {
+    margin: 0;
+
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3.5rem;
+  }
+
+  .column--right {
+    @media (min-width: 800px) {
+      text-align: right;
+    }
+  }
+</style>
+
+<section>
+  <SectionHeader
+    title="Everything you need, right from the statusbar"
+    text="RocketSim keeps things simple. Access all actions right from the statusbar, without any disturbing windows."
+  />
+  <article class="grid">
+    <div class="column">
+      <div class="feature">
+        <h4>Trigger deeplinks</h4>
+        <p>
+          Directly launch universal links that you just copied or select one
+          from your stored groups.
+        </p>
+      </div>
+      <div class="feature">
+        <h4>Recent builds</h4>
+        <p>
+          Grant, revoke, or reset permissions. Open common folders or edit user
+          defaults.
+        </p>
+      </div>
+    </div>
+    <div class="column">
+      <Image
+        class="image"
+        src={statusbarMenuImage}
+        alt="RocketSim opened from the MacOS menu bar. It shows a dropdown with navigation towards: deeplinks, screen recordings, screen captures, recent builds, deleting derived data, permissions, sandbox user data and more."
+      />
+    </div>
+    <div class="column column--right">
+      <div class="feature">
+        <h4>Capture recordings & screenshots</h4>
+        <p>Create MP4 and GIF recordings or capture a screenshot.</p>
+      </div>
+      <div class="feature">
+        <h4>Using your active simulator</h4>
+        <p>All actions perform in the visible Simulator, simple as that.</p>
+      </div>
+    </div>
+  </article>
+</section>
