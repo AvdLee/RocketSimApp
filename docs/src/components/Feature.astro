@@ -1,0 +1,175 @@
+---
+import { Image } from "astro:assets";
+import { marked } from "marked";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  data: CollectionEntry<"feature">["data"];
+}
+
+const {
+  data: { asset, tagLine, name },
+} = Astro.props;
+const parsedCaption = asset.caption
+  ? marked.parseInline(asset.caption)
+  : undefined;
+---
+
+<style>
+  article {
+    row-gap: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+
+  .figure {
+    margin: 0;
+
+    @media (min-width: 800px) {
+      grid-column: var(--image-column);
+    }
+  }
+
+  .figure--before-content {
+    grid-row: 1;
+  }
+
+  figcaption {
+    margin-top: 1rem;
+
+    text-align: center;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+
+    border-radius: 1.25rem;
+  }
+
+  .feature-content {
+    @media (min-width: 800px) {
+      grid-column: var(--content-column);
+      align-self: center;
+    }
+  }
+
+  .feature-content__content {
+    & :global(strong) {
+      font-weight: 400;
+    }
+
+    & :global(p) {
+      margin: 0 0 1rem;
+    }
+  }
+
+  .feature-content__content--big {
+    & :global(p) {
+      margin-top: 2rem;
+
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-color-light);
+      line-height: 1.33341;
+      letter-spacing: -0.003em;
+    }
+  }
+
+  .title {
+    margin: 0 0 0.5rem;
+
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .title--big {
+    font-size: 3rem;
+    line-height: 1.05556;
+    font-weight: 600;
+    letter-spacing: -0.006em;
+
+    @media (min-width: 800px) {
+      font-size: 4.5rem;
+    }
+  }
+
+  .title--dim {
+    color: var(--text-color);
+  }
+</style>
+<article class="grid">
+  <div
+    class="feature-content"
+    style={{
+      "--content-column":
+        asset.alignment === "full-width"
+          ? "2 / -2"
+          : `${asset.alignment === "left" ? `span ${12 - asset.columnSpan}` : 1} / ${asset.alignment === "left" ? -1 : `span ${12 - asset.columnSpan}`}`,
+    }}
+  >
+    <h3
+      class:list={[
+        "title",
+        {
+          "title--dim": !!tagLine,
+          "title--big": asset.alignment === "full-width",
+        },
+      ]}
+    >
+      {name}
+    </h3>
+    {tagLine ? <h4 class:list={["title", "title--big"]}>{tagLine}</h4> : null}
+    <div
+      class:list={[
+        "feature-content__content",
+        {
+          "feature-content__content--big": asset.alignment === "full-width",
+        },
+      ]}
+    >
+      <slot />
+    </div>
+  </div>
+  <figure
+    class:list={[
+      "figure",
+      { "figure--before-content": asset.alignment === "left" },
+    ]}
+    style={{
+      "--image-column":
+        asset.alignment === "full-width"
+          ? "1 / -1"
+          : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
+    }}
+  >
+    {
+      asset.type === "image" ? (
+        <Image
+          src={asset.path}
+          alt={asset.alt}
+          class="image"
+          widths={[640, 800, 1200, 1500]}
+          sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
+        />
+      ) : (
+        <video
+          class="image"
+          src={asset.path}
+          aria-label={asset.alt}
+          autoplay
+          muted
+          playsinline
+          loop
+        />
+      )
+    }
+    {parsedCaption ? <figcaption set:html={parsedCaption} /> : null}
+  </figure>
+</article>
