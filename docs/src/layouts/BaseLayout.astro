@@ -1,7 +1,18 @@
 ---
 import "../styles/global.css";
 
-const { pageTitle } = Astro.props;
+interface Props {
+  pageTitle: string;
+  pageDescription: string;
+}
+
+const { pageTitle, pageDescription } = Astro.props;
+
+const cannonicalUrl =
+  Astro.url.pathname === "/"
+    ? Astro.site
+    : new URL(Astro.url.pathname.replace(/\/+$/, ""), Astro.site).toString();
+const ogImage = `${Astro.site}og-banner-rocketsim.jpg`;
 ---
 
 <!doctype html>
@@ -17,7 +28,18 @@ const { pageTitle } = Astro.props;
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="RocketSim" />
     <link rel="manifest" href="/site.webmanifest" />
+
     <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={cannonicalUrl} />
+
+    <meta property="og:site_name" content="RocketSim" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={cannonicalUrl} />
+    <meta name="twitter:card" content={ogImage} />
+    <meta name="twitter:site" content="@rocketsim_app" />
   </head>
   <body>
     <slot />
