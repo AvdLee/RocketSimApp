@@ -7,9 +7,10 @@ interface Props {
   title: string;
   logo: ImageMetadata;
   logoAlt: string;
+  scrollText?: string;
 }
 
-const { title, logo, logoAlt } = Astro.props;
+const { title, logo, logoAlt, scrollText } = Astro.props;
 ---
 
 <style>
@@ -91,7 +92,7 @@ const { title, logo, logoAlt } = Astro.props;
       <p>
         <slot />
       </p>
-      <p>Scroll down to explore all features ↓</p>
+      <p>{scrollText}</p>
     </div>
     <div class="hero__logo">
       <Image
