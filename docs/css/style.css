@@ -135,6 +135,13 @@ a {
 .gray-text {
 	color: #aaa;
 }
+.gray-link {
+	color: #aaa;
+}
+.gray-link:hover {
+	color: #aaa;
+	text-decoration: none;
+}
 /* Notifications */
 .notification {
 	border: 1px solid #0093ff;
