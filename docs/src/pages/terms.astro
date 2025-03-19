@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import NavigationLink from "../components/NavigationLink.astro";
+import Footer from "../components/Footer.astro";
+
+import logoImage from "../assets/rocketsim-logo.svg";
+---
+
+<style>
+  main {
+    margin-bottom: 2rem;
+  }
+</style>
+
+<BaseLayout pageTitle="Terms of Use - RocketSim">
+  <Header
+    title="RocketSim Terms of Use"
+    logo={logoImage}
+    logoAlt='Written logo spelling: "RocketSim"'
+  >
+    Welcome to RocketSim! These Terms of Use govern your use of RocketSim, a
+    developer tool designed to enhance app development experiences. By accessing
+    or using RocketSim, you agree to these Terms. Please read them carefully.
+  </Header>
+  <Navigation>
+    <NavigationLink href="/"> All Features </NavigationLink>
+    <NavigationLink href="/team-insights">Team Licenses</NavigationLink>
+    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+      Documentation
+    </NavigationLink>
+    <NavigationLink
+      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      target="_blank"
+    >
+      FAQ
+    </NavigationLink>
+  </Navigation>
+  <main>
+    <div class="grid">
+      <div>
+        <ol>
+          <li>
+            <strong>Use of RocketSim:</strong> RocketSim is intended for use by app
+            developers to simulate various scenarios and test their applications.
+            You agree to use RocketSim solely for lawful purposes and in accordance
+            with these Terms.
+          </li>
+          <li>
+            <strong>Data Storage:</strong> RocketSim operates by storing all data
+            locally on your device. We do not collect or store any of your data on
+            external servers. Your data privacy and security are of utmost importance
+            to us. The only data shared relates to RocketSim Insights and consists
+            of your project's scheme name, build durations, and a one-directional
+            hash of the hardware machine UDID
+          </li>
+          <li>
+            <strong>Tracking Services:</strong> RocketSim may utilize tracking services
+            for analytics and crash reporting. We use Amplitude for anonymous analytics
+            and Xcode for crash reports. This data helps us improve RocketSim's performance
+            and user experience.
+          </li>
+          <li>
+            <strong>Email Lists:</strong> Users have the option to opt-in for our
+            email lists to receive product updates. These updates may include information
+            about new features, trial reminders, special offers, and other relevant
+            news related to RocketSim. You can manage your email preferences at any
+            time.
+          </li>
+          <li>
+            <strong>Refund Requests:</strong> If you request a refund for RocketSim,
+            we may share certain personal data with Apple to assist in processing
+            your request. This data may include your usage details and any relevant
+            information needed to review the refund request.
+          </li>
+          <li>
+            <strong>App Store Distribution:</strong> RocketSim is distributed via
+            the App Store. As such, it operates within the sandbox environment provided
+            by the App Store, which enhances security by restricting access to sensitive
+            system resources and data.
+          </li>
+          <li>
+            <strong>Intellectual Property:</strong> RocketSim and its content, including
+            but not limited to software, logos, trademarks, and designs, are the
+            property of RocketSim or its licensors and are protected by intellectual
+            property laws. You may not use RocketSim for any unauthorized purpose
+            or reproduce, distribute, or modify its content without our prior written
+            consent.
+          </li>
+          <li>
+            <strong>Disclaimer of Warranties:</strong> RocketSim is provided "as
+            is" without any warranties, express or implied. We do not guarantee that
+            RocketSim will always be error-free or that it will meet your specific
+            requirements. Your use of RocketSim is at your own risk.
+          </li>
+          <li>
+            <strong>Limitation of Liability:</strong> In no event shall RocketSim
+            or its affiliates be liable for any indirect, incidental, special, consequential,
+            or punitive damages arising out of or in connection with your use of
+            RocketSim.
+          </li>
+          <li>
+            <strong>Changes to Terms:</strong> RocketSim reserves the right to update
+            or modify these Terms of Use at any time without prior notice. Any changes
+            will be effective immediately upon posting. Your continued use of RocketSim
+            after the posting of changes constitutes your acceptance of such changes.
+          </li>
+          <li>
+            <strong>Contact Us:</strong> If you have any questions or concerns about
+            these Terms of Use, please contact us at <a
+              href="mailto:support@rocketsim.app">support@rocketsim.app</a
+            >.
+          </li>
+        </ol>
+
+        <p>
+          By using RocketSim, you acknowledge that you have read, understood,
+          and agree to be bound by these Terms of Use. If you do not agree to
+          these Terms, please do not use RocketSim. Thank you for choosing
+          RocketSim!
+        </p>
+
+        <p><i>Last updated: November 15th, 2024.</i></p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
