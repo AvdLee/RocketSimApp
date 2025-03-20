@@ -1,0 +1,13 @@
+---
+name: "User Defaults Editor"
+tagLine: "Edit Standard & Group User Defaults in realtime"
+asset:
+  type: "video"
+  path: "/features/user-defaults-editor.mp4"
+  alt: "Test how your app responds to User Defaults changes. Quickly switch states like User Defaults-driven experiments."
+  alignment: "full-width"
+  columnSpan: 6
+sortOrder: 6
+---
+
+Test how your app responds to User Defaults changes. Quickly switch states like User Defaults-driven experiments.
