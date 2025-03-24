@@ -112,6 +112,20 @@
     "title" : "Display HTTP Traffic"
   },
   {
+    "description" : "In addition to specific locations, the option to specify a latitude and longitude.",
+    "id" : "564",
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Allow copy pasting lat\/long values"
+  },
+  {
+    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "id" : "283b",
+    "isFinished" : true,
+    "status" : "Implemented",
+    "title" : "Network Link Conditioner"
+  },
+  {
     "description" : "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
     "id" : "368",
     "isFinished" : false,
@@ -138,13 +152,6 @@
     "isFinished" : false,
     "status" : "Planned",
     "title" : "User Defaults Actions"
-  },
-  {
-    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
-    "id" : "283b",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Network Link Conditioner"
   },
   {
     "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error",
@@ -334,12 +341,5 @@
     "isFinished" : false,
     "status" : "Planned",
     "title" : "Directory Actions"
-  },
-  {
-    "description" : "In addition to specific locations, the option to specify a latitude and longitude.",
-    "id" : "564",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Allow copy pasting lat\/long values"
   }
 ]

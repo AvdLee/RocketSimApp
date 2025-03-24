@@ -46,13 +46,14 @@ let features: [Feature] = [
     .init(githubIssueID: "282", title: "Allow to search Quick Actions", description: "Filter long lists by searching for a query", status: .implemented),
     .init(githubIssueID: "357", title: "Clipboard copy to/from buttons", description: "Sync the clipboard between your Mac and the Simulator by using copy from/to buttons", status: .implemented),
     .init(githubIssueID: "179", title: "Display HTTP Traffic", description: "Show HTTP Traffic directly next to the Simulator", status: .implemented),
+    .init(githubIssueID: "564", title: "Allow copy pasting lat/long values", description: "In addition to specific locations, the option to specify a latitude and longitude.", status: .implemented),
+    .init(githubIssueID: "283b", title: "Network Link Conditioner", description: "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w/o influencing your Mac's connection", status: .implemented),
     
     /// Planned
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
     .init(githubIssueID: "370", title: "SwiftData Visual Viewer & Editor", description: "Explore and edit SwiftData databases.", status: .planned),
     .init(githubIssueID: "347", title: "Username/Password Quick Action", description: "Allow to fill in account details inside a email/password textfield via a Quick Action.", status: .planned),
     .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
-    .init(githubIssueID: "283b", title: "Network Link Conditioner", description: "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w/o influencing your Mac's connection", status: .implemented),
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
     .init(githubIssueID: "289", title: "Add a wallpaper and padding to screenshots", description: "Beautify screenshots with a gradient background and extra padding", status: .planned),
     .init(githubIssueID: "280", title: "Resize screenshots", description: "Allow resizing the output screenshot to reduce size and resolution", status: .planned),
@@ -79,8 +80,7 @@ let features: [Feature] = [
     .init(githubIssueID: "374", title: "Grant/Revoke HealthKit permissions", description: "Adding HealthKit permissions to the other existing permission revoke, grant, reset actions.", status: .planned),
     .init(githubIssueID: "561", title: "Reset Kechain action", description: "Allow resetting the keychain without completely resetting the Simulator.", status: .planned),
     .init(githubIssueID: "607", title: "Simulator Camera", description: "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.", status: .planned),
-    .init(githubIssueID: "606", title: "Directory Actions", description: "Create deeplinks for app directories. For example, open .app/caches/db.sqlite with a single click.", status: .planned),
-    .init(githubIssueID: "564", title: "Allow copy pasting lat/long values", description: "In addition to specific locations, the option to specify a latitude and longitude.", status: .planned)
+    .init(githubIssueID: "606", title: "Directory Actions", description: "Create deeplinks for app directories. For example, open .app/caches/db.sqlite with a single click.", status: .planned)
 ]
 
 assert(Set(features.map(\.githubIssueID)).count == features.count, "Duplicate IDs exist!")
