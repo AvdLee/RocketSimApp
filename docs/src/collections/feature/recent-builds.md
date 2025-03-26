@@ -15,4 +15,3 @@ Quick actions for your recent builds help you increase productivity. These actio
 - Travel the world and **relaunch with any timezone**
 - **Grant, revoke, or reset permissions** like photo and location access, allowing you to quicker test related implementations
 - **Open common directories** like your app's documents folder.
-
