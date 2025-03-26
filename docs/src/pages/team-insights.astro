@@ -4,6 +4,8 @@ import Navigation from "../components/Navigation.astro";
 import NavigationLink from "../components/NavigationLink.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Insights from "../components/Insights.astro";
+import InsightsBreakdown from "../components/InsightsBreakdown.astro";
 
 import logoImage from "../assets/rocketsim-insights-logo.svg";
 ---
@@ -36,5 +38,36 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
       FAQ
     </NavigationLink>
   </Navigation>
+  <main>
+    <Insights />
+    <InsightsBreakdown
+      title="Is it worth getting an M3 Max?"
+      chart={{
+        title: "Build Duration by Machine",
+        data: [
+          {
+            title: "Mac Studio 2023 / M2 Ultra 24-core / 192 RAM",
+            value: 12,
+            width: 0.46,
+          },
+          {
+            title: 'MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM',
+            value: 14,
+            width: 0.54,
+          },
+          {
+            title: 'MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM',
+            value: 26,
+            width: 1,
+          },
+        ]
+      }}
+      contentTitle="Benchmark your team's project"
+      >
+            With team licenses, your builds will be synced. You'll find out{" "}
+            <strong>which machine setup performs best</strong> for your Xcode
+            project.
+            </InsightsBreakdown>
+  </main>
   <Footer />
 </BaseLayout>
