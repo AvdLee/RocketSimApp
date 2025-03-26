@@ -13,6 +13,23 @@ const {
 const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
   : undefined;
+
+let imageSizes;
+
+if (asset.alignment === "full-width") {
+  imageSizes =
+    "(max-width: 375px) 21.5rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 55.625rem, 71.25rem";
+} else {
+  if (asset.columnSpan === 6) {
+    imageSizes =
+      "(max-width: 375px) 21.5rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 26.8125rem, 34.625rem";
+  }
+
+  if (asset.columnSpan === 8) {
+    imageSizes =
+      "(max-width: 375px) 21.5rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 36.375rem, 46.875rem";
+  }
+}
 ---
 
 <style>
@@ -149,15 +166,15 @@ const parsedCaption = asset.caption
           src={asset.path}
           alt={asset.alt}
           class="image"
-          widths={[640, 800, 1200, 1500]}
-          sizes="(max-width: 375px) 20rem, ((min-width: 376px) and (max-width: 799px)) 40rem, ((min-width: 800px) and (max-width: 1050px)) 37.5rem, 47.5rem"
+          widths={[360, 640, 800, 1200, 1500, 2000, 2500, 3000, 3420]}
+          sizes={imageSizes}
+          quality={95}
         />
       ) : (
         <video
-          class="image"
+          class="image js-feature-video"
           src={asset.path}
           aria-label={asset.alt}
-          autoplay
           muted
           playsinline
           loop

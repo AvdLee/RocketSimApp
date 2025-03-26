@@ -4,6 +4,12 @@ import Navigation from "../components/Navigation.astro";
 import NavigationLink from "../components/NavigationLink.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Insights from "../components/Insights.astro";
+import InsightsBreakdown from "../components/InsightsBreakdown.astro";
+import InsightsActionable from "../components/InsightsActionable.astro";
+import OnlineTeamManager from "../components/OnlineTeamManager.astro";
+import Pricing from "../components/Pricing.astro";
+import AppStore from "../components/AppStore.astro";
 
 import logoImage from "../assets/rocketsim-insights-logo.svg";
 ---
@@ -36,5 +42,72 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
       FAQ
     </NavigationLink>
   </Navigation>
+  <main>
+    <Insights />
+    <InsightsBreakdown
+      title="Is it worth getting an M3 Max?"
+      chart={{
+        title: "Build Duration by Machine",
+        data: [
+          {
+            title: "Mac Studio 2023 / M2 Ultra 24-core / 192 RAM",
+            value: 12,
+            width: 0.36,
+          },
+          {
+            title: 'MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM',
+            value: 14,
+            width: 0.42,
+          },
+          {
+            title: 'MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM',
+            value: 26,
+            width: 0.77,
+          },
+        ],
+      }}
+      contentTitle="Benchmark your team's project"
+    >
+      <p>
+        With team licenses, your builds will be synced. You'll find out{" "}
+        <strong>which machine setup performs best</strong> for your Xcode project.
+      </p>
+    </InsightsBreakdown>
+    <InsightsBreakdown
+      title="Does Xcode 16 improve our project's build times?"
+      chart={{
+        title: "Build Duration by Xcode Version",
+        data: [
+          {
+            title: "Xcode 16.0 (16F3233f)",
+            value: 13.5,
+            width: 0.68,
+          },
+          {
+            title: "Xcode 15.4 (15F31d)",
+            value: 15,
+            width: 0.76,
+          },
+          {
+            title: "Xcode 15.3 (15E204a)",
+            value: 15.3,
+            width: 0.78,
+          },
+        ],
+      }}
+      contentTitle="Build duration grouped by Xcode version"
+    >
+      <p>
+        RocketSim Insights automatically benchmarks your team's build durations
+        to tell you <strong
+          >how much an Xcode version improves build times</strong
+        > for your Xcode project.
+      </p>
+    </InsightsBreakdown>
+    <InsightsActionable />
+    <OnlineTeamManager />
+    <Pricing />
+    <AppStore />
+  </main>
   <Footer />
 </BaseLayout>

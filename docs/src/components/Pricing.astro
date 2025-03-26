@@ -1,0 +1,57 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+---
+
+<style>
+  section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+
+  .header-wrapper {
+    text-align: center;
+  }
+
+  p {
+    margin: 1rem 0;
+
+    text-align: center;
+  }
+
+  a {
+    color: var(--text-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<section id="get-team-license">
+  <div class="header-wrapper">
+    <SectionHeader
+      title="Ready to get started?"
+      subtitle="Get your licenses now"
+    />
+  </div>
+  <div class="pricing-table-wrapper">
+    <script is:inline async src="https://js.stripe.com/v3/pricing-table.js"
+    ></script>
+    <stripe-pricing-table
+      pricing-table-id="prctbl_1QXPD3AprKYhJoSqYHAc7Uqn"
+      publishable-key="pk_live_51QT1gdAprKYhJoSqnISZjmO3BIfZpA01ZXMM697LzdrkD6LqrqlNvx2Y5SzgazuUoq7iOgN4iAbSvSpV4Jvc6Gcl00D4hvBbyO"
+    >
+    </stripe-pricing-table>
+    <p class="text-center mt-3 gray-text">
+      If you are a software reseller or broker, please contact <a
+        href="mailto:ralphduin@rocketsim.app"
+        class="gray-link">ralphduin@rocketsim.app</a
+      >
+    </p>
+  </div>
+</section>
