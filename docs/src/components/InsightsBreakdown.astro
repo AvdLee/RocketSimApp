@@ -14,7 +14,18 @@ const { title, chart, contentTitle } = Astro.props;
 ---
 
 <style>
+  section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+
   .content-wrapper {
+    row-gap: 2rem;
     margin-top: 2rem;
 
     @media (min-width: 800px) {
@@ -33,6 +44,7 @@ const { title, chart, contentTitle } = Astro.props;
   .description-wrapper {
     @media (min-width: 800px) {
       grid-column: span 6;
+      align-content: center;
     }
   }
 
@@ -121,7 +133,7 @@ const { title, chart, contentTitle } = Astro.props;
                   <div
                     class="bar"
                     style={{ "--progress": `${item.width * 100}%` }}
-                  ></div>
+                  />
                   <span class="value">{item.value}s</span>
                 </div>
               </dd>
@@ -132,7 +144,7 @@ const { title, chart, contentTitle } = Astro.props;
     </figure>
     <div class="description-wrapper">
       <h3 class="title">{contentTitle}</h3>
-      <slot/>
+      <slot />
     </div>
   </div>
 </section>
