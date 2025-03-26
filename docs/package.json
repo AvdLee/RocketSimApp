@@ -13,6 +13,7 @@
     "knip": "knip"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.3.0",
     "astro": "^5.2.5",
     "marked": "^15.0.7"
   },
