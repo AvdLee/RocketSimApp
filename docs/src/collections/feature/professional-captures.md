@@ -2,7 +2,7 @@
 name: "Professional recordings & screenshots"
 asset:
   type: "image"
-  path: "../../assets/features/captures.jpg"
+  path: "../../assets/features/captures.png"
   alt: "Create profession recordings & screenshots with device bezels and audio recorded."
   alignment: "left"
   columnSpan: 6
