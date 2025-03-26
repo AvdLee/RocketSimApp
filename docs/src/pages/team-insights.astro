@@ -7,6 +7,7 @@ import Footer from "../components/Footer.astro";
 import Insights from "../components/Insights.astro";
 import InsightsBreakdown from "../components/InsightsBreakdown.astro";
 import InsightsActionable from "../components/InsightsActionable.astro";
+import OnlineTeamManager from "../components/OnlineTeamManager.astro";
 
 import logoImage from "../assets/rocketsim-insights-logo.svg";
 ---
@@ -65,8 +66,10 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
       }}
       contentTitle="Benchmark your team's project"
     >
-      With team licenses, your builds will be synced. You'll find out{" "}
-      <strong>which machine setup performs best</strong> for your Xcode project.
+      <p>
+        With team licenses, your builds will be synced. You'll find out{" "}
+        <strong>which machine setup performs best</strong> for your Xcode project.
+      </p>
     </InsightsBreakdown>
     <InsightsBreakdown
       title="Does Xcode 16 improve our project's build times?"
@@ -92,11 +95,15 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
       }}
       contentTitle="Build duration grouped by Xcode version"
     >
-      RocketSim Insights automatically benchmarks your team's build durations to
-      tell you <strong>how much an Xcode version improves build times</strong> for
-      your Xcode project.
+      <p>
+        RocketSim Insights automatically benchmarks your team's build durations
+        to tell you <strong
+          >how much an Xcode version improves build times</strong
+        > for your Xcode project.
+      </p>
     </InsightsBreakdown>
     <InsightsActionable />
+    <OnlineTeamManager />
   </main>
   <Footer />
 </BaseLayout>

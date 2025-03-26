@@ -1,0 +1,56 @@
+---
+import Feature from "./Feature.astro";
+---
+
+<style>
+  section {
+    padding: 8rem 0;
+
+    background-color: #101010;
+  }
+</style>
+
+<section>
+  <Feature
+    data={{
+      name: "Online Team Manager",
+      tagLine: "Browse insights and manage seats",
+      asset: {
+        type: "video",
+        path: "/features/team-insights-dashboard.mp4",
+        alt: "RocketSim for Teams dashboard. Showing the build insights page. It is showing build times, build count and breakdown charts for the an Xcode project.",
+        alignment: "full-width",
+      },
+      sortOrder: 1,
+    }}
+  >
+    <p>
+      Configure workspaces, select specific schemes, browse build durations and
+      benchmarks. RocketSim's Team Manager puts you in full control of your
+      team's productivity.
+    </p>
+  </Feature>
+</section>
+
+<script>
+  // Play videos when they are in view, pause when they are not
+  const videos = document.querySelectorAll(".js-feature-video");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const videoElement = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          videoElement.play();
+        } else {
+          videoElement.pause();
+        }
+      });
+    },
+    { threshold: 1 },
+  );
+
+  videos.forEach((video) => {
+    observer.observe(video);
+  });
+</script>
