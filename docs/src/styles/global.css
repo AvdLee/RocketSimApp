@@ -55,13 +55,8 @@ strong {
 
 a {
   color: var(--primary-color);
-  text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .grid {
