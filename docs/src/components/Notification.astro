@@ -1,0 +1,45 @@
+<style>
+  .notification-wrapper {
+    display: none;
+  }
+
+  .notification-wrapper--show {
+    display: grid;
+  }
+
+  .notification {
+    padding: 1rem;
+    margin-top: 2rem;
+
+    background-color: rgba(0, 147, 255, 0.2);
+    border: 1px solid var(--primary-color);
+    border-radius: 1rem;
+  }
+
+  strong,
+  p {
+    margin: 0;
+  }
+</style>
+
+<div class="grid notification-wrapper">
+  <div class="col notification" aria-role="alert">
+    <strong>You're now subscribed</strong>
+    <p>
+      Check your email to confirm your subscription—don’t forget to check your
+      spam folder too!
+    </p>
+  </div>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams);
+  if (urlParams.get("show_email_confirmation") === "1") {
+    console.log("HERE");
+    const notification = document.querySelector(".notification-wrapper");
+    if (notification) {
+      notification.classList.add("notification-wrapper--show"); // Ensure it's visible
+    }
+  }
+</script>
