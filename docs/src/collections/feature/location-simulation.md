@@ -6,7 +6,7 @@ asset:
   path: "../../assets/features/location-routes.png"
   alt: "Single locations or automobile and walking routes: Test them right in the Simulator."
   alignment: "full-width"
-  columnSpan: 6
+  columnSpan: 12
 sortOrder: 8
 ---
 
