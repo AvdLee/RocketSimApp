@@ -6,7 +6,7 @@ asset:
   path: "/features/recording-example.mp4"
   alt: "RocketSim's touch-attention mode ensures your demo is easy to follow since a touch indicator will be constantly visible."
   alignment: "full-width"
-  columnSpan: 8
+  columnSpan: 6
 sortOrder: 16
 ---
 

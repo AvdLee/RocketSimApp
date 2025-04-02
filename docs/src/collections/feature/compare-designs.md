@@ -6,7 +6,7 @@ asset:
   path: "/features/onboarding-compare.mp4"
   alt: "Comparing designs on top of the Simulator after exporting them from apps like Figma."
   alignment: "full-width"
-  columnSpan: 6
+  columnSpan: 12
 sortOrder: 3
 ---
 

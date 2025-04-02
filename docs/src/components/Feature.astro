@@ -115,7 +115,10 @@ if (asset.alignment === "full-width") {
   }
 </style>
 
-<article class="grid">
+<article
+  class="grid"
+  data-aos={asset.alignment === "full-width" ? undefined : "fade-up"}
+>
   <div
     class="feature-content"
     style={{
@@ -124,6 +127,11 @@ if (asset.alignment === "full-width") {
           ? "2 / -2"
           : `${asset.alignment === "left" ? `span ${12 - asset.columnSpan}` : 1} / ${asset.alignment === "left" ? -1 : `span ${12 - asset.columnSpan}`}`,
     }}
+    data-aos={asset.alignment === "full-width"
+      ? "fade-in"
+      : asset.alignment === "left"
+        ? "fade-left"
+        : "fade-right"}
   >
     <h3
       class:list={[
@@ -156,9 +164,10 @@ if (asset.alignment === "full-width") {
     style={{
       "--image-column":
         asset.alignment === "full-width"
-          ? "1 / -1"
+          ? `${(12 - asset.columnSpan) / 2 + 1} / span ${asset.columnSpan}`
           : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
     }}
+    data-aos={asset.alignment === "full-width" ? "fade-up" : undefined}
   >
     {
       asset.type === "image" ? (
@@ -181,6 +190,14 @@ if (asset.alignment === "full-width") {
         />
       )
     }
-    {parsedCaption ? <figcaption set:html={parsedCaption} /> : null}
+    {
+      parsedCaption ? (
+        <figcaption
+          set:html={parsedCaption}
+          data-aos="fade-up"
+          data-aos-delay="1000"
+        />
+      ) : null
+    }
   </figure>
 </article>

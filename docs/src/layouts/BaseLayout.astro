@@ -74,6 +74,9 @@ const ogImage = `${Astro.site}og-banner-rocketsim.jpg`;
         };
     </script>
     <!-- End Plausible -->
+
+    <!-- Styles for AOS (Animate on Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.0/dist/aos.css" />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -86,5 +89,11 @@ const ogImage = `${Astro.site}og-banner-rocketsim.jpg`;
     >
     <!-- End Google Tag Manager (noscript) -->
     <slot />
+
+    <!-- Scripts for AOS (Animate on Scroll) -->
+    <script is:inline src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+    <script>
+      AOS.init({ delay: 400, duration: 500, once: true, offset: 0 });
+    </script>
   </body>
 </html>

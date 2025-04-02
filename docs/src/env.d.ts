@@ -1,1 +1,2 @@
-declare var plausible: any;
+declare var plausible;
+declare var AOS;

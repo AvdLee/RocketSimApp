@@ -2,7 +2,7 @@ import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
 const alignment = z.enum(["left", "right", "full-width"]);
-const columnSpan = z.union([z.literal(6), z.literal(8)]);
+const columnSpan = z.union([z.literal(6), z.literal(8), z.literal(12)]);
 
 const feature = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/collections/feature" }),

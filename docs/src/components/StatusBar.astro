@@ -62,12 +62,14 @@ import statusbarMenuImage from "../assets/statusbar-menu.png";
 </style>
 
 <section>
-  <SectionHeader
-    title="Everything you need, right from the statusbar"
-    text="RocketSim keeps things simple. Access all actions right from the statusbar, without any disturbing windows."
-  />
+  <div data-aos="fade-in">
+    <SectionHeader
+      title="Everything you need, right from the statusbar"
+      text="RocketSim keeps things simple. Access all actions right from the statusbar, without any disturbing windows."
+    />
+  </div>
   <article class="grid">
-    <div class="column">
+    <div class="column" data-aos="fade-left">
       <div class="feature">
         <h4>Trigger deeplinks</h4>
         <p>
@@ -83,14 +85,14 @@ import statusbarMenuImage from "../assets/statusbar-menu.png";
         </p>
       </div>
     </div>
-    <div class="column">
+    <div class="column" data-aos="fade-up">
       <Image
         class="image"
         src={statusbarMenuImage}
         alt="RocketSim opened from the MacOS menu bar. It shows a dropdown with navigation towards: deeplinks, screen recordings, screen captures, recent builds, deleting derived data, permissions, sandbox user data and more."
       />
     </div>
-    <div class="column column--right">
+    <div class="column column--right" data-aos="fade-right">
       <div class="feature">
         <h4>Capture recordings & screenshots</h4>
         <p>Create MP4 and GIF recordings or capture a screenshot.</p>
