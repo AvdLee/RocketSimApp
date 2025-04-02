@@ -59,6 +59,21 @@ const ogImage = `${Astro.site}og-banner-rocketsim.jpg`;
       })(window, document, "script", "dataLayer", "GTM-59LFW4F4");
     </script>
     <!-- End Google Tag Manager -->
+
+    <!-- Plausible -->
+    <script
+      is:inline
+      defer
+      data-domain="rocketsim.app"
+      src="https://plausible.io/js/script.tagged-events.js"></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+    </script>
+    <!-- End Plausible -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
