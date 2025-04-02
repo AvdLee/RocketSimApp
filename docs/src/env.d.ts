@@ -1,3 +1,1 @@
-interface Window {
-  plausible: any;
-}
+declare var plausible: any;

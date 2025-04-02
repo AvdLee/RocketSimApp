@@ -39,6 +39,7 @@ import logoImage from "../assets/rocketsim-logo.svg";
     <NavigationLink
       href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
       className="plausible-event-name=App+Store+Install"
+      id="js-header-app-store-button"
       asButton
       target="_blank"
     >
@@ -67,3 +68,66 @@ import logoImage from "../assets/rocketsim-logo.svg";
   </main>
   <Footer />
 </BaseLayout>
+
+<!-- Script to set the button URL using the UTM Campaign -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let referer = null;
+
+    // First see if we already have a referer stored. We want to use the first-referer possible.
+    if (!referer) {
+      const cookies = document.cookie.split(";");
+      cookies.forEach((cookie) => {
+        const [name, value] = cookie.trim().split("=");
+        if (name === "referer") {
+          referer = decodeURIComponent(value);
+        }
+      });
+    }
+
+    // Even if we fetched the cookie value, we want new campaigns or refs to take over.
+    referer = urlParams.get("utm_campaign") || urlParams.get("ref") || referer;
+
+    // If referer is not set, try using referer header as referer.
+    if (!referer) {
+      const refererHeader = document.referrer;
+      if (refererHeader) {
+        const refererHost = new URL(refererHeader).hostname;
+        if (refererHost) {
+          referer = refererHost;
+        }
+      }
+    }
+
+    // Remember referer for future usage.
+    if (referer) {
+      // Set cookie expiration time to now + 60 minutes
+      const expirationTime = new Date(
+        Date.now() + 7 * 24 * 60 * 60 * 1000,
+      ).toUTCString();
+
+      // Format cookie string
+      const cookieString = `referer=${encodeURIComponent(referer)}; expires=${expirationTime}; path=/`;
+
+      // Set cookie
+      document.cookie = cookieString;
+    }
+
+    // Use the referer as the campaign or fallback to 'website-header'
+    const campaign = referer || "website-header";
+
+    const a = document.getElementById("js-header-app-store-button");
+
+    if(a instanceof HTMLAnchorElement) {
+      a.href =
+        "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" +
+        encodeURIComponent(campaign) +
+          "&mt=8";
+    }
+
+    plausible("Stored Referer", { props: { stored_referer: campaign } });
+  });
+</script>
