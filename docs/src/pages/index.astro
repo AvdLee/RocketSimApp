@@ -121,11 +121,11 @@ import logoImage from "../assets/rocketsim-logo.svg";
 
     const a = document.getElementById("js-header-app-store-button");
 
-    if(a instanceof HTMLAnchorElement) {
+    if (a instanceof HTMLAnchorElement) {
       a.href =
         "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=" +
         encodeURIComponent(campaign) +
-          "&mt=8";
+        "&mt=8";
     }
 
     plausible("Stored Referer", { props: { stored_referer: campaign } });
