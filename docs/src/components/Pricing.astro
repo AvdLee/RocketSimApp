@@ -33,13 +33,13 @@ import SectionHeader from "./SectionHeader.astro";
 </style>
 
 <section id="get-team-license">
-  <div class="header-wrapper">
+  <div class="header-wrapper" data-aos="fade-in">
     <SectionHeader
       title="Ready to get started?"
       subtitle="Get your licenses now"
     />
   </div>
-  <div class="pricing-table-wrapper">
+  <div class="pricing-table-wrapper" data-aos="fade-up">
     <script is:inline async src="https://js.stripe.com/v3/pricing-table.js"
     ></script>
     <stripe-pricing-table
