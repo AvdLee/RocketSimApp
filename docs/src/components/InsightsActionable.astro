@@ -73,7 +73,7 @@ import gaugeAlertIcon from "../assets/gauge-alert.svg";
 </style>
 
 <section>
-  <div class="header-wrapper">
+  <div class="header-wrapper" data-aos="fade-in">
     <SectionHeader
       title="Actionable Insights"
       subtitle="Take action based on data"
@@ -82,7 +82,7 @@ import gaugeAlertIcon from "../assets/gauge-alert.svg";
   <div class="grid">
     <ul>
       <li>
-        <article>
+        <article data-aos="fade-left" data-aos-delay="300">
           <Image src={gaugeIcon} alt="Speedometer icon" height="20" />
           <p>
             Save up to 2 hours per month by upgrading Jordi & Hidde's machine to
@@ -91,7 +91,7 @@ import gaugeAlertIcon from "../assets/gauge-alert.svg";
         </article>
       </li>
       <li>
-        <article>
+        <article data-aos="fade-left" data-aos-delay="600">
           <Image
             src={gaugeAlertIcon}
             alt="Speedometer icon with exclamation mark"
@@ -104,7 +104,7 @@ import gaugeAlertIcon from "../assets/gauge-alert.svg";
         </article>
       </li>
       <li>
-        <article>
+        <article data-aos="fade-left" data-aos-delay="900">
           <Image src={gaugeIcon} alt="Speedometer icon" height="20" />
           <p>
             Xcode 16.0 seems to improve build times by 10%. Consider upgrading

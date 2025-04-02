@@ -119,9 +119,11 @@ const { title, chart, contentTitle } = Astro.props;
 </style>
 
 <section>
-  <SectionHeader title={title} />
+  <div data-aos="fade-up">
+    <SectionHeader title={title} />
+  </div>
   <div class="grid content-wrapper">
-    <figure aria-label="Build Duration by Machine">
+    <figure aria-label="Build Duration by Machine" data-aos="fade-right">
       <figcaption>{chart.title}</figcaption>
       <dl>
         {
@@ -142,7 +144,7 @@ const { title, chart, contentTitle } = Astro.props;
         }
       </dl>
     </figure>
-    <div class="description-wrapper">
+    <div class="description-wrapper" data-aos="fade-left">
       <h3 class="title">{contentTitle}</h3>
       <slot />
     </div>

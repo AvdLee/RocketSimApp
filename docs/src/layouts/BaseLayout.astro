@@ -44,8 +44,14 @@ const ogImage = `${Astro.site}og-banner-rocketsim.jpg`;
     <meta property="og:url" content={cannonicalUrl} />
     <meta name="twitter:card" content={ogImage} />
     <meta name="twitter:site" content="@rocketsim_app" />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.0/dist/aos.css" />
   </head>
   <body>
     <slot />
+    <script is:inline src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
+    <script>
+      AOS.init({ delay: 400, duration: 500, once: true, offset: 0 });
+    </script>
   </body>
 </html>
