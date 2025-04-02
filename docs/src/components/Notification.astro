@@ -34,9 +34,7 @@
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
-  console.log(urlParams);
   if (urlParams.get("show_email_confirmation") === "1") {
-    console.log("HERE");
     const notification = document.querySelector(".notification-wrapper");
     if (notification) {
       notification.classList.add("notification-wrapper--show"); // Ensure it's visible
