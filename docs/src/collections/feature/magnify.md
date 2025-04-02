@@ -6,7 +6,7 @@ asset:
   path: "/features/magnifier-color-picker.mp4"
   alt: "Use the Color Picker and copy the value as SwiftUI Color, NSColor, or UIColor code."
   alignment: "full-width"
-  columnSpan: 6
+  columnSpan: 12
 sortOrder: 5.3
 ---
 

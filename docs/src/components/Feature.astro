@@ -164,7 +164,7 @@ if (asset.alignment === "full-width") {
     style={{
       "--image-column":
         asset.alignment === "full-width"
-          ? "1 / -1"
+          ? `${(12 - asset.columnSpan) / 2 + 1} / span ${asset.columnSpan}`
           : `${asset.alignment === "left" ? 1 : `span ${asset.columnSpan}`} / ${asset.alignment === "left" ? `span ${asset.columnSpan}` : -1}`,
     }}
     data-aos={asset.alignment === "full-width" ? "fade-up" : undefined}

@@ -6,7 +6,7 @@ asset:
   path: "/features/user-defaults-editor.mp4"
   alt: "Test how your app responds to User Defaults changes. Quickly switch states like User Defaults-driven experiments."
   alignment: "full-width"
-  columnSpan: 6
+  columnSpan: 12
 sortOrder: 6
 ---
 

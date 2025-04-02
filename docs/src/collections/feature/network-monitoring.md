@@ -6,7 +6,7 @@ asset:
   path: "/features/network-monitoring-demo.mp4"
   alt: "Clicking through network requests that are done while using the Stock Analyzer app."
   alignment: "full-width"
-  columnSpan: 6
+  columnSpan: 12
   caption: "Network Monitoring is made possible by [Pulse](https://github.com/kean/Pulse), an open-source project created by [Alex Grebenyuk](https://github.com/kean)."
 sortOrder: 1
 ---
