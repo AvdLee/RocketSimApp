@@ -1,345 +1,345 @@
 [
   {
-    "description" : "Use RocketSim with the Apple Watch Simulator",
-    "id" : "135",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Apple Watch Support"
+    "description": "Use RocketSim with the Apple Watch Simulator",
+    "id": "135",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Apple Watch Support"
   },
   {
-    "description" : "Select a color using the Magnifier",
-    "id" : "263",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Magnifier Color Picker"
+    "description": "Select a color using the Magnifier",
+    "id": "263",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Magnifier Color Picker"
   },
   {
-    "description" : "Measure the distance between rulers",
-    "id" : "278",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Show distance between rulers"
+    "description": "Measure the distance between rulers",
+    "id": "278",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Show distance between rulers"
   },
   {
-    "description" : "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection",
-    "id" : "283",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Simulator Airplane Mode"
+    "description": "Disable network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "id": "283",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Simulator Airplane Mode"
   },
   {
-    "description" : "Change the status bar of the Simulator",
-    "id" : "173",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Configurable status bar"
+    "description": "Change the status bar of the Simulator",
+    "id": "173",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Configurable status bar"
   },
   {
-    "description" : "Adjust Dynamic Type from the side window",
-    "id" : "165",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Dynamic Type Control"
+    "description": "Adjust Dynamic Type from the side window",
+    "id": "165",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Dynamic Type Control"
   },
   {
-    "description" : "Always show a mouse-following touch indicator during recordings",
-    "id" : "125",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Constant visible touch indicator"
+    "description": "Always show a mouse-following touch indicator during recordings",
+    "id": "125",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Constant visible touch indicator"
   },
   {
-    "description" : "Keep the comparison overlay visible when switching to apps like Figma or Sketch",
-    "id" : "284",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Show comparison overlay when focus is lost"
+    "description": "Keep the comparison overlay visible when switching to apps like Figma or Sketch",
+    "id": "284",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Show comparison overlay when focus is lost"
   },
   {
-    "description" : "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator.",
-    "id" : "286",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Locale switcher"
+    "description": "Quickly relaunch your app in a different locale w\/o the need to restart the Simulator.",
+    "id": "286",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Locale switcher"
   },
   {
-    "description" : "Allow to switch between dark\/light mode from the side window.",
-    "id" : "346",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Dark Mode switcher"
+    "description": "Allow to switch between dark\/light mode from the side window.",
+    "id": "346",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Dark Mode switcher"
   },
   {
-    "description" : "Directly edit and view UserDefaults.",
-    "id" : "371",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "UserDefaults Visual Viewer & Editor"
+    "description": "Directly edit and view UserDefaults.",
+    "id": "371",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "UserDefaults Visual Viewer & Editor"
   },
   {
-    "description" : "Restarts your app with the requested location and updates the timezone for your app accordingly",
-    "id" : "353",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Automatically update timezone to match location change"
+    "description": "Restarts your app with the requested location and updates the timezone for your app accordingly",
+    "id": "353",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Automatically update timezone to match location change"
   },
   {
-    "description" : "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects.",
-    "id" : "304",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Xcode Build Statistics"
+    "description": "Get statistics on number of builds, build times, and more. Beautifully graphs to keep track of your projects.",
+    "id": "304",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Xcode Build Statistics"
   },
   {
-    "description" : "Filter long lists by searching for a query",
-    "id" : "282",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Allow to search Quick Actions"
+    "description": "Filter long lists by searching for a query",
+    "id": "282",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Allow to search Quick Actions"
   },
   {
-    "description" : "Sync the clipboard between your Mac and the Simulator by using copy from\/to buttons",
-    "id" : "357",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Clipboard copy to\/from buttons"
+    "description": "Sync the clipboard between your Mac and the Simulator by using copy from\/to buttons",
+    "id": "357",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Clipboard copy to\/from buttons"
   },
   {
-    "description" : "Show HTTP Traffic directly next to the Simulator",
-    "id" : "179",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Display HTTP Traffic"
+    "description": "Show HTTP Traffic directly next to the Simulator",
+    "id": "179",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Display HTTP Traffic"
   },
   {
-    "description" : "In addition to specific locations, the option to specify a latitude and longitude.",
-    "id" : "564",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Allow copy pasting lat\/long values"
+    "description": "In addition to specific locations, the option to specify a latitude and longitude.",
+    "id": "564",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Allow copy pasting lat\/long values"
   },
   {
-    "description" : "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
-    "id" : "283b",
-    "isFinished" : true,
-    "status" : "Implemented",
-    "title" : "Network Link Conditioner"
+    "description": "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w\/o influencing your Mac's connection",
+    "id": "283b",
+    "isFinished": true,
+    "status": "Implemented",
+    "title": "Network Link Conditioner"
   },
   {
-    "description" : "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
-    "id" : "368",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Show Magnifier boundaries"
+    "description": "Show a square around the zoomed section on top of the Simulator screen for easier coordination",
+    "id": "368",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Show Magnifier boundaries"
   },
   {
-    "description" : "Explore and edit SwiftData databases.",
-    "id" : "370",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "SwiftData Visual Viewer & Editor"
+    "description": "Explore and edit SwiftData databases.",
+    "id": "370",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "SwiftData Visual Viewer & Editor"
   },
   {
-    "description" : "Allow to fill in account details inside a email\/password textfield via a Quick Action.",
-    "id" : "347",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Username\/Password Quick Action"
+    "description": "Allow to fill in account details inside a email\/password textfield via a Quick Action.",
+    "id": "347",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Username\/Password Quick Action"
   },
   {
-    "description" : "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.",
-    "id" : "345",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "User Defaults Actions"
+    "description": "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.",
+    "id": "345",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "User Defaults Actions"
   },
   {
-    "description" : "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error",
-    "id" : "311",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Show debugger logs"
+    "description": "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error",
+    "id": "311",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Show debugger logs"
   },
   {
-    "description" : "Beautify screenshots with a gradient background and extra padding",
-    "id" : "289",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Add a wallpaper and padding to screenshots"
+    "description": "Beautify screenshots with a gradient background and extra padding",
+    "id": "289",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Add a wallpaper and padding to screenshots"
   },
   {
-    "description" : "Allow resizing the output screenshot to reduce size and resolution",
-    "id" : "280",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Resize screenshots"
+    "description": "Allow resizing the output screenshot to reduce size and resolution",
+    "id": "280",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Resize screenshots"
   },
   {
-    "description" : "Advanced configuration for Simulator recordings, allowing to record in 60FPS, 120FPS or to configure compression.",
-    "id" : "269",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Advanced Simulator Recordings (60FPS, 120FPS, compression config)"
+    "description": "Advanced configuration for Simulator recordings, allowing to record in 60FPS, 120FPS or to configure compression.",
+    "id": "269",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Advanced Simulator Recordings (60FPS, 120FPS, compression config)"
   },
   {
-    "description" : "Export to .MOV instead of .MP4",
-    "id" : "193",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Configurable Video Output"
+    "description": "Export to .MOV instead of .MP4",
+    "id": "193",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Configurable Video Output"
   },
   {
-    "description" : "Right-click a thumbnail to save as...",
-    "id" : "236",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Allow Save as... for captured thumbnails"
+    "description": "Right-click a thumbnail to save as...",
+    "id": "236",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Allow Save as... for captured thumbnails"
   },
   {
-    "description" : "Screen recordings with your voice as instructions",
-    "id" : "285",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Record Mic audio with recordings"
+    "description": "Screen recordings with your voice as instructions",
+    "id": "285",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Record Mic audio with recordings"
   },
   {
-    "description" : "Simulate low storage on the Simulator to trigger No Space Left errors",
-    "id" : "299",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Low storage testing"
+    "description": "Simulate low storage on the Simulator to trigger No Space Left errors",
+    "id": "299",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Low storage testing"
   },
   {
-    "description" : "Create a location Quick Action by collecting lon-lat waypoints manually",
-    "id" : "291",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Manually select locations waypoints"
+    "description": "Create a location Quick Action by collecting lon-lat waypoints manually",
+    "id": "291",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Manually select locations waypoints"
   },
   {
-    "description" : "Use RocketSim with the tvOS Simulator",
-    "id" : "87",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "tvOS Support"
+    "description": "Use RocketSim with the tvOS Simulator",
+    "id": "87",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "tvOS Support"
   },
   {
-    "description" : "Use RocketSim with Xcode in fullscreen mode",
-    "id" : "301",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Fullscreen Support"
+    "description": "Use RocketSim with Xcode in fullscreen mode",
+    "id": "301",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Fullscreen Support"
   },
   {
-    "description" : "Add items from within the User Defaults editor",
-    "id" : "497",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Allow adding items to User Defaults"
+    "description": "Add items from within the User Defaults editor",
+    "id": "497",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Allow adding items to User Defaults"
   },
   {
-    "description" : "Directly access App Action editor via right-click",
-    "id" : "483",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Allow right-click -> Edit on any action"
+    "description": "Directly access App Action editor via right-click",
+    "id": "483",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Allow right-click -> Edit on any action"
   },
   {
-    "description" : "Simulate locations using GPX files",
-    "id" : "480",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Support GPX files for location simulation"
+    "description": "Simulate locations using GPX files",
+    "id": "480",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Support GPX files for location simulation"
   },
   {
-    "description" : "Group long lists of app actions based on configured tags",
-    "id" : "464",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Introduce App Action tags for grouping"
+    "description": "Group long lists of app actions based on configured tags",
+    "id": "464",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Introduce App Action tags for grouping"
   },
   {
-    "description" : "Simulator Airplane Mode support for NWPathFilter, which is often used in accessibility libraries",
-    "id" : "397",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Support reachability libraries (NWPathFilter) with Airplane Mode"
+    "description": "Simulator Airplane Mode support for NWPathFilter, which is often used in accessibility libraries",
+    "id": "397",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Support reachability libraries (NWPathFilter) with Airplane Mode"
   },
   {
-    "description" : "Select a Sketch artboard and show it on top of the simulator for design comparison",
-    "id" : "435",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Integrate Sketch App to use artboards for design comparison"
+    "description": "Select a Sketch artboard and show it on top of the simulator for design comparison",
+    "id": "435",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Integrate Sketch App to use artboards for design comparison"
   },
   {
-    "description" : "Select a Figma artboard and show it on top of the simulator for design comparison",
-    "id" : "520",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Integrate Figma Connect to use artboards for design comparison"
+    "description": "Select a Figma artboard and show it on top of the simulator for design comparison",
+    "id": "520",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Integrate Figma Connect to use artboards for design comparison"
   },
   {
-    "description" : "Inspect on-screen elements for accessibility. Show a tree of accessibility elements.",
-    "id" : "521",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Accessibility Inspector"
+    "description": "Inspect on-screen elements for accessibility. Show a tree of accessibility elements.",
+    "id": "521",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Accessibility Inspector"
   },
   {
-    "description" : "Toggle slow animations using a shortcut.",
-    "id" : "519",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Slow Animations Shortcut"
+    "description": "Toggle slow animations using a shortcut.",
+    "id": "519",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Slow Animations Shortcut"
   },
   {
-    "description" : "Make rulers sticky to on-screen element boundaries.",
-    "id" : "522",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Align rulers to elements"
+    "description": "Make rulers sticky to on-screen element boundaries.",
+    "id": "522",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Align rulers to elements"
   },
   {
-    "description" : "A screenshot of the Simulator will be diffed against a selected design overlay, resulting in an implementation score.",
-    "id" : "523",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Show a score & diff image of the implementation compared to a selected design overlay"
+    "description": "A screenshot of the Simulator will be diffed against a selected design overlay, resulting in an implementation score.",
+    "id": "523",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Show a score & diff image of the implementation compared to a selected design overlay"
   },
   {
-    "description" : "Adding Push notifications permissions to the other existing permission revoke, grant, reset actions.",
-    "id" : "218",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Grant\/Revoke push notifications permissions"
+    "description": "Adding Push notifications permissions to the other existing permission revoke, grant, reset actions.",
+    "id": "218",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Grant\/Revoke push notifications permissions"
   },
   {
-    "description" : "Adding HealthKit permissions to the other existing permission revoke, grant, reset actions.",
-    "id" : "374",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Grant\/Revoke HealthKit permissions"
+    "description": "Adding HealthKit permissions to the other existing permission revoke, grant, reset actions.",
+    "id": "374",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Grant\/Revoke HealthKit permissions"
   },
   {
-    "description" : "Allow resetting the keychain without completely resetting the Simulator.",
-    "id" : "561",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Reset Kechain action"
+    "description": "Allow resetting the keychain without completely resetting the Simulator.",
+    "id": "561",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Reset Kechain action"
   },
   {
-    "description" : "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.",
-    "id" : "607",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Simulator Camera"
+    "description": "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.",
+    "id": "607",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Simulator Camera"
   },
   {
-    "description" : "Create deeplinks for app directories. For example, open .app\/caches\/db.sqlite with a single click.",
-    "id" : "606",
-    "isFinished" : false,
-    "status" : "Planned",
-    "title" : "Directory Actions"
+    "description": "Create deeplinks for app directories. For example, open .app\/caches\/db.sqlite with a single click.",
+    "id": "606",
+    "isFinished": false,
+    "status": "Planned",
+    "title": "Directory Actions"
   }
 ]
