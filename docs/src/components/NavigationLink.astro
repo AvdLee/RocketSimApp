@@ -1,9 +1,10 @@
 ---
 interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
   asButton?: boolean;
+  className?: string;
 }
 
-const { asButton, ...rest } = Astro.props;
+const { asButton, className, ...rest } = Astro.props;
 ---
 
 <style>
@@ -28,5 +29,9 @@ const { asButton, ...rest } = Astro.props;
   }
 </style>
 <li>
-  <a {...rest} class={asButton ? "button" : "link"}><slot /></a>
+  <a
+    {...rest}
+    class={`${asButton ? "button" : "link"}${className ? ` ${className}` : ""}`}
+    ><slot /></a
+  >
 </li>

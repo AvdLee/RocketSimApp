@@ -45,10 +45,52 @@ const ogImage = `${Astro.site}og-banner-rocketsim.jpg`;
     <meta name="twitter:card" content={ogImage} />
     <meta name="twitter:site" content="@rocketsim_app" />
 
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-59LFW4F4");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Plausible -->
+    <script
+      is:inline
+      defer
+      data-domain="rocketsim.app"
+      src="https://plausible.io/js/script.tagged-events.js"></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+    </script>
+    <!-- End Plausible -->
+
+    <!-- Styles for AOS (Animate on Scroll) -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.0/dist/aos.css" />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-59LFW4F4"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
     <slot />
+
+    <!-- Scripts for AOS (Animate on Scroll) -->
     <script is:inline src="https://unpkg.com/aos@2.3.0/dist/aos.js"></script>
     <script>
       AOS.init({ delay: 400, duration: 500, once: true, offset: 0 });
