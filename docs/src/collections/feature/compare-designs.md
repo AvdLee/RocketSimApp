@@ -3,7 +3,7 @@ name: "Compare designs"
 tagLine: "Use overlays or slide comparisons to spot differences between the implementation and the design."
 asset:
   type: "video"
-  path: "/features/onboarding-compare.mp4"
+  path: "/features/onboarding-compare-safari.mp4"
   alt: "Comparing designs on top of the Simulator after exporting them from apps like Figma."
   alignment: "full-width"
   columnSpan: 12
