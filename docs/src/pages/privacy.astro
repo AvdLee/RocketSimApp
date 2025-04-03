@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import NavigationLink from "../components/NavigationLink.astro";
+import Footer from "../components/Footer.astro";
+
+import logoImage from "../assets/rocketsim-logo.svg";
+---
+
+<style>
+  main {
+    margin-bottom: 2rem;
+  }
+</style>
+
+<BaseLayout
+  pageTitle="Privacy Policy - RocketSim"
+  pageDescription="Simulator Airplane Mode, Location Simulation, Accessibility Testing, Compare designs inside the iOS simulator. Test deeplinks, push notifications."
+>
+  <Header
+    title="RocketSim Privacy Policy"
+    logo={logoImage}
+    logoAlt='Written logo spelling: "RocketSim"'
+  >
+    Your privacy is important to us. This Privacy Policy explains how RocketSim
+    collects, uses, and protects your personal information.
+  </Header>
+  <Navigation>
+    <NavigationLink href="/"> All Features </NavigationLink>
+    <NavigationLink href="/team-insights">Team Licenses</NavigationLink>
+    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+      Documentation
+    </NavigationLink>
+    <NavigationLink
+      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      target="_blank"
+    >
+      FAQ
+    </NavigationLink>
+  </Navigation>
+  <main>
+    <div class="grid">
+      <div>
+        <h2>Data Storage</h2>
+        <p>
+          RocketSim operates by storing all data locally on your device. We do
+          not collect or store any of your data on external servers.
+        </p>
+        <p>
+          Build Insights syncs your scheme, project file name (e.g.,
+          MyProject.xcodeproj), and build durations to provide
+          <a
+            href="https://www.rocketsim.app/team-insights"
+            target="_blank"
+            rel="noopener noreferrer">Team Insights</a
+          >. Additionally, machine metadata is synced to allow benchmarking by
+          machine (e.g., determining which machine setup results in the best
+          build duration). This metadata is generic and combined with a
+          one-directional hash of the hardware machine UDID. If you're managing
+          your team via RocketSim for Teams, you'll also have your user
+          credentials and team information stored in our database. We store our
+          data securely, hashed, and follow best-practices to ensure your data
+          is safe.
+        </p>
+
+        <h2>Tracking Services</h2>
+        <p>
+          RocketSim may utilize tracking services for analytics and crash
+          reporting. We use Amplitude for anonymous analytics and Xcode for
+          crash reports. This data helps us improve RocketSim's performance and
+          user experience.
+        </p>
+
+        <h2>Email Lists</h2>
+        <p>
+          Users have the option to opt-in for our email lists to receive product
+          updates. These updates may include information about new features,
+          trial reminders, special offers, and other relevant news related to
+          RocketSim. You can manage your email preferences at any time.
+        </p>
+
+        <p>
+          If you have any questions or concerns about our Privacy Policy, please
+          contact us at <a href="mailto:support@rocketsim.app"
+            >support@rocketsim.app</a
+          >.
+        </p>
+
+        <p><i>Last updated: July 8th, 2024</i></p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

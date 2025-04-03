@@ -1,0 +1,65 @@
+---
+import { getCollection, render } from "astro:content";
+
+import Feature from "./Feature.astro";
+
+const rawFeatures = await getCollection("feature");
+const features = await Promise.all(
+  rawFeatures
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map(async (feature) => {
+      const { Content } = await render(feature);
+      return {
+        ...feature,
+        Content,
+      };
+    }),
+);
+---
+
+<style>
+  .feature-wrapper {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+</style>
+
+<section aria-label="RocketSim features">
+  {
+    features.map(({ data, Content }) => (
+      <div class="feature-wrapper">
+        <Feature data={data}>
+          <Content />
+        </Feature>
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  // Play videos when they are in view, pause when they are not
+  const videos = document.querySelectorAll(".js-feature-video");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const videoElement = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          videoElement.play();
+        } else {
+          videoElement.pause();
+        }
+      });
+    },
+    { threshold: 1 },
+  );
+
+  videos.forEach((video) => {
+    observer.observe(video);
+  });
+</script>

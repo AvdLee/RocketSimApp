@@ -1,0 +1,110 @@
+---
+import { Image } from "astro:assets";
+
+import appIcon from "../assets/rocketsim-app-icon.png";
+---
+
+<style>
+  .navigation-wrapper {
+    padding: 1rem 0;
+
+    background-color: #000;
+    border-bottom: 0.0625rem solid transparent;
+
+    transition: border-bottom-color 0.3s;
+    box-sizing: content-box;
+
+    @media (min-width: 850px) {
+      position: sticky;
+      top: -1px;
+      z-index: 100;
+    }
+  }
+
+  .navigation-wrapper--sticky {
+    @media (min-width: 850px) {
+      border-bottom-color: rgba(255, 255, 255, 0.24);
+
+      .navigation__logo {
+        opacity: 1;
+      }
+    }
+  }
+
+  nav {
+    @media (min-width: 850px) {
+      display: flex;
+      align-items: center;
+      grid-column: 1 / -2;
+    }
+  }
+
+  .navigation__logo {
+    display: none;
+    width: 2.75rem;
+    height: auto;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    @media (min-width: 850px) {
+      display: block;
+      grid-column: span 1 / -1;
+      justify-self: end;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.125rem;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+
+    @media (min-width: 850px) {
+      flex-direction: row;
+      gap: 3rem;
+    }
+  }
+</style>
+
+<div class="navigation-wrapper" id="navigation-menu">
+  <div class="navigation grid">
+    <nav aria-label="Main navigation">
+      <ul>
+        <slot />
+      </ul>
+    </nav>
+    <Image
+      src={appIcon}
+      alt="RocketSim app icon"
+      width="88"
+      height="88"
+      class="navigation__logo"
+    />
+  </div>
+</div>
+
+<script>
+  window.onload = function () {
+    const el = document.getElementById("navigation-menu");
+
+    if (!el) {
+      return null;
+    }
+
+    const observer = new IntersectionObserver(
+      ([e]) =>
+        e.target.classList.toggle(
+          "navigation-wrapper--sticky",
+          e.intersectionRatio < 1,
+        ),
+      { threshold: [1] },
+    );
+
+    observer.observe(el);
+  };
+</script>

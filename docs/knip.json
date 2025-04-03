@@ -1,0 +1,3 @@
+{
+  "ignoreDependencies": ["@typescript-eslint/parser"]
+}

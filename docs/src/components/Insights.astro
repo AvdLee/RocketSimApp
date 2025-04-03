@@ -1,0 +1,55 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+import Feature from "./Feature.astro";
+
+import featureImage from "../assets/features/build-insights.png";
+---
+
+<style>
+  section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+
+  .header-wrapper {
+    text-align: center;
+  }
+
+  .feature-wrapper {
+    margin-top: 4rem;
+  }
+</style>
+
+<section>
+  <div class="header-wrapper" data-aos="fade-in">
+    <SectionHeader
+      title="RocketSim Insights"
+      subtitle="Increase the productivity of your whole team"
+    />
+  </div>
+  <div class="feature-wrapper">
+    <Feature
+      data={{
+        name: "Keep track of Xcode Build Durations",
+        asset: {
+          type: "image",
+          path: featureImage,
+          alt: "RocketSim panel that shows an overview of build insights of a scheme in an app. It shows build counts and build durations split up in mutliple ways.",
+          alignment: "left",
+          columnSpan: 6,
+        },
+        sortOrder: 1,
+      }}
+    >
+      Unlike Xcode, RocketSim will cache all your builds for months to follow.
+      You'll be able to compare build times and <strong
+        >get notified when compilation times increase.</strong
+      >
+    </Feature>
+  </div>
+</section>
