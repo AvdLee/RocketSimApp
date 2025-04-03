@@ -6,7 +6,6 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://rocketsim.app",
-  base: "/RocketSimApp/",
   /**
    * Add the sitemap plugin
    *
