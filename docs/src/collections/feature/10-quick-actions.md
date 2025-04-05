@@ -6,7 +6,6 @@ asset:
   alt: "RocketSim panel that shows configurable actions for locations, push notifications and deeplinks."
   alignment: "right"
   columnSpan: 6
-sortOrder: 7
 ---
 
 **Configurable actions** for Deeplinks (Universal Links), Push Notifications, and locations. Control permissions.

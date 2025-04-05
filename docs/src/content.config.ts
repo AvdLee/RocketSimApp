@@ -28,7 +28,6 @@ const feature = defineCollection({
           columnSpan,
         }),
       ]),
-      sortOrder: z.number(),
     }),
 });
 

@@ -7,7 +7,6 @@ asset:
   alt: "Test how your app responds to User Defaults changes. Quickly switch states like User Defaults-driven experiments."
   alignment: "full-width"
   columnSpan: 12
-sortOrder: 6
 ---
 
 Test how your app responds to User Defaults changes. Quickly switch states like User Defaults-driven experiments.
