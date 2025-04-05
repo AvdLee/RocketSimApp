@@ -22,7 +22,6 @@ import Feature from "./Feature.astro";
         alignment: "full-width",
         columnSpan: 12,
       },
-      sortOrder: 1,
     }}
   >
     <p>
@@ -48,7 +47,7 @@ import Feature from "./Feature.astro";
         }
       });
     },
-    { threshold: 1 },
+    { threshold: 0.5 },
   );
 
   videos.forEach((video) => {
