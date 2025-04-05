@@ -3,6 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Commands
+
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
@@ -12,6 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run knip` - Check for unused dependencies/exports
 
 ## Code Style Guidelines
+
 - Use TypeScript with strict type checking
 - Follow Astro recommended ESLint rules
 - Format code with Prettier (auto-configured for Astro files)
