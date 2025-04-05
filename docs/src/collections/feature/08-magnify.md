@@ -7,7 +7,6 @@ asset:
   alt: "Use the Color Picker and copy the value as SwiftUI Color, NSColor, or UIColor code."
   alignment: "full-width"
   columnSpan: 12
-sortOrder: 5.3
 ---
 
 Use the Color Picker and copy the value as SwiftUI Color, NSColor, or UIColor code.

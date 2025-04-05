@@ -6,7 +6,6 @@ asset:
   alt: "Customize the Simulator Status Bar and use any time, battery status, and more"
   alignment: "left"
   columnSpan: 6
-sortOrder: 15
 ---
 
 Did you know **all iPhones in Apple's keynotes are set to 09:41?**

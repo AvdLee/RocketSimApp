@@ -8,7 +8,6 @@ asset:
   alignment: "full-width"
   columnSpan: 12
   caption: "Network Monitoring is made possible by [Pulse](https://github.com/kean/Pulse), an open-source project created by [Alex Grebenyuk](https://github.com/kean)."
-sortOrder: 1
 ---
 
 Explore JSON responses, request headers, metrics, copy cURL requests, and much more.

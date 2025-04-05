@@ -6,7 +6,7 @@ import Feature from "./Feature.astro";
 const rawFeatures = await getCollection("feature");
 const features = await Promise.all(
   rawFeatures
-    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .sort((a, b) => a.id.localeCompare(b.id))
     .map(async (feature) => {
       const { Content } = await render(feature);
       return {

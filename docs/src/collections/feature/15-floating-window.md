@@ -6,7 +6,6 @@ asset:
   alt: "All your simulator captures appear as floating windows on the side, stackable."
   alignment: "right"
   columnSpan: 6
-sortOrder: 14
 ---
 
 Stack multiple captures in floating windows and **drag them into any destination**.

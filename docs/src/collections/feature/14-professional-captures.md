@@ -6,7 +6,6 @@ asset:
   alt: "Create profession recordings & screenshots with device bezels and audio recorded."
   alignment: "left"
   columnSpan: 6
-sortOrder: 13
 ---
 
 **Capture** MP4, GIF, or PNG.

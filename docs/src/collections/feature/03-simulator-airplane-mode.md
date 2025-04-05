@@ -6,7 +6,6 @@ asset:
   alt: "Only your Simulator app gets disconnected from internet. You can still use your Mac's connection to search Stack Overflow or share your progress via Slack."
   alignment: "right"
   columnSpan: 8
-sortOrder: 2
 ---
 
 **How does your app work without a connection?**

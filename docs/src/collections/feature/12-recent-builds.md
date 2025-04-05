@@ -6,7 +6,6 @@ asset:
   alt: "Quick actions for your recent builds help you increase productivity. These action execute on a given target bundle identifier configured in RocketSim's settings."
   alignment: "left"
   columnSpan: 8
-sortOrder: 9
 ---
 
 Quick actions for your recent builds help you increase productivity. These action execute on a given target bundle identifier configured in RocketSim's settings.
