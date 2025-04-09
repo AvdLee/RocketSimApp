@@ -77,7 +77,13 @@ const { isAlwaysActive } = Astro.props;
   }
 </style>
 
-  <div class:list={["navigation-wrapper", {"navigation-wrapper--sticky": isAlwaysActive}]} id="navigation-menu">
+<div
+  class:list={[
+    "navigation-wrapper",
+    { "navigation-wrapper--sticky": isAlwaysActive },
+  ]}
+  id="navigation-menu"
+>
   <div class="navigation grid">
     <nav aria-label="Main navigation">
       <ul>
@@ -103,7 +109,7 @@ const { isAlwaysActive } = Astro.props;
     }
 
     // Don't observe if the sticky class is already applied
-    if(el.classList.contains("navigation-wrapper--sticky")){
+    if (el.classList.contains("navigation-wrapper--sticky")) {
       return null;
     }
 

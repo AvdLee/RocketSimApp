@@ -31,7 +31,6 @@ import appIcon from "../assets/rocketsim-app-icon.png";
   .logo-image {
     width: 4rem;
     height: auto;
-
   }
 
   section {
@@ -61,51 +60,48 @@ import appIcon from "../assets/rocketsim-app-icon.png";
       padding-bottom: 8rem;
     }
   }
-
 </style>
 
 <BaseLayout
   pageTitle="Thank you - RocketSim"
   pageDescription="Thank you for your order! Your order is being processed and you will receive an email soon."
-  >
+>
   <header>
     <div class="logo">
       <a href="/">
-      <Image
-        src={appIcon}
-        widths={[128, 512]}
-        sizes="(max-width: 767px) 4rem, 16rem"
-        alt="RocketSim app icon"
-        class="logo-image"
+        <Image
+          src={appIcon}
+          widths={[128, 512]}
+          sizes="(max-width: 767px) 4rem, 16rem"
+          alt="RocketSim app icon"
+          class="logo-image"
         />
       </a>
     </div>
-  <Navigation isAlwaysActive={true}>
-    <NavigationLink href="/">All Features</NavigationLink>
-    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
-      Documentation
-    </NavigationLink>
-    <NavigationLink
-      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
-      target="_blank"
-    >
-      FAQ
-    </NavigationLink>
-  </Navigation>
+    <Navigation isAlwaysActive={true}>
+      <NavigationLink href="/">All Features</NavigationLink>
+      <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+        Documentation
+      </NavigationLink>
+      <NavigationLink
+        href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+        target="_blank"
+      >
+        FAQ
+      </NavigationLink>
+    </Navigation>
   </header>
   <main>
     <section class="grid thank-you">
-    <SectionHeader
-        title="Thanks for purchasing RocketSim!"
-        />
-        <p>An invitation email with further instructions has been send to you.</p>
+      <SectionHeader title="Thanks for purchasing RocketSim!" />
+      <p>An invitation email with further instructions has been send to you.</p>
     </section>
     <section class="newsletter">
-    <SectionHeader
-      title="While you await your invitation email"
-      subtitle="Subscribe to our newsletter"
-      smallTitle
-      text="And be the first to discover new features & time-saving tricks."
+      <SectionHeader
+        title="While you await your invitation email"
+        subtitle="Subscribe to our newsletter"
+        smallTitle
+        text="And be the first to discover new features & time-saving tricks."
       />
       <NewsLetterForm />
     </section>
