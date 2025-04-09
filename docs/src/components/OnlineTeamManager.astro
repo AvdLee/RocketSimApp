@@ -1,35 +1,101 @@
 ---
 import Feature from "./Feature.astro";
+
+import userSettingsImage from "../assets/features/user-settings.png";
+import subscriptionSettingsImage from "../assets/features/subscription-settings.png";
 ---
 
 <style>
   section {
-    padding: 8rem 0;
+    padding: 4rem 0;
 
     background-color: #101010;
+
+    @media (min-width: 800px) {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+
+  .feature-wrapper {
+    &:not(:first-child) {
+      margin-top: 4rem;
+
+      @media (min-width: 800px) {
+        margin-top: 8rem;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 4rem;
+
+      @media (min-width: 800px) {
+        margin-bottom: 8rem;
+      }
+    }
   }
 </style>
 
 <section>
-  <Feature
-    data={{
-      name: "Online Team Manager",
-      tagLine: "Browse insights and manage seats",
-      asset: {
-        type: "video",
-        path: "/features/team-insights-dashboard.mp4",
-        alt: "RocketSim for Teams dashboard. Showing the build insights page. It is showing build times, build count and breakdown charts for the an Xcode project.",
-        alignment: "full-width",
-        columnSpan: 12,
-      },
-    }}
-  >
-    <p>
-      Configure workspaces, select specific schemes, browse build durations and
-      benchmarks. RocketSim's Team Manager puts you in full control of your
-      team's productivity.
-    </p>
-  </Feature>
+  <div class="feature-wrapper">
+    <Feature
+      data={{
+        name: "Online Team Manager",
+        tagLine: "Browse insights and manage seats",
+        asset: {
+          type: "video",
+          path: "/features/team-insights-dashboard.mp4",
+          alt: "RocketSim for Teams dashboard. Showing the build insights page. It is showing build times, build count and breakdown charts for the an Xcode project.",
+          alignment: "full-width",
+          columnSpan: 12,
+        },
+      }}
+    >
+      <p>
+        Configure workspaces, select specific schemes, browse build durations
+        and benchmarks. RocketSim's Team Manager puts you in full control of
+        your team's productivity.
+      </p>
+    </Feature>
+  </div>
+  <div class="feature-wrapper">
+    <Feature
+      data={{
+        name: "User & seat management",
+        asset: {
+          type: "image",
+          path: userSettingsImage,
+          alt: "RocketSim for Teams dashboard. Showing the user setting page. It is showing a license with two active users and one user that is invited. The user can add or remove users from the license and give them roles.",
+          alignment: "right",
+          columnSpan: 8,
+        },
+      }}
+    >
+      <p>
+        Manage your team and their access to RocketSim. Invite users, assign
+        roles, and manage seats.
+      </p>
+    </Feature>
+  </div>
+  <div class="feature-wrapper">
+    <Feature
+      data={{
+        name: "License management",
+        asset: {
+          type: "image",
+          path: subscriptionSettingsImage,
+          alt: "RocketSim for Teams dashboard. Showing the subscription setting page. It is showing a license key, expiry date, and  the number of used seats. The user can also manage its subscription.",
+          alignment: "left",
+          columnSpan: 8,
+        },
+      }}
+    >
+      <p>
+        Find your license key, expiry date, and the number of (used) seats.
+        Manage your billing and subscription data.
+      </p>
+    </Feature>
+  </div>
 </section>
 
 <script>
