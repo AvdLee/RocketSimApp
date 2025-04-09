@@ -16,9 +16,9 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) =>
-        page !== "https://www.rocketsim.app/terms/" &&
-        page !== "https://www.rocketsim.app/privacy/" &&
-        page !== "https://www.rocketsim.app/thank-you/",
+        page !== "https://rocketsim.app/terms/" &&
+        page !== "https://rocketsim.app/privacy/" &&
+        page !== "https://rocketsim.app/thank-you/",
     }),
   ],
 });
