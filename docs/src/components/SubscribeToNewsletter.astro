@@ -1,5 +1,6 @@
 ---
 import SectionHeader from "./SectionHeader.astro";
+import NewsLetterForm from "./NewsLetterForm.astro";
 ---
 
 <style>
@@ -14,15 +15,6 @@ import SectionHeader from "./SectionHeader.astro";
     }
   }
 
-  .form-wrapper {
-    margin-top: 1rem;
-  }
-
-  .form {
-    @media (min-width: 800px) {
-      grid-column: 3 / span 8;
-    }
-  }
 </style>
 
 <section>
@@ -32,15 +24,7 @@ import SectionHeader from "./SectionHeader.astro";
       subtitle="Enjoy 30% off RocketSim Pro"
       smallTitle
       text="And be the first to discover new features & time-saving tricks."
-    />
-  </div>
-  <div class="grid form-wrapper" data-aos="fade-up">
-    <div class="form">
-      <script
-        is:inline
-        async
-        data-uid="44112f6fd3"
-        src="https://rocketsim.ck.page/44112f6fd3/index.js"></script>
-    </div>
+      />
+      <NewsLetterForm />
   </div>
 </section>
