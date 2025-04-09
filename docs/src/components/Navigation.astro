@@ -2,6 +2,12 @@
 import { Image } from "astro:assets";
 
 import appIcon from "../assets/rocketsim-app-icon.png";
+
+interface Props {
+  isAlwaysActive?: boolean;
+}
+
+const { isAlwaysActive } = Astro.props;
 ---
 
 <style>
@@ -71,7 +77,13 @@ import appIcon from "../assets/rocketsim-app-icon.png";
   }
 </style>
 
-<div class="navigation-wrapper" id="navigation-menu">
+<div
+  class:list={[
+    "navigation-wrapper",
+    { "navigation-wrapper--sticky": isAlwaysActive },
+  ]}
+  id="navigation-menu"
+>
   <div class="navigation grid">
     <nav aria-label="Main navigation">
       <ul>
@@ -93,6 +105,11 @@ import appIcon from "../assets/rocketsim-app-icon.png";
     const el = document.getElementById("navigation-menu");
 
     if (!el) {
+      return null;
+    }
+
+    // Don't observe if the sticky class is already applied
+    if (el.classList.contains("navigation-wrapper--sticky")) {
       return null;
     }
 

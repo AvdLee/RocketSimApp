@@ -10,14 +10,15 @@ export default defineConfig({
    * Add the sitemap plugin
    *
    * Configurations:
-   *  - filter: We're filtering the terms and privacy pages, since we don't want them to be indexed.
+   *  - filter: We're filtering the terms, privacy and thank you pages, since we don't want them to be indexed.
    *  - LATER: Add `lastmod`, `changefreq`, and `priority` to the feature and blog pages.
    */
   integrations: [
     sitemap({
       filter: (page) =>
         page !== "https://www.rocketsim.app/terms/" &&
-        page !== "https://www.rocketsim.app/privacy/",
+        page !== "https://www.rocketsim.app/privacy/" &&
+        page !== "https://www.rocketsim.app/thank-you/",
     }),
   ],
 });
