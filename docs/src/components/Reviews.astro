@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 
 import majidImage from "../assets/majid.jpeg";
+import peterImage from "../assets/peter.png";
 import jordiImage from "../assets/jordi.jpeg";
-import joshImage from "../assets/josh.jpeg";
 ---
 
 <style>
@@ -64,7 +64,7 @@ import joshImage from "../assets/josh.jpeg";
     font-style: normal;
   }
 
-  a {
+  .testimonial-position {
     display: block;
 
     font-style: italic;
@@ -96,7 +96,7 @@ import joshImage from "../assets/josh.jpeg";
           />
           <div class="cite-wrapper">
             <cite>Majid Jabrayilov</cite>
-            <a href="https://www.swiftwithmajid.com" target="_blank"
+            <a class="testimonial-position" href="https://www.swiftwithmajid.com" target="_blank"
               >swiftwithmajid.com</a
             >
           </div>
@@ -115,7 +115,7 @@ import joshImage from "../assets/josh.jpeg";
           <Image src={jordiImage} alt="Jordi Bruin" width="96" class="image" />
           <div class="cite-wrapper">
             <cite>Jordi Bruin</cite>
-            <a href="https://www.soosee.app" target="_blank">soosee.app</a>
+            <a class="testimonial-position" href="https://www.soosee.app" target="_blank">soosee.app</a>
           </div>
         </figcaption>
       </figure>
@@ -124,16 +124,14 @@ import joshImage from "../assets/josh.jpeg";
       <figure data-aos="fade-up" data-aos-delay="1500">
         <blockquote>
           <p>
-            "Recordings with touches and high-quality GIFs from <strong
-              >RocketSim</strong
-            > are exactly what I need to show what I’m working on."
+          "I use <strong>RocketSim</strong> to create high-quality screenshots and recordings for my presentations."
           </p>
         </blockquote>
         <figcaption>
-          <Image src={joshImage} alt="Josh Holtz" width="96" class="image" />
+          <Image src={peterImage} alt="Peter Friese" width="96" class="image" />
           <div class="cite-wrapper">
-            <cite>Josh Holtz</cite>
-            <a href="https://www.joshholtz.com">joshholtz.com</a>
+            <cite>Peter Friese</cite>
+            <span class="testimonial-position">Developer Advocate, Google</span>
           </div>
         </figcaption>
       </figure>
