@@ -4,6 +4,11 @@ import SectionHeader from "./SectionHeader.astro";
 // Access environment variables for Stripe configuration
 const STRIPE_PRICING_TABLE_ID = import.meta.env.PUBLIC_STRIPE_PRICING_TABLE_ID;
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY;
+
+const trialUrl =
+  import.meta.env.MODE === "production"
+    ? "https://teams.rocketsim.app/signup/trial"
+    : "http://localhost:5173/signup/trial";
 ---
 
 <style>
@@ -27,12 +32,20 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY;
     text-align: center;
   }
 
-  a {
+  .link {
     color: var(--text-color);
 
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  .trial-button {
+    text-align: center;
+  }
+
+  .try {
+    margin-top: 2rem;
   }
 </style>
 
@@ -51,11 +64,17 @@ const STRIPE_PUBLISHABLE_KEY = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY;
       publishable-key={STRIPE_PUBLISHABLE_KEY}
     >
     </stripe-pricing-table>
-    <p class="text-center mt-3 gray-text">
+    <p>
       If you are a software reseller or broker, please contact <a
         href="mailto:ralphduin@rocketsim.app"
-        class="gray-link">ralphduin@rocketsim.app</a
+        class="link">ralphduin@rocketsim.app</a
       >
     </p>
+    <p class="try">
+      Keen to try it out first? Sign up for a free two weeks trial.
+    </p>
+    <div class="trial-button">
+      <a href={trialUrl} class="button">Sign up for a free trial</a>
+    </div>
   </div>
 </section>
