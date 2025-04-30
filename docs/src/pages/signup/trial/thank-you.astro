@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Navigation from "../../../components/Navigation.astro";
+import NavigationLink from "../../../components/NavigationLink.astro";
+import SectionHeader from "../../../components/SectionHeader.astro";
+import NewsLetterForm from "../../../components/NewsLetterForm.astro";
+import { Image } from "astro:assets";
+
+import appIcon from "../../../assets/rocketsim-app-icon.png";
+---
+
+<style>
+  header {
+    margin-top: 2rem;
+
+    @media (min-width: 800px) {
+      margin-top: 0;
+    }
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 800px) {
+      display: none;
+    }
+  }
+
+  .logo-image {
+    width: 4rem;
+    height: auto;
+  }
+
+  section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+
+  .thank-you {
+    text-align: center;
+  }
+
+  .newsletter {
+    padding: 4rem 0;
+    margin: 0;
+
+    text-align: center;
+
+    background-color: #101010;
+
+    @media (min-width: 800px) {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+</style>
+
+<BaseLayout
+  pageTitle="Thank you - RocketSim"
+  pageDescription="Thank you for trying RocketSim! Your submissions is being processed and you will receive an email soon."
+>
+  <header>
+    <div class="logo">
+      <a href="/">
+        <Image
+          src={appIcon}
+          widths={[128, 512]}
+          sizes="(max-width: 767px) 4rem, 16rem"
+          alt="RocketSim app icon"
+          class="logo-image"
+        />
+      </a>
+    </div>
+    <Navigation isAlwaysActive={true}>
+      <NavigationLink href="/">All Features</NavigationLink>
+      <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+        Documentation
+      </NavigationLink>
+      <NavigationLink
+        href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+        target="_blank"
+      >
+        FAQ
+      </NavigationLink>
+    </Navigation>
+  </header>
+  <main>
+    <section class="grid thank-you">
+      <SectionHeader title="Check your inbox!" />
+      <p>You&apos;re invited for a 14 days trial for RocketSim for Teams. Check your email on how to get started.</p>
+    </section>
+    <section class="newsletter">
+      <SectionHeader
+        title="While you await your invitation email"
+        subtitle="Subscribe to our newsletter"
+        smallTitle
+        text="And be the first to discover new features & time-saving tricks."
+      />
+      <NewsLetterForm />
+    </section>
+  </main>
+</BaseLayout>
