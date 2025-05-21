@@ -12,6 +12,89 @@ import logoImage from "../assets/rocketsim-logo.svg";
   main {
     margin-bottom: 2rem;
   }
+
+  .articles {
+    padding: 0;
+    margin: 0;
+
+    font-family: "Arial", sans-serif;
+
+    list-style: none;
+    counter-reset: article;
+  }
+
+  .articles > li {
+    position: relative;
+
+    margin-bottom: 1.5rem;
+
+    counter-increment: article;
+  }
+
+  .articles > li::before {
+    display: inline-block;
+    width: 6.5rem;
+
+    font-weight: bold;
+    color: #fff;
+
+    vertical-align: top;
+    content: "Article " counter(article) ".";
+  }
+
+  .sections {
+    padding-left: 0;
+    margin: 0;
+
+    counter-reset: section;
+    list-style: none;
+  }
+
+  .sections > li {
+    position: relative;
+
+    padding-left: 6.5rem;
+
+    counter-increment: section;
+  }
+
+  .sections > li::before {
+    position: absolute;
+    left: 0;
+
+    width: 6.5rem;
+
+    content: counter(article) "." counter(section) ".";
+  }
+
+  .subsections {
+    padding-left: 0;
+    margin: 0.5rem 0;
+
+    list-style: none;
+    counter-reset: subsection;
+  }
+
+  .subsections > li {
+    position: relative;
+
+    padding-left: 1.875rem;
+
+    font-weight: normal;
+
+    counter-increment: subsection;
+  }
+
+  .subsections > li::before {
+    position: absolute;
+    left: 0;
+
+    width: 1.5rem;
+
+    font-weight: normal;
+
+    content: counter(subsection, lower-alpha) ".";
+  }
 </style>
 
 <BaseLayout
@@ -43,90 +126,42 @@ import logoImage from "../assets/rocketsim-logo.svg";
   <main>
     <div class="grid">
       <div>
-        <ol>
+        <p>
+          These are the Terms and Conditions of RNA Ventures B.V. established in
+          Spanbroek, The Netherlands and registered with the Dutch Chamber of
+          Commerce under number 95657312 (hereinafter: “RocketSim”).
+        </p>
+        <ol class="articles">
           <li>
-            <strong>Use of RocketSim:</strong> RocketSim is intended for use by app
-            developers to simulate various scenarios and test their applications.
-            You agree to use RocketSim solely for lawful purposes and in accordance
-            with these Terms.
+            <strong>Hierarchy, and definitions</strong>
+            <ol class="sections">
+              <li>
+                These Terms apply to all Agreements concluded between RocketSim
+                and the Customer.
+              </li>
+            </ol>
           </li>
           <li>
-            <strong>Data Storage:</strong> RocketSim operates by storing all data
-            locally on your device. We do not collect or store any of your data on
-            external servers. Your data privacy and security are of utmost importance
-            to us. The only data shared relates to RocketSim Insights and consists
-            of your project's scheme name, build durations, and a one-directional
-            hash of the hardware machine UDID
-          </li>
-          <li>
-            <strong>Tracking Services:</strong> RocketSim may utilize tracking services
-            for analytics and crash reporting. We use Amplitude for anonymous analytics
-            and Xcode for crash reports. This data helps us improve RocketSim's performance
-            and user experience.
-          </li>
-          <li>
-            <strong>Email Lists:</strong> Users have the option to opt-in for our
-            email lists to receive product updates. These updates may include information
-            about new features, trial reminders, special offers, and other relevant
-            news related to RocketSim. You can manage your email preferences at any
-            time.
-          </li>
-          <li>
-            <strong>Refund Requests:</strong> If you request a refund for RocketSim,
-            we may share certain personal data with Apple to assist in processing
-            your request. This data may include your usage details and any relevant
-            information needed to review the refund request.
-          </li>
-          <li>
-            <strong>App Store Distribution:</strong> RocketSim is distributed via
-            the App Store. As such, it operates within the sandbox environment provided
-            by the App Store, which enhances security by restricting access to sensitive
-            system resources and data.
-          </li>
-          <li>
-            <strong>Intellectual Property:</strong> RocketSim and its content, including
-            but not limited to software, logos, trademarks, and designs, are the
-            property of RocketSim or its licensors and are protected by intellectual
-            property laws. You may not use RocketSim for any unauthorized purpose
-            or reproduce, distribute, or modify its content without our prior written
-            consent.
-          </li>
-          <li>
-            <strong>Disclaimer of Warranties:</strong> RocketSim is provided "as
-            is" without any warranties, express or implied. We do not guarantee that
-            RocketSim will always be error-free or that it will meet your specific
-            requirements. Your use of RocketSim is at your own risk.
-          </li>
-          <li>
-            <strong>Limitation of Liability:</strong> In no event shall RocketSim
-            or its affiliates be liable for any indirect, incidental, special, consequential,
-            or punitive damages arising out of or in connection with your use of
-            RocketSim.
-          </li>
-          <li>
-            <strong>Changes to Terms:</strong> RocketSim reserves the right to update
-            or modify these Terms of Use at any time without prior notice. Any changes
-            will be effective immediately upon posting. Your continued use of RocketSim
-            after the posting of changes constitutes your acceptance of such changes.
-          </li>
-          <li>
-            <strong>Contact Us:</strong> If you have any questions or concerns about
-            these Terms of Use, please contact us at <a
-              href="mailto:support@rocketsim.app">support@rocketsim.app</a
-            >.
+            <strong>Definitions</strong>
+            <ol class="sections">
+              <li>
+                The definitions of the terms written with a capital letter can
+                be found in this article and apply to all provisions of the
+                Terms.
+                <ol class="subsections">
+                  <li>
+                    <strong>Account:</strong> the right to access to a user interface
+                    that Customer can use to manage and configure certain aspects
+                    of the Services, get insights in statistics, as well as the information
+                    stored by Customer.
+                  </li>
+                </ol>
+              </li>
+            </ol>
           </li>
         </ol>
-
-        <p>
-          By using RocketSim, you acknowledge that you have read, understood,
-          and agree to be bound by these Terms of Use. If you do not agree to
-          these Terms, please do not use RocketSim. Thank you for choosing
-          RocketSim!
-        </p>
-
-        <p><i>Last updated: November 15th, 2024.</i></p>
       </div>
     </div>
+    <Footer />
   </main>
-  <Footer />
 </BaseLayout>
