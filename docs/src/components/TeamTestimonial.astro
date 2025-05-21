@@ -1,0 +1,27 @@
+---
+import Testimonial from "./Testimonial.astro";
+---
+
+<style>
+  section {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    padding: 0 var(--side-padding);
+  }
+
+  .container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+</style>
+
+<section aria-label="Customer testimonial" class="grid">
+  <div class="container">
+    <Testimonial
+      quote='"RocketSim Team Insights finally gives us <strong>visibility into our build times</strong> beyond just gut feeling. We can actually measure the impact of adding SDKs or improving configurations, seeing results reflected in <strong>incremental and clean builds</strong>. It’s been invaluable for decisions like upgrading hardware—we can point to real data showing how different machines affect build times. The metrics are broken down beautifully, no extra setup or build phase hacks required—it just works quietly in the background. Honestly, it’s something we could never have justified building in-house, but it’s been a <strong>total game-changer</strong>."'
+      author="Max Godfrey"
+      position="iOS Developer at Empower Finance"
+      fullWidth={true}
+    />
+  </div>
+</section>

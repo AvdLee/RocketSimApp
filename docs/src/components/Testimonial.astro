@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  quote: string;
+  author: string;
+  position: string;
+  website?: string;
+  image?: ImageMetadata;
+  fullWidth?: boolean;
+}
+
+const {
+  quote,
+  author,
+  position,
+  website,
+  image,
+  fullWidth = false,
+} = Astro.props;
+---
+
+<style>
+  figure {
+    margin: 0;
+  }
+
+  blockquote {
+    margin: 0 0 1rem;
+    font-size: 1.375rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  :global(.testimonial-quote strong) {
+    font-weight: 600;
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .image {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
+
+  cite {
+    display: block;
+    color: var(--text-color-light);
+    font-style: normal;
+  }
+
+  .testimonial-position {
+    display: block;
+    font-style: italic;
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  a.testimonial-position:hover {
+    text-decoration: underline;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+</style>
+
+<figure data-aos="fade-up" class={fullWidth ? "full-width" : ""}>
+  <blockquote>
+    <p class="testimonial-quote" set:html={quote} />
+  </blockquote>
+  <figcaption>
+    {image ? <Image src={image} alt={author} width="96" class="image" /> : null}
+    <div class="cite-wrapper">
+      <cite>{author}</cite>
+      {
+        website ? (
+          <a class="testimonial-position" href={website} target="_blank">
+            {position}
+          </a>
+        ) : (
+          <span class="testimonial-position">{position}</span>
+        )
+      }
+    </div>
+  </figcaption>
+</figure>
