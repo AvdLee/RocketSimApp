@@ -1,8 +1,6 @@
 ---
 import { Image } from "astro:assets";
 
-import NavigationLink from "./NavigationLink.astro";
-
 import appIcon from "../assets/rocketsim-app-icon.png";
 
 interface Props {
@@ -118,9 +116,13 @@ const { isAlwaysActive, showLogin = false } = Astro.props;
       </ul>
     </nav>
     <div class="navigation__right-column">
-      {showLogin ? (
-      <a href="https://teams.rocketsim.app" class="link link--login">Login</a>
-      ): null}
+      {
+        showLogin ? (
+          <a href="https://teams.rocketsim.app" class="link link--login">
+            Login
+          </a>
+        ) : null
+      }
       <Image
         src={appIcon}
         alt="RocketSim app icon"
