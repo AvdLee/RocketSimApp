@@ -23,7 +23,7 @@ const { isAlwaysActive, showLogin = false } = Astro.props;
     transition: border-bottom-color 0.3s;
     box-sizing: content-box;
 
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       position: sticky;
       top: -1px;
       z-index: 100;
@@ -31,7 +31,7 @@ const { isAlwaysActive, showLogin = false } = Astro.props;
   }
 
   .navigation-wrapper--sticky {
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       border-bottom-color: rgba(255, 255, 255, 0.24);
 
       .navigation__logo {
@@ -49,7 +49,7 @@ const { isAlwaysActive, showLogin = false } = Astro.props;
   }
 
   nav {
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       display: flex;
       align-items: center;
       grid-column: 1 / -2;
@@ -73,7 +73,7 @@ const { isAlwaysActive, showLogin = false } = Astro.props;
     opacity: 0;
     transition: opacity 0.3s;
 
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       display: flex;
       align-items: center;
       grid-column: span 1 / -1;
@@ -92,7 +92,7 @@ const { isAlwaysActive, showLogin = false } = Astro.props;
 
     list-style: none;
 
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       flex-direction: row;
       gap: 3rem;
     }
