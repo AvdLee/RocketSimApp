@@ -15,10 +15,30 @@ import TeamTestimonial from "../components/TeamTestimonial.astro";
 import logoImage from "../assets/rocketsim-insights-logo.svg";
 ---
 
+<style>
+  .login-button-container {
+    position: absolute;
+    top: 1rem;
+    right: 0rem;
+    left: 0;
+    z-index: 1;
+  }
+
+  .button--login {
+    grid-column: span 1 / -1;
+  }
+</style>
+
 <BaseLayout
   pageTitle="Build Apps Faster with Insights - RocketSim"
   pageDescription="Simulator Airplane Mode, Location Simulation, Accessibility Testing, Compare designs inside the iOS simulator. Test deeplinks, push notifications."
 >
+  <div class="login-button-container grid">
+    <a
+      href="https://teams.rocketsim.app"
+      class="button button--small button--login">Login</a
+    >
+  </div>
   <Header
     title="Make your whole team Build Apps Faster"
     logo={logoImage}
@@ -28,7 +48,7 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
     Connect your team using the same license key and gather team insights like
     p75 build duration, machine benchmarks, and more.
   </Header>
-  <Navigation>
+  <Navigation showLogin>
     <NavigationLink href="#get-team-license" asButton>
       Get Team Licenses
     </NavigationLink>

@@ -5,9 +5,10 @@ import appIcon from "../assets/rocketsim-app-icon.png";
 
 interface Props {
   isAlwaysActive?: boolean;
+  showLogin?: boolean;
 }
 
-const { isAlwaysActive } = Astro.props;
+const { isAlwaysActive, showLogin = false } = Astro.props;
 ---
 
 <style>
@@ -20,7 +21,7 @@ const { isAlwaysActive } = Astro.props;
     transition: border-bottom-color 0.3s;
     box-sizing: content-box;
 
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       position: sticky;
       top: -1px;
       z-index: 100;
@@ -28,17 +29,25 @@ const { isAlwaysActive } = Astro.props;
   }
 
   .navigation-wrapper--sticky {
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       border-bottom-color: rgba(255, 255, 255, 0.24);
 
       .navigation__logo {
+        opacity: 1;
+      }
+
+      .navigation__login {
+        opacity: 1;
+      }
+
+      .navigation__right-column {
         opacity: 1;
       }
     }
   }
 
   nav {
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       display: flex;
       align-items: center;
       grid-column: 1 / -2;
@@ -46,16 +55,27 @@ const { isAlwaysActive } = Astro.props;
   }
 
   .navigation__logo {
-    display: none;
     width: 2.75rem;
     height: auto;
+  }
 
+  .navigation__login {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    margin-right: 1rem;
+  }
+
+  .navigation__right-column {
+    display: none;
     opacity: 0;
     transition: opacity 0.3s;
 
-    @media (min-width: 850px) {
-      display: block;
+    @media (min-width: 880px) {
+      display: flex;
+      align-items: center;
       grid-column: span 1 / -1;
+      gap: 1rem;
       justify-self: end;
     }
   }
@@ -70,10 +90,15 @@ const { isAlwaysActive } = Astro.props;
 
     list-style: none;
 
-    @media (min-width: 850px) {
+    @media (min-width: 880px) {
       flex-direction: row;
       gap: 3rem;
     }
+  }
+
+  .link--login {
+    font-weight: 600;
+    text-decoration: none;
   }
 </style>
 
@@ -90,13 +115,22 @@ const { isAlwaysActive } = Astro.props;
         <slot />
       </ul>
     </nav>
-    <Image
-      src={appIcon}
-      alt="RocketSim app icon"
-      width="88"
-      height="88"
-      class="navigation__logo"
-    />
+    <div class="navigation__right-column">
+      {
+        showLogin ? (
+          <a href="https://teams.rocketsim.app" class="link link--login">
+            Login
+          </a>
+        ) : null
+      }
+      <Image
+        src={appIcon}
+        alt="RocketSim app icon"
+        width="88"
+        height="88"
+        class="navigation__logo"
+      />
+    </div>
   </div>
 </div>
 
