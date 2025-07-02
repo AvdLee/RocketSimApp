@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import NavigationLink from "../components/NavigationLink.astro";
+import PricingTable from "../components/PricingTable.astro";
+---
+
+<BaseLayout
+  pageTitle="Pricing - RocketSim"
+  pageDescription="Compare plans and find the best way for you to use RocketSim."
+>
+  <Navigation isAlwaysActive>
+    <NavigationLink
+      href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
+      className="plausible-event-name=App+Store+Install"
+      id="js-header-app-store-button"
+      asButton
+      target="_blank"
+    >
+      Download now
+    </NavigationLink>
+    <NavigationLink href="/team-insights">Team Licenses</NavigationLink>
+    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
+      Documentation
+    </NavigationLink>
+    <NavigationLink
+      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      target="_blank"
+    >
+      FAQ
+    </NavigationLink>
+  </Navigation>
+  <main>
+    <PricingTable />
+  </main>
+</BaseLayout>
