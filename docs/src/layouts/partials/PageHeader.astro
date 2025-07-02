@@ -1,0 +1,113 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import TestimonialFeaturedCard from "@/components/TestimonialFeaturedCard.astro";
+import { humanize, markdownify } from "@/lib/utils/textConverter";
+import type { IBackgroundImages, ILink } from "@/types";
+
+const {
+  title = "",
+  subtitle = "",
+  button = "",
+  backgroundImages = "",
+  featuredTestimonial = "",
+  isCenter = false,
+}: {
+  title?: string;
+  subtitle?: string;
+  button?: ILink | "";
+  featuredTestimonial?: any;
+  backgroundImages?: IBackgroundImages | "";
+  isCenter?: false;
+} = Astro.props;
+---
+
+<section class="ph-spacing bg-light relative">
+  <div class="container relative z-20">
+    {
+      isCenter ? (
+        <div class="lg:col-8 mx-auto">
+          <h1
+            data-aos="fade-up-sm"
+            data-aos-delay="0"
+            set:html={humanize(title)}
+            class="font-semibold mb-4 text-center text-h2 hasEmphasize text-balance"
+          />
+        </div>
+      ) : (
+        <div class="flex flex-col md:flex-row w-full md:items-center md:justify-between">
+          <h1
+            data-aos="fade-up-sm"
+            data-aos-delay="0"
+            set:html={humanize(title)}
+            class="font-semibold mb-4 text-left text-h2 hasEmphasize md:w-6/12 text-balance"
+          />
+          <div class="md:text-right md:w-6/12">
+            <p
+              data-aos="fade-up-sm"
+              data-aos-delay="50"
+              set:html={markdownify(subtitle)}
+              class="text-lg  text-balance"
+            />
+            {featuredTestimonial && (
+              <TestimonialFeaturedCard testimonial={featuredTestimonial} />
+            )}
+          </div>
+        </div>
+      )
+    }
+
+    {
+      button && button.enable && (
+        <a
+          href={button.link}
+          class="btn btn-primary mt-9"
+          target={
+            /^(http|https|www|mailto)/.test(button.link) ? "_blank" : "_self"
+          }
+        >
+          {button.label}
+        </a>
+      )
+    }
+  </div>
+
+  {
+    backgroundImages && backgroundImages.enable && (
+      <div class="absolute inset-0 z-10">
+        <div class="absolute top-[15rem] left-[8%]">
+          <div data-aos="zoom-in-sm" data-aos-delay="150">
+            <ImageMod
+              width={80}
+              height={80}
+              src={backgroundImages.image_1 as string}
+              alt=""
+              class="w-[30px] lg:w-[70px] aspect-square rounded-full "
+            />
+          </div>
+        </div>
+        <div class="absolute top-[10rem] right-[20%]">
+          <div data-aos="zoom-in-sm" data-aos-delay="200">
+            <ImageMod
+              width={80}
+              height={80}
+              src={backgroundImages.image_2 as string}
+              alt=""
+              class="w-[30px] lg:w-[50px] aspect-square rounded-full  "
+            />
+          </div>
+        </div>
+        <div class="absolute bottom-[5rem] right-[6rem] lg:right-[10rem]">
+          <div data-aos="zoom-in-sm" data-aos-delay="300">
+            <ImageMod
+              width={80}
+              height={80}
+              src={backgroundImages.image_3 as string}
+              alt=""
+              class="w-[40px] lg:w-[60px] aspect-square rounded-full  "
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+</section>

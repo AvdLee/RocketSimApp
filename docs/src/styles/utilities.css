@@ -1,0 +1,13 @@
+@utility bg-gradient {
+  @apply bg-gradient-to-b from-[rgba(249,249,249,1)] from-[0.53%] to-white to-[83.28%];
+}
+
+@utility badge {
+  @apply bg-primary/5 text-primary px-3 py-2 rounded-3xl leading-none text-base;
+}
+
+@utility bullet {
+  &::before {
+    @apply content-[''] w-5 h-5 bg-white inline-block rounded-full border-[4px] border-primary absolute top-0 -left-2.5;
+  }
+}

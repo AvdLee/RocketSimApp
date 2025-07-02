@@ -1,0 +1,37 @@
+---
+import config from "@/config/config.json";
+
+import { markdownify } from "@/lib/utils/textConverter";
+
+// Function to replace {year} this from string to year
+function replaceYear(text: string) {
+  const year = new Date().getFullYear();
+
+  return text.replace("{year}", year.toString());
+}
+---
+
+<footer class="bg-light pt-16 xl:pt-24">
+  <div class="py-5 bg-light border-t border-border mt-14">
+    <div
+      class="container flex flex-col md:flex-row justify-between items-center gap-5"
+    >
+      <span
+        class="text-center [&>a]:text-primary"
+        set:html={markdownify(replaceYear(config.params.copyright))}
+      />
+      <div class="flex flex-col md:flex-row items-center gap-5">
+        <a
+          href="/terms"
+          class="hover:text-primary transition duration-300"
+          aria-label="Terms and Conditions Link">Terms</a
+        >
+        <a
+          href="/privacy"
+          class="hover:text-primary transition duration-300"
+          aria-label="Privacy Policy Link">Privacy Policy</a
+        >
+</div>
+    </div>
+  </div>
+</footer>

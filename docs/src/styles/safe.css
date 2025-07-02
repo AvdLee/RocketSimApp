@@ -1,0 +1,54 @@
+/* navbar toggler */
+input#nav-toggle:checked + label #show-button {
+  @apply hidden;
+}
+input#nav-toggle:checked + label #hide-button {
+  @apply block;
+}
+input#nav-toggle:checked ~ #nav-menu {
+  @apply max-lg:block;
+}
+
+/* form style */
+.form {
+  @apply grid grid-cols-2 gap-6;
+}
+.form-input {
+  @apply w-full rounded border-transparent border-[2px] px-6 py-4 text-text-dark placeholder:text-text-dark/60 focus:border-primary/30 focus:ring-transparent bg-light text-lg;
+}
+.form-label {
+  @apply mb-3 block font-primary text-base font-normal text-text-dark;
+}
+
+/* swiper pagination */
+.testimonial-slider-pagination {
+  .swiper-pagination-bullet {
+    @apply h-2.5 w-2.5 bg-light opacity-100;
+  }
+  .swiper-pagination-bullet-active {
+    @apply h-4 w-4 bg-primary;
+  }
+}
+.feature-pagination-item.active {
+  @apply bg-white border-l-2 border-secondary;
+  .feature-pagination-icon {
+    @apply text-secondary;
+  }
+}
+
+/* Testimonial Center Card shadow effect */
+.testimonial-slider {
+  .swiper-slide-next > div {
+    @apply xl:shadow-4xl;
+  }
+  .swiper-pagination {
+    @apply translate-y-24 flex items-center gap-5 justify-center;
+
+    .swiper-pagination-bullet {
+      @apply size-3 rounded-full bg-text-dark/15 cursor-pointer;
+    }
+    .swiper-pagination-bullet-active {
+      @apply size-3 bg-primary;
+    }
+  }
+}

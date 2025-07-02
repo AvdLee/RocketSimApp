@@ -1,0 +1,13 @@
+{
+    "main": [
+      {
+        "name": "Pricing",
+        "url": "/pricing"
+      },
+      {
+        "name": "Team Licenses",
+        "url": "/team-insights"
+      }
+    ]
+  }
+  
