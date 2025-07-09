@@ -1,0 +1,231 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+import config from "src/config/config.json";
+
+const { isPageHeader } = Astro.props;
+const sectionData = (await getEntry(
+  "pricingSectionCollection",
+  "pricing"
+)) as CollectionEntry<"pricingSectionCollection">;
+const { title, plans } = sectionData.data;
+
+const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_url : 'http://localhost:5173';
+---
+
+<section class={isPageHeader ? "" : "section"}>
+  <div class="container">
+    <div class="section-container">
+      <div class="section-intro centralize">
+        <!-- Header Area -->
+        {
+          !isPageHeader && (
+            <h2
+              class="title hasEmphasize"
+              data-aos=""
+              set:html={markdownify(title)}
+            />
+          )
+        }
+      </div>
+      <div class="section-content">
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 justify-center gap-6">
+          {
+            plans &&
+              plans.length &&
+              plans.map((plan, index) => {
+                const isEvenIndex = index % 2 !== 0;
+                const cardColor = plan.color || "bg-secondary/80";
+
+                return (
+                  <div data-aos="fade-up-sm" data-aos-delay={index * 100}>
+                    <div
+                      class:list={[
+                        "p-8 rounded-[1.9rem] flex flex-col justify-between relative transition-shadow duration-300 hover:shadow-xl",
+                        { "bg-light text-text-dark ": isEvenIndex },
+                        { "bg-white text-text-dark": !isEvenIndex },
+                      ]}
+                      style={`background-color: ${cardColor}`}
+                    >
+                      <div>
+                        <span
+                          class="h6 mb-7 inline-block"
+                          set:html={markdownify(plan.title)}
+                        />
+                        {/* PRICE NUMBERS */}
+                        <div class="flex items-baseline gap-2 mb-5">
+                          <h3 class="flex items-center text-text-dark text-h2">
+                            <span>{plan.price_prefix}</span>
+                            <span
+                              class="data-count"
+                              data-count-yearly={plan.price.yearly.amount}
+                              set:html={plan.price.yearly.amount}
+                            />
+                          </h3>
+                          <div class="flex flex-col gap-1 text-text">
+                            <span class="text-yearly capitalize">
+                              {plan.price.yearly.period}
+                            </span>
+                          </div>
+                        </div>
+                        <p
+                          class="text-text "
+                          set:html={markdownify(plan.description)}
+                        />
+
+                        <hr class:list={["my-14 border-text-dark/20"]} />
+                        <ul class="flex flex-col gap-5">
+                          {plan.features &&
+                            plan.features.length &&
+                            plan.features
+                              .filter((filter) => filter.enable)
+                              .map((feature) => {
+                                const isIncluded = feature.included;
+                                return (
+                                  <li class="flex items-center gap-x-5 text-text-dark">
+                                    {!isIncluded ? (
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        class="text-primary w-full max-w-6 aspect-square "
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <g opacity="0.4">
+                                          <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M1.5 12C1.5 6.20101 6.20101 1.5 12 1.5C17.799 1.5 22.5 6.20101 22.5 12C22.5 17.799 17.799 22.5 12 22.5C6.20101 22.5 1.5 17.799 1.5 12ZM9.87896 8.81803C9.58607 8.52513 9.1112 8.52513 8.8183 8.81803C8.52541 9.11092 8.52541 9.5858 8.8183 9.87869L10.9396 12L8.81831 14.1213C8.52542 14.4142 8.52542 14.8891 8.81831 15.182C9.1112 15.4749 9.58608 15.4749 9.87897 15.182L12.0003 13.0607L14.1216 15.182C14.4145 15.4749 14.8894 15.4749 15.1823 15.182C15.4752 14.8891 15.4752 14.4142 15.1823 14.1213L13.0609 12L15.1823 9.87869C15.4752 9.5858 15.4752 9.11092 15.1823 8.81803C14.8894 8.52513 14.4145 8.52513 14.1216 8.81803L12.0003 10.9394L9.87896 8.81803Z"
+                                            fill="currentColor"
+                                          />
+                                        </g>
+                                      </svg>
+                                    ) : (
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        class="text-primary  w-full max-w-6 aspect-square"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          clip-rule="evenodd"
+                                          d="M1.5 12C1.5 6.20101 6.20101 1.5 12 1.5C17.799 1.5 22.5 6.20101 22.5 12C22.5 17.799 17.799 22.5 12 22.5C6.20101 22.5 1.5 17.799 1.5 12ZM15.7127 10.7197C16.0055 10.4268 16.0055 9.95192 15.7127 9.65903C15.4198 9.36614 14.9449 9.36614 14.652 9.65903L10.9397 13.3713L9.34869 11.7804C9.0558 11.4875 8.58092 11.4875 8.28803 11.7804C7.99514 12.0732 7.99514 12.5481 8.28803 12.841L10.4093 14.9623C10.7022 15.2552 11.1771 15.2552 11.47 14.9623L15.7127 10.7197Z"
+                                          fill="currentColor"
+                                        />
+                                      </svg>
+                                    )}
+
+                                    <span
+                                      class={`${isIncluded ? "text-text-dark" : "text-text-light"}`}
+                                    >
+                                      {feature.feature}
+                                    </span>
+                                  </li>
+                                );
+                              })}
+                        </ul>
+                      </div>
+
+                      {/* CTA BUTTON */}
+                      {plan.cta.enable && (
+                        <a
+                          href={plan.cta.site === 'custom' ? plan.cta.link : `${plan.cta.site === 'teams' ? teamsUrl : ''}${plan.cta.link}`}
+                          class:list={[
+                            "btn inline-block self-start mt-14 text-center rounded-full",
+                            {
+                              "btn btn-primary bg-text-dark border-text-dark":
+                                isEvenIndex,
+                            },
+                            { "btn btn-outline-secondary": !isEvenIndex },
+                            plan.cta.class
+                          ]}
+                        >
+                          <span>{plan.cta.label}</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function pricingInit() {
+    // Select the toggle switch element
+    const toggleSwitch =
+      document.querySelector<HTMLInputElement>(".pricing-check");
+    const numbers = document.querySelectorAll<HTMLDivElement>(".data-count");
+    toggleSwitch &&
+      toggleSwitch.addEventListener("change", function () {
+        if (toggleSwitch.checked) {
+          numbers.forEach(function (number) {
+            const yearlyCount = number.getAttribute("data-count-yearly");
+            if (yearlyCount && !isNaN(parseInt(yearlyCount, 10))) {
+              number.innerHTML = yearlyCount;
+              animateCounter(number, parseInt(yearlyCount, 10));
+            } else {
+              number.innerHTML = yearlyCount as string;
+            }
+          });
+          toggleVisibility(".text-yearly", "d-block", "hidden");
+          toggleVisibility(".text-monthly", "hidden", "d-block");
+        } else {
+          numbers.forEach(function (number) {
+            const monthlyCount = number.getAttribute("data-count-monthly");
+            if (monthlyCount && !isNaN(parseInt(monthlyCount, 10))) {
+              number.innerHTML = monthlyCount;
+              animateCounter(number, parseInt(monthlyCount, 10));
+            } else {
+              number.innerHTML = monthlyCount as string;
+            }
+          });
+          toggleVisibility(".text-monthly", "block", "hidden");
+          toggleVisibility(".text-yearly", "hidden", "d-block");
+        }
+      });
+
+    function animateCounter(element: HTMLElement, endValue: number) {
+      let startValue = 0;
+      const duration = 300;
+      let startTime: number | null = null;
+
+      function step(currentTime: number) {
+        if (!startTime) startTime = currentTime;
+        const progress = currentTime - startTime;
+        const value =
+          Math.min(progress / duration, 1) * (endValue - startValue) +
+          startValue;
+        element.innerHTML = Math.ceil(value).toString();
+        if (progress < duration) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function toggleVisibility(
+      selector: string,
+      addClass: string,
+      removeClass: string
+    ) {
+      const elements = document.querySelectorAll<HTMLElement>(selector);
+      elements.forEach(function (element) {
+        element.classList.add(addClass);
+        element.classList.remove(removeClass);
+      });
+    }
+  }
+  document.addEventListener("astro:page-load", pricingInit);
+</script>

@@ -2,6 +2,8 @@ import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
 import { pricingCollection } from "./types/pages.collection";
+import { pricingSectionCollection } from "./types/sections.collections";
+
 
 
 const alignment = z.enum(["left", "right", "full-width"]);
@@ -34,4 +36,4 @@ const feature = defineCollection({
     }),
 });
 
-export const collections = { feature, pricing: pricingCollection };
+export const collections = { feature, pricing: pricingCollection, pricingSectionCollection };

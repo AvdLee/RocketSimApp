@@ -1,13 +1,9 @@
 ---
-import Base from "@/layouts/Base.astro";
-// import CallToAction from "@/partials/CallToAction.astro";
-// import ComparePlans from "@/partials/ComparePlans.astro";
-// import FaqSection from "@/partials/FaqSection.astro";
-import PageHeader from "@/partials/PageHeader.astro";
-// import PricingSection from "@/partials/PricingSection.astro";
-// import Statistics from "@/partials/Statistics.astro";
-// import TrustedBrands from "@/partials/TrustedBrands.astro";
 import { getEntry } from "astro:content";
+
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import PricingSection from "@/partials/PricingSection.astro";
 
 const pageIndex = await getEntry("pricing", "-index");
 if (!pageIndex) return null;
@@ -16,12 +12,7 @@ const { hero, title, meta_title, description } = pageIndex.data;
 
 <Base title={title} meta_title={meta_title} description={description}>
   <PageHeader title={hero.title} isCenter={true} />
- <!-- <div class="ph-merged-section -mt-10">
+  <div class="ph-merged-section -mt-10">
     <PricingSection isPageHeader={true} />
   </div>
-  <TrustedBrands />
-  <ComparePlans />
-  <Statistics isFluid="true" />
-  <FaqSection />
-  <CallToAction /> -->
 </Base>

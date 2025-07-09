@@ -9,9 +9,11 @@ import sitemap from "@astrojs/sitemap";
 
 import config from "./src/config/config.json";
 
+const site = import.meta.env.MODE === "production" ? config.site.base_url : "http://localhost:4321";
+
 // https://astro.build/config
 export default defineConfig({
-  site: config.site.base_url,
+  site,
   base: config.site.base_path,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: { service: sharp() },
