@@ -109,7 +109,7 @@ module.exports = plugin.withOptions(() => {
         fill: (value) => ({ fill: value }),
         stroke: (value) => ({ stroke: value }),
       },
-      { values: colorsMap, type: "color" }
+      { values: colorsMap, type: "color" },
     );
 
     matchUtilities(
@@ -134,7 +134,7 @@ module.exports = plugin.withOptions(() => {
             "var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position)",
         }),
       },
-      { values: colorsMap, type: "color" }
+      { values: colorsMap, type: "color" },
     );
   };
 });

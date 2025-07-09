@@ -50,8 +50,19 @@ const Accordion = ({
           </svg>
         </div>
       </button>
-      <div ref={contentRef} style={{ height, overflow: "hidden", transition: "height 0.5s ease" }}>
-        {show && <div className={show ? "accordion-content [&_*]:text-base [&_*]:m-0" : "mt-0"}>{children}</div>}
+      <div
+        ref={contentRef}
+        style={{ height, overflow: "hidden", transition: "height 0.5s ease" }}
+      >
+        {show && (
+          <div
+            className={
+              show ? "accordion-content [&_*]:text-base [&_*]:m-0" : "mt-0"
+            }
+          >
+            {children}
+          </div>
+        )}
       </div>
     </div>
   );

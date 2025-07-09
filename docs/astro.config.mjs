@@ -2,21 +2,27 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import AutoImport from "astro-auto-import";
-import sharp from "sharp";
 import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
 
 import config from "./src/config/config.json";
 
-const site = import.meta.env.MODE === "production" ? config.site.base_url : "http://localhost:4321";
+const site =
+  import.meta.env.MODE === "production"
+    ? config.site.base_url
+    : "http://localhost:4321";
 
 // https://astro.build/config
 export default defineConfig({
   site,
   base: config.site.base_path,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
-  image: { service: sharp() },
+  image: {
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+    },
+  },
   vite: { plugins: [tailwindcss()] },
 
   /**

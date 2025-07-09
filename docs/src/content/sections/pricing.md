@@ -4,8 +4,8 @@ title: "Choose a pricing plan best suited <em>for you</em>"
 plans:
   - enable: true
     title: Trial
-    description: Keen to try it out first? Sign up for a free two weeks trial. 
-    price_prefix: ''
+    description: Keen to try it out first? Sign up for a free two weeks trial.
+    price_prefix: ""
     color: "#FEECA0" # TODO: change color
     features:
       - enable: true
@@ -23,7 +23,7 @@ plans:
     price:
       yearly:
         amount: FREE
-        period: ''
+        period: ""
     cta:
       enable: true
       label: Sign up for a free trial
@@ -78,7 +78,7 @@ plans:
     price:
       yearly:
         amount: 120
-        period: 'per year'
+        period: "per year"
     cta:
       enable: true
       label: Subscribe
@@ -105,7 +105,7 @@ plans:
     price:
       yearly:
         amount: COMING SOON
-        period: ''
+        period: ""
     cta:
       enable: true
       label: Contact sales

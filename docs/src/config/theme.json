@@ -1,28 +1,27 @@
 {
-    "colors": {
-      "default": {
-        "theme_color": {
-          "primary": "#6B21F3",
-          "secondary": "#FEECA0",
-          "tertiary": "#56C590",
-          "quaternary": "#CFD4FA",
-          "body": "#FFFFFF",
-          "border": "#E6E6E6",
-          "light": "#F7F8FA"
-        },
-        "text_color": {
-          "text": "#2f2f2f",
-          "text-dark": "#070127",
-          "text-light": "#73737B"
-        }
-      }
-    },
-    "fonts": {
-      "font_family": {
-        "primary": "Plus Jakarta Sans:wght@300;400;500;600;700",
-        "primary_type": "sans-serif"
+  "colors": {
+    "default": {
+      "theme_color": {
+        "primary": "#6B21F3",
+        "secondary": "#FEECA0",
+        "tertiary": "#56C590",
+        "quaternary": "#CFD4FA",
+        "body": "#FFFFFF",
+        "border": "#E6E6E6",
+        "light": "#F7F8FA"
       },
-      "font_size": { "base": "16", "scale": "1.3" }
+      "text_color": {
+        "text": "#2f2f2f",
+        "text-dark": "#070127",
+        "text-light": "#73737B"
+      }
     }
+  },
+  "fonts": {
+    "font_family": {
+      "primary": "Plus Jakarta Sans:wght@300;400;500;600;700",
+      "primary_type": "sans-serif"
+    },
+    "font_size": { "base": "16", "scale": "1.3" }
   }
-  
+}

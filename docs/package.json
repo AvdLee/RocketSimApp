@@ -18,7 +18,10 @@
     "aos": "^2.3.4",
     "astro": "^5.7.13",
     "astro-font": "^1.0.0",
-    "marked": "^15.0.8"
+    "github-slugger": "^2.0.0",
+    "marked": "^15.0.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
@@ -33,7 +36,6 @@
     "knip": "^5.50.4",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
-    "sharp": "^0.33.5",
     "tailwindcss": "^4.0.15",
     "typescript": "^5.8.3"
   }

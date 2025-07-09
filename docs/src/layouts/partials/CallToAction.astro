@@ -7,11 +7,14 @@ import { getEntry } from "astro:content";
 
 const sectionData = (await getEntry(
   "ctaSectionCollection",
-  "call-to-action"
+  "call-to-action",
 )) as CollectionEntry<"ctaSectionCollection">;
 const { enable, title, description, image, call_to_actions } = sectionData.data;
 
-const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_url : 'http://localhost:5173';
+const teamsUrl =
+  import.meta.env.MODE === "production"
+    ? config.site.teams_base_url
+    : "http://localhost:5173";
 ---
 
 {
@@ -38,15 +41,28 @@ const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_
                 class="mt-10 flex flex-col sm:flex-row items-stretch gap-3 w-full"
               >
                 {call_to_actions.map((cta, index) => (
-                <a
-                  href={cta.site === 'custom' ? cta.link : `${cta.site === 'teams' ? teamsUrl : ''}${cta.link}`}
-                  class:list={["btn rounded-lg font-semibold min-w-max", { "btn-primary": index === 0, "btn-secondary": index !== 0}, cta.class]}
-                  target={
-                    /^(http|https|www|mailto)/.test(cta.link) ? "_blank" : "_self"
-                  }
-                >
-                  {cta.label}
-                </a>
+                  <a
+                    href={
+                      cta.site === "custom"
+                        ? cta.link
+                        : `${cta.site === "teams" ? teamsUrl : ""}${cta.link}`
+                    }
+                    class:list={[
+                      "btn rounded-lg font-semibold min-w-max",
+                      {
+                        "btn-primary": index === 0,
+                        "btn-secondary": index !== 0,
+                      },
+                      cta.class,
+                    ]}
+                    target={
+                      /^(http|https|www|mailto)/.test(cta.link)
+                        ? "_blank"
+                        : "_self"
+                    }
+                  >
+                    {cta.label}
+                  </a>
                 ))}
               </div>
             )}

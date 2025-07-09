@@ -6,7 +6,7 @@ import { getEntry } from "astro:content";
 const { isFluid } = Astro.props;
 const sectionData = (await getEntry(
   "statisticsSectionCollection",
-  "statistics"
+  "statistics",
 )) as CollectionEntry<"statisticsSectionCollection">;
 
 const { enable, list, title } = sectionData.data;
@@ -37,7 +37,10 @@ const { enable, list, title } = sectionData.data;
                       return (
                         <div data-aos="fade-up-sm" data-aos-delay={aosDelay}>
                           <h2 class="text-primary font-bold">{item.title}</h2>
-                          <p class="[&>strong]:font-bold" set:html={markdownify(item.description)} />
+                          <p
+                            class="[&>strong]:font-bold"
+                            set:html={markdownify(item.description)}
+                          />
                         </div>
                       );
                     })}
@@ -52,7 +55,9 @@ const { enable, list, title } = sectionData.data;
             <div class="section-container">
               {isFluid && (
                 <div class="section-intro text-center">
-                  <h2 class="title">Complete solution for teams to connect, collaborate</h2>
+                  <h2 class="title">
+                    Complete solution for teams to connect, collaborate
+                  </h2>
                 </div>
               )}
 
@@ -64,7 +69,10 @@ const { enable, list, title } = sectionData.data;
                       return (
                         <div data-aos="fade-up-sm" data-aos-delay={aosDelay}>
                           <h2 class="text-primary font-bold">{item.title}</h2>
-                          <p class="[&>strong]:font-bold" set:html={markdownify(item.description)} />
+                          <p
+                            class="[&>strong]:font-bold"
+                            set:html={markdownify(item.description)}
+                          />
                         </div>
                       );
                     })}

@@ -4,7 +4,10 @@ import Accordion from "@/shortcodes/Accordion";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
-const sectionData = (await getEntry("faqSectionCollection", "faq")) as CollectionEntry<"faqSectionCollection">;
+const sectionData = (await getEntry(
+  "faqSectionCollection",
+  "faq",
+)) as CollectionEntry<"faqSectionCollection">;
 const { title, list } = sectionData.data;
 ---
 
@@ -12,7 +15,12 @@ const { title, list } = sectionData.data;
   <div class="container">
     <div class="section-container gap-10">
       <div class="section-intro text-center">
-        <h2 set:html={markdownify(title)} class="title hasEmphasize" data-aos="fade-up-sm" data-aos-delay="0" />
+        <h2
+          set:html={markdownify(title)}
+          class="title hasEmphasize"
+          data-aos="fade-up-sm"
+          data-aos-delay="0"
+        />
       </div>
       <div class="section-content space-y-5">
         {

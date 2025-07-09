@@ -1,17 +1,16 @@
 {
-    "main": [
-      {
-        "name": "All features",
-        "url": "/"
-      },
-      {
-        "name": "Team Licenses",
-        "url": "/team-insights"
-      },
-      {
-        "name": "Pricing",
-        "url": "/pricing"
-      }
-    ]
-  }
-  
+  "main": [
+    {
+      "name": "All features",
+      "url": "/"
+    },
+    {
+      "name": "Team Licenses",
+      "url": "/team-insights"
+    },
+    {
+      "name": "Pricing",
+      "url": "/pricing"
+    }
+  ]
+}

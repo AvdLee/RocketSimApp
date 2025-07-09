@@ -3,7 +3,7 @@ enable: true
 title: "Ready to start using RocketSim?"
 description: "Boost your productivity and streamline your workflow with our powerful Xcode Simulator tools. Developers report building, testing, and verifying apps up to 2x faster with RocketSim."
 image: "/images/rocketsim-app-icon.png"
-call_to_actions: 
+call_to_actions:
   - enable: true
     label: Download now
     site: custom

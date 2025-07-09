@@ -24,9 +24,9 @@ export const comparePlansSectionCollection = defineCollection({
               individual: z.union([z.boolean(), z.string()]),
               teams: z.union([z.boolean(), z.string()]),
               enterprise: z.union([z.boolean(), z.string()]),
-            })
+            }),
           ),
-        })
+        }),
       ),
     }),
   }),
@@ -43,14 +43,19 @@ export const ctaSectionCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     image: z.string(),
-    call_to_actions: z.array(z.object({
-          enable: z.boolean(),
-          label: z.string(),
-          site: z.union([z.literal("public"), z.literal("teams"), z.literal('custom')]),
-          link: z.string(),
-          class: z.string().optional()
-    }
-    ))
+    call_to_actions: z.array(
+      z.object({
+        enable: z.boolean(),
+        label: z.string(),
+        site: z.union([
+          z.literal("public"),
+          z.literal("teams"),
+          z.literal("custom"),
+        ]),
+        link: z.string(),
+        class: z.string().optional(),
+      }),
+    ),
   }),
 });
 
@@ -66,7 +71,7 @@ export const faqSectionCollection = defineCollection({
       z.object({
         question: z.string(),
         answer: z.string(),
-      })
+      }),
     ),
   }),
 });
@@ -91,7 +96,7 @@ export const pricingSectionCollection = defineCollection({
             enable: z.boolean(),
             included: z.boolean(),
             feature: z.string(),
-          })
+          }),
         ),
         price: z.object({
           yearly: z.object({
@@ -102,11 +107,15 @@ export const pricingSectionCollection = defineCollection({
         cta: z.object({
           enable: z.boolean(),
           label: z.string(),
-          site: z.union([z.literal("public"), z.literal("teams"), z.literal('custom')]),
+          site: z.union([
+            z.literal("public"),
+            z.literal("teams"),
+            z.literal("custom"),
+          ]),
           link: z.string(),
-          class: z.string().optional()
+          class: z.string().optional(),
         }),
-      })
+      }),
     ),
   }),
 });
@@ -125,7 +134,7 @@ export const statisticsSectionCollection = defineCollection({
         enable: z.boolean(),
         title: z.string(),
         description: z.string(),
-      })
+      }),
     ),
   }),
 });

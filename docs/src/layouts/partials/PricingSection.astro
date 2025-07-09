@@ -8,11 +8,14 @@ import config from "src/config/config.json";
 const { isPageHeader } = Astro.props;
 const sectionData = (await getEntry(
   "pricingSectionCollection",
-  "pricing"
+  "pricing",
 )) as CollectionEntry<"pricingSectionCollection">;
 const { title, plans } = sectionData.data;
 
-const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_url : 'http://localhost:5173';
+const teamsUrl =
+  import.meta.env.MODE === "production"
+    ? config.site.teams_base_url
+    : "http://localhost:5173";
 ---
 
 <section class={isPageHeader ? "" : "section"} id="plans">
@@ -135,7 +138,11 @@ const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_
                       {/* CTA BUTTON */}
                       {plan.cta.enable && (
                         <a
-                          href={plan.cta.site === 'custom' ? plan.cta.link : `${plan.cta.site === 'teams' ? teamsUrl : ''}${plan.cta.link}`}
+                          href={
+                            plan.cta.site === "custom"
+                              ? plan.cta.link
+                              : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
+                          }
                           class:list={[
                             "btn inline-block self-start mt-14 text-center rounded-full",
                             {
@@ -143,7 +150,7 @@ const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_
                                 isEvenIndex,
                             },
                             { "btn btn-outline-secondary": !isEvenIndex },
-                            plan.cta.class
+                            plan.cta.class,
                           ]}
                         >
                           <span>{plan.cta.label}</span>
@@ -218,7 +225,7 @@ const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_
     function toggleVisibility(
       selector: string,
       addClass: string,
-      removeClass: string
+      removeClass: string,
     ) {
       const elements = document.querySelectorAll<HTMLElement>(selector);
       elements.forEach(function (element) {

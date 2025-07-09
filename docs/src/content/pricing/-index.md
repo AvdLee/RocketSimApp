@@ -6,5 +6,4 @@ draft: false
 
 hero:
   title: "Choose a <em>pricing plan</em> best suited for you"
-
 ---

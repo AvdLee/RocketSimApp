@@ -5,7 +5,7 @@ import { getEntry } from "astro:content";
 
 const sectionData = (await getEntry(
   "comparePlansSectionCollection",
-  "compare-plans"
+  "compare-plans",
 )) as CollectionEntry<"comparePlansSectionCollection">;
 const { enable, title, compare_plans } = sectionData.data;
 ---

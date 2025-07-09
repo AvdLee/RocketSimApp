@@ -29,7 +29,7 @@ compare_plans:
           enterprise: true
         - item: Build insights
           individual: Only your own
-          teams: For the entire team 
+          teams: For the entire team
           enterprise: Only for your user group
         - item: Comparing to designs
           individual: true

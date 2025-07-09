@@ -1,5 +1,5 @@
 ---
-enable: true  
+enable: true
 title: Make your whole team Build Apps Faster
 list:
   - enable: true

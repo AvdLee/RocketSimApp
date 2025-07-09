@@ -2,9 +2,13 @@ import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
 import { pricingCollection } from "./types/pages.collection";
-import {comparePlansSectionCollection, ctaSectionCollection, faqSectionCollection, pricingSectionCollection, statisticsSectionCollection } from "./types/sections.collections";
-
-
+import {
+  comparePlansSectionCollection,
+  ctaSectionCollection,
+  faqSectionCollection,
+  pricingSectionCollection,
+  statisticsSectionCollection,
+} from "./types/sections.collections";
 
 const alignment = z.enum(["left", "right", "full-width"]);
 const columnSpan = z.union([z.literal(6), z.literal(8), z.literal(12)]);
@@ -36,4 +40,12 @@ const feature = defineCollection({
     }),
 });
 
-export const collections = { feature, pricing: pricingCollection, ctaSectionCollection, comparePlansSectionCollection, faqSectionCollection, pricingSectionCollection, statisticsSectionCollection };
+export const collections = {
+  feature,
+  pricing: pricingCollection,
+  ctaSectionCollection,
+  comparePlansSectionCollection,
+  faqSectionCollection,
+  pricingSectionCollection,
+  statisticsSectionCollection,
+};

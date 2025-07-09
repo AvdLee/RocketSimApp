@@ -37,7 +37,7 @@ module.exports = plugin.withOptions(() => {
           },
         },
       },
-      { respectImportant }
+      { respectImportant },
     );
 
     // columns
@@ -60,7 +60,7 @@ module.exports = plugin.withOptions(() => {
           },
         })),
       ],
-      { respectImportant }
+      { respectImportant },
     );
 
     // offset
@@ -68,7 +68,7 @@ module.exports = plugin.withOptions(() => {
       [0, ...columns.slice(0, -1)].map((num) => ({
         [`.offset-${num}`]: { marginLeft: `${(100 / gridColumns) * num}%` },
       })),
-      { respectImportant }
+      { respectImportant },
     );
 
     // gutters
@@ -80,7 +80,7 @@ module.exports = plugin.withOptions(() => {
           acc[`.gy-${key}`] = { "--bs-gutter-y": value };
           return acc;
         },
-        {}
+        {},
       );
       addComponents(gutterComponents, { respectImportant });
     }
@@ -96,7 +96,7 @@ module.exports = plugin.withOptions(() => {
           [`.order-${num}`]: { order: String(num) },
         })),
       ],
-      { respectImportant }
+      { respectImportant },
     );
   };
 });
