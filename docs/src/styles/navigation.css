@@ -19,7 +19,7 @@
 }
 
 .nav-link {
-  @apply text-text-dark hover:text-primary  block font-medium transition max-lg:px-5 px-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
+  @apply text-primary hover:underline  block font-semibold transition max-lg:px-5 px-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
 
   &.active {
     @apply text-primary;

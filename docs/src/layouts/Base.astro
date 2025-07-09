@@ -1,23 +1,11 @@
 ---
 import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import config from "@/config/config.json";
-import theme from "@/config/theme.json";
 import { plainify } from "@/lib/utils/textConverter";
 import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
-import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
-
-// font families
-const pf = theme.fonts.font_family.primary;
-
-let fontPrimary;
-if (theme.fonts.font_family.primary) {
-  fontPrimary = theme.fonts.font_family.primary
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;.]+/gi, "");
-}
 
 // types for frontmatters
 export interface Props {
@@ -55,21 +43,6 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-    <!-- google font css -->
-    <AstroFont
-      config={[
-        {
-          src: [],
-          preload: false,
-          display: "swap",
-          name: fontPrimary!,
-          fallback: "sans-serif",
-          cssVariable: "font-primary",
-          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`,
-        },
-      ]}
-    />
 
     <!-- responsive meta -->
     <meta

@@ -1,5 +1,5 @@
 .btn {
-  @apply inline-block rounded-full border border-transparent px-9 py-4 font-medium capitalize transition leading-tight cursor-pointer;
+  @apply inline-block rounded-full border border-transparent px-9 py-4 font-bold capitalize transition leading-tight cursor-pointer;
 }
 
 .btn-sm {
