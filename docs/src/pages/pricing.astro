@@ -4,6 +4,7 @@ import { getEntry } from "astro:content";
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import PricingSection from "@/partials/PricingSection.astro";
+import ComparePlans from "@/partials/ComparePlans.astro";
 
 const pageIndex = await getEntry("pricing", "-index");
 if (!pageIndex) return null;
@@ -15,4 +16,5 @@ const { hero, title, meta_title, description } = pageIndex.data;
   <div class="ph-merged-section -mt-10">
     <PricingSection isPageHeader={true} />
   </div>
+  <ComparePlans />
 </Base>

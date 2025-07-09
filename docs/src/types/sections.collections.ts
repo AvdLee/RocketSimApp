@@ -1,6 +1,37 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+// Compare Plans Section collection schema
+export const comparePlansSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "compare-plans.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    title: z.string(),
+    enable: z.boolean(),
+    compare_plans: z.object({
+      compare: z.string(),
+      individual: z.string(),
+      teams: z.string(),
+      enterprise: z.string(),
+      item: z.array(
+        z.object({
+          title: z.string(),
+          list: z.array(
+            z.object({
+              item: z.string(),
+              individual: z.union([z.boolean(), z.string()]),
+              teams: z.union([z.boolean(), z.string()]),
+              enterprise: z.union([z.boolean(), z.string()]),
+            })
+          ),
+        })
+      ),
+    }),
+  }),
+});
+
 // Pricing Section collection schema
 export const pricingSectionCollection = defineCollection({
   loader: glob({

@@ -1,0 +1,318 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const sectionData = (await getEntry(
+  "comparePlansSectionCollection",
+  "compare-plans"
+)) as CollectionEntry<"comparePlansSectionCollection">;
+const { enable, title, compare_plans } = sectionData.data;
+---
+
+{
+  enable && (
+    <section class="section">
+      <div class="container">
+        <div class="section-container">
+          <div class="section-intro centralize" data-aos="fade-up-sm">
+            <h2
+              class="title hasEmphasize"
+              data-aos="fade-up-sm"
+              data-aos-delay="0"
+              set:html={markdownify(title)}
+            />
+          </div>
+          {compare_plans && (
+            <>
+              {/* Desktop View */}
+              <div
+                class="hidden lg:block"
+                data-aos="fade-up-sm"
+                data-aos-delay="100"
+              >
+                <div class="rounded-xl overflow-hidden border border-border">
+                  <table class="w-full border-collapse">
+                    <thead>
+                      <tr class="bg-primary text-white text-left text-xl font-medium">
+                        <th class="px-10 py-4 border-border border-b">
+                          {compare_plans.compare}
+                        </th>
+                        <th class="px-10 py-4 border-border border-b text-center">
+                          {compare_plans.individual}
+                        </th>
+                        <th class="px-10 py-4 border-border border-b text-center">
+                          {compare_plans.teams}
+                        </th>
+                        <th class="px-10 py-4 border-border border-b text-center">
+                          {compare_plans.enterprise}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {compare_plans.item.map((item: any) => (
+                        <>
+                          <tr>
+                            <td
+                              colspan="4"
+                              class="px-10 py-4 text-lg font-medium"
+                            >
+                              {item.title}
+                            </td>
+                          </tr>
+                          {item.list.map((listItem: any) => (
+                            <tr class="border-y border-border last:border-b-0">
+                              <td class="px-10 py-4 bg-light">
+                                {listItem.item}
+                              </td>
+                              <td class="px-10 py-4 text-center bg-light">
+                                {listItem.individual === true ? (
+                                  <svg
+                                    class="inline-block text-green-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M14.7812 8.9375L9.73672 13.75L7.21875 11.3438"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : listItem.individual === false ? (
+                                  <svg
+                                    class="inline-block text-red-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-miterlimit="10"
+                                    />
+                                    <path
+                                      d="M13.75 8.25L8.25 13.75M13.75 13.75L8.25 8.25"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : (
+                                  listItem.individual
+                                )}
+                              </td>
+                              <td class="px-10 py-4 text-center bg-light">
+                                {listItem.teams === true ? (
+                                  <svg
+                                    class="inline-block text-green-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M14.7812 8.9375L9.73672 13.75L7.21875 11.3438"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : listItem.teams === false ? (
+                                  <svg
+                                    class="inline-block text-red-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-miterlimit="10"
+                                    />
+                                    <path
+                                      d="M13.75 8.25L8.25 13.75M13.75 13.75L8.25 8.25"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : (
+                                  listItem.teams
+                                )}
+                              </td>
+                              <td class="px-10 py-4 text-center bg-light">
+                                {listItem.enterprise === true ? (
+                                  <svg
+                                    class="inline-block text-green-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M14.7812 8.9375L9.73672 13.75L7.21875 11.3438"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : listItem.enterprise === false ? (
+                                  <svg
+                                    class="inline-block text-red-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-miterlimit="10"
+                                    />
+                                    <path
+                                      d="M13.75 8.25L8.25 13.75M13.75 13.75L8.25 8.25"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : (
+                                  listItem.enterprise
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Mobile View */}
+              <div
+                class="lg:hidden space-y-8"
+                data-aos="fade-up-sm"
+                data-aos-delay="100"
+              >
+                {["individual", "teams", "enterprise"].map((planName) => (
+                  <div class="border border-border rounded-xl overflow-hidden">
+                    <div class="bg-primary text-white text-xl font-medium p-4 text-center">
+                      {(compare_plans as any)[planName]}
+                    </div>
+                    {compare_plans.item.map((item: any) => (
+                      <div class="p-4 border-b border-border bg-light last:border-b-0">
+                        <div class="font-medium mb-2">{item.title}</div>
+                        {item.list.map((listItem: any) => {
+                          const value = listItem[planName];
+                          return (
+                            <div class="py-2 flex justify-between items-center">
+                              <span>{listItem.item}</span>
+                              <span>
+                                {value === true ? (
+                                  <svg
+                                    class="text-green-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M14.7812 8.9375L9.73672 13.75L7.21875 11.3438"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : value === false ? (
+                                  <svg
+                                    class="text-red-500"
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M11 19.25C15.5563 19.25 19.25 15.5563 19.25 11C19.25 6.44365 15.5563 2.75 11 2.75C6.44365 2.75 2.75 6.44365 2.75 11C2.75 15.5563 6.44365 19.25 11 19.25Z"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-miterlimit="10"
+                                    />
+                                    <path
+                                      d="M13.75 8.25L8.25 13.75M13.75 13.75L8.25 8.25"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                ) : (
+                                  value
+                                )}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
