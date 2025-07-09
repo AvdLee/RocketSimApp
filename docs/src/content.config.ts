@@ -2,7 +2,7 @@ import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
 import { pricingCollection } from "./types/pages.collection";
-import {comparePlansSectionCollection, pricingSectionCollection, statisticsSectionCollection } from "./types/sections.collections";
+import {comparePlansSectionCollection, faqSectionCollection, pricingSectionCollection, statisticsSectionCollection } from "./types/sections.collections";
 
 
 
@@ -36,4 +36,4 @@ const feature = defineCollection({
     }),
 });
 
-export const collections = { feature, pricing: pricingCollection, comparePlansSectionCollection, pricingSectionCollection, statisticsSectionCollection };
+export const collections = { feature, pricing: pricingCollection, comparePlansSectionCollection, faqSectionCollection, pricingSectionCollection, statisticsSectionCollection };

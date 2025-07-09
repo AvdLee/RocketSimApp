@@ -1,0 +1,30 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import Accordion from "@/shortcodes/Accordion";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const sectionData = (await getEntry("faqSectionCollection", "faq")) as CollectionEntry<"faqSectionCollection">;
+const { title, list } = sectionData.data;
+---
+
+<section class="section" id="faq_section">
+  <div class="container">
+    <div class="section-container gap-10">
+      <div class="section-intro text-center">
+        <h2 set:html={markdownify(title)} class="title hasEmphasize" data-aos="fade-up-sm" data-aos-delay="0" />
+      </div>
+      <div class="section-content space-y-5">
+        {
+          list.map((item, index) => (
+            <div data-aos="fade-up-sm" data-aos-delay={100 * index}>
+              <Accordion client:load title={item.question}>
+                <div set:html={markdownify(item.answer)} />
+              </Accordion>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

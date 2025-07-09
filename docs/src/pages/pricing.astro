@@ -6,6 +6,7 @@ import PageHeader from "@/partials/PageHeader.astro";
 import PricingSection from "@/partials/PricingSection.astro";
 import ComparePlans from "@/partials/ComparePlans.astro";
 import Statistics from "@/partials/Statistics.astro";
+import FaqSection from "@/partials/FaqSection.astro";
 
 const pageIndex = await getEntry("pricing", "-index");
 if (!pageIndex) return null;
@@ -19,4 +20,5 @@ const { hero, title, meta_title, description } = pageIndex.data;
   </div>
   <ComparePlans />
   <Statistics isFluid="true" />
+  <FaqSection />
 </Base>

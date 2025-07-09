@@ -32,6 +32,23 @@ export const comparePlansSectionCollection = defineCollection({
   }),
 });
 
+// FAQ Section collection schema
+export const faqSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "faq.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    title: z.string(),
+    list: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    ),
+  }),
+});
+
 // Pricing Section collection schema
 export const pricingSectionCollection = defineCollection({
   loader: glob({
