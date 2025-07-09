@@ -1,0 +1,79 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const { isFluid } = Astro.props;
+const sectionData = (await getEntry(
+  "statisticsSectionCollection",
+  "statistics"
+)) as CollectionEntry<"statisticsSectionCollection">;
+
+const { enable, list, title } = sectionData.data;
+---
+
+{
+  enable && (
+    <section class="section">
+      {isFluid ? (
+        <div class="bg-primary/5 px-8 py-16 xl:py-40 ">
+          <div class="container">
+            <div class="section-container">
+              {isFluid && (
+                <div class="section-intro text-center">
+                  <h2
+                    data-aos="fade-up-sm"
+                    data-aos-delay="0"
+                    class="title hasEmphasize text-balance"
+                    set:html={markdownify(title)}
+                  />
+                </div>
+              )}
+              <div class="section-content">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                  {list.length &&
+                    list.map((item, index) => {
+                      const aosDelay = 100 * (index % 4);
+                      return (
+                        <div data-aos="fade-up-sm" data-aos-delay={aosDelay}>
+                          <h2 class="text-primary font-bold">{item.title}</h2>
+                          <p class="[&>strong]:font-bold" set:html={markdownify(item.description)} />
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="container">
+          <div class="bg-primary/5 px-8 py-16 rounded-2xl">
+            <div class="section-container">
+              {isFluid && (
+                <div class="section-intro text-center">
+                  <h2 class="title">Complete solution for teams to connect, collaborate</h2>
+                </div>
+              )}
+
+              <div class="section-content">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                  {list.length &&
+                    list.map((item, index) => {
+                      const aosDelay = 100 * (index % 4);
+                      return (
+                        <div data-aos="fade-up-sm" data-aos-delay={aosDelay}>
+                          <h2 class="text-primary font-bold">{item.title}</h2>
+                          <p class="[&>strong]:font-bold" set:html={markdownify(item.description)} />
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}

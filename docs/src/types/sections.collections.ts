@@ -71,3 +71,22 @@ export const pricingSectionCollection = defineCollection({
     ),
   }),
 });
+
+// Statistics Section collection schema
+export const statisticsSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "statistics.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    list: z.array(
+      z.object({
+        enable: z.boolean(),
+        title: z.string(),
+        description: z.string(),
+      })
+    ),
+  }),
+});
