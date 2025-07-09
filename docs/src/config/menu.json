@@ -1,12 +1,16 @@
 {
     "main": [
       {
-        "name": "Pricing",
-        "url": "/pricing"
+        "name": "All features",
+        "url": "/"
       },
       {
         "name": "Team Licenses",
         "url": "/team-insights"
+      },
+      {
+        "name": "Pricing",
+        "url": "/pricing"
       }
     ]
   }

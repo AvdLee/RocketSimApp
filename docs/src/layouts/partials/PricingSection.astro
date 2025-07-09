@@ -15,7 +15,7 @@ const { title, plans } = sectionData.data;
 const teamsUrl = import.meta.env.MODE === "production" ? config.site.teams_base_url : 'http://localhost:5173';
 ---
 
-<section class={isPageHeader ? "" : "section"}>
+<section class={isPageHeader ? "" : "section"} id="plans">
   <div class="container">
     <div class="section-container">
       <div class="section-intro centralize">

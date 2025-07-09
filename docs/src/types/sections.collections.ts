@@ -32,6 +32,28 @@ export const comparePlansSectionCollection = defineCollection({
   }),
 });
 
+// Call to Action collection schema
+export const ctaSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "call-to-action.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    description: z.string(),
+    image: z.string(),
+    call_to_actions: z.array(z.object({
+          enable: z.boolean(),
+          label: z.string(),
+          site: z.union([z.literal("public"), z.literal("teams"), z.literal('custom')]),
+          link: z.string(),
+          class: z.string().optional()
+    }
+    ))
+  }),
+});
+
 // FAQ Section collection schema
 export const faqSectionCollection = defineCollection({
   loader: glob({
