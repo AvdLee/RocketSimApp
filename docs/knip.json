@@ -1,3 +1,4 @@
 {
-  "ignoreDependencies": ["@typescript-eslint/parser"]
+  "ignore": ["src/tailwind-plugin/tw-bs-grid.mjs", "src/tailwind-plugin/tw-theme.mjs"],
+  "ignoreDependencies": ["@typescript-eslint/parser", "tailwindcss", "@tailwindcss/forms", "@tailwindcss/typography"]
 }
