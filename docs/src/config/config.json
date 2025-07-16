@@ -5,9 +5,9 @@
     "base_path": "/",
     "trailing_slash": false,
     "title": "RocketSim",
-    "logo": "/images/rocketsim-app-icon.png",
-    "logo_width": "44",
-    "logo_height": "44",
+    "logo": "/images/rocketsim-logo.svg",
+    "logo_width": "120",
+    "logo_height": "24",
     "logo_text": "RocketSim"
   },
   "settings": {
@@ -19,9 +19,8 @@
   "navigation_buttons": [
     {
       "enable": true,
-      "label": "Download now",
-      "link": "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8",
-      "class": "plausible-event-name=App+Store+Install"
+      "label": "Buy",
+      "link": "/pricing"
     }
   ],
   "metadata": {

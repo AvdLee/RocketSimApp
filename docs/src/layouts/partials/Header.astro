@@ -25,9 +25,7 @@ const { pathname } = Astro.url;
   <header class={`header w-full`}>
     <nav class="navbar px-4 sm:px-16">
       <!-- logo -->
-      <div class="order-0">
-        <Logo />
-      </div>
+      <Logo />
       <!-- navbar toggler -->
       <input id="nav-toggle" type="checkbox" class="hidden" />
       <label
@@ -133,7 +131,7 @@ const { pathname } = Astro.url;
         }
       </ul>
       <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
-        <ul class="navbar-nav hidden lg:flex lg:gap-5">
+        <ul class="navbar-nav hidden lg:flex lg:gap-4">
           {
             main.map((menu) => (
               <>
@@ -200,7 +198,7 @@ const { pathname } = Astro.url;
                     <a
                       aria-label={navigation_button.label}
                       href={navigation_button.link}
-                      class:list={["btn btn-primary", navigation_button.class]}
+                      class:list={["btn btn-sm btn-primary", navigation_button.class]}
                     >
                       {navigation_button.label}
                     </a>

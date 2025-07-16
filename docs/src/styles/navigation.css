@@ -8,21 +8,21 @@
 }
 
 .navbar-brand {
-  @apply text-xl font-semibold text-text-dark;
+  @apply text-[0rem] font-semibold text-text-dark;
   image {
     @apply max-h-full max-w-full;
   }
 }
 
 .navbar-nav {
-  @apply text-left max-lg:bg-white max-lg:border max-lg:border-b-[4px] max-lg:border-text-dark/10 max-lg:rounded-xl max-lg:mt-5 max-lg:p-3;
+  @apply text-left max-lg:bg-light max-lg:rounded-xl max-lg:mt-5 max-lg:p-3;
 }
 
 .nav-link {
-  @apply text-primary hover:underline  block font-semibold transition max-lg:px-5 px-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
+  @apply text-white hover:underline  block min-lg:text-sm font-semibold transition max-lg:px-5 px-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
 
   &.active {
-    @apply text-primary;
+    @apply underline;
   }
 }
 

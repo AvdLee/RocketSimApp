@@ -3,7 +3,7 @@
 }
 
 .btn-sm {
-  @apply rounded-sm px-5 py-4 text-sm;
+  @apply rounded-full px-4 py-1 text-sm;
 }
 
 .btn-primary {
