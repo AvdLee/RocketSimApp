@@ -58,6 +58,9 @@ const { enable, title, compare_plans } = sectionData.data;
                               class="px-10 py-4 text-lg font-medium"
                             >
                               {item.title}
+                              {item.description && (
+                                  <p class="text-sm text-text-light">{item.description}</p>
+                                )}
                             </td>
                           </tr>
                           {item.list.map((listItem: any) => (
