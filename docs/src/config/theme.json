@@ -23,6 +23,6 @@
       "primary": "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",Segoe UI Symbol",
       "primary_type": "sans-serif"
     },
-    "font_size": { "base": "16", "scale": "1.3" }
+    "font_size": { "base": "17", "scale": "1.25" }
   }
 }
