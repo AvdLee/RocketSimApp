@@ -38,7 +38,7 @@
 }
 
 .ph-merged-section {
-  @apply relative before:content-[''] before:absolute before:inset-x-0 before:top-0 before:h-[250px] before:bg-light before:-z-10 pb-24 px-4;
+  @apply relative before:content-[''] before:absolute before:inset-x-0 before:top-0 before:h-[250px] before:-z-10 pb-24 px-4;
 
   .container--ph-merged {
     @apply bg-white rounded-3xl p-10! xl:p-28! shadow-4xl;
