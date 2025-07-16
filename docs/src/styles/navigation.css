@@ -19,10 +19,12 @@
 }
 
 .nav-link {
-  @apply text-white hover:underline  block min-lg:text-sm font-semibold transition max-lg:px-5 px-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
+  @apply text-white opacity-80 hover:opacity-100 relative block min-lg:text-sm font-normal transition max-lg:px-5 mx-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
 
-  &.active {
-    @apply underline;
+  .show-active-item &.active {
+    &::after {
+      @apply content-[''] absolute top-[64px] left-0 w-full h-[0.0625rem] bg-white;
+    }
   }
 }
 
