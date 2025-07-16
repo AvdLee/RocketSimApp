@@ -18,6 +18,7 @@ export const comparePlansSectionCollection = defineCollection({
       item: z.array(
         z.object({
           title: z.string(),
+          description: z.string().optional(),
           list: z.array(
             z.object({
               item: z.string(),
