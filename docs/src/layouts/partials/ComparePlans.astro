@@ -50,7 +50,7 @@ const { enable, title, compare_plans } = sectionData.data;
                       </tr>
                     </thead>
                     <tbody>
-                      {compare_plans.item.map((item: any) => (
+                      {compare_plans.item.map((item) => (
                         <>
                           <tr>
                             <td
@@ -63,7 +63,7 @@ const { enable, title, compare_plans } = sectionData.data;
                                 )}
                             </td>
                           </tr>
-                          {item.list.map((listItem: any, idx: number) => (
+                          {item.list.map((listItem, idx: number) => (
                             <tr
                               class={`border-y border-border
                                 ${idx === 0 ? "border-t-0" : ""}
@@ -244,23 +244,26 @@ const { enable, title, compare_plans } = sectionData.data;
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                {["free", "individual", "teams"].map((planName) => (
-                  <div class="border border-border rounded-xl overflow-hidden">
-                    <div class="bg-primary text-white text-xl font-medium p-4 text-center">
-                      {(compare_plans as any)[planName]}
+                {(["free", "individual", "teams"] as const).map((planName) => (
+                  <div class="rounded-xl overflow-hidden">
+                    <div class="text-white text-xl font-medium p-4 text-center border-border border-b">
+                      {(compare_plans)[planName]} plan
                     </div>
-                    {compare_plans.item.map((item: any) => (
-                      <div class="p-4 border-b border-border bg-light last:border-b-0">
-                        <div class="font-medium mb-2">{item.title}</div>
-                        {item.list.map((listItem: any) => {
+                    {compare_plans.item.map((item) => (
+                      <div class="py-12 ">
+                        <div class="font-medium text-text-light mb-2 text-3xl">{item.title}</div>
+{item.description && (
+                                  <p class="text-base text-dark">{item.description}</p>
+                                )}
+                        {item.list.map((listItem) => {
                           const value = listItem[planName];
                           return (
-                            <div class="py-2 flex justify-between items-center">
+                            <div class="py-4 flex justify-between items-center text-text-light border-b border-border last:border-b-0">
                               <span>{listItem.item}</span>
-                              <span>
+                              <span class="text-text">
                                 {value === true ? (
                                   <svg
-                                    class="text-green-500"
+                                    class="text-primary"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
@@ -284,7 +287,6 @@ const { enable, title, compare_plans } = sectionData.data;
                                   </svg>
                                 ) : value === false ? (
                                   <svg
-                                    class="text-red-500"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
