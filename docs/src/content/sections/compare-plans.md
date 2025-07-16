@@ -4,75 +4,87 @@ enable: true
 
 compare_plans:
   compare: Compare Plans
-  individual: Individual Plan
-  teams: Teams Plan
-  enterprise: Enterprise Plan
+  free: Free
+  individual: Individual
+  teams: Teams
 
   item:
-    - title: Build Apps Faster
+    - title: RocketSim Mac App
       list:
         - item: Networking Traffic Monitor
+          free: true
           individual: true
           teams: true
-          enterprise: true
         - item: Network Speed Control
+          free: true
           individual: true
           teams: true
-          enterprise: true
         - item: Recordings
+          free: true
           individual: true
           teams: true
-          enterprise: true
         - item: Screenshots
+          free: true
           individual: true
           teams: true
-          enterprise: true
-        - item: Build insights
-          individual: Only your own
-          teams: For the entire team
-          enterprise: Only for your user group
         - item: Comparing to designs
+          free: true
           individual: true
           teams: true
-          enterprise: true
         - item: Quick actions
+          free: true
           individual: true
           teams: true
-          enterprise: true
         - item: User Defaults Editor
+          free: true
           individual: true
           teams: true
-          enterprise: true
         - item: Environment Overrides
+          free: true
           individual: true
           teams: true
-          enterprise: true
-    - title: Reports
+    - title: Build Insights
       list:
-        - item: Build insights statistics
+        - item: Build Performance History
+          free: false
+          individual: true
+          teams: true
+        - item: Build Performance by Xcode Version
+          free: false
+          individual: Only your own
+          teams: Aggregated from your entire team
+        - item: Build Performance by Machine
+          free: false
+          individual: Only your own
+          teams: Aggregated from your entire team
+        - item: Smart Build Insights
+          free: false
           individual: false
-          teams: Coming soon
-          enterprise: Coming soon
+          teams: true
+        - item: Online Build Insights Dashboard
+          free: false
+          individual: false
+          teams: true
     - title: Team manager
       list:
         - item: License management
+          free: false
           individual: false
           teams: true
-          enterprise: true
         - item: User management
+          free: false
           individual: false
           teams: true
-          enterprise: true
         - item: SAML based SSO
+          free: false
           individual: false
-          teams: false
-          enterprise: Coming soon
+          teams: Coming soon (Enterprise)
         - item: Distribution outside of the App Store
+          free: false
           individual: false
-          teams: false
-          enterprise: true
+          teams: true
         - item: Group based user management
+          free: false
           individual: false
-          teams: false
-          enterprise: Coming soon
+          teams: Coming soon (Enterprise)
 ---
