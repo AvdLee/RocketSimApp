@@ -34,7 +34,8 @@ const teamsUrl =
         }
       </div>
       <div class="section-content">
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 justify-center gap-6">
+                  <div data-aos="fade-up-sm">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 justify-center max-md:gap-6">
           {
             plans &&
               plans.length &&
@@ -43,14 +44,10 @@ const teamsUrl =
                 const cardColor = plan.color || "bg-secondary/80";
 
                 return (
-                  <div data-aos="fade-up-sm" data-aos-delay={index * 100}>
                     <div
                       class:list={[
-                        "p-8 rounded-[1.9rem] flex flex-col justify-between relative transition-shadow duration-300 hover:shadow-xl",
-                        { "bg-light text-text-dark ": isEvenIndex },
-                        { "bg-white text-text-dark": !isEvenIndex },
+                        "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-md:rounded-2xl md:nth-of-type-1:rounded-tl-2xl md:max-xl:nth-of-type-2:rounded-tr-2xl md:max-xl:nth-of-type-3:rounded-bl-2xl md:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl",
                       ]}
-                      style={`background-color: ${cardColor}`}
                     >
                       <div>
                         <span
@@ -156,10 +153,10 @@ const teamsUrl =
                         </a>
                       )}
                     </div>
-                  </div>
                 );
               })
           }
+          </div>
         </div>
       </div>
     </div>
