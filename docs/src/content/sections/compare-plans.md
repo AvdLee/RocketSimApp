@@ -3,7 +3,7 @@ title: "Compare plans"
 enable: true
 
 compare_plans:
-  compare: Compare Plans
+  compare: Feature
   free: Free
   individual: Individual
   teams: Teams
