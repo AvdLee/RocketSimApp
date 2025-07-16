@@ -6,13 +6,19 @@ This is the public website for RocketSim.
 
 From your terminal:
 
-1. Install dependencies
+1. Change directory to `docs`
+
+```sh
+cd docs
+```
+
+2. Install dependencies
 
 ```sh
 npm install
 ```
 
-2. Run dev server
+3. Run dev server
 
 ```sh
 npm run dev
