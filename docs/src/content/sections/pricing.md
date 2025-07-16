@@ -83,7 +83,7 @@ plans:
     cta:
       enable: true
       label: Start 14-day Trial
-      site: custom
+      site: teams
       link: "/signup/trial"
   - enable: false
     title: Enterprise

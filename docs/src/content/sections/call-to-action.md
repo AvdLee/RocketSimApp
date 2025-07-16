@@ -11,6 +11,6 @@ call_to_actions:
     class: "plausible-event-name=App+Store+Install+CTA+Banner"
   - enable: true
     label: Start a 14-day Teams Trial
-    site: public
+    site: teams
     link: "/signup/trial"
 ---

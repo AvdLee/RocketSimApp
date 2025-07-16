@@ -21,8 +21,8 @@ const teamsUrl =
   enable && (
     <section class="cta pt-32  mb-0">
       <div class="container bg-[#1d1d1f] rounded-3xl">
-        <div class="flex flex-col lg:flex-row">
-          <div class="p-8 lg:px-20 lg:py-16 lg:w-[50%]">
+        <div class="flex flex-col xl:flex-row">
+          <div class="p-8 lg:px-20 xl:py-16 xl:w-[50%]">
             <h2
               class="mb-4"
               data-aos="fade-up-sm"
@@ -48,7 +48,7 @@ const teamsUrl =
                         : `${cta.site === "teams" ? teamsUrl : ""}${cta.link}`
                     }
                     class:list={[
-                      "btn rounded-lg font-semibold min-w-max",
+                      "btn font-semibold min-w-max text-center",
                       {
                         "btn-primary": index === 0,
                         "btn-secondary": index !== 0,
@@ -68,7 +68,7 @@ const teamsUrl =
             )}
           </div>
           <div
-            class="relative lg:w-[50%] hidden lg:block"
+            class="relative xl:w-[50%] hidden xl:block"
             data-aos="zoom-out-sm"
             data-aos-delay="200"
           >
