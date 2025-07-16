@@ -1,5 +1,5 @@
 ---
-title: "Compare <em>plans</em>"
+title: "Compare plans"
 enable: true
 
 compare_plans:

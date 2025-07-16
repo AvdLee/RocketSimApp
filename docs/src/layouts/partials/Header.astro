@@ -125,7 +125,7 @@ const { pathname } = Astro.url;
                     aria-label={navigation_button.label}
                     link={navigation_button.link}
                     label={navigation_button.label}
-                    className="btn btn-primary "
+                    className={`btn btn-primary ${navigation_button.class}`}
                   />
                 </li>
               ),
@@ -201,8 +201,7 @@ const { pathname } = Astro.url;
                       aria-label={navigation_button.label}
                       href={navigation_button.link}
                       class:list={[
-                        "btn btn-text-dark font-medium",
-                        { "bg-white !text-text-dark": index === 0 },
+                        "btn btn-primary",
                         navigation_button.class,
                       ]}
                     >
