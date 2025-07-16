@@ -31,10 +31,10 @@ const { enable, title, compare_plans } = sectionData.data;
                 data-aos="fade-up-sm"
                 data-aos-delay="100"
               >
-                <div class="rounded-xl overflow-hidden border border-border">
+                <div class="rounded-xl overflow-hidden">
                   <table class="w-full border-collapse">
                     <thead>
-                      <tr class="bg-primary text-white text-left text-xl font-medium">
+                      <tr class="text-white text-left text-xl font-medium">
                         <th class="px-10 py-4 border-border border-b">
                           {compare_plans.compare}
                         </th>
@@ -55,23 +55,28 @@ const { enable, title, compare_plans } = sectionData.data;
                           <tr>
                             <td
                               colspan="4"
-                              class="px-10 py-4 text-lg font-medium"
+                              class="px-10 pb-4 pt-12 font-medium text-3xl"
                             >
-                              {item.title}
+                              <div class="text-text-light pb-2">{item.title}</div>
                               {item.description && (
-                                  <p class="text-sm text-text-light">{item.description}</p>
+                                  <p class="text-base text-dark leading-relaxed">{item.description}</p>
                                 )}
                             </td>
                           </tr>
-                          {item.list.map((listItem: any) => (
-                            <tr class="border-y border-border last:border-b-0">
-                              <td class="px-10 py-4 bg-light">
+                          {item.list.map((listItem: any, idx: number) => (
+                            <tr
+                              class={`border-y border-border
+                                ${idx === 0 ? "border-t-0" : ""}
+                                ${idx === item.list.length - 1 ? "border-b-0" : ""}
+                              `}
+                            >
+                              <td class="px-10 py-4 text-text-light">
                                 {listItem.item}
                               </td>
-                              <td class="px-10 py-4 text-center bg-light">
+                              <td class="px-10 py-4 text-center">
                                 {listItem.free === true ? (
                                   <svg
-                                    class="inline-block text-green-500"
+                                    class="inline-block text-primary"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
@@ -95,7 +100,7 @@ const { enable, title, compare_plans } = sectionData.data;
                                   </svg>
                                 ) : listItem.free === false ? (
                                   <svg
-                                    class="inline-block text-red-500"
+                                    class="inline-block text-dark"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
@@ -120,10 +125,10 @@ const { enable, title, compare_plans } = sectionData.data;
                                   listItem.free
                                 )}
                               </td>
-                              <td class="px-10 py-4 text-center bg-light">
+                              <td class="px-10 py-4 text-center">
                                 {listItem.individual === true ? (
                                   <svg
-                                    class="inline-block text-green-500"
+                                    class="inline-block text-primary"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
@@ -147,7 +152,7 @@ const { enable, title, compare_plans } = sectionData.data;
                                   </svg>
                                 ) : listItem.individual === false ? (
                                   <svg
-                                    class="inline-block text-red-500"
+                                    class="inline-block text-dark"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
@@ -172,10 +177,10 @@ const { enable, title, compare_plans } = sectionData.data;
                                   listItem.individual
                                 )}
                               </td>
-                              <td class="px-10 py-4 text-center bg-light">
+                              <td class="px-10 py-4 text-center">
                                 {listItem.teams === true ? (
                                   <svg
-                                    class="inline-block text-green-500"
+                                    class="inline-block text-primary"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
@@ -199,7 +204,7 @@ const { enable, title, compare_plans } = sectionData.data;
                                   </svg>
                                 ) : listItem.teams === false ? (
                                   <svg
-                                    class="inline-block text-red-500"
+                                    class="inline-block text-dark"
                                     width="22"
                                     height="22"
                                     viewBox="0 0 22 22"
