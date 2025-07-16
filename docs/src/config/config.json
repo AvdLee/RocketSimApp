@@ -19,8 +19,9 @@
   "navigation_buttons": [
     {
       "enable": true,
-      "label": "Buy",
-      "link": "/pricing"
+      "label": "Download",
+      "link": "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=topbar&mt=8",
+      "class": "plausible-event-name=App+Store+Install"
     }
   ],
   "metadata": {
