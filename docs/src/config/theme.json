@@ -3,15 +3,15 @@
     "default": {
       "theme_color": {
         "primary": "#0093ff",
-        "secondary": "#2b2f33",
+        "secondary": "#373739",
         "tertiary": "#56C590",
         "quaternary": "#CFD4FA",
         "body": "#000",
-        "border": "##3d3d3d",
-        "light": "##101010"
+        "border": "#3d3d3d",
+        "light": "#1d1d1f"
       },
       "text_color": {
-        "text": "#aaa",
+        "text": "#86868b",
         "text-dark": "#f5f5f7",
         "text-light": "#fff"
       }

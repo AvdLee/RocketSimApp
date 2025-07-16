@@ -6,7 +6,7 @@ plans:
     title: Trial
     description: Keen to try it out first? Sign up for a free two weeks trial.
     price_prefix: ""
-    color: "#292929"
+    color: "#1d1d1f"
     features:
       - enable: true
         included: true
@@ -33,7 +33,7 @@ plans:
     title: Individual
     description: Perfect for solo developers.
     price_prefix: "€"
-    color: "#292929"
+    color: "#1d1d1f"
     features:
       - enable: true
         included: true
@@ -61,7 +61,7 @@ plans:
     title: Teams
     description: Perfect for teams with multiple developers.
     price_prefix: "€"
-    color: "#292929"
+    color: "#1d1d1f"
     features:
       - enable: true
         included: true
@@ -88,7 +88,7 @@ plans:
     title: Enterprise
     description: For larger enterprises with complex requirements.
     price_prefix: ""
-    color: "#292929"
+    color: "#1d1d1f"
     features:
       - enable: true
         included: true

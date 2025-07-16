@@ -211,7 +211,7 @@
   /* before */
   &::before {
     content: "";
-    @apply absolute bottom-0 left-0 bg-light h-1/2 w-full -z-10;
+    @apply absolute bottom-0 left-0 h-1/2 w-full -z-10;
   }
 }
 
