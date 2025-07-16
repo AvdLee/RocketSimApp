@@ -34,7 +34,8 @@ const teamsUrl =
         }
       </div>
       <div class="section-content">
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 justify-center gap-6">
+                  <div data-aos="fade-up-sm">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 justify-center max-xl:gap-6 xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]">
           {
             plans &&
               plans.length &&
@@ -43,18 +44,15 @@ const teamsUrl =
                 const cardColor = plan.color || "bg-secondary/80";
 
                 return (
-                  <div data-aos="fade-up-sm" data-aos-delay={index * 100}>
                     <div
                       class:list={[
-                        "p-8 rounded-[1.9rem] flex flex-col justify-between relative transition-shadow duration-300 hover:shadow-xl",
-                        { "bg-light text-text-dark ": isEvenIndex },
-                        { "bg-white text-text-dark": !isEvenIndex },
+                        "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
                       ]}
-                      style={`background-color: ${cardColor}`}
                     >
                       <div>
+                        <div class="lg:min-h-[13rem] xl:min-h-[15rem]">
                         <span
-                          class="h6 mb-7 inline-block"
+                          class="h6 mb-5 inline-block text-white"
                           set:html={markdownify(plan.title)}
                         />
                         {/* PRICE NUMBERS */}
@@ -77,7 +75,7 @@ const teamsUrl =
                           class="text-text "
                           set:html={markdownify(plan.description)}
                         />
-
+</div>
                         <hr class:list={["my-14 border-text-dark/20"]} />
                         <ul class="flex flex-col gap-5">
                           {plan.features &&
@@ -87,7 +85,7 @@ const teamsUrl =
                               .map((feature) => {
                                 const isIncluded = feature.included;
                                 return (
-                                  <li class="flex items-center gap-x-5 text-text-dark">
+                                  <li class="flex items-start gap-x-5 text-text-dark leading-tight">
                                     {!isIncluded ? (
                                       <svg
                                         width="24"
@@ -144,7 +142,7 @@ const teamsUrl =
                               : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
                           }
                           class:list={[
-                            "btn inline-block self-start mt-14 text-center rounded-full btn-primary",
+                            "btn py-2 w-full inline-block self-start mt-14 text-center rounded-full btn-primary",
                             plan.cta.class,
                           ]}
                         >
@@ -152,10 +150,10 @@ const teamsUrl =
                         </a>
                       )}
                     </div>
-                  </div>
                 );
               })
           }
+          </div>
         </div>
       </div>
     </div>
