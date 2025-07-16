@@ -306,7 +306,7 @@ compare_plans:
         - item: Distribution outside of the App Store
           free: false
           individual: false
-          teams: true
+          teams: Enterprise
         - item: Group based user management
           free: false
           individual: false
