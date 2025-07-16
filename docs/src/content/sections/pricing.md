@@ -3,109 +3,110 @@ title: "Choose a pricing plan best suited <em>for you</em>"
 
 plans:
   - enable: true
-    title: Trial
-    description: Keen to try it out first? Sign up for a free two weeks trial.
-    price_prefix: ""
-    color: "#1d1d1f"
-    features:
-      - enable: true
-        included: true
-        feature: Pro access to RocketSim.
-      - enable: true
-        included: true
-        feature: Team build insights.
-      - enable: true
-        included: true
-        feature: User management.
-      - enable: true
-        included: true
-        feature: License management.
-    price:
-      yearly:
-        amount: FREE
-        period: ""
-    cta:
-      enable: true
-      label: Sign up for a free trial
-      site: teams
-      link: "/signup/trial"
-  - enable: true
-    title: Individual
-    description: Perfect for solo developers.
+    title: Free
+    description: Explore how our 30+ Xcode Simulator features can increase your productivity
     price_prefix: "€"
     color: "#1d1d1f"
     features:
       - enable: true
-        included: true
-        feature: Pro access to RocketSim.
+        included: false
+        feature: Pro access to RocketSim
       - enable: true
         included: false
-        feature: Team build insights.
+        feature: Team build insights
       - enable: true
         included: false
-        feature: User management.
+        feature: User management
       - enable: true
         included: false
-        feature: License management.
+        feature: License management
     price:
       yearly:
-        amount: 50
-        period: per year
+        amount: 0
+        period: per month
     cta:
       enable: true
       label: Download now
       site: custom
-      link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
-      class: "plausible-event-name=App+Store+Install"
+      link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=pricing-table-free&mt=8"
+      class: "plausible-event-name=App+Store+Install+Free"
   - enable: true
-    title: Teams
-    description: Perfect for teams with multiple developers.
+    title: Personal
+    description: Ideal for solo developers—enjoy every Pro feature with an in-app purchase
     price_prefix: "€"
     color: "#1d1d1f"
     features:
       - enable: true
         included: true
-        feature: Pro access to RocketSim.
+        feature: Pro access to RocketSim
       - enable: true
-        included: true
-        feature: Team build insights.
+        included: false
+        feature: Team build insights
       - enable: true
-        included: true
-        feature: User management.
+        included: false
+        feature: User management
       - enable: true
-        included: true
-        feature: License management.
+        included: false
+        feature: License management
     price:
       yearly:
-        amount: 120
-        period: "per year"
+        amount: 5
+        period: per month
     cta:
       enable: true
-      label: Subscribe
+      label: Download now
       site: custom
-      link: "/contact" # TODO: link to Stripe
-  - enable: false
-    title: Enterprise
-    description: For larger enterprises with complex requirements.
-    price_prefix: ""
+      link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=pricing-table-personal&mt=8"
+      class: "plausible-event-name=App+Store+Install+Personal"
+  - enable: true
+    title: Teams
+    description: Perfect for teams with multiple developers
+    price_prefix: "€"
     color: "#1d1d1f"
     features:
       - enable: true
         included: true
-        feature: "Everything in Teams, and:"
+        feature: Pro access to RocketSim
       - enable: true
         included: true
-        feature: SAML based SSO.
+        feature: Team build insights
       - enable: true
         included: true
-        feature: Distribution outside of the App Store.
+        feature: User management
       - enable: true
         included: true
-        feature: Group based user management.
+        feature: License management
     price:
       yearly:
-        amount: COMING SOON
-        period: ""
+        amount: 10
+        period: "per month"
+    cta:
+      enable: true
+      label: Start 14-day Trial
+      site: custom
+      link: "/signup/trial"
+  - enable: false
+    title: Enterprise
+    description: For larger enterprises with complex requirements
+    price_prefix: "€"
+    color: "#1d1d1f"
+    features:
+      - enable: true
+        included: true
+        feature: "Everything in Teams"
+      - enable: true
+        included: true
+        feature: SAML based SSO
+      - enable: true
+        included: true
+        feature: Distribution outside of the App Store
+      - enable: true
+        included: true
+        feature: Group based user management
+    price:
+      yearly:
+        amount: "15"
+        period: "per month"
     cta:
       enable: true
       label: Contact sales
