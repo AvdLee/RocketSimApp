@@ -94,7 +94,7 @@ const teamsUrl =
                                         height="24"
                                         viewBox="0 0 24 24"
                                         fill="none"
-                                        class="text-primary w-full max-w-6 aspect-square "
+                                        class="text-light w-full max-w-6 aspect-square "
                                         xmlns="http://www.w3.org/2000/svg"
                                       >
                                         <g opacity="0.4">
@@ -144,11 +144,7 @@ const teamsUrl =
                               : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
                           }
                           class:list={[
-                            "btn inline-block self-start mt-14 text-center rounded-full",
-                            {
-                              "btn btn-primary": isEvenIndex,
-                            },
-                            { "btn btn-secondary": !isEvenIndex },
+                            "btn inline-block self-start mt-14 text-center rounded-full btn-primary",
                             plan.cta.class,
                           ]}
                         >
