@@ -12,18 +12,19 @@ export const comparePlansSectionCollection = defineCollection({
     enable: z.boolean(),
     compare_plans: z.object({
       compare: z.string(),
+      free: z.string(),
       individual: z.string(),
       teams: z.string(),
-      enterprise: z.string(),
       item: z.array(
         z.object({
           title: z.string(),
+          description: z.string().optional(),
           list: z.array(
             z.object({
               item: z.string(),
+              free: z.union([z.boolean(), z.string()]),
               individual: z.union([z.boolean(), z.string()]),
               teams: z.union([z.boolean(), z.string()]),
-              enterprise: z.union([z.boolean(), z.string()]),
             }),
           ),
         }),
