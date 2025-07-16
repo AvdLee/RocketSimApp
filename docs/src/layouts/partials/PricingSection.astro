@@ -35,7 +35,7 @@ const teamsUrl =
       </div>
       <div class="section-content">
                   <div data-aos="fade-up-sm">
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 justify-center max-md:gap-6">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 justify-center max-xl:gap-6">
           {
             plans &&
               plans.length &&
@@ -46,12 +46,12 @@ const teamsUrl =
                 return (
                     <div
                       class:list={[
-                        "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-md:rounded-2xl md:nth-of-type-1:rounded-tl-2xl md:max-xl:nth-of-type-2:rounded-tr-2xl md:max-xl:nth-of-type-3:rounded-bl-2xl md:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl",
+                        "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)]",
                       ]}
                     >
                       <div>
                         <span
-                          class="h6 mb-7 inline-block"
+                          class="h6 mb-5 inline-block text-white"
                           set:html={markdownify(plan.title)}
                         />
                         {/* PRICE NUMBERS */}
@@ -91,7 +91,7 @@ const teamsUrl =
                                         height="24"
                                         viewBox="0 0 24 24"
                                         fill="none"
-                                        class="text-light w-full max-w-6 aspect-square "
+                                        class="text-text-light w-full max-w-6 aspect-square "
                                         xmlns="http://www.w3.org/2000/svg"
                                       >
                                         <g opacity="0.4">
