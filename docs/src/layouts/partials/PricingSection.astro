@@ -52,11 +52,11 @@ const teamsUrl =
                       <div>
                         <div class="lg:min-h-[13rem] xl:min-h-[15rem]">
                         <span
-                          class="h6 mb-5 inline-block text-white"
+                          class="h6 mb-2 inline-block text-white"
                           set:html={markdownify(plan.title)}
                         />
                         {/* PRICE NUMBERS */}
-                        <div class="flex items-baseline gap-2 mb-5">
+                        <div class="flex items-baseline gap-2 mb-2">
                           <h3 class="flex items-center text-text-dark text-h2">
                             <span>{plan.price_prefix}</span>
                             <span
@@ -66,10 +66,13 @@ const teamsUrl =
                             />
                           </h3>
                           <div class="flex flex-col gap-1 text-text">
-                            <span class="text-yearly capitalize">
+                            <span class="text-yearly">
                               {plan.price.yearly.period}
                             </span>
                           </div>
+                        </div>
+                        <div class="mb-6 h-4">
+                        {plan.price.yearly.note ? <p class="text-text text-sm" set:html={markdownify(plan.price.yearly.note)} /> : null}
                         </div>
                         <p
                           class="text-text "

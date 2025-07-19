@@ -23,7 +23,7 @@ plans:
     price:
       yearly:
         amount: 0
-        period: per month
+        period: "/ month"
     cta:
       enable: true
       label: Download now
@@ -51,7 +51,7 @@ plans:
     price:
       yearly:
         amount: 5
-        period: per month
+        period: "/ month"
     cta:
       enable: true
       label: Download now
@@ -79,7 +79,8 @@ plans:
     price:
       yearly:
         amount: 10
-        period: "per month"
+        period: "/ seat / month"
+        note: "€120 billed annually"
     cta:
       enable: true
       label: Start 14-day Trial
@@ -105,8 +106,9 @@ plans:
         feature: Group based user management
     price:
       yearly:
-        amount: "15"
-        period: "per month"
+        amount: 15
+        period: "/ seat / month"
+        note: "€180 billed annually"
     cta:
       enable: true
       label: Contact sales
