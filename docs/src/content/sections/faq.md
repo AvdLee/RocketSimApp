@@ -9,7 +9,7 @@ list:
     question: "Can I invite my whole team during the Teams trial?"
     answer: "Yes, you can invite your entire team. Simply specify your team size when starting the trial, and you'll receive the corresponding number of seats."
   - enable: true
-    question: "What happens when my trials is over?"
+    question: "What happens when my trial is over?"
     answer: "You will have the option to convert to a paying plan or you'll loose access to RocketSim Pro features and team build insights."
   - enable: true
     question: "Can I cancel, upgrade, or downgrade anytime?"
