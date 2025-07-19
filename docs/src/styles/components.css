@@ -272,3 +272,11 @@
     }
   }
 }
+
+.faq-answer {
+  @apply text-base;
+
+  a {
+    @apply text-white underline;
+  }
+}

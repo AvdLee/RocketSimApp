@@ -27,7 +27,7 @@ const { title, list } = sectionData.data;
           list.map((item, index) => (
             <div data-aos="fade-up-sm" data-aos-delay={100 * index}>
               <Accordion client:load title={item.question}>
-                <div set:html={markdownify(item.answer)} />
+                <div class="faq-answer" set:html={markdownify(item.answer)} />
               </Accordion>
             </div>
           ))
