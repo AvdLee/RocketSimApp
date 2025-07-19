@@ -163,7 +163,7 @@
   @apply aspect-square rotate-[0] right-0 relative border-[1.5px] border-primary text-primary rounded-md;
 }
 .accordion-content {
-  @apply ease-out pl-6 pb-8 text-base text-text/80 lg:col-8 pr-10;
+  @apply ease-out pl-6 pb-8 text-base text-text lg:col-8 pr-10;
 }
 
 /* modal */
