@@ -311,4 +311,8 @@ compare_plans:
           free: false
           individual: false
           teams: Coming soon (Enterprise)
+        - item: Audit logging
+          free: false
+          individual: false
+          teams: Coming soon (Enterprise)
 ---

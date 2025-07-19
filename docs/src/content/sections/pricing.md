@@ -88,7 +88,7 @@ plans:
       link: "/signup/trial"
   - enable: false
     title: Enterprise
-    description: For larger enterprises with complex requirements
+    description: For larger enterprise with a need for more control and security
     price_prefix: "€"
     color: "#1d1d1f"
     features:
