@@ -178,7 +178,7 @@ const { title, meta_title, description, image, noindex, canonical } =
           const currentScroll = window.pageYOffset;
           if (
             sticky_header &&
-            currentScroll > 300 &&
+            currentScroll > 1 &&
             currentScroll > lastScroll &&
             header
           ) {
@@ -187,22 +187,20 @@ const { title, meta_title, description, image, noindex, canonical } =
               "!top-0",
               "bg-body/30",
               "backdrop-blur-lg",
-              "shadow-sm",
-              "border-b",
               "border-border",
               "show-active-item"
             );
-          } else if (currentScroll < 250 && header) {
+            header.classList.remove('border-transparent');
+          } else if (currentScroll < 1 && header) {
             header.classList.remove(
               "fixed",
               "!top-0",
               "bg-body/30",
               "backdrop-blur-lg",
-              "shadow-sm",
-              "border-b",
               "border-border",
               "show-active-item"
             );
+            header.classList.add('border-transparent');
           }
           lastScroll = currentScroll;
         };
