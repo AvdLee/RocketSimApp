@@ -21,11 +21,20 @@
 .nav-link {
   @apply text-white opacity-80 hover:opacity-100 relative block min-lg:text-sm font-normal transition max-lg:px-5 mx-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
 
-  .show-active-item &.active {
-    &::after {
-      @apply content-[''] absolute top-[64px] left-0 w-full h-[0.0625rem] bg-white;
+  &.active {
+    @media (max-width: 1023px) {
+      text-decoration: underline;
+    }
+
+    .show-active-item & {
+      @media (min-width: 1024px) {
+        &::after {
+          @apply content-[''] absolute top-[64px] left-0 w-full h-[0.0625rem] bg-white;
+        }
+      }
     }
   }
+
 }
 
 .nav-dropdown {
