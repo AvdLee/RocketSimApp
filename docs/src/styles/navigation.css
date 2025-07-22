@@ -19,7 +19,7 @@
 }
 
 .nav-link {
-  @apply text-white opacity-80 hover:opacity-100 relative block min-lg:text-sm font-normal transition max-lg:px-5 mx-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
+  @apply text-white no-underline opacity-80 hover:opacity-100 relative block min-lg:text-sm font-normal transition max-lg:px-5 mx-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
 
   &.active {
     @media (max-width: 1023px) {

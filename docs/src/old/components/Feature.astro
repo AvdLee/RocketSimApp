@@ -70,12 +70,24 @@ if (asset.alignment === "full-width") {
   }
 
   .feature-content__content {
+
     & :global(strong) {
       font-weight: 400;
     }
 
     & :global(p) {
       margin: 0 0 1rem;
+
+      font-size: 1rem;
+    }
+
+    & :global(ul) {
+      padding-left: 1.75rem;
+      margin: 1rem 0;
+
+      font-size: 1rem;
+
+      list-style: initial;
     }
   }
 
@@ -115,7 +127,7 @@ if (asset.alignment === "full-width") {
 </style>
 
 <article
-  class="grid"
+  class="deprecated-grid"
   data-aos={asset.alignment === "full-width" ? undefined : "fade-up"}
 >
   <div

@@ -34,7 +34,16 @@
   --radius-3xl-sm: 19.6px;
 }
 
-.grid {
+:root {
+  --text-color: #aaa;
+  --text-color-light: #f5f5f7;
+  --primary-color: #0093ff;
+  --primary-color-accent: #3961d0;
+  --primary-color-active: #0062cc;
+  --ring: #0069d9;
+}
+
+.deprecated-grid {
   display: grid;
   grid-gap: 0 0.625rem;
   grid-template-columns: repeat(4, [col-start] 1fr);

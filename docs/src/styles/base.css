@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  @apply bg-body text-base  font-primary font-normal tracking-[-0.022em] leading-relaxed text-text antialiased scroll-smooth;
+  @apply bg-body text-base  font-primary font-normal tracking-[-0.022em] leading-normal text-text antialiased scroll-smooth;
 }
 
 h1,
@@ -45,13 +45,17 @@ h6,
   @apply text-h6;
 }
 
+a {
+  @apply text-primary bg-transparent underline;
+}
+
 p {
   @apply text-[1.15rem];
 }
 
 b,
 strong {
-  @apply font-semibold;
+  @apply font-semibold text-text-light;
 }
 
 code {
