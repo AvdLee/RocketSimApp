@@ -11,6 +11,8 @@ const sectionData = (await getEntry(
 )) as CollectionEntry<"ctaSectionCollection">;
 const { enable, title, description, image, call_to_actions } = sectionData.data;
 
+const callToActions = Astro.url.pathname === '/team-insights' ? [...call_to_actions].reverse() : call_to_actions;
+
 const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
@@ -34,13 +36,13 @@ const teamsUrl =
               data-aos="fade-up-sm"
               data-aos-delay="100"
             />
-            {call_to_actions.length > 0 && (
+            {callToActions.length > 0 && (
               <div
                 data-aos="fade-in-sm"
                 data-aos-delay="200"
                 class="mt-10 flex flex-col sm:flex-row items-stretch gap-3 w-full"
               >
-                {call_to_actions.map((cta, index) => (
+                {callToActions.map((cta, index) => (
                   <a
                     href={
                       cta.site === "custom"
