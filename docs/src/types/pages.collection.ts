@@ -42,3 +42,13 @@ export const termsCollection = defineCollection({
     draft: z.boolean(),
   }),
 });
+
+// Thank you collection schema
+export const thankYouCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean(),
+  }),
+});

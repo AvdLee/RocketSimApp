@@ -1,13 +1,14 @@
 ---
-import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
 
-import BaseLayout from "../old/layouts/BaseLayout.astro";
-import Navigation from "../old/components/Navigation.astro";
-import NavigationLink from "../old/components/NavigationLink.astro";
+import Base from "@/layouts/Base.astro";
 import SectionHeader from "../old/components/SectionHeader.astro";
 import NewsLetterForm from "../old/components/NewsLetterForm.astro";
 
-import appIcon from "../assets/rocketsim-app-icon.png";
+
+const pageIndex = await getEntry("thank-you", "-index");
+if (!pageIndex) return null;
+const { title, meta_title, description } = pageIndex.data;
 ---
 
 <style>
@@ -44,6 +45,11 @@ import appIcon from "../assets/rocketsim-app-icon.png";
     }
   }
 
+  .thank-you-wrapper {
+    padding-top: 0.0625rem;
+    margin-top: 5rem;
+  }
+
   .thank-you {
     text-align: center;
   }
@@ -63,36 +69,8 @@ import appIcon from "../assets/rocketsim-app-icon.png";
   }
 </style>
 
-<BaseLayout
-  pageTitle="Thank you - RocketSim"
-  pageDescription="Thank you for your order! Your order is being processed and you will receive an email soon."
->
-  <header>
-    <div class="logo">
-      <a href="/">
-        <Image
-          src={appIcon}
-          widths={[128, 512]}
-          sizes="(max-width: 767px) 4rem, 16rem"
-          alt="RocketSim app icon"
-          class="logo-image"
-        />
-      </a>
-    </div>
-    <Navigation isAlwaysActive={true}>
-      <NavigationLink href="/">All Features</NavigationLink>
-      <NavigationLink href="https://docs.rocketsim.app" target="_blank">
-        Documentation
-      </NavigationLink>
-      <NavigationLink
-        href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
-        target="_blank"
-      >
-        FAQ
-      </NavigationLink>
-    </Navigation>
-  </header>
-  <main>
+<Base title={title} meta_title={meta_title} description={description}>
+  <div class="thank-you-wrapper">
     <section class="deprecated-grid thank-you">
       <SectionHeader title="Thanks for purchasing RocketSim!" />
       <p>An invitation email with further instructions has been send to you.</p>
@@ -106,5 +84,5 @@ import appIcon from "../assets/rocketsim-app-icon.png";
       />
       <NewsLetterForm />
     </section>
-  </main>
-</BaseLayout>
+</div>
+</Base>
