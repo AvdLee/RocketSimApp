@@ -1,7 +1,7 @@
 import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
-import { pricingCollection } from "./types/pages.collection";
+import { pricingCollection, privacyCollection, teamInsightsCollection } from "./types/pages.collection";
 import {
   comparePlansSectionCollection,
   ctaSectionCollection,
@@ -43,6 +43,8 @@ const feature = defineCollection({
 export const collections = {
   feature,
   pricing: pricingCollection,
+  privacy: privacyCollection,
+  "team-insights": teamInsightsCollection,
   ctaSectionCollection,
   comparePlansSectionCollection,
   faqSectionCollection,

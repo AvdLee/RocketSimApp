@@ -1,6 +1,8 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Header from "../old/components/Header.astro";
+import Navigation from "../old/components/Navigation.astro";
+import NavigationLink from "../old/components/NavigationLink.astro";
 
 import Notification from "../old/components/Notification.astro";
 import AppStore from "../old/components/AppStore.astro";
@@ -30,6 +32,18 @@ import logoImage from "../assets/rocketsim-logo.svg";
       >up to 2x faster</strong
     > with RocketSim.
   </Header>
+  <Navigation>
+    <NavigationLink
+      href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
+      className="plausible-event-name=App+Store+Install"
+      id="js-header-app-store-button"
+      asButton
+      target="_blank"
+    >
+      Download now
+    </NavigationLink>
+    <NavigationLink href="/team-insights">Team Licenses</NavigationLink>
+  </Navigation>
   <AppStore />
   <Reviews />
   <Features />

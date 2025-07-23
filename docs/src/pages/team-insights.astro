@@ -1,9 +1,10 @@
 ---
-import BaseLayout from "../old/layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
+
+import Base from "@/layouts/Base.astro";
 import Navigation from "../old/components/Navigation.astro";
 import NavigationLink from "../old/components/NavigationLink.astro";
 import Header from "../old/components/Header.astro";
-import Footer from "../old/components/Footer.astro";
 import Insights from "../old/components/Insights.astro";
 import InsightsBreakdown from "../old/components/InsightsBreakdown.astro";
 import InsightsActionable from "../old/components/InsightsActionable.astro";
@@ -13,32 +14,13 @@ import AppStore from "../old/components/AppStore.astro";
 import TeamTestimonial from "../old/components/TeamTestimonial.astro";
 
 import logoImage from "../assets/rocketsim-insights-logo.svg";
+
+const pageIndex = await getEntry("team-insights", "-index");
+if (!pageIndex) return null;
+const { title, meta_title, description } = pageIndex.data;
 ---
 
-<style>
-  .login-button-container {
-    position: absolute;
-    top: 1rem;
-    right: 0rem;
-    left: 0;
-    z-index: 1;
-  }
-
-  .button--login {
-    grid-column: span 1 / -1;
-  }
-</style>
-
-<BaseLayout
-  pageTitle="Build Apps Faster with Insights - RocketSim"
-  pageDescription="Simulator Airplane Mode, Location Simulation, Accessibility Testing, Compare designs inside the iOS simulator. Test deeplinks, push notifications."
->
-  <div class="login-button-container deprecated-grid">
-    <a
-      href="https://teams.rocketsim.app"
-      class="button button--small button--login">Login</a
-    >
-  </div>
+<Base title={title} meta_title={meta_title} description={description}>
   <Header
     title="Make your whole team Build Apps Faster"
     logo={logoImage}
@@ -49,89 +31,77 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
     p75 build duration, machine benchmarks, and more.
   </Header>
   <Navigation showLogin>
-    <NavigationLink href="#get-team-license" asButton>
+    <NavigationLink href="/pricing" asButton>
       Get Team Licenses
     </NavigationLink>
     <NavigationLink href="/">All Features</NavigationLink>
-    <NavigationLink href="https://docs.rocketsim.app" target="_blank">
-      Documentation
-    </NavigationLink>
-    <NavigationLink
-      href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
-      target="_blank"
-    >
-      FAQ
-    </NavigationLink>
   </Navigation>
-  <main>
-    <TeamTestimonial />
-    <Insights />
-    <InsightsBreakdown
-      title="Is it worth getting an M4 Max?"
-      chart={{
-        title: "Build Duration by Machine",
-        data: [
-          {
-            title: "Mac Studio 2024 / M2 Ultra 24-core / 192 RAM",
-            value: 12,
-            width: 0.36,
-          },
-          {
-            title: 'MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM',
-            value: 14,
-            width: 0.42,
-          },
-          {
-            title: 'MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM',
-            value: 26,
-            width: 0.77,
-          },
-        ],
-      }}
-      contentTitle="Benchmark your team's project"
-    >
-      <p>
-        With team licenses, your <strong>local</strong> builds will be synced. You'll
-        find out{" "}
-        <strong>which machine setup performs best</strong> for your Xcode project.
-      </p>
-    </InsightsBreakdown>
-    <InsightsBreakdown
-      title="Does Xcode 16 improve our project's build times?"
-      chart={{
-        title: "Build Duration by Xcode Version",
-        data: [
-          {
-            title: "Xcode 16.3 (16E140)",
-            value: 13.5,
-            width: 0.68,
-          },
-          {
-            title: "Xcode 15.4 (15F31d)",
-            value: 15,
-            width: 0.76,
-          },
-          {
-            title: "Xcode 15.3 (15E204a)",
-            value: 15.3,
-            width: 0.78,
-          },
-        ],
-      }}
-      contentTitle="Build duration grouped by Xcode version"
-    >
-      <p>
-        RocketSim Insights automatically benchmarks your team's <strong
-          >local</strong
-        > build durations to tell you <strong
-          >how much an Xcode version improves build times</strong
-        > for your Xcode project.
-      </p>
-    </InsightsBreakdown>
-    <InsightsActionable />
-    <OnlineTeamManager />
-    <Pricing />
-    <AppStore />
-  </main>
-  <Footer />
-</BaseLayout>
+  <TeamTestimonial />
+  <Insights />
+  <InsightsBreakdown
+    title="Is it worth getting an M4 Max?"
+    chart={{
+      title: "Build Duration by Machine",
+      data: [
+        {
+          title: "Mac Studio 2024 / M2 Ultra 24-core / 192 RAM",
+          value: 12,
+          width: 0.36,
+        },
+        {
+          title: 'MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM',
+          value: 14,
+          width: 0.42,
+        },
+        {
+          title: 'MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM',
+          value: 26,
+          width: 0.77,
+        },
+      ],
+    }}
+    contentTitle="Benchmark your team's project"
+  >
+    <p>
+      With team licenses, your <strong>local</strong> builds will be synced. You'll
+      find out{" "}
+      <strong>which machine setup performs best</strong> for your Xcode project.
+    </p>
+  </InsightsBreakdown>
+  <InsightsBreakdown
+    title="Does Xcode 16 improve our project's build times?"
+    chart={{
+      title: "Build Duration by Xcode Version",
+      data: [
+        {
+          title: "Xcode 16.3 (16E140)",
+          value: 13.5,
+          width: 0.68,
+        },
+        {
+          title: "Xcode 15.4 (15F31d)",
+          value: 15,
+          width: 0.76,
+        },
+        {
+          title: "Xcode 15.3 (15E204a)",
+          value: 15.3,
+          width: 0.78,
+        },
+      ],
+    }}
+    contentTitle="Build duration grouped by Xcode version"
+  >
+    <p>
+      RocketSim Insights automatically benchmarks your team's <strong
+        >local</strong
+      > build durations to tell you <strong
+        >how much an Xcode version improves build times</strong
+      > for your Xcode project.
+    </p>
+  </InsightsBreakdown>
+  <InsightsActionable />
+  <OnlineTeamManager />
+  <Pricing />
+  <AppStore />
+</Base>

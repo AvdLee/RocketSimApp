@@ -12,3 +12,23 @@ export const pricingCollection = defineCollection({
     }),
   }),
 });
+
+// Team insights collection schema
+export const teamInsightsCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean(),
+  }),
+});
+
+// Privacy collection schema
+export const privacyCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean(),
+  }),
+});
