@@ -5,7 +5,6 @@ import Base from "@/layouts/Base.astro";
 import SectionHeader from "../old/components/SectionHeader.astro";
 import NewsLetterForm from "../old/components/NewsLetterForm.astro";
 
-
 const pageIndex = await getEntry("thank-you", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
