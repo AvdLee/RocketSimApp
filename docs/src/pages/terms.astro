@@ -1,16 +1,25 @@
 ---
-import BaseLayout from "../old/layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
+
+import Base from "@/layouts/Base.astro";
 import Header from "../old/components/Header.astro";
 import Navigation from "../old/components/Navigation.astro";
 import NavigationLink from "../old/components/NavigationLink.astro";
-import Footer from "../old/components/Footer.astro";
 
 import logoImage from "../assets/rocketsim-logo.svg";
+
+const pageIndex = await getEntry("terms", "-index");
+if (!pageIndex) return null;
+const { title, meta_title, description } = pageIndex.data;
 ---
 
 <style>
   main {
     margin-bottom: 2rem;
+  }
+
+  p {
+    margin: 1rem 0;
   }
 
   .articles {
@@ -97,10 +106,7 @@ import logoImage from "../assets/rocketsim-logo.svg";
   }
 </style>
 
-<BaseLayout
-  pageTitle="Term and Conditions - RocketSim"
-  pageDescription="RocketSim Terms and Conditions"
->
+<Base title={title} meta_title={meta_title} description={description}>
   <Header
     title="RocketSim Terms and Conditions"
     logo={logoImage}
@@ -124,7 +130,6 @@ import logoImage from "../assets/rocketsim-logo.svg";
       FAQ
     </NavigationLink>
   </Navigation>
-  <main>
     <div class="deprecated-grid">
       <div>
         <p>
@@ -1099,6 +1104,4 @@ import logoImage from "../assets/rocketsim-logo.svg";
         <p><em>Last updated: April 9th, 2025</em></p>
       </div>
     </div>
-    <Footer />
-  </main>
-</BaseLayout>
+</Base>

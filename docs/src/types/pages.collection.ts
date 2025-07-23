@@ -32,3 +32,13 @@ export const privacyCollection = defineCollection({
     draft: z.boolean(),
   }),
 });
+
+// Terms collection schema
+export const termsCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean(),
+  }),
+});
