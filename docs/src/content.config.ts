@@ -1,7 +1,13 @@
 import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
 
-import { pricingCollection, privacyCollection, teamInsightsCollection, termsCollection, thankYouCollection } from "./types/pages.collection";
+import {
+  pricingCollection,
+  privacyCollection,
+  teamInsightsCollection,
+  termsCollection,
+  thankYouCollection,
+} from "./types/pages.collection";
 import {
   comparePlansSectionCollection,
   ctaSectionCollection,

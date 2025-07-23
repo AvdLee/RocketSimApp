@@ -17,7 +17,6 @@
     "@astrojs/sitemap": "^3.4.0",
     "aos": "^2.3.4",
     "astro": "^5.7.13",
-    "astro-font": "^1.0.0",
     "marked": "^15.0.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

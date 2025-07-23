@@ -103,7 +103,7 @@ export const pricingSectionCollection = defineCollection({
           yearly: z.object({
             amount: z.union([z.number(), z.string()]),
             period: z.string(),
-            note: z.string().optional()
+            note: z.string().optional(),
           }),
         }),
         cta: z.object({

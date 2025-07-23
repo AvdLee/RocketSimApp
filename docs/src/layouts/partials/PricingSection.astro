@@ -34,16 +34,18 @@ const teamsUrl =
         }
       </div>
       <div class="section-content">
-                  <div data-aos="fade-up-sm">
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 justify-center max-xl:gap-6 xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]">
-          {
-            plans &&
-              plans.length &&
-              plans.map((plan, index) => {
-                const isEvenIndex = index % 2 !== 0;
-                const cardColor = plan.color || "bg-secondary/80";
+        <div data-aos="fade-up-sm">
+          <div
+            class="grid md:grid-cols-2 xl:grid-cols-4 justify-center max-xl:gap-6 xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]"
+          >
+            {
+              plans &&
+                plans.length &&
+                plans.map((plan, index) => {
+                  const isEvenIndex = index % 2 !== 0;
+                  const cardColor = plan.color || "bg-secondary/80";
 
-                return (
+                  return (
                     <div
                       class:list={[
                         "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
@@ -51,34 +53,39 @@ const teamsUrl =
                     >
                       <div>
                         <div class="lg:min-h-[13rem] xl:min-h-[15rem]">
-                        <span
-                          class="h6 mb-2 inline-block text-white"
-                          set:html={markdownify(plan.title)}
-                        />
-                        {/* PRICE NUMBERS */}
-                        <div class="flex items-baseline gap-2 mb-2">
-                          <h3 class="flex items-center text-text-dark text-h2">
-                            <span>{plan.price_prefix}</span>
-                            <span
-                              class="data-count"
-                              data-count-yearly={plan.price.yearly.amount}
-                              set:html={plan.price.yearly.amount}
-                            />
-                          </h3>
-                          <div class="flex flex-col gap-1 text-text">
-                            <span class="text-yearly">
-                              {plan.price.yearly.period}
-                            </span>
+                          <span
+                            class="h6 mb-2 inline-block text-white"
+                            set:html={markdownify(plan.title)}
+                          />
+                          {/* PRICE NUMBERS */}
+                          <div class="flex items-baseline gap-2 mb-2">
+                            <h3 class="flex items-center text-text-dark text-h2">
+                              <span>{plan.price_prefix}</span>
+                              <span
+                                class="data-count"
+                                data-count-yearly={plan.price.yearly.amount}
+                                set:html={plan.price.yearly.amount}
+                              />
+                            </h3>
+                            <div class="flex flex-col gap-1 text-text">
+                              <span class="text-yearly">
+                                {plan.price.yearly.period}
+                              </span>
+                            </div>
                           </div>
+                          <div class="mb-6 h-4">
+                            {plan.price.yearly.note ? (
+                              <p
+                                class="text-text text-sm"
+                                set:html={markdownify(plan.price.yearly.note)}
+                              />
+                            ) : null}
+                          </div>
+                          <p
+                            class="text-text "
+                            set:html={markdownify(plan.description)}
+                          />
                         </div>
-                        <div class="mb-6 h-4">
-                        {plan.price.yearly.note ? <p class="text-text text-sm" set:html={markdownify(plan.price.yearly.note)} /> : null}
-                        </div>
-                        <p
-                          class="text-text "
-                          set:html={markdownify(plan.description)}
-                        />
-</div>
                         <hr class:list={["my-14 border-text-dark/20"]} />
                         <ul class="flex flex-col gap-5">
                           {plan.features &&
@@ -153,9 +160,9 @@ const teamsUrl =
                         </a>
                       )}
                     </div>
-                );
-              })
-          }
+                  );
+                })
+            }
           </div>
         </div>
       </div>

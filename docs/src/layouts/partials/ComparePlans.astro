@@ -57,10 +57,14 @@ const { enable, title, compare_plans } = sectionData.data;
                               colspan="4"
                               class="px-10 pb-4 pt-12 font-medium text-3xl"
                             >
-                              <div class="text-text-light pb-2">{item.title}</div>
+                              <div class="text-text-light pb-2">
+                                {item.title}
+                              </div>
                               {item.description && (
-                                  <p class="text-base text-dark leading-relaxed">{item.description}</p>
-                                )}
+                                <p class="text-base text-dark leading-relaxed">
+                                  {item.description}
+                                </p>
+                              )}
                             </td>
                           </tr>
                           {item.list.map((listItem, idx: number) => (
@@ -247,14 +251,16 @@ const { enable, title, compare_plans } = sectionData.data;
                 {(["free", "individual", "teams"] as const).map((planName) => (
                   <div class="rounded-xl overflow-hidden">
                     <div class="text-white text-xl font-medium p-4 text-center border-border border-b">
-                      {(compare_plans)[planName]} plan
+                      {compare_plans[planName]} plan
                     </div>
                     {compare_plans.item.map((item) => (
                       <div class="py-12 ">
-                        <div class="font-medium text-text-light mb-2 text-3xl">{item.title}</div>
-{item.description && (
-                                  <p class="text-base text-dark">{item.description}</p>
-                                )}
+                        <div class="font-medium text-text-light mb-2 text-3xl">
+                          {item.title}
+                        </div>
+                        {item.description && (
+                          <p class="text-base text-dark">{item.description}</p>
+                        )}
                         {item.list.map((listItem) => {
                           const value = listItem[planName];
                           return (

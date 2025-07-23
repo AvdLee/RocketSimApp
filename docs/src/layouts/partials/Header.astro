@@ -22,7 +22,9 @@ const { pathname } = Astro.url;
 ---
 
 <div class={`absolute top-0 inset-x-0 z-30 `}>
-  <header class={`header w-full border-b border-transparent transition-all duration-300`}>
+  <header
+    class={`header w-full border-b border-transparent transition-all duration-300`}
+  >
     <nav class="container navbar px-4 sm:px-16">
       <!-- logo -->
       <Logo />
@@ -198,7 +200,10 @@ const { pathname } = Astro.url;
                     <a
                       aria-label={navigation_button.label}
                       href={navigation_button.link}
-                      class:list={["btn btn-sm btn-primary", navigation_button.class]}
+                      class:list={[
+                        "btn btn-sm btn-primary",
+                        navigation_button.class,
+                      ]}
                     >
                       {navigation_button.label}
                     </a>
