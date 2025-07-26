@@ -14,13 +14,13 @@ function replaceYear(text: string) {
 <footer class="pt-16 xl:pt-24">
   <div class="py-5 border-t border-border mt-14">
     <div
-      class="container flex flex-col md:flex-row justify-between items-center gap-5"
+      class="container flex flex-col lg:flex-row justify-between items-center gap-5"
     >
       <span
         class="text-center [&>a]:text-primary"
         set:html={markdownify(replaceYear(config.params.copyright))}
       />
-      <div class="flex flex-col md:flex-row items-center gap-5">
+      <div class="flex flex-col lg:flex-row items-center gap-5">
         <a
           href="/terms"
           class="hover:text-primary transition duration-300"
@@ -30,6 +30,18 @@ function replaceYear(text: string) {
           href="/privacy"
           class="hover:text-primary transition duration-300"
           aria-label="Privacy Policy Link">Privacy Policy</a
+        >
+        <a
+          href="https://docs.rocketsim.app"
+          target="_blank"
+          class="hover:text-primary transition duration-300"
+          >Documentation</a
+        >
+        <a
+          href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+          target="_blank"
+          class="hover:text-primary transition duration-300"
+          >FAQ</a
         >
       </div>
     </div>
