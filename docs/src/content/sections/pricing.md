@@ -85,7 +85,7 @@ plans:
       enable: true
       label: Start 14-day Trial
       site: teams
-      link: "/signup/trial"
+      link: "/signup/trial?utm_source=website&utm_medium=website&utm_content=pricing"
   - enable: false
     title: Enterprise
     description: For larger enterprise with a need for more control and security

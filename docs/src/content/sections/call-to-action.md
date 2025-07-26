@@ -12,5 +12,5 @@ call_to_actions:
   - enable: true
     label: Start a 14-day Teams Trial
     site: teams
-    link: "/signup/trial"
+    link: "/signup/trial?utm_source=website&utm_medium=website&utm_content=cta"
 ---
