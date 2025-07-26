@@ -11,15 +11,15 @@ a.btn {
 }
 
 .btn-primary {
-  @apply border-primary hover:text-white/80 duration-500 bg-primary text-white;
+  @apply border-primary duration-300 bg-primary text-white hover:bg-primary-accent hover:border-primary-accent active:bg-primary-active active:border-primary-active;
 }
 
 .btn-secondary {
-  @apply border-secondary hover:text-white/80 duration-500 bg-secondary text-white;
+  @apply border-secondary duration-300 bg-secondary text-white;
 }
 
 .btn-text-dark {
-  @apply border-text-dark hover:text-white/80 duration-500 bg-text-dark text-white hover:border-text-dark hover:bg-white hover:text-text-dark!;
+  @apply border-text-dark duration-500 bg-text-dark text-white hover:border-text-dark hover:bg-white hover:text-text-dark!;
 }
 
 .btn-outline-text-dark {

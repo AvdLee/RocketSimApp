@@ -3,6 +3,8 @@
     "default": {
       "theme_color": {
         "primary": "#0093ff",
+        "primary-active": "#0062cc",
+        "primary-accent": "#3961d0",
         "secondary": "#373739",
         "tertiary": "#56C590",
         "quaternary": "#CFD4FA",
