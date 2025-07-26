@@ -191,9 +191,9 @@ const { pathname } = Astro.url;
             ))
           }
         </ul>
-        <ul class="ml-5">
+        <ul class="ml-5 md:flex md:gap-2">
           {
-            navigation_buttons.map(
+            navigation_buttons.filter(button => (pathname !== '/team-insights' &&  button.label === 'Login') ? false : true).map(
               (navigation_button, index) =>
                 navigation_button.enable && (
                   <li class="hidden md:inline-block ">
