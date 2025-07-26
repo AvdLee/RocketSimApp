@@ -26,10 +26,16 @@
       text-decoration: underline;
     }
 
+    @media (min-width: 1024px) {
+      &::after {
+        @apply content-[''] absolute top-[64px] left-0 w-full h-[0.0625rem] bg-transparent transition-colors duration-300;
+      }
+    }
+
     .show-active-item & {
       @media (min-width: 1024px) {
         &::after {
-          @apply content-[''] absolute top-[64px] left-0 w-full h-[0.0625rem] bg-white;
+          @apply bg-white;
         }
       }
     }
