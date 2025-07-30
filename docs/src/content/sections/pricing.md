@@ -89,7 +89,7 @@ plans:
   - enable: false
     title: Enterprise
     description: For larger enterprise with a need for more control and security
-    price_prefix: "€"
+    price_prefix: ""
     color: "#1d1d1f"
     features:
       - enable: true
@@ -106,9 +106,8 @@ plans:
         feature: Group based user management
     price:
       yearly:
-        amount: 15
-        period: "/ seat / month"
-        note: "€180 billed annually"
+        amount: "CUSTOM"
+        period: ""
     cta:
       enable: true
       label: Contact sales
