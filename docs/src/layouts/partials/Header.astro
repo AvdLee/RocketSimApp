@@ -193,23 +193,29 @@ const { pathname } = Astro.url;
         </ul>
         <ul class="ml-5 md:flex md:gap-2">
           {
-            navigation_buttons.filter(button => (pathname !== '/team-insights' &&  button.label === 'Login') ? false : true).map(
-              (navigation_button, index) =>
-                navigation_button.enable && (
-                  <li class="hidden md:inline-block ">
-                    <a
-                      aria-label={navigation_button.label}
-                      href={navigation_button.link}
-                      class:list={[
-                        "btn btn-sm btn-primary",
-                        navigation_button.class,
-                      ]}
-                    >
-                      {navigation_button.label}
-                    </a>
-                  </li>
-                ),
-            )
+            navigation_buttons
+              .filter((button) =>
+                pathname !== "/team-insights" && button.label === "Login"
+                  ? false
+                  : true,
+              )
+              .map(
+                (navigation_button, index) =>
+                  navigation_button.enable && (
+                    <li class="hidden md:inline-block ">
+                      <a
+                        aria-label={navigation_button.label}
+                        href={navigation_button.link}
+                        class:list={[
+                          "btn btn-sm btn-primary",
+                          navigation_button.class,
+                        ]}
+                      >
+                        {navigation_button.label}
+                      </a>
+                    </li>
+                  ),
+              )
           }
         </ul>
       </div>

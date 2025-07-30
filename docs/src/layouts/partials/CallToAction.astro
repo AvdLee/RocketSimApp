@@ -11,7 +11,10 @@ const sectionData = (await getEntry(
 )) as CollectionEntry<"ctaSectionCollection">;
 const { enable, title, description, image, call_to_actions } = sectionData.data;
 
-const callToActions = Astro.url.pathname === '/team-insights' ? [...call_to_actions].reverse() : call_to_actions;
+const callToActions =
+  Astro.url.pathname === "/team-insights"
+    ? [...call_to_actions].reverse()
+    : call_to_actions;
 
 const teamsUrl =
   import.meta.env.MODE === "production"
