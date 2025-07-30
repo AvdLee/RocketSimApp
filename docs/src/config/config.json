@@ -1,0 +1,37 @@
+{
+  "site": {
+    "base_url": "https://rocketsim.app",
+    "teams_base_url": "https://teams.rocketsim.app",
+    "base_path": "/",
+    "trailing_slash": false,
+    "title": "Build Apps Faster - RocketSim",
+    "logo": "/images/rocketsim-logo.svg",
+    "logo_width": "120",
+    "logo_height": "24",
+    "logo_text": "RocketSim"
+  },
+  "settings": {
+    "sticky_header": true
+  },
+  "params": {
+    "copyright": "Copyright © {year} RocketSim. All Rights Reserved."
+  },
+  "navigation_buttons": [
+    {
+      "enable": true,
+      "label": "Download",
+      "link": "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=topbar&mt=8",
+      "class": "plausible-event-name=App+Store+Install"
+    },
+    {
+      "enable": true,
+      "label": "Login",
+      "link": "https://teams.rocketsim.app/login",
+      "class": "btn-secondary"
+    }
+  ],
+  "metadata": {
+    "meta_description": "Simulator Airplane Mode, Location Simulation, Accessibility Testing, Compare designs inside the iOS simulator. Test deeplinks, push notifications.",
+    "meta_image": "/og-banner-rocketsim.jpg"
+  }
+}

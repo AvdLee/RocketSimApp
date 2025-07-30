@@ -1,0 +1,30 @@
+{
+  "colors": {
+    "default": {
+      "theme_color": {
+        "primary": "#0093ff",
+        "primary-active": "#0062cc",
+        "primary-accent": "#3961d0",
+        "secondary": "#373739",
+        "tertiary": "#56C590",
+        "quaternary": "#CFD4FA",
+        "body": "#000",
+        "black-accent": "#07080a",
+        "border": "#3d3d3d",
+        "light": "#1d1d1f"
+      },
+      "text_color": {
+        "text": "#86868b",
+        "text-dark": "#f5f5f7",
+        "text-light": "#fff"
+      }
+    }
+  },
+  "fonts": {
+    "font_family": {
+      "primary": "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",Segoe UI Symbol",
+      "primary_type": "sans-serif"
+    },
+    "font_size": { "base": "17", "scale": "1.25" }
+  }
+}

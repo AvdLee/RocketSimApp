@@ -1,0 +1,240 @@
+---
+import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
+import config from "@/config/config.json";
+import { plainify } from "@/lib/utils/textConverter";
+import Footer from "@/partials/Footer.astro";
+import Header from "@/partials/Header.astro";
+import "@/styles/main.css";
+import { ClientRouter } from "astro:transitions";
+
+// types for frontmatters
+export interface Props {
+  title?: string;
+  meta_title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  canonical?: string;
+}
+
+// destructure frontmatter
+const { title, meta_title, description, image, noindex, canonical } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="RocketSim" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- theme meta -->
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#000"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- responsive meta -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+
+    <!-- title -->
+    <title>
+      {plainify(meta_title ? meta_title : title ? title : config.site.title)}
+    </title>
+
+    <!-- canonical url -->
+    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+
+    <!-- noindex robots -->
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- meta-description -->
+    <meta
+      name="description"
+      content={plainify(
+        description ? description : config.metadata.meta_description,
+      )}
+    />
+
+    <ClientRouter />
+
+    <!-- og-title -->
+    <meta
+      property="og:title"
+      content={plainify(
+        meta_title ? meta_title : title ? title : config.site.title,
+      )}
+    />
+
+    <!-- og-description -->
+    <meta
+      property="og:description"
+      content={plainify(
+        description ? description : config.metadata.meta_description,
+      )}
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
+    />
+
+    <!-- twitter-title -->
+    <meta
+      name="twitter:title"
+      content={plainify(
+        meta_title ? meta_title : title ? title : config.site.title,
+      )}
+    />
+
+    <!-- twitter-description -->
+    <meta
+      name="twitter:description"
+      content={plainify(
+        description ? description : config.metadata.meta_description,
+      )}
+    />
+
+    <!-- og-image -->
+    <meta
+      property="og:image"
+      content={`${config.site.base_url}${image ? image : config.metadata.meta_image}`}
+    />
+
+    <!-- twitter-image -->
+    <meta
+      name="twitter:image"
+      content={`${config.site.base_url}${image ? image : config.metadata.meta_image}`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-59LFW4F4");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Plausible -->
+    <script
+      is:inline
+      defer
+      data-domain="rocketsim.app"
+      src="https://plausible.io/js/script.tagged-events.js"></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+    </script>
+    <!-- End Plausible -->
+  </head>
+  <body class="antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-59LFW4F4"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+    <TwSizeIndicator />
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import config from "@/config/config.json";
+      const sticky_header = config.settings.sticky_header;
+      const stickyNavInit = () => {
+        // fix header on 100px scroll and get back to normal on 90px scroll
+        const header = document.querySelector(".header");
+        let lastScroll = 0;
+        const onScroll = () => {
+          const currentScroll = window.pageYOffset;
+          if (
+            sticky_header &&
+            currentScroll > 1 &&
+            currentScroll > lastScroll &&
+            header
+          ) {
+            header.classList.add(
+              "fixed",
+              "!top-0",
+              "bg-body/30",
+              "backdrop-blur-lg",
+              "border-border",
+              "show-active-item",
+            );
+            header.classList.remove("border-transparent");
+          } else if (currentScroll < 1 && header) {
+            header.classList.remove(
+              "fixed",
+              "!top-0",
+              "bg-body/30",
+              "backdrop-blur-lg",
+              "border-border",
+              "show-active-item",
+            );
+            header.classList.add("border-transparent");
+          }
+          lastScroll = currentScroll;
+        };
+        window.addEventListener("scroll", onScroll);
+        onScroll(); // Check scroll position on page load
+      };
+
+      // AOS init
+      import AOS from "aos";
+      import "aos/dist/aos.css";
+
+      let scrollRef = 0;
+
+      // Fix `not animating although in viewport` issue
+      window.addEventListener("scroll", function () {
+        scrollRef <= 10 ? scrollRef++ : AOS.refresh();
+      });
+
+      function aosInit() {
+        AOS.init({
+          duration: 600,
+          offset: 100,
+          once: true,
+        });
+      }
+
+      document.addEventListener("astro:page-load", () => {
+        stickyNavInit();
+        aosInit();
+      });
+
+      document.addEventListener("astro:after-swap", () => {
+        aosInit();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "main": [
+    {
+      "name": "All Features",
+      "url": "/"
+    },
+    {
+      "name": "Team Licenses",
+      "url": "/team-insights"
+    },
+    {
+      "name": "Pricing",
+      "url": "/pricing"
+    }
+  ]
+}

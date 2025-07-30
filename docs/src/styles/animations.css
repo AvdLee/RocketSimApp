@@ -1,0 +1,135 @@
+/* Horizontal infinite scroll animation */
+@keyframes inf-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes inf-scroll-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.inf-slide-track {
+  display: flex;
+}
+
+.inf-slide {
+  flex-shrink: 0;
+}
+
+/* Animate CTA Circles */
+
+.inf-rotate {
+  animation: inf-rotate 140s linear infinite;
+
+  /* reverse animation on children to make it look still while parent is rotating */
+  & > *:nth-child(1) {
+    animation: inf-rotate-reverse 140s linear infinite;
+  }
+  & > *:nth-child(2) {
+    animation: inf-rotate-reverse-2 140s linear infinite;
+  }
+  & > *:nth-child(3) {
+    animation: inf-rotate-reverse 140s linear infinite;
+  }
+  & > *:nth-child(4) {
+    animation: inf-rotate-reverse-2 140s linear infinite;
+  }
+}
+.inf-rotate:nth-child(2) {
+  animation: inf-rotate-child-2 70s linear infinite;
+
+  /* reverse animation on children to make it look still while parent is rotating */
+  & > *:nth-child(1) {
+    animation: inf-rotate-reverse 70s linear infinite;
+  }
+  & > *:nth-child(2) {
+    animation: inf-rotate-reverse-2 70s linear infinite;
+  }
+  & > *:nth-child(3) {
+    animation: inf-rotate-reverse 70s linear infinite;
+  }
+  & > *:nth-child(4) {
+    animation: inf-rotate-reverse-2 70s linear infinite;
+  }
+}
+
+@keyframes inf-rotate {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
+@keyframes inf-rotate-child-2 {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
+@keyframes inf-rotate-reverse {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+  }
+}
+@keyframes inf-rotate-reverse-2 {
+  0% {
+    transform: translateX(50%) translateY(50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(50%) translateY(50%) rotate(-360deg);
+  }
+}
+
+/* AOS Custom Animations */
+[data-aos="fade-up-sm"] {
+  transform: translateY(15px);
+  opacity: 0;
+  transition-property: transform, opacity;
+  &.aos-animate {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+[data-aos="fade-right-sm"] {
+  transform: translateX(-15px);
+  opacity: 0;
+  transition-property: transform, opacity;
+  &.aos-animate {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+[data-aos="zoom-out-sm"] {
+  transform: scale(1.05);
+  opacity: 0.5;
+  transition-property: transform, opacity;
+  &.aos-animate {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+[data-aos="zoom-in-sm"] {
+  transform: scale(0.9);
+  opacity: 0.5;
+  transition-property: transform, opacity;
+  &.aos-animate {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

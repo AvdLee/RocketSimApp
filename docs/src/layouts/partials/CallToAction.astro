@@ -1,0 +1,92 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import config from "@/config/config.json";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const sectionData = (await getEntry(
+  "ctaSectionCollection",
+  "call-to-action",
+)) as CollectionEntry<"ctaSectionCollection">;
+const { enable, title, description, image, call_to_actions } = sectionData.data;
+
+const callToActions =
+  Astro.url.pathname === "/team-insights"
+    ? [...call_to_actions].reverse()
+    : call_to_actions;
+
+const teamsUrl =
+  import.meta.env.MODE === "production"
+    ? config.site.teams_base_url
+    : "http://localhost:5173";
+---
+
+{
+  enable && (
+    <section class="cta pt-32  mb-0">
+      <div class="container bg-[#1d1d1f] rounded-3xl">
+        <div class="flex flex-col xl:flex-row">
+          <div class="p-8 lg:px-20 xl:py-16 xl:w-[50%]">
+            <h2
+              class="mb-4"
+              data-aos="fade-up-sm"
+              data-aos-delay="0"
+              set:html={markdownify(title)}
+            />
+            <p
+              set:html={markdownify(description)}
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+            />
+            {callToActions.length > 0 && (
+              <div
+                data-aos="fade-in-sm"
+                data-aos-delay="200"
+                class="mt-10 flex flex-col sm:flex-row items-stretch gap-3 w-full"
+              >
+                {callToActions.map((cta, index) => (
+                  <a
+                    href={
+                      cta.site === "custom"
+                        ? cta.link
+                        : `${cta.site === "teams" ? teamsUrl : ""}${cta.link}`
+                    }
+                    class:list={[
+                      "btn font-semibold min-w-max text-center",
+                      {
+                        "btn-primary": index === 0,
+                        "btn-secondary": index !== 0,
+                      },
+                      cta.class,
+                    ]}
+                    target={
+                      /^(http|https|www|mailto)/.test(cta.link)
+                        ? "_blank"
+                        : "_self"
+                    }
+                  >
+                    {cta.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <div
+            class="relative xl:w-[50%] hidden xl:block"
+            data-aos="zoom-out-sm"
+            data-aos-delay="200"
+          >
+            <ImageMod
+              width={800}
+              height={800}
+              src={image}
+              alt="Call to Action"
+              class="lg:absolute top-[50%] left-[50%] xl:max-w-[400px] translate-x-[-50%] translate-y-[-50%]"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,47 @@
+---
+import config from "@/config/config.json";
+
+import { markdownify } from "@/lib/utils/textConverter";
+
+// Function to replace {year} this from string to year
+function replaceYear(text: string) {
+  const year = new Date().getFullYear();
+
+  return text.replace("{year}", year.toString());
+}
+---
+
+<footer class="pt-16 xl:pt-24">
+  <div class="py-5 border-t border-border mt-14">
+    <div
+      class="container flex flex-col lg:flex-row justify-between items-center gap-5"
+    >
+      <span
+        class="text-center [&>a]:text-primary"
+        set:html={markdownify(replaceYear(config.params.copyright))}
+      />
+      <div class="flex flex-col lg:flex-row items-center gap-5">
+        <a
+          href="/terms"
+          class="text-text no-underline hover:underline"
+          aria-label="Terms and Conditions Link">Terms</a
+        >
+        <a
+          href="/privacy"
+          class="text-text no-underline hover:underline"
+          aria-label="Privacy Policy Link">Privacy Policy</a
+        >
+        <a
+          href="https://docs.rocketsim.app"
+          target="_blank"
+          class="text-text no-underline hover:underline">Documentation</a
+        >
+        <a
+          href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+          target="_blank"
+          class="text-text no-underline hover:underline">FAQ</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>

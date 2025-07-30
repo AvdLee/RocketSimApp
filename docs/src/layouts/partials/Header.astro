@@ -1,0 +1,239 @@
+---
+import Logo from "@/components/Logo.astro";
+import RightArrowBtn from "@/components/RightArrowBtn.astro";
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+
+export interface ChildNavigationLink {
+  name: string;
+  url: string;
+}
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+  hasChildren?: boolean;
+  children?: ChildNavigationLink[];
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+const { navigation_buttons } = config;
+const { pathname } = Astro.url;
+---
+
+<div class={`absolute top-0 inset-x-0 z-30 `}>
+  <header
+    class={`header w-full border-b border-transparent transition-all duration-300`}
+  >
+    <nav class="container navbar px-4 sm:px-16">
+      <!-- logo -->
+      <Logo />
+      <!-- navbar toggler -->
+      <input id="nav-toggle" type="checkbox" class="hidden" />
+      <label
+        for="nav-toggle"
+        class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark lg:order-1 ml-4"
+      >
+        <svg
+          id="show-button"
+          class="h-6 fill-current block"
+          viewBox="0 0 20 20"
+        >
+          <title>Menu Open</title>
+          <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+        </svg>
+        <svg
+          id="hide-button"
+          class="h-6 fill-current hidden"
+          viewBox="0 0 20 20"
+        >
+          <title>Menu Close</title>
+          <polygon
+            points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+            transform="rotate(45 10 10)"></polygon>
+        </svg>
+      </label>
+      <!-- /navbar toggler -->
+      <ul
+        id="nav-menu"
+        class="navbar-nav order-3 hidden w-full lg:order-1 lg:w-auto lg:space-x-2 xl:space-x-8"
+      >
+        {
+          main.map((menu) => (
+            <>
+              {menu.hasChildren ? (
+                <li class="nav-item nav-dropdown group relative">
+                  <span
+                    id="all-pages"
+                    class={`nav-link !bg-transparent inline-flex items-center cursor-pointer ${
+                      menu.children?.map(({ url }) => url).includes(pathname) ||
+                      menu.children
+                        ?.map(({ url }) => `${url}/`)
+                        .includes(pathname)
+                        ? ""
+                        : ""
+                    }`}
+                  >
+                    {menu.name}
+                    <svg
+                      class="h-5 w-5 fill-current ml-1 group-hover:rotate-180 transition-transform duration-300"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </span>
+                  <ul
+                    id="all-pages-dropdown"
+                    class="nav-dropdown-list hidden  "
+                  >
+                    {menu.children?.map((child) => (
+                      <li class="nav-dropdown-item">
+                        <a
+                          href={child.url}
+                          aria-label={child.name}
+                          class={`nav-dropdown-link block ${
+                            (pathname === `${child.url}/` ||
+                              pathname === child.url) &&
+                            "active"
+                          }`}
+                        >
+                          {child.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li class="nav-item">
+                  <a
+                    href={menu.url}
+                    class={`nav-link block ${(pathname === `${menu.url}/` || pathname === menu.url) && "active"}`}
+                  >
+                    {menu.name}
+                  </a>
+                </li>
+              )}
+            </>
+          ))
+        }
+        {
+          navigation_buttons.map(
+            (navigation_button) =>
+              navigation_button.enable && (
+                <li class="inline-block md:hidden px-4 pt-2">
+                  <RightArrowBtn
+                    aria-label={navigation_button.label}
+                    link={navigation_button.link}
+                    label={navigation_button.label}
+                    className={`btn btn-primary ${navigation_button.class}`}
+                  />
+                </li>
+              ),
+          )
+        }
+      </ul>
+      <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+        <ul class="navbar-nav hidden lg:flex lg:gap-4">
+          {
+            main.map((menu) => (
+              <>
+                {menu.hasChildren ? (
+                  <li class="nav-item nav-dropdown group relative">
+                    <span
+                      class={`nav-link !bg-transparent inline-flex items-center ${
+                        menu.children
+                          ?.map(({ url }) => url)
+                          .includes(pathname) ||
+                        menu.children
+                          ?.map(({ url }) => `${url}/`)
+                          .includes(pathname)
+                          ? ""
+                          : ""
+                      }`}
+                    >
+                      {menu.name}
+                      <svg
+                        class="dropdown-icon h-5 w-5 fill-current ml-1 group-hover:rotate-180 transition-transform duration-300"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      </svg>
+                    </span>
+                    <ul class="nav-dropdown-list hidden group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100 lg:right-0">
+                      {menu.children?.map((child) => (
+                        <li class="nav-dropdown-item">
+                          <a
+                            href={child.url}
+                            aria-label={child.name}
+                            class={`nav-dropdown-link block ${
+                              (pathname === `${child.url}/` ||
+                                pathname === child.url) &&
+                              "active"
+                            }`}
+                          >
+                            {child.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li class="nav-item">
+                    <a
+                      href={menu.url}
+                      class={`nav-link block ${(pathname === `${menu.url}/` || pathname === menu.url) && "active"}`}
+                    >
+                      {menu.name}
+                    </a>
+                  </li>
+                )}
+              </>
+            ))
+          }
+        </ul>
+        <ul class="ml-5 md:flex md:gap-2">
+          {
+            navigation_buttons
+              .filter((button) =>
+                pathname !== "/team-insights" && button.label === "Login"
+                  ? false
+                  : true,
+              )
+              .map(
+                (navigation_button, index) =>
+                  navigation_button.enable && (
+                    <li class="hidden md:inline-block ">
+                      <a
+                        aria-label={navigation_button.label}
+                        href={navigation_button.link}
+                        class:list={[
+                          "btn btn-sm btn-primary",
+                          navigation_button.class,
+                        ]}
+                      >
+                        {navigation_button.label}
+                      </a>
+                    </li>
+                  ),
+              )
+          }
+        </ul>
+      </div>
+    </nav>
+  </header>
+</div>
+
+<script>
+  const headerHamburgerInit = () => {
+    const allPages = document.getElementById("all-pages");
+    allPages &&
+      allPages.addEventListener("click", () => {
+        const menu = document.getElementById("all-pages-dropdown");
+        menu && menu.classList.toggle("active");
+      });
+  };
+
+  document.addEventListener("astro:page-load", () => {
+    headerHamburgerInit();
+  });
+</script>

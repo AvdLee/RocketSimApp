@@ -1,0 +1,73 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+import Feature from "./Feature.astro";
+
+import FeatureImage from "../../assets/features/build-insights.png";
+---
+
+<style>
+  section {
+    padding: 8rem 0;
+
+    background-color: #101010;
+  }
+
+  .feature-wrapper {
+    margin-top: 4rem;
+  }
+
+  .team-insights {
+    background-image: url("/teams-line.svg");
+    background-repeat: no-repeat;
+    background-position: center 35%;
+    text-align: center;
+
+    @media (min-width: 1600px) {
+      background-size: contain;
+    }
+  }
+
+  a {
+    margin-top: 2rem;
+  }
+</style>
+
+<section>
+  <SectionHeader
+    title="RocketSim Insights"
+    subtitle="Increase the productivity of your whole team"
+  />
+  <div class="feature-wrapper">
+    <Feature
+      data={{
+        name: "Keep track of Xcode Build Durations",
+        asset: {
+          type: "image",
+          path: FeatureImage,
+          alt: "RocketSim panel that shows an overview of build insights of a scheme in an app. It shows build counts and build durations split up in mutliple ways.",
+          alignment: "right",
+          columnSpan: 6,
+        },
+      }}
+    >
+      Unlike Xcode, RocketSim will cache all your builds for months to follow.
+      You'll be able to compare build times and <strong
+        >get notified when compilation times increase.</strong
+      >
+    </Feature>
+  </div>
+</section>
+<section class="team-insights">
+  <div data-aos="fade-in">
+    <SectionHeader
+      title="Team Insights"
+      subtitle="Build Apps Faster with your whole team"
+      text="What's the build duration across the team? Does an M3 Max make a difference in terms of compilation time? With team insights, you'll be able to optimize productivity based on real build data"
+    />
+    <a
+      href="/team-insights"
+      class="button plausible-event-name=Explore+Team+Insights"
+      >Explore Team Insights</a
+    >
+  </div>
+</section>

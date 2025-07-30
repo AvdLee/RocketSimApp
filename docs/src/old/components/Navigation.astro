@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+
+import appIcon from "../../assets/rocketsim-app-icon.png";
+
+interface Props {
+  showLogin?: boolean;
+}
+
+const { showLogin = false } = Astro.props;
+---
+
+<style>
+  .navigation-wrapper {
+    padding: 1rem 0;
+
+    background-color: #000;
+    border-bottom: 0.0625rem solid transparent;
+
+    transition: border-bottom-color 0.3s;
+    box-sizing: content-box;
+  }
+
+  nav {
+    @media (min-width: 800px) {
+      display: flex;
+      align-items: center;
+      grid-column: 1 / -2;
+    }
+  }
+
+  .navigation__logo {
+    width: 2.75rem;
+    height: auto;
+  }
+
+  .navigation__login {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    margin-right: 1rem;
+  }
+
+  .navigation__right-column {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    @media (min-width: 800px) {
+      display: flex;
+      align-items: center;
+      grid-column: span 1 / -1;
+      gap: 1rem;
+      justify-self: end;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.125rem;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+
+    @media (min-width: 800px) {
+      flex-direction: row;
+      gap: 3rem;
+    }
+  }
+
+  .link--login {
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>
+
+<div class:list={["navigation-wrapper"]} id="navigation-menu">
+  <div class="navigation deprecated-grid">
+    <nav aria-label="Hero navigation">
+      <ul>
+        <slot />
+      </ul>
+    </nav>
+    <div class="navigation__right-column">
+      {
+        showLogin ? (
+          <a href="https://teams.rocketsim.app" class="link link--login">
+            Login
+          </a>
+        ) : null
+      }
+      <Image
+        src={appIcon}
+        alt="RocketSim app icon"
+        width="88"
+        height="88"
+        class="navigation__logo"
+      />
+    </div>
+  </div>
+</div>

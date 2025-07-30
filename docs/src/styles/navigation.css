@@ -1,0 +1,66 @@
+.header {
+  @apply py-4;
+}
+
+/* navbar items */
+.navbar {
+  @apply relative flex flex-wrap items-center justify-between;
+}
+
+.navbar-brand {
+  @apply text-[0rem] font-semibold text-text-dark;
+  image {
+    @apply max-h-full max-w-full;
+  }
+}
+
+.navbar-nav {
+  @apply text-left max-lg:bg-light max-lg:rounded-xl max-lg:mt-5 max-lg:p-3;
+}
+
+.nav-link {
+  @apply text-white no-underline opacity-80 hover:opacity-100 relative block min-lg:text-sm font-normal transition max-lg:px-5 mx-2 py-3 max-lg:hover:bg-primary/5 rounded-lg;
+
+  &.active {
+    @media (max-width: 1023px) {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 1024px) {
+      &::after {
+        @apply content-[''] absolute top-[64px] left-0 w-full h-[0.0625rem] bg-transparent transition-colors duration-300;
+      }
+
+      .show-active-item &::after {
+        @apply bg-white;
+      }
+    }
+  }
+}
+
+.nav-dropdown {
+  @apply mr-0;
+}
+
+.nav-dropdown-list {
+  @apply z-10 min-w-[230px] bg-body p-2 shadow border border-b-[2px] border-primary/20 rounded-xl max-lg:mx-5;
+}
+
+.nav-dropdown-item {
+  @apply mb-0;
+}
+
+.nav-dropdown-link {
+  @apply block py-2 font-medium text-text-dark transition hover:text-primary hover:bg-primary/5 px-5 rounded-lg min-w-max;
+
+  &.active {
+    @apply text-primary;
+  }
+}
+
+/* apply above css only below 1024px */
+@media (max-width: 1024px) {
+  #all-pages-dropdown.active {
+    @apply block!;
+  }
+}

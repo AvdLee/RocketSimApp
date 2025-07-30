@@ -1,12 +1,13 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import Navigation from "../../../components/Navigation.astro";
-import NavigationLink from "../../../components/NavigationLink.astro";
-import SectionHeader from "../../../components/SectionHeader.astro";
-import NewsLetterForm from "../../../components/NewsLetterForm.astro";
-import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
 
-import appIcon from "../../../assets/rocketsim-app-icon.png";
+import Base from "@/layouts/Base.astro";
+import SectionHeader from "../../../old/components/SectionHeader.astro";
+import NewsLetterForm from "../../../old/components/NewsLetterForm.astro";
+
+const pageIndex = await getEntry("thank-you", "-index");
+if (!pageIndex) return null;
+const { title, meta_title, description } = pageIndex.data;
 ---
 
 <style>
@@ -43,6 +44,11 @@ import appIcon from "../../../assets/rocketsim-app-icon.png";
     }
   }
 
+  .thank-you-wrapper {
+    padding-top: 0.0625rem;
+    margin-top: 5rem;
+  }
+
   .thank-you {
     text-align: center;
   }
@@ -62,37 +68,9 @@ import appIcon from "../../../assets/rocketsim-app-icon.png";
   }
 </style>
 
-<BaseLayout
-  pageTitle="Thank you - RocketSim"
-  pageDescription="Thank you for trying RocketSim! Your submissions is being processed and you will receive an email soon."
->
-  <header>
-    <div class="logo">
-      <a href="/">
-        <Image
-          src={appIcon}
-          widths={[128, 512]}
-          sizes="(max-width: 767px) 4rem, 16rem"
-          alt="RocketSim app icon"
-          class="logo-image"
-        />
-      </a>
-    </div>
-    <Navigation isAlwaysActive={true}>
-      <NavigationLink href="/">All Features</NavigationLink>
-      <NavigationLink href="https://docs.rocketsim.app" target="_blank">
-        Documentation
-      </NavigationLink>
-      <NavigationLink
-        href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
-        target="_blank"
-      >
-        FAQ
-      </NavigationLink>
-    </Navigation>
-  </header>
-  <main>
-    <section class="grid thank-you">
+<Base title={title} meta_title={meta_title} description={description}>
+  <div class="thank-you-wrapper">
+    <section class="deprecated-grid thank-you">
       <SectionHeader title="Check your inbox!" />
       <p>
         You&apos;re invited for a 14 days trial for RocketSim for Teams. Check
@@ -108,5 +86,5 @@ import appIcon from "../../../assets/rocketsim-app-icon.png";
       />
       <NewsLetterForm />
     </section>
-  </main>
-</BaseLayout>
+  </div>
+</Base>

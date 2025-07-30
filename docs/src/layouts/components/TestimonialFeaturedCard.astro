@@ -1,0 +1,88 @@
+---
+import ImageMod from "./ImageMod.astro";
+
+const { testimonial } = Astro.props;
+---
+
+<div class="bg-secondary/10 p-5 rounded-3xl">
+  <div class="bg-white/60 rounded-3xl-sm p-8 lg:px-11 lg:py-14 text-left">
+    {/* Profile Area */}
+    <div class="flex gap-4 items-center">
+      <ImageMod
+        src={testimonial.avatar}
+        alt={testimonial.name}
+        width={100}
+        height={100}
+        quality="high"
+        class="rounded-full w-16 aspect-square object-cover bg-secondary/30"
+      />
+      <div>
+        <h4 class="text-h6 mb-1">{testimonial.name}</h4>
+        <p class="text-text-light">{testimonial.designation}</p>
+      </div>
+    </div>
+
+    {/* Testimonial Area */}
+    <div class="mt-14">
+      <p class="text-h5 text-text-dark text-balance">"{testimonial.content}"</p>
+    </div>
+
+    {/* Rating Area */}
+    <div class="flex justify-between items-center gap-8">
+      <div class="mt-14 flex items-center flex-wrap gap-2">
+        <div class="flex items-center gap-1">
+          {
+            [...Array(testimonial.rating.stars).fill("")].map((_) => (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 0L13.2138 6.09124L20 7.26542L15.2 12.2042L16.1803 19.0211L10 15.9822L3.81966 19.0211L4.8 12.2042L0 7.26542L6.78622 6.09124L10 0Z"
+                  fill="#FFB443"
+                />
+              </svg>
+            ))
+          }
+        </div>
+        <div class="flex items-center gap-4 justify-between flex-wrap">
+          <p>{testimonial.rating.stars} Reviews from</p>
+          <ImageMod
+            src={testimonial.rating.company}
+            alt=""
+            width={120}
+            height={40}
+            quality="high"
+            class="inline-block h-8 w-auto"
+          />
+        </div>
+      </div>
+
+      <!-- Quotes logo -->
+      <svg
+        class="text-secondary/20"
+        width="80"
+        height="80"
+        viewBox="0 0 104 104"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M43.875 58.5H16.25C15.388 58.5 14.5614 58.1576 13.9519 57.5481C13.3424 56.9386 13 56.112 13 55.25V29.25C13 28.388 13.3424 27.5614 13.9519 26.9519C14.5614 26.3424 15.388 26 16.25 26H40.625C41.487 26 42.3136 26.3424 42.9231 26.9519C43.5326 27.5614 43.875 28.388 43.875 29.25V65C43.875 69.3098 42.163 73.443 39.1155 76.4905C36.068 79.538 31.9348 81.25 27.625 81.25"
+          stroke="currentColor"
+          stroke-width="6.70968"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M91 58.5H63.375C62.513 58.5 61.6864 58.1576 61.0769 57.5481C60.4674 56.9386 60.125 56.112 60.125 55.25V29.25C60.125 28.388 60.4674 27.5614 61.0769 26.9519C61.6864 26.3424 62.513 26 63.375 26H87.75C88.612 26 89.4386 26.3424 90.0481 26.9519C90.6576 27.5614 91 28.388 91 29.25V65C91 69.3098 89.288 73.443 86.2405 76.4905C83.193 79.538 79.0598 81.25 74.75 81.25"
+          stroke="currentColor"
+          stroke-width="6.70968"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </div>
+  </div>
+</div>
