@@ -6,6 +6,10 @@ body {
   @apply bg-body text-base  font-primary font-normal tracking-[-0.022em] leading-normal text-text antialiased scroll-smooth;
 }
 
+main {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,
