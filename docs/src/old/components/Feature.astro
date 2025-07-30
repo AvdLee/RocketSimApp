@@ -191,7 +191,8 @@ if (asset.alignment === "full-width") {
           quality={95}
         />
       ) : (
-        <video
+      <video
+transition:persist
           class="image js-feature-video"
           aria-label={asset.alt}
           muted
