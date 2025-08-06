@@ -16,6 +16,12 @@ const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
     : "http://localhost:5173";
+
+// TODO: Update this URL to the correct payment link for your production environment
+const stripePaymentLink =
+  import.meta.env.MODE === "production"
+    ? "https://nieknijland.nl"
+    : "https://billing.rocketsim.app/b/test_28E7sKbaS8OK6UD4jlc7u00";
 ---
 
 <section class={isPageHeader ? "" : "section"} id="plans">
@@ -45,7 +51,7 @@ const teamsUrl =
                   return (
                     <div
                       class:list={[
-                        "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
+                        "p-8 pb-6 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
                       ]}
                     >
                       <div>
@@ -140,22 +146,32 @@ const teamsUrl =
                         </ul>
                       </div>
 
-                      {/* CTA BUTTON */}
-                      {plan.cta.enable && (
-                        <a
-                          href={
-                            plan.cta.site === "custom"
-                              ? plan.cta.link
-                              : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
-                          }
-                          class:list={[
-                            "btn py-2 w-full inline-block self-start mt-14 text-center rounded-full btn-primary",
-                            plan.cta.class,
-                          ]}
-                        >
-                          <span>{plan.cta.label}</span>
-                        </a>
-                      )}
+                      <div>
+                        {/* CTA BUTTON */}
+                        {plan.cta.enable && (
+                          <a
+                            href={
+                              plan.cta.site === "custom"
+                                ? plan.cta.link
+                                : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
+                            }
+                            class:list={[
+                              "btn py-2 w-full inline-block self-start mt-14 text-center rounded-full btn-primary",
+                              plan.cta.class,
+                            ]}
+                          >
+                            <span>{plan.cta.label}</span>
+                          </a>
+                        )}
+                        <div class="min-h-6 text-center">
+                          {plan.title === "Teams" ? (
+                            <span class="text-xs">
+                              or skip trial and{" "}
+                              <a href={stripePaymentLink}>pay now</a>
+                            </span>
+                          ) : null}
+                        </div>
+                      </div>
                     </div>
                   );
                 })
