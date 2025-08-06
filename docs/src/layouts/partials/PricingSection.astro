@@ -41,10 +41,7 @@ const teamsUrl =
             {
               plans &&
                 plans.length &&
-                plans.map((plan, index) => {
-                  const isEvenIndex = index % 2 !== 0;
-                  const cardColor = plan.color || "bg-secondary/80";
-
+                plans.map((plan) => {
                   return (
                     <div
                       class:list={[
@@ -169,73 +166,3 @@ const teamsUrl =
     </div>
   </div>
 </section>
-
-<script>
-  function pricingInit() {
-    // Select the toggle switch element
-    const toggleSwitch =
-      document.querySelector<HTMLInputElement>(".pricing-check");
-    const numbers = document.querySelectorAll<HTMLDivElement>(".data-count");
-    toggleSwitch &&
-      toggleSwitch.addEventListener("change", function () {
-        if (toggleSwitch.checked) {
-          numbers.forEach(function (number) {
-            const yearlyCount = number.getAttribute("data-count-yearly");
-            if (yearlyCount && !isNaN(parseInt(yearlyCount, 10))) {
-              number.innerHTML = yearlyCount;
-              animateCounter(number, parseInt(yearlyCount, 10));
-            } else {
-              number.innerHTML = yearlyCount as string;
-            }
-          });
-          toggleVisibility(".text-yearly", "d-block", "hidden");
-          toggleVisibility(".text-monthly", "hidden", "d-block");
-        } else {
-          numbers.forEach(function (number) {
-            const monthlyCount = number.getAttribute("data-count-monthly");
-            if (monthlyCount && !isNaN(parseInt(monthlyCount, 10))) {
-              number.innerHTML = monthlyCount;
-              animateCounter(number, parseInt(monthlyCount, 10));
-            } else {
-              number.innerHTML = monthlyCount as string;
-            }
-          });
-          toggleVisibility(".text-monthly", "block", "hidden");
-          toggleVisibility(".text-yearly", "hidden", "d-block");
-        }
-      });
-
-    function animateCounter(element: HTMLElement, endValue: number) {
-      let startValue = 0;
-      const duration = 300;
-      let startTime: number | null = null;
-
-      function step(currentTime: number) {
-        if (!startTime) startTime = currentTime;
-        const progress = currentTime - startTime;
-        const value =
-          Math.min(progress / duration, 1) * (endValue - startValue) +
-          startValue;
-        element.innerHTML = Math.ceil(value).toString();
-        if (progress < duration) {
-          requestAnimationFrame(step);
-        }
-      }
-
-      requestAnimationFrame(step);
-    }
-
-    function toggleVisibility(
-      selector: string,
-      addClass: string,
-      removeClass: string,
-    ) {
-      const elements = document.querySelectorAll<HTMLElement>(selector);
-      elements.forEach(function (element) {
-        element.classList.add(addClass);
-        element.classList.remove(removeClass);
-      });
-    }
-  }
-  document.addEventListener("astro:page-load", pricingInit);
-</script>

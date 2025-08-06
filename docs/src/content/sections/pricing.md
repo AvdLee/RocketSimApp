@@ -6,7 +6,6 @@ plans:
     title: Free
     description: Explore how our 30+ Xcode Simulator features can increase your productivity
     price_prefix: "€"
-    color: "#1d1d1f"
     features:
       - enable: true
         included: false
@@ -34,7 +33,6 @@ plans:
     title: Personal
     description: Ideal for solo developers—enjoy every Pro feature with an in-app purchase
     price_prefix: "€"
-    color: "#1d1d1f"
     features:
       - enable: true
         included: true
@@ -62,7 +60,6 @@ plans:
     title: Teams
     description: Perfect for teams with multiple developers
     price_prefix: "€"
-    color: "#1d1d1f"
     features:
       - enable: true
         included: true
@@ -86,11 +83,10 @@ plans:
       label: Start 14-day Trial
       site: teams
       link: "/signup/trial?utm_source=website&utm_medium=website&utm_content=pricing"
-  - enable: false
+  - enable: true
     title: Enterprise
     description: For larger enterprise with a need for more control and security
     price_prefix: ""
-    color: "#1d1d1f"
     features:
       - enable: true
         included: true
@@ -106,7 +102,7 @@ plans:
         feature: Group based user management
     price:
       yearly:
-        amount: "CUSTOM"
+        amount: "Custom"
         period: ""
     cta:
       enable: true
