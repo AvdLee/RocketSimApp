@@ -90,7 +90,6 @@ export const pricingSectionCollection = defineCollection({
         enable: z.boolean(),
         title: z.string(),
         description: z.string(),
-        color: z.string(),
         price_prefix: z.string(),
         features: z.array(
           z.object({

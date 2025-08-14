@@ -16,6 +16,11 @@ const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
     : "http://localhost:5173";
+
+const stripePaymentLink =
+  import.meta.env.MODE === "production"
+    ? "https://billing.rocketsim.app/b/28E3cua6Oe94en54jlc7u01"
+    : "https://billing.rocketsim.app/b/test_28E7sKbaS8OK6UD4jlc7u00";
 ---
 
 <section class={isPageHeader ? "" : "section"} id="plans">
@@ -41,14 +46,11 @@ const teamsUrl =
             {
               plans &&
                 plans.length &&
-                plans.map((plan, index) => {
-                  const isEvenIndex = index % 2 !== 0;
-                  const cardColor = plan.color || "bg-secondary/80";
-
+                plans.map((plan) => {
                   return (
                     <div
                       class:list={[
-                        "p-8 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
+                        "p-8 pb-6 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
                       ]}
                     >
                       <div>
@@ -143,22 +145,32 @@ const teamsUrl =
                         </ul>
                       </div>
 
-                      {/* CTA BUTTON */}
-                      {plan.cta.enable && (
-                        <a
-                          href={
-                            plan.cta.site === "custom"
-                              ? plan.cta.link
-                              : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
-                          }
-                          class:list={[
-                            "btn py-2 w-full inline-block self-start mt-14 text-center rounded-full btn-primary",
-                            plan.cta.class,
-                          ]}
-                        >
-                          <span>{plan.cta.label}</span>
-                        </a>
-                      )}
+                      <div>
+                        {/* CTA BUTTON */}
+                        {plan.cta.enable && (
+                          <a
+                            href={
+                              plan.cta.site === "custom"
+                                ? plan.cta.link
+                                : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
+                            }
+                            class:list={[
+                              "btn py-2 w-full inline-block self-start mt-14 text-center rounded-full btn-primary",
+                              plan.cta.class,
+                            ]}
+                          >
+                            <span>{plan.cta.label}</span>
+                          </a>
+                        )}
+                        <div class="min-h-6 text-center">
+                          {plan.title === "Teams" ? (
+                            <span class="text-xs">
+                              or skip trial and{" "}
+                              <a href={stripePaymentLink}>pay now</a>
+                            </span>
+                          ) : null}
+                        </div>
+                      </div>
                     </div>
                   );
                 })
@@ -169,73 +181,3 @@ const teamsUrl =
     </div>
   </div>
 </section>
-
-<script>
-  function pricingInit() {
-    // Select the toggle switch element
-    const toggleSwitch =
-      document.querySelector<HTMLInputElement>(".pricing-check");
-    const numbers = document.querySelectorAll<HTMLDivElement>(".data-count");
-    toggleSwitch &&
-      toggleSwitch.addEventListener("change", function () {
-        if (toggleSwitch.checked) {
-          numbers.forEach(function (number) {
-            const yearlyCount = number.getAttribute("data-count-yearly");
-            if (yearlyCount && !isNaN(parseInt(yearlyCount, 10))) {
-              number.innerHTML = yearlyCount;
-              animateCounter(number, parseInt(yearlyCount, 10));
-            } else {
-              number.innerHTML = yearlyCount as string;
-            }
-          });
-          toggleVisibility(".text-yearly", "d-block", "hidden");
-          toggleVisibility(".text-monthly", "hidden", "d-block");
-        } else {
-          numbers.forEach(function (number) {
-            const monthlyCount = number.getAttribute("data-count-monthly");
-            if (monthlyCount && !isNaN(parseInt(monthlyCount, 10))) {
-              number.innerHTML = monthlyCount;
-              animateCounter(number, parseInt(monthlyCount, 10));
-            } else {
-              number.innerHTML = monthlyCount as string;
-            }
-          });
-          toggleVisibility(".text-monthly", "block", "hidden");
-          toggleVisibility(".text-yearly", "hidden", "d-block");
-        }
-      });
-
-    function animateCounter(element: HTMLElement, endValue: number) {
-      let startValue = 0;
-      const duration = 300;
-      let startTime: number | null = null;
-
-      function step(currentTime: number) {
-        if (!startTime) startTime = currentTime;
-        const progress = currentTime - startTime;
-        const value =
-          Math.min(progress / duration, 1) * (endValue - startValue) +
-          startValue;
-        element.innerHTML = Math.ceil(value).toString();
-        if (progress < duration) {
-          requestAnimationFrame(step);
-        }
-      }
-
-      requestAnimationFrame(step);
-    }
-
-    function toggleVisibility(
-      selector: string,
-      addClass: string,
-      removeClass: string,
-    ) {
-      const elements = document.querySelectorAll<HTMLElement>(selector);
-      elements.forEach(function (element) {
-        element.classList.add(addClass);
-        element.classList.remove(removeClass);
-      });
-    }
-  }
-  document.addEventListener("astro:page-load", pricingInit);
-</script>
