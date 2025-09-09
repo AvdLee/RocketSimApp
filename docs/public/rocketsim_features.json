@@ -331,8 +331,8 @@
   {
     "description": "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.",
     "id": "607",
-    "isFinished": false,
-    "status": "Planned",
+    "isFinished": true,
+    "status": "Implemented",
     "title": "Simulator Camera"
   },
   {
