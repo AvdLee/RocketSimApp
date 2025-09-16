@@ -1,0 +1,48 @@
+---
+import { JSDOM } from "jsdom";
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  let data = await fetch("http://localhost:8888/wp-json/wp/v2/posts");
+  let posts = (await data.json()) as Array<{ slug: string }>;
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post: post },
+  }));
+}
+
+// TODO: make url dynamic based on environment
+const res = await fetch(
+  `http://localhost:8888/wp-json/wp/v2/posts?slug=${slug}`,
+);
+const [post] = await res.json();
+
+const dom = new JSDOM(post.content.rendered);
+const doc = dom.window.document;
+
+const videos = doc.querySelectorAll("video");
+
+videos.forEach((video) => {
+  video.setAttribute("autoplay", "true");
+  video.setAttribute("playsinline", "true");
+  video.setAttribute("muted", "true");
+  video.setAttribute("loop", "true");
+});
+
+const manipulatedDom = dom.serialize();
+
+const {
+  site: { base_url },
+} = config;
+---
+
+<Base canonical={`${base_url}/blog/${post.slug}`}>
+  <article>
+    <h1 set:html={post.title.rendered} />
+    <Fragment set:html={manipulatedDom} />
+  </article>
+</Base>
