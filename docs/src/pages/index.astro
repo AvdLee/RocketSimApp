@@ -1,5 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+
 import Header from "../old/components/Header.astro";
 import Navigation from "../old/components/Navigation.astro";
 import NavigationLink from "../old/components/NavigationLink.astro";
@@ -15,9 +17,11 @@ import SubscribeToNewsletter from "../old/components/SubscribeToNewsletter.astro
 import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
 
 import logoImage from "../assets/rocketsim-logo.svg";
+
+const { site: { base_url } } = config;
 ---
 
-<Base>
+<Base canonical={`${base_url}`}>
   <Notification />
   <Header
     title="Enhancing the Xcode Simulators"
