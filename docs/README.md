@@ -99,3 +99,18 @@ sortOrder: 3
 - Quickly test **Locations, Push Notifications, and Deeplinks**
 - **Grant, revoke, or reset permissions** like photo and location access, allowing you to quicker test related implementations
 ```
+
+## Blog
+
+The blog is powered by a headless WordPress instance. The blog posts are fetched at build time and statically rendered.
+
+### Local development
+
+Make sure Docker is running.
+
+Start: `npm run wordpress:start`
+Stop: `npm run wordpress:stop`
+
+url: `http://localhost:8888/wp-admin`
+username: `root`
+password: `password`
