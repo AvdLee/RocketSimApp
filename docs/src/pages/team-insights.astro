@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 
+import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import Navigation from "../old/components/Navigation.astro";
 import NavigationLink from "../old/components/NavigationLink.astro";
@@ -18,9 +19,17 @@ import logoImage from "../assets/rocketsim-insights-logo.svg";
 const pageIndex = await getEntry("team-insights", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
+const {
+  site: { base_url },
+} = config;
 ---
 
-<Base title={title} meta_title={meta_title} description={description}>
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  canonical={`${base_url}/team-insights`}
+>
   <Header
     title="Make your whole team Build Apps Faster"
     logo={logoImage}

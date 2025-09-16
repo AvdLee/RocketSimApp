@@ -1,6 +1,6 @@
 {
   "site": {
-    "base_url": "https://rocketsim.app",
+    "base_url": "https://www.rocketsim.app",
     "teams_base_url": "https://teams.rocketsim.app",
     "base_path": "/",
     "trailing_slash": false,

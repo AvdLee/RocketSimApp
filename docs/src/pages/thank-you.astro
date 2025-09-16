@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 
+import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import SectionHeader from "../old/components/SectionHeader.astro";
 import NewsLetterForm from "../old/components/NewsLetterForm.astro";
@@ -8,6 +9,9 @@ import NewsLetterForm from "../old/components/NewsLetterForm.astro";
 const pageIndex = await getEntry("thank-you", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
+const {
+  site: { base_url },
+} = config;
 ---
 
 <style>
@@ -68,7 +72,12 @@ const { title, meta_title, description } = pageIndex.data;
   }
 </style>
 
-<Base title={title} meta_title={meta_title} description={description}>
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  canonical={`${base_url}/thank-you`}
+>
   <div class="thank-you-wrapper">
     <section class="deprecated-grid thank-you">
       <SectionHeader title="Thanks for purchasing RocketSim!" />

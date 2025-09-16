@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 
+import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import Header from "../old/components/Header.astro";
 import Navigation from "../old/components/Navigation.astro";
@@ -11,6 +12,9 @@ import logoImage from "../assets/rocketsim-logo.svg";
 const pageIndex = await getEntry("terms", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
+const {
+  site: { base_url },
+} = config;
 ---
 
 <style>
@@ -106,7 +110,12 @@ const { title, meta_title, description } = pageIndex.data;
   }
 </style>
 
-<Base title={title} meta_title={meta_title} description={description}>
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  canonical={`${base_url}/terms`}
+>
   <Header
     title="RocketSim Terms and Conditions"
     logo={logoImage}
