@@ -1,6 +1,7 @@
 ---
 name: "Network Monitor"
 tagLine: "Inspect Network Requests in realtime"
+blogId: 15
 asset:
   type: "video"
   path: "/features/network-monitoring-demo.mp4"
