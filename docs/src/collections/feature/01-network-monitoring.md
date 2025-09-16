@@ -1,6 +1,7 @@
 ---
 name: "Network Monitor"
 tagLine: "Inspect Network Requests in realtime"
+# TODO: Replace with correct id once in production
 blogId: 15
 asset:
   type: "video"

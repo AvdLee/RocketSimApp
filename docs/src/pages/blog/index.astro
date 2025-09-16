@@ -1,0 +1,21 @@
+---
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+
+  let data = await fetch("http://localhost:8888/wp-json/wp/v2/posts");
+  let posts = (await data.json()) as Array<{ slug: string }>;
+
+
+const {
+  site: { base_url },
+  } = config;
+  ---
+
+  <Base canonical={`${base_url}/blog`}>
+    <h1>Blog</h1>
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.slug}`}>{post.slug}</a>
+      </li>
+    ))}
+  </Base>

@@ -37,7 +37,9 @@ const manipulatedDom = dom.serialize();
 
 const {
   site: { base_url },
-} = config;
+  } = config;
+
+// TODO: setup proper meta tags for SEO
 ---
 
 <Base canonical={`${base_url}/blog/${post.slug}`}>
