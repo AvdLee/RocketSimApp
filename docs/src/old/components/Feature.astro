@@ -14,16 +14,15 @@ const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
   : undefined;
 
-  let blogPath;
+let blogPath;
 
-if(blogId) {
-const res = await fetch(
-`http://localhost:8888/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
-);
-const { slug } = await res.json() as { slug: string };
-blogPath = `/blog/${slug}`;
+if (blogId) {
+  const res = await fetch(
+    `http://localhost:8888/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
+  );
+  const { slug } = (await res.json()) as { slug: string };
+  blogPath = `/blog/${slug}`;
 }
-
 
 let imageSizes;
 
@@ -175,11 +174,13 @@ if (asset.alignment === "full-width") {
       ]}
     >
       <slot />
-      {blogPath ? (
-        <p>
-          <a href={blogPath}>Learn more</a>
-        </p>
-  ) : null}
+      {
+        blogPath ? (
+          <p>
+            <a href={blogPath}>Learn more</a>
+          </p>
+        ) : null
+      }
     </div>
   </div>
   <figure
