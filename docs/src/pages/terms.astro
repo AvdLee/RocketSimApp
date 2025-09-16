@@ -12,7 +12,9 @@ import logoImage from "../assets/rocketsim-logo.svg";
 const pageIndex = await getEntry("terms", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
-const { site: { base_url } } = config;
+const {
+  site: { base_url },
+} = config;
 ---
 
 <style>
@@ -108,7 +110,12 @@ const { site: { base_url } } = config;
   }
 </style>
 
-  <Base title={title} meta_title={meta_title} description={description} canonical={`${base_url}/terms`}>
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  canonical={`${base_url}/terms`}
+>
   <Header
     title="RocketSim Terms and Conditions"
     logo={logoImage}

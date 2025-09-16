@@ -13,11 +13,17 @@ import CallToAction from "@/partials/CallToAction.astro";
 const pageIndex = await getEntry("pricing", "-index");
 if (!pageIndex) return null;
 const { hero, title, meta_title, description } = pageIndex.data;
-const { site: { base_url } } = config;
-
+const {
+  site: { base_url },
+} = config;
 ---
 
-<Base title={title} meta_title={meta_title} description={description} canonical={`${base_url}/pricing`}>
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  canonical={`${base_url}/pricing`}
+>
   <PageHeader title={hero.title} isCenter={true} />
   <div class="ph-merged-section -mt-10">
     <PricingSection isPageHeader={true} />
