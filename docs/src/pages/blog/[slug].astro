@@ -52,10 +52,8 @@ const doc = dom.window.document;
 const videos = doc.querySelectorAll("video");
 
 videos.forEach((video) => {
-  video.setAttribute("autoplay", "true");
   video.setAttribute("playsinline", "true");
-  video.setAttribute("muted", "true");
-  video.setAttribute("loop", "true");
+  video.setAttribute("controls", "true");
 });
 
 const manipulatedDom = dom.serialize();
