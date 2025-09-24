@@ -3,6 +3,7 @@ import { JSDOM } from "jsdom";
 import Base from "@/layouts/Base.astro";
 import config from "@/config/config.json";
 import { selectOgImage } from "@/lib/utils/selectOgImage";
+import {dateFormat} from "@/lib/utils/dateFormat";
 
 const { slug } = Astro.params;
 
@@ -68,8 +69,36 @@ const manipulatedDom = dom.serialize();
   articleModifiedTime={articleModifiedTime}
   image={image}
 >
-  <article>
-    <h1 set:html={post.title.rendered} />
-    <Fragment set:html={manipulatedDom} />
-  </article>
+  <section class="ph-spacing">
+    <div class="container text-center">
+      <div class="flex flex-col items-center gap-16 lg:gap-28">
+        <div class="space-y-3 md:space-y-5 mx-auto">
+          {
+            articleModifiedTime && (
+              <p
+                class="text-center text-base font-medium text-text pb-2"
+                data-aos="fade-up-sm"
+                data-aos-delay="0"
+              >
+                Last Updated
+                <span set:html={dateFormat(articleModifiedTime, " MMM dd, yyyy")} />
+              </p>
+            )
+          }
+          <h1
+            class="page-heading leading-none text-center !mb-6"
+            data-aos="fade-up-sm"
+            data-aos-delay="50"
+            set:html={title}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section -mt-20">
+    <div class="container">
+      <div class="content xl:px-32">
+        <Fragment set:html={manipulatedDom} />
+    </div>
+  </section>
 </Base>
