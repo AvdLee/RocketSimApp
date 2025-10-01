@@ -10,7 +10,9 @@ import { dateFormat } from "@/lib/utils/dateFormat";
 const { slug } = Astro.params;
 
 export async function getStaticPaths() {
-  let data = await fetch("http://localhost:8888/wp-json/wp/v2/posts");
+  const blogBaseUrl = config.blog.base_url;
+
+  let data = await fetch(`${blogBaseUrl}/wp-json/wp/v2/posts`);
   let posts = (await data.json()) as Array<{ slug: string }>;
 
   return posts.map((post) => ({
@@ -21,10 +23,11 @@ export async function getStaticPaths() {
 
 let post;
 
+const blogBaseUrl = config.blog.base_url;
+
 try {
-  // TODO: make url dynamic based on environment
   const res = await fetch(
-    `http://localhost:8888/wp-json/wp/v2/posts?slug=${slug}&_embed`,
+    `${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed`,
   );
   [post] = await res.json();
 } catch (e) {

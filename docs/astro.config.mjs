@@ -25,9 +25,8 @@ export default defineConfig({
    *
    * Configurations:
    *  - filter: We're filtering the terms, privacy and thank you pages, since we don't want them to be indexed.
-   *  - LATER: Add `lastmod`, `changefreq`, and `priority` to the feature and blog pages.
+   *  - LATER: Add `lastmod` to the feature and blog pages.
    */
-  // TODO: add blog and blog post pages to sitemap
   integrations: [
     react(),
     sitemap({

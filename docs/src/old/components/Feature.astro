@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import { marked } from "marked";
 import type { CollectionEntry } from "astro:content";
 
+import config from "@/config/config.json";
+
 interface Props {
   data: CollectionEntry<"feature">["data"];
 }
@@ -14,11 +16,13 @@ const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
   : undefined;
 
+
 let blogPath;
 
 if (blogId) {
+  const blogBaseUrl = config.blog.base_url;
   const res = await fetch(
-    `http://localhost:8888/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
+    `${blogBaseUrl}/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
   );
   const { slug } = (await res.json()) as { slug: string };
   blogPath = `/blog/${slug}`;
