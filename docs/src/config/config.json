@@ -13,6 +13,9 @@
   "settings": {
     "sticky_header": true
   },
+  "blog": {
+    "base_url": "https://cms.rocketsim.app"
+  },
   "params": {
     "copyright": "Copyright © {year} RocketSim. All Rights Reserved."
   },
