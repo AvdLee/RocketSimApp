@@ -145,6 +145,7 @@ We've disabled comments on the Wordpress instance
 Astro giving <!Doctype...> could not be read error?
 
 To fix:
+
 1. Go into the Wordpress instance
 2. "Settings > Permalinks"
 3. Set it to anything other that "Plain"

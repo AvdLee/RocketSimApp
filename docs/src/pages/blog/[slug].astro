@@ -32,7 +32,7 @@ try {
   [post] = await res.json();
 } catch (e) {
   throw new Error(
-    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed": ${e instanceof Error ? e.message : String(e)}`
+    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed": ${e instanceof Error ? e.message : String(e)}`,
   );
 }
 
