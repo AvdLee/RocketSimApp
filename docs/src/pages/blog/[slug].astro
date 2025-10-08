@@ -1,0 +1,138 @@
+---
+import { JSDOM } from "jsdom";
+import { Image } from "astro:assets";
+
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import { selectOgImage } from "@/lib/utils/selectOgImage";
+import { dateFormat } from "@/lib/utils/dateFormat";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const blogBaseUrl = config.blog.base_url;
+
+  let data = await fetch(`${blogBaseUrl}/wp-json/wp/v2/posts`);
+  let posts = (await data.json()) as Array<{ slug: string }>;
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post: post },
+  }));
+}
+
+let post;
+
+const blogBaseUrl = config.blog.base_url;
+
+try {
+  const res = await fetch(
+    `${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed`,
+  );
+  [post] = await res.json();
+} catch (e) {
+  throw new Error(
+    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed": ${e instanceof Error ? e.message : String(e)}`,
+  );
+}
+
+const title = post.title.rendered;
+const articlePublishedTime = post.date;
+const articleModifiedTime = post.modified;
+const image = post._embedded?.["wp:featuredmedia"]?.[0]
+  ? selectOgImage(post._embedded["wp:featuredmedia"][0].media_details.sizes)
+  : undefined;
+const { description } = post.yoast_head_json;
+
+const {
+  site: { base_url },
+} = config;
+
+/**
+ * Manipulate the post content in any way you want here.
+ */
+const dom = new JSDOM(post.content.rendered);
+const doc = dom.window.document;
+
+const videos = doc.querySelectorAll("video");
+
+videos.forEach((video) => {
+  video.setAttribute("playsinline", "true");
+  video.setAttribute("controls", "true");
+});
+
+const manipulatedDom = dom.serialize();
+---
+
+<Base
+  title={title}
+  meta_title={`${title} - RocketSim`}
+  description={description}
+  canonical={`${base_url}/blog/${post.slug}`}
+  contentType="article"
+  articlePublishedTime={articlePublishedTime}
+  articleModifiedTime={articleModifiedTime}
+  image={image}
+>
+  <article>
+    <header>
+      <div class="ph-spacing">
+        <div class="container text-center">
+          <div class="flex flex-col items-center gap-16 lg:gap-28">
+            <div class="space-y-3 md:space-y-5 mx-auto">
+              {
+                articleModifiedTime && (
+                  <p
+                    class="text-center text-base font-medium text-text pb-2"
+                    data-aos="fade-up-sm"
+                    data-aos-delay="0"
+                  >
+                    Last Updated
+                    <span
+                      set:html={dateFormat(
+                        articleModifiedTime,
+                        " MMM dd, yyyy",
+                      )}
+                    />
+                  </p>
+                )
+              }
+              <h1
+                class="page-heading leading-none text-center !mb-6"
+                data-aos="fade-up-sm"
+                data-aos-delay="50"
+                set:html={title}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {
+        image ? (
+          <div class="ph-merged-section">
+            <div class="container">
+              <figure data-aos="fade-up-sm" data-aos-delay="150">
+                <Image
+                  src={image}
+                  alt={title}
+                  width={1300}
+                  height={768}
+                  class="w-full max-h-[580px] object-cover rounded-2xl"
+                />
+              </figure>
+            </div>
+          </div>
+        ) : null
+      }
+    </header>
+
+    <section class="section -mt-20">
+      <div class="container">
+        <div class="content xl:px-32">
+          <Fragment set:html={manipulatedDom} />
+        </div>
+      </div>
+    </section>
+  </article>
+</Base>

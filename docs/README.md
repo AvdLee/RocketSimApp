@@ -99,3 +99,53 @@ sortOrder: 3
 - Quickly test **Locations, Push Notifications, and Deeplinks**
 - **Grant, revoke, or reset permissions** like photo and location access, allowing you to quicker test related implementations
 ```
+
+## Blog
+
+The blog is powered by a headless WordPress instance. The blog posts are fetched at build time and statically rendered.
+
+### Local development
+
+Make sure Docker is running.
+
+Start: `npm run wordpress:start`
+Stop: `npm run wordpress:stop`
+
+url: `http://localhost:8888/wp-admin`
+username: `root`
+password: `password`
+
+### Plugins
+
+We use the following plugins:
+
+1. [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) - SEO optimization
+2. [Code Block Pro](https://wordpress.org/plugins/code-block-pro/) - Syntax highlighting for code blocks
+
+### Indexing
+
+We don't want the pages of the Wordpress instance to be indexed by search engines. They should be indexed when displayed on rocketsim.app. To set this up:
+
+1. Go into the Wordpress instance
+2. Settings > Reading
+3. Check: "Discourage search engines from indexing this site"
+
+### Comments
+
+We've disabled comments on the Wordpress instance
+
+1. Go into the Wordpress instance
+2. Settings > Discussion
+3. Turn off: "Allow people to submit comments on new posts"
+
+### Troubleshooting
+
+#### Doctype error
+
+Astro giving <!Doctype...> could not be read error?
+
+To fix:
+
+1. Go into the Wordpress instance
+2. "Settings > Permalinks"
+3. Set it to anything other that "Plain"

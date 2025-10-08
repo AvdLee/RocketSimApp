@@ -18,14 +18,15 @@ export default defineConfig({
       entrypoint: "astro/assets/services/sharp",
     },
   },
-  vite: { plugins: [tailwindcss()] },
+  // TODO: fix later
+  vite: { plugins: [tailwindcss() as any] },
 
   /**
    * Add the sitemap plugin
    *
    * Configurations:
    *  - filter: We're filtering the terms, privacy and thank you pages, since we don't want them to be indexed.
-   *  - LATER: Add `lastmod`, `changefreq`, and `priority` to the feature and blog pages.
+   *  - LATER: Add `lastmod` to the feature and blog pages.
    */
   integrations: [
     react(),

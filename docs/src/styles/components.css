@@ -189,7 +189,7 @@
   @apply prose-h3:text-h4 md:prose-h3:text-h3-sm;
   @apply prose-img:max-w-full prose-img:rounded;
   @apply prose-hr:border-border;
-  @apply prose-p:text-h6-sm prose-p:text-text/70 prose-p:font-medium;
+  @apply prose-p:text-h6-sm prose-p:text-text prose-p:font-medium;
   @apply prose-blockquote:rounded-lg prose-blockquote:border prose-blockquote:border-l-[10px] prose-blockquote:border-primary prose-blockquote:bg-light prose-blockquote:px-8 prose-blockquote:py-10 prose-blockquote:font-primary prose-blockquote:text-2xl prose-blockquote:not-italic prose-blockquote:text-text-dark;
   @apply prose-pre:rounded-lg prose-pre:bg-light;
   @apply prose-code:px-1 prose-code:text-primary;
@@ -202,6 +202,7 @@
   @apply prose-tr:border-border;
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px];
   @apply prose-li:marker:text-primary;
+  @apply prose-figcaption:text-center;
 }
 
 /* CTA style */
