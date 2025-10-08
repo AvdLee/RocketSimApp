@@ -35,6 +35,18 @@ compare_plans:
           free: false
           individual: true
           teams: true
+    - title: Simulator Camera
+      description: |
+        Test camera functionality without a physical device by streaming your macOS camera. Scan QR codes or capture assets. All plug & play, you can just use the same AVCapture APIs as normal.
+      list:
+        - item: Simulator Camera Captures
+          free: false
+          individual: true
+          teams: true
+        - item: Barcode & QR Code Scanning
+          free: false
+          individual: true
+          teams: true
     - title: Recordings
       description: |
         Create recordings that are optimized for App Store Previews. Customize the status bar, show touches, record the audio, and show device bezels for professional videos.
@@ -51,15 +63,31 @@ compare_plans:
           free: true
           individual: true
           teams: true
+        - item: Touches
+          free: true
+          individual: true
+          teams: true
+        - item: Touche Attention Mode
+          free: true
+          individual: true
+          teams: true
+        - item: Custom Backgrounds
+          free: true
+          individual: true
+          teams: true
+        - item: Custom Touches Color
+          free: false
+          individual: true
+          teams: true
+        - item: Aspect Ratio
+          free: true
+          individual: true
+          teams: true
         - item: Apple 9:41 status bar
           free: false
           individual: true
           teams: true
         - item: Remove Watermark
-          free: false
-          individual: true
-          teams: true
-        - item: Touches
           free: false
           individual: true
           teams: true
@@ -72,14 +100,6 @@ compare_plans:
           individual: true
           teams: true
         - item: Custom Bezel Color
-          free: false
-          individual: true
-          teams: true
-        - item: Custom Background Color
-          free: false
-          individual: true
-          teams: true
-        - item: Custom Touches Color
           free: false
           individual: true
           teams: true
@@ -99,6 +119,14 @@ compare_plans:
           free: true
           individual: true
           teams: true
+        - item: Custom Backgrounds
+          free: true
+          individual: true
+          teams: true
+        - item: Aspect Ratio
+          free: true
+          individual: true
+          teams: true
         - item: Remove Watermark
           free: false
           individual: true
@@ -108,10 +136,6 @@ compare_plans:
           individual: true
           teams: true
         - item: Custom Bezel Color
-          free: false
-          individual: true
-          teams: true
-        - item: Custom Background Color
           free: false
           individual: true
           teams: true
