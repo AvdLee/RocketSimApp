@@ -31,7 +31,9 @@ try {
   );
   [post] = await res.json();
 } catch (e) {
-  throw e;
+  throw new Error(
+    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed": ${e instanceof Error ? e.message : String(e)}`
+  );
 }
 
 const title = post.title.rendered;
