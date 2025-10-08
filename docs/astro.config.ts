@@ -18,7 +18,8 @@ export default defineConfig({
       entrypoint: "astro/assets/services/sharp",
     },
   },
-  vite: { plugins: [tailwindcss()] },
+  // TODO: fix later
+  vite: { plugins: [tailwindcss() as any] },
 
   /**
    * Add the sitemap plugin
