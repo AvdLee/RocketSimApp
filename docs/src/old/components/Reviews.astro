@@ -1,9 +1,5 @@
 ---
-import Testimonial from "./Testimonial.astro";
-
-import majidImage from "../../assets/majid.jpeg";
-import peterImage from "../../assets/peter.png";
-import jordiImage from "../../assets/jordi.jpeg";
+// Senja testimonials widget
 ---
 
 <style>
@@ -11,47 +7,21 @@ import jordiImage from "../../assets/jordi.jpeg";
     margin-top: 5rem;
     margin-bottom: 5rem;
   }
-
-  ul {
-    row-gap: 4rem;
-    padding: 0;
-    list-style: none;
-  }
-
-  li {
-    @media (min-width: 800px) {
-      grid-column: span 4;
-    }
-  }
 </style>
 
 <section aria-label="Reviews from users">
-  <ul class="deprecated-grid">
-    <li>
-      <Testimonial
-        quote='"I use RocketSim a lot to <strong>create recordings</strong> for my articles. The touches now make it even easier to share my learnings."'
-        author="Majid Jabrayilov"
-        position="swiftwithmajid.com"
-        website="https://www.swiftwithmajid.com"
-        image={majidImage}
-      />
-    </li>
-    <li>
-      <Testimonial
-        quote='"RocketSim helps me to <strong>create localized preview videos</strong> for Soosee, ready to upload to App Store Connect."'
-        author="Jordi Bruin"
-        position="soosee.app"
-        website="https://www.soosee.app"
-        image={jordiImage}
-      />
-    </li>
-    <li>
-      <Testimonial
-        quote='"I love <strong>RocketSim’s Network Monitor!</strong> It lets me inspect outgoing requests and quickly spot why any fail. Incredibly useful."'
-        author="Peter Friese"
-        position="Developer Advocate, Google"
-        image={peterImage}
-      />
-    </li>
-  </ul>
+  <div
+    class="senja-embed"
+    data-id="3e26a85b-fd07-45d2-88b6-a69564850353"
+    data-mode="shadow"
+    data-lazyload="false"
+    style="display: block; width: 100%;"
+  >
+  </div>
 </section>
+
+<script
+  is:inline
+  src="https://widget.senja.io/widget/3e26a85b-fd07-45d2-88b6-a69564850353/platform.js"
+  type="text/javascript"
+  async></script>
