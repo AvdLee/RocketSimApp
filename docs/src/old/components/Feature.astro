@@ -212,7 +212,6 @@ if (asset.alignment === "full-width") {
         />
       ) : (
         <video
-          transition:persist
           class="image js-feature-video"
           aria-label={asset.alt}
           muted
@@ -234,3 +233,34 @@ if (asset.alignment === "full-width") {
     }
   </figure>
 </article>
+
+<script>
+  // Astro de-duplicates scripts, so this will only run once even if there are multiple feature components on the page
+  document.addEventListener("astro:page-load", () => {
+    const videos = document.querySelectorAll(".js-feature-video");
+
+    // Force videos to load their sources after navigation
+    videos.forEach((video) => {
+      const videoElement = video as HTMLVideoElement;
+      videoElement.load();
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const videoElement = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            videoElement.play();
+          } else {
+            videoElement.pause();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    videos.forEach((video) => {
+      observer.observe(video);
+    });
+  });
+</script>

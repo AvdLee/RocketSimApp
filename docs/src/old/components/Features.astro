@@ -40,26 +40,3 @@ const features = await Promise.all(
     ))
   }
 </section>
-
-<script>
-  // Play videos when they are in view, pause when they are not
-  const videos = document.querySelectorAll(".js-feature-video");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const videoElement = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting) {
-          videoElement.play();
-        } else {
-          videoElement.pause();
-        }
-      });
-    },
-    { threshold: 0.5 },
-  );
-
-  videos.forEach((video) => {
-    observer.observe(video);
-  });
-</script>
