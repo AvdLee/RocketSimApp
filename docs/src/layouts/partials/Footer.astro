@@ -39,7 +39,10 @@ function replaceYear(text: string) {
                 {
                   footer.map((item) => (
                     <li>
-                      <a class="text-text no-underline hover:underline" href={item.url}>
+                      <a
+                        class="text-text no-underline hover:underline"
+                        href={item.url}
+                      >
                         {item.name}
                       </a>
                     </li>
@@ -54,14 +57,15 @@ function replaceYear(text: string) {
             class="flex flex-wrap gap-y-6 sm:flex-nowrap md:justify-end lg:justify-around md:mt-4"
           >
             <div class="w-[160px]">
-              <h3 class="mb-9 text-lg text-text-dark font-medium">
-                Support
-              </h3>
+              <h3 class="mb-9 text-lg text-text-dark font-medium">Support</h3>
               <ul class="flex flex-col gap-5">
                 {
                   support.map((item) => (
                     <li>
-                      <a class="text-text no-underline hover:underline" href={item.url}>
+                      <a
+                        class="text-text no-underline hover:underline"
+                        href={item.url}
+                      >
                         {item.name}
                       </a>
                     </li>
