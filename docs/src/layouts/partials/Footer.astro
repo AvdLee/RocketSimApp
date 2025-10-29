@@ -1,8 +1,14 @@
 ---
 import config from "@/config/config.json";
+import social from "@/config/social.json";
+import menu from "@/config/menu.json";
+
+import Logo from "@/components/Logo.astro";
+import Social from "@/components/Social.astro";
 
 import { markdownify } from "@/lib/utils/textConverter";
 
+const { footer, support } = menu;
 // Function to replace {year} this from string to year
 function replaceYear(text: string) {
   const year = new Date().getFullYear();
@@ -12,6 +18,66 @@ function replaceYear(text: string) {
 ---
 
 <footer class="pt-16 xl:pt-24">
+  <div class="container mx-auto">
+    <div class="w-full md:max-w-[calc(100%-100px)] mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 justify-between gap-10">
+        <div class="col-span-1" data-aos="fade-up-sm" data-aos-delay="0">
+          <div class="mb-10">
+            <Logo />
+          </div>
+          <Social source={social.main} className="flex gap-5" />
+        </div>
+        <div class="col-span-1" data-aos="fade-up-sm" data-aos-delay="100">
+          <div
+            class="flex flex-wrap gap-y-6 sm:flex-nowrap md:justify-end lg:justify-around md:mt-4"
+          >
+            <div class="w-[160px]">
+              <h3 class="mb-9 text-lg text-text-dark font-medium">
+                Navigation
+              </h3>
+              <ul class="flex flex-col gap-5">
+                {
+                  footer.map((item) => (
+                    <li>
+                      <a
+                        class="text-text no-underline hover:underline"
+                        href={item.url}
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1" data-aos="fade-up-sm" data-aos-delay="100">
+          <div
+            class="flex flex-wrap gap-y-6 sm:flex-nowrap md:justify-end lg:justify-around md:mt-4"
+          >
+            <div class="w-[160px]">
+              <h3 class="mb-9 text-lg text-text-dark font-medium">Support</h3>
+              <ul class="flex flex-col gap-5">
+                {
+                  support.map((item) => (
+                    <li>
+                      <a
+                        class="text-text no-underline hover:underline"
+                        href={item.url}
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="py-5 border-t border-border mt-14">
     <div
       class="container flex flex-col lg:flex-row justify-between items-center gap-5"
@@ -30,16 +96,6 @@ function replaceYear(text: string) {
           href="/privacy"
           class="text-text no-underline hover:underline"
           aria-label="Privacy Policy Link">Privacy Policy</a
-        >
-        <a
-          href="https://docs.rocketsim.app"
-          target="_blank"
-          class="text-text no-underline hover:underline">Documentation</a
-        >
-        <a
-          href="https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
-          target="_blank"
-          class="text-text no-underline hover:underline">FAQ</a
         >
       </div>
     </div>

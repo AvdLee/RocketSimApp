@@ -12,5 +12,33 @@
       "name": "Pricing",
       "url": "/pricing"
     }
+  ],
+  "support": [
+    {
+      "name": "Documentation",
+      "url": "https://docs.rocketsim.app"
+    },
+    {
+      "name": "FAQ",
+      "url": "https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+    },
+    {
+      "name": "Email",
+      "url": "mailto:support@rocketsim.app"
+    }
+  ],
+  "footer": [
+    {
+      "name": "All features",
+      "url": "/"
+    },
+    {
+      "name": "Team licenses",
+      "url": "/team-insights"
+    },
+    {
+      "name": "Pricing",
+      "url": "/pricing"
+    }
   ]
 }
