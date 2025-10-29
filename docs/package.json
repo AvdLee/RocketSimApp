@@ -31,7 +31,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.14.1",
+    "@types/node": "^24.7.0",
     "@typescript-eslint/parser": "^8.41.0",
     "@wordpress/env": "^10.30.0",
     "astro-auto-import": "^0.4.4",
