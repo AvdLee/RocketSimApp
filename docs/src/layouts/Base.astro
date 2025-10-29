@@ -149,7 +149,7 @@ const { title, meta_title, description, image, noindex, canonical } =
         }),
         (plausible.init =
           plausible.init ||
-          function (i) {
+          function (i: any) {
             plausible.o = i || {};
           }));
       plausible.init();
