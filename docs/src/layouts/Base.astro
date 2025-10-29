@@ -136,18 +136,23 @@ const { title, meta_title, description, image, noindex, canonical } =
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Plausible -->
+    <!-- Privacy-friendly analytics by Plausible -->
     <script
       is:inline
       defer
-      data-domain="rocketsim.app"
-      src="https://plausible.io/js/script.tagged-events.js"></script>
+      src="https://plausible.io/js/pa-UU6kf044LfXx1I_nLu86Q.js"></script>
     <script>
-      window.plausible =
+      ((window.plausible =
         window.plausible ||
         function () {
-          (window.plausible.q = window.plausible.q || []).push(arguments);
-        };
+          (plausible.q = plausible.q || []).push(arguments);
+        }),
+        (plausible.init =
+          plausible.init ||
+          function (i) {
+            plausible.o = i || {};
+          }));
+      plausible.init();
     </script>
     <!-- End Plausible -->
 
