@@ -154,6 +154,22 @@ const { title, meta_title, description, image, noindex, canonical } =
           }));
       plausible.init();
     </script>
+    <script>
+      /// This adds event listeners to our inline forms
+      /// and sends an event to Plausible.
+      (function () {
+        document.addEventListener(
+          "submit",
+          function (event: any) {
+            if (event.target.dataset.svForm) {
+              plausible("Newsletter Form Conversion");
+              console.log("Newsletter Form Conversion");
+            }
+          },
+          true,
+        );
+      })();
+    </script>
     <!-- End Plausible -->
 
     <!-- ConvertKit Insights -->
