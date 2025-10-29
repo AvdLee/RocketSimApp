@@ -1,0 +1,19 @@
+{
+  "main": [
+    {
+      "name": "@rocketsim_app",
+      "icon": "FaXTwitter",
+      "link": "https://x.com/rocketsim_app"
+    },
+    {
+      "name": "@rocketsimapp",
+      "icon": "FaYoutube",
+      "link": "https://www.youtube.com/@rocketsimapp"
+    },
+    {
+      "name": "@rocketsim",
+      "icon": "FaLinkedin",
+      "link": "https://linkedin.com/company/rocketsim"
+    }
+  ]
+}
