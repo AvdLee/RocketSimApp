@@ -67,7 +67,7 @@ compare_plans:
           free: true
           individual: true
           teams: true
-        - item: Touche Attention Mode
+        - item: Touch Attention Mode
           free: true
           individual: true
           teams: true
