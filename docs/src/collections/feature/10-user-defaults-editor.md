@@ -1,6 +1,7 @@
 ---
 name: "User Defaults Editor"
 tagLine: "Edit Standard & Group User Defaults in realtime"
+youtubeLink: "https://www.youtube.com/watch?v=zTbQck3ofcc"
 asset:
   type: "video"
   path: "/features/user-defaults-editor.mp4"

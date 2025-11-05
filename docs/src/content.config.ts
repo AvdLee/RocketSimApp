@@ -26,6 +26,7 @@ const feature = defineCollection({
       name: z.string(),
       tagLine: z.string().optional(),
       blogId: z.number().optional(),
+      youtubeLink: z.string().url().optional(),
       asset: z.discriminatedUnion("type", [
         z.object({
           type: z.literal("image"),
