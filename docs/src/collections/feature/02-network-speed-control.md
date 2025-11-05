@@ -1,5 +1,6 @@
 ---
 name: "Network Speed Control"
+youtubeLink: "https://www.youtube.com/watch?v=xK3iI5TzuA4"
 asset:
   type: "image"
   path: "../../assets/features/network-speed-control.png"
