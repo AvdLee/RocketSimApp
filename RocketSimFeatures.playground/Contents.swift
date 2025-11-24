@@ -48,6 +48,11 @@ let features: [Feature] = [
     .init(githubIssueID: "179", title: "Display HTTP Traffic", description: "Show HTTP Traffic directly next to the Simulator", status: .implemented),
     .init(githubIssueID: "564", title: "Allow copy pasting lat/long values", description: "In addition to specific locations, the option to specify a latitude and longitude.", status: .implemented),
     .init(githubIssueID: "283b", title: "Network Link Conditioner", description: "Apart from Airplane mode, allow to only slow down the network connection for a specific Simulator app w/o influencing your Mac's connection", status: .implemented),
+    .init(githubIssueID: "607", title: "Simulator Camera", description: "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.", status: .implemented),
+    .init(githubIssueID: "289", title: "Add a wallpaper and padding to screenshots", description: "Beautify screenshots with a gradient background and extra padding", status: .implemented),
+    .init(githubIssueID: "497", title: "Allow adding items to User Defaults", description: "Add items from within the User Defaults editor", status: .implemented),
+    .init(githubIssueID: "236", title: "Allow Save as... for captured thumbnails", description: "Right-click a thumbnail to save as...", status: .implemented),
+    .init(githubIssueID: "218", title: "Grant/Revoke push notifications permissions", description: "Adding Push notifications permissions to the other existing permission revoke, grant, reset actions.", status: .implemented),
     
     /// Planned
     .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
@@ -55,17 +60,14 @@ let features: [Feature] = [
     .init(githubIssueID: "347", title: "Username/Password Quick Action", description: "Allow to fill in account details inside a email/password textfield via a Quick Action.", status: .planned),
     .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
-    .init(githubIssueID: "289", title: "Add a wallpaper and padding to screenshots", description: "Beautify screenshots with a gradient background and extra padding", status: .planned),
     .init(githubIssueID: "280", title: "Resize screenshots", description: "Allow resizing the output screenshot to reduce size and resolution", status: .planned),
     .init(githubIssueID: "269", title: "Advanced Simulator Recordings (60FPS, 120FPS, compression config)", description: "Advanced configuration for Simulator recordings, allowing to record in 60FPS, 120FPS or to configure compression.", status: .planned),
     .init(githubIssueID: "193", title: "Configurable Video Output", description: "Export to .MOV instead of .MP4", status: .planned),
-    .init(githubIssueID: "236", title: "Allow Save as... for captured thumbnails", description: "Right-click a thumbnail to save as...", status: .planned),
     .init(githubIssueID: "285", title: "Record Mic audio with recordings", description: "Screen recordings with your voice as instructions", status: .planned),
     .init(githubIssueID: "299", title: "Low storage testing", description: "Simulate low storage on the Simulator to trigger No Space Left errors", status: .planned),
     .init(githubIssueID: "291", title: "Manually select locations waypoints", description: "Create a location Quick Action by collecting lon-lat waypoints manually", status: .planned),
     .init(githubIssueID: "87", title: "tvOS Support", description: "Use RocketSim with the tvOS Simulator", status: .planned),
     .init(githubIssueID: "301", title: "Fullscreen Support", description: "Use RocketSim with Xcode in fullscreen mode", status: .planned),
-    .init(githubIssueID: "497", title: "Allow adding items to User Defaults", description: "Add items from within the User Defaults editor", status: .planned),
     .init(githubIssueID: "483", title: "Allow right-click -> Edit on any action", description: "Directly access App Action editor via right-click", status: .planned),
     .init(githubIssueID: "480", title: "Support GPX files for location simulation", description: "Simulate locations using GPX files", status: .planned),
     .init(githubIssueID: "464", title: "Introduce App Action tags for grouping", description: "Group long lists of app actions based on configured tags", status: .planned),
@@ -76,10 +78,8 @@ let features: [Feature] = [
     .init(githubIssueID: "519", title: "Slow Animations Shortcut", description: "Toggle slow animations using a shortcut.", status: .planned),
     .init(githubIssueID: "522", title: "Align rulers to elements", description: "Make rulers sticky to on-screen element boundaries.", status: .planned),
     .init(githubIssueID: "523", title: "Show a score & diff image of the implementation compared to a selected design overlay", description: "A screenshot of the Simulator will be diffed against a selected design overlay, resulting in an implementation score.", status: .planned),
-    .init(githubIssueID: "218", title: "Grant/Revoke push notifications permissions", description: "Adding Push notifications permissions to the other existing permission revoke, grant, reset actions.", status: .planned),
     .init(githubIssueID: "374", title: "Grant/Revoke HealthKit permissions", description: "Adding HealthKit permissions to the other existing permission revoke, grant, reset actions.", status: .planned),
     .init(githubIssueID: "561", title: "Reset Kechain action", description: "Allow resetting the keychain without completely resetting the Simulator.", status: .planned),
-    .init(githubIssueID: "607", title: "Simulator Camera", description: "Use your Mac's camera as input for the Simulator camera to allow testing camera functionality in the Simulator.", status: .planned),
     .init(githubIssueID: "606", title: "Directory Actions", description: "Create deeplinks for app directories. For example, open .app/caches/db.sqlite with a single click.", status: .planned)
 ]
 
