@@ -112,7 +112,7 @@ Start: `npm run wordpress:start`
 Stop: `npm run wordpress:stop`
 
 url: `http://localhost:8888/wp-admin`
-username: `root`
+username: `admin`
 password: `password`
 
 ### Plugins
