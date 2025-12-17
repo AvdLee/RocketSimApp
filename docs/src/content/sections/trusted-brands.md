@@ -2,8 +2,6 @@
 enable: true
 title: "Trusted by developers at leading tech companies."
 list:
-  - brand: Meta,
-    logo: "/images/brands/meta.svg"
   - brand: Calendly,
     logo: "/images/brands/calendly.svg"
   - brand: Strava,
