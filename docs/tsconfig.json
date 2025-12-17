@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "jsx": "react",
+    "strict": true,
     "paths": {
       "@/components/*": ["./src/layouts/components/*"],
       "@/shortcodes/*": ["./src/layouts/shortcodes/*"],
@@ -14,6 +15,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro"],
   "exclude": ["dist"]
 }
