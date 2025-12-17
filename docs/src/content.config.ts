@@ -14,7 +14,7 @@ import {
   faqSectionCollection,
   pricingSectionCollection,
   statisticsSectionCollection,
-  trustedBrandsSectionCollection
+  trustedBrandsSectionCollection,
 } from "./types/sections.collections";
 
 const alignment = z.enum(["left", "right", "full-width"]);
@@ -61,5 +61,5 @@ export const collections = {
   faqSectionCollection,
   pricingSectionCollection,
   statisticsSectionCollection,
-  trustedBrandsSectionCollection
+  trustedBrandsSectionCollection,
 };

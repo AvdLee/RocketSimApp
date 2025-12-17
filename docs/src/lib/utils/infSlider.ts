@@ -5,12 +5,15 @@ interface SliderOptions {
 }
 
 export function initInfiniteSliders(): void {
-  const sliders: NodeListOf<HTMLElement> = document.querySelectorAll(".inf-slider");
+  const sliders: NodeListOf<HTMLElement> =
+    document.querySelectorAll(".inf-slider");
 
   sliders.forEach((slider: HTMLElement) => {
     const options: SliderOptions = {
       scrollSpeed: slider.dataset.infScrollSpeed || "100", // Default scroll speed 100px/s
-      direction: (slider.dataset.infDirection === "reverse" ? "reverse" : "normal") as "normal" | "reverse",
+      direction: (slider.dataset.infDirection === "reverse"
+        ? "reverse"
+        : "normal") as "normal" | "reverse",
       pauseOnHover: slider.dataset.infSlidePauseOnHover === "true",
     };
 
@@ -18,7 +21,7 @@ export function initInfiniteSliders(): void {
     if (!track) return;
 
     const slides: HTMLCollectionOf<HTMLElement> = track.getElementsByClassName(
-      "inf-slide"
+      "inf-slide",
     ) as HTMLCollectionOf<HTMLElement>;
     const numSlides: number = slides.length;
 

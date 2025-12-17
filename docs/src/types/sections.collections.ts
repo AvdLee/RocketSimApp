@@ -14,7 +14,7 @@ export const trustedBrandsSectionCollection = defineCollection({
       z.object({
         brand: z.string(),
         logo: z.string(),
-      })
+      }),
     ),
   }),
 });
