@@ -1,6 +1,24 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+// Trusted Brands Section collection schema
+export const trustedBrandsSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "trusted-brands.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    list: z.array(
+      z.object({
+        brand: z.string(),
+        logo: z.string(),
+      })
+    ),
+  }),
+});
+
 // Compare Plans Section collection schema
 export const comparePlansSectionCollection = defineCollection({
   loader: glob({

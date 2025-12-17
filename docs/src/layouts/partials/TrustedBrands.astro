@@ -1,0 +1,60 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+const sectionData = (await getEntry("trustedBrandsSectionCollection", "trusted-brands")) as CollectionEntry<"trustedBrandsSectionCollection">;
+
+const { enable, title, list } = sectionData.data;
+---
+<style>
+  section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+</style>
+
+{
+  enable && <section data-aos="fade-up-sm">
+  <div class="container">
+    <!-- TITLE -->
+    <p class="mb-12 text-h6 font-medium text-center" set:html={markdownify(title)} />
+    <!-- CAROUSEL ITEMS -->
+    <div
+      class:list={["inf-slider overflow-hidden"]}
+      data-inf-scroll-speed="40"
+      data-inf-direction="normal"
+      data-inf-slide-pause-on-hover="true"
+    >
+      <div class="inf-slide-track">
+        {
+          list.map(({ brand, logo }) => (
+            <div class="inf-slide ml-10">
+              <ImageMod
+                quality="max"
+                width={180}
+                height={40}
+                src={logo}
+                alt={brand}
+                class="object-contain max-h-[46px] h-full"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+}
+
+<script>
+  import { initInfiniteSliders } from "@/lib/utils/infSlider";
+
+  document.addEventListener("astro:page-load", initInfiniteSliders);
+</script>
