@@ -83,6 +83,7 @@ plans:
       label: Start 14-day Trial
       site: teams
       link: "/signup/trial?utm_source=website&utm_medium=website&utm_content=pricing"
+      class: "plausible-event-name=Pricing+Teams+Start+Trial"
   - enable: true
     title: Enterprise
     description: For larger enterprise with a need for more control and security
@@ -109,4 +110,5 @@ plans:
       label: Contact sales
       site: custom
       link: "mailto:ralphduin@rocketsim.app"
+      class: "plausible-event-name=Pricing+Enterprise+Contact+Sales"
 ---
