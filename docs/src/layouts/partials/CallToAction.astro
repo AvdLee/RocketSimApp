@@ -20,6 +20,25 @@ const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
     : "http://localhost:5173";
+
+function getCurrentPage(pathname: string): string {
+  switch (pathname) {
+    case "/": {
+      return "homepage";
+    }
+    case "/team-insights": {
+      return "team-page";
+    }
+    case "/pricing": {
+      return "pricing-page";
+    }
+    default: {
+      return "other-page";
+    }
+  }
+}
+
+const currentPage = getCurrentPage(Astro.url.pathname);
 ---
 
 {
@@ -59,6 +78,7 @@ const teamsUrl =
                         "btn-secondary": index !== 0,
                       },
                       cta.class,
+                      `plausible-event-page=${currentPage}`,
                     ]}
                     target={
                       /^(http|https|www|mailto)/.test(cta.link)
