@@ -21,9 +21,24 @@ const teamsUrl =
     ? config.site.teams_base_url
     : "http://localhost:5173";
 
-const currentPage = Astro.url.pathname === "/" ? "homepage"
-  : Astro.url.pathname === "/team-insights" ? "team-page"
-  : "other-page";
+function getCurrentPage(pathname: string): string {
+  switch (pathname) {
+    case "/": {
+      return "homepage";
+    }
+    case "/team-insights": {
+      return "team-page";
+    }
+    case "/pricing": {
+      return "pricing-page";
+    }
+    default: {
+      return "other-page";
+    }
+  }
+}
+
+const currentPage = getCurrentPage(Astro.url.pathname);
 ---
 
 {

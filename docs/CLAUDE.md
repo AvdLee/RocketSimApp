@@ -23,3 +23,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Place new pages in `/src/pages`
 - Place static assets in `/public` directory
 - Content collections are in `/src/collections`
+- Switch statements must use closure brackets for each case:
+  ```typescript
+  switch (value) {
+    case "option1": {
+      return "result1";
+    }
+    case "option2": {
+      return "result2";
+    }
+    default: {
+      return "default";
+    }
+  }
+  ```
