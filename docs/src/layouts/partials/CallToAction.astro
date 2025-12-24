@@ -20,6 +20,10 @@ const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
     : "http://localhost:5173";
+
+const currentPage = Astro.url.pathname === "/" ? "homepage"
+  : Astro.url.pathname === "/team-insights" ? "team-page"
+  : "other-page";
 ---
 
 {
@@ -59,6 +63,7 @@ const teamsUrl =
                         "btn-secondary": index !== 0,
                       },
                       cta.class,
+                      `plausible-event-page=${currentPage}`,
                     ]}
                     target={
                       /^(http|https|www|mailto)/.test(cta.link)
