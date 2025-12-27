@@ -13,5 +13,4 @@ call_to_actions:
     label: Start a 14-day Teams Trial
     site: teams
     link: "/signup/trial?utm_source=website&utm_medium=website&utm_content=cta"
-    class: "plausible-event-name=cta_click plausible-event-cta_type=trial plausible-event-position=bottom plausible-event-button_text=Start+a+14-day+Teams+Trial"
 ---
