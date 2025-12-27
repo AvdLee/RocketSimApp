@@ -11,34 +11,35 @@ const sectionData = (await getEntry(
 )) as CollectionEntry<"ctaSectionCollection">;
 const { enable, title, description, image, call_to_actions } = sectionData.data;
 
-const callToActions =
-  Astro.url.pathname === "/team-insights"
-    ? [...call_to_actions].reverse()
-    : call_to_actions;
+const isTeamPage = Astro.url.pathname === "/team-insights";
+const isPricingPage = Astro.url.pathname === "/pricing";
+
+const callToActions = isTeamPage
+  ? [...call_to_actions].reverse()
+  : call_to_actions;
 
 const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
     : "http://localhost:5173";
 
-function getCurrentPage(pathname: string): string {
-  switch (pathname) {
-    case "/": {
-      return "homepage";
+// Get page-specific event names
+function getEventName(ctaLabel: string): string {
+  if (isTeamPage) {
+    if (ctaLabel.includes("Trial")) {
+      return "plausible-event-name=CTA:+Team+Page+-+Start+Trial";
     }
-    case "/team-insights": {
-      return "team-page";
-    }
-    case "/pricing": {
-      return "pricing-page";
-    }
-    default: {
-      return "other-page";
+    // For Download button on team page - keep as is from content
+    return "";
+  } else if (isPricingPage) {
+    if (ctaLabel.includes("Download")) {
+      return "plausible-event-name=CTA:+Pricing+Bottom+-+Download";
+    } else if (ctaLabel.includes("Trial")) {
+      return "plausible-event-name=CTA:+Pricing+Bottom+-+Trial";
     }
   }
+  return "";
 }
-
-const currentPage = getCurrentPage(Astro.url.pathname);
 ---
 
 {
@@ -64,31 +65,33 @@ const currentPage = getCurrentPage(Astro.url.pathname);
                 data-aos-delay="200"
                 class="mt-10 flex flex-col sm:flex-row items-stretch gap-3 w-full"
               >
-                {callToActions.map((cta, index) => (
-                  <a
-                    href={
-                      cta.site === "custom"
-                        ? cta.link
-                        : `${cta.site === "teams" ? teamsUrl : ""}${cta.link}`
-                    }
-                    class:list={[
-                      "btn font-semibold min-w-max text-center",
-                      {
-                        "btn-primary": index === 0,
-                        "btn-secondary": index !== 0,
-                      },
-                      cta.class,
-                      `plausible-event-page=${currentPage}`,
-                    ]}
-                    target={
-                      /^(http|https|www|mailto)/.test(cta.link)
-                        ? "_blank"
-                        : "_self"
-                    }
-                  >
-                    {cta.label}
-                  </a>
-                ))}
+                {callToActions.map((cta, index) => {
+                  const eventName = getEventName(cta.label);
+                  return (
+                    <a
+                      href={
+                        cta.site === "custom"
+                          ? cta.link
+                          : `${cta.site === "teams" ? teamsUrl : ""}${cta.link}`
+                      }
+                      class:list={[
+                        "btn font-semibold min-w-max text-center",
+                        {
+                          "btn-primary": index === 0,
+                          "btn-secondary": index !== 0,
+                        },
+                        eventName || cta.class || "",
+                      ]}
+                      target={
+                        /^(http|https|www|mailto)/.test(cta.link)
+                          ? "_blank"
+                          : "_self"
+                      }
+                    >
+                      {cta.label}
+                    </a>
+                  );
+                })}
               </div>
             )}
           </div>
