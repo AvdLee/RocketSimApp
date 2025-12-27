@@ -14,7 +14,9 @@ const { enable, title, description, image, call_to_actions } = sectionData.data;
 const isTeamPage = Astro.url.pathname === "/team-insights";
 const isPricingPage = Astro.url.pathname === "/pricing";
 
-const callToActions = isTeamPage ? [...call_to_actions].reverse() : call_to_actions;
+const callToActions = isTeamPage
+  ? [...call_to_actions].reverse()
+  : call_to_actions;
 
 const teamsUrl =
   import.meta.env.MODE === "production"
