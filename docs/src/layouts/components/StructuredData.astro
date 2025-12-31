@@ -1,9 +1,9 @@
 ---
 import config from "@/config/config.json";
 
-export interface Props {
-  type: "article" | "website" | "static" | "product" | "offer";
-  article?: {
+type ArticleProps = {
+  type: "article";
+  article: {
     headline: string;
     description: string;
     datePublished: string;
@@ -18,18 +18,41 @@ export interface Props {
     url: string;
     slug: string;
   };
-  product?: {
+};
+
+type ProductProps = {
+  type: "product";
+  product: {
     name: string;
     description: string | undefined;
     image?: string;
     url: string;
   };
-  offers?: {
+};
+
+type OfferProps = {
+  type: "offer";
+  offers: {
     title: string;
     description: string | undefined;
     url: string;
   };
-}
+};
+
+type StaticProps = {
+  type: "static";
+};
+
+type WebsiteProps = {
+  type: "website";
+};
+
+export type Props =
+  | ArticleProps
+  | ProductProps
+  | OfferProps
+  | StaticProps
+  | WebsiteProps;
 
 // TypeScript interfaces for JSON-LD schemas
 interface SchemaBase {
@@ -138,7 +161,7 @@ interface OfferSchema extends SchemaBase {
   description?: string;
 }
 
-const { type, article, product, offers } = Astro.props;
+const { type } = Astro.props;
 
 // Author data (hardcoded - single author blog)
 const authorData: PersonSchema = {
@@ -170,7 +193,8 @@ const organizationData: OrganizationSchema = {
 // Build schemas based on type
 const schemas: SchemaBase[] = [];
 
-if (type === "article" && article) {
+if (type === "article") {
+  const { article } = Astro.props;
   // 1. Article schema
   const articleSchema: ArticleSchema = {
     "@context": "https://schema.org",
@@ -271,7 +295,8 @@ if (type === "static") {
   schemas.push(organizationData);
 }
 
-if (type === "product" && product) {
+if (type === "product") {
+  const { product } = Astro.props;
   // 1. SoftwareApplication schema
   const softwareSchema: SoftwareApplicationSchema = {
     "@context": "https://schema.org",
@@ -320,7 +345,8 @@ if (type === "product" && product) {
   schemas.push(breadcrumbSchema);
 }
 
-if (type === "offer" && offers) {
+if (type === "offer") {
+  const { offers } = Astro.props;
   // 1. SoftwareApplication with individual Offer schemas for each tier
   const pricingOffers: OfferSchema[] = [
     {
