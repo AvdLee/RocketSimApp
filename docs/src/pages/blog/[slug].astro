@@ -48,26 +48,37 @@ const image = featuredMedia
 
 // Extract Yoast SEO data
 const yoast = post.yoast_head_json || {};
-const description = yoast.og_description || yoast.description || post.excerpt?.rendered || "";
+const description =
+  yoast.og_description || yoast.description || post.excerpt?.rendered || "";
 
 // Extract robots meta settings from Yoast
 const robotsMeta = yoast.robots || {};
 const robots = {
   index: robotsMeta.index !== "noindex",
   follow: robotsMeta.follow !== "nofollow",
-  ...(robotsMeta["max-snippet"] && { maxSnippet: parseInt(robotsMeta["max-snippet"]) }),
-  ...(robotsMeta["max-image-preview"] && { maxImagePreview: robotsMeta["max-image-preview"] }),
-  ...(robotsMeta["max-video-preview"] && { maxVideoPreview: parseInt(robotsMeta["max-video-preview"]) }),
+  ...(robotsMeta["max-snippet"] && {
+    maxSnippet: parseInt(robotsMeta["max-snippet"]),
+  }),
+  ...(robotsMeta["max-image-preview"] && {
+    maxImagePreview: robotsMeta["max-image-preview"],
+  }),
+  ...(robotsMeta["max-video-preview"] && {
+    maxVideoPreview: parseInt(robotsMeta["max-video-preview"]),
+  }),
 };
 
 // Extract Twitter metadata
-const twitterCreator = yoast.twitter_misc?.["Written by"] ? "@twannl" : "@twannl";
+const twitterCreator = yoast.twitter_misc?.["Written by"]
+  ? "@twannl"
+  : "@twannl";
 const twitterSite = yoast.twitter_site || "@rocketsim_app";
 
 // Extract word count from schema data
 let wordCount: number | undefined;
 if (yoast.schema?.["@graph"]) {
-  const articleSchema = yoast.schema["@graph"].find((item: any) => item["@type"] === "Article");
+  const articleSchema = yoast.schema["@graph"].find(
+    (item: any) => item["@type"] === "Article",
+  );
   if (articleSchema?.wordCount) {
     wordCount = articleSchema.wordCount;
   }
@@ -84,7 +95,7 @@ const canonicalUrl = `${base_url}/blog/${post.slug}`;
 const seo = {
   title: `${title} - RocketSim`,
   description,
-  image, 
+  image,
   canonical: canonicalUrl,
   robots,
   twitterCreator,
@@ -105,12 +116,14 @@ const structuredData = {
     datePublished: articlePublishedTime,
     dateModified: articleModifiedTime,
     wordCount,
-    image: image ? {
-      url: image,
-      width: featuredMedia?.media_details?.width,
-      height: featuredMedia?.media_details?.height,
-      caption: featuredMedia?.caption?.rendered,
-    } : undefined,
+    image: image
+      ? {
+          url: image,
+          width: featuredMedia?.media_details?.width,
+          height: featuredMedia?.media_details?.height,
+          caption: featuredMedia?.caption?.rendered,
+        }
+      : undefined,
     url: canonicalUrl,
     slug: post.slug,
   },
@@ -132,10 +145,7 @@ videos.forEach((video) => {
 const manipulatedDom = dom.serialize();
 ---
 
-<Base
-  seo={seo}
-  structuredData={structuredData}
->
+<Base seo={seo} structuredData={structuredData}>
   <article>
     <header>
       <div class="ph-spacing">

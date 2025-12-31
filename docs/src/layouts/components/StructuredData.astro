@@ -121,7 +121,10 @@ const organizationData: OrganizationSchema = {
   name: "RocketSim",
   url: config.site.base_url,
   logo: `${config.site.base_url}/images/rocketsim-app-icon.png`,
-  sameAs: ["https://x.com/rocketsim_app", "https://www.youtube.com/@rocketsimapp"],
+  sameAs: [
+    "https://x.com/rocketsim_app",
+    "https://www.youtube.com/@rocketsimapp",
+  ],
 };
 
 // Build schemas based on type
@@ -231,6 +234,10 @@ if (type === "static") {
 
 {
   schemas.map((schema) => (
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schema)}
+    />
   ))
 }

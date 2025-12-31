@@ -92,7 +92,10 @@ const ogType = article ? "article" : "website";
   article && (
     <>
       {article.publishedTime && (
-        <meta property="article:published_time" content={article.publishedTime} />
+        <meta
+          property="article:published_time"
+          content={article.publishedTime}
+        />
       )}
       {article.modifiedTime && (
         <meta property="article:modified_time" content={article.modifiedTime} />
