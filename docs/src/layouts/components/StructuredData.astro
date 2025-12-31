@@ -2,7 +2,7 @@
 import config from "@/config/config.json";
 
 export interface Props {
-  type: "article" | "website" | "static";
+  type: "article" | "website" | "static" | "product" | "offer";
   article?: {
     headline: string;
     description: string;
@@ -17,6 +17,18 @@ export interface Props {
     };
     url: string;
     slug: string;
+  };
+  product?: {
+    name: string;
+    description: string | undefined;
+    image?: string;
+    url: string;
+    brand: string;
+  };
+  offers?: {
+    title: string;
+    description: string | undefined;
+    url: string;
   };
 }
 
@@ -98,7 +110,36 @@ interface WebSiteSchema extends SchemaBase {
   description: string;
 }
 
-const { type, article } = Astro.props;
+interface SoftwareApplicationSchema extends SchemaBase {
+  "@type": "SoftwareApplication";
+  name: string;
+  applicationCategory: string;
+  operatingSystem: string;
+  description?: string;
+  brand: OrganizationSchema;
+  offers?: OfferSchema | OfferSchema[];
+  image?: string;
+}
+
+interface OfferSchema extends SchemaBase {
+  "@type": "Offer";
+  name: string;
+  price?: string;
+  priceCurrency?: string;
+  priceSpecification?: {
+    "@type": "UnitPriceSpecification";
+    price: string;
+    priceCurrency: string;
+    referenceQuantity?: {
+      "@type": "QuantitativeValue";
+      value: string;
+      unitText: string;
+    };
+  };
+  description?: string;
+}
+
+const { type, article, product, offers } = Astro.props;
 
 // Author data (hardcoded - single author blog)
 const authorData: PersonSchema = {
@@ -229,6 +270,146 @@ if (type === "static") {
 
   // Organization schema
   schemas.push(organizationData);
+}
+
+if (type === "product" && product) {
+  // 1. SoftwareApplication schema
+  const softwareSchema: SoftwareApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: product.name,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "macOS",
+    ...(product.description && { description: product.description }),
+    brand: organizationData,
+    ...(product.image && { image: product.image }),
+  };
+  schemas.push(softwareSchema);
+
+  // 2. WebPage schema
+  const webPageSchema: WebPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: product.name,
+    url: product.url,
+    datePublished: new Date().toISOString(),
+    dateModified: new Date().toISOString(),
+    breadcrumb: { "@id": `${product.url}#breadcrumb` },
+  };
+  schemas.push(webPageSchema);
+
+  // 3. BreadcrumbList schema
+  const breadcrumbSchema: BreadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${product.url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: config.site.base_url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: product.name,
+        item: product.url,
+      },
+    ],
+  };
+  schemas.push(breadcrumbSchema);
+}
+
+if (type === "offer" && offers) {
+  // 1. SoftwareApplication with individual Offer schemas for each tier
+  const pricingOffers: OfferSchema[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Offer",
+      name: "Personal",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "5",
+        priceCurrency: "EUR",
+        referenceQuantity: {
+          "@type": "QuantitativeValue",
+          value: "1",
+          unitText: "MONTH",
+        },
+      },
+      description: "Personal license for individual developers",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Offer",
+      name: "Teams",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "10",
+        priceCurrency: "EUR",
+        referenceQuantity: {
+          "@type": "QuantitativeValue",
+          value: "1",
+          unitText: "MONTH",
+        },
+      },
+      description: "Team license billed annually at €10/seat/month",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Offer",
+      name: "Enterprise",
+      description: "Custom enterprise pricing with dedicated support",
+    },
+  ];
+
+  const softwareWithOffersSchema: SoftwareApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "RocketSim",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "macOS",
+    ...(offers.description && { description: offers.description }),
+    brand: organizationData,
+    image: `${config.site.base_url}/images/rocketsim-app-icon.png`,
+    offers: pricingOffers,
+  };
+  schemas.push(softwareWithOffersSchema);
+
+  // 2. WebPage schema
+  const webPageSchema: WebPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: offers.title,
+    url: offers.url,
+    datePublished: new Date().toISOString(),
+    dateModified: new Date().toISOString(),
+    breadcrumb: { "@id": `${offers.url}#breadcrumb` },
+  };
+  schemas.push(webPageSchema);
+
+  // 3. BreadcrumbList schema
+  const breadcrumbSchema: BreadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${offers.url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: config.site.base_url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: offers.title,
+        item: offers.url,
+      },
+    ],
+  };
+  schemas.push(breadcrumbSchema);
 }
 ---
 

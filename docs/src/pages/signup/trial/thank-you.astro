@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 
+import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import SectionHeader from "../../../old/components/SectionHeader.astro";
 import NewsLetterForm from "../../../old/components/NewsLetterForm.astro";
@@ -8,11 +9,19 @@ import NewsLetterForm from "../../../old/components/NewsLetterForm.astro";
 const pageIndex = await getEntry("thank-you", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
+const {
+  site: { base_url },
+} = config;
 
 // Build SEO object
 const seo = {
   title: meta_title || `${title} - RocketSim`,
   description,
+  canonical: `${base_url}/signup/trial/thank-you`,
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 ---
 

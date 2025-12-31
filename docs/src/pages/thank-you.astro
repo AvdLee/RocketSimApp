@@ -18,6 +18,10 @@ const seo = {
   title: meta_title || `${title} - RocketSim`,
   description,
   canonical: `${base_url}/thank-you`,
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 ---
 

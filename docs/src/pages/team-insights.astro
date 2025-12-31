@@ -30,9 +30,20 @@ const seo = {
   description,
   canonical: `${base_url}/team-insights`,
 };
+
+const structuredData = {
+  type: "product" as const,
+  product: {
+    name: "RocketSim Team Insights",
+    description: description,
+    image: `${base_url}/images/rocketsim-app-icon.png`,
+    url: `${base_url}/team-insights`,
+    brand: "RocketSim",
+  },
+};
 ---
 
-<Base seo={seo}>
+<Base seo={seo} structuredData={structuredData}>
   <Header
     title="Make your whole team Build Apps Faster"
     logo={logoImage}
