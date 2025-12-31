@@ -31,9 +31,6 @@ const {
   twitterSite = "@rocketsim_app",
 } = Astro.props;
 
-// Get base URL from environment or use fallback
-const siteUrl = import.meta.env.SITE || "https://rocketsim.app";
-
 // Build canonical URL
 const canonicalUrl = canonical || Astro.url.href;
 
