@@ -3,7 +3,7 @@ import config from "@/config/config.json";
 
 export interface Props {
   title: string;
-  description: string;
+  description?: string;
   image?: string;
   article?: {
     publishedTime?: string;
@@ -35,6 +35,9 @@ const {
 
 // Build canonical URL
 const canonicalUrl = canonical || Astro.url.href;
+
+// Use provided description or fall back to default meta description
+const metaDescription = description || config.metadata.meta_description;
 
 // Use provided image or fall back to default meta image
 const ogImage = image || `${config.site.base_url}${config.metadata.meta_image}`;
@@ -68,7 +71,7 @@ const ogType = article ? "article" : "website";
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
-<meta name="description" content={description} />
+<meta name="description" content={metaDescription} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalUrl} />
@@ -80,7 +83,7 @@ const ogType = article ? "article" : "website";
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={metaDescription} />
 <meta property="og:site_name" content="RocketSim" />
 <meta property="og:image" content={ogImage} />
 
@@ -103,7 +106,7 @@ const ogType = article ? "article" : "website";
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalUrl} />
 <meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
+<meta property="twitter:description" content={metaDescription} />
 <meta property="twitter:image" content={ogImage} />
 <meta name="twitter:creator" content={twitterCreator} />
 <meta name="twitter:site" content={twitterSite} />
