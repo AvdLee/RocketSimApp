@@ -1,4 +1,6 @@
 ---
+import config from "@/config/config.json";
+
 export interface Props {
   type: "article" | "website" | "static";
   article?: {
@@ -104,7 +106,7 @@ const authorData: PersonSchema = {
   "@type": "Person",
   name: "Antoine van der Lee",
   url: "https://www.avanderlee.com/",
-  image: "https://rocketsim.app/images/author-image-antoine.jpg",
+  image: `${config.site.base_url}/images/author-image-antoine.jpg`,
   sameAs: [
     "https://x.com/twannl",
     "https://www.linkedin.com/in/ajvanderlee",
@@ -117,8 +119,8 @@ const organizationData: OrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "RocketSim",
-  url: "https://rocketsim.app",
-  logo: "https://rocketsim.app/images/rocketsim-app-icon.png",
+  url: config.site.base_url,
+  logo: `${config.site.base_url}/images/rocketsim-app-icon.png`,
   sameAs: ["https://x.com/rocketsim_app", "https://www.youtube.com/@rocketsimapp"],
 };
 
@@ -190,7 +192,7 @@ if (type === "article" && article) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://rocketsim.app",
+        item: config.site.base_url,
       },
       {
         "@type": "ListItem",
@@ -218,7 +220,7 @@ if (type === "static") {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "RocketSim",
-    url: "https://rocketsim.app",
+    url: config.site.base_url,
     description:
       "RocketSim is the essential developer tool for building better apps faster on iOS, macOS, and visionOS.",
   };

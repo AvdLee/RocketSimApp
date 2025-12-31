@@ -72,8 +72,13 @@ if (yoast.schema?.["@graph"]) {
     wordCount = articleSchema.wordCount;
   }
 }
-// Build canonical URL (transform from cms.rocketsim.app to rocketsim.app)
-const canonicalUrl = `https://rocketsim.app/blog/${post.slug}`;
+
+const {
+  site: { base_url },
+} = config;
+
+// Build canonical URL (transform from cms.rocketsim.app to www.rocketsim.app)
+const canonicalUrl = `${base_url}/blog/${post.slug}`;
 
 // Build SEO object for SEO component
 const seo = {
