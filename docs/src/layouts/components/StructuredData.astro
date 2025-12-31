@@ -47,12 +47,8 @@ type WebsiteProps = {
   type: "website";
 };
 
-export type Props =
-  | ArticleProps
-  | ProductProps
-  | OfferProps
-  | StaticProps
-  | WebsiteProps;
+// prettier-ignore
+export type Props = ArticleProps | ProductProps | OfferProps | StaticProps | WebsiteProps;
 
 // TypeScript interfaces for JSON-LD schemas
 interface SchemaBase {
