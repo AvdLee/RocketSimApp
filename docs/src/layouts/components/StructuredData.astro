@@ -23,7 +23,7 @@ export interface Props {
     description: string | undefined;
     image?: string;
     url: string;
-    brand: string;
+    owner: string;
   };
   offers?: {
     title: string;
@@ -116,7 +116,7 @@ interface SoftwareApplicationSchema extends SchemaBase {
   applicationCategory: string;
   operatingSystem: string;
   description?: string;
-  brand: OrganizationSchema;
+  owner: OrganizationSchema;
   offers?: OfferSchema | OfferSchema[];
   image?: string;
 }
@@ -281,7 +281,7 @@ if (type === "product" && product) {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS",
     ...(product.description && { description: product.description }),
-    brand: organizationData,
+    owner: organizationData,
     ...(product.image && { image: product.image }),
   };
   schemas.push(softwareSchema);
@@ -360,7 +360,7 @@ if (type === "offer" && offers) {
       "@context": "https://schema.org",
       "@type": "Offer",
       name: "Enterprise",
-      description: "Custom enterprise pricing with dedicated support",
+      description: "Custom enterprise pricing",
     },
   ];
 
@@ -371,7 +371,7 @@ if (type === "offer" && offers) {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS",
     ...(offers.description && { description: offers.description }),
-    brand: organizationData,
+    owner: organizationData,
     image: `${config.site.base_url}/images/rocketsim-app-icon.png`,
     offers: pricingOffers,
   };
