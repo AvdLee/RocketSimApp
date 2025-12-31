@@ -51,22 +51,6 @@ const yoast = post.yoast_head_json || {};
 const description =
   yoast.og_description || yoast.description || post.excerpt?.rendered || "";
 
-// Extract robots meta settings from Yoast
-const robotsMeta = yoast.robots || {};
-const robots = {
-  index: robotsMeta.index !== "noindex",
-  follow: robotsMeta.follow !== "nofollow",
-  ...(robotsMeta["max-snippet"] && {
-    maxSnippet: parseInt(robotsMeta["max-snippet"]),
-  }),
-  ...(robotsMeta["max-image-preview"] && {
-    maxImagePreview: robotsMeta["max-image-preview"],
-  }),
-  ...(robotsMeta["max-video-preview"] && {
-    maxVideoPreview: parseInt(robotsMeta["max-video-preview"]),
-  }),
-};
-
 // Extract Twitter metadata
 const twitterCreator = yoast.twitter_misc?.["Written by"]
   ? "@twannl"
@@ -97,7 +81,6 @@ const seo = {
   description,
   image,
   canonical: canonicalUrl,
-  robots,
   twitterCreator,
   twitterSite,
   article: {
