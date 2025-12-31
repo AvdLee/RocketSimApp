@@ -1,7 +1,7 @@
 ---
 import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
-import SEO from "@/components/SEO.astro";
-import StructuredData from "@/components/StructuredData.astro";
+import SEO, { type Props as SEOProps } from "@/components/SEO.astro";
+import StructuredData, { type Props as StructuredDataProps } from "@/components/StructuredData.astro";
 import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
@@ -9,44 +9,8 @@ import { ClientRouter } from "astro:transitions";
 
 // types for frontmatters
 export interface Props {
-  seo: {
-    title: string;
-    description: string;
-    image?: string;
-    article?: {
-      publishedTime?: string;
-      modifiedTime?: string;
-      wordCount?: number;
-    };
-    canonical?: string;
-    robots?: {
-      index?: boolean;
-      follow?: boolean;
-      maxSnippet?: number;
-      maxImagePreview?: string;
-      maxVideoPreview?: number;
-    };
-    twitterCreator?: string;
-    twitterSite?: string;
-  };
-  structuredData?: {
-    type: "article" | "website" | "static";
-    article?: {
-      headline: string;
-      description: string;
-      datePublished: string;
-      dateModified: string;
-      wordCount?: number;
-      image?: {
-        url: string;
-        width?: number;
-        height?: number;
-        caption?: string;
-      };
-      url: string;
-      slug: string;
-    };
-  };
+  seo: SEOProps;
+  structuredData?: StructuredDataProps;
 }
 
 const { seo, structuredData } = Astro.props;

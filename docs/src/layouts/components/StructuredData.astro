@@ -206,10 +206,7 @@ if (type === "article" && article) {
   schemas.push(breadcrumbSchema);
 
   // 4. Person schema (author)
-  schemas.push({
-    "@context": "https://schema.org",
-    ...authorData,
-  });
+  schemas.push(authorData);
 }
 
 if (type === "static") {
