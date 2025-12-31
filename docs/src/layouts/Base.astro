@@ -2,8 +2,6 @@
 import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import SEO from "@/components/SEO.astro";
 import StructuredData from "@/components/StructuredData.astro";
-import config from "@/config/config.json";
-import { plainify } from "@/lib/utils/textConverter";
 import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
@@ -11,16 +9,7 @@ import { ClientRouter } from "astro:transitions";
 
 // types for frontmatters
 export interface Props {
-  title?: string;
-  meta_title?: string;
-  description?: string;
-  image?: string;
-  noindex?: boolean;
-  canonical?: string;
-  contentType?: "article";
-  articlePublishedTime?: string;
-  articleModifiedTime?: string;
-  seo?: {
+  seo: {
     title: string;
     description: string;
     image?: string;
@@ -60,20 +49,7 @@ export interface Props {
   };
 }
 
-// destructure frontmatter
-const {
-  title,
-  meta_title,
-  description,
-  image,
-  noindex,
-  canonical,
-  contentType,
-  articlePublishedTime,
-  articleModifiedTime,
-  seo,
-  structuredData,
-} = Astro.props;
+const { seo, structuredData } = Astro.props;
 ---
 
 <!doctype html>
@@ -106,103 +82,11 @@ const {
       content="width=device-width, initial-scale=1, maximum-scale=5"
     />
 
-    <!-- title -->
-    <title>
-      {plainify(meta_title ? meta_title : title ? title : config.site.title)}
-    </title>
-
-    <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
-
-    <!-- noindex robots -->
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
-
     <!-- sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Use new SEO component if seo prop is provided, otherwise fallback to legacy meta tags -->
-    {seo ? (
-      <SEO {...seo} />
-    ) : (
-      <>
-        <!-- meta-description -->
-        <meta
-          name="description"
-          content={plainify(
-            description ? description : config.metadata.meta_description,
-          )}
-        />
-
-        <!-- og-title -->
-        <meta
-          property="og:title"
-          content={plainify(
-            meta_title ? meta_title : title ? title : config.site.title,
-          )}
-        />
-
-        <!-- og-description -->
-        <meta
-          property="og:description"
-          content={plainify(
-            description ? description : config.metadata.meta_description,
-          )}
-        />
-        <meta property="og:type" content={contentType ? contentType : "website"} />
-        <meta
-          property="og:url"
-          content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
-        />
-
-        <!-- article specific meta -->
-        {
-          articlePublishedTime ? (
-            <meta
-              property="article:published_time"
-              content={articlePublishedTime}
-            />
-          ) : null
-        }
-        {
-          articleModifiedTime ? (
-            <meta property="article:modified_time" content={articleModifiedTime} />
-          ) : null
-        }
-
-        <!-- twitter-title -->
-        <meta
-          name="twitter:title"
-          content={plainify(
-            meta_title ? meta_title : title ? title : config.site.title,
-          )}
-        />
-
-        <!-- twitter-description -->
-        <meta
-          name="twitter:description"
-          content={plainify(
-            description ? description : config.metadata.meta_description,
-          )}
-        />
-
-        <!-- og-image -->
-        <meta
-          property="og:image"
-          content={image
-            ? image
-            : `${config.site.base_url}${config.metadata.meta_image}`}
-        />
-
-        <!-- twitter-image -->
-        <meta
-          name="twitter:image"
-          content={image
-            ? image
-            : `${config.site.base_url}${config.metadata.meta_image}`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-      </>
-    )}
+    <!-- SEO Meta Tags (title, description, Open Graph, Twitter Cards) -->
+    <SEO {...seo} />
 
     <!-- Structured Data (JSON-LD) -->
     {structuredData && <StructuredData {...structuredData} />}
