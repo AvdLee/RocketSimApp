@@ -72,11 +72,6 @@ if (yoast.schema?.["@graph"]) {
     wordCount = articleSchema.wordCount;
   }
 }
-
-const {
-  site: { base_url },
-} = config;
-
 // Build canonical URL (transform from cms.rocketsim.app to rocketsim.app)
 const canonicalUrl = `https://rocketsim.app/blog/${post.slug}`;
 
@@ -84,7 +79,7 @@ const canonicalUrl = `https://rocketsim.app/blog/${post.slug}`;
 const seo = {
   title: `${title} - RocketSim`,
   description,
-  image, // Keep cms.rocketsim.app domain for images
+  image, 
   canonical: canonicalUrl,
   robots,
   twitterCreator,
@@ -106,7 +101,7 @@ const structuredData = {
     dateModified: articleModifiedTime,
     wordCount,
     image: image ? {
-      url: image, // Keep cms.rocketsim.app domain for images
+      url: image,
       width: featuredMedia?.media_details?.width,
       height: featuredMedia?.media_details?.height,
       caption: featuredMedia?.caption?.rendered,
