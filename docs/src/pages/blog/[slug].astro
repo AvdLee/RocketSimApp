@@ -39,14 +39,82 @@ try {
 const title = post.title.rendered;
 const articlePublishedTime = post.date;
 const articleModifiedTime = post.modified;
-const image = post._embedded?.["wp:featuredmedia"]?.[0]
-  ? selectOgImage(post._embedded["wp:featuredmedia"][0].media_details.sizes)
+
+// Extract featured image data
+const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
+const image = featuredMedia
+  ? selectOgImage(featuredMedia.media_details.sizes)
   : undefined;
-const { description } = post.yoast_head_json;
+
+// Extract Yoast SEO data
+const yoast = post.yoast_head_json || {};
+const description = yoast.og_description || yoast.description || post.excerpt?.rendered || "";
+
+// Extract robots meta settings from Yoast
+const robotsMeta = yoast.robots || {};
+const robots = {
+  index: robotsMeta.index !== "noindex",
+  follow: robotsMeta.follow !== "nofollow",
+  ...(robotsMeta["max-snippet"] && { maxSnippet: parseInt(robotsMeta["max-snippet"]) }),
+  ...(robotsMeta["max-image-preview"] && { maxImagePreview: robotsMeta["max-image-preview"] }),
+  ...(robotsMeta["max-video-preview"] && { maxVideoPreview: parseInt(robotsMeta["max-video-preview"]) }),
+};
+
+// Extract Twitter metadata
+const twitterCreator = yoast.twitter_misc?.["Written by"] ? "@twannl" : "@twannl";
+const twitterSite = yoast.twitter_site || "@rocketsim_app";
+
+// Extract word count from schema data
+let wordCount: number | undefined;
+if (yoast.schema?.["@graph"]) {
+  const articleSchema = yoast.schema["@graph"].find((item: any) => item["@type"] === "Article");
+  if (articleSchema?.wordCount) {
+    wordCount = articleSchema.wordCount;
+  }
+}
 
 const {
   site: { base_url },
 } = config;
+
+// Build canonical URL (transform from cms.rocketsim.app to rocketsim.app)
+const canonicalUrl = `https://rocketsim.app/blog/${post.slug}`;
+
+// Build SEO object for SEO component
+const seo = {
+  title: `${title} - RocketSim`,
+  description,
+  image, // Keep cms.rocketsim.app domain for images
+  canonical: canonicalUrl,
+  robots,
+  twitterCreator,
+  twitterSite,
+  article: {
+    publishedTime: articlePublishedTime,
+    modifiedTime: articleModifiedTime,
+    wordCount,
+  },
+};
+
+// Build structured data object for StructuredData component
+const structuredData = {
+  type: "article" as const,
+  article: {
+    headline: title,
+    description,
+    datePublished: articlePublishedTime,
+    dateModified: articleModifiedTime,
+    wordCount,
+    image: image ? {
+      url: image, // Keep cms.rocketsim.app domain for images
+      width: featuredMedia?.media_details?.width,
+      height: featuredMedia?.media_details?.height,
+      caption: featuredMedia?.caption?.rendered,
+    } : undefined,
+    url: canonicalUrl,
+    slug: post.slug,
+  },
+};
 
 /**
  * Manipulate the post content in any way you want here.
@@ -65,14 +133,8 @@ const manipulatedDom = dom.serialize();
 ---
 
 <Base
-  title={title}
-  meta_title={`${title} - RocketSim`}
-  description={description}
-  canonical={`${base_url}/blog/${post.slug}`}
-  contentType="article"
-  articlePublishedTime={articlePublishedTime}
-  articleModifiedTime={articleModifiedTime}
-  image={image}
+  seo={seo}
+  structuredData={structuredData}
 >
   <article>
     <header>

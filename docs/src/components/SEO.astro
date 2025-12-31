@@ -1,0 +1,107 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    wordCount?: number;
+  };
+  canonical?: string;
+  robots?: {
+    index?: boolean;
+    follow?: boolean;
+    maxSnippet?: number;
+    maxImagePreview?: string;
+    maxVideoPreview?: number;
+  };
+  twitterCreator?: string;
+  twitterSite?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  article,
+  canonical,
+  robots,
+  twitterCreator = "@twannl",
+  twitterSite = "@rocketsim_app",
+} = Astro.props;
+
+// Get base URL from environment or use fallback
+const siteUrl = import.meta.env.SITE || "https://rocketsim.app";
+
+// Build canonical URL
+const canonicalUrl = canonical || Astro.url.href;
+
+// Build robots meta content
+let robotsContent = "";
+if (robots) {
+  const parts: string[] = [];
+  if (robots.index !== undefined) {
+    parts.push(robots.index ? "index" : "noindex");
+  }
+  if (robots.follow !== undefined) {
+    parts.push(robots.follow ? "follow" : "nofollow");
+  }
+  if (robots.maxSnippet !== undefined) {
+    parts.push(`max-snippet:${robots.maxSnippet}`);
+  }
+  if (robots.maxImagePreview) {
+    parts.push(`max-image-preview:${robots.maxImagePreview}`);
+  }
+  if (robots.maxVideoPreview !== undefined) {
+    parts.push(`max-video-preview:${robots.maxVideoPreview}`);
+  }
+  robotsContent = parts.join(", ");
+}
+
+// Determine Open Graph type
+const ogType = article ? "article" : "website";
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Robots -->
+{robotsContent && <meta name="robots" content={robotsContent} />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name" content="RocketSim" />
+{image && <meta property="og:image" content={image} />}
+
+<!-- Article-specific Open Graph tags -->
+{
+  article && (
+    <>
+      {article.publishedTime && (
+        <meta property="article:published_time" content={article.publishedTime} />
+      )}
+      {article.modifiedTime && (
+        <meta property="article:modified_time" content={article.modifiedTime} />
+      )}
+      <meta property="article:author" content="https://www.avanderlee.com/" />
+    </>
+  )
+}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+{image && <meta property="twitter:image" content={image} />}
+<meta name="twitter:creator" content={twitterCreator} />
+<meta name="twitter:site" content={twitterSite} />

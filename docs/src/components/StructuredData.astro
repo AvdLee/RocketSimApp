@@ -1,0 +1,173 @@
+---
+export interface Props {
+  type: "article" | "website" | "static";
+  article?: {
+    headline: string;
+    description: string;
+    datePublished: string;
+    dateModified: string;
+    wordCount?: number;
+    image?: {
+      url: string;
+      width?: number;
+      height?: number;
+      caption?: string;
+    };
+    url: string;
+    slug: string;
+  };
+}
+
+const { type, article } = Astro.props;
+
+// Author data (hardcoded - single author blog)
+const authorData = {
+  "@type": "Person",
+  name: "Antoine van der Lee",
+  url: "https://www.avanderlee.com/",
+  // TODO: Add author profile image URL here
+  // image: "https://example.com/author-image.jpg",
+  sameAs: [
+    "https://x.com/twannl",
+    "https://www.linkedin.com/in/ajvanderlee",
+    "https://github.com/AvdLee",
+  ],
+};
+
+// Organization data (RocketSim)
+const organizationData = {
+  "@type": "Organization",
+  name: "RocketSim",
+  url: "https://rocketsim.app",
+  // TODO: Add RocketSim logo URL here if needed
+  // logo: "https://rocketsim.app/logo.png",
+  sameAs: ["https://x.com/rocketsim_app"],
+};
+
+// Build schemas based on type
+let schemas: any[] = [];
+
+if (type === "article" && article) {
+  // 1. Article schema
+  const articleSchema: any = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.headline,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    author: authorData,
+    publisher: organizationData,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": article.url,
+    },
+  };
+
+  if (article.wordCount) {
+    articleSchema.wordCount = article.wordCount;
+  }
+
+  if (article.image) {
+    articleSchema.image = {
+      "@type": "ImageObject",
+      url: article.image.url,
+      ...(article.image.width && { width: article.image.width }),
+      ...(article.image.height && { height: article.image.height }),
+    };
+  }
+
+  schemas.push(articleSchema);
+
+  // 2. WebPage schema
+  const webPageSchema: any = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: article.headline,
+    url: article.url,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    breadcrumb: {
+      "@id": `${article.url}#breadcrumb`,
+    },
+  };
+
+  if (article.image) {
+    webPageSchema.primaryImageOfPage = {
+      "@type": "ImageObject",
+      url: article.image.url,
+      contentUrl: article.image.url,
+      ...(article.image.width && { width: article.image.width }),
+      ...(article.image.height && { height: article.image.height }),
+      ...(article.image.caption && { caption: article.image.caption }),
+    };
+    webPageSchema.thumbnailUrl = article.image.url;
+  }
+
+  schemas.push(webPageSchema);
+
+  // 3. BreadcrumbList schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${article.url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://rocketsim.app",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: article.headline,
+        item: article.url,
+      },
+    ],
+  };
+
+  schemas.push(breadcrumbSchema);
+
+  // 4. Person schema (author)
+  schemas.push({
+    "@context": "https://schema.org",
+    ...authorData,
+  });
+}
+
+if (type === "static") {
+  // Static schemas for WebSite and Organization (used on homepage or base layout)
+
+  // WebSite schema
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "RocketSim",
+    url: "https://rocketsim.app",
+    description:
+      "RocketSim is the essential developer tool for building better apps faster on iOS, macOS, and visionOS.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "https://rocketsim.app/blog?s={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  schemas.push(webSiteSchema);
+
+  // Organization schema
+  schemas.push({
+    "@context": "https://schema.org",
+    ...organizationData,
+  });
+}
+---
+
+{
+  schemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))
+}
