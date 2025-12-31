@@ -23,9 +23,18 @@ const seo = {
   description,
   canonical: `${base_url}/pricing`,
 };
+
+const structuredData = {
+  type: "offer" as const,
+  offers: {
+    title: title,
+    description: description,
+    url: `${base_url}/pricing`,
+  },
+};
 ---
 
-<Base seo={seo}>
+<Base seo={seo} structuredData={structuredData}>
   <PageHeader title={hero.title} isCenter={true} />
   <div class="ph-merged-section -mt-10">
     <PricingSection isPageHeader={true} />
