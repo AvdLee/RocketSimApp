@@ -32,9 +32,10 @@ export default defineConfig({
     react(),
     sitemap({
       filter: (page) =>
-        page !== "https://rocketsim.app/terms/" &&
-        page !== "https://rocketsim.app/privacy/" &&
-        page !== "https://rocketsim.app/thank-you/",
+        page !== "https://rocketsim.app/terms" &&
+        page !== "https://rocketsim.app/privacy" &&
+        page !== "https://rocketsim.app/thank-you" &&
+        page !== "https://www.rocketsim.app/signup/trial/thank-you",
     }),
     AutoImport({
       imports: [
