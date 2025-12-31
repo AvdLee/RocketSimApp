@@ -19,11 +19,19 @@ import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
 import logoImage from "../assets/rocketsim-logo.svg";
 
 const {
-  site: { base_url },
+  site: { base_url, title: siteTitle },
+  metadata: { meta_description },
 } = config;
+
+// Build SEO object for homepage
+const seo = {
+  title: siteTitle,
+  description: meta_description,
+  canonical: base_url,
+};
 ---
 
-<Base canonical={`${base_url}`}>
+<Base seo={seo}>
   <Notification />
   <Header
     title="Enhancing the Xcode Simulators"

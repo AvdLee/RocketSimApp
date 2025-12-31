@@ -8,6 +8,12 @@ import NewsLetterForm from "../../../old/components/NewsLetterForm.astro";
 const pageIndex = await getEntry("thank-you", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
+
+// Build SEO object
+const seo = {
+  title: meta_title || `${title} - RocketSim`,
+  description,
+};
 ---
 
 <style>
@@ -68,7 +74,7 @@ const { title, meta_title, description } = pageIndex.data;
   }
 </style>
 
-<Base title={title} meta_title={meta_title} description={description}>
+<Base seo={seo}>
   <div class="thank-you-wrapper">
     <section class="deprecated-grid thank-you">
       <SectionHeader title="Check your inbox!" />

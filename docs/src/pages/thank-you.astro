@@ -12,6 +12,13 @@ const { title, meta_title, description } = pageIndex.data;
 const {
   site: { base_url },
 } = config;
+
+// Build SEO object
+const seo = {
+  title: meta_title || `${title} - RocketSim`,
+  description,
+  canonical: `${base_url}/thank-you`,
+};
 ---
 
 <style>
@@ -72,12 +79,7 @@ const {
   }
 </style>
 
-<Base
-  title={title}
-  meta_title={meta_title}
-  description={description}
-  canonical={`${base_url}/thank-you`}
->
+<Base seo={seo}>
   <div class="thank-you-wrapper">
     <section class="deprecated-grid thank-you">
       <SectionHeader title="Thanks for purchasing RocketSim!" />

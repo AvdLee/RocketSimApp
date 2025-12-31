@@ -1,0 +1,243 @@
+---
+import config from "@/config/config.json";
+
+export interface Props {
+  type: "article" | "website" | "static";
+  article?: {
+    headline: string;
+    description: string;
+    datePublished: string;
+    dateModified: string;
+    wordCount?: number;
+    image?: {
+      url: string;
+      width?: number;
+      height?: number;
+      caption?: string;
+    };
+    url: string;
+    slug: string;
+  };
+}
+
+// TypeScript interfaces for JSON-LD schemas
+interface SchemaBase {
+  "@context": string;
+  "@type": string;
+  [key: string]: unknown;
+}
+
+interface ImageObject extends SchemaBase {
+  "@type": "ImageObject";
+  url: string;
+  contentUrl?: string;
+  width?: number;
+  height?: number;
+  caption?: string;
+}
+
+interface PersonSchema extends SchemaBase {
+  "@type": "Person";
+  name: string;
+  url: string;
+  image?: string;
+  sameAs: string[];
+}
+
+interface OrganizationSchema extends SchemaBase {
+  "@type": "Organization";
+  name: string;
+  url: string;
+  logo?: string;
+  sameAs: string[];
+}
+
+interface ArticleSchema extends SchemaBase {
+  "@type": "Article";
+  headline: string;
+  datePublished: string;
+  dateModified: string;
+  author: PersonSchema;
+  publisher: OrganizationSchema;
+  mainEntityOfPage: {
+    "@type": "WebPage";
+    "@id": string;
+  };
+  wordCount?: number;
+  image?: ImageObject;
+}
+
+interface WebPageSchema extends SchemaBase {
+  "@type": "WebPage";
+  name: string;
+  url: string;
+  datePublished: string;
+  dateModified: string;
+  breadcrumb: {
+    "@id": string;
+  };
+  primaryImageOfPage?: ImageObject;
+  thumbnailUrl?: string;
+}
+
+interface BreadcrumbListSchema extends SchemaBase {
+  "@type": "BreadcrumbList";
+  "@id": string;
+  itemListElement: Array<{
+    "@type": "ListItem";
+    position: number;
+    name: string;
+    item: string;
+  }>;
+}
+
+interface WebSiteSchema extends SchemaBase {
+  "@type": "WebSite";
+  name: string;
+  url: string;
+  description: string;
+}
+
+const { type, article } = Astro.props;
+
+// Author data (hardcoded - single author blog)
+const authorData: PersonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Antoine van der Lee",
+  url: "https://www.avanderlee.com/",
+  image: `${config.site.base_url}/images/author-image-antoine.jpg`,
+  sameAs: [
+    "https://x.com/twannl",
+    "https://www.linkedin.com/in/ajvanderlee",
+    "https://github.com/AvdLee",
+  ],
+};
+
+// Organization data (RocketSim)
+const organizationData: OrganizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "RocketSim",
+  url: config.site.base_url,
+  logo: `${config.site.base_url}/images/rocketsim-app-icon.png`,
+  sameAs: [
+    "https://x.com/rocketsim_app",
+    "https://www.youtube.com/@rocketsimapp",
+  ],
+};
+
+// Build schemas based on type
+const schemas: SchemaBase[] = [];
+
+if (type === "article" && article) {
+  // 1. Article schema
+  const articleSchema: ArticleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.headline,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    author: authorData,
+    publisher: organizationData,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": article.url,
+    },
+    ...(article.wordCount && { wordCount: article.wordCount }),
+    ...(article.image && {
+      image: {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        url: article.image.url,
+        ...(article.image.width && { width: article.image.width }),
+        ...(article.image.height && { height: article.image.height }),
+      } as ImageObject,
+    }),
+  };
+
+  schemas.push(articleSchema);
+
+  // 2. WebPage schema
+  const webPageSchema: WebPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: article.headline,
+    url: article.url,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    breadcrumb: {
+      "@id": `${article.url}#breadcrumb`,
+    },
+    ...(article.image && {
+      primaryImageOfPage: {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        url: article.image.url,
+        contentUrl: article.image.url,
+        ...(article.image.width && { width: article.image.width }),
+        ...(article.image.height && { height: article.image.height }),
+        ...(article.image.caption && { caption: article.image.caption }),
+      } as ImageObject,
+      thumbnailUrl: article.image.url,
+    }),
+  };
+
+  schemas.push(webPageSchema);
+
+  // 3. BreadcrumbList schema
+  const breadcrumbSchema: BreadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${article.url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: config.site.base_url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: article.headline,
+        item: article.url,
+      },
+    ],
+  };
+
+  schemas.push(breadcrumbSchema);
+
+  // 4. Person schema (author)
+  schemas.push(authorData);
+}
+
+if (type === "static") {
+  // Static schemas for WebSite and Organization (used on homepage or base layout)
+
+  // WebSite schema
+  const webSiteSchema: WebSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "RocketSim",
+    url: config.site.base_url,
+    description:
+      "RocketSim is the essential developer tool for building better apps faster on iOS, macOS, and visionOS.",
+  };
+
+  schemas.push(webSiteSchema);
+
+  // Organization schema
+  schemas.push(organizationData);
+}
+---
+
+{
+  schemas.map((schema) => (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schema)}
+    />
+  ))
+}
