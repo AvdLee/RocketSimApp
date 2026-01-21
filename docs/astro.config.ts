@@ -4,13 +4,13 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import AutoImport from "astro-auto-import";
 import tailwindcss from "@tailwindcss/vite";
-import starlight from '@astrojs/starlight';
+import starlight from "@astrojs/starlight";
 
 import sitemap from "@astrojs/sitemap";
 
 import config from "./src/config/config.json";
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 /**
  * Build the integrations array
@@ -47,9 +47,12 @@ if (!isProduction) {
     starlight({
       title: "RocketSim Docs TITLE",
       sidebar: [
-        { label: "Getting Started", autogenerate: { directory: 'docs/getting-started'} },
-      ]
-    })
+        {
+          label: "Getting Started",
+          autogenerate: { directory: "docs/getting-started" },
+        },
+      ],
+    }),
   );
 }
 
