@@ -1,7 +1,7 @@
 import { glob } from "astro/loaders";
 import { z, defineCollection } from "astro:content";
-import { docsLoader } from '@astrojs/starlight/loaders';
-import { docsSchema } from '@astrojs/starlight/schema';
+import { docsLoader } from "@astrojs/starlight/loaders";
+import { docsSchema } from "@astrojs/starlight/schema";
 
 import {
   pricingCollection,
@@ -69,5 +69,5 @@ export const collections = {
   pricingSectionCollection,
   statisticsSectionCollection,
   trustedBrandsSectionCollection,
-  docs
+  docs,
 };

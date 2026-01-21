@@ -1,6 +1,5 @@
 ---
-title: 'Docs Home'
+title: "Docs Home"
 ---
 
 # Welcome to the docs
-
