@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.5.1",
+    "@astrojs/starlight": "^0.37.3",
     "aos": "^2.3.4",
     "astro": "^5.16.6",
     "date-fns": "^4.1.0",
