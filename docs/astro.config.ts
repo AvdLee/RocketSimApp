@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import AutoImport from "astro-auto-import";
 import tailwindcss from "@tailwindcss/vite";
+import starlight from '@astrojs/starlight';
 
 import sitemap from "@astrojs/sitemap";
 
@@ -48,5 +49,11 @@ export default defineConfig({
         "@/shortcodes/Tab",
       ],
     }),
+    starlight({
+      title: "RocketSim Docs TITLE",
+      sidebar: [
+        { label: "Getting Started", autogenerate: { directory: 'docs/getting-started'} },
+      ]
+    })
   ],
 });
