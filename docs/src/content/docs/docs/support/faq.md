@@ -1,0 +1,77 @@
+---
+title: "FAQ"
+description: "Frequently asked questions about RocketSim."
+---
+
+## Do you offer out-of-the App Store distribution?
+
+Yes, we do. Get in touch via [support@rocketsim.app](mailto:support@rocketsim.app)
+
+## Are there non-recurring subscriptions as well?
+
+Yes, you can consider buying [Team Licenses](https://www.rocketsim.app/team-insights/).
+
+## I can’t reimburse App Store subscriptions, is there an alternative?
+
+Yes, we offer [Team Licenses](https://www.rocketsim.app/team-insights/).
+
+## Do you provide the option for commercial or team licenses?
+
+Yes, check out [Team Licenses](https://www.rocketsim.app/team-insights/).
+
+## Can I buy a lifetime license?
+
+No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://www.avanderlee.com/swiftlee-weekly-subscribe/) and follow the instructions in the email.
+
+## **Why is my video not accepted by App Store Connect?**
+
+The videos are optimized for App Previews following [these specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8). App Store Connect does not accept each device, so your selected Simulator could not support App Previews. Make sure to use a Simulator matching a device from the App preview specifications.
+
+## **Why wouldn't I just use xcrun simctl?**
+
+Yes, RocketSim uses xcrun simctl as well, but it enhances the output and provides interfaces for quicker access. Recordings, for example, are enhanced with touches and device bezels that you won't get through the command line tools.
+
+## **Why does RocketSim need screen recording permissions?**
+
+As a developer, I know how important it is to not just use any permissions. Adding the requirement for screen recording permissions was something I disliked, but it was unavoidable. RocketSim is sandboxed and can't read NSWindow titles without screen recording permissions. RocketSim needs to read the title of the Simulator windows to determine the currently active Simulator.
+
+## **Where can I follow active development?**
+
+RocketSim is developed by [Antoine van der Lee](https://www.twitter.com/twannl). You can follow him or the official [RocketSim Twitter Account](https://www.twitter.com/rocketsim_app) for updates about development.
+
+## **Where can I report bugs or feature requests?**
+
+Issues and feature requests are managed on [GitHub](https://github.com/AvdLee/RocketSimApp/issues).
+
+## **I only get JPEG images, how can I get PNG images again?**
+
+You've likely enabled App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer. Disable the option and you should get PNGs again.
+
+## Why are my iPad captures upside-down?
+
+RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording.
+
+## Can I create transparent captures?
+
+Yes, make sure to disable **App Preview Optimized** and set your background color to transparent.
+
+## **Network Speed Control isn’t working for me, what can I do?**
+
+This is usually caused by missing system permissions.
+
+1. Quit **Xcode**, all **Simulators**, and **RocketSim**, then reopen them.
+    
+    (This often fixes the issue after Xcode or macOS updates.)
+    
+2. Open **System Settings → Privacy & Security** and approve any pending **RocketSim** permissions.
+3. Open System Settings → Network → Filter and verify whether RocketSim is present & enabled
+4. On **macOS 26**, enable the Network Extension:
+    - **System Settings → General → Login Items & Extensions**
+    - Find **RocketSim**, click **(i)**, and enable **Network Extension**
+        
+        You may need to approve permissions more than once.
+        
+5. Still not working? Do a clean reinstall:
+    - Delete **RocketSim.app** from Applications
+    - Empty the Trash and reinstall RocketSim
+6. If it *still* doesn’t work, run `systemextensionsctl list`and email the output to [support@rocketsim.app](https://www.notion.so/RocketSim-Quarterly-Finances-201fe943204d8077945ecd6c92940f86?pvs=21)

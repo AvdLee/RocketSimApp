@@ -1,8 +1,0 @@
-﻿Article Title,Article Description,Published,Suggested,Last Updated
-General App Actions,Perform actions using the configured bundle identifier of the selected App Group.,Yes,Yes,"August 4, 2021"
-User Defaults Editor,RocketSim’s real-time User Defaults Editor.,Yes,No,"August 6, 2021"
-Network Speed Control & Simulator Airplane Mode,Validate your app’s functionality when there’s no or slow networking connection available.,Yes,No,
-Location Simulation,Simulate a specific location or freeway route.,Yes,No,
-Push Notifications,Test your Push Notifications directly in the Simulator.,Yes,No,
-Deeplinks (Universal Links),Deeplink into a specific page using URLs.,Yes,No,
-Build Insights,Xcode Build Count and Duration Tracking,Yes,No,

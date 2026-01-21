@@ -45,11 +45,23 @@ const integrations: AstroIntegration[] = [
 if (!isProduction) {
   integrations.push(
     starlight({
-      title: "RocketSim Docs TITLE",
+      title: "RocketSim Docs",
       sidebar: [
         {
           label: "Getting Started",
           autogenerate: { directory: "docs/getting-started" },
+        },
+        {
+          label: "Features",
+          autogenerate: { directory: "docs/features" },
+        },
+        {
+          label: "Appearance",
+          autogenerate: { directory: "docs/appearance" },
+        },
+        {
+          label: "Support",
+          autogenerate: { directory: "docs/support" },
         },
       ],
     }),
