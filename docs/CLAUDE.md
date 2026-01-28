@@ -22,6 +22,7 @@ This project has access to MCP (Model Context Protocol) servers that provide add
   - Example: When implementing new Starlight features or troubleshooting Astro-specific issues
 
 To use an MCP server tool:
+
 1. First load it with ToolSearch: `query: "select:mcp__astro-docs__search_astro_docs"`
 2. Then call the tool directly
 
