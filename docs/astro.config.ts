@@ -53,35 +53,43 @@ if (!isProduction) {
         },
         {
           label: "Features",
+          collapsed: true,
           items: [
             {
               label: "Capturing",
+              collapsed: true,
               autogenerate: { directory: "docs/features/capturing" },
             },
             {
-              label: "Accessibility",
-              autogenerate: { directory: "docs/features/accessibility" },
-            },
-            {
-              label: "App Actions",
-              autogenerate: { directory: "docs/features/app-actions" },
-            },
-            {
               label: "Design Comparison",
+              collapsed: true,
               autogenerate: { directory: "docs/features/design-comparison" },
             },
             {
+              label: "App Actions",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/app-actions" },
+            },
+            {
               label: "RocketSim Connect",
+              collapsed: true,
               autogenerate: { directory: "docs/features/rocketsim-connect" },
+            },
+            {
+              label: "Accessibility",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/accessibility" },
             },
           ],
         },
         {
           label: "Appearance",
+          collapsed: true,
           autogenerate: { directory: "docs/appearance" },
         },
         {
           label: "Support",
+          collapsed: true,
           autogenerate: { directory: "docs/support" },
         },
       ],
