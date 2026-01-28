@@ -94,7 +94,7 @@ nav a:hover {
   border-right: 1px solid var(--sl-color-hairline);
 }
 
-/* Active sidebar item styling */
+/* Active sidebar item styling - white text on accent background */
 [data-current="true"] > a,
 [aria-current="page"],
 .sidebar-content [aria-current="page"],
@@ -103,7 +103,7 @@ nav.sidebar a[aria-current="page"],
 starlight-menu-button + nav a[aria-current="page"],
 .sl-sidebar a[aria-current="page"],
 .sl-sidebar-state a[aria-current="page"] {
-  color: var(--sl-color-text-accent) !important;
+  color: #fff !important;
   font-weight: 600;
 }
 
