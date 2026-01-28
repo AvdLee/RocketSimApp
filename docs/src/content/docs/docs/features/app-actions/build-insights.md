@@ -11,7 +11,7 @@ RocketSim’s Build Insights allow you to keep track of build counts and duratio
 
 You can access Build Insights for any recent build inside the side window:
 
-![Build Insights for One Year.jpeg](./build-insights/Build_Insights_for_One_Year.jpeg)
+![Build Insights for One Year.jpeg](./build-insights/build_insights_for_one_year.jpeg)
 
 ## FAQ
 

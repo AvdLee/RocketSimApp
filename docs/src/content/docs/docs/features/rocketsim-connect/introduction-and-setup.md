@@ -13,7 +13,7 @@ RocketSim Connect works by implementing a small piece of code into your applicat
 
 ## Where do I find this onboarding?
 
-![CleanShot 2024-07-04 at 10.22.32@2x.png](./introduction-and-setup/CleanShot_2024-07-04_at_10.22.322x.png)
+![CleanShot 2024-07-04 at 10.22.32@2x.png](./introduction-and-setup/cleanshot_2024-07-04_at_10.22.322x.png)
 
 You can find the onboarding by following these steps:
 
@@ -25,7 +25,7 @@ You can find the onboarding by following these steps:
 
 Yes, you can!
 
-![IMG_7335.png](./introduction-and-setup/IMG_7335.png)
+![img_7335.png](./introduction-and-setup/img_7335.png)
 
 1. Define a symbolic breakpoint for `UIApplicationMain`
 2. Add a debugger command action using `expr (void *)dlopen("/Applications/RocketSim.app/Contents/Frameworks/RocketSimConnectLinker.nocache.framework/RocketSimConnectLinker", 0x2)` 

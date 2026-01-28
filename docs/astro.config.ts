@@ -53,7 +53,28 @@ if (!isProduction) {
         },
         {
           label: "Features",
-          autogenerate: { directory: "docs/features" },
+          items: [
+            {
+              label: "Capturing",
+              autogenerate: { directory: "docs/features/capturing" },
+            },
+            {
+              label: "Accessibility",
+              autogenerate: { directory: "docs/features/accessibility" },
+            },
+            {
+              label: "App Actions",
+              autogenerate: { directory: "docs/features/app-actions" },
+            },
+            {
+              label: "Design Comparison",
+              autogenerate: { directory: "docs/features/design-comparison" },
+            },
+            {
+              label: "RocketSim Connect",
+              autogenerate: { directory: "docs/features/rocketsim-connect" },
+            },
+          ],
         },
         {
           label: "Appearance",

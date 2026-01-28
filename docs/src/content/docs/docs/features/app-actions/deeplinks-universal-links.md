@@ -13,12 +13,12 @@ The same functionality can be built into your apps. I’ve seen developers manag
 2. Select the App Groups tab
 3. Create a new deeplink inside your app’s group:
     
-    ![CleanShot 2025-01-21 at 14.23.35@2x.png](./deeplinks-universal-links/CleanShot_2025-01-21_at_14.23.352x.png)
+    ![CleanShot 2025-01-21 at 14.23.35@2x.png](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.23.352x.png)
 
 4. Open the Simulator
 5. Execute the action by tapping your deeplink from the side window:
 
-    ![CleanShot 2025-01-21 at 14.24.04@2x.png](./deeplinks-universal-links/CleanShot_2025-01-21_at_14.24.042x.png)
+    ![CleanShot 2025-01-21 at 14.24.04@2x.png](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.24.042x.png)
     
 
 ## Learn more

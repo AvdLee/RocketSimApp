@@ -12,13 +12,13 @@ The magnifier lets you zoom in pixel-level and thoroughly validate your UI imple
 3. Hold `⇧ shift` and move the mouse to change the magnifier position
 4. Use a two-finger drag to adjust the zoom level while moving the mouse up and down
 
-![CleanShot 2023-11-01 at 14.09.17@2x.png](./magnifier/CleanShot_2023-11-01_at_14.09.172x.png)
+![CleanShot 2023-11-01 at 14.09.17@2x.png](./magnifier/cleanshot_2023-11-01_at_14.09.172x.png)
 
 ## Copying the color code
 
 Once hovering over a specific color, you can copy the color as code using the **Copy as code** button:
 
-![CleanShot 2023-11-01 at 14.10.38@2x.png](./magnifier/CleanShot_2023-11-01_at_14.10.382x.png)
+![CleanShot 2023-11-01 at 14.10.38@2x.png](./magnifier/cleanshot_2023-11-01_at_14.10.382x.png)
 
 The above color resulted in the following code:
 

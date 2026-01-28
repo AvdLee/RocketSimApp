@@ -5,7 +5,7 @@ description: "Monitor in- and outgoing network requests for your application."
 
 Powered by RocketSim Connect, you’re able to monitor in- and outgoing network requests for your app.
 
-![Networking Tools Details.jpeg](./network-traffic-monitoring/Networking_Tools_Details.jpeg)
+![Networking Tools Details.jpeg](./network-traffic-monitoring/networking_tools_details.jpeg)
 
 Being able to see which requests are running is essential for a fast development workflow.
 

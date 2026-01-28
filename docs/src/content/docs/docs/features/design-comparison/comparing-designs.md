@@ -11,7 +11,7 @@ RocketSim’s unique design comparison tool allows you to display a design on to
 2. Select the comparing tab
 3. Upload the design you want to compare. In this example, I’ve selected the Stock Detail page for my app:
 
-![Design Comparison.png](./comparing-designs/Design_Comparison.png)
+![Design Comparison.png](./comparing-designs/design_comparison.png)
 
 1. Use the alignment tools and different modes to compare the image with your design implementation. In the above example, you can see that I’m comparing the dark mode design (right side) with the light mode real application (left side).
 
@@ -19,4 +19,4 @@ RocketSim’s unique design comparison tool allows you to display a design on to
 
 Toggle the advanced section to adjust zoom level, x- and y-position:
 
-![CleanShot 2025-01-21 at 13.55.24@2x.png](./comparing-designs/CleanShot_2025-01-21_at_13.55.242x.png)
+![CleanShot 2025-01-21 at 13.55.24@2x.png](./comparing-designs/cleanshot_2025-01-21_at_13.55.242x.png)

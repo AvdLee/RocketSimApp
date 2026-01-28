@@ -29,6 +29,6 @@ This is the directory in which your recent builds are stored. By providing acces
 
 Once configured, you’re ready to get started with RocketSim. Make sure to open a Simulator and see if the RocketSim side window shows up: 
 
-![CleanShot 2025-01-21 at 13.33.53@2x.png](./onboarding/CleanShot_2025-01-21_at_13.33.532x.png)
+![CleanShot 2025-01-21 at 13.33.53@2x.png](./onboarding/cleanshot_2025-01-21_at_13.33.532x.png)
 
 If so, you’re ready to continue your journey by configuring your first App Actions.

@@ -13,7 +13,7 @@ This article provides an overview of features that work best for specific cases,
 
 Brand new since 2025 is our RocketSim for Teams dashboard. 
 
-![CleanShot 2025-01-21 at 13.42.47@2x.png](./how-large-teams-use-rocketsim/CleanShot_2025-01-21_at_13.42.472x.png)
+![CleanShot 2025-01-21 at 13.42.47@2x.png](./how-large-teams-use-rocketsim/cleanshot_2025-01-21_at_13.42.472x.png)
 
 You can find more info about this [on our website](https://www.rocketsim.app/team-insights).
 
@@ -23,7 +23,7 @@ RocketSim allows you to save app actions per bundle identifier. App actions incl
 
 By storing your configuration in Git, you allow all your team members to benefit from the same set of app actions related to your bundle identifier.
 
-![CleanShot 2024-01-19 at 11.01.38@2x.png](./how-large-teams-use-rocketsim/CleanShot_2024-01-19_at_11.01.382x.png)
+![CleanShot 2024-01-19 at 11.01.38@2x.png](./how-large-teams-use-rocketsim/cleanshot_2024-01-19_at_11.01.382x.png)
 
 ## Enabling feature flags
 
@@ -37,7 +37,7 @@ RocketSim introduces an alternative to these debug views by allowing you to swit
 
 Your team should prepare for the [European Accessibility Act](https://ec.europa.eu/social/main.jsp?catId=1202&intPageId=5581&langId=en) and RocketSim is here to help. The environment toggles allow you to validate all kinds of accessibility related implementations, including dark mode and dynamic type.
 
-![CleanShot 2025-01-21 at 13.43.57@2x.png](./how-large-teams-use-rocketsim/CleanShot_2025-01-21_at_13.43.572x.png)
+![CleanShot 2025-01-21 at 13.43.57@2x.png](./how-large-teams-use-rocketsim/cleanshot_2025-01-21_at_13.43.572x.png)
 
 ## How designers and QA engineers validate implementations on the Simulator
 

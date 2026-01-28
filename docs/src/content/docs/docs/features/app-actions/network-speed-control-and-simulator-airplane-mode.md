@@ -21,13 +21,13 @@ Apple’s Network Link Conditioner works great, but also affects your Mac’s co
 
 Yes, you can! Just click the little info button next to the Network Speed Control button:
 
-![Network Speed Control Turned On.png](./network-speed-control-and-simulator-airplane-mode/Network_Speed_Control_Turned_On.png)
+![Network Speed Control Turned On.png](./network-speed-control-and-simulator-airplane-mode/network_speed_control_turned_on.png)
 
 ### How do I enable Network Speed Control on macOS Sequoia?
 
 The system settings are a bit more hidden, but you can find them here: *System Settings → General → Login Items & Extensions → Network Extensions.*
 
-![CleanShot 2024-11-21 at 14.36.53@2x.png](./network-speed-control-and-simulator-airplane-mode/CleanShot_2024-11-21_at_14.36.532x.png)
+![CleanShot 2024-11-21 at 14.36.53@2x.png](./network-speed-control-and-simulator-airplane-mode/cleanshot_2024-11-21_at_14.36.532x.png)
 
 Make sure to switch the permissions switch to on and you should be able to get started with Simulator Airplane Mode.
 

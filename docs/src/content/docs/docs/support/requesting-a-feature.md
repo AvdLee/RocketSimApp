@@ -15,4 +15,4 @@ I’m planning ahead any feature development for RocketSim. You can vote on my r
 2. Select **Roadmap**
 3. Submit your votes
     
-    ![CleanShot 2023-11-01 at 14.56.57@2x.png](./requesting-a-feature/CleanShot_2023-11-01_at_14.56.572x.png)
+    ![CleanShot 2023-11-01 at 14.56.57@2x.png](./requesting-a-feature/cleanshot_2023-11-01_at_14.56.572x.png)
