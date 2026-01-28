@@ -2,8 +2,8 @@
 // Custom PageTitle component that displays the description as a subtitle
 // For the docs homepage, add CTA buttons after the description
 const { title, description } = Astro.locals.starlightRoute.entry.data;
-const slug = Astro.locals.starlightRoute.slug;
-const isHomepage = slug === 'docs';
+const id = Astro.locals.starlightRoute.id;
+const isHomepage = id === 'docs';
 ---
 
 <h1 id="_top">{title}</h1>
