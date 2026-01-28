@@ -1,0 +1,49 @@
+---
+interface Props {
+  columns?: 2 | 3;
+  gap?: string;
+}
+
+const { columns = 3, gap = '1.5rem' } = Astro.props;
+---
+
+<div class={`feature-grid feature-grid-${columns}`} style={`--grid-gap: ${gap}`}>
+  <slot />
+</div>
+
+<style>
+  .feature-grid {
+    display: grid;
+    gap: var(--grid-gap);
+    margin: 2rem 0;
+  }
+
+  /* Reset any inherited margins on grid items */
+  :global(.feature-grid > *) {
+    margin: 0;
+  }
+
+  .feature-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 540px) {
+    .feature-grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-grid-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .feature-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+title: "RocketSim Docs"
+description: "Guides and resources to help you capture, test and debug with RocketSim."
+tableOfContents: false
+---
+
+import FeatureCard from '@/components/starlight/FeatureCard.astro';
+import FeatureGrid from '@/components/starlight/FeatureGrid.astro';
+
+## Quick Start
+
+Get up and running with RocketSim in minutes.
+
+<FeatureGrid columns={3}>
+  <FeatureCard
+    title="First Steps"
+    description="Set up permissions and configure App Actions to start using RocketSim"
+    href="/docs/getting-started/onboarding"
+    icon="🚀"
+  />
+  <FeatureCard
+    title="Product Tour"
+    description="Watch quick demos and explore all of RocketSim's features"
+    href="/docs/getting-started/product-tour-and-quick-demos"
+    icon="🎥"
+  />
+  <FeatureCard
+    title="Team Usage"
+    description="Learn how large teams leverage RocketSim to boost productivity"
+    href="/docs/getting-started/how-large-teams-use-rocketsim"
+    icon="👥"
+  />
+</FeatureGrid>
+
+## Features
+
+Explore RocketSim's powerful suite of tools for iOS development.
+
+<FeatureGrid columns={3}>
+  <FeatureCard
+    title="RocketSim Connect"
+    description="Monitor network traffic and debug API calls in real-time with an intuitive interface"
+    href="/docs/features/rocketsim-connect/introduction-and-setup"
+    icon="🔌"
+    links={[
+      {label: "Setup Guide", href: "/docs/features/rocketsim-connect/introduction-and-setup"},
+      {label: "Network Monitoring", href: "/docs/features/rocketsim-connect/network-traffic-monitoring"}
+    ]}
+  />
+  <FeatureCard
+    title="Professional Captures"
+    description="Create App Store-ready screenshots with device bezels and high-quality video recordings"
+    href="/docs/features/capturing/screenshots"
+    icon="📸"
+    links={[
+      {label: "Screenshots", href: "/docs/features/capturing/screenshots"},
+      {label: "Recordings", href: "/docs/features/capturing/recordings"}
+    ]}
+  />
+  <FeatureCard
+    title="Design Comparison"
+    description="Achieve pixel-perfect designs with overlays, grids, rulers, and magnifier tools"
+    href="/docs/features/design-comparison/comparing-designs"
+    icon="🎨"
+    links={[
+      {label: "Compare Designs", href: "/docs/features/design-comparison/comparing-designs"},
+      {label: "Grids & Rulers", href: "/docs/features/design-comparison/grids-and-rulers"}
+    ]}
+  />
+  <FeatureCard
+    title="App Actions"
+    description="Test push notifications, deep links, location simulation, and network conditions"
+    href="/docs/features/app-actions/general-app-actions"
+    icon="⚡"
+    links={[
+      {label: "Push Notifications", href: "/docs/features/app-actions/push-notifications"},
+      {label: "Deep Links", href: "/docs/features/app-actions/deeplinks-universal-links"},
+    ]}
+  />
+  <FeatureCard
+    title="Accessibility"
+    description="Test your app with Dynamic Type and accessibility feature toggles"
+    href="/docs/features/accessibility/toggles-and-dynamic-text"
+    icon="♿"
+  />
+  <FeatureCard
+    title="Appearance"
+    description="Customize RocketSim's side window, shortcuts, and interface settings"
+    href="/docs/appearance/side-window"
+    icon="⚙️"
+    links={[
+      {label: "Side Window", href: "/docs/appearance/side-window"},
+      {label: "Shortcuts", href: "/docs/appearance/shortcuts"}
+    ]}
+  />
+</FeatureGrid>
+
+## Resources
+
+Additional resources to help you make the most of RocketSim.
+
+<FeatureGrid columns={3}>
+  <FeatureCard
+    title="Video Tutorials"
+    description="Browse our YouTube channel for comprehensive video guides and feature showcases"
+    href="https://www.youtube.com/@rocketsimapp"
+    icon="📺"
+  />
+  <FeatureCard
+    title="FAQ"
+    description="Find answers to frequently asked questions and common troubleshooting tips"
+    href="/docs/support/faq"
+    icon="❓"
+  />
+  <FeatureCard
+    title="Support"
+    description="Report issues or request new features to help improve RocketSim"
+    href="/docs/support/reporting-an-issue"
+    icon="💬"
+    links={[
+      {label: "Report an Issue", href: "/docs/support/reporting-an-issue"},
+      {label: "Request a Feature", href: "/docs/support/requesting-a-feature"}
+    ]}
+  />
+</FeatureGrid>
