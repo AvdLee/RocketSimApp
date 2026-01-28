@@ -11,17 +11,17 @@ During the first launch, you’ll be asked to provide several permissions that a
 
 RocketSim requires a few permissions to be able to access the Simulator and its builds.
 
-### **Xcode**
+### Xcode
 
 Make sure to select the latest version of Xcode. RocketSim uses your Xcode application to fetch Simulator metadata and communicate with the Simulator.
 
 We will re-ask for your Xcode Path in case a link your Xcode is lost or if we indicate a new Simulator that mismatches your currently configured Xcode.
 
-### **Screen Recording**
+### Screen Recording
 
 RocketSim uses Screen Recording permissions to read the Simulator’s window name and match it to the right device. Without permissions, we would only be able to see `"Simulator"` as a window name, making it impossible to properly calculate screen dimensions. These permissions are also used to record audio if enabled for Simulator captures.
 
-### **Developer Directory**
+### Developer Directory
 
 This is the directory in which your recent builds are stored. By providing access, RocketSim can show your most recent builds per Simulator and enhance your experience.
 
