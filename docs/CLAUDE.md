@@ -12,6 +12,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint` - Lint the source code
 - `npm run knip` - Check for unused dependencies/exports
 
+## Available MCP Servers
+
+This project has access to MCP (Model Context Protocol) servers that provide additional capabilities:
+
+- **Astro Docs MCP** (`mcp__astro-docs__search_astro_docs`): Search official Astro documentation
+  - Use this proactively when working with Astro features, Starlight configuration, or answering questions about Astro best practices
+  - Helpful for understanding Astro/Starlight APIs, configuration options, and recommended patterns
+  - Example: When implementing new Starlight features or troubleshooting Astro-specific issues
+
+To use an MCP server tool:
+
+1. First load it with ToolSearch: `query: "select:mcp__astro-docs__search_astro_docs"`
+2. Then call the tool directly
+
 ## Code Style Guidelines
 
 - Use TypeScript with strict type checking

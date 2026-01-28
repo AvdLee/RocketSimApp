@@ -2,6 +2,7 @@
 import type { AstroIntegration } from "astro";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
+import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
 import tailwindcss from "@tailwindcss/vite";
 import starlight from "@astrojs/starlight";
@@ -31,13 +32,9 @@ const integrations: AstroIntegration[] = [
   }),
   AutoImport({
     imports: [
-      "@/shortcodes/Button",
       "@/shortcodes/Accordion",
-      "@/shortcodes/Notice",
-      "@/shortcodes/Video",
       "@/shortcodes/Youtube",
-      "@/shortcodes/Tabs",
-      "@/shortcodes/Tab",
+      "@/shortcodes/Tweet.astro",
     ],
   }),
 ];
@@ -45,15 +42,60 @@ const integrations: AstroIntegration[] = [
 if (!isProduction) {
   integrations.push(
     starlight({
-      title: "RocketSim Docs TITLE",
+      title: "RocketSim Docs",
+      components: {
+        PageTitle: "./src/components/starlight/PageTitle.astro",
+      },
       sidebar: [
         {
           label: "Getting Started",
           autogenerate: { directory: "docs/getting-started" },
         },
+        {
+          label: "Features",
+          collapsed: true,
+          items: [
+            {
+              label: "Capturing",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/capturing" },
+            },
+            {
+              label: "Design Comparison",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/design-comparison" },
+            },
+            {
+              label: "App Actions",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/app-actions" },
+            },
+            {
+              label: "RocketSim Connect",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/rocketsim-connect" },
+            },
+            {
+              label: "Accessibility",
+              collapsed: true,
+              autogenerate: { directory: "docs/features/accessibility" },
+            },
+          ],
+        },
+        {
+          label: "Appearance",
+          collapsed: true,
+          autogenerate: { directory: "docs/appearance" },
+        },
+        {
+          label: "Support",
+          collapsed: true,
+          autogenerate: { directory: "docs/support" },
+        },
       ],
     }),
   );
+  integrations.push(mdx());
 }
 
 // https://astro.build/config

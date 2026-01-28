@@ -1,0 +1,114 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon?: string;
+  links?: Link[];
+}
+
+const { title, description, href, icon, links } = Astro.props;
+---
+
+<div class="feature-card">
+  <a href={href} class="card-main-link">
+    {icon && <span class="card-icon">{icon}</span>}
+    <h3 class="card-title">{title}</h3>
+    <p class="card-description">{description}</p>
+  </a>
+
+  {
+    links && links.length > 0 && (
+      <ul class="card-links">
+        {links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label} →</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>
+
+<style>
+  .feature-card {
+    background: var(--sl-color-bg-sidebar);
+    border: 1px solid var(--sl-color-hairline-light);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .feature-card:hover {
+    border-color: var(--sl-color-text-accent);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  :global([data-theme="light"]) .feature-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-main-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    margin: 0 0 0.5rem 0;
+    font-size: var(--sl-text-lg);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    line-height: 1.3;
+  }
+
+  .card-description {
+    margin: 0;
+    font-size: var(--sl-text-base);
+    color: var(--sl-color-gray-3);
+    line-height: 1.6;
+  }
+
+  :global([data-theme="light"]) .card-description {
+    color: var(--sl-color-gray-5);
+  }
+
+  .card-links {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    border-top: 1px solid var(--sl-color-hairline-light);
+    padding-top: 1rem;
+  }
+
+  .card-links li {
+    margin: 0.25rem 0;
+  }
+
+  .card-links a {
+    color: var(--sl-color-text-accent);
+    text-decoration: none;
+    font-size: var(--sl-text-sm);
+    transition: color 0.2s ease;
+  }
+
+  .card-links a:hover {
+    color: var(--sl-color-white);
+    text-decoration: underline;
+  }
+</style>

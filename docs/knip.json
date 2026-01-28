@@ -1,11 +1,23 @@
 {
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["astro.config.ts", "src/content/**/*.{md,mdx}"],
+  "project": ["src/**/*.{js,ts,tsx,astro,mjs}"],
+  "paths": {
+    "@/components/*": ["./src/components/*"],
+    "@/shortcodes/*": ["./src/layouts/shortcodes/*"],
+    "@/helpers/*": ["./src/layouts/helpers/*"],
+    "@/partials/*": ["./src/layouts/partials/*"],
+    "@/*": ["./src/*"]
+  },
   "ignore": [
     "src/tailwind-plugin/tw-bs-grid.mjs",
-    "src/tailwind-plugin/tw-theme.mjs"
+    "src/tailwind-plugin/tw-theme.mjs",
+    "src/layouts/shortcodes/Tweet.astro",
+    "src/layouts/shortcodes/Youtube.tsx",
+    "src/layouts/shortcodes/Accordion.tsx"
   ],
   "ignoreDependencies": [
     "@typescript-eslint/parser",
-    "tailwindcss",
     "@tailwindcss/forms",
     "@tailwindcss/typography"
   ]
