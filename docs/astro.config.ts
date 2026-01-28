@@ -42,6 +42,9 @@ if (!isProduction) {
   integrations.push(
     starlight({
       title: "RocketSim Docs",
+      components: {
+        PageTitle: "./src/components/starlight/PageTitle.astro",
+      },
       sidebar: [
         {
           label: "Getting Started",

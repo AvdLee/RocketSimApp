@@ -1,0 +1,32 @@
+---
+// Custom PageTitle component that displays the description as a subtitle
+const { title, description } = Astro.locals.starlightRoute.entry.data;
+---
+
+<h1 id="_top">{title}</h1>
+{description && (
+  <p class="page-subtitle">{description}</p>
+)}
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    font-size: var(--sl-text-h1);
+    line-height: var(--sl-line-height-headings);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+
+  .page-subtitle {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: var(--sl-text-lg);
+    color: var(--sl-color-gray-3);
+    line-height: 1.5;
+  }
+
+  :global([data-theme="light"]) .page-subtitle {
+    color: var(--sl-color-gray-4);
+  }
+</style>
