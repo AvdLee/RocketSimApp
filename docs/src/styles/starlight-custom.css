@@ -96,9 +96,28 @@ nav a:hover {
 
 /* Active sidebar item styling */
 [data-current="true"] > a,
-[aria-current="page"] {
+[aria-current="page"],
+.sidebar-content [aria-current="page"],
+.sidebar-content a[aria-current="page"],
+nav.sidebar a[aria-current="page"],
+starlight-menu-button + nav a[aria-current="page"],
+.sl-sidebar a[aria-current="page"],
+.sl-sidebar-state a[aria-current="page"] {
   color: var(--sl-color-text-accent) !important;
   font-weight: 600;
+}
+
+/* Ensure sidebar links are visible */
+.sidebar-content a,
+nav.sidebar a,
+.sl-sidebar a {
+  color: var(--sl-color-gray-2);
+}
+
+.sidebar-content a:hover,
+nav.sidebar a:hover,
+.sl-sidebar a:hover {
+  color: var(--sl-color-text-accent);
 }
 
 /* Table of contents active styling */
