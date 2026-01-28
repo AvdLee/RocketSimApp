@@ -1,0 +1,41 @@
+---
+/**
+ * Custom SiteTitle component for RocketSim docs
+ * Displays the RocketSim logo with proper sizing and hover effects
+ */
+import type { Props } from "@astrojs/starlight/props";
+import { Image } from "astro:assets";
+import logo from "../../assets/rocketsim-logo.svg";
+
+const { siteTitle } = Astro.props;
+const altText = siteTitle || "RocketSim";
+---
+
+<a href="/" class="site-title sl-flex">
+  <Image src={logo} alt={altText} class="site-logo" />
+</a>
+
+<style>
+  .site-title {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.5rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .site-title:hover {
+    opacity: 0.8;
+  }
+
+  .site-logo {
+    height: 24px;
+    width: auto;
+  }
+
+  @media (min-width: 540px) {
+    .site-logo {
+      height: 28px;
+    }
+  }
+</style>

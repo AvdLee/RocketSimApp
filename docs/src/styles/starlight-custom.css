@@ -1,0 +1,346 @@
+/**
+ * RocketSim Starlight Custom Styles
+ * Applies RocketSim branding to Starlight documentation theme
+ */
+
+/* Import the base theme colors from the main site */
+:root {
+  /* Primary brand colors */
+  --sl-color-accent-low: #0062cc;
+  --sl-color-accent: #0093ff;
+  --sl-color-accent-high: #3db4ff;
+
+  /* Font family - matches main site */
+  --sl-font: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* Dark theme (default) - matches RocketSim dark branding */
+:root,
+[data-theme="dark"] {
+  /* Background colors */
+  --sl-color-bg: #000;
+  --sl-color-bg-nav: #07080a;
+  --sl-color-bg-sidebar: #07080a;
+  --sl-color-bg-inline-code: #1d1d1f;
+
+  /* Hairline/border colors */
+  --sl-color-hairline: #3d3d3d;
+  --sl-color-hairline-shade: #1d1d1f;
+  --sl-color-hairline-light: #373739;
+
+  /* Text colors */
+  --sl-color-white: #fff;
+  --sl-color-gray-1: #f5f5f7;
+  --sl-color-gray-2: #d1d5db;
+  --sl-color-gray-3: #868686;
+  --sl-color-gray-4: #6b7280;
+  --sl-color-gray-5: #3d3d3d;
+  --sl-color-gray-6: #1d1d1f;
+  --sl-color-black: #000;
+
+  /* Text accent for links and highlights */
+  --sl-color-text-accent: #0093ff;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  /* Background colors */
+  --sl-color-bg: #fff;
+  --sl-color-bg-nav: #f5f5f7;
+  --sl-color-bg-sidebar: #f5f5f7;
+  --sl-color-bg-inline-code: #f0f0f0;
+
+  /* Hairline/border colors */
+  --sl-color-hairline: #d1d5db;
+  --sl-color-hairline-shade: #e5e7eb;
+  --sl-color-hairline-light: #f0f0f0;
+
+  /* Text colors */
+  --sl-color-white: #000;
+  --sl-color-gray-1: #1d1d1f;
+  --sl-color-gray-2: #373739;
+  --sl-color-gray-3: #6b7280;
+  --sl-color-gray-4: #868686;
+  --sl-color-gray-5: #d1d5db;
+  --sl-color-gray-6: #f5f5f7;
+  --sl-color-black: #fff;
+
+  /* Text accent for links and highlights */
+  --sl-color-text-accent: #0062cc;
+}
+
+/* Site title styling */
+.site-title {
+  font-weight: 600;
+  gap: 0.5rem;
+}
+
+/* Custom logo sizing */
+.site-title img {
+  height: 24px;
+  width: auto;
+}
+
+/* Navigation links - accent color on hover */
+nav a:hover {
+  color: var(--sl-color-text-accent);
+}
+
+/* Sidebar styling */
+.sidebar-content {
+  border-right: 1px solid var(--sl-color-hairline);
+}
+
+/* Active sidebar item styling */
+[data-current="true"] > a,
+[aria-current="page"] {
+  color: var(--sl-color-text-accent) !important;
+  font-weight: 600;
+}
+
+/* Table of contents active styling */
+starlight-toc a[aria-current="true"] {
+  color: var(--sl-color-text-accent);
+  font-weight: 600;
+}
+
+/* Code blocks styling */
+.expressive-code {
+  --ec-codeBg: #1d1d1f;
+  --ec-codeFg: #f5f5f7;
+  --ec-uiFg: #868686;
+  --ec-uiBorderClr: #3d3d3d;
+  --ec-frm-shdClr: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .expressive-code {
+  --ec-codeBg: #f5f5f7;
+  --ec-codeFg: #1d1d1f;
+  --ec-uiFg: #6b7280;
+  --ec-uiBorderClr: #d1d5db;
+  --ec-frm-shdClr: rgba(0, 0, 0, 0.1);
+}
+
+/* Inline code styling */
+:not(pre) > code {
+  background: var(--sl-color-bg-inline-code);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Links styling */
+.sl-markdown-content a:not(.card):not(.action-button) {
+  color: var(--sl-color-text-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sl-markdown-content a:not(.card):not(.action-button):hover {
+  color: var(--sl-color-accent-high);
+  text-decoration: underline;
+}
+
+/* Card styling */
+.card {
+  background: var(--sl-color-bg-nav);
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--sl-color-text-accent);
+  transform: translateY(-2px);
+}
+
+/* Button/Action styling */
+.sl-link-button {
+  background: var(--sl-color-accent);
+  color: #fff !important;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.sl-link-button:hover {
+  background: var(--sl-color-accent-low);
+}
+
+/* Search button styling */
+site-search button {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 8px;
+  background: var(--sl-color-bg-nav);
+}
+
+site-search button:hover {
+  border-color: var(--sl-color-text-accent);
+}
+
+/* Header styling */
+header.header {
+  background: var(--sl-color-bg);
+  border-bottom: 1px solid var(--sl-color-hairline);
+  backdrop-filter: blur(10px);
+}
+
+/* Mobile menu button */
+starlight-menu-button button {
+  color: var(--sl-color-gray-2);
+}
+
+starlight-menu-button button:hover {
+  color: var(--sl-color-text-accent);
+}
+
+/* Badge styling */
+.sl-badge {
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+/* Aside/Callout styling - matches main site notices */
+.starlight-aside {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+.starlight-aside--note {
+  --sl-color-asides-text-accent: #1b83e2;
+  border-color: #1b83e2;
+}
+
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: #40d294;
+  border-color: #40d294;
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text-accent: #e3a72c;
+  border-color: #e3a72c;
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text-accent: #db2c23;
+  border-color: #db2c23;
+}
+
+/* Tabs styling */
+starlight-tabs [role="tablist"] {
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+starlight-tabs [role="tab"] {
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+starlight-tabs [role="tab"][aria-selected="true"] {
+  color: var(--sl-color-text-accent);
+  border-bottom-color: var(--sl-color-text-accent);
+}
+
+starlight-tabs [role="tab"]:hover {
+  color: var(--sl-color-text-accent);
+}
+
+/* Pagination links */
+.pagination-links a {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.pagination-links a:hover {
+  border-color: var(--sl-color-text-accent);
+  background: var(--sl-color-bg-nav);
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th,
+table td {
+  border: 1px solid var(--sl-color-hairline);
+  padding: 0.75rem;
+}
+
+table th {
+  background: var(--sl-color-bg-nav);
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background: var(--sl-color-bg-nav);
+}
+
+/* Scrollbar styling for dark theme */
+:root,
+[data-theme="dark"] {
+  scrollbar-color: #3d3d3d #1d1d1f;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sl-color-bg-nav);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sl-color-hairline);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-color-gray-4);
+}
+
+/* Selection highlight */
+::selection {
+  background: rgba(0, 147, 255, 0.3);
+  color: inherit;
+}
+
+/* Focus styling */
+:focus-visible {
+  outline: 2px solid var(--sl-color-text-accent);
+  outline-offset: 2px;
+}
+
+/* Hero section if used */
+.hero {
+  padding: 4rem 0;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Footer styling */
+footer.footer {
+  border-top: 1px solid var(--sl-color-hairline);
+  padding: 1.5rem;
+}
+
+/* Social icons */
+.social-icons a {
+  color: var(--sl-color-gray-3);
+  transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+  color: var(--sl-color-text-accent);
+}

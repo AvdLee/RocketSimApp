@@ -57,7 +57,7 @@ const isHomepage = id === "docs";
   .action-button {
     display: inline-block;
     padding: 0.75rem 1.25rem;
-    border-radius: 0.375rem;
+    border-radius: 9999px;
     text-decoration: none;
     font-weight: 600;
     font-size: var(--sl-text-base);
@@ -65,22 +65,24 @@ const isHomepage = id === "docs";
   }
 
   .action-button.primary {
-    background: #0093ff;
+    background: var(--sl-color-accent);
     color: white;
   }
 
   .action-button.primary:hover {
-    background: #0062cc;
+    background: var(--sl-color-accent-low);
+    transform: translateY(-1px);
   }
 
   .action-button.secondary {
     background: transparent;
     color: var(--sl-color-white);
-    border: 1px solid var(--sl-color-gray-5);
+    border: 1px solid var(--sl-color-hairline);
   }
 
   .action-button.secondary:hover {
     border-color: var(--sl-color-text-accent);
-    background: var(--sl-color-gray-6);
+    background: var(--sl-color-bg-nav);
+    transform: translateY(-1px);
   }
 </style>

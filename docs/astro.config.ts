@@ -43,8 +43,23 @@ if (!isProduction) {
   integrations.push(
     starlight({
       title: "RocketSim Docs",
+      logo: {
+        src: "./src/assets/rocketsim-logo.svg",
+        alt: "RocketSim",
+        replacesTitle: true,
+      },
+      favicon: "/favicon.svg",
+      customCss: ["./src/styles/starlight-custom.css"],
+      social: [
+        { icon: "x.com", label: "X/Twitter", href: "https://x.com/rocketsim_app" },
+        { icon: "youtube", label: "YouTube", href: "https://www.youtube.com/@rocketsimapp" },
+        { icon: "linkedin", label: "LinkedIn", href: "https://linkedin.com/company/rocketsim" },
+        { icon: "github", label: "GitHub", href: "https://github.com/AvdLee" },
+      ],
       components: {
+        Head: "./src/components/starlight/Head.astro",
         PageTitle: "./src/components/starlight/PageTitle.astro",
+        SiteTitle: "./src/components/starlight/SiteTitle.astro",
       },
       sidebar: [
         {
