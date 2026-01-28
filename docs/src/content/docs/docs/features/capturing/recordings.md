@@ -3,7 +3,7 @@ title: "Recordings"
 description: "Create professional recordings to demonstrate your app’s features with colleagues and social media."
 ---
 
-RocketSim allows you to create both screenshots and videos of the Xcode Simulator. Unlike the default Simulator recording capabilities, RocketSim allows you to record touches, audio, and bezels. Using the App Store Connect Preview mode, you’re recordings will be ready to upload directly into App Store Connect.
+RocketSim allows you to create both screenshots and videos of the Xcode Simulator. Unlike the default Simulator recording capabilities, RocketSim allows you to record touches, audio, and bezels. Using the App Store Connect Preview mode, your recordings will be ready to upload directly into App Store Connect.
 
 ## Creating a recording
 

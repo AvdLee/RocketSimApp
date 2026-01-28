@@ -30,7 +30,7 @@ Yes, you can!
 1. Define a symbolic breakpoint for `UIApplicationMain`
 2. Add a debugger command action using `expr (void *)dlopen("/Applications/RocketSim.app/Contents/Frameworks/RocketSimConnectLinker.nocache.framework/RocketSimConnectLinker", 0x2)`
    _Note: make sure to point to RocketSim’s .app path correctly._
-3. Enable “Automatically continue after evalutating actions”
+3. Enable “Automatically continue after evaluating actions”
 4. Move the breakpoint to “User” using the right-click menu to make it apply on all your Xcode projects
 
 ## Does this work with React Native?

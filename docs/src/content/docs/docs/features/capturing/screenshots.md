@@ -9,7 +9,7 @@ RocketSim allows you to create screenshots with bezels, a custom background colo
 
 1. Open the Simulator
 2. Select the Captures tab inside the RocketSim Side Window
-3. Click **JPEG Screenshot** (when App Preview Optimized is enabled) \***\*or **PNG Record\*\*
+3. Click **JPEG Screenshot** (when App Preview Optimized is enabled) or **PNG Record**
 
    ![CleanShot 2025-01-21 at 13.48.13@2x.png](./screenshots/cleanshot_2025-01-21_at_13.48.132x.png)
 

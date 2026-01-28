@@ -15,7 +15,7 @@ RocketSim Connect’s dynamic library gets loaded at runtime and swizzles URLSes
 
 ## How do I get started?
 
-Follow the instructions for RocketSim Connect as described [here](https://docs.rocketsim.app/features/hzQMSrSga7BGWvxdNVdwYs/introduction/iXHZvJWvedgZuVTN5V3YS1).
+Follow the instructions for RocketSim Connect as described [here](./introduction-and-setup).
 
 ## Do I need to set up a proxy or certificates?
 
@@ -23,7 +23,7 @@ Nope! Integrating RocketSim Connect is all you need.
 
 ## Are you saying I don’t need Proxyman, Charles Proxy, or any other proxy app anymore?
 
-Basically, yes! However, RocketSim does not yet allow configuring breakpoints or adjusting responses before they return into your app. Though, in most cases, it’s enough to be able to see which requests go in and out, what respones they return, and why a request failed.
+Basically, yes! However, RocketSim does not yet allow configuring breakpoints or adjusting responses before they return into your app. Though, in most cases, it's enough to be able to see which requests go in and out, what responses they return, and why a request failed.
 
 ## Powered by open-sourced framework Pulse
 

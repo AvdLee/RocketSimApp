@@ -72,4 +72,4 @@ This is usually caused by missing system permissions.
 5. Still not working? Do a clean reinstall:
    - Delete **RocketSim.app** from Applications
    - Empty the Trash and reinstall RocketSim
-6. If it *still* doesn’t work, run `systemextensionsctl list`and email the output to [support@rocketsim.app](https://www.notion.so/RocketSim-Quarterly-Finances-201fe943204d8077945ecd6c92940f86?pvs=21)
+6. If it *still* doesn’t work, run `systemextensionsctl list` and email the output to [support@rocketsim.app](mailto:support@rocketsim.app)
