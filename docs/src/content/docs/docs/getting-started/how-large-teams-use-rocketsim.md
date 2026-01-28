@@ -5,13 +5,13 @@ sidebar:
   order: 6
 ---
 
-Many large teams make use of RocketSim to improve their development workflow. Developers, but also QA engineers and designers make use of RocketSim to validate designs, accessibility implementations, or execute deeplinks to enable certain feature flags. 
+Many large teams make use of RocketSim to improve their development workflow. Developers, but also QA engineers and designers make use of RocketSim to validate designs, accessibility implementations, or execute deeplinks to enable certain feature flags.
 
 This article provides an overview of features that work best for specific cases, allowing you to explore what RocketSim has to offer.
 
 ## RocketSim for Teams
 
-Brand new since 2025 is our RocketSim for Teams dashboard. 
+Brand new since 2025 is our RocketSim for Teams dashboard.
 
 ![CleanShot 2025-01-21 at 13.42.47@2x.png](./how-large-teams-use-rocketsim/cleanshot_2025-01-21_at_13.42.472x.png)
 

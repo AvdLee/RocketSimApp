@@ -3,19 +3,26 @@
 // For the docs homepage, add CTA buttons after the description
 const { title, description } = Astro.locals.starlightRoute.entry.data;
 const id = Astro.locals.starlightRoute.id;
-const isHomepage = id === 'docs';
+const isHomepage = id === "docs";
 ---
 
 <h1 id="_top">{title}</h1>
-{description && (
-  <p class="page-subtitle">{description}</p>
-)}
-{isHomepage && (
-  <div class="homepage-actions">
-    <a href="/docs/getting-started/onboarding" class="action-button primary">Get Started →</a>
-    <a href="/docs/getting-started/product-tour-and-quick-demos" class="action-button secondary">Product Tour</a>
-  </div>
-)}
+{description && <p class="page-subtitle">{description}</p>}
+{
+  isHomepage && (
+    <div class="homepage-actions">
+      <a href="/docs/getting-started/onboarding" class="action-button primary">
+        Get Started →
+      </a>
+      <a
+        href="/docs/getting-started/product-tour-and-quick-demos"
+        class="action-button secondary"
+      >
+        Product Tour
+      </a>
+    </div>
+  )
+}
 
 <style>
   h1 {

@@ -15,9 +15,8 @@ RocketSim allows you to create both screenshots and videos of the Xcode Simulato
 
 1. Press **Stop** when you’re done
 2. Drag or copy your recording using the floating thumbnail in the bottom right corner
-    
-    ![CleanShot 2023-11-01 at 13.30.44@2x.png](./recordings/cleanshot_2023-11-01_at_13.30.442x.png)
-    
+
+   ![CleanShot 2023-11-01 at 13.30.44@2x.png](./recordings/cleanshot_2023-11-01_at_13.30.442x.png)
 
 ## Showing touches
 

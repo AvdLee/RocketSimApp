@@ -13,8 +13,10 @@ const { id } = Astro.props;
 </div>
 
 <script>
-  function getStarlightTheme(): 'light' | 'dark' {
-    return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  function getStarlightTheme(): "light" | "dark" {
+    return document.documentElement.dataset.theme === "light"
+      ? "light"
+      : "dark";
   }
 
   function loadTweetWithTheme(container: HTMLElement) {
@@ -24,14 +26,14 @@ const { id } = Astro.props;
     const theme = getStarlightTheme();
 
     // Clear existing content
-    container.innerHTML = '';
+    container.innerHTML = "";
 
     // Create new blockquote with current theme
-    const blockquote = document.createElement('blockquote');
-    blockquote.className = 'twitter-tweet';
-    blockquote.setAttribute('data-theme', theme);
+    const blockquote = document.createElement("blockquote");
+    blockquote.className = "twitter-tweet";
+    blockquote.setAttribute("data-theme", theme);
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = `https://twitter.com/x/status/${tweetId}`;
     blockquote.appendChild(link);
 
@@ -45,21 +47,28 @@ const { id } = Astro.props;
 
   // Initialize all tweets on page load
   function initTweets() {
-    document.querySelectorAll<HTMLElement>('.tweet-embed').forEach(loadTweetWithTheme);
+    document
+      .querySelectorAll<HTMLElement>(".tweet-embed")
+      .forEach(loadTweetWithTheme);
   }
 
   // Wait for Twitter widgets to be available
   if (window.twttr?.widgets) {
     initTweets();
   } else {
-    window.addEventListener('load', initTweets);
+    window.addEventListener("load", initTweets);
   }
 
   // Watch for theme changes
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-        document.querySelectorAll<HTMLElement>('.tweet-embed').forEach(loadTweetWithTheme);
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "data-theme"
+      ) {
+        document
+          .querySelectorAll<HTMLElement>(".tweet-embed")
+          .forEach(loadTweetWithTheme);
         break;
       }
     }
@@ -67,7 +76,7 @@ const { id } = Astro.props;
 
   observer.observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ['data-theme']
+    attributeFilter: ["data-theme"],
   });
 </script>
 

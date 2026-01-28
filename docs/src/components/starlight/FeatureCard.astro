@@ -22,15 +22,17 @@ const { title, description, href, icon, links } = Astro.props;
     <p class="card-description">{description}</p>
   </a>
 
-  {links && links.length > 0 && (
-    <ul class="card-links">
-      {links.map((link) => (
-        <li>
-          <a href={link.href}>{link.label} →</a>
-        </li>
-      ))}
-    </ul>
-  )}
+  {
+    links && links.length > 0 && (
+      <ul class="card-links">
+        {links.map((link) => (
+          <li>
+            <a href={link.href}>{link.label} →</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </div>
 
 <style>

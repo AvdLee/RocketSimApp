@@ -4,10 +4,13 @@ interface Props {
   gap?: string;
 }
 
-const { columns = 3, gap = '1.5rem' } = Astro.props;
+const { columns = 3, gap = "1.5rem" } = Astro.props;
 ---
 
-<div class={`feature-grid feature-grid-${columns}`} style={`--grid-gap: ${gap}`}>
+<div
+  class={`feature-grid feature-grid-${columns}`}
+  style={`--grid-gap: ${gap}`}
+>
   <slot />
 </div>
 

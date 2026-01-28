@@ -15,4 +15,4 @@ Within the editor, you can click the **Send** button to test out the notificatio
 
 ![CleanShot 2025-01-21 at 14.17.54@2x.png](./push-notifications/cleanshot_2025-01-21_at_14.17.542x.png)
 
-You can read more about this feature in my dedicated article [**Testing push notifications on the iOS simulator](https://www.avanderlee.com/workflow/testing-push-notifications-ios-simulator/).**
+You can read more about this feature in my dedicated article [\*\*Testing push notifications on the iOS simulator](https://www.avanderlee.com/workflow/testing-push-notifications-ios-simulator/).\*\*

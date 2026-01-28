@@ -7,7 +7,12 @@ interface YoutubeProps {
   className?: string;
 }
 
-const Youtube = ({ id, url, title = "YouTube video", className }: YoutubeProps) => {
+const Youtube = ({
+  id,
+  url,
+  title = "YouTube video",
+  className,
+}: YoutubeProps) => {
   // Extract video ID from URL if provided
   let videoId = id;
   if (url && !videoId) {
@@ -34,10 +39,28 @@ const Youtube = ({ id, url, title = "YouTube video", className }: YoutubeProps) 
   }
 
   return (
-    <div className={`youtube-embed ${className || ""}`} style={{ width: "100%" }}>
-      <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", width: "100%" }}>
+    <div
+      className={`youtube-embed ${className || ""}`}
+      style={{ width: "100%" }}
+    >
+      <div
+        style={{
+          position: "relative",
+          paddingBottom: "56.25%",
+          height: 0,
+          overflow: "hidden",
+          width: "100%",
+        }}
+      >
         <iframe
-          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            border: 0,
+          }}
           src={`https://www.youtube-nocookie.com/embed/${videoId}`}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -60,18 +60,16 @@ Yes, make sure to disable **App Preview Optimized** and set your background colo
 This is usually caused by missing system permissions.
 
 1. Quit **Xcode**, all **Simulators**, and **RocketSim**, then reopen them.
-    
-    (This often fixes the issue after Xcode or macOS updates.)
-    
+
+   (This often fixes the issue after Xcode or macOS updates.)
+
 2. Open **System Settings → Privacy & Security** and approve any pending **RocketSim** permissions.
 3. Open System Settings → Network → Filter and verify whether RocketSim is present & enabled
 4. On **macOS 26**, enable the Network Extension:
-    - **System Settings → General → Login Items & Extensions**
-    - Find **RocketSim**, click **(i)**, and enable **Network Extension**
-        
-        You may need to approve permissions more than once.
-        
+   - **System Settings → General → Login Items & Extensions**
+   - Find **RocketSim**, click **(i)**, and enable **Network Extension**
+     You may need to approve permissions more than once.
 5. Still not working? Do a clean reinstall:
-    - Delete **RocketSim.app** from Applications
-    - Empty the Trash and reinstall RocketSim
+   - Delete **RocketSim.app** from Applications
+   - Empty the Trash and reinstall RocketSim
 6. If it *still* doesn’t work, run `systemextensionsctl list`and email the output to [support@rocketsim.app](https://www.notion.so/RocketSim-Quarterly-Finances-201fe943204d8077945ecd6c92940f86?pvs=21)

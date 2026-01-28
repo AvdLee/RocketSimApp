@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-After configuring both permissions and App Actions, you’ve finished the basics of RocketSim’s configuration. All other features will work out of the box and don’t require specific configurations. 
+After configuring both permissions and App Actions, you’ve finished the basics of RocketSim’s configuration. All other features will work out of the box and don’t require specific configurations.
 
 I encourage you to continue your journey and explore other features RocketSim offers. On the left side of this documentation, you’ll find per-feature detailed documentation that can guide you on your journey.
 

@@ -20,12 +20,12 @@ Camera simulation is available from the Capture side window tab:
 1. Open the Simulator
 2. Navigate to the bottom of the capturing side window
 3. Setup camera authorization via RocketSim’s Side Window
-    
-    ![The side window in its state after camera permissions have been granted.](./simulator-camera-support/cleanshot_2025-06-19_at_13.15.372x.png)
-    
-    The side window in its state after camera permissions have been granted.
-    
-4. Integrate RocketSim Connect following the in-app instructions. For more info, see [Introduction & Setup](../RocketSim%20Connect/Introduction%20&%20Setup%209173248f5a7c45beb3638580d2680a54.md) 
+
+   ![The side window in its state after camera permissions have been granted.](./simulator-camera-support/cleanshot_2025-06-19_at_13.15.372x.png)
+
+   The side window in its state after camera permissions have been granted.
+
+4. Integrate RocketSim Connect following the in-app instructions. For more info, see [Introduction & Setup](../RocketSim%20Connect/Introduction%20&%20Setup%209173248f5a7c45beb3638580d2680a54.md)
 5. Start running your app
 
 ## Troubleshooting
@@ -34,7 +34,7 @@ Since this is an early version of Camera Simulation, I’m pretty sure you’ll 
 
 1. Add `-com.swiftlee.rocketsim.debug 1` as a launch argument to your app
 2. Relaunch your app and try to get Camera Simulation to work
-*Note: functionality won’t change, but you’ll have more debug logs*
+   _Note: functionality won’t change, but you’ll have more debug logs_
 3. Copy the logs from your console
 4. Start a new email to me via Settings → About → Report a bug
 5. Add the copied logs

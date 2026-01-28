@@ -13,9 +13,9 @@ RocketSim requires a few permissions to be able to access the Simulator and its 
 
 ### **Xcode**
 
-Make sure to select the latest version of Xcode. RocketSim uses your Xcode application to fetch Simulator metadata and communicate with the Simulator. 
+Make sure to select the latest version of Xcode. RocketSim uses your Xcode application to fetch Simulator metadata and communicate with the Simulator.
 
-We will re-ask for your Xcode Path in case a link your Xcode is lost or if we indicate a new Simulator that mismatches your currently configured Xcode. 
+We will re-ask for your Xcode Path in case a link your Xcode is lost or if we indicate a new Simulator that mismatches your currently configured Xcode.
 
 ### **Screen Recording**
 
@@ -27,7 +27,7 @@ This is the directory in which your recent builds are stored. By providing acces
 
 ## Exploring the Side Window
 
-Once configured, you’re ready to get started with RocketSim. Make sure to open a Simulator and see if the RocketSim side window shows up: 
+Once configured, you’re ready to get started with RocketSim. Make sure to open a Simulator and see if the RocketSim side window shows up:
 
 ![CleanShot 2025-01-21 at 13.33.53@2x.png](./onboarding/cleanshot_2025-01-21_at_13.33.532x.png)
 

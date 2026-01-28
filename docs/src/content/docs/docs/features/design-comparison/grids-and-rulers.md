@@ -3,7 +3,7 @@ title: "Grids & Rulers"
 description: "Show Grids and Rulers on top of the Simulator."
 ---
 
-Aligning elements based on grids and rulers allows you to create a balanced design. 
+Aligning elements based on grids and rulers allows you to create a balanced design.
 
 ## Showing the Grid
 

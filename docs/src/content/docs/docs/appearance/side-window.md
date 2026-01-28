@@ -7,7 +7,7 @@ RocketSim’s Side Window is unique and always accessible when you’re testing 
 
 ## Hiding the Side Window
 
-Using the more button: 
+Using the more button:
 
 ![Untitled](./side-window/untitled.png)
 

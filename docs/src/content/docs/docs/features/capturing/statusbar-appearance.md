@@ -14,7 +14,6 @@ You might or might not have noticed, but all of Apple’s devices have the statu
 [That time used to be 9:42](https://www.businessinsider.com/iphone-ad-942-2012-2), matching the time of January 9th, 2007 when Steve Jobs announced the first first iPhone. Around 42 minutes into his keynote he mentioned:
 
 > “Today, Apple is going to reinvent the phone.”
-> 
 
 Quite the historic sentence for us developers!
 

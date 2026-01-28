@@ -17,7 +17,7 @@ You can access Build Insights for any recent build inside the side window:
 
 ### I don’t see any builds?
 
-RocketSim will start tracking as soon as you’ve updated to 12.9.0 or higher. At first, it’s only able to track the builds that Xcode cached. Since Xcode is often clearing cache, it’s likely that you don’t see many builds yet. 
+RocketSim will start tracking as soon as you’ve updated to 12.9.0 or higher. At first, it’s only able to track the builds that Xcode cached. Since Xcode is often clearing cache, it’s likely that you don’t see many builds yet.
 
 ### Can I also keep track of modules (Swift packages)?
 
