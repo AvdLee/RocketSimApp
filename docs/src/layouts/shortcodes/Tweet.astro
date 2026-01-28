@@ -1,0 +1,84 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div class="tweet-embed" data-tweet-id={id}>
+  <blockquote class="twitter-tweet">
+    <a href={`https://twitter.com/x/status/${id}`}></a>
+  </blockquote>
+</div>
+
+<script>
+  function getStarlightTheme(): 'light' | 'dark' {
+    return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  }
+
+  function loadTweetWithTheme(container: HTMLElement) {
+    const tweetId = container.dataset.tweetId;
+    if (!tweetId) return;
+
+    const theme = getStarlightTheme();
+
+    // Clear existing content
+    container.innerHTML = '';
+
+    // Create new blockquote with current theme
+    const blockquote = document.createElement('blockquote');
+    blockquote.className = 'twitter-tweet';
+    blockquote.setAttribute('data-theme', theme);
+
+    const link = document.createElement('a');
+    link.href = `https://twitter.com/x/status/${tweetId}`;
+    blockquote.appendChild(link);
+
+    container.appendChild(blockquote);
+
+    // Load the widget
+    if (window.twttr?.widgets) {
+      window.twttr.widgets.load(container);
+    }
+  }
+
+  // Initialize all tweets on page load
+  function initTweets() {
+    document.querySelectorAll<HTMLElement>('.tweet-embed').forEach(loadTweetWithTheme);
+  }
+
+  // Wait for Twitter widgets to be available
+  if (window.twttr?.widgets) {
+    initTweets();
+  } else {
+    window.addEventListener('load', initTweets);
+  }
+
+  // Watch for theme changes
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        document.querySelectorAll<HTMLElement>('.tweet-embed').forEach(loadTweetWithTheme);
+        break;
+      }
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  });
+</script>
+
+<script is:inline src="https://platform.twitter.com/widgets.js"></script>
+
+<style>
+  .tweet-embed {
+    margin: 2rem 0;
+    > div {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+  }
+</style>

@@ -34,6 +34,7 @@ const integrations: AstroIntegration[] = [
     imports: [
       "@/shortcodes/Accordion",
       "@/shortcodes/Youtube",
+      "@/shortcodes/Tweet.astro",
     ],
   }),
 ];
