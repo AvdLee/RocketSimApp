@@ -2,6 +2,7 @@
 import type { AstroIntegration } from "astro";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
+import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
 import tailwindcss from "@tailwindcss/vite";
 import starlight from "@astrojs/starlight";
@@ -31,13 +32,8 @@ const integrations: AstroIntegration[] = [
   }),
   AutoImport({
     imports: [
-      "@/shortcodes/Button",
       "@/shortcodes/Accordion",
-      "@/shortcodes/Notice",
-      "@/shortcodes/Video",
       "@/shortcodes/Youtube",
-      "@/shortcodes/Tabs",
-      "@/shortcodes/Tab",
     ],
   }),
 ];
@@ -95,6 +91,7 @@ if (!isProduction) {
       ],
     }),
   );
+  integrations.push(mdx());
 }
 
 // https://astro.build/config
