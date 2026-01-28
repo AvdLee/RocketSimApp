@@ -9,7 +9,7 @@ RocketSim Connect creates a connection between your running application and Rock
 
 RocketSim Connect works by implementing a small piece of code into your application. The app will guide you and provides a `Copy Code` button.
 
-![CleanShot%202024-07-01%20at%2014.42.06@2x.png](./introduction-and-setup/CleanShot202024-07-0120at2014.42.062x.png)
+![CleanShot%202024-07-01%20at%2014.42.06@2x.png](./introduction-and-setup/cleanShot202024-07-0120at2014.42.062x.png)
 
 ## Where do I find this onboarding?
 
