@@ -1,6 +1,8 @@
 ---
 title: "Onboarding"
 description: "Selecting Xcode and providing permissions"
+sidebar:
+  order: 2
 ---
 
 During the first launch, you’ll be asked to provide several permissions that are required for RocketSim to function properly. RocketSim is a sandboxed application, meaning it’s secure but also requires explicit access to certain capabilities.

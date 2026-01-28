@@ -1,6 +1,8 @@
 ---
 title: "Product Tour & Quick Demo's"
 description: "A demonstration of what RocketSim has to offer"
+sidebar:
+  order: 1
 ---
 
 If you’re new to RocketSim, it’s best to get started [browsing our YouTube channel](https://www.youtube.com/@rocketsimapp).

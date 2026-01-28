@@ -1,6 +1,8 @@
 ---
 title: "Exploring All RocketSim Features"
 description: "After the basic setup is done, you can continue exploring RocketSim."
+sidebar:
+  order: 4
 ---
 
 After configuring both permissions and App Actions, you’ve finished the basics of RocketSim’s configuration. All other features will work out of the box and don’t require specific configurations. 

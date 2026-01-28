@@ -1,6 +1,8 @@
 ---
 title: "Testimonials"
 description: "Testimonials from current RocketSim users."
+sidebar:
+  order: 5
 ---
 
 [https://x.com/bionik6/status/1719461887367069884?s=20](https://x.com/bionik6/status/1719461887367069884?s=20)

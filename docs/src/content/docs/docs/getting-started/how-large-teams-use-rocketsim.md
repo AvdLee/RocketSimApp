@@ -1,6 +1,8 @@
 ---
 title: "How Large Teams Use RocketSim"
 description: "Making the most of RocketSim’s features when collaborating in larger teams."
+sidebar:
+  order: 6
 ---
 
 Many large teams make use of RocketSim to improve their development workflow. Developers, but also QA engineers and designers make use of RocketSim to validate designs, accessibility implementations, or execute deeplinks to enable certain feature flags. 

@@ -1,6 +1,8 @@
 ---
 title: "Configuring App Actions"
 description: "Make sure RocketSim App Actions work for your recent builds"
+sidebar:
+  order: 3
 ---
 
 A major part of RocketSim’s functionality is based on so-called App Actions. They’re configured based on your app’s primary target bundle identifier and allow you to perform the following actions:
