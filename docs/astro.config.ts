@@ -132,7 +132,7 @@ if (!isProduction) {
           autogenerate: { directory: "docs/support" },
         },
       ],
-    })
+    }),
   );
   integrations.push(mdx());
 }
