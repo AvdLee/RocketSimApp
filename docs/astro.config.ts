@@ -28,7 +28,9 @@ const integrations: AstroIntegration[] = [
       page !== "https://www.rocketsim.app/terms" &&
       page !== "https://www.rocketsim.app/privacy" &&
       page !== "https://www.rocketsim.app/thank-you" &&
-      page !== "https://www.rocketsim.app/signup/trial/thank-you",
+      page !== "https://www.rocketsim.app/signup/trial/thank-you" &&
+      page !== "https://www.rocketsim.app/404" &&
+      page !== "https://www.rocketsim.app/docs/404",
   }),
   AutoImport({
     imports: [
@@ -43,6 +45,7 @@ if (!isProduction) {
   integrations.push(
     starlight({
       title: "RocketSim Docs",
+      disable404Route: true,
       logo: {
         light: "./src/assets/rocketsim-logo-dark.svg",
         dark: "./src/assets/rocketsim-logo.svg",
