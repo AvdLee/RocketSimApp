@@ -1,0 +1,22 @@
+---
+/**
+ * Custom Head component for RocketSim docs
+ * Includes proper favicon and meta tags matching the main site
+ */
+import Default from "@astrojs/starlight/components/Head.astro";
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Theme color matching RocketSim dark theme -->
+<meta name="theme-color" content="#000000" />
+<meta name="color-scheme" content="dark light" />
+
+<!-- Additional meta for better SEO -->
+<meta name="author" content="RocketSim" />

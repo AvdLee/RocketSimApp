@@ -1,0 +1,430 @@
+/**
+ * RocketSim Starlight Custom Styles
+ * Applies RocketSim branding to Starlight documentation theme
+ *
+ * Following Starlight best practices:
+ * - Using CSS custom properties for theming
+ * - Proper dark/light theme selectors
+ * - CSS layers for style precedence
+ *
+ * @see https://starlight.astro.build/guides/css-and-tailwind/
+ */
+
+/* ==========================================================================
+   Theme Colors - Dark Mode (Default)
+   ========================================================================== */
+
+:root {
+  /* Accent colors - RocketSim primary blue */
+  --sl-color-accent-low: #003d66;
+  --sl-color-accent: #0093ff;
+  --sl-color-accent-high: #66bfff;
+
+  /* Gray scale for dark theme */
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #f5f5f7;
+  --sl-color-gray-2: #c7c7cc;
+  --sl-color-gray-3: #868686;
+  --sl-color-gray-4: #636366;
+  --sl-color-gray-5: #3d3d3d;
+  --sl-color-gray-6: #1d1d1f;
+  --sl-color-black: #000000;
+
+  /* Font family - matches main site */
+  --sl-font:
+    -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --sl-font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* Text accent for links */
+  --sl-color-text-accent: var(--sl-color-accent);
+}
+
+/* ==========================================================================
+   Theme Colors - Light Mode
+   ========================================================================== */
+
+:root[data-theme="light"] {
+  /* Accent colors - consistent with dark mode */
+  --sl-color-accent-low: #cce4ff;
+  --sl-color-accent: #0093ff;
+  --sl-color-accent-high: #003d80;
+
+  /* Gray scale for light theme (inverted) */
+  --sl-color-white: #1d1d1f;
+  --sl-color-gray-1: #3d3d3d;
+  --sl-color-gray-2: #636366;
+  --sl-color-gray-3: #868686;
+  --sl-color-gray-4: #aeaeb2;
+  --sl-color-gray-5: #d1d1d6;
+  --sl-color-gray-6: #f5f5f7;
+  --sl-color-black: #ffffff;
+
+  /* Text accent for links */
+  --sl-color-text-accent: var(--sl-color-accent);
+}
+
+/* ==========================================================================
+   Site Title & Logo
+   ========================================================================== */
+
+.site-title {
+  font-weight: 600;
+  gap: 0.5rem;
+}
+
+.site-title img {
+  height: 24px;
+  width: auto;
+}
+
+/* ==========================================================================
+   Sidebar Navigation
+   ========================================================================== */
+
+/* Active sidebar item - ensure white text is visible on accent background */
+[aria-current="page"],
+[aria-current="true"],
+.sidebar a[aria-current="page"],
+.sidebar a[aria-current="true"] {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Table of contents active styling */
+starlight-toc a[aria-current="true"] {
+  color: var(--sl-color-text-accent);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Code Blocks (Expressive Code)
+   ========================================================================== */
+
+.expressive-code {
+  --ec-codeBg: var(--sl-color-gray-6);
+  --ec-codeFg: var(--sl-color-gray-1);
+  --ec-uiFg: var(--sl-color-gray-3);
+  --ec-uiBorderClr: var(--sl-color-gray-5);
+  --ec-frm-shdClr: rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .expressive-code {
+  --ec-frm-shdClr: rgba(0, 0, 0, 0.1);
+}
+
+/* Inline code styling */
+:not(pre) > code {
+  background: var(--sl-color-gray-6);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+.sl-markdown-content a:not(.card):not(.action-button) {
+  color: var(--sl-color-text-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sl-markdown-content a:not(.card):not(.action-button):hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 12px;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--sl-color-accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.sl-link-button {
+  background: var(--sl-color-accent);
+  color: #fff !important;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.sl-link-button:hover {
+  background: var(--sl-color-accent-high);
+}
+
+:root[data-theme="light"] .sl-link-button:hover {
+  background: var(--sl-color-accent-low);
+}
+
+/* ==========================================================================
+   Search
+   ========================================================================== */
+
+site-search button {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background: var(--sl-color-gray-6);
+}
+
+site-search button:hover {
+  border-color: var(--sl-color-accent);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+header.header {
+  background: var(--sl-color-black);
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  backdrop-filter: blur(10px);
+}
+
+/* Mobile menu button */
+starlight-menu-button button {
+  color: var(--sl-color-gray-2);
+}
+
+starlight-menu-button button:hover {
+  color: var(--sl-color-accent);
+}
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+
+.sl-badge {
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Asides / Callouts
+   ========================================================================== */
+
+.starlight-aside {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+.starlight-aside--note {
+  --sl-color-asides-text-accent: #1b83e2;
+  border-color: #1b83e2;
+}
+
+.starlight-aside--tip {
+  --sl-color-asides-text-accent: #1b83e2;
+  border-color: #1b83e2;
+  background-color: hsl(210, 80%, 95%);
+}
+
+:root[data-theme="dark"] .starlight-aside--tip {
+  background-color: hsl(210, 39%, 22%);
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text-accent: #e3a72c;
+  border-color: #e3a72c;
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text-accent: #db2c23;
+  border-color: #db2c23;
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+starlight-tabs [role="tablist"] {
+  border-bottom: 1px solid var(--sl-color-gray-5);
+}
+
+starlight-tabs [role="tab"] {
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+starlight-tabs [role="tab"][aria-selected="true"] {
+  color: var(--sl-color-text-accent);
+  border-bottom-color: var(--sl-color-accent);
+}
+
+starlight-tabs [role="tab"]:hover {
+  color: var(--sl-color-text-accent);
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.pagination-links a {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.pagination-links a:hover {
+  border-color: var(--sl-color-accent);
+  background: var(--sl-color-gray-6);
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th,
+table td {
+  border: 1px solid var(--sl-color-gray-5);
+  padding: 0.75rem;
+}
+
+table th {
+  background: var(--sl-color-gray-6);
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background: var(--sl-color-gray-6);
+}
+
+/* ==========================================================================
+   Scrollbar
+   ========================================================================== */
+
+:root {
+  scrollbar-color: var(--sl-color-gray-5) var(--sl-color-gray-6);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sl-color-gray-6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sl-color-gray-5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-color-gray-4);
+}
+
+/* ==========================================================================
+   Selection & Focus
+   ========================================================================== */
+
+::selection {
+  background: rgba(0, 147, 255, 0.3);
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  padding: 4rem 0;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer.footer {
+  border-top: 1px solid var(--sl-color-gray-5);
+  padding: 1.5rem;
+}
+
+/* Footer links section */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.5rem;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--sl-color-gray-3);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a svg {
+  width: 1em;
+  height: 1em;
+}
+
+.footer-links a:hover {
+  color: var(--sl-color-text-accent);
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   Social Icons
+   ========================================================================== */
+
+.social-icons a {
+  color: var(--sl-color-gray-3);
+  transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+  color: var(--sl-color-accent);
+}

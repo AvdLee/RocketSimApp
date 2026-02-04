@@ -1,0 +1,70 @@
+---
+/**
+ * Custom SiteTitle component for RocketSim docs
+ * Shows the RocketSim logo linking to main site and a "DOCS" badge linking to /docs
+ */
+// Import logo images
+import logoDark from "../../assets/rocketsim-logo.svg";
+import logoLight from "../../assets/rocketsim-logo-dark.svg";
+---
+
+<a href="/" class="site-title sl-flex" aria-label="RocketSim">
+  <img class="logo-dark" src={logoDark.src} alt="RocketSim" />
+  <img class="logo-light" src={logoLight.src} alt="RocketSim" />
+</a>
+<a href="/docs" class="docs-badge">DOCS</a>
+
+<style>
+  .site-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+
+  .site-title img {
+    height: 24px;
+    width: auto;
+  }
+
+  /* Dark mode: show dark logo, hide light logo */
+  .logo-dark {
+    display: block;
+  }
+  .logo-light {
+    display: none;
+  }
+
+  /* Light mode: show light logo, hide dark logo */
+  :global([data-theme="light"]) .logo-dark {
+    display: none;
+  }
+  :global([data-theme="light"]) .logo-light {
+    display: block;
+  }
+
+  .docs-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--sl-color-accent);
+    border: 1px solid var(--sl-color-accent);
+    border-radius: 4px;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .docs-badge:hover {
+    background-color: var(--sl-color-accent);
+    color: white;
+  }
+</style>

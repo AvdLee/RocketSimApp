@@ -14,6 +14,10 @@ a.btn {
   @apply border-primary duration-300 bg-primary text-white hover:bg-primary-accent hover:border-primary-accent active:bg-primary-active active:border-primary-active;
 }
 
+.btn-primary:focus-visible {
+  outline: 0.25rem solid var(--ring);
+}
+
 .btn-secondary {
   @apply border-secondary duration-300 bg-secondary text-white;
 }

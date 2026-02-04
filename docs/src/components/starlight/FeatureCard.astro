@@ -37,9 +37,9 @@ const { title, description, href, icon, links } = Astro.props;
 
 <style>
   .feature-card {
-    background: var(--sl-color-bg-sidebar);
-    border: 1px solid var(--sl-color-hairline-light);
-    border-radius: 0.5rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 12px;
     padding: 1.5rem;
     transition: all 0.2s ease;
     display: flex;
@@ -49,18 +49,26 @@ const { title, description, href, icon, links } = Astro.props;
 
   .feature-card:hover {
     border-color: var(--sl-color-text-accent);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 147, 255, 0.1);
     transform: translateY(-2px);
+
+    & .card-main-link {
+      text-decoration: none;
+    }
   }
 
   :global([data-theme="light"]) .feature-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   }
 
   .card-main-link {
     text-decoration: none;
     color: inherit;
     flex: 1;
+
+    &:hover {
+      text-decoration: none !important;
+    }
   }
 
   .card-icon {
@@ -85,14 +93,14 @@ const { title, description, href, icon, links } = Astro.props;
   }
 
   :global([data-theme="light"]) .card-description {
-    color: var(--sl-color-gray-5);
+    color: var(--sl-color-gray-4);
   }
 
   .card-links {
     list-style: none;
     padding: 0;
     margin: 1rem 0 0 0;
-    border-top: 1px solid var(--sl-color-hairline-light);
+    border-top: 1px solid var(--sl-color-hairline);
     padding-top: 1rem;
   }
 
@@ -104,11 +112,11 @@ const { title, description, href, icon, links } = Astro.props;
     color: var(--sl-color-text-accent);
     text-decoration: none;
     font-size: var(--sl-text-sm);
-    transition: color 0.2s ease;
+    font-weight: 500;
+    transition: all 0.2s ease;
   }
 
   .card-links a:hover {
-    color: var(--sl-color-white);
-    text-decoration: underline;
+    color: var(--sl-color-accent-high);
   }
 </style>

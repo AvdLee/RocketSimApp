@@ -1,0 +1,25 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const seo = {
+  title: "Page Not Found | RocketSim",
+  description: "The page you're looking for doesn't exist.",
+};
+---
+
+<Base seo={seo}>
+  <section id="main-404" class="py-48 text-center">
+    <div class="container mx-auto px-4">
+      <h1 class="text-6xl font-bold mb-4">404</h1>
+      <p class="text-xl text-gray-400 mb-8">Page not found</p>
+      <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Redirect docs routes to Starlight's 404 page
+  if (window.location.pathname.startsWith("/docs")) {
+    window.location.replace("/docs/404");
+  }
+</script>

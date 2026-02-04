@@ -28,7 +28,9 @@ const integrations: AstroIntegration[] = [
       page !== "https://www.rocketsim.app/terms" &&
       page !== "https://www.rocketsim.app/privacy" &&
       page !== "https://www.rocketsim.app/thank-you" &&
-      page !== "https://www.rocketsim.app/signup/trial/thank-you",
+      page !== "https://www.rocketsim.app/signup/trial/thank-you" &&
+      page !== "https://www.rocketsim.app/404" &&
+      page !== "https://www.rocketsim.app/docs/404",
   }),
   AutoImport({
     imports: [
@@ -43,8 +45,45 @@ if (!isProduction) {
   integrations.push(
     starlight({
       title: "RocketSim Docs",
+      disable404Route: true,
+      logo: {
+        light: "./src/assets/rocketsim-logo-dark.svg",
+        dark: "./src/assets/rocketsim-logo.svg",
+        alt: "RocketSim",
+        replacesTitle: true,
+      },
+      favicon: "/favicon.svg",
+      customCss: ["./src/styles/starlight-custom.css"],
+      social: [
+        {
+          icon: "x.com",
+          label: "X/Twitter",
+          href: "https://x.com/rocketsim_app",
+        },
+        {
+          icon: "youtube",
+          label: "YouTube",
+          href: "https://www.youtube.com/@rocketsimapp",
+        },
+        {
+          icon: "linkedin",
+          label: "LinkedIn",
+          href: "https://linkedin.com/company/rocketsim",
+        },
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/AvdLee/RocketSimApp",
+        },
+      ],
+      editLink: {
+        baseUrl: "https://github.com/AvdLee/RocketSimApp/edit/master/docs/",
+      },
       components: {
+        Head: "./src/components/starlight/Head.astro",
         PageTitle: "./src/components/starlight/PageTitle.astro",
+        Footer: "./src/components/starlight/Footer.astro",
+        SiteTitle: "./src/components/starlight/SiteTitle.astro",
       },
       sidebar: [
         {

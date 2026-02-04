@@ -1,0 +1,20 @@
+---
+/**
+ * Custom Footer component for RocketSim docs
+ * Includes the default Starlight footer plus custom footer links
+ */
+import Default from "@astrojs/starlight/components/Footer.astro";
+import { Icon } from "@astrojs/starlight/components";
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<div class="footer-links">
+  <a href="/"><Icon name="rocket" /> Home</a>
+  <a href="/team-licenses"><Icon name="star" /> For teams</a>
+  <a
+    href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=doc-footer&mt=8"
+    ><Icon name="apple" /> Mac App Store</a
+  >
+  <a href="mailto:support@rocketsim.app"><Icon name="email" /> Contact us</a>
+</div>
