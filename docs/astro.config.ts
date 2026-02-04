@@ -44,7 +44,8 @@ if (!isProduction) {
     starlight({
       title: "RocketSim Docs",
       logo: {
-        src: "./src/assets/rocketsim-logo.svg",
+        light: "./src/assets/rocketsim-logo-dark.svg",
+        dark: "./src/assets/rocketsim-logo.svg",
         alt: "RocketSim",
         replacesTitle: true,
       },
@@ -59,7 +60,6 @@ if (!isProduction) {
       components: {
         Head: "./src/components/starlight/Head.astro",
         PageTitle: "./src/components/starlight/PageTitle.astro",
-        SiteTitle: "./src/components/starlight/SiteTitle.astro",
         Footer: "./src/components/starlight/Footer.astro",
       },
       sidebar: [
