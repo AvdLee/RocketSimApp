@@ -70,19 +70,27 @@ const isHomepage = id === "docs";
   }
 
   .action-button.primary:hover {
-    background: var(--sl-color-accent-low);
-    transform: translateY(-1px);
+    background: #0069d9;
+  }
+
+  .action-button.primary:active {
+    background: #005cbf;
+  }
+
+  .action-button.primary:focus-visible {
+    outline: 0.25rem solid #0069d9;
   }
 
   .action-button.secondary {
-    background: transparent;
-    color: var(--sl-color-white);
-    border: 1px solid var(--sl-color-hairline);
+    background: #373739;
+    color: white;
+    border: 1px solid #373739;
+    transition: all 0.3s ease;
   }
 
-  .action-button.secondary:hover {
-    border-color: var(--sl-color-text-accent);
-    background: var(--sl-color-bg-nav);
-    transform: translateY(-1px);
+  :global([data-theme="light"]) .action-button.secondary {
+    background: #e9ecef;
+    color: #373739;
+    border-color: #e9ecef;
   }
 </style>
