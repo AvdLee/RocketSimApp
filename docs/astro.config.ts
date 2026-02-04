@@ -67,7 +67,11 @@ if (!isProduction) {
           label: "LinkedIn",
           href: "https://linkedin.com/company/rocketsim",
         },
-        { icon: "github", label: "GitHub", href: "https://github.com/AvdLee" },
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/AvdLee/RocketSimApp",
+        },
       ],
       components: {
         Head: "./src/components/starlight/Head.astro",
