@@ -51,6 +51,10 @@ const { title, description, href, icon, links } = Astro.props;
     border-color: var(--sl-color-text-accent);
     box-shadow: 0 4px 24px rgba(0, 147, 255, 0.1);
     transform: translateY(-2px);
+
+    & .card-main-link {
+      text-decoration: none;
+    }
   }
 
   :global([data-theme="light"]) .feature-card:hover {
@@ -61,7 +65,12 @@ const { title, description, href, icon, links } = Astro.props;
     text-decoration: none;
     color: inherit;
     flex: 1;
+
+    &:hover {
+      text-decoration: none !important;
+    }
   }
+
 
   .card-icon {
     font-size: 2rem;
