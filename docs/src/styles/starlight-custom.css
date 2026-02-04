@@ -39,7 +39,7 @@
     "Courier New", monospace;
 
   /* Text accent for links */
-  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-text-accent: var(--sl-color-accent);
 }
 
 /* ==========================================================================
@@ -47,9 +47,9 @@
    ========================================================================== */
 
 :root[data-theme="light"] {
-  /* Accent colors - darker for light backgrounds */
+  /* Accent colors - consistent with dark mode */
   --sl-color-accent-low: #cce4ff;
-  --sl-color-accent: #0062cc;
+  --sl-color-accent: #0093ff;
   --sl-color-accent-high: #003d80;
 
   /* Gray scale for light theme (inverted) */
