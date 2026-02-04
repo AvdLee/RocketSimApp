@@ -83,6 +83,7 @@ if (!isProduction) {
         Head: "./src/components/starlight/Head.astro",
         PageTitle: "./src/components/starlight/PageTitle.astro",
         Footer: "./src/components/starlight/Footer.astro",
+        SiteTitle: "./src/components/starlight/SiteTitle.astro",
       },
       sidebar: [
         {
