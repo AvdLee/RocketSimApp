@@ -73,6 +73,9 @@ if (!isProduction) {
           href: "https://github.com/AvdLee/RocketSimApp",
         },
       ],
+      editLink: {
+        baseUrl: "https://github.com/AvdLee/RocketSimApp/edit/master/docs/",
+      },
       components: {
         Head: "./src/components/starlight/Head.astro",
         PageTitle: "./src/components/starlight/PageTitle.astro",
