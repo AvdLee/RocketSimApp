@@ -233,8 +233,13 @@ starlight-menu-button button:hover {
 }
 
 .starlight-aside--tip {
-  --sl-color-asides-text-accent: #40d294;
-  border-color: #40d294;
+  --sl-color-asides-text-accent: #1b83e2;
+  border-color: #1b83e2;
+  background-color: hsl(210, 80%, 95%);
+}
+
+:root[data-theme="dark"] .starlight-aside--tip {
+  background-color: hsl(210, 39%, 22%);
 }
 
 .starlight-aside--caution {
