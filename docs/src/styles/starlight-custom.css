@@ -158,19 +158,22 @@ starlight-toc a[aria-current="true"] {
    ========================================================================== */
 
 .sl-link-button {
-  background: var(--sl-color-accent);
-  color: #fff !important;
   border-radius: 9999px;
   padding: 0.75rem 1.5rem;
   font-weight: 600;
   transition: background-color 0.2s ease;
 }
 
-.sl-link-button:hover {
+.sl-link-button.primary {
+  background: var(--sl-color-accent);
+  color: #fff !important;
+}
+
+.sl-link-button.primary:hover {
   background: var(--sl-color-accent-high);
 }
 
-:root[data-theme="light"] .sl-link-button:hover {
+:root[data-theme="light"] .sl-link-button.primary:hover {
   background: var(--sl-color-accent-low);
 }
 
@@ -368,6 +371,10 @@ table tr:nth-child(even) {
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.1;
+}
+
+.hero .actions {
+  gap: 1rem;
 }
 
 /* ==========================================================================
