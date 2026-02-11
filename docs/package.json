@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --port 4322 --open",
-    "build": "astro build",
+    "generate:llms": "node scripts/generate-llms-txt.mjs",
+    "build": "node scripts/generate-llms-txt.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
