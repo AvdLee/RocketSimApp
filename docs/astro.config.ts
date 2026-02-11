@@ -43,6 +43,7 @@ const integrations: AstroIntegration[] = [
         projectName: "RocketSim",
         description:
           "RocketSim enhances the iOS Simulator with features for capturing screenshots and recordings, comparing designs, testing push notifications, deep links, location simulation, network speed control, accessibility toggles, and more.",
+        rawContent: true,
       }),
     ],
     title: "RocketSim Docs",
