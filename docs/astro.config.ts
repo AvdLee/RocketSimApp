@@ -88,11 +88,12 @@ if (!isProduction) {
       sidebar: [
         {
           label: "Getting Started",
+          collapsed: true,
           autogenerate: { directory: "docs/getting-started" },
         },
         {
           label: "Features",
-          collapsed: true,
+          collapsed: false,
           items: [
             {
               label: "Capturing",
