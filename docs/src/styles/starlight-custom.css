@@ -85,8 +85,6 @@
    ========================================================================== */
 
 /* Active sidebar item - ensure white text is visible on accent background */
-[aria-current="page"],
-[aria-current="true"],
 .sidebar a[aria-current="page"],
 .sidebar a[aria-current="true"] {
   color: #fff !important;
