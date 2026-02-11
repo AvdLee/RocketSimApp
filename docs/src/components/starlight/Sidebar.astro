@@ -6,15 +6,23 @@ import Default from "@astrojs/starlight/components/Sidebar.astro";
 
 <script>
   // Prevent the "Features" sidebar group from being collapsed
-  const topLevelItems = document.querySelectorAll(".sidebar .top-level > li");
-  const featuresItem = topLevelItems[1]; // "Features" is the second group
-  if (featuresItem) {
-    const details = featuresItem.querySelector(":scope > details");
-    if (details) {
-      details.setAttribute("open", "");
-      details.querySelector("summary")?.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
+  const sidebars = document.querySelectorAll(".sidebar");
+
+  sidebars.forEach((sidebar) => {
+    const featureDetails = Array.from(
+      sidebar.querySelectorAll(".top-level > li > details")
+    ).find((details) => {
+      const summary = details.querySelector(":scope > summary");
+      return summary && summary.textContent.trim() === "Features";
+    });
+
+    if (featureDetails) {
+      featureDetails.setAttribute("open", "");
+      featureDetails
+        .querySelector(":scope > summary")
+        ?.addEventListener("click", (e) => {
+          e.preventDefault();
+        });
     }
-  }
+  });
 </script>
