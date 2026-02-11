@@ -18,7 +18,3 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-
-# generated llms.txt files
-public/llms.txt
-public/llms-full.txt

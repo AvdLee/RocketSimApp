@@ -4,8 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --port 4322 --open",
-    "generate:llms": "node scripts/generate-llms-txt.mjs",
-    "build": "node scripts/generate-llms-txt.mjs && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
@@ -26,7 +25,8 @@
     "marked": "^16.4.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "starlight-llms-txt": "^0.7.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
