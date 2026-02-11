@@ -1,0 +1,20 @@
+---
+import Default from "@astrojs/starlight/components/Sidebar.astro";
+---
+
+<Default><slot /></Default>
+
+<script>
+  // Prevent the "Features" sidebar group from being collapsed
+  const topLevelItems = document.querySelectorAll(".sidebar .top-level > li");
+  const featuresItem = topLevelItems[1]; // "Features" is the second group
+  if (featuresItem) {
+    const details = featuresItem.querySelector(":scope > details");
+    if (details) {
+      details.setAttribute("open", "");
+      details.querySelector("summary")?.addEventListener("click", (e) => {
+        e.preventDefault();
+      });
+    }
+  }
+</script>

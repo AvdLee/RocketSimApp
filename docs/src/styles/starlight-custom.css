@@ -91,6 +91,15 @@
   font-weight: 600;
 }
 
+/* Keep "Features" sidebar group non-collapsible */
+.sidebar .top-level > li:nth-child(2) > details > summary {
+  cursor: default;
+}
+
+.sidebar .top-level > li:nth-child(2) > details > summary .caret {
+  display: none;
+}
+
 /* Table of contents active styling */
 starlight-toc a[aria-current="true"] {
   color: var(--sl-color-text-accent);

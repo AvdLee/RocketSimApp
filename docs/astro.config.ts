@@ -84,15 +84,17 @@ if (!isProduction) {
         PageTitle: "./src/components/starlight/PageTitle.astro",
         Footer: "./src/components/starlight/Footer.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
+        Sidebar: "./src/components/starlight/Sidebar.astro",
       },
       sidebar: [
         {
           label: "Getting Started",
+          collapsed: true,
           autogenerate: { directory: "docs/getting-started" },
         },
         {
           label: "Features",
-          collapsed: true,
+          collapsed: false,
           items: [
             {
               label: "Capturing",
