@@ -167,23 +167,33 @@ starlight-toc a[aria-current="true"] {
    ========================================================================== */
 
 .sl-link-button {
-  border-radius: 9999px;
+  border-radius: 1.685rem;
   padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: background-color 0.15s ease-in-out;
 }
 
 .sl-link-button.primary {
-  background: var(--sl-color-accent);
+  background: #0093ff;
   color: #fff !important;
+  border: 0.0625rem solid #0093ff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sl-link-button.primary:hover {
-  background: var(--sl-color-accent-high);
+  background: #0069d9;
+  border-color: #0069d9;
 }
 
-:root[data-theme="light"] .sl-link-button.primary:hover {
-  background: var(--sl-color-accent-low);
+.sl-link-button.primary:active {
+  background: #005cbf;
+  border-color: #005cbf;
+}
+
+.sl-link-button.primary:focus-visible {
+  outline: 0.25rem solid #0069d9;
 }
 
 /* ==========================================================================
