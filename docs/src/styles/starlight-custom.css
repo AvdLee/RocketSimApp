@@ -92,11 +92,11 @@
 }
 
 /* Keep "Features" sidebar group non-collapsible */
-.sidebar .top-level > li:nth-child(2) > details > summary {
+.sidebar .top-level > li > details[aria-label="Features"] > summary {
   cursor: default;
 }
 
-.sidebar .top-level > li:nth-child(2) > details > summary .caret {
+.sidebar .top-level > li > details[aria-label="Features"] > summary .caret {
   display: none;
 }
 
