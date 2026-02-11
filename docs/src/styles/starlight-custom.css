@@ -295,6 +295,10 @@ starlight-tabs [role="tab"]:hover {
   background: var(--sl-color-gray-6);
 }
 
+.pagination-links .link-title {
+  font-size: var(--sl-text-lg);
+}
+
 /* ==========================================================================
    Tables
    ========================================================================== */
