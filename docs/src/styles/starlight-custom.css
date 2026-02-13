@@ -195,7 +195,7 @@ site-search button[data-open-modal] {
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 8px;
   background: var(--sl-color-gray-6);
-  max-width: 40rem;
+  max-width: 45rem;
 }
 
 site-search button:hover {
