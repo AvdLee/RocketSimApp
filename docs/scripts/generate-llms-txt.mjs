@@ -55,7 +55,20 @@ function cleanContent(body) {
     body
       // Remove import statements
       .replace(/^import\s+.*$/gm, "")
-      // Remove self-closing JSX/MDX components: <Component ... />
+      // Convert <Youtube> to markdown links
+      .replace(/<Youtube[\s\S]*?\/>/g, (match) => {
+        const id = match.match(/id="([^"]+)"/)?.[1];
+        const title = match.match(/title="([^"]+)"/)?.[1];
+        return id
+          ? `[${title || "YouTube video"}](https://www.youtube.com/watch?v=${id})`
+          : "";
+      })
+      // Convert <Tweet> to markdown links
+      .replace(/<Tweet[\s\S]*?\/>/g, (match) => {
+        const id = match.match(/id="([^"]+)"/)?.[1];
+        return id ? `[Tweet](https://x.com/i/status/${id})` : "";
+      })
+      // Remove remaining self-closing JSX/MDX components
       .replace(/<\w+(?:\s[\s\S]*?)?\/>/g, "")
       // Remove block JSX/MDX components: <Component ...>...</Component>
       .replace(/<(\w+)(?:\s[\s\S]*?)?>[\s\S]*?<\/\1>/g, "")
