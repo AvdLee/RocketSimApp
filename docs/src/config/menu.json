@@ -16,11 +16,11 @@
   "support": [
     {
       "name": "Documentation",
-      "url": "https://docs.rocketsim.app"
+      "url": "/docs"
     },
     {
       "name": "FAQ",
-      "url": "https://docs.rocketsim.app/support/4FNpAbMLD25WbYwAhdxd37/faq/p3eKWj5LcsvBE7AqGuSty9"
+      "url": "/docs/support/faq"
     },
     {
       "name": "Email",
