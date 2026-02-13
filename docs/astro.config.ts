@@ -6,7 +6,6 @@ import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
 import tailwindcss from "@tailwindcss/vite";
 import starlight from "@astrojs/starlight";
-import starlightLlmsTxt from "starlight-llms-txt";
 
 import sitemap from "@astrojs/sitemap";
 
@@ -38,14 +37,6 @@ const integrations: AstroIntegration[] = [
     ],
   }),
   starlight({
-    plugins: [
-      starlightLlmsTxt({
-        projectName: "RocketSim",
-        description:
-          "RocketSim enhances the iOS Simulator with features for capturing screenshots and recordings, comparing designs, testing push notifications, deep links, location simulation, network speed control, accessibility toggles, and more.",
-        rawContent: true,
-      }),
-    ],
     title: "RocketSim Docs",
     disable404Route: true,
     logo: {
