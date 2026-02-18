@@ -42,10 +42,7 @@ export function llmsTxtPostProcess(): AstroIntegration {
   };
 }
 
-function transformLlmsTxt(
-  content: string,
-  variant: "full" | "small",
-): string {
+function transformLlmsTxt(content: string, variant: "full" | "small"): string {
   // Preserve the <SYSTEM> header
   const systemMatch = content.match(/^(<SYSTEM>[\s\S]*?<\/SYSTEM>\n\n)/);
   const systemHeader = systemMatch?.[1] ?? "";
@@ -116,7 +113,10 @@ function transformLlmsTxt(
     );
   } else {
     // Strip directives entirely for small variant
-    result = result.replace(/^:::(tip|note|caution|danger)\n[\s\S]*?^:::/gm, "");
+    result = result.replace(
+      /^:::(tip|note|caution|danger)\n[\s\S]*?^:::/gm,
+      "",
+    );
   }
 
   // Fix escaped bold-in-link markdown: [\*\*text](url).\*\* → [**text**](url).
