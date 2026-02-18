@@ -4,6 +4,7 @@
  * Includes proper favicon and meta tags matching the main site
  */
 import Default from "@astrojs/starlight/components/Head.astro";
+import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -20,3 +21,5 @@ import Default from "@astrojs/starlight/components/Head.astro";
 
 <!-- Additional meta for better SEO -->
 <meta name="author" content="RocketSim" />
+
+<PlausibleAnalytics />
