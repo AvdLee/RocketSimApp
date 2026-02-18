@@ -8,6 +8,7 @@ import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
 import { ClientRouter } from "astro:transitions";
+import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 
 // types for frontmatters
 export interface Props {
@@ -74,24 +75,7 @@ const { seo, structuredData } = Astro.props;
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Privacy-friendly analytics by Plausible -->
-    <script
-      is:inline
-      defer
-      src="https://plausible.io/js/pa-UU6kf044LfXx1I_nLu86Q.js"></script>
-    <script>
-      ((window.plausible =
-        window.plausible ||
-        function () {
-          (plausible.q = plausible.q || []).push(arguments);
-        }),
-        (plausible.init =
-          plausible.init ||
-          function (i: any) {
-            plausible.o = i || {};
-          }));
-      plausible.init();
-    </script>
+    <PlausibleAnalytics />
     <script>
       /// This adds event listeners to our inline forms
       /// and sends an event to Plausible.
@@ -108,7 +92,6 @@ const { seo, structuredData } = Astro.props;
         );
       })();
     </script>
-    <!-- End Plausible -->
 
     <!-- ConvertKit Insights -->
     <script type="text/javascript" is:inline>
