@@ -214,6 +214,7 @@ header.header {
 
 /* Mobile menu button */
 starlight-menu-button button {
+  background: transparent;
   color: var(--sl-color-gray-2);
 }
 
