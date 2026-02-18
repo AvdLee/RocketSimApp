@@ -15,7 +15,7 @@ RocketSim Connect’s dynamic library gets loaded at runtime and swizzles URLSes
 
 ## How do I get started?
 
-Follow the instructions for RocketSim Connect as described [here](./introduction-and-setup).
+Follow the instructions for RocketSim Connect as described [here](/docs/features/rocketsim-connect/introduction-and-setup).
 
 ## Do I need to set up a proxy or certificates?
 
