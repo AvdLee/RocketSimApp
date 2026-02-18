@@ -9,7 +9,7 @@ RocketSim allows you to customize the status bar of the iOS Simulator.
 
 You might or might not have noticed, but all of Apple’s devices have the status bar time set to 09:41. Here’s an image from the iPhone product page as an example:
 
-![](./https:/)
+![Screenshot of iPhone product page](./statusbar-appearance/status_bar_override_9_41-1024x416.jpg)
 
 [That time used to be 9:42](https://www.businessinsider.com/iphone-ad-942-2012-2), matching the time of January 9th, 2007 when Steve Jobs announced the first first iPhone. Around 42 minutes into his keynote he mentioned:
 
