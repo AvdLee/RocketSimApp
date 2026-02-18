@@ -25,7 +25,7 @@ Camera simulation is available from the Capture side window tab:
 
    The side window in its state after camera permissions have been granted.
 
-4. Integrate RocketSim Connect following the in-app instructions. For more info, see [Introduction & Setup](../rocketsim-connect/introduction-and-setup)
+4. Integrate RocketSim Connect following the in-app instructions. For more info, see [Introduction & Setup](/docs/features/rocketsim-connect/introduction-and-setup)
 5. Start running your app
 
 ## Troubleshooting
