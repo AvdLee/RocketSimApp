@@ -9,6 +9,7 @@ import starlight from "@astrojs/starlight";
 import starlightLlmsTxt from "starlight-llms-txt";
 
 import sitemap from "@astrojs/sitemap";
+import { llmsTxtPostProcess } from "./src/integrations/llms-txt-post-process";
 
 import config from "./src/config/config.json";
 
@@ -137,6 +138,7 @@ const integrations: AstroIntegration[] = [
     ],
   }),
   mdx(),
+  llmsTxtPostProcess(),
 ];
 
 // https://astro.build/config
