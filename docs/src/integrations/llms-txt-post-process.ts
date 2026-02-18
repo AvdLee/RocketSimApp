@@ -10,7 +10,7 @@ import path from "node:path";
  * - Convert <Youtube> components to YouTube links
  * - Convert <Tweet> components to X/Twitter links
  * - Clean up leftover JSX artifacts (imports, style blocks)
- * - Strip all image references (LLMs can't view images from .txt)
+ * - Strip all image references in small variant (full retains images)
  * - Convert :::tip/:::note directives to blockquotes (full) or strip them (small)
  * - Fix escaped bold-in-link markdown as safety net
  * - Differentiate llms-small.txt (strip testimonials, tips, extra whitespace)
@@ -93,9 +93,11 @@ function transformLlmsTxt(
   // Remove style blocks
   result = result.replace(/<style>\{`[\s\S]*?`\}<\/style>/g, "");
 
-  // Strip all image references (whole-line and inline)
-  result = result.replace(/^[ \t]*!\[.*?\]\(.*?\)\s*$/gm, "");
-  result = result.replace(/!\[.*?\]\(.*?\)/g, "");
+  // Strip all image references for small variant only
+  if (variant === "small") {
+    result = result.replace(/^[ \t]*!\[.*?\]\(.*?\)\s*$/gm, "");
+    result = result.replace(/!\[.*?\]\(.*?\)/g, "");
+  }
 
   // Handle :::tip/:::note/:::caution/:::danger directives
   if (variant === "full") {
