@@ -19,7 +19,13 @@ const { title, description, href, icon, links } = Astro.props;
 
 <div class="feature-card">
   <a href={href} class="card-main-link">
-    {icon && <span class="card-icon"><CardIcon name={icon} /></span>}
+    {
+      icon && (
+        <span class="card-icon">
+          <CardIcon name={icon} />
+        </span>
+      )
+    }
     <h3 class="card-title">{title}</h3>
     <p class="card-description">{description}</p>
   </a>

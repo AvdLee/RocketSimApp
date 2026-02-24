@@ -26,6 +26,15 @@ To use an MCP server tool:
 1. First load it with ToolSearch: `query: "select:mcp__astro-docs__search_astro_docs"`
 2. Then call the tool directly
 
+## After Making Changes
+
+Always run these checks after modifying files in this project:
+
+1. `npm run lint` - Verify ESLint passes
+2. `npm run format:check` - Verify Prettier formatting
+3. `npm run typecheck` - Verify TypeScript types
+4. `npm run build` - Verify production build succeeds
+
 ## Code Style Guidelines
 
 - Use TypeScript with strict type checking

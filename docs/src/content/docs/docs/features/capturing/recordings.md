@@ -58,7 +58,7 @@ Make sure you don’t have any audio routing enabled. Doing so will confuse Rock
 
 ### Does RocketSim install a custom audio driver for audio recording?
 
-No, there’s nothing you need to install for audio recording to work. 🎉
+No, there’s nothing you need to install for audio recording to work.
 
 ### Why are my iPad recordings upside-down?
 
