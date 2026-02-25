@@ -123,6 +123,7 @@ export const pricingSectionCollection = defineCollection({
             note: z.string().optional(),
           }),
         }),
+        microcopy: z.string().optional(),
         cta: z.object({
           enable: z.boolean(),
           label: z.string(),

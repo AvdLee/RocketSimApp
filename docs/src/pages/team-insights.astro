@@ -34,7 +34,7 @@ const seo = {
 const structuredData = {
   type: "product" as const,
   product: {
-    name: "RocketSim Team Insights",
+    name: "RocketSim for Teams",
     description: description,
     image: `${base_url}/images/rocketsim-app-icon.png`,
     url: `${base_url}/team-insights`,
@@ -46,7 +46,7 @@ const structuredData = {
   <Header
     title="Make your whole team Build Apps Faster"
     logo={logoImage}
-    logoAlt='Written logo spelling: "RocketSim Insights"'
+    logoAlt='Written logo spelling: "RocketSim for Teams"'
     scrollText="Scroll down to explore all features ↓"
   >
     Connect your team using the same license key and gather team insights like
@@ -58,9 +58,14 @@ const structuredData = {
       asButton
       className="plausible-event-name=CTA:+Team+Page+-+See+Pricing"
     >
-      Get Team Licenses
+      See Team Pricing &rarr;
     </NavigationLink>
-    <NavigationLink href="/">All Features</NavigationLink>
+    <NavigationLink
+      href="/signup/trial?utm_source=website&utm_medium=website&utm_content=team"
+      className="plausible-event-name=CTA:+Team+Page+-+Start+Trial"
+    >
+      Start 14-Day Trial
+    </NavigationLink>
   </Navigation>
   <TrustedBrands />
   <TeamTestimonial />
@@ -120,7 +125,7 @@ const structuredData = {
     contentTitle="Build duration grouped by Xcode version"
   >
     <p>
-      RocketSim Insights automatically benchmarks your team's <strong
+      RocketSim for Teams automatically benchmarks your team's <strong
         >local</strong
       > build durations to tell you <strong
         >how much an Xcode version improves build times</strong
