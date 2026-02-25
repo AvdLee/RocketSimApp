@@ -99,40 +99,51 @@ export default defineConfig({
           autogenerate: { directory: "docs/getting-started" },
         },
         {
-          label: "Features",
-          collapsed: false,
-          items: [
-            {
-              label: "Capturing",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/capturing" },
-            },
-            {
-              label: "Design Comparison",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/design-comparison" },
-            },
-            {
-              label: "App Actions",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/app-actions" },
-            },
-            {
-              label: "RocketSim Connect",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/rocketsim-connect" },
-            },
-            {
-              label: "Accessibility",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/accessibility" },
-            },
-          ],
+          label: "Screenshots & Recordings",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/capturing" },
         },
         {
-          label: "Appearance",
+          label: "Simulator Camera",
+          link: "/docs/docs/features/capturing/simulator-camera-support",
+        },
+        {
+          label: "Status Bar",
+          link: "/docs/docs/features/capturing/statusbar-appearance",
+        },
+        {
+          label: "Design Comparison",
           collapsed: true,
-          autogenerate: { directory: "docs/appearance" },
+          autogenerate: { directory: "docs/features/design-comparison" },
+        },
+        {
+          label: "App Actions",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/app-actions" },
+        },
+        {
+          label: "Networking",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/networking" },
+        },
+        {
+          label: "Build Insights",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/build-insights" },
+        },
+        {
+          label: "Accessibility",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/accessibility" },
+        },
+        {
+          label: "User Defaults Editor",
+          link: "/docs/docs/features/user-defaults-editor",
+        },
+        {
+          label: "Settings",
+          collapsed: true,
+          autogenerate: { directory: "docs/settings" },
         },
         {
           label: "Support",
