@@ -52,15 +52,20 @@ const structuredData = {
     Connect your team using the same license key and gather team insights like
     p75 build duration, machine benchmarks, and more.
   </Header>
-  <Navigation showLogin>
+  <Navigation showLogin microcopy="No credit card required for trial">
     <NavigationLink
       href="/pricing"
       asButton
       className="plausible-event-name=CTA:+Team+Page+-+See+Pricing"
     >
-      Get Team Licenses
+      See Team Pricing &rarr;
     </NavigationLink>
-    <NavigationLink href="/">All Features</NavigationLink>
+    <NavigationLink
+      href="/signup/trial?utm_source=website&utm_medium=website&utm_content=team"
+      className="plausible-event-name=CTA:+Team+Page+-+Start+Trial"
+    >
+      Start 14-Day Trial
+    </NavigationLink>
   </Navigation>
   <TrustedBrands />
   <TeamTestimonial />
