@@ -5,7 +5,7 @@ description: "Beta of testing the camera on the Simulator"
 
 A top requested feature has always been Simulator camera support. Constantly having to test the camera on an actual device can be a pain and it’s annoying to run into dead ends on the Simulator for apps that come with camera features.
 
-We hear you and we’re excited to share the early beta of RocketSim Camera Simulation 📸
+We hear you and we’re excited to share the early beta of RocketSim Camera Simulation.
 
 Check out these demo’s:
 
