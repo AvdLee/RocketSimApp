@@ -37,6 +37,13 @@ const stripePaymentLink =
             />
           )
         }
+        <p class="text-text text-sm text-center mt-4">
+          Individual developer? Start with{" "}
+          <a href="#plan-free" class="text-primary hover:underline"
+            >Free or Personal</a
+          >. Managing a team? Check out{" "}
+          <a href="#plan-teams" class="text-primary hover:underline">Teams</a>.
+        </p>
       </div>
       <div class="section-content">
         <div data-aos="fade-up-sm">
@@ -49,6 +56,7 @@ const stripePaymentLink =
                 plans.map((plan) => {
                   return (
                     <div
+                      id={`plan-${plan.title.toLowerCase()}`}
                       class:list={[
                         "p-8 pb-6 flex flex-col justify-between h-full relative transition-shadow duration-300 bg-black-accent border border-[color:hsla(0,0%,100%,.06))] shadow-[inset_0_1px_0_0_hsla(0,0%,100%,.1)] max-xl:rounded-2xl xl:nth-of-type-1:rounded-tl-2xl xl:nth-of-type-4:rounded-br-2xl xl:nth-of-type-1:rounded-bl-2xl xl:nth-of-type-4:rounded-tr-2xl bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7)_-17%,rgba(64,145,247,0.25)_11%,rgba(0,0,0,0.7)_46%)] max-xl:shadow-[0_1px_40px_0_rgba(64,145,247,0.05),0_0_16px_-7px_rgba(64,145,247,0.05),0_2px_40px_10px_rgba(64,145,247,0.05),inset_0_1px_1px_0_hsla(0,0%,100%,0.1)]",
                       ]}
@@ -162,9 +170,12 @@ const stripePaymentLink =
                             <span>{plan.cta.label}</span>
                           </a>
                         )}
-                        <div class="min-h-6 text-center">
+                        <div class="text-center mt-2">
+                          {plan.microcopy && (
+                            <p class="text-xs text-text">{plan.microcopy}</p>
+                          )}
                           {plan.title === "Teams" ? (
-                            <span class="text-xs">
+                            <p class="text-xs mt-1">
                               or skip trial and{" "}
                               <a
                                 class="plausible-event-name=CTA:+Pricing+Teams+-+Buy+Now"
@@ -172,7 +183,7 @@ const stripePaymentLink =
                               >
                                 pay now
                               </a>
-                            </span>
+                            </p>
                           ) : null}
                         </div>
                       </div>
