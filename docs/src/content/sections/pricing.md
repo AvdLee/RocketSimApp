@@ -54,7 +54,7 @@ plans:
     microcopy: "Unlock all Pro features instantly"
     cta:
       enable: true
-      label: Upgrade to Personal
+      label: Download Now
       site: custom
       link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=pricing-table-personal&mt=8"
       class: "plausible-event-name=CTA:+Pricing+Personal+-+Download"

@@ -41,7 +41,7 @@ const stripePaymentLink =
           Individual developer? Start with{" "}
           <a href="#plan-free" class="text-primary hover:underline"
             >Free or Personal</a
-          >. Managing a team? Check out{" "}
+          >. Working in a team? Check out{" "}
           <a href="#plan-teams" class="text-primary hover:underline">Teams</a>.
         </p>
       </div>
@@ -154,6 +154,11 @@ const stripePaymentLink =
                       </div>
 
                       <div>
+                        {plan.microcopy && (
+                          <p class="text-xs text-text text-center mt-14 mb-2">
+                            {plan.microcopy}
+                          </p>
+                        )}
                         {/* CTA BUTTON */}
                         {plan.cta.enable && (
                           <a
@@ -163,29 +168,27 @@ const stripePaymentLink =
                                 : `${plan.cta.site === "teams" ? teamsUrl : ""}${plan.cta.link}`
                             }
                             class:list={[
-                              "btn py-2 w-full inline-block self-start mt-14 text-center rounded-full btn-primary",
+                              "btn py-2 w-full inline-block self-start text-center rounded-full btn-primary",
+                              plan.microcopy ? "" : "mt-14",
                               plan.cta.class,
                             ]}
                           >
                             <span>{plan.cta.label}</span>
                           </a>
                         )}
-                        <div class="text-center mt-2">
-                          {plan.microcopy && (
-                            <p class="text-xs text-text">{plan.microcopy}</p>
-                          )}
-                          {plan.title === "Teams" ? (
-                            <p class="text-xs mt-1">
-                              or skip trial and{" "}
-                              <a
-                                class="plausible-event-name=CTA:+Pricing+Teams+-+Buy+Now"
-                                href={stripePaymentLink}
-                              >
-                                pay now
-                              </a>
-                            </p>
-                          ) : null}
-                        </div>
+                        {plan.title === "Teams" ? (
+                          <p class="text-xs text-center mt-1">
+                            or skip trial and{" "}
+                            <a
+                              class="plausible-event-name=CTA:+Pricing+Teams+-+Buy+Now"
+                              href={stripePaymentLink}
+                            >
+                              pay now
+                            </a>
+                          </p>
+                        ) : (
+                          <div class="min-h-6 text-center"></div>
+                        )}
                       </div>
                     </div>
                   );
