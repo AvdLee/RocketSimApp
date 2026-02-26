@@ -4,9 +4,10 @@ interface Props {
   subtitle?: string;
   text?: string;
   smallTitle?: boolean;
+  badge?: string;
 }
 
-const { title, subtitle, text, smallTitle } = Astro.props;
+const { title, subtitle, text, smallTitle, badge } = Astro.props;
 ---
 
 <style>
@@ -14,6 +15,21 @@ const { title, subtitle, text, smallTitle } = Astro.props;
     @media (min-width: 800px) {
       grid-column: 2 / -2;
     }
+  }
+
+  .badge {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem 0.75rem;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    background-color: var(--primary-color);
+    border-radius: 999px;
   }
 
   .title {
@@ -51,6 +67,7 @@ const { title, subtitle, text, smallTitle } = Astro.props;
 
 <header class="deprecated-grid">
   <div>
+    {badge && <span class="badge">{badge}</span>}
     <h3
       class:list={[
         "title",

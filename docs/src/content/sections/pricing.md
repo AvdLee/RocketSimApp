@@ -23,6 +23,7 @@ plans:
       yearly:
         amount: 0
         period: "/ month"
+    microcopy: "Free forever — no account needed"
     cta:
       enable: true
       label: Download now
@@ -50,6 +51,7 @@ plans:
       yearly:
         amount: 5
         period: "/ month"
+    microcopy: "Unlock all Pro features instantly"
     cta:
       enable: true
       label: Download now
@@ -78,6 +80,7 @@ plans:
         amount: 10
         period: "/ seat / month"
         note: "€120 billed annually"
+    microcopy: "No credit card required"
     cta:
       enable: true
       label: Start 14-day Trial
@@ -105,6 +108,7 @@ plans:
       yearly:
         amount: "Custom"
         period: ""
+    microcopy: "Custom pricing for 20+ seats"
     cta:
       enable: true
       label: Contact sales

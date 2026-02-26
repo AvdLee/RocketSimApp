@@ -96,6 +96,10 @@ For more on creating and managing App Groups, see [Configuring App Actions](/doc
 
 Make sure you don't have any audio routing enabled. Doing so can prevent RocketSim from recording Simulator audio or your microphone correctly.
 
+### Does RocketSim install a custom audio driver for audio recording?
+
+No, there's nothing you need to install for audio recording to work.
+
 ### Why are my iPad recordings upside-down?
 
 RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording.

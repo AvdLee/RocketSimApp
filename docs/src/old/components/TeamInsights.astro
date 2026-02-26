@@ -16,6 +16,19 @@ import FeatureImage from "../../assets/features/build-insights.png";
     margin-top: 4rem;
   }
 
+  .learn-more {
+    display: inline-block;
+    margin-top: 2.5rem;
+
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .team-insights {
     background-image: url("/teams-line.svg");
     background-repeat: no-repeat;
@@ -36,6 +49,7 @@ import FeatureImage from "../../assets/features/build-insights.png";
   <SectionHeader
     title="RocketSim Insights"
     subtitle="Increase the productivity of your whole team"
+    badge="For Teams"
   />
   <div class="feature-wrapper">
     <Feature
@@ -55,6 +69,13 @@ import FeatureImage from "../../assets/features/build-insights.png";
         >get notified when compilation times increase.</strong
       >
     </Feature>
+  </div>
+  <div class="deprecated-grid">
+    <a
+      href="/team-insights"
+      class="learn-more plausible-event-name=CTA:+Homepage+Insights+-+Learn+More"
+      >Learn more about Teams &rarr;</a
+    >
   </div>
 </section>
 <section class="team-insights">
