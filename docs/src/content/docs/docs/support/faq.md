@@ -65,7 +65,7 @@ This is usually caused by missing system permissions.
 
 2. Open **System Settings → Privacy & Security** and approve any pending **RocketSim** permissions.
 3. Open System Settings → Network → Filter and verify whether RocketSim is present & enabled
-4. On **macOS 26**, enable the Network Extension:
+4. On **macOS Sequoia (15) and later**, enable the Network Extension:
    - **System Settings → General → Login Items & Extensions**
    - Find **RocketSim**, click **(i)**, and enable **Network Extension**
      You may need to approve permissions more than once.

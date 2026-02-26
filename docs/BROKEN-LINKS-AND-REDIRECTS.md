@@ -8,28 +8,28 @@ Analysis of all internal doc links and redirects after the docs restructure (com
 
 Every internal doc link was checked against existing files. **All current link targets have a corresponding page** in the repo.
 
-| Link target | Used in | File exists |
-|-------------|---------|-------------|
-| `/docs/docs/features/app-actions/app-directory-access` | user-defaults-editor.mdx | ✓ app-directory-access.md |
-| `/docs/features/capturing/simulator-camera-support` | setting-up-rocketsim-connect.md | ✓ |
-| `/docs/features/networking/network-traffic-monitoring` | setting-up-rocketsim-connect.md, network-speed-control.mdx, network-traffic-monitoring.md (Networking Insights), index.mdx | ✓ |
-| `/docs/features/networking/networking-insights` | network-traffic-monitoring.md | ✓ |
-| `/docs/getting-started/setting-up-rocketsim-connect` | network-traffic-monitoring.md, simulator-camera-support.md, networking-insights.md, index.mdx | ✓ |
-| `/docs/docs/features/capturing/app-store-connect-optimization` | recordings.md | ✓ |
-| `/docs/docs/features/capturing/touch-indicators` | recordings.md | ✓ |
-| `/docs/docs/features/capturing/floating-thumbnail` | recordings.md, app-store-connect-optimization.md | ✓ |
-| `/docs/docs/features/build-insights/team-build-insights` | build-insights.md | ✓ |
-| `/docs/docs/settings/side-window` | onboarding.md | ✓ |
-| `/docs/getting-started/onboarding` | index.mdx, PageTitle.astro | ✓ |
-| `/docs/getting-started/product-tour-and-quick-demos` | index.mdx, PageTitle.astro | ✓ |
-| `/docs/getting-started/how-large-teams-use-rocketsim` | index.mdx | ✓ |
-| `/docs/features/capturing/screenshots` | index.mdx | ✓ |
-| `/docs/features/design-comparison/comparing-designs` | index.mdx | ✓ |
-| `/docs/getting-started/configuring-app-actions` | index.mdx | ✓ |
-| `/docs/features/accessibility/toggles-and-dynamic-text` | index.mdx | ✓ |
-| `/docs/settings/side-window` | index.mdx | ✓ |
-| `/docs/support/faq` | index.mdx, menu.json | ✓ |
-| `/docs/support/reporting-an-issue` | index.mdx | ✓ |
+| Link target                                                    | Used in                                                                                                                    | File exists               |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `/docs/docs/features/app-actions/app-directory-access`         | user-defaults-editor.mdx                                                                                                   | ✓ app-directory-access.md |
+| `/docs/features/capturing/simulator-camera-support`            | setting-up-rocketsim-connect.md                                                                                            | ✓                         |
+| `/docs/features/networking/network-traffic-monitoring`         | setting-up-rocketsim-connect.md, network-speed-control.mdx, network-traffic-monitoring.md (Networking Insights), index.mdx | ✓                         |
+| `/docs/features/networking/networking-insights`                | network-traffic-monitoring.md                                                                                              | ✓                         |
+| `/docs/getting-started/setting-up-rocketsim-connect`           | network-traffic-monitoring.md, simulator-camera-support.md, networking-insights.md, index.mdx                              | ✓                         |
+| `/docs/docs/features/capturing/app-store-connect-optimization` | recordings.md                                                                                                              | ✓                         |
+| `/docs/docs/features/capturing/touch-indicators`               | recordings.md                                                                                                              | ✓                         |
+| `/docs/docs/features/capturing/floating-thumbnail`             | recordings.md, app-store-connect-optimization.md                                                                           | ✓                         |
+| `/docs/docs/features/build-insights/team-build-insights`       | build-insights.md                                                                                                          | ✓                         |
+| `/docs/docs/settings/side-window`                              | onboarding.md                                                                                                              | ✓                         |
+| `/docs/getting-started/onboarding`                             | index.mdx, PageTitle.astro                                                                                                 | ✓                         |
+| `/docs/getting-started/product-tour-and-quick-demos`           | index.mdx, PageTitle.astro                                                                                                 | ✓                         |
+| `/docs/getting-started/how-large-teams-use-rocketsim`          | index.mdx                                                                                                                  | ✓                         |
+| `/docs/features/capturing/screenshots`                         | index.mdx                                                                                                                  | ✓                         |
+| `/docs/features/design-comparison/comparing-designs`           | index.mdx                                                                                                                  | ✓                         |
+| `/docs/getting-started/configuring-app-actions`                | index.mdx                                                                                                                  | ✓                         |
+| `/docs/features/accessibility/toggles-and-dynamic-text`        | index.mdx                                                                                                                  | ✓                         |
+| `/docs/settings/side-window`                                   | index.mdx                                                                                                                  | ✓                         |
+| `/docs/support/faq`                                            | index.mdx, menu.json                                                                                                       | ✓                         |
+| `/docs/support/reporting-an-issue`                             | index.mdx                                                                                                                  | ✓                         |
 
 **Conclusion:** No broken internal links remain. The fixes applied earlier (index.mdx + simulator-camera-support.md) resolved all invalid targets.
 
@@ -48,22 +48,22 @@ If the built site serves doc pages under **/docs/docs/...**, then links that use
 
 Redirects cover both possible old URL styles (single and double `docs`) so bookmarks and external links keep working.
 
-| From | To |
-|------|----|
-| `/docs/features/rocketsim-connect/introduction-and-setup` | `/docs/getting-started/setting-up-rocketsim-connect` |
-| `/docs/features/rocketsim-connect/network-traffic-monitoring` | `/docs/features/networking/network-traffic-monitoring` |
-| `/docs/appearance/side-window` | `/docs/settings/side-window` |
-| `/docs/appearance/shortcuts` | `/docs/settings/shortcuts` |
-| `/docs/features/app-actions/general-app-actions` | `/docs/getting-started/configuring-app-actions` |
-| `/docs/features/app-actions/build-insights` | `/docs/features/build-insights/build-insights` |
-| `/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode` | `/docs/features/networking/network-speed-control` |
-| `/docs/docs/features/rocketsim-connect/introduction-and-setup` | `/docs/getting-started/setting-up-rocketsim-connect` |
-| `/docs/docs/features/rocketsim-connect/network-traffic-monitoring` | `/docs/features/networking/network-traffic-monitoring` |
-| `/docs/docs/appearance/side-window` | `/docs/settings/side-window` |
-| `/docs/docs/appearance/shortcuts` | `/docs/settings/shortcuts` |
-| `/docs/docs/features/app-actions/general-app-actions` | `/docs/getting-started/configuring-app-actions` |
-| `/docs/docs/features/app-actions/build-insights` | `/docs/features/build-insights/build-insights` |
-| `/docs/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode` | `/docs/features/networking/network-speed-control` |
+| From                                                                                | To                                                     |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `/docs/features/rocketsim-connect/introduction-and-setup`                           | `/docs/getting-started/setting-up-rocketsim-connect`   |
+| `/docs/features/rocketsim-connect/network-traffic-monitoring`                       | `/docs/features/networking/network-traffic-monitoring` |
+| `/docs/appearance/side-window`                                                      | `/docs/settings/side-window`                           |
+| `/docs/appearance/shortcuts`                                                        | `/docs/settings/shortcuts`                             |
+| `/docs/features/app-actions/general-app-actions`                                    | `/docs/getting-started/configuring-app-actions`        |
+| `/docs/features/app-actions/build-insights`                                         | `/docs/features/build-insights/build-insights`         |
+| `/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode`      | `/docs/features/networking/network-speed-control`      |
+| `/docs/docs/features/rocketsim-connect/introduction-and-setup`                      | `/docs/getting-started/setting-up-rocketsim-connect`   |
+| `/docs/docs/features/rocketsim-connect/network-traffic-monitoring`                  | `/docs/features/networking/network-traffic-monitoring` |
+| `/docs/docs/appearance/side-window`                                                 | `/docs/settings/side-window`                           |
+| `/docs/docs/appearance/shortcuts`                                                   | `/docs/settings/shortcuts`                             |
+| `/docs/docs/features/app-actions/general-app-actions`                               | `/docs/getting-started/configuring-app-actions`        |
+| `/docs/docs/features/app-actions/build-insights`                                    | `/docs/features/build-insights/build-insights`         |
+| `/docs/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode` | `/docs/features/networking/network-speed-control`      |
 
 If the live site uses **/docs/docs/...** for docs, update the **To** column (and `astro.config.ts`) to use that pattern (e.g. `/docs/docs/getting-started/setting-up-rocketsim-connect`).
 
