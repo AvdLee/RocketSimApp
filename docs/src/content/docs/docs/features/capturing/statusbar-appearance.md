@@ -19,7 +19,7 @@ Quite the historic sentence for us developers!
 
 With RocketSim, you can apply the same appearance using the 09:41 button:
 
-![CleanShot 2025-01-21 at 13.51.51@2x.png](./statusbar-appearance/cleanshot_2025-01-21_at_13.51.512x.png)
+![09:41 status bar example](./statusbar-appearance/09_41_example.png)
 
 ## Configuring a custom status bar appearance
 
@@ -27,4 +27,4 @@ In some cases, you want to go more extreme. You can use the Custom status bar co
 
 For example, a low battery level and 3G network connection:
 
-![CleanShot 2025-01-21 at 13.53.30@2x.png](./statusbar-appearance/cleanshot_2025-01-21_at_13.53.302x.png)
+![Custom status bar appearance](./statusbar-appearance/status_bar_custom.png)
