@@ -4,7 +4,7 @@ description: "Visualize and navigate VoiceOver element order directly on the Sim
 ---
 
 :::note
-VoiceOver Navigator is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/PLACEHOLDER) to try it out.
+VoiceOver Navigator is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/emGszFpq) to try it out.
 :::
 
 Testing VoiceOver used to mean grabbing a physical device, enabling VoiceOver, and swiping through your app. VoiceOver Navigator lets you stay in the Simulator: you get a visual overlay of the accessibility element order and keyboard-driven navigation, so you can verify reading order and rotor behavior without leaving your flow.

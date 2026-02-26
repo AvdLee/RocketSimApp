@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-RocketSim lets you create GIF and MP4 recordings of the Xcode Simulator from the **Captures** tab in the side window. You can record with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/docs/features/capturing/app-store-connect-optimization).
+RocketSim lets you create GIF and MP4 recordings of the Xcode Simulator from the **Captures** tab in the side window. You can record with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/features/capturing/app-store-connect-optimization).
 
 ## Creating a recording
 
@@ -34,7 +34,7 @@ You can add a device frame around the Simulator content. Choose **None**, **Simu
 - **Touch Attention Mode** — Keeps a single touch indicator on screen that follows your mouse pointer the whole time, useful for directing attention in demos.
 - **Touches color** — Pick a custom color for the touch indicators in the Captures tab or in Settings → Captures (plain colors only).
 
-See also [Touch indicators](/docs/docs/features/capturing/touch-indicators) for more on how touches appear in captures.
+See also [Touch indicators](/docs/features/capturing/touch-indicators) for more on how touches appear in captures.
 
 ### Device shadow
 
@@ -42,7 +42,7 @@ When you use device bezels, you can turn on **Device shadow** to add a shadow be
 
 ### Audio
 
-- **Simulator audio** — Records only the audio that comes out of the Simulator (your app’s sound). It does not record system audio or other apps. Enable it with **Record audio** in the Captures tab or **Record Simulator audio during recordings** in Settings → Captures. No custom drivers are required.
+- **Simulator audio** — Records only the audio that comes out of the Simulator (your app's sound). It does not record system audio or other apps. Enable it with **Record audio** in the Captures tab or **Record Simulator audio during recordings** in Settings → Captures. No custom drivers are required.
 - **Microphone** — Optionally record from any system microphone (e.g. for voiceover). In the Captures tab, use the **Microphone** picker and choose **None** or a device. You can use Simulator audio and a microphone at the same time.
 
 ### Output ratio
@@ -60,7 +60,7 @@ Enable **Record audio** (Simulator audio) or pick a **Microphone** (or both) in 
 
 ## Trimming a recording
 
-Once your recording is done, tap the scissors button on the [floating thumbnail](/docs/docs/features/capturing/floating-thumbnail) to open the trim editor. Adjust your video and click **Trim** when you're done.
+Once your recording is done, tap the scissors button on the [floating thumbnail](/docs/features/capturing/floating-thumbnail) to open the trim editor. Adjust your video and click **Trim** when you're done.
 
 ![Trim editor on the floating thumbnail](./recordings/cleanshot_2023-11-01_at_13.32.382x.png)
 

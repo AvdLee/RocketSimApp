@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-RocketSim lets you create screenshots from the **Captures** tab in the side window, with bezels, custom backgrounds (including transparent), and optional [App Store Connect optimization](/docs/docs/features/capturing/app-store-connect-optimization). When optimized, you can drag screenshots directly into App Store Connect.
+RocketSim lets you create screenshots from the **Captures** tab in the side window, with bezels, custom backgrounds (including transparent), and optional [App Store Connect optimization](/docs/features/capturing/app-store-connect-optimization). When optimized, you can drag screenshots directly into App Store Connect.
 
 ## Creating a screenshot
 
@@ -15,11 +15,11 @@ RocketSim lets you create screenshots from the **Captures** tab in the side wind
 
 ![RocketSim Side Window Captures tab with screenshot options](./recordings/rocketsim_side_window_screenshot.png)
 
-4. Drag or copy your screenshot from the [floating thumbnail](/docs/docs/features/capturing/floating-thumbnail) in the bottom right corner:
+4. Drag or copy your screenshot from the [floating thumbnail](/docs/features/capturing/floating-thumbnail) in the bottom right corner:
 
 ![Floating thumbnail with screenshot](./screenshots/cleanshot_2023-11-01_at_13.49.412x.png)
 
-You can set the background, bezels, and other capture options before taking a screenshot in the **Captures** tab or in **Settings → Captures**. For the full list of options, see [Creating Recordings](/docs/docs/features/capturing/recordings) — the same options apply to screenshots.
+You can set the background, bezels, and other capture options before taking a screenshot in the **Captures** tab or in **Settings → Captures**. For the full list of options, see [Creating Recordings](/docs/features/capturing/recordings) — the same options apply to screenshots.
 
 ## App Preview Optimized
 

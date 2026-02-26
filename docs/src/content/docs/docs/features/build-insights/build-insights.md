@@ -31,4 +31,4 @@ The RocketSim Welcome view shows your build activity for the last 12 months in a
 
 ![Welcome view with Build Activity graph for the last 12 months](./build-insights/build-activity-welcome-view.png)
 
-For team-wide visibility, check out [Team Build Insights](/docs/docs/features/build-insights/team-build-insights).
+For team-wide visibility, check out [Team Build Insights](/docs/features/build-insights/team-build-insights).

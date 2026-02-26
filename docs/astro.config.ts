@@ -18,7 +18,6 @@ export default defineConfig({
   base: config.site.base_path,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   redirects: {
-    // Old paths (single /docs/...) — restructure fixes
     "/docs/features/rocketsim-connect/introduction-and-setup":
       "/docs/getting-started/setting-up-rocketsim-connect",
     "/docs/features/rocketsim-connect/network-traffic-monitoring":
@@ -27,11 +26,12 @@ export default defineConfig({
     "/docs/appearance/shortcuts": "/docs/settings/shortcuts",
     "/docs/features/app-actions/general-app-actions":
       "/docs/getting-started/configuring-app-actions",
+    "/docs/features/app-actions/user-defaults-editor":
+      "/docs/features/user-defaults-editor",
     "/docs/features/app-actions/build-insights":
       "/docs/features/build-insights/build-insights",
     "/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode":
       "/docs/features/networking/network-speed-control",
-    // Old paths (double /docs/docs/...) — in case production used this format
     "/docs/docs/features/rocketsim-connect/introduction-and-setup":
       "/docs/getting-started/setting-up-rocketsim-connect",
     "/docs/docs/features/rocketsim-connect/network-traffic-monitoring":

@@ -48,4 +48,4 @@ RocketSim maps each Simulator device to the right [App Store Connect resolution]
 
 ## Drag and drop to App Store Connect
 
-Once captured, drag the [floating thumbnail](/docs/docs/features/capturing/floating-thumbnail) directly into App Store Connect. No export step, no manual conversion — just capture and drop.
+Once captured, drag the [floating thumbnail](/docs/features/capturing/floating-thumbnail) directly into App Store Connect. No export step, no manual conversion — just capture and drop.

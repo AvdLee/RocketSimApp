@@ -4,14 +4,14 @@ description: "Analyze historical network requests and debug API issues."
 ---
 
 :::note
-Networking Insights is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/PLACEHOLDER) to try it out.
+Networking Insights is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/emGszFpq) to try it out.
 :::
 
-While [Network Traffic Monitoring](/docs/docs/features/networking/network-traffic-monitoring) shows you requests in real time, Networking Insights gives you a historical view. Open it from the **Welcome** view via **Network Insights** in the sidebar. You can analyze past requests, spot patterns, and copy request data or cURL into your AI coding assistant to debug API issues.
+While [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring) shows you requests in real time, Networking Insights gives you a historical view. Open it from the **Welcome** view via **Network Insights** in the sidebar. You can analyze past requests, spot patterns, and copy request data or cURL into your AI coding assistant to debug API issues.
 
 ## How it differs from Network Traffic Monitoring
 
-[Network Traffic Monitoring](/docs/docs/features/networking/network-traffic-monitoring) captures requests as they happen. Networking Insights stores and analyzes that data over time, making it easier to find recurring issues or compare request patterns across sessions.
+[Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring) captures requests as they happen. Networking Insights stores and analyzes that data over time, making it easier to find recurring issues or compare request patterns across sessions.
 
 ## What you can analyze
 
@@ -29,4 +29,4 @@ Use the toolbar to filter by **app** and **time range** (All Time, Last 7 Days, 
 
 From the detail view (double-click a request or use the toolbar), you can copy the request, response, headers, or cURL. Paste that into your preferred AI tool to get help debugging failing requests or understanding API behavior.
 
-Networking Insights requires [RocketSim Connect](/docs/docs/getting-started/setting-up-rocketsim-connect) to be set up.
+Networking Insights requires [RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect) to be set up.

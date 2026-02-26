@@ -4,7 +4,7 @@ description: "Create butter-smooth recordings at 120 frames per second."
 ---
 
 :::note
-120 FPS Recordings is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/PLACEHOLDER) to try it out.
+120 FPS Recordings is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/emGszFpq) to try it out.
 :::
 
 Standard Simulator recordings run at 30 FPS. RocketSim's 120 FPS mode produces much smoother recordings, which makes a real difference for demo videos, presentations, and social media content.
