@@ -13,6 +13,8 @@ RocketSim does it for you. Turn on **App Preview Optimized** once, and every scr
 
 Open **RocketSim Settings → Captures** and enable **App Preview Optimized**. From then on, every screenshot and recording is automatically converted to the correct format and resolution for the Simulator device you used.
 
+![App Preview Optimized setting in Settings → Captures](./app_store_connect_optimized.png)
+
 ## What gets optimized
 
 ### Screenshots
