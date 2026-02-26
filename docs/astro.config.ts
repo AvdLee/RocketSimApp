@@ -17,6 +17,34 @@ export default defineConfig({
   site: config.site.base_url,
   base: config.site.base_path,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
+  redirects: {
+    "/docs/features/rocketsim-connect/introduction-and-setup":
+      "/docs/getting-started/setting-up-rocketsim-connect",
+    "/docs/features/rocketsim-connect/network-traffic-monitoring":
+      "/docs/features/networking/network-traffic-monitoring",
+    "/docs/appearance/side-window": "/docs/settings/side-window",
+    "/docs/appearance/shortcuts": "/docs/settings/shortcuts",
+    "/docs/features/app-actions/general-app-actions":
+      "/docs/getting-started/configuring-app-actions",
+    "/docs/features/app-actions/user-defaults-editor":
+      "/docs/features/user-defaults-editor",
+    "/docs/features/app-actions/build-insights":
+      "/docs/features/build-insights/build-insights",
+    "/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode":
+      "/docs/features/networking/network-speed-control",
+    "/docs/docs/features/rocketsim-connect/introduction-and-setup":
+      "/docs/getting-started/setting-up-rocketsim-connect",
+    "/docs/docs/features/rocketsim-connect/network-traffic-monitoring":
+      "/docs/features/networking/network-traffic-monitoring",
+    "/docs/docs/appearance/side-window": "/docs/settings/side-window",
+    "/docs/docs/appearance/shortcuts": "/docs/settings/shortcuts",
+    "/docs/docs/features/app-actions/general-app-actions":
+      "/docs/getting-started/configuring-app-actions",
+    "/docs/docs/features/app-actions/build-insights":
+      "/docs/features/build-insights/build-insights",
+    "/docs/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode":
+      "/docs/features/networking/network-speed-control",
+  },
   image: {
     service: {
       entrypoint: "astro/assets/services/sharp",
@@ -99,40 +127,58 @@ export default defineConfig({
           autogenerate: { directory: "docs/getting-started" },
         },
         {
-          label: "Features",
-          collapsed: false,
+          label: "Screenshots & Recordings",
+          collapsed: true,
           items: [
-            {
-              label: "Capturing",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/capturing" },
-            },
-            {
-              label: "Design Comparison",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/design-comparison" },
-            },
-            {
-              label: "App Actions",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/app-actions" },
-            },
-            {
-              label: "RocketSim Connect",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/rocketsim-connect" },
-            },
-            {
-              label: "Accessibility",
-              collapsed: true,
-              autogenerate: { directory: "docs/features/accessibility" },
-            },
+            { slug: "docs/features/capturing/screenshots" },
+            { slug: "docs/features/capturing/recordings" },
+            { slug: "docs/features/capturing/floating-thumbnail" },
+            { slug: "docs/features/capturing/app-store-connect-optimization" },
+            { slug: "docs/features/capturing/touch-indicators" },
+            { slug: "docs/features/capturing/120-fps-recordings" },
           ],
         },
         {
-          label: "Appearance",
+          label: "Simulator Camera",
+          link: "/docs/features/capturing/simulator-camera-support",
+        },
+        {
+          label: "Status Bar",
+          link: "/docs/features/capturing/statusbar-appearance",
+        },
+        {
+          label: "Design Comparison",
           collapsed: true,
-          autogenerate: { directory: "docs/appearance" },
+          autogenerate: { directory: "docs/features/design-comparison" },
+        },
+        {
+          label: "App Actions",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/app-actions" },
+        },
+        {
+          label: "Networking",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/networking" },
+        },
+        {
+          label: "Build Insights",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/build-insights" },
+        },
+        {
+          label: "Accessibility",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/accessibility" },
+        },
+        {
+          label: "User Defaults Editor",
+          link: "/docs/features/user-defaults-editor",
+        },
+        {
+          label: "Settings",
+          collapsed: true,
+          autogenerate: { directory: "docs/settings" },
         },
         {
           label: "Support",
