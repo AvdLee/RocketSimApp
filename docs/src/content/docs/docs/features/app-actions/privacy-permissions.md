@@ -13,7 +13,7 @@ RocketSim supports all 15 permission types: Calendar, Camera, Contacts (Limited)
 
 **Grant** (available to all users) sets the permission without showing a dialog. **Revoke** (Pro) denies the permission. **Reset** (Pro) returns to the "not determined" state so the system dialog appears again on next use.
 
-![Grant, revoke, or reset permissions](./privacy-permissions/cleanshot_2025-01-21_at_14.05.402x.png)
+![Grant, revoke, or reset permissions](./privacy-permissions/permissions.png)
 
 ## Push Notification Reset — Unique to RocketSim
 

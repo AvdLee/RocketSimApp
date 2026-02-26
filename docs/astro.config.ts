@@ -129,15 +129,22 @@ export default defineConfig({
         {
           label: "Screenshots & Recordings",
           collapsed: true,
-          autogenerate: { directory: "docs/features/capturing" },
+          items: [
+            { slug: "docs/features/capturing/screenshots" },
+            { slug: "docs/features/capturing/recordings" },
+            { slug: "docs/features/capturing/floating-thumbnail" },
+            { slug: "docs/features/capturing/app-store-connect-optimization" },
+            { slug: "docs/features/capturing/touch-indicators" },
+            { slug: "docs/features/capturing/120-fps-recordings" },
+          ],
         },
         {
           label: "Simulator Camera",
-          link: "/docs/docs/features/capturing/simulator-camera-support",
+          link: "/docs/features/capturing/simulator-camera-support",
         },
         {
           label: "Status Bar",
-          link: "/docs/docs/features/capturing/statusbar-appearance",
+          link: "/docs/features/capturing/statusbar-appearance",
         },
         {
           label: "Design Comparison",
@@ -166,7 +173,7 @@ export default defineConfig({
         },
         {
           label: "User Defaults Editor",
-          link: "/docs/docs/features/user-defaults-editor",
+          link: "/docs/features/user-defaults-editor",
         },
         {
           label: "Settings",

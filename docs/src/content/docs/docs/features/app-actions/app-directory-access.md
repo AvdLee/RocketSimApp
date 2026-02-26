@@ -11,7 +11,7 @@ Finding your app's sandbox directory in the Simulator has always been painful. T
 
 **Pro tier:** Documents, Library, Caches, Application Support, Temp, Derived Data folder, App Group directories (with nested User Defaults plists), and File Provider Storage.
 
-![Directories dropdown in logical order](./app-directory-access/cleanshot_2025-01-21_at_14.08.142x.png)
+![Directories dropdown in logical order](./app-directory-access/file_directories.png)
 
 ## How to Access
 
