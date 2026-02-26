@@ -1,75 +1,101 @@
 ---
-title: "Recordings"
-description: "Create professional recordings to demonstrate your app’s features with colleagues and social media."
+title: "Creating Recordings"
+description: "Record professional GIF and MP4 videos of your Simulator with touches, audio, and bezels."
+sidebar:
+  order: 2
 ---
 
-RocketSim allows you to create both screenshots and videos of the Xcode Simulator. Unlike the default Simulator recording capabilities, RocketSim allows you to record touches, audio, and bezels. Using the App Store Connect Preview mode, your recordings will be ready to upload directly into App Store Connect.
+RocketSim lets you create GIF and MP4 recordings of the Xcode Simulator from the **Captures** tab in the side window. You can record with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/docs/features/capturing/app-store-connect-optimization).
 
 ## Creating a recording
 
 1. Open the Simulator
-2. Select the Captures tab inside the RocketSim Side Window
+2. Select the **Captures** tab inside the RocketSim Side Window
 3. Click **GIF Record** or **MP4 Record** and perform your interactions
 
-![CleanShot 2025-01-21 at 13.46.10@2x.png](./recordings/cleanshot_2025-01-21_at_13.46.102x.png)
+![RocketSim Side Window Captures tab with GIF Record and MP4 Record](./recordings/rocketsim_side_window_screenshot.png)
 
-1. Press **Stop** when you’re done
-2. Drag or copy your recording using the floating thumbnail in the bottom right corner
+4. Press **Stop** when you're done
+5. A floating thumbnail appears in the bottom right corner — drag or copy your recording from there
 
-   ![CleanShot 2023-11-01 at 13.30.44@2x.png](./recordings/cleanshot_2023-11-01_at_13.30.442x.png)
+Most capture options (bezels, touches, audio, ratio, background) can be set before you start, either in the **Captures** tab or in **Settings → Captures**.
 
-## Showing touches
+## Capture options
 
-RocketSim recordings can show touches in different ways. Using the **Settings**, you can select the type of touches you prefer:
+Configure how your recordings look and what they include. All of the following are available in the **Captures** tab of the side window; many are also in **Settings → Captures**.
 
-![CleanShot 2023-11-01 at 14.57.57@2x.png](./recordings/cleanshot_2023-11-01_at_14.57.572x.png)
+### Device bezels
 
-You can change the color of the touch points or enable an extra stroke around the touch circles.
+You can add a device frame around the Simulator content. Choose **None**, **Simulator Bezel** (the standard Simulator chrome), or a **real device bezel** (device-specific frames for supported iPhone and iPad models). Use the **Device Bezel** picker in the Captures tab. Your choice is stored per device, so each Simulator type can have its own preference.
 
-### Showing touch attention in recordings
+### Touches and touch attention
 
-A feature you should definitely try out is touch attention. Apple uses this technique in their demo videos as it allows viewers to follow your mouse while navigating through your app. In other words, by enabling this mode, your video will constantly show a touch indicator.
+- **Show touches in recordings** — Renders touch indicators so viewers can see taps and gestures. You can also enable **Show stroke around touches** in Settings → Captures.
+- **Touch Attention Mode** — Keeps a single touch indicator on screen that follows your mouse pointer the whole time, useful for directing attention in demos.
+- **Touches color** — Pick a custom color for the touch indicators in the Captures tab or in Settings → Captures (plain colors only).
+
+See also [Touch indicators](/docs/docs/features/capturing/touch-indicators) for more on how touches appear in captures.
+
+### Device shadow
+
+When you use device bezels, you can turn on **Device shadow** to add a shadow behind the device frame. The toggle is in the Captures tab and in Settings → Captures under Bezels.
+
+### Audio
+
+- **Simulator audio** — Records only the audio that comes out of the Simulator (your app’s sound). It does not record system audio or other apps. Enable it with **Record audio** in the Captures tab or **Record Simulator audio during recordings** in Settings → Captures. No custom drivers are required.
+- **Microphone** — Optionally record from any system microphone (e.g. for voiceover). In the Captures tab, use the **Microphone** picker and choose **None** or a device. You can use Simulator audio and a microphone at the same time.
+
+### Output ratio
+
+You can lock the output to a specific aspect ratio. Supported values: **Auto** (no fixed ratio), **1:1**, **5:4**, **4:3**, **3:2**, and **16:9**. Set it with the **Ratio** picker in the Captures tab.
+
+### Background and frame
+
+- **Background** — Choose what appears behind the device: **plain colors**, **gradient (mesh) backgrounds**, or **transparent**. Use the **Background** control in the Captures tab or **Captures background** in Settings → Captures. Transparent is the default.
+- **Device Frame color** — When using bezels, you can set the frame color separately (plain colors) in Settings → Captures under Bezels.
+
+## Audio recording
+
+Enable **Record audio** (Simulator audio) or pick a **Microphone** (or both) in the Captures tab or in **Settings → Captures**. RocketSim does not install custom audio drivers; it works with the system as-is. For details on what each option records, see [Capture options > Audio](#audio) above.
 
 ## Trimming a recording
 
-Once you’re done with your recording, you can decide to trim the result by tapping the scissors button on the floating thumbnail:
+Once your recording is done, tap the scissors button on the [floating thumbnail](/docs/docs/features/capturing/floating-thumbnail) to open the trim editor. Adjust your video and click **Trim** when you're done.
 
-![CleanShot 2023-11-01 at 13.32.38@2x.png](./recordings/cleanshot_2023-11-01_at_13.32.382x.png)
+![Trim editor on the floating thumbnail](./recordings/cleanshot_2023-11-01_at_13.32.382x.png)
 
-This will open up a trim editor. Adjust your video and click on **Trim** once you’re done.
+## Transparent recordings
 
-## App Preview Optimized
+You can create recordings with a transparent background. Set the background to transparent in the **Background** picker (see [Capture options > Background and frame](#background-and-frame)) in the Captures tab or in **Settings → Captures**:
 
-:::tip
-Your App Preview recordings have to conform to [Apple’s App Preview Specifications](https://developer.apple.com/help/app-store-connect/reference/app-preview-specifications/). It can be challenging to convert your videos into the right format, but RocketSim does this all automatically for you.
-:::
+![Transparent background setting in Captures](./recordings/transparent_background_setting.png)
 
-App Preview videos can make your App Store Product page look a little more interactive. It can be a great way to demonstrate your application’s features.
+App Store Connect videos cannot have alpha layers, so disable **App Preview Optimized** mode if you need transparency. Apps like QuickTime may not show transparency correctly — copy your video into Keynote to verify:
 
-![CleanShot 2023-11-01 at 13.38.49@2x.png](./screenshots/cleanshot_2023-11-01_at_13.38.492x.png)
+![Verifying transparent background in Keynote](./screenshots/cleanshot_2023-11-01_at_13.45.082x.png)
 
-Simply enable App Preview Optimized, create your recording, and drag it directly into App Store Connect.
+## Capture Metadata
+
+Recordings can show the app icon, app title, and an optional subtitle on the background. That helps viewers see which app they're watching in demos and App Store previews.
+
+RocketSim takes this metadata from your most recent build: it reads the app icon and display name from the running Simulator app, so you don't have to configure anything for the basics.
+
+![Recording background with app icon, title, and subtitle](./recordings/metadata-example.png)
+
+### Using a custom metadata title or subtitle
+
+To override the app name or add a custom subtitle (e.g. a version or tagline), configure them in the App Group settings for that app. RocketSim will use those values on the recording background instead of the default app name.
+
+![App Group settings for custom app name and subtitle](./recordings/metadata-settings.png)
+
+For more on creating and managing App Groups, see [Configuring App Actions](/docs/getting-started/configuring-app-actions).
 
 ## Troubleshooting
 
-### I enabled audio, but it’s not working?
+### I enabled audio, but it's not working?
 
-Make sure you don’t have any audio routing enabled. Doing so will confuse RocketSim and make it impossible to record your audio.
-
-### Does RocketSim install a custom audio driver for audio recording?
-
-No, there’s nothing you need to install for audio recording to work.
+Make sure you don't have any audio routing enabled. Doing so can prevent RocketSim from recording Simulator audio or your microphone correctly.
 
 ### Why are my iPad recordings upside-down?
 
 RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording.
-
-### Can I create transparent recordings?
-
-Yes, you can! Make sure to change the background color inside **Settings** to transparent:
-
-![CleanShot 2023-11-01 at 13.42.32@2x.png](./screenshots/cleanshot_2023-11-01_at_13.42.322x.png)
-
-Note that App Preview videos can’t have alpha layers, so you need to disable **App Preview Optimized mode.** Lastly, apps like QuickTime make it look like your video’s background isn’t transparent. It’s best to copy your video into an app like keynote to verify transparency:
-
-![CleanShot 2023-11-01 at 13.45.08@2x.png](./screenshots/cleanshot_2023-11-01_at_13.45.082x.png)
