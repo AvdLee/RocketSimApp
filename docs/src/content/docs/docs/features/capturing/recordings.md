@@ -1,6 +1,6 @@
 ---
 title: "Creating Recordings"
-description: "Record professional GIF and MP4 videos of your Simulator with touches, audio, and bezels."
+description: "Record high-quality GIF and MP4 videos from the iOS Simulator with touch indicators, device bezels, audio narration, and custom backgrounds."
 sidebar:
   order: 2
 ---
@@ -62,7 +62,7 @@ Enable **Record audio** (Simulator audio) or pick a **Microphone** (or both) in 
 
 Once your recording is done, tap the scissors button on the [floating thumbnail](/docs/features/capturing/floating-thumbnail) to open the trim editor. Adjust your video and click **Trim** when you're done.
 
-![Trim editor on the floating thumbnail](./recordings/cleanshot_2023-11-01_at_13.32.382x.png)
+![Trim editor on the floating thumbnail for cutting recording start and end](./recordings/cleanshot_2023-11-01_at_13.32.382x.png)
 
 ## Transparent recordings
 
@@ -72,7 +72,7 @@ You can create recordings with a transparent background. Set the background to t
 
 App Store Connect videos cannot have alpha layers, so disable **App Preview Optimized** mode if you need transparency. Apps like QuickTime may not show transparency correctly — copy your video into Keynote to verify:
 
-![Verifying transparent background in Keynote](./screenshots/cleanshot_2023-11-01_at_13.45.082x.png)
+![Transparent background verified in Keynote](./screenshots/cleanshot_2023-11-01_at_13.45.082x.png)
 
 ## Capture Metadata
 

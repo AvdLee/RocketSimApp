@@ -1,6 +1,6 @@
 ---
-title: "Setting up RocketSim Connect"
-description: "Enable communication between your Simulator app and RocketSim."
+title: "Setting Up RocketSim Connect"
+description: "Enable RocketSim Connect to unlock network traffic monitoring and Simulator camera support. Set up the framework in your Xcode project with a single line of code."
 sidebar:
   order: 3
 ---

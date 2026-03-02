@@ -1,6 +1,6 @@
 ---
 title: "Floating Thumbnail"
-description: "Quick actions for your captures via the floating thumbnail."
+description: "Use the floating thumbnail to quickly preview, trim, copy, save, or drag your Simulator captures directly into other apps without extra steps."
 sidebar:
   order: 6
 ---

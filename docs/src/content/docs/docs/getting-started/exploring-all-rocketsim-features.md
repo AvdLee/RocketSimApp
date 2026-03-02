@@ -1,6 +1,6 @@
 ---
 title: "Additional Resources"
-description: "Video walkthroughs and in-depth articles covering RocketSim features."
+description: "Explore video walkthroughs, SwiftLee articles, and in-depth guides covering every RocketSim feature for iOS Simulator development."
 sidebar:
   order: 6
 ---

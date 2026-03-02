@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about RocketSim."
+description: "Frequently asked questions about RocketSim — licensing, App Store Connect issues, transparent captures, network speed control troubleshooting, and more."
 ---
 
 ## Do you offer out-of-the App Store distribution?
