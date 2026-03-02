@@ -5,6 +5,9 @@
  */
 import Default from "@astrojs/starlight/components/Head.astro";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
+import config from "@/config/config.json";
+
+const ogImage = `${config.site.base_url}${config.metadata.meta_image}`;
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -21,5 +24,12 @@ import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 
 <!-- Additional meta for better SEO -->
 <meta name="author" content="RocketSim" />
+
+<!-- Open Graph image for social sharing -->
+<meta property="og:site_name" content="RocketSim" />
+<meta property="og:image" content={ogImage} />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content={ogImage} />
+<meta name="twitter:site" content="@rocketsim_app" />
 
 <PlausibleAnalytics />
