@@ -9,22 +9,12 @@ const description = entry?.data?.description ?? "";
 const slug = entry?.slug ?? "";
 const pageUrl = `${baseUrl}/${slug}`;
 
-const pathSegments = slug.split("/").filter(Boolean);
 const breadcrumbItems = [
   { name: "Home", url: baseUrl },
   { name: "Docs", url: `${baseUrl}/docs` },
 ];
-let currentPath = "";
-for (const segment of pathSegments.slice(1)) {
-  currentPath += `/${segment}`;
-  const name = segment
-    .split("-")
-    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-  breadcrumbItems.push({ name, url: `${baseUrl}/docs${currentPath}` });
-}
-if (breadcrumbItems.length > 2) {
-  breadcrumbItems[breadcrumbItems.length - 1].name = title;
+if (title !== "RocketSim Docs" && title !== "404") {
+  breadcrumbItems.push({ name: title, url: pageUrl });
 }
 
 const isFaqPage = slug.endsWith("support/faq");
