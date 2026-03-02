@@ -310,11 +310,7 @@ function transformLlmsTxt(content: string, variant: "full" | "small"): string {
   }
 
   let result =
-    newSystemHeader +
-    "\n\n" +
-    toc +
-    "\n\n" +
-    pagesWithRelated.join("");
+    newSystemHeader + "\n\n" + toc + "\n\n" + pagesWithRelated.join("");
 
   // Convert <Youtube> components to markdown links (handles multi-line tags)
   result = result.replace(/<Youtube[\s\S]*?\/>/g, (match) => {
