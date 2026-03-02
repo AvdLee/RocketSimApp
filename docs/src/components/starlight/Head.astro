@@ -62,23 +62,23 @@ if (breadcrumbItems.length > 1) {
 const faqEntries = isFaqPage
   ? [
       {
-        q: "Does RocketSim offer out-of-the App Store distribution?",
+        q: "Do you offer out-of-the App Store distribution?",
         a: "Yes. Get in touch via support@rocketsim.app.",
       },
       {
-        q: "Are there non-recurring subscriptions?",
+        q: "Are there non-recurring subscriptions as well?",
         a: "Yes, you can consider buying Team Licenses at rocketsim.app/team-insights.",
       },
       {
-        q: "Can I reimburse my App Store subscription?",
+        q: "I can't reimburse App Store subscriptions, is there an alternative?",
         a: "Yes, RocketSim offers Team Licenses as an alternative at rocketsim.app/team-insights.",
       },
       {
-        q: "Do you provide commercial or team licenses?",
+        q: "Do you provide the option for commercial or team licenses?",
         a: "Yes, check out Team Licenses at rocketsim.app/team-insights.",
       },
       {
-        q: "Can I buy a lifetime RocketSim license?",
+        q: "Can I buy a lifetime license?",
         a: "No, but you can earn a lifetime license through SwiftLee Weekly's referral program. Join the newsletter and follow the instructions.",
       },
       {
@@ -94,12 +94,16 @@ const faqEntries = isFaqPage
         a: "RocketSim is sandboxed and needs screen recording permissions to read Simulator window titles, which it uses to determine the currently active Simulator.",
       },
       {
+        q: "Where can I follow active development?",
+        a: "RocketSim is developed by Antoine van der Lee. You can follow him or the official RocketSim Twitter account at twitter.com/rocketsim_app for updates.",
+      },
+      {
         q: "Where can I report bugs or feature requests?",
         a: "Issues and feature requests are managed on GitHub at github.com/AvdLee/RocketSimApp/issues.",
       },
       {
-        q: "How can I get PNG images instead of JPEG?",
-        a: "Disable App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer.",
+        q: "I only get JPEG images, how can I get PNG images again?",
+        a: "You've likely enabled App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer. Disable the option and you should get PNGs again.",
       },
       {
         q: "Why are my iPad captures upside-down?",
@@ -152,7 +156,7 @@ if (isFaqPage && faqEntries.length > 0) {
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(schema)}
+      set:html={JSON.stringify(schema).replace(/<\//g, "<\\/")}
     />
   ))
 }
