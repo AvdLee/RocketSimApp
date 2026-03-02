@@ -46,7 +46,7 @@ if (title !== "RocketSim Docs" && title !== "404") {
   });
 }
 
-if (breadcrumbItems.length > 1) {
+if (breadcrumbItems.length > 1 && title !== "404") {
   schemas.push({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -152,7 +152,7 @@ if (isFaqPage && faqEntries.length > 0) {
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(schema)}
+      set:html={JSON.stringify(schema).replaceAll("<", "\\u003c")}
     />
   ))
 }
