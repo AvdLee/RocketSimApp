@@ -1,10 +1,145 @@
 ---
-/**
- * Custom Head component for RocketSim docs
- * Includes proper favicon and meta tags matching the main site
- */
 import Default from "@astrojs/starlight/components/Head.astro";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
+
+const baseUrl = "https://www.rocketsim.app";
+const { entry } = Astro.props;
+const title = entry?.data?.title ?? "RocketSim Docs";
+const description = entry?.data?.description ?? "";
+const slug = entry?.slug ?? "";
+const pageUrl = `${baseUrl}/${slug}`;
+
+const pathSegments = slug.split("/").filter(Boolean);
+const breadcrumbItems = [
+  { name: "Home", url: baseUrl },
+  { name: "Docs", url: `${baseUrl}/docs` },
+];
+let currentPath = "";
+for (const segment of pathSegments.slice(1)) {
+  currentPath += `/${segment}`;
+  const name = segment
+    .split("-")
+    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+  breadcrumbItems.push({ name, url: `${baseUrl}/docs${currentPath}` });
+}
+if (breadcrumbItems.length > 2) {
+  breadcrumbItems[breadcrumbItems.length - 1].name = title;
+}
+
+const isFaqPage = slug.endsWith("support/faq");
+
+const schemas: Record<string, unknown>[] = [];
+
+if (title !== "RocketSim Docs" && title !== "404") {
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: title,
+    description,
+    url: pageUrl,
+    author: {
+      "@type": "Organization",
+      name: "RocketSim",
+      url: baseUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "RocketSim",
+      url: baseUrl,
+      logo: `${baseUrl}/images/rocketsim-app-icon.png`,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  });
+}
+
+if (breadcrumbItems.length > 1) {
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  });
+}
+
+const faqEntries = isFaqPage
+  ? [
+      {
+        q: "Does RocketSim offer out-of-the App Store distribution?",
+        a: "Yes. Get in touch via support@rocketsim.app.",
+      },
+      {
+        q: "Are there non-recurring subscriptions?",
+        a: "Yes, you can consider buying Team Licenses at rocketsim.app/team-insights.",
+      },
+      {
+        q: "Can I reimburse my App Store subscription?",
+        a: "Yes, RocketSim offers Team Licenses as an alternative at rocketsim.app/team-insights.",
+      },
+      {
+        q: "Do you provide commercial or team licenses?",
+        a: "Yes, check out Team Licenses at rocketsim.app/team-insights.",
+      },
+      {
+        q: "Can I buy a lifetime RocketSim license?",
+        a: "No, but you can earn a lifetime license through SwiftLee Weekly's referral program. Join the newsletter and follow the instructions.",
+      },
+      {
+        q: "Why is my video not accepted by App Store Connect?",
+        a: "Videos are optimized for App Previews following Apple's specifications. Make sure to use a Simulator matching a device from the App Preview specifications.",
+      },
+      {
+        q: "Why wouldn't I just use xcrun simctl?",
+        a: "RocketSim uses xcrun simctl under the hood but enhances the output with touches, device bezels, and a visual interface for quicker access.",
+      },
+      {
+        q: "Why does RocketSim need screen recording permissions?",
+        a: "RocketSim is sandboxed and needs screen recording permissions to read Simulator window titles, which it uses to determine the currently active Simulator.",
+      },
+      {
+        q: "Where can I report bugs or feature requests?",
+        a: "Issues and feature requests are managed on GitHub at github.com/AvdLee/RocketSimApp/issues.",
+      },
+      {
+        q: "How can I get PNG images instead of JPEG?",
+        a: "Disable App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer.",
+      },
+      {
+        q: "Why are my iPad captures upside-down?",
+        a: "RocketSim cannot detect landscape-left or landscape-right and defaults to one rotation. Rotate your Simulator twice and restart the recording.",
+      },
+      {
+        q: "Can I create transparent captures?",
+        a: "Yes, disable App Preview Optimized and set your background color to transparent.",
+      },
+      {
+        q: "Network Speed Control isn't working, what can I do?",
+        a: "Quit Xcode, all Simulators, and RocketSim, then reopen them. Check System Settings → Privacy & Security for pending permissions. On macOS Sequoia, enable the Network Extension in System Settings → General → Login Items & Extensions.",
+      },
+    ]
+  : [];
+
+if (isFaqPage && faqEntries.length > 0) {
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqEntries.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  });
+}
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -21,5 +156,15 @@ import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 
 <!-- Additional meta for better SEO -->
 <meta name="author" content="RocketSim" />
+
+{
+  schemas.map((schema) => (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schema)}
+    />
+  ))
+}
 
 <PlausibleAnalytics />
