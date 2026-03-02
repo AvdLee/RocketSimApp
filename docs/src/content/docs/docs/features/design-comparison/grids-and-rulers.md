@@ -26,7 +26,7 @@ Aligning elements based on grids and rulers allows you to create a balanced desi
 
 By tapping `⇧ Shift` while your rulers are visible, you’ll be able to see the distance between Rulers and the edges:
 
-![Grid settings for color, spacing, and opacity customization](./grids-and-rulers/cleanshot_2025-01-21_at_13.59.112x.png)
+![Rulers showing measured distances between guides and Simulator edges](./grids-and-rulers/cleanshot_2025-01-21_at_13.59.112x.png)
 
 ## Deleting a ruler
 

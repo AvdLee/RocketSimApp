@@ -1,6 +1,6 @@
 ---
 title: "Side Window"
-description: "Configure RocketSim's side window placement, visibility, and behavior. Reposition, minimize, or hide the window — all features remain accessible from the menu bar."
+description: "Configure RocketSim's side window placement, visibility, and behavior. Reposition, minimize, or hide the window while keeping menu bar access."
 ---
 
 RocketSim's side window is always accessible when you're testing your app in the Simulator. You're in full control of how it appears — reposition it, minimize it, or hide it entirely. Every feature in the side window is also accessible from the menu bar, so the side window is always optional.
@@ -25,7 +25,7 @@ By default, the side window uses **dynamic** placement (left or right based on a
 
 In some cases, you want the side window to never hide. From within the more menu, you can enable this mode:
 
-![Side window auto-hide behavior when Simulator loses focus](./side-window/cleanshot_2023-11-01_at_14.44.022x.png)
+![Always show windows option enabled in the side window more menu](./side-window/cleanshot_2023-11-01_at_14.44.022x.png)
 
 ## Minimized Capturing Window
 
@@ -41,7 +41,7 @@ Which you can enable from the general settings page:
 
 The Side Window is not required to access all functionality. When the side window is hidden, you can use RocketSim's **status bar** menu instead:
 
-![Side window tab selection for switching between feature panels](./side-window/cleanshot_2023-11-01_at_14.46.372x.png)
+![RocketSim status bar menu providing access to all features when the side window is hidden](./side-window/cleanshot_2023-11-01_at_14.46.372x.png)
 
 From the general settings page, you can disable the floating window completely:
 

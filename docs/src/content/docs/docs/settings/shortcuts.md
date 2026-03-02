@@ -1,6 +1,6 @@
 ---
 title: "Shortcuts"
-description: "Customize keyboard shortcuts for RocketSim's features including captures, app actions, design comparison, and side window visibility. Speed up your testing workflow."
+description: "Customize keyboard shortcuts for RocketSim's captures, app actions, design comparison, and side window. Speed up your Simulator testing workflow."
 ---
 
 You can view and customize all shortcuts in **Settings → Shortcuts**:
