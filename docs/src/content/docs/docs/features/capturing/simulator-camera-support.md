@@ -1,6 +1,6 @@
 ---
 title: "Simulator Camera Support"
-description: "Beta of testing the camera on the Simulator"
+description: "Test camera functionality directly in the iOS Simulator without a physical device. Stream images or video to the Simulator camera via RocketSim Connect."
 ---
 
 A top requested feature has always been Simulator camera support. Constantly having to test the camera on an actual device can be a pain and it’s annoying to run into dead ends on the Simulator for apps that come with camera features.

@@ -1,6 +1,6 @@
 ---
 title: "Requesting A Feature"
-description: "Request the next big improvement of RocketSim."
+description: "Request new features for RocketSim via GitHub Issues. Browse the public roadmap and vote on upcoming features to help shape the development priorities."
 ---
 
 Did you know many of RocketSim’s features today result from user-requested features?
@@ -15,4 +15,4 @@ I’m planning ahead any feature development for RocketSim. You can vote on my r
 2. Select **Roadmap**
 3. Submit your votes
 
-   ![CleanShot 2023-11-01 at 14.56.57@2x.png](./requesting-a-feature/cleanshot_2023-11-01_at_14.56.572x.png)
+   ![Roadmap option in the RocketSim status bar menu](./requesting-a-feature/cleanshot_2023-11-01_at_14.56.572x.png)

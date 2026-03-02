@@ -1,6 +1,6 @@
 ---
 title: "Environment Overrides"
-description: "Test accessibility settings and Dark Mode directly from the side window."
+description: "Toggle accessibility settings and Dark Mode directly from RocketSim's side window. Test Increase Contrast, Bold Text, Reduce Motion, and Dynamic Type instantly."
 ---
 
 Testing accessibility settings usually means navigating deep into Simulator Settings. RocketSim's Environment Overrides put all the important toggles right in the side window, so you can switch settings while looking at your app.

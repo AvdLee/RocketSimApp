@@ -1,6 +1,6 @@
 ---
 title: "App Directory Access"
-description: "Open your app's sandbox folders, caches, and derived data directly."
+description: "Open your Simulator app's sandbox, caches, documents, derived data, and app group directories with one click. No more digging through CoreSimulator paths."
 ---
 
 Finding your app's sandbox directory in the Simulator has always been painful. The path is buried deep inside `~/Library/Developer/CoreSimulator` and changes with every install. RocketSim gives you one-click access to any directory your app uses.

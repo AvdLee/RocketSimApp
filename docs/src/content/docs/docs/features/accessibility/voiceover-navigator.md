@@ -1,6 +1,6 @@
 ---
 title: "VoiceOver Navigator"
-description: "Visualize and navigate VoiceOver element order directly on the Simulator."
+description: "Visualize VoiceOver element order on the iOS Simulator with numbered overlays. Navigate elements with keyboard shortcuts and verify reading order without a device."
 ---
 
 :::note
