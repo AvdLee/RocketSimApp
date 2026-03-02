@@ -23,14 +23,15 @@ import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 <meta name="author" content="RocketSim" />
 
 <!-- Open Graph image for social sharing -->
+<meta property="og:site_name" content="RocketSim" />
 <meta
   property="og:image"
-  content="https://www.rocketsim.app/og-banner-rocketsim.jpg"
+  content={new URL("/og-banner-rocketsim.jpg", Astro.site).href}
 />
 <meta name="twitter:card" content="summary_large_image" />
 <meta
   name="twitter:image"
-  content="https://www.rocketsim.app/og-banner-rocketsim.jpg"
+  content={new URL("/og-banner-rocketsim.jpg", Astro.site).href}
 />
 <meta name="twitter:site" content="@rocketsim_app" />
 
