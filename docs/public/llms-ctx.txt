@@ -31,7 +31,7 @@ User Defaults real-time editor, status bar customization, simulator camera suppo
 
 ## Technical Details
 - Platform: macOS (enhances the iOS/watchOS/visionOS Simulator in Xcode)
-- Distribution: Mac App Store + direct enterprise distribution
+- Distribution: Mac App Store (out-of-store distribution available on request — contact support@rocketsim.app)
 - Sandboxed: Yes
 - RocketSim Connect: Local Bonjour-based framework for Simulator-to-RocketSim communication (debug builds only)
 

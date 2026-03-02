@@ -43,7 +43,7 @@ const TABLE_OF_CONTENTS = `## Table of Contents
 - Onboarding
 - Product Tour & Quick Demos
 - Configuring App Actions
-- Setting Up RocketSim Connect
+- Setting up RocketSim Connect
 - How Large Teams Use RocketSim
 - Additional Resources
 - Testimonials
@@ -60,7 +60,7 @@ const TABLE_OF_CONTENTS = `## Table of Contents
 - Simulator Camera Support
 
 ### Status Bar
-- Status Bar Appearance
+- Statusbar Appearance
 
 ### Design Comparison
 - Comparing Designs
@@ -70,7 +70,7 @@ const TABLE_OF_CONTENTS = `## Table of Contents
 
 ### App Actions
 - App Directory Access
-- Deep Links & Universal Links
+- Deeplinks (Universal Links)
 - Location Simulation
 - Privacy & Permissions
 - Push Notifications
@@ -156,7 +156,7 @@ const RELATED_LINKS: Record<string, string[]> = {
   "Simulator Camera Support": [
     "[Setting Up RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect)",
   ],
-  "Setting Up RocketSim Connect": [
+  "Setting up RocketSim Connect": [
     "[Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring)",
     "[Simulator Camera Support](/docs/features/capturing/simulator-camera-support)",
   ],
@@ -304,10 +304,15 @@ function transformLlmsTxt(content: string, variant: "full" | "small"): string {
   // Assemble with enriched SYSTEM header and TOC
   const newSystemHeader =
     variant === "full" ? FULL_SYSTEM_HEADER : SMALL_SYSTEM_HEADER;
+  let toc = TABLE_OF_CONTENTS;
+  if (variant === "small") {
+    toc = toc.replace(/^- Testimonials\n?/m, "");
+  }
+
   let result =
     newSystemHeader +
     "\n\n" +
-    TABLE_OF_CONTENTS +
+    toc +
     "\n\n" +
     pagesWithRelated.join("");
 
