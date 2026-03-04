@@ -1,5 +1,6 @@
 ---
 name: "VoiceOver Navigator"
+docPath: "docs/features/accessibility/voiceover-navigator"
 tagLine: "Visualize VoiceOver element order right on the Simulator"
 asset:
   type: "image"

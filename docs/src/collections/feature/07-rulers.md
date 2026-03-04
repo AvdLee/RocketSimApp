@@ -1,5 +1,6 @@
 ---
 name: "Rulers"
+docPath: "docs/features/design-comparison/grids-and-rulers"
 asset:
   type: "image"
   path: "../../assets/features/rulers.png"

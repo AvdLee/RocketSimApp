@@ -1,5 +1,6 @@
 ---
 name: "User Defaults Editor"
+docPath: "docs/features/user-defaults-editor"
 tagLine: "Edit Standard & Group User Defaults in realtime"
 youtubeLink: "https://www.youtube.com/watch?v=zTbQck3ofcc"
 asset:

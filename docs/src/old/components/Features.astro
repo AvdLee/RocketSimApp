@@ -31,9 +31,9 @@ const features = await Promise.all(
 
 <section aria-label="RocketSim features">
   {
-    features.map(({ data, Content }) => (
+    features.map(({ id, data, Content }) => (
       <div class="feature-wrapper">
-        <Feature data={data}>
+        <Feature data={data} featureSlug={id.replace(/^\d+-/, "")}>
           <Content />
         </Feature>
       </div>

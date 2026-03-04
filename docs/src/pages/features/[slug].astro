@@ -1,0 +1,139 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import { Image } from "astro:assets";
+
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+export async function getStaticPaths() {
+  const features = await getCollection("feature");
+  return features.map((feature) => ({
+    params: { slug: feature.id.replace(/^\d+-/, "") },
+    props: { feature },
+  }));
+}
+
+const { feature } = Astro.props;
+const { name, tagLine, docPath } = feature.data;
+const {
+  site: { base_url },
+} = config;
+
+const slug = feature.id.replace(/^\d+-/, "");
+
+let Content: any = null;
+let docEntry: any = null;
+
+if (docPath) {
+  docEntry = await getEntry("docs", docPath);
+  if (docEntry) {
+    const rendered = await render(docEntry);
+    Content = rendered.Content;
+  }
+}
+
+const seo = {
+  title: `${name} - RocketSim`,
+  description: tagLine || docEntry?.data?.description || "",
+  canonical: `${base_url}/features/${slug}`,
+};
+
+const structuredData = {
+  type: "static" as const,
+};
+
+const { asset } = feature.data;
+---
+
+<Base seo={seo} structuredData={structuredData}>
+  <PageHeader title={name} subtitle={tagLine || ""} />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-container">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <div class="w-full lg:w-6/12" data-aos="fade-up-sm">
+            {
+              asset.type === "image" ? (
+                <Image
+                  src={asset.path}
+                  alt={asset.alt}
+                  class="w-full h-auto rounded-2xl"
+                  widths={[360, 640, 800, 1200]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={95}
+                />
+              ) : (
+                <video
+                  class="w-full h-auto rounded-2xl js-feature-video"
+                  aria-label={asset.alt}
+                  muted
+                  playsinline
+                  loop
+                >
+                  <source src={asset.path} type="video/mp4" />
+                </video>
+              )
+            }
+          </div>
+          <div
+            class="w-full lg:w-6/12"
+            data-aos="fade-up-sm"
+            data-aos-delay="100"
+          >
+            <h2 class="mb-4 font-semibold">{name}</h2>
+            {tagLine && <p class="text-lg text-text mb-6">{tagLine}</p>}
+            {
+              docPath && (
+                <a href={`/${docPath}`} class="btn btn-secondary inline-block">
+                  View full documentation →
+                </a>
+              )
+            }
+          </div>
+        </div>
+
+        {
+          Content && (
+            <div class="content mt-12 prose max-w-none">
+              <Content />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const videos = document.querySelectorAll(".js-feature-video");
+
+    videos.forEach((video) => {
+      const videoElement = video as HTMLVideoElement;
+      videoElement.load();
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const videoElement = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            videoElement.play();
+          } else {
+            videoElement.pause();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    videos.forEach((video) => {
+      observer.observe(video);
+    });
+  });
+</script>

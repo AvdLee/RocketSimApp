@@ -1,5 +1,6 @@
 ---
 name: "09:41 - A historical moment in time"
+docPath: "docs/features/capturing/statusbar-appearance"
 asset:
   type: "image"
   path: "../../assets/features/status-bar-overrides.png"

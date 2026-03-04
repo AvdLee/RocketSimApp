@@ -1,5 +1,6 @@
 ---
 name: "Environment Overrides"
+docPath: "docs/features/accessibility/environment-overrides"
 youtubeLink: "https://www.youtube.com/watch?v=RQ7tXHyY5Ic"
 asset:
   type: "image"

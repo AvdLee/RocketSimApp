@@ -4,6 +4,8 @@ import { docsLoader } from "@astrojs/starlight/loaders";
 import { docsSchema } from "@astrojs/starlight/schema";
 
 import {
+  featurePageSchema,
+  featuresPageCollection,
   pricingCollection,
   privacyCollection,
   teamInsightsCollection,
@@ -28,6 +30,7 @@ const feature = defineCollection({
     z.object({
       name: z.string(),
       tagLine: z.string().optional(),
+      docPath: z.string().optional(),
       blogId: z.number().optional(),
       youtubeLink: z.string().url().optional(),
       asset: z.discriminatedUnion("type", [
@@ -56,8 +59,18 @@ const docs = defineCollection({
   schema: docsSchema(),
 });
 
+const featurePage = defineCollection({
+  loader: glob({
+    pattern: "**/[^_]*.md",
+    base: "./src/collections/feature-page",
+  }),
+  schema: featurePageSchema,
+});
+
 export const collections = {
   feature,
+  "feature-page": featurePage,
+  features: featuresPageCollection,
   pricing: pricingCollection,
   privacy: privacyCollection,
   "team-insights": teamInsightsCollection,
