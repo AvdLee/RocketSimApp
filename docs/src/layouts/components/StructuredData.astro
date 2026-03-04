@@ -39,6 +39,24 @@ type OfferProps = {
   };
 };
 
+type TechArticleProps = {
+  type: "techArticle";
+  techArticle: {
+    title: string;
+    description: string;
+    url: string;
+  };
+};
+
+type FAQPageProps = {
+  type: "faqPage";
+  faqEntries: Array<{
+    question: string;
+    answer: string;
+  }>;
+  url: string;
+};
+
 type StaticProps = {
   type: "static";
 };
@@ -48,7 +66,7 @@ type WebsiteProps = {
 };
 
 // prettier-ignore
-export type Props = ArticleProps | ProductProps | OfferProps | StaticProps | WebsiteProps;
+export type Props = ArticleProps | ProductProps | OfferProps | TechArticleProps | FAQPageProps | StaticProps | WebsiteProps;
 
 // TypeScript interfaces for JSON-LD schemas
 interface SchemaBase {
@@ -155,6 +173,31 @@ interface OfferSchema extends SchemaBase {
     };
   };
   description?: string;
+}
+
+interface TechArticleSchema extends SchemaBase {
+  "@type": "TechArticle";
+  headline: string;
+  description: string;
+  url: string;
+  author: OrganizationSchema;
+  publisher: OrganizationSchema;
+  mainEntityOfPage: {
+    "@type": "WebPage";
+    "@id": string;
+  };
+}
+
+interface FAQPageSchema extends SchemaBase {
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+    };
+  }>;
 }
 
 const { type } = Astro.props;
@@ -341,6 +384,100 @@ if (type === "product") {
   schemas.push(breadcrumbSchema);
 }
 
+if (type === "techArticle") {
+  const { techArticle } = Astro.props;
+
+  const techArticleSchema: TechArticleSchema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: techArticle.title,
+    description: techArticle.description,
+    url: techArticle.url,
+    author: organizationData,
+    publisher: {
+      ...organizationData,
+      logo: `${config.site.base_url}/images/rocketsim-app-icon.png`,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": techArticle.url,
+    },
+  };
+  schemas.push(techArticleSchema);
+
+  const breadcrumbSchema: BreadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${techArticle.url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: config.site.base_url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Docs",
+        item: `${config.site.base_url}/docs`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: techArticle.title,
+        item: techArticle.url,
+      },
+    ],
+  };
+  schemas.push(breadcrumbSchema);
+}
+
+if (type === "faqPage") {
+  const { faqEntries, url } = Astro.props;
+
+  const faqPageSchema: FAQPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqEntries.map((faq) => ({
+      "@type": "Question" as const,
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer" as const,
+        text: faq.answer,
+      },
+    })),
+  };
+  schemas.push(faqPageSchema);
+
+  const breadcrumbSchema: BreadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: config.site.base_url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Docs",
+        item: `${config.site.base_url}/docs`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "FAQ",
+        item: url,
+      },
+    ],
+  };
+  schemas.push(breadcrumbSchema);
+}
+
 if (type === "offer") {
   const { offers } = Astro.props;
   // 1. SoftwareApplication with individual Offer schemas for each tier
@@ -439,7 +576,7 @@ if (type === "offer") {
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(schema)}
+      set:html={JSON.stringify(schema).replaceAll("<", "\\u003c")}
     />
   ))
 }
