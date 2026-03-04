@@ -1,6 +1,6 @@
 ---
 title: "Networking Insights"
-description: "Analyze historical network requests and debug API issues."
+description: "Analyze historical network traffic patterns, spot duplicate API calls, identify slow endpoints, and debug failures across sessions with Networking Insights."
 ---
 
 :::note

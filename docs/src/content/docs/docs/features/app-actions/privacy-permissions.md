@@ -1,6 +1,6 @@
 ---
 title: "Privacy & Permissions"
-description: "Grant, revoke, and reset app permissions for the Simulator."
+description: "Grant, revoke, and reset app permissions on the iOS Simulator. Test camera, location, contacts, photos, and 15 other permission states without reinstalling."
 ---
 
 Testing permission flows is one of those things that's surprisingly tedious. You need to verify that your app handles denied permissions gracefully, that the permission dialog shows up at the right time, and that your onboarding flow works after a fresh permission state. RocketSim makes this fast.

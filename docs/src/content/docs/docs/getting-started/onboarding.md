@@ -1,6 +1,6 @@
 ---
-title: "Onboarding"
-description: "Selecting Xcode and providing permissions"
+title: "Getting Started with RocketSim"
+description: "Set up RocketSim for the first time — select your Xcode installation, grant the required permissions, and start enhancing your iOS Simulator workflow in minutes."
 sidebar:
   order: 2
 ---

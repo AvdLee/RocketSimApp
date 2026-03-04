@@ -1,6 +1,6 @@
 ---
 title: "Comparing Designs"
-description: "Compare designs right on top of the Simulator."
+description: "Overlay Figma or Sketch designs on the iOS Simulator to achieve pixel-perfect implementations. Adjust opacity and compare your app against the original design."
 ---
 
 RocketSim’s unique design comparison tool allows you to display a design on top of the Simulator in the correct dimensions. It’s the best way to verify you’ve implemented designs pixel-perfectly.
@@ -19,4 +19,4 @@ RocketSim’s unique design comparison tool allows you to display a design on to
 
 Toggle the advanced section to adjust zoom level, x- and y-position:
 
-![CleanShot 2025-01-21 at 13.55.24@2x.png](./comparing-designs/cleanshot_2025-01-21_at_13.55.242x.png)
+![Design overlay with opacity slider for comparing app against mockup](./comparing-designs/cleanshot_2025-01-21_at_13.55.242x.png)

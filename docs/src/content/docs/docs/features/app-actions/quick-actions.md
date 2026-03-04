@@ -1,6 +1,6 @@
 ---
 title: "Quick Actions"
-description: "Relaunch with locale, manage lifecycle, and speed up your testing workflow."
+description: "Relaunch your app with a different locale, manage app lifecycle, terminate, uninstall, and perform common testing actions with a single click from RocketSim."
 ---
 
 Quick Actions speed up your testing workflow by giving you one-click access to common operations. Instead of navigating through Xcode or Simulator menus, you can perform everything from RocketSim's side window.

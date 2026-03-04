@@ -81,6 +81,7 @@ export default defineConfig({
       ],
       title: "RocketSim Docs",
       disable404Route: true,
+      lastUpdated: true,
       logo: {
         light: "./src/assets/rocketsim-logo-dark.svg",
         dark: "./src/assets/rocketsim-logo.svg",

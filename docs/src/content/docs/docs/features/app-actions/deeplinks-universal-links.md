@@ -1,6 +1,6 @@
 ---
-title: "Deeplinks (Universal Links)"
-description: "Deeplink into a specific page using URLs."
+title: "Deep Links & Universal Links"
+description: "Test deep links and universal links on the iOS Simulator. Save, organize, and trigger your app's URL schemes and associated domains from RocketSim's side window."
 ---
 
 A deeplink or Universal Link allows you to redirect users to a specific location of your app. A common example is opening a map location in WhatsApp, which will directly open inside Apple Maps.
@@ -13,12 +13,12 @@ The same functionality can be built into your apps. I’ve seen developers manag
 2. Select the App Groups tab
 3. Create a new deeplink inside your app’s group:
 
-   ![CleanShot 2025-01-21 at 14.23.35@2x.png](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.23.352x.png)
+   ![Deep link editor in the App Group settings with URL scheme input](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.23.352x.png)
 
 4. Open the Simulator
 5. Execute the action by tapping your deeplink from the side window:
 
-   ![CleanShot 2025-01-21 at 14.24.04@2x.png](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.24.042x.png)
+   ![Deep link list in the side window ready to trigger](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.24.042x.png)
 
 ## Learn more
 
