@@ -1,6 +1,6 @@
 ---
 title: "Team Build Insights"
-description: "Compare build performance across your team and make data-driven hardware decisions."
+description: "Compare Xcode build performance across your entire team. Measure the impact of different machines, Xcode versions, and SDK changes on build duration."
 ---
 
 Individual Build Insights show you how your project builds on your machine. Team Build Insights take it further — you get visibility into how the same project builds across your entire team.

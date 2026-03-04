@@ -1,6 +1,6 @@
 ---
-title: "Statusbar Appearance"
-description: "Customize the status bar appearance in the Simulator to 9:41."
+title: "Status Bar Appearance"
+description: "Customize the iOS Simulator status bar for professional screenshots — set the time to 9:41, choose carrier text, and configure battery and signal indicators."
 ---
 
 RocketSim allows you to customize the status bar of the iOS Simulator.

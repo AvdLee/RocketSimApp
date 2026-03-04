@@ -1,6 +1,6 @@
 ---
 title: "120 FPS Recordings"
-description: "Create butter-smooth recordings at 120 frames per second."
+description: "Record smooth 120 FPS videos from the iOS Simulator for high-quality App Preview videos and marketing materials. Requires Apple Silicon."
 ---
 
 :::note

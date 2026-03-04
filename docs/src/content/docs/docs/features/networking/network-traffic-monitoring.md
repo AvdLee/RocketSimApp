@@ -1,11 +1,11 @@
 ---
 title: "Network Traffic Monitoring"
-description: "Monitor in- and outgoing network requests for your application."
+description: "Monitor HTTP requests and responses from your Simulator app in real time. Inspect headers, bodies, status codes, and copy cURL commands for debugging."
 ---
 
 Powered by RocketSim Connect, you’re able to monitor in- and outgoing network requests for your app.
 
-![Networking Tools Details.jpeg](./network-traffic-monitoring/networking_tools_details.jpeg)
+![Network traffic monitoring panel showing request list with methods, URLs, and status codes](./network-traffic-monitoring/networking_tools_details.jpeg)
 
 Being able to see which requests are running is essential for a fast development workflow.
 

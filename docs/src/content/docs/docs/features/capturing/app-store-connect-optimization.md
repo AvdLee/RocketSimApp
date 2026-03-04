@@ -1,6 +1,6 @@
 ---
 title: "App Store Connect Optimization"
-description: "Automatically convert screenshots and recordings to App Store Connect specifications."
+description: "Automatically convert iOS Simulator captures to App Store Connect specifications. Create correctly sized screenshots and App Preview videos ready for upload."
 sidebar:
   order: 4
 ---

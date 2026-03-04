@@ -1,6 +1,6 @@
 ---
 title: "Build Insights"
-description: "Track your Xcode build counts, durations, and trends over time."
+description: "Track your Xcode build counts, durations, and performance trends over time. Compare incremental vs. clean builds and monitor build times across Xcode versions."
 ---
 
 Build Insights tracks every Xcode build you make and shows you trends over time. You'll see how many builds you do per day, how long they take, and whether things are getting faster or slower.

@@ -1,6 +1,6 @@
 ---
 title: "Taking Screenshots"
-description: "Create professional screenshots with bezels, custom backgrounds, and App Store Connect optimization."
+description: "Capture professional iOS Simulator screenshots with device bezels, custom backgrounds, and App Store Connect optimization. Drag and drop directly into App Store Connect."
 sidebar:
   order: 1
 ---
@@ -65,4 +65,4 @@ Yes, you can! Set the background to transparent in the **Captures** tab or in **
 
 Note that App Store Connect images can’t have alpha layers, so you need to disable **App Preview Optimized mode.** Lastly, apps like Preview make it look like your screenshot’s background isn’t transparent. It’s best to copy your image into an app like Keynote to verify transparency:
 
-![CleanShot 2023-11-01 at 13.45.08@2x.png](./screenshots/cleanshot_2023-11-01_at_13.45.082x.png)
+![Transparent screenshot verified in Keynote showing no background](./screenshots/cleanshot_2023-11-01_at_13.45.082x.png)
