@@ -1,14 +1,25 @@
 import type { AstroIntegration } from "astro";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, readdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { sidebarGroups } from "../config/sidebar-groups";
+import siteConfig from "../config/config.json";
+
+const baseUrl = siteConfig.site.base_url;
+
+interface PageInfo {
+  title: string;
+  slug: string;
+  order: number;
+  groupLabel: string;
+}
 
 const FULL_SYSTEM_HEADER = `<SYSTEM>
 This is the official documentation for RocketSim, a macOS developer tool that enhances Apple's iOS Simulator.
 
 Product: RocketSim — available on the Mac App Store
 Developer: Antoine van der Lee (https://www.avanderlee.com)
-Website: https://www.rocketsim.app
+Website: ${baseUrl}
 Supported platforms: iOS, macOS, watchOS, and visionOS development via the Simulator
 
 Key capabilities:
@@ -32,141 +43,16 @@ This is a compact version of the official documentation for RocketSim, a macOS d
 
 Product: RocketSim — available on the Mac App Store
 Developer: Antoine van der Lee (https://www.avanderlee.com)
-Website: https://www.rocketsim.app
+Website: ${baseUrl}
 Supported platforms: iOS, macOS, watchOS, and visionOS development via the Simulator
 Target audience: iOS, macOS, watchOS, and visionOS developers using Xcode and the Simulator.
 </SYSTEM>`;
 
-const TABLE_OF_CONTENTS = `## Table of Contents
-
-### Getting Started
-- Onboarding
-- Product Tour & Quick Demos
-- Configuring App Actions
-- Setting up RocketSim Connect
-- How Large Teams Use RocketSim
-- Additional Resources
-- Testimonials
-
-### Screenshots & Recordings
-- Taking Screenshots
-- Creating Recordings
-- Floating Thumbnail
-- App Store Connect Optimization
-- Touch Indicators
-- 120 FPS Recordings
-
-### Simulator Camera
-- Simulator Camera Support
-
-### Status Bar
-- Statusbar Appearance
-
-### Design Comparison
-- Comparing Designs
-- Grids & Rulers
-- Magnifier
-- Slow Animations
-
-### App Actions
-- App Directory Access
-- Deeplinks (Universal Links)
-- Location Simulation
-- Privacy & Permissions
-- Push Notifications
-- Quick Actions
-
-### Networking
-- Network Speed Control & Simulator Airplane Mode
-- Network Traffic Monitoring
-- Networking Insights
-
-### Build Insights
-- Build Insights
-- Team Build Insights
-
-### Accessibility
-- Environment Overrides
-- Toggles & Dynamic Text
-- VoiceOver Navigator
-
-### Other Features
-- User Defaults Editor
-
-### Settings
-- Shortcuts
-- Side Window
-
-### Support
-- FAQ
-- Reporting An Issue
-- Requesting A Feature`;
-
-const RELATED_LINKS: Record<string, string[]> = {
-  "Taking Screenshots": [
-    "[Creating Recordings](/docs/features/capturing/recordings)",
-    "[App Store Connect Optimization](/docs/features/capturing/app-store-connect-optimization)",
-    "[Floating Thumbnail](/docs/features/capturing/floating-thumbnail)",
-  ],
-  "Creating Recordings": [
-    "[Taking Screenshots](/docs/features/capturing/screenshots)",
-    "[Touch Indicators](/docs/features/capturing/touch-indicators)",
-    "[120 FPS Recordings](/docs/features/capturing/120-fps-recordings)",
-  ],
-  "Network Traffic Monitoring": [
-    "[Setting Up RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect)",
-    "[Networking Insights](/docs/features/networking/networking-insights)",
-    "[Network Speed Control](/docs/features/networking/network-speed-control)",
-  ],
-  "Networking Insights": [
-    "[Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring)",
-    "[Setting Up RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect)",
-  ],
-  "Network Speed Control & Simulator Airplane Mode": [
-    "[Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring)",
-    "[Networking Insights](/docs/features/networking/networking-insights)",
-  ],
-  "Push Notifications": [
-    "[Configuring App Actions](/docs/getting-started/configuring-app-actions)",
-    "[Deep Links & Universal Links](/docs/features/app-actions/deeplinks-universal-links)",
-  ],
-  "Deeplinks (Universal Links)": [
-    "[Configuring App Actions](/docs/getting-started/configuring-app-actions)",
-    "[Push Notifications](/docs/features/app-actions/push-notifications)",
-  ],
-  "Build Insights": [
-    "[Team Build Insights](/docs/features/build-insights/team-build-insights)",
-  ],
-  "Team Build Insights": [
-    "[Build Insights](/docs/features/build-insights/build-insights)",
-    "[How Large Teams Use RocketSim](/docs/getting-started/how-large-teams-use-rocketsim)",
-  ],
-  "Comparing Designs": [
-    "[Grids & Rulers](/docs/features/design-comparison/grids-and-rulers)",
-    "[Magnifier](/docs/features/design-comparison/magnifier)",
-  ],
-  "Environment Overrides": [
-    "[Toggles & Dynamic Text](/docs/features/accessibility/toggles-and-dynamic-text)",
-    "[VoiceOver Navigator](/docs/features/accessibility/voiceover-navigator)",
-  ],
-  "VoiceOver Navigator": [
-    "[Environment Overrides](/docs/features/accessibility/environment-overrides)",
-    "[Toggles & Dynamic Text](/docs/features/accessibility/toggles-and-dynamic-text)",
-  ],
-  "Simulator Camera Support": [
-    "[Setting Up RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect)",
-  ],
-  "Setting up RocketSim Connect": [
-    "[Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring)",
-    "[Simulator Camera Support](/docs/features/capturing/simulator-camera-support)",
-  ],
-};
-
 /**
  * Post-processes the generated llms-full.txt and llms-small.txt files to:
  * - Replace the SYSTEM header with an enriched product context block
- * - Inject a table of contents for navigation
- * - Add cross-reference "Related" links between related pages
+ * - Inject an auto-generated table of contents derived from the sidebar config
+ * - Add cross-reference "Related" links between pages in the same sidebar group
  * - Remove the home/index page (only contains navigation components)
  * - Remove the 404 page
  * - Convert <Youtube> components to YouTube links
@@ -185,6 +71,8 @@ export function llmsTxtPostProcess(): AstroIntegration {
     hooks: {
       "astro:build:done": async ({ dir }) => {
         const outputDir = fileURLToPath(dir);
+        const contentRoot = path.join(process.cwd(), "src/content/docs");
+        const pages = await scanContentPages(contentRoot);
 
         const variants = [
           { file: "llms-full.txt", variant: "full" as const },
@@ -195,7 +83,9 @@ export function llmsTxtPostProcess(): AstroIntegration {
           const filePath = path.join(outputDir, file);
           try {
             let content = await readFile(filePath, "utf-8");
-            content = transformLlmsTxt(content, variant);
+            const toc = buildTableOfContents(pages, variant);
+            const relatedLinks = buildRelatedLinks(pages, variant);
+            content = transformLlmsTxt(content, variant, toc, relatedLinks);
             await writeFile(filePath, content, "utf-8");
           } catch {
             // File might not exist, skip
@@ -208,6 +98,164 @@ export function llmsTxtPostProcess(): AstroIntegration {
   };
 }
 
+async function scanContentPages(contentRoot: string): Promise<PageInfo[]> {
+  const pages: PageInfo[] = [];
+
+  for (const group of sidebarGroups) {
+    if (group.directory) {
+      const dirPath = path.join(contentRoot, group.directory);
+      let files: string[];
+      try {
+        files = await readdir(dirPath);
+      } catch {
+        continue;
+      }
+
+      for (const file of files.filter(
+        (f) => f.endsWith(".md") || f.endsWith(".mdx"),
+      )) {
+        const content = await readFile(path.join(dirPath, file), "utf-8");
+        const fm = extractFrontmatter(content);
+        const slug = group.directory + "/" + file.replace(/\.(mdx?)$/, "");
+        pages.push({
+          title: fm.title,
+          slug,
+          order: fm.sidebarOrder ?? 999,
+          groupLabel: group.label,
+        });
+      }
+    } else if (group.slugs) {
+      for (let i = 0; i < group.slugs.length; i++) {
+        const slug = group.slugs[i];
+        const content = await readContentFile(contentRoot, slug);
+        if (!content) continue;
+        const fm = extractFrontmatter(content);
+        pages.push({
+          title: fm.title,
+          slug,
+          order: i,
+          groupLabel: group.label,
+        });
+      }
+    }
+  }
+
+  return pages;
+}
+
+async function readContentFile(
+  contentRoot: string,
+  slug: string,
+): Promise<string | null> {
+  for (const ext of [".md", ".mdx"]) {
+    try {
+      return await readFile(path.join(contentRoot, slug + ext), "utf-8");
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+function extractFrontmatter(content: string): {
+  title: string;
+  sidebarOrder?: number;
+} {
+  const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!fmMatch) return { title: "" };
+  const fm = fmMatch[1];
+  const titleMatch = fm.match(/title:\s*"([^"]+)"/);
+  const orderMatch = fm.match(/order:\s*(\d+)/);
+  return {
+    title: titleMatch?.[1] ?? "",
+    sidebarOrder: orderMatch ? parseInt(orderMatch[1]) : undefined,
+  };
+}
+
+function buildTableOfContents(
+  pages: PageInfo[],
+  variant: "full" | "small",
+): string {
+  const groupOrder = sidebarGroups.map((g) => g.label);
+  const grouped = new Map<string, PageInfo[]>();
+
+  for (const label of groupOrder) {
+    grouped.set(label, []);
+  }
+
+  for (const page of pages) {
+    if (variant === "small" && page.title === "Testimonials") continue;
+    grouped.get(page.groupLabel)?.push(page);
+  }
+
+  let toc = "## Table of Contents\n";
+
+  for (const label of groupOrder) {
+    const groupPages = grouped.get(label);
+    if (!groupPages || groupPages.length === 0) continue;
+
+    groupPages.sort((a, b) => a.order - b.order);
+
+    toc += `\n### ${label}\n`;
+    for (const page of groupPages) {
+      toc += `- ${page.title}\n`;
+    }
+  }
+
+  return toc.trimEnd();
+}
+
+function buildRelatedLinks(
+  pages: PageInfo[],
+  variant: "full" | "small",
+): Record<string, string[]> {
+  const filtered =
+    variant === "small"
+      ? pages.filter((p) => p.title !== "Testimonials")
+      : pages;
+  const grouped = new Map<string, PageInfo[]>();
+  for (const page of filtered) {
+    if (!grouped.has(page.groupLabel)) {
+      grouped.set(page.groupLabel, []);
+    }
+    grouped.get(page.groupLabel)!.push(page);
+  }
+
+  const related: Record<string, string[]> = {};
+
+  for (const groupPages of grouped.values()) {
+    if (groupPages.length < 2) continue;
+
+    for (const page of groupPages) {
+      related[page.title] = groupPages
+        .filter((p) => p.slug !== page.slug)
+        .map((p) => `[${p.title}](/${p.slug})`);
+    }
+  }
+
+  return related;
+}
+
+function addRelatedLinks(
+  page: string,
+  relatedLinks: Record<string, string[]>,
+): string {
+  const titleMatch = page.match(/^# (.+)/);
+  if (!titleMatch) return page;
+  const title = titleMatch[1].trim();
+
+  const related = relatedLinks[title];
+  if (related && related.length > 0) {
+    return (
+      page.trimEnd() +
+      "\n\n### Related\n" +
+      related.map((r) => `- ${r}`).join("\n") +
+      "\n"
+    );
+  }
+  return page;
+}
+
 async function enhanceLlmsTxtIndex(outputDir: string): Promise<void> {
   const llmsTxtPath = path.join(outputDir, "llms.txt");
   try {
@@ -217,8 +265,8 @@ async function enhanceLlmsTxtIndex(outputDir: string): Promise<void> {
 > RocketSim is a macOS developer tool that enhances Apple's iOS Simulator with professional-grade features for capturing, debugging, testing, and design validation. Available on the Mac App Store for iOS, macOS, watchOS, and visionOS developers.
 
 Last updated: ${buildDate}
-Website: https://www.rocketsim.app
-Documentation: https://www.rocketsim.app/docs
+Website: ${baseUrl}
+Documentation: ${baseUrl}/docs
 GitHub: https://github.com/AvdLee/RocketSimApp
 Support: support@rocketsim.app
 
@@ -234,18 +282,18 @@ Support: support@rocketsim.app
 
 ## Context
 
-- [Product context](https://www.rocketsim.app/llms-ctx.txt): concise product overview, feature summary, and technical details for RocketSim
+- [Product context](${baseUrl}/llms-ctx.txt): concise product overview, feature summary, and technical details for RocketSim
 
 ## Documentation Sets
 
-- [Abridged documentation](https://www.rocketsim.app/llms-small.txt): compact version with non-essential content removed
-- [Complete documentation](https://www.rocketsim.app/llms-full.txt): full documentation for RocketSim
+- [Abridged documentation](${baseUrl}/llms-small.txt): compact version with non-essential content removed
+- [Complete documentation](${baseUrl}/llms-full.txt): full documentation for RocketSim
 
 ## Quick Start
 
-- [Getting Started](https://www.rocketsim.app/docs/getting-started/onboarding)
-- [Product Tour](https://www.rocketsim.app/docs/getting-started/product-tour-and-quick-demos)
-- [FAQ](https://www.rocketsim.app/docs/support/faq)
+- [Getting Started](${baseUrl}/docs/getting-started/onboarding)
+- [Product Tour](${baseUrl}/docs/getting-started/product-tour-and-quick-demos)
+- [FAQ](${baseUrl}/docs/support/faq)
 
 ## Notes
 
@@ -258,24 +306,12 @@ Support: support@rocketsim.app
   }
 }
 
-function addRelatedLinks(page: string): string {
-  const titleMatch = page.match(/^# (.+)/);
-  if (!titleMatch) return page;
-  const title = titleMatch[1].trim();
-
-  const related = RELATED_LINKS[title];
-  if (related && related.length > 0) {
-    return (
-      page.trimEnd() +
-      "\n\n### Related\n" +
-      related.map((r) => `- ${r}`).join("\n") +
-      "\n"
-    );
-  }
-  return page;
-}
-
-function transformLlmsTxt(content: string, variant: "full" | "small"): string {
+function transformLlmsTxt(
+  content: string,
+  variant: "full" | "small",
+  toc: string,
+  relatedLinks: Record<string, string[]>,
+): string {
   // Extract and discard the original <SYSTEM> header
   const systemMatch = content.match(/^(<SYSTEM>[\s\S]*?<\/SYSTEM>\n\n)/);
   const body = systemMatch ? content.slice(systemMatch[1].length) : content;
@@ -299,15 +335,13 @@ function transformLlmsTxt(content: string, variant: "full" | "small"): string {
   });
 
   // Add cross-reference links to relevant pages
-  const pagesWithRelated = filteredPages.map(addRelatedLinks);
+  const pagesWithRelated = filteredPages.map((page) =>
+    addRelatedLinks(page, relatedLinks),
+  );
 
   // Assemble with enriched SYSTEM header and TOC
   const newSystemHeader =
     variant === "full" ? FULL_SYSTEM_HEADER : SMALL_SYSTEM_HEADER;
-  let toc = TABLE_OF_CONTENTS;
-  if (variant === "small") {
-    toc = toc.replace(/^- Testimonials\n?/m, "");
-  }
 
   let result =
     newSystemHeader + "\n\n" + toc + "\n\n" + pagesWithRelated.join("");
