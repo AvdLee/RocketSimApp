@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
-    "format:check": "prettier --check .",
+    "format:check": "prettier --check src",
     "lint": "eslint src",
     "knip": "knip",
     "wordpress:start": "wp-env start",
