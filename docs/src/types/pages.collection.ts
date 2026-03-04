@@ -43,6 +43,70 @@ export const termsCollection = defineCollection({
   }),
 });
 
+// Features Page collection schema
+export const featuresPageCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean(),
+    hero: z.object({
+      title: z.string().optional(),
+    }),
+  }),
+});
+
+// Feature Page schema (consolidated feature category pages)
+const bentoColumnSchema = z.object({
+  title: z.string(),
+  subtitle: z.string(),
+  image: z.string(),
+});
+
+export const featurePageSchema = z.object({
+  title: z.string(),
+  meta_title: z.string().optional(),
+  description: z.string(),
+  draft: z.boolean().default(false),
+  hero: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+  }),
+  bento: z
+    .object({
+      enable: z.boolean(),
+      title: z.string(),
+      list: z.object({
+        firstServiceRow: z.object({
+          landscapeColumn: bentoColumnSchema,
+          squareColumn: bentoColumnSchema,
+        }),
+        secondServiceRow: z.object({
+          landscapeColumn: bentoColumnSchema,
+          squareColumn: bentoColumnSchema,
+        }),
+      }),
+    })
+    .optional(),
+  subFeatures: z.array(
+    z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      description: z.string(),
+      highlights: z.array(z.object({ enable: z.boolean(), title: z.string() })),
+      feature_image: z.object({
+        src: z.string(),
+        alt: z.string(),
+      }),
+      button: z.object({
+        enable: z.boolean(),
+        label: z.string(),
+        url: z.string(),
+      }),
+    }),
+  ),
+});
+
 // Thank you collection schema
 export const thankYouCollection = defineCollection({
   schema: z.object({
