@@ -37,6 +37,51 @@ export function llmsTxtPostProcess(): AstroIntegration {
             // File might not exist, skip
           }
         }
+
+        // Enhance llms.txt with richer metadata
+        const llmsTxtPath = path.join(outputDir, "llms.txt");
+        try {
+          const buildDate = new Date().toISOString().split("T")[0];
+          const enhancedLlmsTxt = `# RocketSim
+
+> RocketSim is a macOS developer tool that enhances Apple's iOS Simulator with professional-grade features for capturing, debugging, testing, and design validation. Available on the Mac App Store for iOS, macOS, watchOS, and visionOS developers.
+
+Last updated: ${buildDate}
+Website: https://www.rocketsim.app
+Documentation: https://www.rocketsim.app/docs
+GitHub: https://github.com/AvdLee/RocketSimApp
+Support: support@rocketsim.app
+
+## Key Features
+
+- Professional screenshot and video capture with device bezels
+- Network traffic monitoring and debugging
+- Push notification and deep link testing
+- Design comparison with pixel-perfect overlays
+- Accessibility testing (Dynamic Type, VoiceOver Navigator)
+- Xcode build insights and team analytics
+- Network speed throttling and Simulator airplane mode
+
+## Documentation Sets
+
+- [Abridged documentation](https://www.rocketsim.app/llms-small.txt): compact version with non-essential content removed
+- [Complete documentation](https://www.rocketsim.app/llms-full.txt): full documentation for RocketSim
+
+## Quick Start
+
+- [Getting Started](https://www.rocketsim.app/docs/getting-started/onboarding)
+- [Product Tour](https://www.rocketsim.app/docs/getting-started/product-tour-and-quick-demos)
+- [FAQ](https://www.rocketsim.app/docs/support/faq)
+
+## Notes
+
+- All documentation is automatically generated from the same source as the official docs
+- The "Last updated" date reflects when the documentation was last built and deployed
+`;
+          await writeFile(llmsTxtPath, enhancedLlmsTxt, "utf-8");
+        } catch {
+          // File might not exist
+        }
       },
     },
   };
