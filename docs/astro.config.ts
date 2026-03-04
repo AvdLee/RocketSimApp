@@ -18,6 +18,7 @@ export default defineConfig({
   base: config.site.base_path,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   redirects: {
+    "/team-insights": "/for-teams",
     "/docs/features/rocketsim-connect/introduction-and-setup":
       "/docs/getting-started/setting-up-rocketsim-connect",
     "/docs/features/rocketsim-connect/network-traffic-monitoring":

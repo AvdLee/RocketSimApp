@@ -11,7 +11,7 @@ const sectionData = (await getEntry(
 )) as CollectionEntry<"ctaSectionCollection">;
 const { enable, title, description, image, call_to_actions } = sectionData.data;
 
-const isTeamPage = Astro.url.pathname === "/team-insights";
+const isTeamPage = Astro.url.pathname === "/for-teams";
 const isPricingPage = Astro.url.pathname === "/pricing";
 
 const callToActions = isTeamPage
