@@ -1,5 +1,6 @@
 ---
 name: "The Power of Drag and Drop"
+docPath: "docs/features/capturing/app-store-connect-optimization"
 tagLine: "App Store Connect. GitHub. Slack. Twitter. iMessage."
 asset:
   type: "video"

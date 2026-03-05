@@ -1,5 +1,6 @@
 ---
 name: "Recent builds"
+docPath: "docs/features/build-insights/build-insights"
 youtubeLink: "https://www.youtube.com/watch?v=zukRdke1cP8"
 asset:
   type: "image"

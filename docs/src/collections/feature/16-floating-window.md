@@ -1,5 +1,6 @@
 ---
 name: "Floating windows for quick access"
+docPath: "docs/features/capturing/floating-thumbnail"
 asset:
   type: "image"
   path: "../../assets/features/floating-window-trimming.png"

@@ -1,5 +1,6 @@
 ---
 name: "Quick Actions"
+docPath: "docs/features/app-actions/quick-actions"
 asset:
   type: "video"
   path: "/features/quick-actions.mp4"

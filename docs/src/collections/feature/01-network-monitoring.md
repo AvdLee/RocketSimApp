@@ -2,6 +2,7 @@
 name: "Network Monitor"
 youtubeLink: "https://www.youtube.com/watch?v=ihVwU9usxgQ"
 tagLine: "Inspect Network Requests in realtime"
+docPath: "docs/features/networking/network-traffic-monitoring"
 blogId: 20
 asset:
   type: "video"

@@ -1,5 +1,6 @@
 ---
 name: "Professional recordings & screenshots"
+docPath: "docs/features/capturing/recordings"
 asset:
   type: "image"
   path: "../../assets/features/captures.png"

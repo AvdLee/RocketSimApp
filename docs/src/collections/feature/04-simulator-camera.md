@@ -1,5 +1,6 @@
 ---
 name: "Simulator Camera"
+docPath: "docs/features/capturing/simulator-camera-support"
 asset:
   type: "video"
   path: "/features/simulator-camera.mov"

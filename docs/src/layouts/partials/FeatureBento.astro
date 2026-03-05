@@ -1,0 +1,124 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+interface BentoColumn {
+  title: string;
+  subtitle: string;
+  image: string;
+}
+
+interface Props {
+  title: string;
+  list: {
+    firstServiceRow: {
+      landscapeColumn: BentoColumn;
+      squareColumn: BentoColumn;
+    };
+    secondServiceRow: {
+      landscapeColumn: BentoColumn;
+      squareColumn: BentoColumn;
+    };
+  };
+}
+
+const { title, list } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-container">
+      <div class="section-intro centralize">
+        <h2
+          class="title hasEmphasize"
+          data-aos="fade-up-sm"
+          data-aos-delay="0"
+          set:html={markdownify(title)}
+        />
+      </div>
+      <div class="section-content" data-aos="fade-up-sm" data-aos-delay="100">
+        <div class="grid gap-4">
+          {
+            list.firstServiceRow && (
+              <div class="grid lg:grid-cols-3 gap-4">
+                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl">
+                  <div class="p-6 sm:p-11">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.firstServiceRow.landscapeColumn.title}
+                    </h3>
+                    <p>{list.firstServiceRow.landscapeColumn.subtitle}</p>
+                  </div>
+                  <div class="px-6 sm:px-11">
+                    <ImageMod
+                      width={700}
+                      height={330}
+                      src={list.firstServiceRow.landscapeColumn.image}
+                      alt={list.firstServiceRow.landscapeColumn.title}
+                      class="aspect-[700/330] object-cover object-left-top rounded-t-md w-full"
+                    />
+                  </div>
+                </div>
+                <div class="lg:col-span-1 bg-light flex flex-col-reverse lg:flex-col gap-8 lg:gap-0 justify-between rounded-3xl">
+                  <div class="p-6 sm:p-8">
+                    <ImageMod
+                      width={700}
+                      height={330}
+                      src={list.firstServiceRow.squareColumn.image}
+                      alt={list.firstServiceRow.squareColumn.title}
+                      class="w-full"
+                    />
+                  </div>
+                  <div class="p-6 sm:p-8">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.firstServiceRow.squareColumn.title}
+                    </h3>
+                    <p>{list.firstServiceRow.squareColumn.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+
+          {
+            list.secondServiceRow && (
+              <div class="grid lg:grid-cols-3 gap-4">
+                <div class="lg:col-span-1 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl overflow-hidden">
+                  <div class="p-6 sm:p-11">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.secondServiceRow.squareColumn.title}
+                    </h3>
+                    <p>{list.secondServiceRow.squareColumn.subtitle}</p>
+                  </div>
+                  <ImageMod
+                    width={700}
+                    height={600}
+                    src={list.secondServiceRow.squareColumn.image}
+                    alt={list.secondServiceRow.squareColumn.title}
+                    class="w-full"
+                  />
+                </div>
+                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl">
+                  <div class="p-6 sm:p-11">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.secondServiceRow.landscapeColumn.title}
+                    </h3>
+                    <p>{list.secondServiceRow.landscapeColumn.subtitle}</p>
+                  </div>
+                  <div class="pl-6 sm:pl-11">
+                    <ImageMod
+                      width={700}
+                      height={330}
+                      src={list.secondServiceRow.landscapeColumn.image}
+                      alt={list.secondServiceRow.landscapeColumn.title}
+                      class="aspect-[700/330] object-cover object-left-top rounded-md w-full rounded-t-md"
+                    />
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
