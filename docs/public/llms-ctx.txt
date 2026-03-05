@@ -1,0 +1,43 @@
+# RocketSim — Product Context
+
+## What is RocketSim?
+RocketSim is a macOS developer tool that enhances Apple's iOS Simulator with professional-grade features for capturing, debugging, testing, and design validation. It's available on the Mac App Store and used by individual developers and large teams worldwide.
+
+## Who is it for?
+iOS, macOS, watchOS, and visionOS developers who use Xcode and the iOS Simulator for app development and testing.
+
+## Core Feature Areas
+
+### Capturing
+Professional screenshots and recordings with device bezels, custom backgrounds, touch indicators, and App Store Connect optimization. Supports GIF, MP4, and JPEG/PNG formats.
+
+### Networking
+Real-time network traffic monitoring via RocketSim Connect, historical networking insights, and network speed throttling (3G, Edge, airplane mode) for testing poor connectivity.
+
+### App Actions
+Test push notifications, deep links/universal links, location simulation, and privacy permissions without a physical device. Manage everything from a persistent side window.
+
+### Design Comparison
+Overlay design mockups from Figma or Sketch with adjustable opacity. Add grid overlays and rulers. Use the pixel-level magnifier for precise layout verification.
+
+### Accessibility
+Toggle accessibility settings (Dynamic Type, Increase Contrast, Bold Text, Reduce Motion, etc.) from the side window. VoiceOver Navigator visualizes element order and supports keyboard-driven navigation.
+
+### Build Insights
+Track Xcode build counts, durations, and trends. Compare incremental vs. clean builds. Team Build Insights lets teams compare performance across machines and Xcode versions.
+
+### Other
+User Defaults real-time editor, status bar customization, simulator camera support, and configurable keyboard shortcuts.
+
+## Technical Details
+- Platform: macOS (enhances the iOS/watchOS/visionOS Simulator in Xcode)
+- Distribution: Mac App Store (out-of-store distribution available on request — contact support@rocketsim.app)
+- Sandboxed: Yes
+- RocketSim Connect: Local Bonjour-based framework for Simulator-to-RocketSim communication (debug builds only)
+
+## Links
+- Website: https://www.rocketsim.app
+- Documentation: https://www.rocketsim.app/docs
+- GitHub (issues & features): https://github.com/AvdLee/RocketSimApp
+- YouTube: https://www.youtube.com/@rocketsimapp
+- Developer: Antoine van der Lee (https://www.avanderlee.com)
