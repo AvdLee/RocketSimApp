@@ -75,7 +75,7 @@ const seo = {
       <section>
         <p>
           <em
-            >This privacy statement was most recently revised on 9 April 2025</em
+            >This privacy statement was most recently revised on 7 March 2026</em
           >
         </p>
         <p>
@@ -245,6 +245,70 @@ const seo = {
           will be permanently deleted within 30 days.
         </p>
       </section>
+      <section aria-labelledby="sso-authentication">
+        <h3 id="sso-authentication" class="title--underline">
+          <em>Single Sign-On (SSO) Authentication</em>
+        </h3>
+        <p>
+          <strong>Purpose:</strong> To allow Users to authenticate via their organization's
+          identity provider using Single Sign-On (SSO).
+        </p>
+        <p><strong>Personal data:</strong></p>
+        <ul>
+          <li>E-mail address (received from the identity provider)</li>
+          <li>Full name (received from the identity provider)</li>
+          <li>
+            E-mail verification status (received from the identity provider)
+          </li>
+          <li>
+            SSO authentication status (flag indicating the User authenticated
+            via SSO)
+          </li>
+          <li>ID token (used for single logout)</li>
+          <li>
+            Refresh token (a hashed, randomly generated token stored server-side
+            for session continuity, with a 7-day lifetime)
+          </li>
+          <li>
+            Access token (a short-lived JWT issued to the client for API
+            authentication, with a 15-minute lifetime; not stored server-side)
+          </li>
+        </ul>
+        <p>
+          No passwords are created or stored for Users who authenticate via SSO.
+        </p>
+        <p>
+          During authentication, the following OAuth scopes are requested from
+          the identity provider: <code>openid</code>,
+          <code>profile</code>, and <code>email</code>. Only data necessary for
+          authentication and account provisioning is processed.
+        </p>
+        <p><strong>Session data:</strong></p>
+        <p>
+          During the SSO login flow, temporary session data — including state,
+          nonce, and PKCE code verifier — is created server-side to securely
+          complete the authentication process. This data is automatically
+          deleted after successful authentication or upon expiration.
+        </p>
+        <p><strong>Cookies:</strong></p>
+        <p>
+          A temporary cookie named <code>sso_session_code</code> is used solely during
+          the SSO login flow. This cookie is secure, HTTP-only, and SameSite. It is
+          used to exchange a session code for access and refresh tokens and is cleared
+          immediately after exchange. This cookie is not used for tracking or analytics
+          purposes.
+        </p>
+        <p><strong>Legal basis:</strong></p>
+        <ul>
+          <li>Execution of an agreement with the data subject;</li>
+        </ul>
+        <p>
+          <strong>Retention period:</strong><br />During the subscription term,
+          data will be retained. Upon termination of the subscription, all data
+          will be permanently deleted within 30 days. Temporary session data is
+          deleted immediately after use or upon expiration.
+        </p>
+      </section>
       <section aria-labelledby="contact">
         <h3 id="contact"><em>Contact</em></h3>
         <p>
@@ -325,6 +389,12 @@ const seo = {
         <p>Third parties processing personal data on our behalf or yours:</p>
         <ul>
           <li>MailGun – to send emails</li>
+          <li>
+            Auth0 (by Okta) – to broker SSO authentication. Auth0 processes
+            authentication data only to facilitate the login flow and does not
+            receive data beyond what is necessary for authentication. The actual
+            authentication takes place at the Customer's own identity provider.
+          </li>
         </ul>
         <p>
           RocketSim may provide your personal data to parties located outside

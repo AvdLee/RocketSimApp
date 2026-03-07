@@ -496,6 +496,11 @@ const seo = {
               To access and use the Services, the Customer will be provided with
               an Account and asked to provide login information (a unique
               username and password) after conclusion of the Agreement.
+              Alternatively, where the Customer's organization has configured
+              Single Sign-On (SSO) for its email domain, Users may authenticate
+              through the Customer's own identity provider (e.g., Okta, Azure
+              AD, Google Workspace). In such cases, credentials are managed by
+              the Customer's identity provider and not by RocketSim.
             </li>
             <li>
               The Customer is obliged to use any Account made available by
@@ -506,6 +511,14 @@ const seo = {
               approval of the Customer. The Customer is obliged to notify
               RocketSim immediately if it suspects abuse of and/or unauthorized
               access to its Accounts.
+            </li>
+            <li>
+              When using SSO, the User's authentication is governed by the
+              policies and security controls of the Customer's identity
+              provider. RocketSim is not responsible for credential management,
+              access policies, or authentication failures handled by third-party
+              identity providers. SSO access requires a valid license and an SSO
+              domain mapping configured by the Customer's organization.
             </li>
           </ol>
         </li>
