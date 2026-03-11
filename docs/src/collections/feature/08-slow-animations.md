@@ -1,5 +1,6 @@
 ---
 name: "Slow Animations"
+featurePage: "design-comparison"
 asset:
   type: "video"
   path: "/features/slow-animations.mp4"

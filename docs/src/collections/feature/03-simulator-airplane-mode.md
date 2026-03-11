@@ -1,5 +1,6 @@
 ---
 name: "Simulator Airplane Mode"
+featurePage: "networking"
 asset:
   type: "video"
   path: "/features/simulator-airplane-mode.mp4"

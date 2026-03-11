@@ -1,5 +1,6 @@
 ---
 name: "Simulator Camera"
+featurePage: "simulator-camera"
 asset:
   type: "video"
   path: "/features/simulator-camera.mov"

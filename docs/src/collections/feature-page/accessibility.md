@@ -4,28 +4,6 @@ description: "Test accessibility with environment overrides, VoiceOver Navigator
 hero:
   title: "Accessibility"
   subtitle: "Make your app accessible to everyone"
-bento:
-  enable: true
-  title: "Accessibility *Testing* Tools"
-  list:
-    firstServiceRow:
-      landscapeColumn:
-        title: "Environment Overrides"
-        subtitle: "Test with inverted colors, dynamic type sizes, and more accessibility settings."
-        image: "/images/features/environment-overrides.png"
-      squareColumn:
-        title: "VoiceOver Navigator"
-        subtitle: "Visualize VoiceOver element order right on the Simulator."
-        image: "/images/features/voiceover-navigator.png"
-    secondServiceRow:
-      landscapeColumn:
-        title: "Dynamic Text"
-        subtitle: "Test how your app responds to different text sizes without leaving the Simulator."
-        image: "/images/features/environment-overrides.png"
-      squareColumn:
-        title: "Accessibility Toggles"
-        subtitle: "Quickly toggle accessibility features like bold text, reduce motion, and more."
-        image: "/images/features/voiceover-navigator.png"
 subFeatures:
   - enable: true
     title: "*Environment* Overrides"

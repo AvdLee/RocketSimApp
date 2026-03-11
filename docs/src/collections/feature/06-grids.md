@@ -1,5 +1,6 @@
 ---
 name: "Grids"
+featurePage: "design-comparison"
 asset:
   type: "image"
   path: "../../assets/features/grids.png"

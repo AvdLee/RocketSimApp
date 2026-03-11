@@ -33,6 +33,19 @@ const feature = defineCollection({
       docPath: z.string().optional(),
       blogId: z.number().optional(),
       youtubeLink: z.string().url().optional(),
+      featurePage: z
+        .enum([
+          "accessibility",
+          "app-actions",
+          "build-insights",
+          "design-comparison",
+          "networking",
+          "screenshots-recordings",
+          "simulator-camera",
+          "status-bar",
+          "user-defaults-editor",
+        ])
+        .optional(),
       asset: z.discriminatedUnion("type", [
         z.object({
           type: z.literal("image"),
