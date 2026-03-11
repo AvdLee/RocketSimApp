@@ -6,7 +6,6 @@ hero:
   subtitle: "Pixel-perfect implementations, verified right in the Simulator"
 bento:
   enable: true
-  title: "Tools for *Pixel Perfection*"
   list:
     firstServiceRow:
       landscapeColumn:

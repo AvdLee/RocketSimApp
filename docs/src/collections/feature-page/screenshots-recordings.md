@@ -6,7 +6,6 @@ hero:
   subtitle: "Professional captures that make your app shine"
 bento:
   enable: true
-  title: "Capture *Every Detail*"
   list:
     firstServiceRow:
       landscapeColumn:

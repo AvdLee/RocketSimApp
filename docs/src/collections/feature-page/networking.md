@@ -6,7 +6,6 @@ hero:
   subtitle: "Inspect, throttle, and control your app's network traffic"
 bento:
   enable: true
-  title: "Network *Debugging* Made Easy"
   list:
     firstServiceRow:
       landscapeColumn:

@@ -75,7 +75,7 @@ export const featurePageSchema = z.object({
   bento: z
     .object({
       enable: z.boolean(),
-      title: z.string(),
+      title: z.string().optional(),
       list: z.object({
         firstServiceRow: z.object({
           landscapeColumn: bentoColumnSchema,

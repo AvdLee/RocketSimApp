@@ -9,7 +9,7 @@ interface BentoColumn {
 }
 
 interface Props {
-  title: string;
+  title?: string;
   list: {
     firstServiceRow: {
       landscapeColumn: BentoColumn;
@@ -28,14 +28,18 @@ const { title, list } = Astro.props;
 <section class="section">
   <div class="container">
     <div class="section-container">
-      <div class="section-intro centralize">
-        <h2
-          class="title hasEmphasize"
-          data-aos="fade-up-sm"
-          data-aos-delay="0"
-          set:html={markdownify(title)}
-        />
-      </div>
+      {
+        title && (
+          <div class="section-intro centralize">
+            <h2
+              class="title hasEmphasize"
+              data-aos="fade-up-sm"
+              data-aos-delay="0"
+              set:html={markdownify(title)}
+            />
+          </div>
+        )
+      }
       <div class="section-content" data-aos="fade-up-sm" data-aos-delay="100">
         <div class="grid gap-4">
           {

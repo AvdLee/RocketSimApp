@@ -6,7 +6,6 @@ hero:
   subtitle: "Configurable actions to boost your development speed"
 bento:
   enable: true
-  title: "Actions at Your *Fingertips*"
   list:
     firstServiceRow:
       landscapeColumn:
