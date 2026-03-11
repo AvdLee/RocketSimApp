@@ -9,20 +9,20 @@ bento:
   list:
     firstServiceRow:
       landscapeColumn:
-        title: "Quick Actions"
-        subtitle: "Configurable actions for Deeplinks, Push Notifications, and locations."
-        image: "/images/features/location-routes.png"
-      squareColumn:
         title: "Location Simulation"
         subtitle: "Single locations or automobile and walking routes, tested right in the Simulator."
         image: "/images/features/location-routes.png"
+      squareColumn:
+        title: "Quick Actions"
+        subtitle: "Configurable actions for Deeplinks, Push Notifications, and locations."
+        image: "/images/features/privacy-permissions.png"
     secondServiceRow:
-      landscapeColumn:
+      squareColumn:
         title: "Push Notifications"
         subtitle: "Send test push notifications to your Simulator app without a server."
-        image: "/images/features/location-routes.png"
-      squareColumn:
+        image: "/images/features/push-notifications.png"
+      landscapeColumn:
         title: "Deeplinks & Universal Links"
         subtitle: "Test deeplinks and universal links directly from RocketSim."
-        image: "/images/features/location-routes.png"
+        image: "/images/features/deeplinks-universal-links-landscape.png"
 ---

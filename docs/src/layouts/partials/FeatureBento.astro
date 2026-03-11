@@ -40,12 +40,12 @@ const { title, list } = Astro.props;
           </div>
         )
       }
-      <div class="section-content" data-aos="fade-up-sm" data-aos-delay="100">
+      <div class="section-content">
         <div class="grid gap-4">
           {
             list.firstServiceRow && (
               <div class="grid lg:grid-cols-3 gap-4">
-                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl">
+                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl" data-aos="fade-right-sm" data-aos-delay="0">
                   <div class="p-6 sm:p-11">
                     <h3 class="text-h5 font-medium pb-3">
                       {list.firstServiceRow.landscapeColumn.title}
@@ -60,14 +60,14 @@ const { title, list } = Astro.props;
                     />
                   </div>
                 </div>
-                <div class="lg:col-span-1 bg-light flex flex-col-reverse lg:flex-col gap-8 lg:gap-0 justify-between rounded-3xl">
+                <div class="lg:col-span-1 bg-light flex flex-col-reverse lg:flex-col gap-8 lg:gap-0 justify-between rounded-3xl" data-aos="fade-left-sm" data-aos-delay="100">
                   <div class="p-6 sm:p-8">
                     <ImageMod
                       width={700}
-                      height={330}
+                      height={600}
                       src={list.firstServiceRow.squareColumn.image}
                       alt={list.firstServiceRow.squareColumn.title}
-                      class="w-full"
+                      class="w-full rounded-md"
                     />
                   </div>
                   <div class="p-6 sm:p-8">
@@ -84,7 +84,7 @@ const { title, list } = Astro.props;
           {
             list.secondServiceRow && (
               <div class="grid lg:grid-cols-3 gap-4">
-                <div class="lg:col-span-1 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl overflow-hidden">
+                <div class="lg:col-span-1 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl overflow-hidden" data-aos="fade-right-sm" data-aos-delay="200">
                   <div class="p-6 sm:p-11">
                     <h3 class="text-h5 font-medium pb-3">
                       {list.secondServiceRow.squareColumn.title}
@@ -99,7 +99,7 @@ const { title, list } = Astro.props;
                     class="w-full"
                   />
                 </div>
-                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl">
+                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl" data-aos="fade-left-sm" data-aos-delay="300">
                   <div class="p-6 sm:p-11">
                     <h3 class="text-h5 font-medium pb-3">
                       {list.secondServiceRow.landscapeColumn.title}
