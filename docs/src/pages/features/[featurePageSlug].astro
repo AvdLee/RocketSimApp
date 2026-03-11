@@ -40,7 +40,10 @@ const structuredData = {
 
   {bento?.enable && <FeatureBento title={bento.title} list={bento.list} />}
 
-  <FeatureItems featurePage={page.id} />
+  <FeatureItems
+    featurePage={page.id}
+    title={bento?.enable ? `Explore all ${title} features` : undefined}
+  />
 
   <CallToAction />
 </Base>

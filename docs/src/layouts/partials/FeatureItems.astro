@@ -5,9 +5,10 @@ import Feature from "@/components/Feature.astro";
 
 interface Props {
   featurePage: string;
+  title?: string;
 }
 
-const { featurePage } = Astro.props;
+const { featurePage, title } = Astro.props;
 
 const rawFeatures = await getCollection("feature", (entry) => {
   return entry.data.featurePage === featurePage;
@@ -24,7 +25,7 @@ const features = await Promise.all(
 ---
 
 <style>
-  .feature-wrapper {
+  .feature-wrapper:not(:first-of-type):not(:last-of-type) {
     margin-top: 4rem;
     margin-bottom: 4rem;
 
@@ -44,6 +45,15 @@ const features = await Promise.all(
 <section class="section">
   <div class="container">
     <div class="section-container">
+      {
+        title && (
+          <div class="section-intro centralize">
+            <h2 class="title" data-aos="fade-up-sm" data-aos-delay="0">
+              {title}
+            </h2>
+          </div>
+        )
+      }
       <div class="section-content">
         {
           features.map(({ data, Content }) => (
