@@ -1,8 +1,8 @@
 {
   "main": [
     {
-      "name": "All Features",
-      "url": "/"
+      "name": "Features",
+      "url": "/features"
     },
     {
       "name": "For Teams",
@@ -29,8 +29,8 @@
   ],
   "footer": [
     {
-      "name": "All features",
-      "url": "/"
+      "name": "Features",
+      "url": "/features"
     },
     {
       "name": "For Teams",

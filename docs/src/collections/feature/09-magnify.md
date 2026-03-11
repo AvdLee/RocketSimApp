@@ -1,5 +1,6 @@
 ---
 name: "Magnify for precision"
+featurePage: "design-comparison"
 tagLine: "Hold ⇧ Shift and move mouse or scroll wheel to magnify"
 asset:
   type: "video"

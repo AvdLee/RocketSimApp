@@ -1,6 +1,7 @@
 ---
 name: "Recent builds"
 youtubeLink: "https://www.youtube.com/watch?v=zukRdke1cP8"
+featurePage: "build-insights"
 asset:
   type: "image"
   path: "../../assets/features/recent-builds.png"

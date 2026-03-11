@@ -1,5 +1,6 @@
 ---
 name: "Floating windows for quick access"
+featurePage: "screenshots-recordings"
 asset:
   type: "image"
   path: "../../assets/features/floating-window-trimming.png"

@@ -1,5 +1,6 @@
 ---
 name: "Professional recordings & screenshots"
+featurePage: "screenshots-recordings"
 asset:
   type: "image"
   path: "../../assets/features/captures.png"
