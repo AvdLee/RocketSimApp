@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 
-import Feature from "./Feature.astro";
+import Feature from "@/components/Feature.astro";
 
 const rawFeatures = await getCollection("feature");
 const features = await Promise.all(

@@ -88,23 +88,6 @@ export const featurePageSchema = z.object({
       }),
     })
     .optional(),
-  subFeatures: z.array(
-    z.object({
-      enable: z.boolean(),
-      title: z.string(),
-      description: z.string(),
-      highlights: z.array(z.object({ enable: z.boolean(), title: z.string() })),
-      feature_image: z.object({
-        src: z.string(),
-        alt: z.string(),
-      }),
-      button: z.object({
-        enable: z.boolean(),
-        label: z.string(),
-        url: z.string(),
-      }),
-    }),
-  ),
 });
 
 // Thank you collection schema

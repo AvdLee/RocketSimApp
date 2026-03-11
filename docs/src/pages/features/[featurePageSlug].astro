@@ -6,7 +6,7 @@ import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import FeatureBento from "@/partials/FeatureBento.astro";
-import FeatureKeyItems from "@/partials/FeatureKeyItems.astro";
+import FeatureItems from "@/partials/FeatureItems.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("feature-page");
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { title, description, hero, bento, subFeatures } = page.data;
+const { title, description, hero, bento } = page.data;
 const {
   site: { base_url },
 } = config;
@@ -40,7 +40,7 @@ const structuredData = {
 
   {bento?.enable && <FeatureBento title={bento.title} list={bento.list} />}
 
-  <FeatureKeyItems list={subFeatures} />
+  <FeatureItems featurePage={page.id} />
 
   <CallToAction />
 </Base>
