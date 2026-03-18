@@ -74,7 +74,7 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                     <ImageMod
                       src={list.firstServiceRow.landscapeColumn.image}
                       alt={list.firstServiceRow.landscapeColumn.title}
-                      class="aspect-[700/330] object-cover object-left-top rounded-t-md w-full"
+                      class="aspect-[3/2] object-cover object-left-top rounded-t-md w-full"
                     />
                   </div>
                 </div>
@@ -96,11 +96,9 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                   )}
                   <div class="p-6 sm:p-8">
                     <ImageMod
-                      width={700}
-                      height={600}
                       src={list.firstServiceRow.squareColumn.image}
                       alt={list.firstServiceRow.squareColumn.title}
-                      class="w-full rounded-md"
+                      class="aspect-[4/5] object-cover object-top w-full rounded-md"
                     />
                   </div>
                   <div class="p-6 sm:p-8">
@@ -140,11 +138,9 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                     <p>{list.secondServiceRow.squareColumn.subtitle}</p>
                   </div>
                   <ImageMod
-                    width={700}
-                    height={600}
                     src={list.secondServiceRow.squareColumn.image}
                     alt={list.secondServiceRow.squareColumn.title}
-                    class="w-full"
+                    class="aspect-[4/5] object-cover object-top w-full"
                   />
                 </div>
                 <div
@@ -171,11 +167,9 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                   </div>
                   <div class="pl-6 sm:pl-11">
                     <ImageMod
-                      width={700}
-                      height={330}
                       src={list.secondServiceRow.landscapeColumn.image}
                       alt={list.secondServiceRow.landscapeColumn.title}
-                      class="aspect-[700/330] object-cover object-left-top rounded-md w-full rounded-t-md"
+                      class="aspect-[3/2] object-cover object-left-top rounded-t-md w-full"
                     />
                   </div>
                 </div>
