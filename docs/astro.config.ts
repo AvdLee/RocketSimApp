@@ -60,6 +60,7 @@ export default defineConfig({
         page !== "https://www.rocketsim.app/terms" &&
         page !== "https://www.rocketsim.app/privacy" &&
         page !== "https://www.rocketsim.app/thank-you" &&
+        page !== "https://www.rocketsim.app/claim-offer" &&
         page !== "https://www.rocketsim.app/signup/trial/thank-you" &&
         page !== "https://www.rocketsim.app/404" &&
         page !== "https://www.rocketsim.app/docs/404",

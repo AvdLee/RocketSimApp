@@ -1,0 +1,42 @@
+---
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: "Opening RocketSim | RocketSim",
+  description: "Opening RocketSim and forwarding your offer details.",
+  canonical: `${base_url}/claim-offer`,
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Base seo={seo}>
+  <section class="py-48 text-center">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-4">Opening RocketSim...</h1>
+      <p class="text-xl text-gray-400 mb-8">
+        If RocketSim does not open automatically, you'll be redirected to the
+        homepage shortly.
+      </p>
+      <a href="/" class="btn btn-primary">If nothing happened, click here to visit RocketSim</a>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  const deepLink = `rocketsim://open-offer${window.location.search}`;
+  const fallbackUrl = "https://www.rocketsim.app";
+
+  window.location.href = deepLink;
+
+  window.setTimeout(() => {
+    window.location.replace(fallbackUrl);
+  }, 2000);
+</script>
