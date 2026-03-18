@@ -6,10 +6,13 @@ interface BentoColumn {
   title: string;
   subtitle: string;
   image: string;
+  href?: string;
 }
 
 interface Props {
   title?: string;
+  viewAllHref?: string;
+  viewAllText?: string;
   list: {
     firstServiceRow: {
       landscapeColumn: BentoColumn;
@@ -22,7 +25,7 @@ interface Props {
   };
 }
 
-const { title, list } = Astro.props;
+const { title, viewAllHref, viewAllText, list } = Astro.props;
 ---
 
 <section class="section">
@@ -45,7 +48,8 @@ const { title, list } = Astro.props;
           {
             list.firstServiceRow && (
               <div class="grid lg:grid-cols-3 gap-4">
-                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl" data-aos="fade-right-sm" data-aos-delay="0">
+                <div class:list={["lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl border border-transparent transition-all", list.firstServiceRow.landscapeColumn.href && "group relative hover:border-primary hover:shadow-lg"]} data-aos="fade-right-sm" data-aos-delay="0">
+                  {list.firstServiceRow.landscapeColumn.href && <a href={list.firstServiceRow.landscapeColumn.href} class="absolute inset-0 z-10 rounded-3xl" aria-label={list.firstServiceRow.landscapeColumn.title}></a>}
                   <div class="p-6 sm:p-11">
                     <h3 class="text-h5 font-medium pb-3">
                       {list.firstServiceRow.landscapeColumn.title}
@@ -60,7 +64,8 @@ const { title, list } = Astro.props;
                     />
                   </div>
                 </div>
-                <div class="lg:col-span-1 bg-light flex flex-col-reverse lg:flex-col gap-8 lg:gap-0 justify-between rounded-3xl" data-aos="fade-left-sm" data-aos-delay="100">
+                <div class:list={["lg:col-span-1 bg-light flex flex-col-reverse lg:flex-col gap-8 lg:gap-0 justify-between rounded-3xl border border-transparent transition-all", list.firstServiceRow.squareColumn.href && "group relative hover:border-primary hover:shadow-lg"]} data-aos="fade-left-sm" data-aos-delay="100">
+                  {list.firstServiceRow.squareColumn.href && <a href={list.firstServiceRow.squareColumn.href} class="absolute inset-0 z-10 rounded-3xl" aria-label={list.firstServiceRow.squareColumn.title}></a>}
                   <div class="p-6 sm:p-8">
                     <ImageMod
                       width={700}
@@ -84,7 +89,8 @@ const { title, list } = Astro.props;
           {
             list.secondServiceRow && (
               <div class="grid lg:grid-cols-3 gap-4">
-                <div class="lg:col-span-1 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl overflow-hidden" data-aos="fade-right-sm" data-aos-delay="200">
+                <div class:list={["lg:col-span-1 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl overflow-hidden border border-transparent transition-all", list.secondServiceRow.squareColumn.href && "group relative hover:border-primary hover:shadow-lg"]} data-aos="fade-right-sm" data-aos-delay="200">
+                  {list.secondServiceRow.squareColumn.href && <a href={list.secondServiceRow.squareColumn.href} class="absolute inset-0 z-10 rounded-3xl" aria-label={list.secondServiceRow.squareColumn.title}></a>}
                   <div class="p-6 sm:p-11">
                     <h3 class="text-h5 font-medium pb-3">
                       {list.secondServiceRow.squareColumn.title}
@@ -99,7 +105,8 @@ const { title, list } = Astro.props;
                     class="w-full"
                   />
                 </div>
-                <div class="lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl" data-aos="fade-left-sm" data-aos-delay="300">
+                <div class:list={["lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl border border-transparent transition-all", list.secondServiceRow.landscapeColumn.href && "group relative hover:border-primary hover:shadow-lg"]} data-aos="fade-left-sm" data-aos-delay="300">
+                  {list.secondServiceRow.landscapeColumn.href && <a href={list.secondServiceRow.landscapeColumn.href} class="absolute inset-0 z-10 rounded-3xl" aria-label={list.secondServiceRow.landscapeColumn.title}></a>}
                   <div class="p-6 sm:p-11">
                     <h3 class="text-h5 font-medium pb-3">
                       {list.secondServiceRow.landscapeColumn.title}
@@ -120,6 +127,15 @@ const { title, list } = Astro.props;
             )
           }
         </div>
+        {
+          viewAllHref && (
+            <div class="mt-8 text-center" data-aos="fade-up-sm">
+              <a href={viewAllHref} class="btn btn-secondary">
+                {viewAllText || "View all features"} →
+              </a>
+            </div>
+          )
+        }
       </div>
     </div>
   </div>

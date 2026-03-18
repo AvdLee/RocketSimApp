@@ -9,7 +9,7 @@ import NavigationLink from "../old/components/NavigationLink.astro";
 import Notification from "../old/components/Notification.astro";
 import AppStore from "../old/components/AppStore.astro";
 import Reviews from "../old/components/Reviews.astro";
-import Features from "../old/components/Features.astro";
+import FeatureBento from "@/layouts/partials/FeatureBento.astro";
 import StatusBar from "../old/components/StatusBar.astro";
 import TeamInsights from "../old/components/TeamInsights.astro";
 import SocialMediaMentions from "../old/components/SocialMediaMentions.astro";
@@ -64,7 +64,41 @@ const seo = {
   <AppStore />
   <Reviews />
   <SubscribeToNewsletter />
-  <Features />
+  <FeatureBento
+    title="Explore our **features**"
+    viewAllHref="/features"
+    viewAllText="View all features"
+    list={{
+      firstServiceRow: {
+        landscapeColumn: {
+          title: "Screenshots & Recordings",
+          subtitle: "Capture stunning App Store screenshots and recordings directly from the Simulator.",
+          image: "/images/features/screenshots-in-presentation.png",
+          href: "/features/screenshots-recordings",
+        },
+        squareColumn: {
+          title: "Design Comparison",
+          subtitle: "Compare your implementation against the original design right inside the Simulator.",
+          image: "/images/features/design-comparison-landscape.png",
+          href: "/features/design-comparison",
+        },
+      },
+      secondServiceRow: {
+        squareColumn: {
+          title: "App Actions",
+          subtitle: "Trigger push notifications, deeplinks, and location simulations with a single click.",
+          image: "/images/features/push-notifications.png",
+          href: "/features/app-actions",
+        },
+        landscapeColumn: {
+          title: "Build Insights",
+          subtitle: "Get actionable insights into your build times and optimize your development workflow.",
+          image: "/images/features/build-insights.png",
+          href: "/features/build-insights",
+        },
+      },
+    }}
+  />
   <TeamInsights />
   <StatusBar />
   <SubscribeToNewsletter />
