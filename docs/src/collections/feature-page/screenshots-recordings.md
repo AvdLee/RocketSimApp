@@ -12,17 +12,21 @@ bento:
         title: "120 FPS Recordings"
         subtitle: "Record at 120 FPS for ultra-smooth video output. Great for smooth scrolling, animations, and transitions."
         image: "/images/features/120-fps-recordings.png"
+        imageAlign: "center-top"
       squareColumn:
         title: "Floating Windows"
         subtitle: "Stack multiple captures in floating windows and drag them anywhere."
         image: "/images/features/floating-window-trimming.png"
+        imageAlign: "right-top"
     secondServiceRow:
       squareColumn:
         title: "Professional Recordings & Screenshots"
         subtitle: "Capture MP4, GIF, or PNG with device bezels and audio recorded."
         image: "/images/features/captures.png"
+        imageAlign: "center-top"
       landscapeColumn:
         title: "Professional Recordings & Screenshots"
         subtitle: "Capture MP4, GIF, or PNG with device bezels and audio recorded."
         image: "/images/features/screenshots-in-presentation.png"
+        imageAlign: "center-top"
 ---

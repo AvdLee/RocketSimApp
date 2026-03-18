@@ -11,18 +11,22 @@ bento:
       landscapeColumn:
         title: "Grids & Rulers"
         subtitle: "Perfectly align elements with grid overlays and precise rulers."
-        image: "/images/features/grids-landscape.png"
+        image: "/images/features/grids.png"
+        imageAlign: "center-top"
       squareColumn:
         title: "Slow Animations"
         subtitle: "Slow down animations to optimize them for perfection."
         image: "/images/features/slow-animations.png"
+        imageAlign: "center-top"
     secondServiceRow:
       squareColumn:
         title: "Magnify for Precision"
         subtitle: "Hold Shift and move mouse to magnify. Pick colors as SwiftUI, NSColor, or UIColor."
         image: "/images/features/magnifier.png"
+        imageAlign: "center"
       landscapeColumn:
         title: "Compare Designs"
         subtitle: "Use overlays or slide comparisons to spot differences between implementation and design."
         image: "/images/features/design-comparison-landscape.png"
+        imageAlign: "center-top"
 ---

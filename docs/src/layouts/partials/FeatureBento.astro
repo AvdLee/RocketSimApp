@@ -7,6 +7,16 @@ interface BentoColumn {
   subtitle: string;
   image: string;
   href?: string;
+  imageAlign?:
+    | "left-top"
+    | "center-top"
+    | "right-top"
+    | "left-center"
+    | "center"
+    | "right-center"
+    | "left-bottom"
+    | "center-bottom"
+    | "right-bottom";
 }
 
 interface Props {
@@ -26,6 +36,11 @@ interface Props {
 }
 
 const { title, viewAllHref, viewAllText, list } = Astro.props;
+
+function toObjectPosition(align?: string): string {
+  if (!align) return "left top";
+  return align === "center" ? "center" : align.replace("-", " ");
+}
 ---
 
 <section class="section">
@@ -74,7 +89,8 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                     <ImageMod
                       src={list.firstServiceRow.landscapeColumn.image}
                       alt={list.firstServiceRow.landscapeColumn.title}
-                      class="aspect-[3/2] object-cover object-left-top rounded-t-md w-full"
+                      class="aspect-[3/2] object-cover rounded-t-md w-full"
+                      style={`object-position: ${toObjectPosition(list.firstServiceRow.landscapeColumn.imageAlign)}`}
                     />
                   </div>
                 </div>
@@ -98,7 +114,8 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                     <ImageMod
                       src={list.firstServiceRow.squareColumn.image}
                       alt={list.firstServiceRow.squareColumn.title}
-                      class="aspect-[4/5] object-cover object-top w-full rounded-md"
+                      class="aspect-[4/5] object-cover w-full rounded-md"
+                      style={`object-position: ${toObjectPosition(list.firstServiceRow.squareColumn.imageAlign)}`}
                     />
                   </div>
                   <div class="p-6 sm:p-8">
@@ -140,7 +157,8 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                   <ImageMod
                     src={list.secondServiceRow.squareColumn.image}
                     alt={list.secondServiceRow.squareColumn.title}
-                    class="aspect-[4/5] object-cover object-top w-full"
+                    class="aspect-[4/5] object-cover w-full"
+                    style={`object-position: ${toObjectPosition(list.secondServiceRow.squareColumn.imageAlign)}`}
                   />
                 </div>
                 <div
@@ -169,7 +187,8 @@ const { title, viewAllHref, viewAllText, list } = Astro.props;
                     <ImageMod
                       src={list.secondServiceRow.landscapeColumn.image}
                       alt={list.secondServiceRow.landscapeColumn.title}
-                      class="aspect-[3/2] object-cover object-left-top rounded-t-md w-full"
+                      class="aspect-[3/2] object-cover rounded-t-md w-full"
+                      style={`object-position: ${toObjectPosition(list.secondServiceRow.landscapeColumn.imageAlign)}`}
                     />
                   </div>
                 </div>

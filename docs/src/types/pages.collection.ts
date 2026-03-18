@@ -61,6 +61,19 @@ const bentoColumnSchema = z.object({
   title: z.string(),
   subtitle: z.string(),
   image: z.string(),
+  imageAlign: z
+    .enum([
+      "left-top",
+      "center-top",
+      "right-top",
+      "left-center",
+      "center",
+      "right-center",
+      "left-bottom",
+      "center-bottom",
+      "right-bottom",
+    ])
+    .optional(),
 });
 
 export const featurePageSchema = z.object({
