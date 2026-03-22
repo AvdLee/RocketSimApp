@@ -7,7 +7,11 @@ interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
 
 const { asButton, asSecondaryButton, className, ...rest } = Astro.props;
 
-const baseClass = asButton ? "button" : asSecondaryButton ? "button button--secondary" : "link";
+const baseClass = asButton
+  ? "button"
+  : asSecondaryButton
+    ? "button button--secondary"
+    : "link";
 ---
 
 <style>
@@ -48,12 +52,9 @@ const baseClass = asButton ? "button" : asSecondaryButton ? "button button--seco
       outline: 0.25rem solid var(--ring);
     }
   }
-
 </style>
 <li>
-  <a
-    {...rest}
-    class={`${baseClass}${className ? ` ${className}` : ""}`}
+  <a {...rest} class={`${baseClass}${className ? ` ${className}` : ""}`}
     ><slot /></a
   >
 </li>
