@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+
+import Feature from "@/components/Feature.astro";
+
+const rawFeatures = await getCollection("feature");
+const features = await Promise.all(
+  rawFeatures
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map(async (feature) => {
+      const { Content } = await render(feature);
+      return {
+        ...feature,
+        Content,
+      };
+    }),
+);
+---
+
+<style>
+  .feature-wrapper {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+    }
+  }
+</style>
+
+<section aria-label="RocketSim features">
+  {
+    features.map(({ data, Content }) => (
+      <div class="feature-wrapper">
+        <Feature data={data}>
+          <Content />
+        </Feature>
+      </div>
+    ))
+  }
+</section>
