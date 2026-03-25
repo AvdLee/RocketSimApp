@@ -1,5 +1,7 @@
 ---
+showOnHomepage: true
 name: "Location Simulation"
+featurePage: "app-actions"
 tagLine: "Single locations or automobile and walking routes: Test them right in the Simulator"
 asset:
   type: "image"

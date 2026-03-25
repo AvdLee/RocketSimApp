@@ -4,6 +4,8 @@ import { docsLoader } from "@astrojs/starlight/loaders";
 import { docsSchema } from "@astrojs/starlight/schema";
 
 import {
+  featurePageSchema,
+  featuresPageCollection,
   pricingCollection,
   privacyCollection,
   teamInsightsCollection,
@@ -27,9 +29,24 @@ const feature = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
+      showOnHomepage: z.boolean().default(false),
       tagLine: z.string().optional(),
+      docPath: z.string().optional(),
       blogId: z.number().optional(),
       youtubeLink: z.string().url().optional(),
+      featurePage: z
+        .enum([
+          "accessibility",
+          "app-actions",
+          "build-insights",
+          "design-comparison",
+          "networking",
+          "screenshots-recordings",
+          "simulator-camera",
+          "status-bar",
+          "user-defaults-editor",
+        ])
+        .optional(),
       asset: z.discriminatedUnion("type", [
         z.object({
           type: z.literal("image"),
@@ -56,8 +73,18 @@ const docs = defineCollection({
   schema: docsSchema(),
 });
 
+const featurePage = defineCollection({
+  loader: glob({
+    pattern: "**/[^_]*.md",
+    base: "./src/collections/feature-page",
+  }),
+  schema: featurePageSchema,
+});
+
 export const collections = {
   feature,
+  "feature-page": featurePage,
+  features: featuresPageCollection,
   pricing: pricingCollection,
   privacy: privacyCollection,
   "team-insights": teamInsightsCollection,

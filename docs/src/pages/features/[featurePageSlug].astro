@@ -1,0 +1,78 @@
+---
+import { getCollection } from "astro:content";
+
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+import FeatureBento from "@/partials/FeatureBento.astro";
+import FeatureItems from "@/partials/FeatureItems.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("feature-page");
+  return pages
+    .filter((page) => !page.data.draft)
+    .map((page) => ({
+      params: { featurePageSlug: page.id },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const { title, description, hero, bento } = page.data;
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: page.data.meta_title || `${title} - RocketSim`,
+  description,
+  canonical: `${base_url}/features/${page.id}`,
+};
+
+const structuredData = {
+  type: "static" as const,
+};
+---
+
+<Base seo={seo} structuredData={structuredData}>
+  <PageHeader title={hero.title} subtitle={hero.subtitle || ""} />
+
+  {bento?.enable && <FeatureBento title={bento.title} list={bento.list} />}
+
+  <FeatureItems
+    featurePage={page.id}
+    title={bento?.enable ? `Explore all ${title} features` : undefined}
+  />
+
+  <CallToAction />
+</Base>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const videos = document.querySelectorAll(".js-feature-video");
+
+    videos.forEach((video) => {
+      const videoElement = video as HTMLVideoElement;
+      videoElement.load();
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const videoElement = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            videoElement.play();
+          } else {
+            videoElement.pause();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    videos.forEach((video) => {
+      observer.observe(video);
+    });
+  });
+</script>

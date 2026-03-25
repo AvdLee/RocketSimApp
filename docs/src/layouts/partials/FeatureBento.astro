@@ -1,0 +1,211 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+interface BentoColumn {
+  title: string;
+  subtitle: string;
+  image: string;
+  href?: string;
+  imageAlign?:
+    | "left-top"
+    | "center-top"
+    | "right-top"
+    | "left-center"
+    | "center"
+    | "right-center"
+    | "left-bottom"
+    | "center-bottom"
+    | "right-bottom";
+}
+
+interface Props {
+  title?: string;
+  viewAllHref?: string;
+  viewAllText?: string;
+  list: {
+    firstServiceRow: {
+      landscapeColumn: BentoColumn;
+      squareColumn: BentoColumn;
+    };
+    secondServiceRow: {
+      landscapeColumn: BentoColumn;
+      squareColumn: BentoColumn;
+    };
+  };
+}
+
+const { title, viewAllHref, viewAllText, list } = Astro.props;
+
+function toObjectPosition(align?: string): string {
+  if (!align) return "left top";
+  return align === "center" ? "center" : align.replace("-", " ");
+}
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-container">
+      {
+        title && (
+          <div class="section-intro centralize">
+            <h2
+              class="title hasEmphasize"
+              data-aos="fade-up-sm"
+              data-aos-delay="0"
+              set:html={markdownify(title)}
+            />
+          </div>
+        )
+      }
+      <div class="section-content">
+        <div class="grid gap-4">
+          {
+            list.firstServiceRow && (
+              <div class="grid lg:grid-cols-3 gap-4">
+                <div
+                  class:list={[
+                    "lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl border border-transparent transition-all",
+                    list.firstServiceRow.landscapeColumn.href &&
+                      "group relative hover:border-primary hover:shadow-lg",
+                  ]}
+                  data-aos="fade-right-sm"
+                  data-aos-delay="0"
+                >
+                  {list.firstServiceRow.landscapeColumn.href && (
+                    <a
+                      href={list.firstServiceRow.landscapeColumn.href}
+                      class="absolute inset-0 z-10 rounded-3xl"
+                      aria-label={list.firstServiceRow.landscapeColumn.title}
+                    />
+                  )}
+                  <div class="p-6 sm:p-11">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.firstServiceRow.landscapeColumn.title}
+                    </h3>
+                    <p>{list.firstServiceRow.landscapeColumn.subtitle}</p>
+                  </div>
+                  <div class="px-6 sm:px-11">
+                    <ImageMod
+                      src={list.firstServiceRow.landscapeColumn.image}
+                      alt={list.firstServiceRow.landscapeColumn.title}
+                      class="aspect-[3/2] object-cover rounded-t-md w-full"
+                      style={`object-position: ${toObjectPosition(list.firstServiceRow.landscapeColumn.imageAlign)}`}
+                    />
+                  </div>
+                </div>
+                <div
+                  class:list={[
+                    "lg:col-span-1 bg-light flex flex-col-reverse lg:flex-col gap-8 lg:gap-0 justify-between rounded-3xl border border-transparent transition-all",
+                    list.firstServiceRow.squareColumn.href &&
+                      "group relative hover:border-primary hover:shadow-lg",
+                  ]}
+                  data-aos="fade-left-sm"
+                  data-aos-delay="100"
+                >
+                  {list.firstServiceRow.squareColumn.href && (
+                    <a
+                      href={list.firstServiceRow.squareColumn.href}
+                      class="absolute inset-0 z-10 rounded-3xl"
+                      aria-label={list.firstServiceRow.squareColumn.title}
+                    />
+                  )}
+                  <div class="p-6 sm:p-8">
+                    <ImageMod
+                      src={list.firstServiceRow.squareColumn.image}
+                      alt={list.firstServiceRow.squareColumn.title}
+                      class="aspect-[4/5] object-cover w-full rounded-md"
+                      style={`object-position: ${toObjectPosition(list.firstServiceRow.squareColumn.imageAlign)}`}
+                    />
+                  </div>
+                  <div class="p-6 sm:p-8">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.firstServiceRow.squareColumn.title}
+                    </h3>
+                    <p>{list.firstServiceRow.squareColumn.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+
+          {
+            list.secondServiceRow && (
+              <div class="grid lg:grid-cols-3 gap-4">
+                <div
+                  class:list={[
+                    "lg:col-span-1 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl overflow-hidden border border-transparent transition-all",
+                    list.secondServiceRow.squareColumn.href &&
+                      "group relative hover:border-primary hover:shadow-lg",
+                  ]}
+                  data-aos="fade-right-sm"
+                  data-aos-delay="200"
+                >
+                  {list.secondServiceRow.squareColumn.href && (
+                    <a
+                      href={list.secondServiceRow.squareColumn.href}
+                      class="absolute inset-0 z-10 rounded-3xl"
+                      aria-label={list.secondServiceRow.squareColumn.title}
+                    />
+                  )}
+                  <div class="p-6 sm:p-11">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.secondServiceRow.squareColumn.title}
+                    </h3>
+                    <p>{list.secondServiceRow.squareColumn.subtitle}</p>
+                  </div>
+                  <ImageMod
+                    src={list.secondServiceRow.squareColumn.image}
+                    alt={list.secondServiceRow.squareColumn.title}
+                    class="aspect-[4/5] object-cover w-full"
+                    style={`object-position: ${toObjectPosition(list.secondServiceRow.squareColumn.imageAlign)}`}
+                  />
+                </div>
+                <div
+                  class:list={[
+                    "lg:col-span-2 bg-light flex gap-10 lg:gap-0 flex-col justify-between rounded-3xl border border-transparent transition-all",
+                    list.secondServiceRow.landscapeColumn.href &&
+                      "group relative hover:border-primary hover:shadow-lg",
+                  ]}
+                  data-aos="fade-left-sm"
+                  data-aos-delay="300"
+                >
+                  {list.secondServiceRow.landscapeColumn.href && (
+                    <a
+                      href={list.secondServiceRow.landscapeColumn.href}
+                      class="absolute inset-0 z-10 rounded-3xl"
+                      aria-label={list.secondServiceRow.landscapeColumn.title}
+                    />
+                  )}
+                  <div class="p-6 sm:p-11">
+                    <h3 class="text-h5 font-medium pb-3">
+                      {list.secondServiceRow.landscapeColumn.title}
+                    </h3>
+                    <p>{list.secondServiceRow.landscapeColumn.subtitle}</p>
+                  </div>
+                  <div class="pl-6 sm:pl-11">
+                    <ImageMod
+                      src={list.secondServiceRow.landscapeColumn.image}
+                      alt={list.secondServiceRow.landscapeColumn.title}
+                      class="aspect-[3/2] object-cover rounded-t-md w-full"
+                      style={`object-position: ${toObjectPosition(list.secondServiceRow.landscapeColumn.imageAlign)}`}
+                    />
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </div>
+        {
+          viewAllHref && (
+            <div class="mt-8 text-center" data-aos="fade-up-sm">
+              <a href={viewAllHref} class="btn btn-secondary">
+                {viewAllText || "View all features"} →
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

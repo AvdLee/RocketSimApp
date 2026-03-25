@@ -1,8 +1,10 @@
 ---
+showOnHomepage: true
 name: "Network Monitor"
 youtubeLink: "https://www.youtube.com/watch?v=ihVwU9usxgQ"
 tagLine: "Inspect Network Requests in realtime"
 blogId: 20
+featurePage: "networking"
 asset:
   type: "video"
   path: "/features/network-monitoring-demo.mp4"

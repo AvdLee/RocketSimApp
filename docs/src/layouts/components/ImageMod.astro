@@ -6,8 +6,8 @@ import { Image } from "astro:assets";
 interface Props {
   src: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   quality?: "low" | "mid" | "high" | "max";
   loading?: "eager" | "lazy" | null | undefined;
   decoding?: "async" | "auto" | "sync" | null | undefined;
@@ -57,6 +57,7 @@ const imageQuality = quality ? quality : "mid";
       height={height}
       loading={loading}
       decoding={decoding}
+      layout="constrained"
       class={className}
       format={format}
       style={style}

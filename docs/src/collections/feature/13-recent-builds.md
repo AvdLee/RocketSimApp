@@ -1,5 +1,7 @@
 ---
+showOnHomepage: true
 name: "Recent builds"
+featurePage: "app-actions"
 youtubeLink: "https://www.youtube.com/watch?v=zukRdke1cP8"
 asset:
   type: "image"

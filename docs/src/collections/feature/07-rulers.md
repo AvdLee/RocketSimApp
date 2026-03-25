@@ -1,5 +1,7 @@
 ---
+showOnHomepage: true
 name: "Rulers"
+featurePage: "design-comparison"
 asset:
   type: "image"
   path: "../../assets/features/rulers.png"

@@ -210,7 +210,10 @@ const { seo, structuredData } = Astro.props;
       });
 
       document.addEventListener("astro:after-swap", () => {
-        aosInit();
+        // Remove leftover AOS state so animations re-trigger on the new page
+        document.querySelectorAll("[data-aos]").forEach((el) => {
+          el.classList.remove("aos-animate", "aos-init");
+        });
       });
     </script>
   </body>

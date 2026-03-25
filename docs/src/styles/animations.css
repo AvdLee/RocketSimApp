@@ -115,6 +115,15 @@
     opacity: 1;
   }
 }
+[data-aos="fade-left-sm"] {
+  transform: translateX(15px);
+  opacity: 0;
+  transition-property: transform, opacity;
+  &.aos-animate {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 [data-aos="zoom-out-sm"] {
   transform: scale(1.05);
   opacity: 0.5;

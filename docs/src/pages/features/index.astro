@@ -1,0 +1,33 @@
+---
+import { getEntry } from "astro:content";
+
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import FeatureGrid from "@/partials/FeatureGrid.astro";
+import FaqSection from "@/partials/FaqSection.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+const pageIndex = await getEntry("features", "-index");
+if (!pageIndex) return null;
+const { hero, title, meta_title, description } = pageIndex.data;
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: meta_title || `${title} - RocketSim`,
+  description,
+  canonical: `${base_url}/features`,
+};
+
+const structuredData = {
+  type: "static" as const,
+};
+---
+
+<Base seo={seo} structuredData={structuredData}>
+  <PageHeader title={hero.title} isCenter={true} />
+  <FeatureGrid />
+  <CallToAction />
+</Base>

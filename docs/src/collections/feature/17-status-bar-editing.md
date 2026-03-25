@@ -1,5 +1,7 @@
 ---
+showOnHomepage: true
 name: "09:41 - A historical moment in time"
+featurePage: "status-bar"
 asset:
   type: "image"
   path: "../../assets/features/status-bar-overrides.png"

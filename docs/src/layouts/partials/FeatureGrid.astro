@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+
+const rawFeaturePages = await getCollection("feature-page");
+const featurePages = rawFeaturePages
+  .filter((page) => !page.data.draft)
+  .sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {
+        featurePages.map((page, index) => {
+          return (
+            <a
+              href={`/features/${page.id}`}
+              class="group block no-underline rounded-2xl border border-border bg-theme-light p-6 transition-all hover:border-primary hover:shadow-lg"
+              data-aos="fade-up-sm"
+              data-aos-delay={50 * (index % 3)}
+            >
+              <h3 class="mb-2 text-lg font-semibold group-hover:text-primary transition-colors">
+                {page.data.hero.title}
+              </h3>
+              <p class="text-sm text-text">{page.data.description}</p>
+              <span class="mt-4 inline-block text-sm font-medium text-primary">
+                Learn more →
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

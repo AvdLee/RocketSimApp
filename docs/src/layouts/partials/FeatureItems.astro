@@ -1,0 +1,68 @@
+---
+import { getCollection, render } from "astro:content";
+
+import Feature from "@/components/Feature.astro";
+
+interface Props {
+  featurePage: string;
+  title?: string;
+}
+
+const { featurePage, title } = Astro.props;
+
+const rawFeatures = await getCollection("feature", (entry) => {
+  return entry.data.featurePage === featurePage;
+});
+
+const features = await Promise.all(
+  rawFeatures
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map(async (feature) => {
+      const { Content } = await render(feature);
+      return { data: feature.data, Content };
+    }),
+);
+---
+
+<style>
+  .feature-wrapper:not(:first-of-type) {
+    margin-top: 4rem;
+
+    @media (min-width: 800px) {
+      margin-top: 8rem;
+    }
+  }
+
+  .feature-wrapper :global(.deprecated-grid) {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+</style>
+
+<section class="section">
+  <div class="container">
+    <div class="section-container">
+      {
+        title && (
+          <div class="section-intro centralize">
+            <h2 class="title" data-aos="fade-up-sm" data-aos-delay="0">
+              {title}
+            </h2>
+          </div>
+        )
+      }
+      <div class="section-content">
+        {
+          features.map(({ data, Content }) => (
+            <div class="feature-wrapper">
+              <Feature data={data}>
+                <Content />
+              </Feature>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

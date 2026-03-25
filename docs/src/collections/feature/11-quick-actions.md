@@ -1,5 +1,7 @@
 ---
+showOnHomepage: true
 name: "Quick Actions"
+featurePage: "app-actions"
 asset:
   type: "video"
   path: "/features/quick-actions.mp4"
