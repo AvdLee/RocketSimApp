@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "Network Speed Control"
 youtubeLink: "https://www.youtube.com/watch?v=xK3iI5TzuA4"
 featurePage: "networking"

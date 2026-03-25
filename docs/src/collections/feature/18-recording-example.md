@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "A RocketSim recording in action"
 featurePage: "screenshots-recordings"
 tagLine: "Touches + Bezels = Professional Recording."

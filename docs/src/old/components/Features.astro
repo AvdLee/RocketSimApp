@@ -3,7 +3,10 @@ import { getCollection, render } from "astro:content";
 
 import Feature from "@/components/Feature.astro";
 
-const rawFeatures = await getCollection("feature");
+const rawFeatures = await getCollection(
+  "feature",
+  (entry) => entry.data.showOnHomepage === true,
+);
 const features = await Promise.all(
   rawFeatures
     .sort((a, b) => a.id.localeCompare(b.id))

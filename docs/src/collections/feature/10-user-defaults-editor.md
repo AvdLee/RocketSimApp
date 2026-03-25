@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "User Defaults Editor"
 tagLine: "Edit Standard & Group User Defaults in realtime"
 youtubeLink: "https://www.youtube.com/watch?v=zTbQck3ofcc"

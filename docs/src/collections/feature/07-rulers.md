@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "Rulers"
 featurePage: "design-comparison"
 asset:

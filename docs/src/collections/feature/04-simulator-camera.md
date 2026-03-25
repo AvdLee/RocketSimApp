@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "Simulator Camera"
 featurePage: "simulator-camera"
 asset:

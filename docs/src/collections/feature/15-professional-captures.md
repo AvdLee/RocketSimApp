@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "Professional recordings & screenshots"
 featurePage: "screenshots-recordings"
 asset:

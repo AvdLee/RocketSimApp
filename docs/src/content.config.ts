@@ -29,6 +29,7 @@ const feature = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
+      showOnHomepage: z.boolean().default(false),
       tagLine: z.string().optional(),
       docPath: z.string().optional(),
       blogId: z.number().optional(),

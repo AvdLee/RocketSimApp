@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "Simulator Airplane Mode"
 featurePage: "networking"
 asset:

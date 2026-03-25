@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "The Power of Drag and Drop"
 featurePage: "screenshots-recordings"
 tagLine: "App Store Connect. GitHub. Slack. Twitter. iMessage."

@@ -1,4 +1,5 @@
 ---
+showOnHomepage: true
 name: "Quick Actions"
 featurePage: "app-actions"
 asset:
