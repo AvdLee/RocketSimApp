@@ -1,0 +1,154 @@
+---
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: "Free RocketSim Pro for Students | RocketSim",
+  description:
+    "Get one year of RocketSim Pro for free with a valid student email address.",
+  canonical: `${base_url}/student`,
+};
+---
+
+<Base seo={seo}>
+  <section class="py-24 md:py-32">
+    <div class="mx-auto px-6 w-full max-w-[600px]">
+      <div id="student-form">
+        <div class="text-center mb-10">
+          <h1 class="text-4xl font-bold mb-4">
+            Free RocketSim Pro for Students
+          </h1>
+          <p class="text-lg text-gray-400">
+            Get one year of RocketSim Pro for free with a valid student email
+            address.
+          </p>
+        </div>
+
+        <div
+          id="alert-error"
+          class="hidden mb-6 p-4 rounded-lg bg-red-900/30 border border-red-500/50 text-red-300"
+        >
+          <p id="alert-error-message"></p>
+        </div>
+
+        <form id="student-signup-form" class="flex flex-col gap-5">
+          <div>
+            <label for="first_name" class="block text-sm font-medium mb-2"
+              >First name</label
+            >
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              placeholder="Alice"
+              required
+              class="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2"
+              >Student email address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="name@university.edu"
+              required
+              class="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+
+          <button
+            type="submit"
+            id="submit-btn"
+            class="btn btn-primary w-full mt-2 font-bold"
+          >
+            Claim free year
+          </button>
+        </form>
+      </div>
+
+      <div id="student-success" class="hidden text-center">
+        <h1 class="text-4xl font-bold mb-4">You're almost there!</h1>
+        <p class="text-lg text-gray-400">
+          Check your email to confirm your subscription and claim your free year
+          of RocketSim Pro.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  const form = document.getElementById("student-signup-form");
+  const submitBtn = document.getElementById("submit-btn");
+  const alertError = document.getElementById("alert-error");
+  const alertErrorMessage = document.getElementById("alert-error-message");
+  const formSection = document.getElementById("student-form");
+  const successSection = document.getElementById("student-success");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    alertError.classList.add("hidden");
+
+    const firstName = form.querySelector("#first_name").value.trim();
+    const email = form.querySelector("#email").value.trim();
+
+    if (!firstName) {
+      alertErrorMessage.textContent = "Please enter your first name.";
+      alertError.classList.remove("hidden");
+      return;
+    }
+
+    if (!email) {
+      alertErrorMessage.textContent = "Please enter your email address.";
+      alertError.classList.remove("hidden");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Verifying...";
+
+    try {
+      const response = await fetch(
+        "https://api.rocketsim.app/v1/student/subscribe",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            first_name: firstName,
+            form_id: 9283203,
+          }),
+        },
+      );
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        formSection.classList.add("hidden");
+        successSection.classList.remove("hidden");
+      } else {
+        const message =
+          result.reason ||
+          result.message ||
+          "Something went wrong. Please try again.";
+        alertErrorMessage.textContent = message;
+        alertError.classList.remove("hidden");
+      }
+    } catch {
+      alertErrorMessage.textContent =
+        "Unable to connect. Please try again later.";
+      alertError.classList.remove("hidden");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Claim free year";
+    }
+  });
+</script>
