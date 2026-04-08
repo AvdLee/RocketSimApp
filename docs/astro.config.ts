@@ -11,6 +11,7 @@ import sitemap from "@astrojs/sitemap";
 import { llmsTxtPostProcess } from "./src/integrations/llms-txt-post-process";
 
 import config from "./src/config/config.json";
+import { sidebarGroups } from "./src/config/sidebar-groups";
 
 // https://astro.build/config
 export default defineConfig({
@@ -123,72 +124,24 @@ export default defineConfig({
         Footer: "./src/components/starlight/Footer.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
       },
-      sidebar: [
-        {
-          label: "Getting Started",
-          collapsed: true,
-          autogenerate: { directory: "docs/getting-started" },
-        },
-        {
-          label: "Screenshots & Recordings",
-          collapsed: true,
-          items: [
-            { slug: "docs/features/capturing/screenshots" },
-            { slug: "docs/features/capturing/recordings" },
-            { slug: "docs/features/capturing/floating-thumbnail" },
-            { slug: "docs/features/capturing/app-store-connect-optimization" },
-            { slug: "docs/features/capturing/touch-indicators" },
-            { slug: "docs/features/capturing/120-fps-recordings" },
-          ],
-        },
-        {
-          label: "Simulator Camera",
-          link: "/docs/features/capturing/simulator-camera-support",
-        },
-        {
-          label: "Status Bar",
-          link: "/docs/features/capturing/statusbar-appearance",
-        },
-        {
-          label: "Design Comparison",
-          collapsed: true,
-          autogenerate: { directory: "docs/features/design-comparison" },
-        },
-        {
-          label: "App Actions",
-          collapsed: true,
-          autogenerate: { directory: "docs/features/app-actions" },
-        },
-        {
-          label: "Networking",
-          collapsed: true,
-          autogenerate: { directory: "docs/features/networking" },
-        },
-        {
-          label: "Build Insights",
-          collapsed: true,
-          autogenerate: { directory: "docs/features/build-insights" },
-        },
-        {
-          label: "Accessibility",
-          collapsed: true,
-          autogenerate: { directory: "docs/features/accessibility" },
-        },
-        {
-          label: "User Defaults Editor",
-          link: "/docs/features/user-defaults-editor",
-        },
-        {
-          label: "Settings",
-          collapsed: true,
-          autogenerate: { directory: "docs/settings" },
-        },
-        {
-          label: "Support",
-          collapsed: true,
-          autogenerate: { directory: "docs/support" },
-        },
-      ],
+      sidebar: sidebarGroups.map((group) => {
+        if (group.directory) {
+          return {
+            label: group.label,
+            collapsed: group.collapsed,
+            autogenerate: { directory: group.directory },
+          };
+        }
+        const slugs = group.slugs!;
+        if (slugs.length === 1) {
+          return { label: group.label, link: `/${slugs[0]}` };
+        }
+        return {
+          label: group.label,
+          collapsed: group.collapsed,
+          items: slugs.map((slug) => ({ slug })),
+        };
+      }),
     }),
     mdx(),
     llmsTxtPostProcess(),
