@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 struct Feature: Codable {
     enum CodingKeys: String, CodingKey {
@@ -53,34 +53,29 @@ let features: [Feature] = [
     .init(githubIssueID: "497", title: "Allow adding items to User Defaults", description: "Add items from within the User Defaults editor", status: .implemented),
     .init(githubIssueID: "236", title: "Allow Save as... for captured thumbnails", description: "Right-click a thumbnail to save as...", status: .implemented),
     .init(githubIssueID: "218", title: "Grant/Revoke push notifications permissions", description: "Adding Push notifications permissions to the other existing permission revoke, grant, reset actions.", status: .implemented),
-    
+    .init(githubIssueID: "269", title: "High-FPS Recordings (60 & 120 FPS)", description: "Record smoother simulator videos at 60 or 120 FPS.", status: .implemented),
+    .init(githubIssueID: "285", title: "Record Mic audio with recordings", description: "Record simulator videos together with system microphone audio.", status: .implemented),
+    .init(githubIssueID: "521", title: "Accessibility Inspector", description: "Inspect on-screen accessibility elements and explore their hierarchy directly in RocketSim.", status: .implemented),
+    .init(githubIssueID: "561", title: "Reset Keychain", description: "Reset a Simulator app's keychain without fully erasing the Simulator.", status: .implemented),
+
+    /// In Progress
+    .init(githubIssueID: "816", title: "RocketSim CLI & Agent Automation", description: "Control RocketSim from the terminal and AI tooling through a stable automation surface.", status: .inProgress),
+
     /// Planned
-    .init(githubIssueID: "368", title: "Show Magnifier boundaries", description: "Show a square around the zoomed section on top of the Simulator screen for easier coordination", status: .planned),
     .init(githubIssueID: "370", title: "SwiftData Visual Viewer & Editor", description: "Explore and edit SwiftData databases.", status: .planned),
     .init(githubIssueID: "347", title: "Username/Password Quick Action", description: "Allow to fill in account details inside a email/password textfield via a Quick Action.", status: .planned),
-    .init(githubIssueID: "345", title: "User Defaults Actions", description: "Add custom bundle identifier-based actions that modify user defaults for your application. Possible replacement to in-app debug views.", status: .planned),
     .init(githubIssueID: "311", title: "Show debugger logs", description: "Show OSLog-based debugger logs next to the simulator with filters for levels like debug, info, and error", status: .planned),
     .init(githubIssueID: "280", title: "Resize screenshots", description: "Allow resizing the output screenshot to reduce size and resolution", status: .planned),
-    .init(githubIssueID: "269", title: "Advanced Simulator Recordings (60FPS, 120FPS, compression config)", description: "Advanced configuration for Simulator recordings, allowing to record in 60FPS, 120FPS or to configure compression.", status: .planned),
-    .init(githubIssueID: "193", title: "Configurable Video Output", description: "Export to .MOV instead of .MP4", status: .planned),
-    .init(githubIssueID: "285", title: "Record Mic audio with recordings", description: "Screen recordings with your voice as instructions", status: .planned),
     .init(githubIssueID: "299", title: "Low storage testing", description: "Simulate low storage on the Simulator to trigger No Space Left errors", status: .planned),
-    .init(githubIssueID: "291", title: "Manually select locations waypoints", description: "Create a location Quick Action by collecting lon-lat waypoints manually", status: .planned),
-    .init(githubIssueID: "87", title: "tvOS Support", description: "Use RocketSim with the tvOS Simulator", status: .planned),
     .init(githubIssueID: "301", title: "Fullscreen Support", description: "Use RocketSim with Xcode in fullscreen mode", status: .planned),
-    .init(githubIssueID: "483", title: "Allow right-click -> Edit on any action", description: "Directly access App Action editor via right-click", status: .planned),
     .init(githubIssueID: "480", title: "Support GPX files for location simulation", description: "Simulate locations using GPX files", status: .planned),
-    .init(githubIssueID: "464", title: "Introduce App Action tags for grouping", description: "Group long lists of app actions based on configured tags", status: .planned),
-    .init(githubIssueID: "397", title: "Support reachability libraries (NWPathFilter) with Airplane Mode", description: "Simulator Airplane Mode support for NWPathFilter, which is often used in accessibility libraries", status: .planned),
     .init(githubIssueID: "435", title: "Integrate Sketch App to use artboards for design comparison", description: "Select a Sketch artboard and show it on top of the simulator for design comparison", status: .planned),
     .init(githubIssueID: "520", title: "Integrate Figma Connect to use artboards for design comparison", description: "Select a Figma artboard and show it on top of the simulator for design comparison", status: .planned),
-    .init(githubIssueID: "521", title: "Accessibility Inspector", description: "Inspect on-screen elements for accessibility. Show a tree of accessibility elements.", status: .planned),
-    .init(githubIssueID: "519", title: "Slow Animations Shortcut", description: "Toggle slow animations using a shortcut.", status: .planned),
-    .init(githubIssueID: "522", title: "Align rulers to elements", description: "Make rulers sticky to on-screen element boundaries.", status: .planned),
-    .init(githubIssueID: "523", title: "Show a score & diff image of the implementation compared to a selected design overlay", description: "A screenshot of the Simulator will be diffed against a selected design overlay, resulting in an implementation score.", status: .planned),
     .init(githubIssueID: "374", title: "Grant/Revoke HealthKit permissions", description: "Adding HealthKit permissions to the other existing permission revoke, grant, reset actions.", status: .planned),
-    .init(githubIssueID: "561", title: "Reset Kechain action", description: "Allow resetting the keychain without completely resetting the Simulator.", status: .planned),
-    .init(githubIssueID: "606", title: "Directory Actions", description: "Create deeplinks for app directories. For example, open .app/caches/db.sqlite with a single click.", status: .planned)
+    .init(githubIssueID: "963", title: "Face ID Testing", description: "Test Face ID and Touch ID flows from RocketSim with quick enroll and authentication actions.", status: .planned),
+    .init(githubIssueID: "731", title: "MCP Server", description: "Expose RocketSim features to AI workflows through a Model Context Protocol server.", status: .planned),
+    .init(githubIssueID: "543", title: "Simulator TestFlight", description: "Install builds directly into the Simulator using a TestFlight-style workflow.", status: .planned),
+    .init(githubIssueID: "544", title: "Show Logs Inside Network Monitor", description: "View logs alongside network requests to understand the full debugging breadcrumb trail.", status: .planned)
 ]
 
 assert(Set(features.map(\.githubIssueID)).count == features.count, "Duplicate IDs exist!")
