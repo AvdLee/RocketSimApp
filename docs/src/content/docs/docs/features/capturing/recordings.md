@@ -7,6 +7,8 @@ sidebar:
 
 RocketSim lets you create GIF and MP4 recordings of the Xcode Simulator from the **Captures** tab in the side window. You can record with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/features/capturing/app-store-connect-optimization).
 
+For final tweaks after recording, RocketSim 15 also includes a built-in [Post Editor](/docs/features/capturing/post-editor) that lets you trim and restyle the exported result.
+
 ## Creating a recording
 
 1. Open the Simulator
@@ -58,11 +60,11 @@ You can lock the output to a specific aspect ratio. Supported values: **Auto** (
 
 Enable **Record audio** (Simulator audio) or pick a **Microphone** (or both) in the Captures tab or in **Settings → Captures**. RocketSim does not install custom audio drivers; it works with the system as-is. For details on what each option records, see [Capture options > Audio](#audio) above.
 
-## Trimming a recording
+## Editing and trimming a recording
 
-Once your recording is done, tap the scissors button on the [floating thumbnail](/docs/features/capturing/floating-thumbnail) to open the trim editor. Adjust your video and click **Trim** when you're done.
+Once your recording is done, open it from the [floating thumbnail](/docs/features/capturing/floating-thumbnail) to continue in the [Post Editor](/docs/features/capturing/post-editor). There you can trim the beginning and end of the recording, preview playback, and refine the final styling before converting the result.
 
-![Trim editor on the floating thumbnail for cutting recording start and end](./recordings/cleanshot_2023-11-01_at_13.32.382x.png)
+![Recording post editor showing the trim timeline, preview, and export controls.](./post-editor/video-post-editor.png)
 
 ## Transparent recordings
 
@@ -84,7 +86,7 @@ RocketSim takes this metadata from your most recent build: it reads the app icon
 
 ### Using a custom metadata title or subtitle
 
-To override the app name or add a custom subtitle (e.g. a version or tagline), configure them in the App Group settings for that app. RocketSim will use those values on the recording background instead of the default app name.
+To override the app name or add a custom subtitle (e.g. a version or tagline), configure them in the App Group settings for that app. RocketSim will use those values on the recording background instead of the default app name. You can also fine-tune the metadata contents later in the [Post Editor](/docs/features/capturing/post-editor).
 
 ![App Group settings for custom app name and subtitle](./recordings/metadata-settings.png)
 

@@ -7,6 +7,8 @@ sidebar:
 
 RocketSim lets you create screenshots from the **Captures** tab in the side window, with bezels, custom backgrounds (including transparent), and optional [App Store Connect optimization](/docs/features/capturing/app-store-connect-optimization). When optimized, you can drag screenshots directly into App Store Connect.
 
+If you want to refine the final output after capture, RocketSim 15 also includes a built-in [Post Editor](/docs/features/capturing/post-editor) for screenshots and recordings.
+
 ## Creating a screenshot
 
 1. Open the Simulator
@@ -20,6 +22,12 @@ RocketSim lets you create screenshots from the **Captures** tab in the side wind
 ![Floating thumbnail with screenshot](./screenshots/cleanshot_2023-11-01_at_13.49.412x.png)
 
 You can set the background, bezels, and other capture options before taking a screenshot in the **Captures** tab or in **Settings → Captures**. For the full list of options, see [Creating Recordings](/docs/features/capturing/recordings) — the same options apply to screenshots.
+
+## Editing a screenshot after capture
+
+After taking a screenshot, you can open it in the [Post Editor](/docs/features/capturing/post-editor) to adjust the final framing, background, ratio, metadata, and export styling without taking the screenshot again.
+
+This is especially useful when you want to produce several polished variants from a single base capture.
 
 ## App Preview Optimized
 

@@ -29,6 +29,14 @@ Launch, Relaunch, Terminate, and Uninstall your app. These speak for themselves.
 
 Transfer clipboard content between your Mac and the Simulator. Useful when you need to paste test data into your app without manually typing it.
 
+## Reset Keychain
+
+RocketSim 15 adds a **Reset Keychain** quick action directly to the Recent Builds side window. Use it when your app gets stuck because of old credentials, stale login state, or test accounts that left the Simulator keychain in a bad state.
+
+This resets the Simulator device keychain, so it's especially useful when you're testing authentication flows and want a faster alternative to manually wiping state.
+
+![Recent Builds side window showing the Reset Keychain button next to the other general actions.](./quick-actions/reset-keychain-button.png)
+
 ## Delete Derived Data
 
 Deletes derived data only for the selected app. This avoids rebuilding every project you have open in Xcode when you just need a clean build for one target.
