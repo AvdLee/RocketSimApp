@@ -1,0 +1,324 @@
+---
+import { Image } from "astro:assets";
+
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import Youtube from "@/layouts/shortcodes/Youtube";
+
+import voiceOverHero from "../../assets/blog/rocketsim-15/voiceover-accessibility-overlay-white.png";
+import voiceOverNavigation from "../../assets/blog/rocketsim-15/voiceover-navigation.png";
+import rocketsimCLI from "../../assets/blog/rocketsim-15/rocketsim-cli.png";
+import liquidGlassCompare from "../../assets/features/liquid-glass-accessibility-testing-compare.jpg";
+import postEditorVideo from "../../content/docs/docs/features/capturing/post-editor/video-post-editor.png";
+import keychainResetButton from "../../content/docs/docs/features/app-actions/quick-actions/reset-keychain-button.png";
+import networkingTools from "../../content/docs/docs/features/networking/network-traffic-monitoring/networking_tools_details.jpeg";
+
+const slug = "15-voiceover-navigator-pro-xcode-simulator-recordings";
+const title =
+  "RocketSim 15: VoiceOver testing in the Simulator and better Xcode Simulator recordings";
+const description =
+  "RocketSim 15 adds VoiceOver Navigator, Elements Overlay, Tinted Liquid Glass testing, a new post editor for Xcode Simulator recordings, networking improvements, and the first RocketSim CLI beta.";
+const publishedTime = "2026-04-09T09:05:24.000Z";
+const modifiedTime = publishedTime;
+const canonicalUrl = `${config.site.base_url}/blog/${slug}`;
+const image = `${config.site.base_url}${voiceOverHero.src}`;
+
+const seo = {
+  title: `${title} - RocketSim`,
+  description,
+  image,
+  canonical: canonicalUrl,
+  twitterCreator: "@twannl",
+  twitterSite: "@rocketsim_app",
+  article: {
+    publishedTime,
+    modifiedTime,
+  },
+};
+
+const structuredData = {
+  type: "article" as const,
+  article: {
+    headline: title,
+    description,
+    datePublished: publishedTime,
+    dateModified: modifiedTime,
+    url: canonicalUrl,
+    slug,
+    image: {
+      url: image,
+    },
+  },
+};
+---
+
+<Base seo={seo} structuredData={structuredData}>
+  <article>
+    <header>
+      <div class="ph-spacing">
+        <div class="container text-center">
+          <div class="flex flex-col items-center gap-16 lg:gap-28">
+            <div class="space-y-3 md:space-y-5 mx-auto">
+              <p
+                class="text-center text-base font-medium text-text pb-2"
+                data-aos="fade-up-sm"
+                data-aos-delay="0"
+              >
+                Apr 09, 2026
+              </p>
+              <h1
+                class="page-heading leading-none text-center !mb-6"
+                data-aos="fade-up-sm"
+                data-aos-delay="50"
+              >
+                {title}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ph-merged-section">
+        <div class="container">
+          <figure data-aos="fade-up-sm" data-aos-delay="150">
+            <Image
+              src={voiceOverHero}
+              alt="RocketSim VoiceOver Navigator showing numbered accessibility elements directly on top of the iOS Simulator."
+              class="w-full max-h-[580px] object-cover rounded-2xl"
+            />
+          </figure>
+        </div>
+      </div>
+    </header>
+
+    <section class="section -mt-20">
+      <div class="container">
+        <div class="content xl:px-32">
+          <p>
+            <strong>VoiceOver testing in the Simulator</strong> used to be one of
+            those jobs I would postpone until the very end. You grab a device, enable
+            VoiceOver, start swiping, lose context, and then go back to the Simulator
+            to fix the issue you just found. RocketSim 15 changes that loop completely.
+          </p>
+
+          <p>
+            On top of that, this release makes <strong
+              >Xcode Simulator recordings</strong
+            >
+            much more useful after capture. Instead of retaking a screenshot or video
+            because the framing is slightly off, you can now post-edit the result
+            directly inside RocketSim. Combined with a dedicated networking tools
+            tab, a keychain reset action, localized App Store pages, and the first
+            RocketSim CLI beta, this is easily the biggest RocketSim release I have
+            shipped so far.
+          </p>
+
+          <h2>VoiceOver testing in the Simulator</h2>
+
+          <p>
+            The headline feature in RocketSim 15 is <a
+              href="/docs/features/accessibility/voiceover-navigator"
+              >VoiceOver Navigator</a
+            >. It lets you move through accessibility elements using your
+            keyboard, directly in the Simulator. Arrow keys move through the
+            current VoiceOver order, Enter activates the selected element, and
+            the overlay updates as your app changes state.
+          </p>
+
+          <p>
+            What I like most is that this is not just another inspector. You can
+            still click elements and inspect their accessibility metadata, but
+            the real win is speed. You immediately see whether the reading order
+            makes sense, whether a heading lands where you expect it to, and
+            whether activating a control moves focus in a sensible way.
+          </p>
+
+          <figure>
+            <Image
+              src={voiceOverNavigation}
+              alt="VoiceOver Navigator overlay visualizing accessibility element order in RocketSim."
+              class="w-full rounded-2xl"
+            />
+          </figure>
+
+          <p>
+            Accessibility work in iOS often becomes much easier once you can see
+            the structure instead of only hearing it. That is exactly what the
+            new Elements Overlay gives you. If you care about shipping more
+            accessible apps, this feature is worth checking out on its own.
+          </p>
+
+          <p>
+            RocketSim 15 also adds direct testing for <a
+              href="/docs/features/accessibility/toggles-and-dynamic-text#tinted-liquid-glass-testing"
+              >Tinted Liquid Glass</a
+            >. Liquid Glass looks great in demos, but the accessibility story
+            matters just as much. Being able to compare both states in the
+            Simulator is a much faster way to validate contrast and readability
+            while you iterate.
+          </p>
+
+          <figure>
+            <Image
+              src={liquidGlassCompare}
+              alt="Comparison of an app before and after enabling the Tinted Liquid Glass accessibility toggle in RocketSim."
+              class="w-full rounded-2xl"
+            />
+          </figure>
+
+          <h2>Editing Xcode Simulator recordings after capture</h2>
+
+          <p>
+            The second big improvement in RocketSim 15 is the new <a
+              href="/docs/features/capturing/post-editor">post editor</a
+            >
+            for screenshots and videos. If you record Xcode Simulator videos for release
+            notes, social media, demos, or App Store assets, you probably know how
+            often a capture is technically correct but still not quite ready to share.
+          </p>
+
+          <p>
+            The new editor fixes that. You can trim the recording, adjust the
+            styling, tweak the frame, change the output ratio, update metadata,
+            and preview everything live before exporting. That means one good
+            base recording can now become several polished variants without you
+            needing to capture the whole flow again.
+          </p>
+
+          <figure>
+            <Image
+              src={postEditorVideo}
+              alt="RocketSim Capture Editor open for a recording, showing live preview, trim controls, and export settings."
+              class="w-full rounded-2xl"
+            />
+          </figure>
+
+          <p>
+            I think this is especially useful for teams that rely on Xcode
+            Simulator recordings as part of their development workflow. You can
+            keep your capture loop fast, but still end up with an output that
+            looks intentional. If you want to see it in action first, I also
+            published a <a href="https://www.youtube.com/watch?v=3LlGj6oVi7A"
+              >short demo video</a
+            >.
+          </p>
+
+          <Youtube
+            url="https://www.youtube.com/watch?v=3LlGj6oVi7A"
+            title="RocketSim Post Editor demo"
+          />
+
+          <h2>Smaller updates that speed up testing</h2>
+
+          <p>
+            RocketSim 15 also includes a few smaller changes that matter a lot
+            in day-to-day work. The new <a
+              href="/docs/features/app-actions/quick-actions">Reset Keychain</a
+            >
+            action is one of those features you start using once and then wonder why
+            it did not exist earlier. Authentication testing often goes wrong because
+            of stale credentials, and resetting the Simulator keychain is much faster
+            than manually clearing app state over and over again.
+          </p>
+
+          <figure>
+            <Image
+              src={keychainResetButton}
+              alt="RocketSim Recent Builds side window showing the Reset Keychain quick action."
+              class="w-full rounded-2xl"
+            />
+          </figure>
+
+          <p>
+            Networking tools also moved into a dedicated tab. That sounds small,
+            but it makes both discovery and repeated usage better. Features like
+            network speed control and the network monitor now feel like part of
+            one workflow instead of scattered utilities.
+          </p>
+
+          <figure>
+            <Image
+              src={networkingTools}
+              alt="RocketSim networking tools overview with request details and network inspection controls."
+              class="w-full rounded-2xl"
+            />
+          </figure>
+
+          <p>
+            If you regularly test under poor connectivity, inspect requests, or
+            debug networking issues in the Simulator, this new structure should
+            save you a few clicks every day. Sometimes that is exactly the kind
+            of improvement that makes a tool feel much more polished.
+          </p>
+
+          <h2>The first RocketSim CLI beta</h2>
+
+          <p>
+            I also bundled the first version of the RocketSim CLI in this
+            release. It only supports a few commands today, but the direction is
+            clear: I want to make it easier for your agents and automation
+            workflows to interact with the Simulator in a secure, sandboxed way.
+          </p>
+
+          <figure>
+            <Image
+              src={rocketsimCLI}
+              alt="RocketSim CLI help output showing simulator, elements, and interact subcommands."
+              class="w-full rounded-2xl"
+            />
+          </figure>
+
+          <p>
+            I am particularly excited about this because I used an agentic
+            coding setup heavily while building RocketSim 15 itself. The
+            foundation of RocketSim has always been solid, but the current
+            tooling finally lets me move at a speed that was simply not
+            realistic before. If your team is already deep into agentic coding,
+            feel free to reach out if you want to join the beta.
+          </p>
+
+          <h2>Localized pages and student access</h2>
+
+          <p>
+            Two more updates are worth calling out. First, RocketSim now has
+            localized App Store pages in Chinese, French, German, and Spanish.
+            After visiting Let&apos;s Vision in Shanghai, it became clear to me
+            that RocketSim needed to do a better job outside English-only
+            messaging.
+          </p>
+
+          <p>
+            Second, students can now get RocketSim Pro for free for one year
+            through the <a href="/student">student program</a>. Professional
+            tooling made a big difference early in my own career, so this felt
+            like the right moment to give something back.
+          </p>
+
+          <h2><strong>Conclusion</strong></h2>
+
+          <p>
+            RocketSim 15 is a release focused on faster feedback loops.
+            VoiceOver testing in the Simulator becomes practical enough to use
+            throughout development, and Xcode Simulator recordings become much
+            easier to polish after capture. The rest of the release continues
+            that same pattern: fewer interruptions, less repetitive setup, and
+            quicker access to the tools you actually use.
+          </p>
+
+          <p>
+            If you already use RocketSim, I recommend installing the latest
+            update from the <a
+              href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=april-newsletter&mt=8"
+              >Mac App Store</a
+            >
+            and trying the accessibility and capture workflows first. If you have
+            feature ideas or feedback, feel free to <a
+              href="https://github.com/AvdLee/RocketSimApp/issues"
+              >open an issue on GitHub</a
+            >. Thanks!
+          </p>
+        </div>
+      </div>
+    </section>
+  </article>
+</Base>
