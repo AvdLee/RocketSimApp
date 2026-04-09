@@ -11,6 +11,10 @@
     {
       "name": "Pricing",
       "url": "/pricing"
+    },
+    {
+      "name": "Docs",
+      "url": "https://www.rocketsim.app/docs"
     }
   ],
   "support": [
