@@ -1,6 +1,8 @@
 ---
 title: "Build Insights"
 description: "Track your Xcode build counts, durations, and performance trends over time. Compare incremental vs. clean builds and monitor build times across Xcode versions."
+sidebar:
+  order: 1
 ---
 
 Build Insights tracks every Xcode build you make and shows you trends over time. You'll see how many builds you do per day, how long they take, and whether things are getting faster or slower.
@@ -31,4 +33,4 @@ The RocketSim Welcome view shows your build activity for the last 12 months in a
 
 ![Welcome view with Build Activity graph for the last 12 months](./build-insights/build-activity-welcome-view.png)
 
-For team-wide visibility, check out [Team Build Insights](/docs/features/build-insights/team-build-insights).
+For team-wide visibility, check out [Team Build Insights](/docs/features/build-insights/team-build-insights). If you want help improving slow builds after spotting a regression, see the [Agent Skill](/docs/features/build-insights/xcode-build-optimization-agent-skill).

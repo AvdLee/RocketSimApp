@@ -21,5 +21,6 @@ VoiceOver Navigator keeps you in the Simulator. It overlays numbered labels on e
 - **Search** — find elements by name or type
 - **Rotor** — manually select which rotor category to use
 - **Overlay** — turn the numbered overlay on or off
+- **Stay in flow** — verify accessibility behavior without moving to a physical device
 
 No device, no gestures, no context switch. You get a much quicker loop for checking VoiceOver behavior while you develop.

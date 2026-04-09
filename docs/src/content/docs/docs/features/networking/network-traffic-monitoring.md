@@ -15,13 +15,23 @@ You can see aggregated insights across all your apps for the selected time perio
 
 ![Network Insights overview with failure spikes, duplicate calls, and slowest endpoints](./network-traffic-monitoring/network-insights-overview.png)
 
-For the historical view and the built-in agent prompt to debug API issues, see [Networking Insights](/docs/features/networking/networking-insights).
+For the historical view and the built-in prompt export workflow for AI-assisted debugging, see [Networking Insights](/docs/features/networking/networking-insights) and [Exporting Network Requests as Prompts](/docs/features/networking/network-request-prompts).
 
 ## Inspecting a request
 
 Open the detail view for any request by double-clicking it in the list or using the toolbar button. From there you can inspect the **summary**, **request and response** body, **headers**, and **metrics**. You can also copy the request as a **cURL** command to reproduce the same call from the terminal or share it with your team.
 
 ![Network request detail view with summary, headers, response, and cURL](./network-traffic-monitoring/network-request-detail.png)
+
+## Copying summaries and prompts
+
+RocketSim 15 adds more shareable export options for the current request set:
+
+- **Copy export** for a compact redacted summary
+- **Copy prompt** for built-in AI prompt templates such as redundant calls, performance, and failures
+- **Copy Summary** on an individual request when you want to share one safe, redacted request summary
+
+See [Exporting Network Requests as Prompts](/docs/features/networking/network-request-prompts) for the full workflow.
 
 ## How does this work?
 

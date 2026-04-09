@@ -11,11 +11,15 @@ compare_plans:
   item:
     - title: Networking Traffic Monitor
       description: |
-        Inspect network requests triggered from your app using URLSession. Explore JSON responses, request headers, or copy requests as cURL commands.
+        Inspect network requests triggered from your app using URLSession. Explore JSON responses, request headers, copy requests as cURL commands, or export redacted request summaries and prompt-ready debugging context.
 
         All of this, without requiring the installation of Simulator certificates, as apps like Proxyman or Charles Proxy do.
       list:
         - item: Side Window Network Monitor
+          free: true
+          individual: true
+          teams: true
+        - item: Prompt-ready request exports
           free: true
           individual: true
           teams: true
@@ -193,7 +197,7 @@ compare_plans:
           teams: true
     - title: Quick Actions
       description: |
-        Perform bundle identifier-based quick actions on your most recent build. Simulate Locations, open Deeplinks, or send Push Notifications without an external server.
+        Perform bundle identifier-based quick actions on your most recent build. Simulate locations, open deeplinks, send push notifications, or reset the Simulator keychain without an external server.
       list:
         - item: Single Location Simulation
           free: true
@@ -239,6 +243,10 @@ compare_plans:
           free: false
           individual: true
           teams: true
+        - item: Reset Keychain
+          free: true
+          individual: true
+          teams: true
     - title: User Defaults Editor
       description: |
         Monitor changes to User Defaults or modify your app's preferences in real-time with the User Defaults editor. Works with any User Defaults, incl. standard & group.
@@ -253,7 +261,7 @@ compare_plans:
           teams: true
     - title: Environment Overrides
       description: |
-        With environment overrides accessible directly next to the Simulator, you can validate your app's accessibility in the most optimal manner.
+        With environment overrides accessible directly next to the Simulator, you can validate your app's accessibility in the most optimal manner, including VoiceOver-specific testing flows.
       list:
         - item: Accessibility
           free: true
@@ -264,6 +272,10 @@ compare_plans:
           individual: true
           teams: true
         - item: Dynamic Type
+          free: false
+          individual: true
+          teams: true
+        - item: VoiceOver Navigator
           free: false
           individual: true
           teams: true

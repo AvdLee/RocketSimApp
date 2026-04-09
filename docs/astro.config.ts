@@ -135,6 +135,7 @@ export default defineConfig({
           items: [
             { slug: "docs/features/capturing/screenshots" },
             { slug: "docs/features/capturing/recordings" },
+            { slug: "docs/features/capturing/post-editor" },
             { slug: "docs/features/capturing/floating-thumbnail" },
             { slug: "docs/features/capturing/app-store-connect-optimization" },
             { slug: "docs/features/capturing/touch-indicators" },

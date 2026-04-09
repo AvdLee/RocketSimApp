@@ -1,9 +1,9 @@
 ---
 title: "App Actions"
-description: "Configurable quick actions for deeplinks, push notifications, locations, permissions, and more."
+description: "Configurable quick actions for deeplinks, push notifications, locations, permissions, reset keychain, and more."
 hero:
   title: "App Actions"
-  subtitle: "Configurable actions to boost your development speed"
+  subtitle: "Configurable actions to boost your development speed and clear app state faster"
 bento:
   enable: true
   list:

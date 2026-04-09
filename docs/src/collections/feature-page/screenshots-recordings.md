@@ -1,9 +1,9 @@
 ---
 title: "Screenshots & Recordings"
-description: "Create professional screenshots and recordings with device bezels, touch indicators, and App Store Connect optimization."
+description: "Create professional screenshots and recordings with device bezels, touch indicators, a built-in post editor, and App Store Connect optimization."
 hero:
   title: "Screenshots & Recordings"
-  subtitle: "Professional captures that make your app shine"
+  subtitle: "Professional captures you can polish after recording"
 bento:
   enable: true
   list:
