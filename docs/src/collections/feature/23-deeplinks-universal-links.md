@@ -9,4 +9,4 @@ asset:
   columnSpan: 6
 ---
 
-**Test deep links and universal links** directly from the side window. Save, organize, and trigger your app's URL schemes and associated domains.
+**Test deep links and universal links** directly from the side window. Save, organize, and trigger your app's URL schemes and associated domains, including reusable URLs with placeholders like `{SYMBOL}`.
