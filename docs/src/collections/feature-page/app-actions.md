@@ -1,9 +1,9 @@
 ---
 title: "App Actions"
-description: "Configurable quick actions for deeplinks, push notifications, locations, permissions, reset keychain, and more."
+description: "Configurable quick actions for parameterized deeplinks, push notifications, locations, permissions, reset keychain, and more."
 hero:
   title: "App Actions"
-  subtitle: "Configurable actions to boost your development speed and clear app state faster"
+  subtitle: "Configurable actions to boost your development speed, test dynamic deeplinks, and clear app state faster"
 bento:
   enable: true
   list:
@@ -15,7 +15,7 @@ bento:
         imageAlign: "center"
       squareColumn:
         title: "Quick Actions"
-        subtitle: "Configurable actions for Deeplinks, Push Notifications, and locations."
+        subtitle: "Configurable actions for Deeplinks, Push Notifications, locations, and runtime deeplink arguments."
         image: "/images/features/privacy-permissions.png"
         imageAlign: "center-top"
     secondServiceRow:

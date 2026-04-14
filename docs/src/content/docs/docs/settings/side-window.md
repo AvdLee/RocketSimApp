@@ -15,6 +15,14 @@ You can hide the Side Window and move it into a red label:
 
 ![Side window minimized into a small red label on the Simulator edge](./side-window/cleanshot_2023-11-01_at_14.40.492x.png)
 
+## Quick minimize with Cmd
+
+RocketSim 15.1 adds a faster way to get the side window out of the way for a moment. Hold `Cmd` while hovering the side window and the usual more button temporarily swaps to a direct minimize button.
+
+That saves a click when you're recording, taking screenshots, or just need the Simulator fully visible again right away.
+
+![Side window showing the quick minimize state while the Command key is held.](./side-window/cmd_to_minimize_side_window.png)
+
 ## Sticky window placement
 
 By default, the side window uses **dynamic** placement (left or right based on available space). You can instead stick it to the **left**, **right**, or **bottom** of the Simulator. Use the more button and select your preference:

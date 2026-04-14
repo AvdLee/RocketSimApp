@@ -10,15 +10,29 @@ The same functionality can be built into your apps. I’ve seen developers manag
 ## Creating a deeplink (Universal Link)
 
 1. Open Settings
-2. Select the App Groups tab
-3. Create a new deeplink inside your app’s group:
+2. Select the **App Actions** tab
+3. Create a new deeplink inside your app's group:
 
-   ![Deep link editor in the App Group settings with URL scheme input](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.23.352x.png)
+   ![Deep link editor in the App Actions settings with URL scheme input](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.23.352x.png)
 
 4. Open the Simulator
 5. Execute the action by tapping your deeplink from the side window:
 
    ![Deep link list in the side window ready to trigger](./deeplinks-universal-links/cleanshot_2025-01-21_at_14.24.042x.png)
+
+## Deeplinks with arguments
+
+RocketSim 15.1 adds support for a single runtime argument inside a deeplink URL. Use curly braces to mark the placeholder, for example `stocks://analyze/{SYMBOL}`.
+
+That makes it easy to keep one reusable deeplink around for many test cases instead of saving a separate action per symbol, product ID, or user identifier.
+
+![Deeplink editor showing a configured runtime placeholder such as {SYMBOL} in the URL.](./deeplinks-universal-links/deeplinks_argument_settings_example.png)
+
+When you trigger that deeplink from the side window, RocketSim opens a compact input view right there in the Simulator context. Enter the value you want to use and RocketSim substitutes it into the final URL before launching your app.
+
+RocketSim also keeps a few recently used values as quick relaunch pills, so repeating the same test case only takes one click.
+
+![Side window deeplink prompt showing a runtime argument field and recent values for quick relaunch.](./deeplinks-universal-links/deeplinks_with_argument_side_window.png)
 
 ## Learn more
 

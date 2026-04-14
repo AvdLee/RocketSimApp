@@ -9,4 +9,4 @@ asset:
   columnSpan: 6
 ---
 
-**Show touch indicators** in your recordings and screenshots. Enable **Touch Attention Mode** for a constant indicator that follows your pointer — the same technique Apple uses in their demo videos.
+**Show touch indicators** in your recordings and screenshots. Enable **Touch Attention Mode** for a constant indicator that follows your pointer, and record pinch or rotate gestures with both touch points visible for clearer demos.
