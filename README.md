@@ -1,27 +1,42 @@
-![Network Monitoring Demo](docs/Assets/network_monitoring_demo.gif)
+# RocketSim Agent Skill
 
-# Enhancing the Xcode Simulators
-Boost your productivity and streamline your workflow with our **powerful Xcode Simulator tools**. Developers report building, testing, and verifying apps **up to 2x faster** with RocketSim.
+RocketSim enhances the iOS Simulator with powerful developer tooling for testing, debugging, captures, accessibility, app actions, and more.
 
-- [Explore all features](https://www.rocketsim.app)
-- [Documentation](https://docs.rocketsim.app)
+This repository also ships the public `Agent-Skill`, a lightweight discovery skill for AI coding agents. Its job is simple: locate a valid RocketSim installation on disk, resolve the bundled in-app skill, and hand off simulator interaction to the RocketSim CLI that ships with the installed app.
 
-#### Available for free in the Mac App Store
+## How It Works
 
-[![Mac App Store](Assets/download_mac_app_store.svg)](https://apps.apple.com/nl/app/rocketsim-launch-deeplinks/id1504940162?l=en&mt=12)
+The public skill in this repository stays intentionally small and stable:
 
+- `Agent-Skill/SKILL.md` discovers a valid RocketSim app bundle.
+- It resolves the bundled in-app skill and CLI from the installed app.
+- The bundled skill contains the version-matched CLI guidance for interacting with the simulator.
 
+This split keeps the public discovery layer easy to maintain while letting the installed RocketSim app define the exact simulator automation capabilities for that version.
 
-## FAQ
+## Install The Public Skill
 
-#### I need another feature!
-That's great; I would love to hear your ideas. Please, open an issue with your idea in this repository.
+Clone this repository and symlink the public skill into your agent skills directory:
 
-#### I found a bug 🐛
-Too bad, but you're at the right place. I'm all in for fixing that bug! Please open a bug report in this repository.
+```bash
+git clone --depth 1 https://github.com/AvdLee/RocketSimApp.git ~/.rocketsim-skill
+mkdir -p .cursor/skills
+ln -s ~/.rocketsim-skill/Agent-Skill .cursor/skills/rocketsim
+```
 
-#### Where can I follow progress on updates?
-All work in progress is posted on our [RocketSim Twitter](https://twitter.com/rocketsim_app)
+Once installed, agents can use the skill to discover RocketSim and delegate simulator interaction to the bundled CLI.
 
-## Contact
-RocketSim is developed by [Antoine van der Lee](https://www.twitter.com/twannl) and proudly made possible by [SwiftLee](https://www.avanderlee.com).
+## Learn More
+
+If you want to learn more about RocketSim itself, use the canonical product resources:
+
+- [RocketSim website](https://www.rocketsim.app)
+- [RocketSim documentation](https://www.rocketsim.app/docs)
+- [RocketSim on the Mac App Store](https://apps.apple.com/us/app/rocketsim-for-xcode-simulator/id1504940162)
+
+## Support And Feedback
+
+- Open a GitHub issue for bugs or feature requests related to RocketSim or this public skill.
+- Use the documentation site for feature guides and setup help.
+
+RocketSim is developed by [Antoine van der Lee](https://www.avanderlee.com) and built by SwiftLee.
