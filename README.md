@@ -1,3 +1,5 @@
+![RocketSim - Build Apps Faster](Assets/github-banner.jpg)
+
 # RocketSim - Build Apps Faster
 
 RocketSim enhances the iOS Simulator with tools for testing, debugging, captures, accessibility, app actions, and more. It helps iOS developers move faster by making common Simulator workflows easier to inspect, automate, and repeat.
