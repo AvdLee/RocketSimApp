@@ -33,6 +33,7 @@ const feature = defineCollection({
       tagLine: z.string().optional(),
       docPath: z.string().optional(),
       blogId: z.number().optional(),
+      blogFragment: z.string().optional(),
       youtubeLink: z.string().url().optional(),
       featurePage: z
         .enum([

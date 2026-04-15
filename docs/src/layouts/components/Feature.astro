@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  data: { asset, tagLine, name, blogId, youtubeLink },
+  data: { asset, tagLine, name, blogId, blogFragment, youtubeLink },
 } = Astro.props;
 const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
@@ -24,7 +24,7 @@ if (blogId) {
     `${blogBaseUrl}/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
   );
   const { slug } = (await res.json()) as { slug: string };
-  blogPath = `/blog/${slug}`;
+  blogPath = `/blog/${slug}${blogFragment ? `#${blogFragment}` : ""}`;
 }
 
 let imageSizes;
