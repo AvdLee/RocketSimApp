@@ -24,7 +24,7 @@ if (blogId) {
     `${blogBaseUrl}/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
   );
   const { slug } = (await res.json()) as { slug: string };
-  blogPath = `/blog/${slug}${blogFragment ? `#${blogFragment}` : ""}`;
+  blogPath = `/blog/${slug}${blogFragment ? `/#${blogFragment}` : ""}`;
 }
 
 let imageSizes;
