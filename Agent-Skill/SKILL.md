@@ -16,7 +16,11 @@ Developer machines can have multiple RocketSim installs side-by-side, such as an
 If RocketSim is already running, prefer that app bundle first:
 
 ```bash
-APP_PATH="$(ps -o command= -p "$(pgrep -x RocketSim | head -1)" | sed 's#/Contents/MacOS/RocketSim$##')"
+ROCKETSIM_PID="$(pgrep -x RocketSim | head -1)"
+APP_PATH=""
+if [ -n "$ROCKETSIM_PID" ]; then
+  APP_PATH="$(ps -o command= -p "$ROCKETSIM_PID" | sed 's#/Contents/MacOS/RocketSim$##')"
+fi
 printf '%s\n' "$APP_PATH"
 ```
 

@@ -65,7 +65,7 @@ To install this skill for your personal use in Claude Code:
 /plugin marketplace add AvdLee/RocketSimApp
 ```
 
-1. Install the skill:
+2. Install the skill:
 
 ```bash
 /plugin install rocketsim@rocketsim
