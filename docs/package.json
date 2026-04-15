@@ -22,6 +22,7 @@
     "aos": "^2.3.4",
     "astro": "^5.16.6",
     "date-fns": "^4.1.0",
+    "github-slugger": "^2.0.0",
     "marked": "^16.4.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

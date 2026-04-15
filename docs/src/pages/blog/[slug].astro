@@ -1,5 +1,9 @@
 ---
 import { JSDOM } from "jsdom";
+import GithubSlugger from "github-slugger";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { FaLink } from "react-icons/fa6";
 import { Image } from "astro:assets";
 
 import Base from "@/layouts/Base.astro";
@@ -125,6 +129,27 @@ videos.forEach((video) => {
   video.setAttribute("controls", "true");
 });
 
+const slugger = new GithubSlugger();
+const headings = doc.querySelectorAll("h1, h2, h3, h4, h5, h6");
+const linkIconMarkup = renderToStaticMarkup(
+  createElement(FaLink, { "aria-hidden": true }),
+);
+
+headings.forEach((heading) => {
+  const text = heading.textContent?.trim() ?? "";
+  if (!text) return;
+
+  const id = heading.id || slugger.slug(text);
+  heading.id = id;
+
+  const anchor = doc.createElement("a");
+  anchor.setAttribute("href", `#${id}`);
+  anchor.setAttribute("class", "heading-anchor");
+  anchor.setAttribute("aria-label", `Link to section: ${text}`);
+  anchor.innerHTML = linkIconMarkup;
+  heading.insertBefore(anchor, heading.firstChild);
+});
+
 const manipulatedDom = dom.serialize();
 ---
 
@@ -191,3 +216,48 @@ const manipulatedDom = dom.serialize();
     </section>
   </article>
 </Base>
+
+<style>
+  .content :global(h1),
+  .content :global(h2),
+  .content :global(h3),
+  .content :global(h4),
+  .content :global(h5),
+  .content :global(h6) {
+    position: relative;
+
+    scroll-margin-top: 6rem;
+  }
+
+  .content :global(.heading-anchor) {
+    position: absolute;
+    top: 56%;
+    right: calc(100% + 0.5rem);
+
+    display: inline-flex;
+    align-items: center;
+
+    color: inherit;
+    text-decoration: none;
+
+    opacity: 0;
+
+    transform: translateY(-50%);
+    transition: opacity 150ms ease;
+  }
+
+  .content :global(.heading-anchor svg) {
+    width: 0.5em;
+    height: 0.5em;
+  }
+
+  .content :global(h1:hover .heading-anchor),
+  .content :global(h2:hover .heading-anchor),
+  .content :global(h3:hover .heading-anchor),
+  .content :global(h4:hover .heading-anchor),
+  .content :global(h5:hover .heading-anchor),
+  .content :global(h6:hover .heading-anchor),
+  .content :global(.heading-anchor:focus-visible) {
+    opacity: 1;
+  }
+</style>
