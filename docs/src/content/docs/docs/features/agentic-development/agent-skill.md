@@ -13,14 +13,13 @@ The RocketSim Agent Skill is a lightweight, installable skill that lives in its 
 
 - [RocketSim-Agent-Skill](https://github.com/AvdLee/RocketSim-Agent-Skill)
 
-It supports multiple AI coding tools:
+It supports popular AI coding tools like Claude Code, Cursor, and Codex. The easiest way to install is through [skills.sh](https://skills.sh):
 
-- `skills.sh`
-- Claude Code
-- Cursor
-- OpenAI-compatible tools such as Codex
+```bash
+npx skills add https://github.com/AvdLee/RocketSim-Agent-Skill --skill rocketsim
+```
 
-For installation instructions, see the [RocketSim-Agent-Skill README](https://github.com/AvdLee/RocketSim-Agent-Skill).
+For more installation options, see the [RocketSim-Agent-Skill README](https://github.com/AvdLee/RocketSim-Agent-Skill).
 
 ## What happens after installation
 
