@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/refs/heads/main/marketplace/marketplace.schema.json",
+  "name": "rocketsim",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Antoine van der Lee",
+    "email": "contact@avanderlee.com"
+  },
+  "metadata": {
+    "description": "Use RocketSim to inspect and interact with iOS Simulator apps through the RocketSim CLI."
+  },
+  "plugins": [
+    {
+      "name": "rocketsim",
+      "description": "Use RocketSim to inspect visible simulator UI and interact with iOS Simulator apps through the RocketSim CLI.",
+      "repository": "https://github.com/AvdLee/RocketSimApp",
+      "version": "1.0.0",
+      "author": {
+        "name": "Antoine van der Lee",
+        "email": "contact@avanderlee.com"
+      },
+      "license": "UNLICENSED",
+      "category": "development",
+      "keywords": [
+        "rocketsim",
+        "simulator",
+        "ios",
+        "apple",
+        "automation",
+        "accessibility",
+        "ui-testing"
+      ],
+      "tags": [
+        "rocketsim",
+        "simulator",
+        "ios",
+        "apple",
+        "automation",
+        "accessibility",
+        "ui-testing"
+      ],
+      "source": "./"
+    }
+  ]
+}

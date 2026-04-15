@@ -1,0 +1,91 @@
+name: Release Agent Skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g. 1.0.2)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate version input
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Error: Invalid version '$VERSION'. Expected format like 1.0.2."
+            exit 1
+          fi
+
+      - name: Bump agent skill package versions
+        run: |
+          set -euo pipefail
+
+          python3 <<'PY'
+          import json
+          import os
+          import pathlib
+          import re
+
+          version = os.environ["VERSION"]
+
+          openai_path = pathlib.Path("agents/openai.yaml")
+          openai_text = openai_path.read_text()
+          updated_openai_text, count = re.subn(
+              r'(?m)^version:\s*"[^"]+"$',
+              f'version: "{version}"',
+              openai_text,
+              count=1,
+          )
+          if count != 1:
+            raise SystemExit("Failed to update version in agents/openai.yaml")
+          openai_path.write_text(updated_openai_text)
+
+          json_paths = [
+              pathlib.Path(".claude-plugin/plugin.json"),
+              pathlib.Path(".claude-plugin/marketplace.json"),
+              pathlib.Path(".cursor-plugin/plugin.json"),
+          ]
+
+          for path in json_paths:
+            data = json.loads(path.read_text())
+            data["version"] = version
+            if path.name == "marketplace.json":
+              if not data.get("plugins"):
+                raise SystemExit("Expected at least one plugin in .claude-plugin/marketplace.json")
+              data["plugins"][0]["version"] = version
+            path.write_text(json.dumps(data, indent=2) + "\n")
+          PY
+
+      - name: Commit and push version bump
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet agents/openai.yaml .claude-plugin/plugin.json .claude-plugin/marketplace.json .cursor-plugin/plugin.json; then
+            echo "Error: No changes detected after version bump. Is the repository already at version $VERSION?"
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add agents/openai.yaml .claude-plugin/plugin.json .claude-plugin/marketplace.json .cursor-plugin/plugin.json
+          git commit -m "Bump Agent-Skill package version to $VERSION"
+          git push
