@@ -175,6 +175,11 @@ export default defineConfig({
           autogenerate: { directory: "docs/features/accessibility" },
         },
         {
+          label: "Agentic Development",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/agentic-development" },
+        },
+        {
           label: "User Defaults Editor",
           link: "/docs/features/user-defaults-editor",
         },
