@@ -63,7 +63,7 @@ Once the skill is installed and RocketSim is running, your agent can:
 
 Open an agent and try:
 
-> Use RocketSim to navigate through the app in the Simulator
+> Use RocketSim to navigate through `<your_app_name>` in the Simulator
 
 If the skill is installed and RocketSim is running, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
 
