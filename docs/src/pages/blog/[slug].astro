@@ -231,18 +231,19 @@ const manipulatedDom = dom.serialize();
 
   .content :global(.heading-anchor) {
     position: absolute;
-    top: 56%;
+    top: 0;
     right: calc(100% + 0.5rem);
 
     display: inline-flex;
     align-items: center;
+    height: 1lh;
+    padding-top: 0.125em;
 
     color: inherit;
     text-decoration: none;
 
     opacity: 0;
 
-    transform: translateY(-50%);
     transition: opacity 150ms ease;
   }
 
