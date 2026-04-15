@@ -104,6 +104,8 @@ The agent format contains everything an agent typically needs to decide what to 
 
 Use the full JSON output when you need extra metadata like `value`, `role`, or the full accessibility frame.
 
+This structured output for agents works especially well with the [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill), which connects your AI coding tool to the CLI automatically. We highly recommend using the Agent Skill instead of communicating directly with the CLI when doing agentic development.
+
 ## Selector-based interaction
 
 When possible, agents should prefer targeting elements by label, type, or value instead of raw coordinates:
