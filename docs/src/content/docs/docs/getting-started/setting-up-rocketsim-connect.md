@@ -35,13 +35,13 @@ Select the **Recent Builds** tab, then the **Networking** tab, and press **Setup
 
 ## Setup via breakpoint
 
-If you prefer a zero-code approach, use a symbolic breakpoint. Set a breakpoint on `UIApplicationMain` and add this debugger command:
+RocketSim can install the symbolic breakpoint for you from the onboarding flow. If you need to add it manually as a fallback, create a symbolic breakpoint named `UIApplicationMain` and add this debugger command:
 
 ```
-expr dlopen("/Applications/RocketSim.app/Contents/Frameworks/RocketSimConnectLinker.nocache.framework/Contents/MacOS/RocketSimConnectLinker", 1)
+expr -l objc -- (void *)NSClassFromString(@"RocketSimConnectCoreLinker") != nil ? 0x0 : (void *)(BOOL)[[NSBundle bundleWithPath:@"/Applications/RocketSim.app/Contents/Frameworks/RocketSimConnectLinker.nocache.framework"] load]
 ```
 
-The breakpoint fires once at launch, loads the framework, and you're done. No code changes required.
+This loads the framework bundle from the default App Store install path and only runs if RocketSim Connect is not already loaded. The breakpoint fires once at launch, and no code changes are required.
 
 ![RocketSim Connect setup via breakpoint](./setting-up-rocketsim-connect/img_7335.png)
 
