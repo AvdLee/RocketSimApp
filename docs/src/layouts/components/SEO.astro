@@ -33,8 +33,12 @@ const {
   twitterSite = "@rocketsim_app",
 } = Astro.props;
 
-// Build canonical URL
-const canonicalUrl = canonical || Astro.url.href;
+// Build canonical URL (normalize to trailing slash when the site is configured for it)
+const rawCanonicalUrl = canonical || Astro.url.href;
+const canonicalUrl =
+  config.site.trailing_slash && !rawCanonicalUrl.endsWith("/")
+    ? `${rawCanonicalUrl}/`
+    : rawCanonicalUrl;
 
 // Use provided description or fall back to default meta description
 const metaDescription = description || config.metadata.meta_description;
