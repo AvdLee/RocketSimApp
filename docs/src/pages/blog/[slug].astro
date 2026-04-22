@@ -7,6 +7,7 @@ import { FaLink } from "react-icons/fa6";
 import { Image } from "astro:assets";
 
 import Base from "@/layouts/Base.astro";
+import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
 import { selectOgImage } from "@/lib/utils/selectOgImage";
 import { dateFormat } from "@/lib/utils/dateFormat";
@@ -209,11 +210,13 @@ const manipulatedDom = dom.serialize();
 
     <section class="section -mt-20">
       <div class="container">
-        <div class="content xl:px-32">
+        <div class="content mx-auto max-w-[680px]">
           <Fragment set:html={manipulatedDom} />
         </div>
       </div>
     </section>
+
+    <CallToAction />
   </article>
 </Base>
 
