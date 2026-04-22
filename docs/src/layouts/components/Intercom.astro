@@ -1,41 +1,46 @@
 <script is:inline>
-  window.intercomSettings = {
-    api_base: "https://api-iam.intercom.io",
-    app_id: "wbadhzkf",
-  };
-</script>
-<script is:inline>
-  (function () {
-    var w = window;
-    var ic = w.Intercom;
-    if (typeof ic === "function") {
-      ic("reattach_activator");
-      ic("update", w.intercomSettings);
-    } else {
-      var d = document;
-      var i = function () {
-        i.c(arguments);
-      };
-      i.q = [];
-      i.c = function (args) {
-        i.q.push(args);
-      };
-      w.Intercom = i;
-      var l = function () {
-        var s = d.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://widget.intercom.io/widget/wbadhzkf";
-        var x = d.getElementsByTagName("script")[0];
-        x.parentNode.insertBefore(s, x);
-      };
-      if (document.readyState === "complete") {
-        l();
-      } else if (w.attachEvent) {
-        w.attachEvent("onload", l);
+  // Gated on a localStorage flag so we can dogfood Intercom in production
+  // without exposing the Messenger to all visitors. Set
+  // `localStorage.setItem("intercom_preview", "true")` in the browser to opt
+  // in. Matches the gate on teams.rocketsim.app so the cross-subdomain cookie
+  // handoff only kicks in for opted-in visitors.
+  if (localStorage.getItem("intercom_preview") === "true") {
+    window.intercomSettings = {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "wbadhzkf",
+    };
+    (function () {
+      var w = window;
+      var ic = w.Intercom;
+      if (typeof ic === "function") {
+        ic("reattach_activator");
+        ic("update", w.intercomSettings);
       } else {
-        w.addEventListener("load", l, false);
+        var d = document;
+        var i = function () {
+          i.c(arguments);
+        };
+        i.q = [];
+        i.c = function (args) {
+          i.q.push(args);
+        };
+        w.Intercom = i;
+        var l = function () {
+          var s = d.createElement("script");
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = "https://widget.intercom.io/widget/wbadhzkf";
+          var x = d.getElementsByTagName("script")[0];
+          x.parentNode.insertBefore(s, x);
+        };
+        if (document.readyState === "complete") {
+          l();
+        } else if (w.attachEvent) {
+          w.attachEvent("onload", l);
+        } else {
+          w.addEventListener("load", l, false);
+        }
       }
-    }
-  })();
+    })();
+  }
 </script>
