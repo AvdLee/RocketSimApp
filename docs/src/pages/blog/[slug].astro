@@ -264,4 +264,18 @@ const manipulatedDom = dom.serialize();
   .content :global(.heading-anchor:focus-visible) {
     opacity: 1;
   }
+
+  /* Make WordPress YouTube / video oEmbeds fill the content column */
+  .content :global(.wp-embed-aspect-16-9 .wp-block-embed__wrapper) {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .content :global(.wp-embed-aspect-16-9 .wp-block-embed__wrapper iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
