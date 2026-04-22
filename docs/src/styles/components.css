@@ -192,17 +192,25 @@
   @apply prose-p:text-h6-sm prose-p:text-text prose-p:font-medium;
   @apply prose-blockquote:rounded-lg prose-blockquote:border prose-blockquote:border-l-[10px] prose-blockquote:border-primary prose-blockquote:bg-light prose-blockquote:px-8 prose-blockquote:py-10 prose-blockquote:font-primary prose-blockquote:text-2xl prose-blockquote:not-italic prose-blockquote:text-text-dark;
   @apply prose-pre:rounded-lg prose-pre:bg-light;
-  @apply prose-code:px-1 prose-code:text-primary;
   @apply prose-strong:text-text-dark;
   @apply prose-a:text-text prose-a:underline prose-a:hover:text-primary;
-  @apply prose-li:text-text;
+  @apply prose-li:my-0 prose-li:text-h6-sm prose-li:text-text prose-li:font-medium;
   @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-lg prose-table:before:absolute prose-table:before:left-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:border-border prose-table:before:content-[""];
   @apply prose-thead:border-border prose-thead:bg-light;
   @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[18px] prose-th:text-text-dark;
   @apply prose-tr:border-border;
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px];
-  @apply prose-li:marker:text-primary;
+  @apply prose-li:marker:text-text;
   @apply prose-figcaption:text-center;
+}
+
+/* Inline code only — leave <pre><code> blocks to their own theme */
+.content :not(pre) > code {
+  @apply rounded-md border border-border/60 bg-light px-1.5 py-0.5 text-[0.9em] font-normal text-text-dark;
+}
+.content :not(pre) > code::before,
+.content :not(pre) > code::after {
+  content: none;
 }
 
 /* CTA style */

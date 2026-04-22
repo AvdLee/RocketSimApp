@@ -13,6 +13,7 @@ const { enable, title, description, image, call_to_actions } = sectionData.data;
 
 const isTeamPage = Astro.url.pathname === "/for-teams";
 const isPricingPage = Astro.url.pathname === "/pricing";
+const isBlogPage = Astro.url.pathname.startsWith("/blog/");
 
 const callToActions = isTeamPage
   ? [...call_to_actions].reverse()
@@ -36,6 +37,12 @@ function getEventName(ctaLabel: string): string {
       return "plausible-event-name=CTA:+Pricing+Bottom+-+Download";
     } else if (ctaLabel.includes("Trial")) {
       return "plausible-event-name=CTA:+Pricing+Bottom+-+Trial";
+    }
+  } else if (isBlogPage) {
+    if (ctaLabel.includes("Download")) {
+      return "plausible-event-name=CTA:+Blog+Bottom+-+Download";
+    } else if (ctaLabel.includes("Trial")) {
+      return "plausible-event-name=CTA:+Blog+Bottom+-+Trial";
     }
   }
   return "";

@@ -7,6 +7,7 @@ import { FaLink } from "react-icons/fa6";
 import { Image } from "astro:assets";
 
 import Base from "@/layouts/Base.astro";
+import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
 import { selectOgImage } from "@/lib/utils/selectOgImage";
 import { dateFormat } from "@/lib/utils/dateFormat";
@@ -157,13 +158,13 @@ const manipulatedDom = dom.serialize();
   <article>
     <header>
       <div class="ph-spacing">
-        <div class="container text-center">
-          <div class="flex flex-col items-center gap-16 lg:gap-28">
-            <div class="space-y-3 md:space-y-5 mx-auto">
+        <div class="container">
+          <div class="flex flex-col gap-16 lg:gap-28">
+            <div class="space-y-3 md:space-y-5 mx-auto w-full max-w-[680px]">
               {
                 articleModifiedTime && (
                   <p
-                    class="text-center text-base font-medium text-text pb-2"
+                    class="text-base font-medium text-text pb-2"
                     data-aos="fade-up-sm"
                     data-aos-delay="0"
                   >
@@ -178,7 +179,7 @@ const manipulatedDom = dom.serialize();
                 )
               }
               <h1
-                class="page-heading leading-none text-center !mb-6"
+                class="page-heading leading-none !mb-6"
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
                 set:html={title}
@@ -209,11 +210,13 @@ const manipulatedDom = dom.serialize();
 
     <section class="section -mt-20">
       <div class="container">
-        <div class="content xl:px-32">
+        <div class="content mx-auto max-w-[680px]">
           <Fragment set:html={manipulatedDom} />
         </div>
       </div>
     </section>
+
+    <CallToAction />
   </article>
 </Base>
 
@@ -260,5 +263,19 @@ const manipulatedDom = dom.serialize();
   .content :global(h6:hover .heading-anchor),
   .content :global(.heading-anchor:focus-visible) {
     opacity: 1;
+  }
+
+  /* Make WordPress YouTube / video oEmbeds fill the content column */
+  .content :global(.wp-embed-aspect-16-9 .wp-block-embed__wrapper) {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .content :global(.wp-embed-aspect-16-9 .wp-block-embed__wrapper iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 </style>
