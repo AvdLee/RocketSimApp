@@ -194,7 +194,7 @@
   @apply prose-pre:rounded-lg prose-pre:bg-light;
   @apply prose-strong:text-text-dark;
   @apply prose-a:text-text prose-a:underline prose-a:hover:text-primary;
-  @apply prose-li:text-h6-sm prose-li:text-text prose-li:font-medium;
+  @apply prose-li:my-0 prose-li:text-h6-sm prose-li:text-text prose-li:font-medium;
   @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-lg prose-table:before:absolute prose-table:before:left-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:border-border prose-table:before:content-[""];
   @apply prose-thead:border-border prose-thead:bg-light;
   @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[18px] prose-th:text-text-dark;
