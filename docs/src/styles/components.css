@@ -201,7 +201,7 @@
   @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[18px] prose-th:text-text-dark;
   @apply prose-tr:border-border;
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px];
-  @apply prose-li:marker:text-primary;
+  @apply prose-li:marker:text-text;
   @apply prose-figcaption:text-center;
 }
 
