@@ -1,18 +1,19 @@
 ---
 title: "Agentic Development with RocketSim"
-description: "Let AI coding agents see and interact with your running iOS Simulator app. Automate repetitive flows, validate UI states, and navigate faster without re-describing the screen on every step."
+description: "Let AI coding agents see and interact with your running iOS Simulator app through RocketSim's version-matched CLI and Agent Skill."
 sidebar:
   order: 1
 ---
 
-RocketSim helps AI coding agents see and interact with your running Simulator app. That makes it possible to automate repetitive flows, validate UI states, and move through app navigation faster without re-describing the screen on every step.
+RocketSim helps AI coding agents see and interact with your running Simulator app. The RocketSim Mac app stays connected to the Simulator, keeps useful state warm, and exposes a compact CLI that agents can use to inspect screens, tap controls, type text, and verify UI changes.
 
-With the RocketSim Agent Skill installed and RocketSim running, your agent can:
+With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your agent can:
 
-- Read visible accessibility elements before deciding what to do
+- Read visible accessibility elements, including common navigation and tab bar items
 - Tap, swipe, type, and navigate through your app reliably
-- Stay in a tight interaction loop without losing context between steps
-- Spend fewer tokens by using RocketSim's compact screen summaries
+- Stay in a tight interaction loop without rebuilding context between steps
+- Use compact screen summaries to spend fewer tokens per UI read
+- Fall back to screenshots when accessibility data is not enough
 
 ## What you can do with it
 
@@ -44,6 +45,8 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 > Use RocketSim to inspect the visible elements on screen and tap the primary CTA
 
+> Use RocketSim to take a screenshot if the accessibility snapshot does not expose the web content clearly
+
 > Use RocketSim to navigate to settings and toggle the feature flag for dark mode
 
 > Use RocketSim to reproduce the crash described in this issue by navigating to the affected screen
@@ -54,31 +57,38 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 ### Stateful by design
 
-RocketSim runs continuously alongside the Simulator. It maintains a live connection, so agents work against the current app state rather than reconnecting from scratch on every command. That keeps interaction loops tight and reduces the amount of context agents need to rebuild between steps.
+RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster, avoided wrong taps entirely**, and used about **63% fewer estimated tokens** than a popular alternative.
 
 ### Compact screen summaries
 
-RocketSim's `--agent` output format gives agents a focused, token-efficient snapshot of visible elements. Instead of processing a full JSON accessibility tree, agents get a compact pipe-delimited summary with just the element type, label, and coordinates they need to act.
+RocketSim's `--agent` output format gives agents a focused, token-efficient snapshot of visible elements. Instead of processing a full JSON accessibility tree, agents get a compact summary with the element type, label, and coordinates they need to act.
+
+RocketSim also recovers many elements that are easy to miss in raw accessibility output, including top bars, navigation bars, tab bars, and visible controls that are needed to move through an app.
 
 ### Selector-based interaction
 
 Agents can target elements by label, type, or value instead of guessing coordinates. RocketSim uses semantic accessibility activation when possible, which is more reliable than coordinate-only approaches for buttons, toggles, and list rows.
 
+### Agent-optimized protocol
+
+The CLI uses RocketSim's `rs/1` protocol for agent workflows. You do not need to learn the protocol details; the important part is that it is designed for compact, reliable interaction through the running RocketSim app.
+
 ### Version-matched automation
 
-RocketSim ships a built-in skill alongside its CLI. That means the interaction instructions agents receive always match the installed RocketSim version. When RocketSim updates, the built-in skill updates with it automatically.
+RocketSim ships the CLI and Agent Skill inside the app. When RocketSim updates, the installed command and the skill instructions can update with it, so your agent keeps using guidance that matches the RocketSim version you have installed.
 
 ## How it works
 
 RocketSim's agentic development support has three layers:
 
-1. **The RocketSim CLI** lets agents inspect visible elements and perform interactions through a stateful connection to the Simulator.
-2. **The built-in skill** ships inside RocketSim and documents the exact CLI for that installed version, so agents always use version-matched guidance.
-3. **The RocketSim Agent Skill** is the installable entry point that discovers RocketSim on your machine and hands off to the built-in layer automatically.
+1. **The RocketSim Mac app** keeps the live Simulator connection, caches state, and performs the optimized work.
+2. **The RocketSim CLI** exposes that running app to agents through commands such as `elements`, `interact`, `wait`, `screenshot`, and `doctor`.
+3. **The RocketSim Agent Skill** teaches your AI coding tool how to use the CLI safely and consistently.
 
-You only install the public Agent Skill. RocketSim handles the rest.
+Install both the command line tool and Agent Skill from **RocketSim → Settings → CLI & Agent**. RocketSim creates symlinks into your chosen folders, so the CLI and skill keep pointing at the latest installed app.
 
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) -- how agents inspect and interact with the Simulator
-- [Agent Skill](/docs/features/agentic-development/agent-skill) -- what to install and how the architecture works
+- [Agent Skill](/docs/features/agentic-development/agent-skill) -- how to install the recommended agent workflow
+- [CLI & Agent settings](/docs/settings/cli-and-agent) -- how to install the CLI and skill from RocketSim

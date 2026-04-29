@@ -1,17 +1,19 @@
 ---
 title: "Creating Recordings"
-description: "Record high-quality GIF and MP4 videos from the iOS Simulator with touch indicators, device bezels, audio narration, and custom backgrounds."
+description: "Record high-quality GIF and MP4 videos from the iOS Simulator and connected physical devices with touch indicators, device bezels, audio, and custom backgrounds."
 sidebar:
   order: 2
 ---
 
-RocketSim lets you create GIF and MP4 recordings of the Xcode Simulator from the **Captures** tab in the side window. You can record with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/features/capturing/app-store-connect-optimization).
+RocketSim lets you create GIF and MP4 recordings from the **Captures** tab in the side window. You can record the Xcode Simulator with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/features/capturing/app-store-connect-optimization).
 
-For final tweaks after recording, RocketSim 15 also includes a built-in [Post Editor](/docs/features/capturing/post-editor) that lets you trim and restyle the exported result.
+RocketSim 16 also supports video recordings from connected physical iOS devices, including audio from the device stream. See [Physical Device Support](/docs/features/capturing/physical-device-support) for setup and device-specific behavior.
+
+For final tweaks after recording, RocketSim includes a built-in [Post Editor](/docs/features/capturing/post-editor) that lets you trim and restyle the exported result.
 
 ## Creating a recording
 
-1. Open the Simulator
+1. Open the Simulator or connect a supported physical iOS device
 2. Select the **Captures** tab inside the RocketSim Side Window
 3. Click **GIF Record** or **MP4 Record** and perform your interactions
 
@@ -45,6 +47,7 @@ When you use device bezels, you can turn on **Device shadow** to add a shadow be
 ### Audio
 
 - **Simulator audio** — Records only the audio that comes out of the Simulator (your app's sound). It does not record system audio or other apps. Enable it with **Record audio** in the Captures tab or **Record Simulator audio during recordings** in Settings → Captures. No custom drivers are required.
+- **Physical device audio** — When recording a connected physical device, RocketSim records audio from the device stream.
 - **Microphone** — Optionally record from any system microphone (e.g. for voiceover). In the Captures tab, use the **Microphone** picker and choose **None** or a device. You can use Simulator audio and a microphone at the same time.
 
 ### Output ratio

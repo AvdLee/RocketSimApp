@@ -135,6 +135,12 @@ starlight-toc a[aria-current="true"] {
   text-decoration: underline;
 }
 
+/* Keep emphasized product and settings names high-contrast in docs copy. */
+.sl-markdown-content strong {
+  color: var(--sl-color-white);
+  font-weight: 700;
+}
+
 /* ==========================================================================
    Cards
    ========================================================================== */

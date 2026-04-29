@@ -1,13 +1,15 @@
 ---
 title: "Grids & Rulers"
-description: "Add grid overlays and rulers to the iOS Simulator for precise layout alignment. Customize grid size, color, and spacing to match your design system."
+description: "Add grid overlays and rulers to the iOS Simulator or a connected physical device for precise layout alignment."
 ---
 
 Aligning elements based on grids and rulers allows you to create a balanced design.
 
+RocketSim 16 supports grids and rulers on both Simulator windows and connected physical-device preview windows, so you can inspect spacing on real hardware as well.
+
 ## Showing the Grid
 
-1. Open the Simulator
+1. Open the Simulator or connect a supported physical iOS device
 2. Select the comparing tab
 3. Click on the Grid button:
 
@@ -15,7 +17,7 @@ Aligning elements based on grids and rulers allows you to create a balanced desi
 
 ## Showing Rulers
 
-1. Open the Simulator
+1. Open the Simulator or connect a supported physical iOS device
 2. Select the comparing tab
 3. Click on the Rulers button
 4. Hover over the horizontal or vertical ruler and left-mouse click to store a ruler:
