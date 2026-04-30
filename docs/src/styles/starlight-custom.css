@@ -135,6 +135,17 @@ starlight-toc a[aria-current="true"] {
   text-decoration: underline;
 }
 
+/* Keep emphasized product and settings names high-contrast in docs copy. */
+.sl-markdown-content :where(p, li) strong {
+  color: var(--sl-color-white);
+  font-weight: 700;
+}
+
+/* Preserve link accent color for emphasized text inside links. */
+.sl-markdown-content a:not(.card):not(.action-button) strong {
+  color: inherit;
+}
+
 /* ==========================================================================
    Cards
    ========================================================================== */

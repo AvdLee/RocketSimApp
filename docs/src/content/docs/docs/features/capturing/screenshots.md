@@ -1,17 +1,19 @@
 ---
 title: "Taking Screenshots"
-description: "Capture professional iOS Simulator screenshots with device bezels, custom backgrounds, and App Store Connect optimization. Drag and drop directly into App Store Connect."
+description: "Capture professional iOS Simulator and physical-device screenshots with device bezels, custom backgrounds, and App Store Connect optimization."
 sidebar:
   order: 1
 ---
 
 RocketSim lets you create screenshots from the **Captures** tab in the side window, with bezels, custom backgrounds (including transparent), and optional [App Store Connect optimization](/docs/features/capturing/app-store-connect-optimization). When optimized, you can drag screenshots directly into App Store Connect.
 
-If you want to refine the final output after capture, RocketSim 15 also includes a built-in [Post Editor](/docs/features/capturing/post-editor) for screenshots and recordings.
+If you want to refine the final output after capture, RocketSim includes a built-in [Post Editor](/docs/features/capturing/post-editor) for screenshots and recordings.
+
+RocketSim 16 also supports screenshots from connected physical iOS devices. See [Physical Device Support](/docs/features/capturing/physical-device-support) for setup and device-specific behavior.
 
 ## Creating a screenshot
 
-1. Open the Simulator
+1. Open the Simulator or connect a supported physical iOS device
 2. Select the **Captures** tab inside the RocketSim Side Window
 3. Click **JPEG Screenshot** (when App Preview Optimized is enabled) or **PNG Screenshot**
 
