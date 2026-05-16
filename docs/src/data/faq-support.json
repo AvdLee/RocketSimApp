@@ -1,0 +1,58 @@
+[
+  {
+    "question": "Do you offer out-of-the App Store distribution?",
+    "answer": "Yes, we do. Get in touch via support@rocketsim.app."
+  },
+  {
+    "question": "Are there non-recurring subscriptions as well?",
+    "answer": "Yes, you can consider buying Team Licenses at rocketsim.app/team-insights."
+  },
+  {
+    "question": "I can't reimburse App Store subscriptions, is there an alternative?",
+    "answer": "Yes, we offer Team Licenses at rocketsim.app/team-insights."
+  },
+  {
+    "question": "Do you provide the option for commercial or team licenses?",
+    "answer": "Yes, check out Team Licenses at rocketsim.app/team-insights."
+  },
+  {
+    "question": "Can I buy a lifetime license?",
+    "answer": "No, but you can join SwiftLee Weekly's referral program to get a lifetime RocketSim license. Just join the newsletter and follow the instructions in the email."
+  },
+  {
+    "question": "Why is my video not accepted by App Store Connect?",
+    "answer": "The videos are optimized for App Previews following Apple's specifications. App Store Connect does not accept each device, so your selected Simulator could not support App Previews. Make sure to use a Simulator matching a device from the App Preview specifications."
+  },
+  {
+    "question": "Why wouldn't I just use xcrun simctl?",
+    "answer": "RocketSim uses xcrun simctl as well, but it enhances the output and provides interfaces for quicker access. Recordings, for example, are enhanced with touches and device bezels that you won't get through the command line tools."
+  },
+  {
+    "question": "Why does RocketSim need screen recording permissions?",
+    "answer": "RocketSim is sandboxed and can't read NSWindow titles without screen recording permissions. RocketSim needs to read the title of the Simulator windows to determine the currently active Simulator."
+  },
+  {
+    "question": "Where can I follow active development?",
+    "answer": "RocketSim is developed by Antoine van der Lee. You can follow him or the official RocketSim Twitter Account for updates about development."
+  },
+  {
+    "question": "Where can I report bugs or feature requests?",
+    "answer": "Issues and feature requests are managed on GitHub at github.com/AvdLee/RocketSimApp/issues."
+  },
+  {
+    "question": "I only get JPEG images, how can I get PNG images again?",
+    "answer": "You've likely enabled App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer. Disable the option and you should get PNGs again."
+  },
+  {
+    "question": "Why are my iPad captures upside-down?",
+    "answer": "RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording."
+  },
+  {
+    "question": "Can I create transparent captures?",
+    "answer": "Yes, make sure to disable App Preview Optimized and set your background color to transparent."
+  },
+  {
+    "question": "Network Speed Control isn't working for me, what can I do?",
+    "answer": "This is usually caused by missing system permissions. Quit Xcode, all Simulators, and RocketSim, then reopen them. Open System Settings → Privacy & Security and approve any pending RocketSim permissions. On macOS Sequoia and later, enable the Network Extension in System Settings → General → Login Items & Extensions."
+  }
+]
