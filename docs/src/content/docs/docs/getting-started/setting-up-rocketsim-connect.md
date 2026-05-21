@@ -29,7 +29,7 @@ Adjust the path if you've installed RocketSim elsewhere. The `.nocache` suffix e
 
 ## Where to find the onboarding
 
-Select the **Recent Builds** tab, then the **Networking** tab, and press **Setup RocketSim Connect**.
+Select the side window's **Networking** tab with the antenna icon, then press **Setup RocketSim Connect**.
 
 ![Where to find RocketSim Connect onboarding](./setting-up-rocketsim-connect/cleanshot_2024-07-04_at_10.22.322x.png)
 
