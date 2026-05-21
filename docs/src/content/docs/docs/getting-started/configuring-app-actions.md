@@ -43,6 +43,6 @@ A major part of RocketSim’s functionality is based on so-called App Actions. T
 
 Well done, you’ve configured your first App Actions group and executed a deeplink in the Simulator!
 
-This is just the beginning, there’s much more to discover. While you’re at it, how about creating app actions for locations and Push Notifications?
+This is just the beginning, there’s much more to discover. While you’re at it, how about creating App Actions for [Location Simulation](/docs/features/app-actions/location-simulation) and [Push Notifications](/docs/features/app-actions/push-notifications)?
 
 You can also explore the Network Speed Control, Relaunch buttons, or permissions section. I’m sure there are many features that will help you build apps faster.
