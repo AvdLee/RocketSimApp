@@ -19,6 +19,8 @@ For a deeper dive into localization testing, see [Localization testing in Xcode]
 
 Similar to locale — pick a timezone and your app relaunches with that timezone active. Useful for testing time-dependent features like scheduling or date formatting.
 
+For location-aware testing, the Locations tab also offers **Relaunch with time zone** so a simulated location can restart your app in the matching time zone. See [Location Simulation](/docs/features/app-actions/location-simulation) for saved locations and routes.
+
 ## Lifecycle Actions
 
 Launch, Relaunch, Terminate, and Uninstall your app. These speak for themselves. No need to switch to the Simulator or Xcode to manage your app's state.

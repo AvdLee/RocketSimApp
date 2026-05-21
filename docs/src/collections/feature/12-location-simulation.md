@@ -2,6 +2,7 @@
 showOnHomepage: true
 name: "Location Simulation"
 featurePage: "app-actions"
+docPath: "/docs/features/app-actions/location-simulation"
 tagLine: "Single locations or automobile and walking routes: Test them right in the Simulator"
 asset:
   type: "image"
