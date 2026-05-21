@@ -2,7 +2,7 @@
 showOnHomepage: true
 name: "Network Monitor"
 youtubeLink: "https://www.youtube.com/watch?v=ihVwU9usxgQ"
-tagLine: "Inspect Network Requests in realtime"
+tagLine: "Inspect, summarize, and debug network traffic in realtime"
 blogId: 20
 featurePage: "networking"
 asset:
@@ -14,4 +14,4 @@ asset:
   caption: "Network Monitoring is made possible by [Pulse](https://github.com/kean/Pulse), an open-source project created by [Alex Grebenyuk](https://github.com/kean)."
 ---
 
-Explore JSON responses, request headers, metrics, connected app logs, copy cURL requests, export redacted summaries, and generate prompt-ready debugging context.
+Explore JSON responses, request headers, metrics, and connected app logs without setting up a proxy. Copy cURL requests, export privacy-redacted summaries, and generate prompt-ready debugging context for AI-assisted network reviews.
