@@ -7,6 +7,8 @@ sidebar:
 
 RocketSim helps AI coding agents see and interact with your running Simulator app. The RocketSim Mac app stays connected to the Simulator, keeps useful state warm, and exposes a compact CLI that agents can use to inspect screens, tap controls, type text, and verify UI changes.
 
+RocketSim does not build, install, or launch your app from source. Start the app with Xcode or your normal build tooling first, then use RocketSim for fast Simulator inspection and interaction.
+
 With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your agent can:
 
 - Read visible accessibility elements, including common navigation and tab bar items
@@ -25,7 +27,7 @@ Ask your agent to move through multi-step flows like onboarding, login, settings
 
 ### Validate UI after code changes
 
-After making a code change, ask your agent to launch the app, navigate to the relevant screen, and verify that the expected elements are visible. This is faster than switching to the Simulator yourself to check.
+After making a code change, launch the app from Xcode or ask your agent to use your normal build tooling. Once the app is running, ask the agent to navigate to the relevant screen with RocketSim and verify that the expected elements are visible. This is faster than switching to the Simulator yourself to check.
 
 ### Reproduce bugs in context
 

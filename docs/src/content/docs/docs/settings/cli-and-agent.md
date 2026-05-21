@@ -31,7 +31,7 @@ The Agent Skill is installed from the same settings page.
 
 1. Open **RocketSim → Settings → CLI & Agent**
 2. Install the command line tool first if it is not installed yet
-3. In **Agent Skill**, choose **General Agents**
+3. In **Agent Skill**, choose **General Agents** for broad support or **Agentic Coding in Xcode** for Xcode's built-in coding assistant
 4. Click **Install**
 5. Restart or refresh your tool if it does not detect new skills automatically
 
@@ -39,7 +39,11 @@ RocketSim installs the skill as a symlink to the bundled skill inside the app. T
 
 ![CLI & Agent settings showing Agent Skill installation options](./cli-and-agent/cli-agent-settings.png)
 
-We recommend **General Agents** because it installs into the shared `.agents/skills` location. Multiple AI coding tools can reuse that same version-matched RocketSim skill. Use a tool-specific destination only if your tool does not scan the shared location.
+We recommend **General Agents** because it installs into the shared `.agents/skills` location. Multiple AI coding tools can reuse that same version-matched RocketSim skill.
+
+Use **Agentic Coding in Xcode** when you want Xcode's built-in Claude Agent or Codex integration to discover RocketSim. Xcode stores coding assistant configuration under `~/Library/Developer/Xcode/CodingAssistant`, separate from Claude Code's `~/.claude/skills` folder.
+
+Use a tool-specific destination only if your tool does not scan the shared location.
 
 ## Why this setup is recommended
 
@@ -76,6 +80,8 @@ The existing `rocketsim` symlink points somewhere unexpected. Click **Repair Com
 ### My agent does not see the skill
 
 Some AI coding tools only scan skill folders when they start. Restart the tool or reload its workspace after installing the skill.
+
+If you are using Claude Agent inside Xcode, install **Agentic Coding in Xcode** instead of the **Claude** destination. The **Claude** row installs into `~/.claude/skills`, while Xcode's built-in coding assistant reads from its own `~/Library/Developer/Xcode/CodingAssistant` configuration folders.
 
 ### I use a custom skill folder
 
