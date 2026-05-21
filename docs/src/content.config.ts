@@ -38,6 +38,7 @@ const feature = defineCollection({
       featurePage: z
         .enum([
           "accessibility",
+          "agentic-development",
           "app-actions",
           "build-insights",
           "design-comparison",

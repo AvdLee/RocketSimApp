@@ -5,17 +5,16 @@ featurePage: "screenshots-recordings"
 asset:
   type: "image"
   path: "../../assets/features/captures.png"
-  alt: "Create profession recordings & screenshots with device bezels and audio recorded."
+  alt: "Create professional recordings and screenshots with device bezels, touch indicators, and audio."
   alignment: "left"
   columnSpan: 6
 ---
 
-**Capture and polish** MP4, GIF, or PNG.
+**Capture and polish** MP4, GIF, or PNG output for demos, reviews, social posts, and App Store submissions.
 
-- You'll blow away your colleagues after **adding device bezels** to your screenshots & videos
-- Apply a custom ratio like 16:9 to **create social media assets**
-- Fine-tune the result afterwards with the built-in **Post Editor**
-- **Touches** make a difference in telling a story. Share professional recordings of a new feature with your friends and colleagues
-- Create easy-to-follow demos by using **Touch Attention Mode**.
-- **Optimize for App Store Connect App Previews** and stop wasting time using tools like FFmpeg to conform to the [App Preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8).
-- **Record audio** to make it complete
+- Add **device bezels**, custom backgrounds, and ratios like 16:9 for polished marketing assets
+- Fine-tune screenshots and videos afterwards with the built-in **Post Editor**
+- Use **Touch Attention Mode** and multi-touch indicators to make demos easier to follow
+- Record smooth Simulator videos, including **120 FPS** output for scrolling, animations, and transitions
+- Capture audio and connected physical-device footage when you need real-device output
+- **Optimize for App Store Connect App Previews** without manually fighting FFmpeg or export specs
