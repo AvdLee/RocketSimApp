@@ -9,6 +9,8 @@ RocketSim includes a built-in CLI that lets agents inspect visible UI and intera
 
 For agentic development, we recommend installing both the CLI and [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill) from **RocketSim → Settings → CLI & Agent**.
 
+The CLI works with the Simulator UI that is already running. It does not build, install, or launch apps from an Xcode project; use Xcode or your normal build tooling for that step, then let RocketSim inspect and interact with the app on screen.
+
 ## Installing the CLI
 
 1. Open **RocketSim → Settings → CLI & Agent**
@@ -210,7 +212,7 @@ These prompts work well with the CLI interaction loop:
 
 > Use RocketSim to type a search query into the search field and select the first result
 
-> Use RocketSim to press the home button and relaunch the app
+> Use RocketSim to press the home button, then inspect the Simulator after the app is open again
 
 ## Requirements
 

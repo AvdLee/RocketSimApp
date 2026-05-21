@@ -28,7 +28,7 @@ In our internal research, RocketSim's CLI completed the same agent workflows abo
 
 1. Open **RocketSim → Settings → CLI & Agent**
 2. Install the **Command Line Tool** if `rocketsim` is not on your `PATH` yet
-3. In **Agent Skill**, choose **General Agents**
+3. In **Agent Skill**, choose **General Agents** for broad support or **Agentic Coding in Xcode** for Xcode's built-in coding assistant
 4. Click **Install** or **Repair**
 5. Restart or refresh your AI coding tool if it does not discover new skills automatically
 
@@ -39,6 +39,8 @@ RocketSim installs the skill as a symlink to the bundled skill inside `RocketSim
 ## Supported destinations
 
 We recommend **General Agents** for most setups. It installs the skill into the shared `.agents/skills` location, so multiple AI coding tools can use the same version-matched RocketSim skill instead of each tool needing its own copy.
+
+Choose **Agentic Coding in Xcode** when you use Xcode's built-in Claude Agent or Codex integration. Xcode keeps its coding assistant configuration in `~/Library/Developer/Xcode/CodingAssistant`, separate from Claude Code's `~/.claude/skills` folder. Restart Xcode after installing or repairing this destination.
 
 Use a tool-specific destination like **Cursor**, **Claude**, or **Codex** if that tool only scans its own skill folder. You can also choose a custom skill folder if your tool stores skills somewhere else.
 
@@ -73,7 +75,7 @@ Then open your AI coding tool and try:
 
 > Use RocketSim to navigate through `<your_app_name>` in the Simulator
 
-If the skill is installed and RocketSim is running, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
+If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
 
 ## Learn more
 
