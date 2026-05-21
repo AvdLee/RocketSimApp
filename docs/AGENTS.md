@@ -129,7 +129,13 @@ Current sidebar sections: Getting Started, Screenshots & Recordings, Simulator C
 
 Images for a doc page should be placed in a subfolder next to the `.md`/`.mdx` file and referenced with relative paths (e.g., `![Alt](./subfolder/image.png)`).
 
-When opening local docs pages in the browser, always use the configured trailing slash (for example, `http://localhost:4322/docs/features/networking/network-speed-control/`) to avoid stale optimized image URLs or route mismatches.
+When opening local docs pages in the browser:
+
+- First update against the latest default branch, for example `git fetch origin master` followed by `git merge origin/master` or another explicit branch update strategy.
+- Check any existing local dev server before using it. Confirm its process is serving from the current workspace checkout, not from another Cursor worktree or stale clone (for example, inspect `lsof -nP -iTCP:4322 -sTCP:LISTEN` and the process command).
+- If the server is from another checkout, stop it and restart `npm run dev -- --host 127.0.0.1` from the current `docs/` directory before opening the page.
+- Verify the served HTML contains a unique string from the change before reporting that the local page is updated.
+- Always use the configured trailing slash (for example, `http://localhost:4322/docs/features/networking/network-speed-control/`) to avoid stale optimized image URLs or route mismatches.
 
 Available shortcodes (auto-imported, no import statement needed):
 - `<Youtube id="..." title="..." />` — embeds a YouTube video

@@ -48,11 +48,22 @@ When RocketSim recognizes the format, it shows the result as **Custom Coordinate
 
 ![Walking route App Action configured with custom coordinates](./location-simulation/edit-location-app-action-walking-route-custom-coordinates.png)
 
-Custom coordinates are useful for testing repeatable real-world paths. For example, a golf app can save a walking route from one hole coordinate to another and replay that route whenever you need to validate distance, map rendering, or location update handling.
+Custom coordinates are useful for testing repeatable real-world paths. For example, a golf app can save a route from one hole coordinate to another and replay that route whenever you need to validate distance, map rendering, or location update handling.
+
+## Pick waypoints from the map
+
+RocketSim 16.0.2 adds coordinate picking directly from the map. Focus the **From**, **To**, or single **Location** field, then long-press a point on the map to fill that field with the selected coordinates.
+
+![Creating an off-road golf course route by long-pressing coordinates on the map](./location-simulation/edit-location-app-action-off-road-route.png)
+
+For routes, use **Follow roads** to choose how RocketSim connects both waypoints:
+
+- **Enabled:** calculate a car or walking route using Apple Maps directions.
+- **Disabled:** move directly between the two selected waypoints, which is useful for golf courses, hiking paths, indoor routes, or any other off-road scenario.
 
 ## Simulate car and walking routes
 
-Choose the car or walking icon in the location editor to create a route. RocketSim calculates the route using Apple Maps directions and previews it on the map before you save it.
+Choose the car or walking icon in the location editor to create a route. With **Follow roads** enabled, RocketSim calculates the route using Apple Maps directions and previews it on the map before you save it.
 
 ![Creating a car route App Action](./location-simulation/edit-location-app-action-car-route.png)
 
@@ -66,7 +77,7 @@ Use interval or distance depending on what you want to validate. Interval-based 
 
 ![Activating a saved driving route from the side window](./location-simulation/side-window-driving-route-activate.png)
 
-Saved routes currently use a start and destination. Multi-stop paths are not exposed as a saved App Action route, but you can still create precise point-to-point routes by entering custom coordinates for both fields.
+Saved routes currently use a start and destination. Multi-stop paths are not exposed as a saved App Action route, but you can still create precise point-to-point routes by entering custom coordinates or by long-pressing the map for both fields.
 
 ## Relaunch with the matching time zone
 
@@ -76,7 +87,7 @@ This is helpful for apps that combine location and date logic, such as calendars
 
 ## Share location actions with your team
 
-Saved location App Actions are included when you sync App Actions to JSON, including their route option, speed, interval, distance, and waypoints. This lets a team keep common test locations and routes in Git next to deeplinks and push notifications.
+Saved location App Actions are included when you sync App Actions to JSON, including their route option, Follow roads setting, speed, interval, distance, and waypoints. This lets a team keep common test locations and routes in Git next to deeplinks and push notifications.
 
 See [How Large Teams Use RocketSim](/docs/getting-started/how-large-teams-use-rocketsim) for more on sharing App Actions using Git.
 
