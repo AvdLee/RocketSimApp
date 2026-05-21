@@ -7,7 +7,7 @@ RocketSim can turn captured network traffic into a format that is much easier to
 
 ## Where to find it
 
-Open either [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring) or [Networking Insights](/docs/features/networking/networking-insights), then use the toolbar's copy menu.
+Open either [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring) from the side window's **Networking** tab, or [Networking Insights](/docs/features/networking/networking-insights), then use the toolbar's copy menu.
 
 From there, RocketSim gives you two paths:
 
