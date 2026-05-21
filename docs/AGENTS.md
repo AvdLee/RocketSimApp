@@ -129,6 +129,8 @@ Current sidebar sections: Getting Started, Screenshots & Recordings, Simulator C
 
 Images for a doc page should be placed in a subfolder next to the `.md`/`.mdx` file and referenced with relative paths (e.g., `![Alt](./subfolder/image.png)`).
 
+When opening local docs pages in the browser, always use the configured trailing slash (for example, `http://localhost:4322/docs/features/networking/network-speed-control/`) to avoid stale optimized image URLs or route mismatches.
+
 Available shortcodes (auto-imported, no import statement needed):
 - `<Youtube id="..." title="..." />` — embeds a YouTube video
 - `<Accordion>` — collapsible content

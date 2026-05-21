@@ -35,9 +35,10 @@ This loads the framework bundle from the default App Store install path and only
 
 ## Alternative: copy the debug code
 
-If your team prefers an explicit integration, use the **Code** tab and press **Copy code**. Add the generated code to your app and call it at launch, for example in your app delegate or `@main` entry point:
+If your team prefers an explicit integration, use the **Code** tab and press **Copy code** inside RocketSim. The generated snippet is tailored to the current RocketSim install and should be used instead of copying the example below. Add the generated code to your app and call it at launch, for example in your app delegate or `@main` entry point:
 
 ```swift
+/// This is for example purposes. Use the Copy Code button inside RocketSim for a correct version of the code.
 #if DEBUG
 Bundle(path: "/Applications/RocketSim.app/Contents/Frameworks/RocketSimConnectLinker.nocache.framework")?.load()
 #endif
