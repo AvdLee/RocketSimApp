@@ -1,11 +1,18 @@
 ---
-/**
- * Custom Head component for RocketSim docs
- * Includes proper favicon and meta tags matching the main site
- */
 import Default from "@astrojs/starlight/components/Head.astro";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
+import StructuredData from "@/components/StructuredData.astro";
 import config from "@/config/config.json";
+import faqEntries from "@/data/faq-support.json";
+
+const { entry } = Astro.props;
+const title = entry?.data?.title ?? "RocketSim Docs";
+const description = entry?.data?.description ?? "";
+const slug = entry?.slug ?? "";
+const pageUrl = `${config.site.base_url}/${slug}`;
+
+const isContentPage = title !== "RocketSim Docs" && title !== "404";
+const isFaqPage = slug.endsWith("support/faq");
 
 const ogImage = `${config.site.base_url}${config.metadata.meta_image}`;
 ---
@@ -31,5 +38,20 @@ const ogImage = `${config.site.base_url}${config.metadata.meta_image}`;
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content={ogImage} />
 <meta name="twitter:site" content="@rocketsim_app" />
+
+{
+  isContentPage && !isFaqPage && (
+    <StructuredData
+      type="techArticle"
+      techArticle={{ title, description, url: pageUrl }}
+    />
+  )
+}
+
+{
+  isFaqPage && (
+    <StructuredData type="faqPage" faqEntries={faqEntries} url={pageUrl} />
+  )
+}
 
 <PlausibleAnalytics />
