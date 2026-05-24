@@ -464,3 +464,126 @@ footer.footer {
 .social-icons a:hover {
   color: var(--sl-color-accent);
 }
+
+/* ==========================================================================
+   Docs Conversion Components
+   ========================================================================== */
+
+.docs-cta {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.9rem;
+  background: color-mix(
+    in srgb,
+    var(--sl-color-accent) 8%,
+    var(--sl-color-black)
+  );
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:root[data-theme="light"] .docs-cta {
+  background: color-mix(
+    in srgb,
+    var(--sl-color-accent) 9%,
+    var(--sl-color-black)
+  );
+}
+
+.docs-cta__title {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--sl-color-white);
+}
+
+.docs-cta__description {
+  margin: 0.35rem 0 0;
+  color: var(--sl-color-gray-2);
+}
+
+.docs-cta__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.docs-cta__button--secondary {
+  border: 1px solid var(--sl-color-gray-4);
+}
+
+.docs-cta--compact {
+  padding: 1rem;
+}
+
+.docs-install-banner {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--sl-color-gray-4);
+  background: color-mix(in srgb, var(--sl-color-gray-6) 92%, black);
+  color: var(--sl-color-gray-1);
+  padding: 0.45rem 0.45rem 0.45rem 0.9rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
+  max-width: calc(100vw - 1.5rem);
+}
+
+.docs-install-banner__text {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.docs-install-banner__cta {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--sl-color-accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.docs-install-banner__dismiss {
+  border: 0;
+  background: transparent;
+  color: var(--sl-color-gray-2);
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.docs-install-banner__dismiss:hover,
+.docs-install-banner__dismiss:focus-visible,
+.docs-install-banner__cta:focus-visible,
+.docs-cta__button:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 50rem) {
+  .docs-cta {
+    margin: 1.5rem 0;
+  }
+
+  .docs-install-banner {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    border-radius: 0.9rem;
+    justify-content: space-between;
+  }
+
+  .docs-install-banner__text {
+    font-size: 0.82rem;
+  }
+}

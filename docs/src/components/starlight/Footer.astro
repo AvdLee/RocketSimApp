@@ -5,9 +5,56 @@
  */
 import Default from "@astrojs/starlight/components/Footer.astro";
 import { Icon } from "@astrojs/starlight/components";
+import DocsCTA from "./DocsCTA.astro";
+import DocsInstallBanner from "./DocsInstallBanner.astro";
+import docsEngagementScript from "@/scripts/docs-engagement.ts?url";
+
+const pageId = Astro.locals.starlightRoute.id;
+const isDocsContentPage = pageId !== "404";
 ---
 
 <Default {...Astro.props}><slot /></Default>
+
+{
+  isDocsContentPage && (
+    <>
+      <div data-docs-cta-templates hidden>
+        <DocsCTA
+          placement="inline"
+          compact={true}
+          title="Save time while debugging iOS apps"
+          description="RocketSim adds powerful simulator tools directly to your workflow."
+          primary={{
+            label: "Download RocketSim",
+            href: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=docs-inline-cta&mt=8",
+            event: "Docs CTA Click - Inline Primary",
+          }}
+          secondary={{
+            label: "View Pricing",
+            href: "/pricing",
+            event: "Docs CTA Click - Inline Secondary",
+          }}
+        />
+        <DocsCTA
+          placement="bottom"
+          title="Save time while debugging iOS apps"
+          description="RocketSim adds powerful simulator tools directly to your workflow."
+          primary={{
+            label: "Download RocketSim",
+            href: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=docs-bottom-cta&mt=8",
+            event: "Docs CTA Click - Bottom Primary",
+          }}
+          secondary={{
+            label: "View Pricing",
+            href: "/pricing",
+            event: "Docs CTA Click - Bottom Secondary",
+          }}
+        />
+      </div>
+      <DocsInstallBanner />
+    </>
+  )
+}
 
 <div class="footer-links">
   <a href="/"><Icon name="rocket" /> Home</a>
@@ -18,3 +65,5 @@ import { Icon } from "@astrojs/starlight/components";
   >
   <a href="mailto:support@rocketsim.app"><Icon name="email" /> Contact us</a>
 </div>
+
+{isDocsContentPage && <script type="module" src={docsEngagementScript} />}

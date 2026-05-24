@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  primary: { label: string; href: string; event: string };
+  secondary?: { label: string; href: string; event: string };
+  compact?: boolean;
+  placement: "inline" | "bottom";
+}
+
+const {
+  title,
+  description,
+  primary,
+  secondary,
+  compact = false,
+  placement,
+} = Astro.props;
+---
+
+<section
+  class={`docs-cta ${compact ? "docs-cta--compact" : ""}`}
+  data-docs-cta
+  data-placement={placement}
+>
+  <div class="docs-cta__content">
+    <h2 class="docs-cta__title">{title}</h2>
+    <p class="docs-cta__description">{description}</p>
+  </div>
+  <div class="docs-cta__actions">
+    <a
+      class="sl-link-button primary docs-cta__button"
+      href={primary.href}
+      data-analytics-event={primary.event}
+      data-docs-cta-click
+    >
+      {primary.label}
+    </a>
+    {
+      secondary && (
+        <a
+          class="sl-link-button minimal docs-cta__button docs-cta__button--secondary"
+          href={secondary.href}
+          data-analytics-event={secondary.event}
+          data-docs-cta-click
+        >
+          {secondary.label}
+        </a>
+      )
+    }
+  </div>
+</section>
