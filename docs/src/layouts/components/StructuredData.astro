@@ -101,8 +101,8 @@ interface WebPageSchema extends SchemaBase {
   "@type": "WebPage";
   name: string;
   url: string;
-  datePublished: string;
-  dateModified: string;
+  datePublished?: string;
+  dateModified?: string;
   breadcrumb: {
     "@id": string;
   };
@@ -188,6 +188,9 @@ const organizationData: OrganizationSchema = {
 
 // Build schemas based on type
 const schemas: SchemaBase[] = [];
+
+// Add Organization globally for all page types (one lightweight schema node).
+schemas.push(organizationData);
 
 if (type === "article") {
   const { article } = Astro.props;
@@ -286,9 +289,6 @@ if (type === "static") {
   };
 
   schemas.push(webSiteSchema);
-
-  // Organization schema
-  schemas.push(organizationData);
 }
 
 if (type === "product") {
@@ -312,8 +312,6 @@ if (type === "product") {
     "@type": "WebPage",
     name: product.name,
     url: product.url,
-    datePublished: new Date().toISOString(),
-    dateModified: new Date().toISOString(),
     breadcrumb: { "@id": `${product.url}#breadcrumb` },
   };
   schemas.push(webPageSchema);
@@ -404,8 +402,6 @@ if (type === "offer") {
     "@type": "WebPage",
     name: offers.title,
     url: offers.url,
-    datePublished: new Date().toISOString(),
-    dateModified: new Date().toISOString(),
     breadcrumb: { "@id": `${offers.url}#breadcrumb` },
   };
   schemas.push(webPageSchema);

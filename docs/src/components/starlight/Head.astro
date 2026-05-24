@@ -6,8 +6,25 @@
 import Default from "@astrojs/starlight/components/Head.astro";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 import config from "@/config/config.json";
+import { normalizeCanonicalUrl, toAbsoluteUrl } from "@/lib/utils/seo";
 
-const ogImage = `${config.site.base_url}${config.metadata.meta_image}`;
+const ogImage =
+  toAbsoluteUrl(config.metadata.meta_image) ||
+  `${config.site.base_url}/images/rocketsim-app-icon.png`;
+const canonicalUrl = normalizeCanonicalUrl(Astro.url.href);
+const pathParts = Astro.url.pathname
+  .split("/")
+  .filter(Boolean)
+  .map((segment) => decodeURIComponent(segment));
+const breadcrumbItems = pathParts.map((segment, index) => {
+  const href = `${config.site.base_url}/${pathParts.slice(0, index + 1).join("/")}/`;
+  return {
+    "@type": "ListItem",
+    position: index + 1,
+    name: segment.replace(/-/g, " "),
+    item: href,
+  };
+});
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -27,9 +44,25 @@ const ogImage = `${config.site.base_url}${config.metadata.meta_image}`;
 
 <!-- Open Graph image for social sharing -->
 <meta property="og:site_name" content="RocketSim" />
+<meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={ogImage} />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content={ogImage} />
+<meta name="twitter:image" content={ogImage} />
 <meta name="twitter:site" content="@rocketsim_app" />
+<link rel="canonical" href={canonicalUrl} />
+
+{
+  Astro.url.pathname.startsWith("/docs") && breadcrumbItems.length > 0 && (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbItems,
+      })}
+    />
+  )
+}
 
 <PlausibleAnalytics />

@@ -1,5 +1,6 @@
 ---
 import config from "@/config/config.json";
+import { normalizeCanonicalUrl, toAbsoluteUrl } from "@/lib/utils/seo";
 
 export interface Props {
   title: string;
@@ -35,16 +36,16 @@ const {
 
 // Build canonical URL (normalize to trailing slash when the site is configured for it)
 const rawCanonicalUrl = canonical || Astro.url.href;
-const canonicalUrl =
-  config.site.trailing_slash && !rawCanonicalUrl.endsWith("/")
-    ? `${rawCanonicalUrl}/`
-    : rawCanonicalUrl;
+const canonicalUrl = normalizeCanonicalUrl(rawCanonicalUrl);
 
 // Use provided description or fall back to default meta description
 const metaDescription = description || config.metadata.meta_description;
 
 // Use provided image or fall back to default meta image
-const ogImage = image || `${config.site.base_url}${config.metadata.meta_image}`;
+const ogImage =
+  toAbsoluteUrl(image) ||
+  toAbsoluteUrl(config.metadata.meta_image) ||
+  `${config.site.base_url}/images/rocketsim-app-icon.png`;
 
 // Build robots meta content
 let robotsContent = "";
@@ -111,9 +112,9 @@ const ogType = article ? "article" : "website";
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalUrl} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={metaDescription} />
-<meta property="twitter:image" content={ogImage} />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImage} />
 <meta name="twitter:creator" content={twitterCreator} />
 <meta name="twitter:site" content={twitterSite} />
