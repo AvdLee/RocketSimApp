@@ -51,6 +51,16 @@ Recordings include audio from the device stream. If a device disconnects while r
 
 For capture options that also apply to Simulator recordings, see [Creating Recordings](/docs/features/capturing/recordings) and [Taking Screenshots](/docs/features/capturing/screenshots).
 
+### Status bar time (9:41)
+
+Screenshots and recordings from a connected physical iPhone often show **9:41** in the status bar. That comes from **iOS itself** when the system captures the device screen — it is not a RocketSim feature you can turn on or off.
+
+There is no known setting on iPhone (or in RocketSim) to disable this for physical-device captures. RocketSim cannot override it.
+
+The Simulator is different: you can customize the status bar there, including the 9:41 preset. See [Status Bar Appearance](/docs/features/capturing/statusbar-appearance).
+
+If your app shows its own time and it does not match what appears in captures, add a debug or screenshot flag so in-app clocks also display **9:41** when you record marketing assets. The same behavior shows up in other Mac tools that mirror a device, such as QuickTime screen recording.
+
 ## Design comparison
 
 The physical device window supports RocketSim's design comparison tools. You can use grids and rulers on top of the device preview to check spacing, alignment, and layout behavior on real hardware.
