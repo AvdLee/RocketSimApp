@@ -5,9 +5,12 @@
  * BreadcrumbList JSON-LD for /docs/* routes.
  *
  * NOTE: Starlight's default Head already emits `<title>`, `<link rel="canonical">`,
- * `og:title`, `og:description`, `og:url`, `og:locale`, `og:site_name`,
- * `twitter:card`, `twitter:site`, and `<link rel="sitemap">`. We only add tags
- * Starlight does not provide (image-related OG/Twitter tags) and structured data.
+ * `og:title`, `og:type`, `og:description`, `og:url`, `og:locale`, `og:site_name`,
+ * `twitter:card`, `twitter:site`, and `<link rel="sitemap">`. The `og:site_name`
+ * override (to "RocketSim" rather than the Starlight site title "RocketSim Docs")
+ * lives in `astro.config.ts` under Starlight's `head` config so it deduplicates
+ * cleanly. This component only adds tags Starlight does not provide
+ * (image-related OG/Twitter tags) and the BreadcrumbList structured data.
  */
 import Default from "@astrojs/starlight/components/Head.astro";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
@@ -20,18 +23,22 @@ import {
   toAbsoluteSecureUrl,
 } from "@/lib/utils/seo";
 
-const DEFAULT_OG_IMAGE_FALLBACK = "/images/rocketsim-app-icon.png";
-// Dimensions of `public/og-banner-rocketsim.jpg`. Kept in sync with that asset.
-const DEFAULT_OG_IMAGE_WIDTH = 1600;
-const DEFAULT_OG_IMAGE_HEIGHT = 840;
-const DEFAULT_OG_IMAGE_ALT = "RocketSim — build apps faster";
+// Dimensions/alt apply to the configured banner (`config.metadata.meta_image`,
+// `public/og-banner-rocketsim.jpg`). They are only emitted when that banner is
+// actually being served. The app-icon path is a separate last-resort fallback
+// whose dimensions we deliberately don't claim at this layer.
+const DEFAULT_BANNER_WIDTH = 1600;
+const DEFAULT_BANNER_HEIGHT = 840;
+const DEFAULT_BANNER_ALT = "RocketSim — build apps faster";
+const APP_ICON_FALLBACK_PATH = "/images/rocketsim-app-icon.png";
 
-const configuredOgImage = toAbsoluteSecureUrl(config.metadata.meta_image);
+const configuredBanner = toAbsoluteSecureUrl(config.metadata.meta_image);
 const ogImage =
-  configuredOgImage ??
-  toAbsoluteSecureUrl(DEFAULT_OG_IMAGE_FALLBACK) ??
-  `${config.site.base_url}${DEFAULT_OG_IMAGE_FALLBACK}`;
-const isDefaultOgImage = ogImage === configuredOgImage;
+  configuredBanner ??
+  toAbsoluteSecureUrl(APP_ICON_FALLBACK_PATH) ??
+  `${config.site.base_url}${APP_ICON_FALLBACK_PATH}`;
+const isConfiguredBanner =
+  configuredBanner !== undefined && ogImage === configuredBanner;
 
 const canonicalUrl = normalizeCanonicalUrl(Astro.url.href);
 
@@ -91,30 +98,27 @@ const breadcrumbSchema =
 <meta name="apple-mobile-web-app-title" content="RocketSim" />
 
 <!--
-  Open Graph / Twitter image tags. Starlight emits title/description/url/locale
-  and twitter:card / twitter:site itself, so we only fill in image gaps here.
+  Open Graph / Twitter image tags. Starlight emits title/description/url/locale,
+  twitter:card and twitter:site itself, and `og:site_name` is set via Starlight's
+  `head` config in `astro.config.ts`, so we only fill in image gaps here.
 -->
-<meta property="og:site_name" content="RocketSim" />
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:secure_url" content={ogImage} />
 {
-  isDefaultOgImage && (
+  isConfiguredBanner && (
     <>
-      <meta
-        property="og:image:width"
-        content={String(DEFAULT_OG_IMAGE_WIDTH)}
-      />
+      <meta property="og:image:width" content={String(DEFAULT_BANNER_WIDTH)} />
       <meta
         property="og:image:height"
-        content={String(DEFAULT_OG_IMAGE_HEIGHT)}
+        content={String(DEFAULT_BANNER_HEIGHT)}
       />
       <meta property="og:image:type" content="image/jpeg" />
     </>
   )
 }
-<meta property="og:image:alt" content={DEFAULT_OG_IMAGE_ALT} />
+<meta property="og:image:alt" content={DEFAULT_BANNER_ALT} />
 <meta name="twitter:image" content={ogImage} />
-<meta name="twitter:image:alt" content={DEFAULT_OG_IMAGE_ALT} />
+<meta name="twitter:image:alt" content={DEFAULT_BANNER_ALT} />
 
 {
   breadcrumbSchema && (
