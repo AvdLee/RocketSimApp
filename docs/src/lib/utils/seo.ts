@@ -8,8 +8,12 @@ const SAFE_SCHEMES = new Set(["http:", "https:"]);
  *
  * Unsafe schemes (e.g. `javascript:`, `data:`, `mailto:`, `tel:`) are rejected so
  * we never accidentally surface them through SEO meta tags or JSON-LD.
+ *
+ * Kept internal because all current callers want either the HTTPS-upgraded
+ * variant (`toAbsoluteSecureUrl`) or the canonical-normalized variant
+ * (`normalizeCanonicalUrl`).
  */
-export function toAbsoluteUrl(url?: string | null): string | undefined {
+function toAbsoluteUrl(url?: string | null): string | undefined {
   if (!url) return undefined;
   try {
     const resolved = new URL(url, config.site.base_url);
@@ -59,6 +63,10 @@ export function normalizeCanonicalUrl(url?: string | null): string {
  * @example
  *   pathToAbsoluteUrl(["docs", "getting-started"])
  *   // => "https://www.rocketsim.app/docs/getting-started/"
+ *
+ * @public Consumed by the Starlight `Head.astro` override; knip's astro plugin
+ *   marks Starlight component overrides as `ignore exports`, which currently
+ *   prevents its import statements from counting toward upstream usage.
  */
 export function pathToAbsoluteUrl(segments: string[]): string {
   const path = segments.filter(Boolean).join("/");
@@ -68,6 +76,9 @@ export function pathToAbsoluteUrl(segments: string[]): string {
 /**
  * Convert a kebab-case URL slug into a human-readable, title-cased label
  * suitable for breadcrumb display (e.g. "getting-started" → "Getting Started").
+ *
+ * @public Consumed by the Starlight `Head.astro` override; see
+ *   `pathToAbsoluteUrl` for why this needs to be explicitly marked public.
  */
 export function slugToTitle(slug: string): string {
   return slug
@@ -80,6 +91,9 @@ export function slugToTitle(slug: string): string {
 /**
  * Safe wrapper around `decodeURIComponent` that returns the raw input when
  * decoding fails (e.g. on malformed `%`-sequences).
+ *
+ * @public Consumed by the Starlight `Head.astro` override; see
+ *   `pathToAbsoluteUrl` for why this needs to be explicitly marked public.
  */
 export function safeDecodePathSegment(segment: string): string {
   try {
