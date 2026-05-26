@@ -407,6 +407,13 @@ table tr:nth-child(even) {
   gap: 1rem;
 }
 
+/* RocketSim is a Mac app; hide Mac-only CTAs on phones to avoid dead-end taps. */
+@media (max-width: 50rem) {
+  .hero .actions .hide-below-md {
+    display: none;
+  }
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */

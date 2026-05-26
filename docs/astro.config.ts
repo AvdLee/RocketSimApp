@@ -122,6 +122,7 @@ export default defineConfig({
         PageTitle: "./src/components/starlight/PageTitle.astro",
         Footer: "./src/components/starlight/Footer.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
+        PageSidebar: "./src/components/starlight/PageSidebar.astro",
       },
       sidebar: [
         {

@@ -29,7 +29,7 @@ plans:
       label: Download now
       site: custom
       link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=pricing-table-free&mt=8"
-      class: "plausible-event-name=App+Store+Install+Free"
+      class: "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-pricing-free plausible-event-format=button"
   - enable: true
     title: Personal
     description: Ideal for solo developers—enjoy every Pro feature with an in-app purchase
@@ -57,7 +57,7 @@ plans:
       label: Download now
       site: custom
       link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=pricing-table-personal&mt=8"
-      class: "plausible-event-name=App+Store+Install+Personal"
+      class: "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-pricing-personal plausible-event-format=button"
   - enable: true
     title: Teams
     description: Perfect for teams with multiple developers
