@@ -1,6 +1,11 @@
 ---
 import config from "@/config/config.json";
-import { toAbsoluteSecureUrl } from "@/lib/utils/seo";
+import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
+
+// Canonical root URL respecting the site's `trailing_slash` policy. Used as
+// the `url` for Organization/WebSite nodes and the "Home" breadcrumb item so
+// structured data matches the canonical form emitted in meta tags.
+const SITE_ROOT_URL = normalizeCanonicalUrl("/");
 
 type ArticleProps = {
   type: "article";
@@ -196,7 +201,7 @@ const organizationData: OrganizationSchema = {
   "@type": "Organization",
   "@id": ORGANIZATION_ID,
   name: "RocketSim",
-  url: config.site.base_url,
+  url: SITE_ROOT_URL,
   logo:
     toAbsoluteSecureUrl("/images/rocketsim-app-icon.png") ??
     `${config.site.base_url}/images/rocketsim-app-icon.png`,
@@ -214,6 +219,7 @@ schemas.push(organizationData);
 
 if (type === "article") {
   const { article } = Astro.props;
+  const articleUrl = normalizeCanonicalUrl(article.url);
   const articleImageUrl = toAbsoluteSecureUrl(article.image?.url);
 
   // Author is emitted as a top-level node and referenced by @id below.
@@ -230,7 +236,7 @@ if (type === "article") {
     publisher: { "@id": ORGANIZATION_ID },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": article.url,
+      "@id": articleUrl,
     },
     ...(article.wordCount && { wordCount: article.wordCount }),
     ...(article.image &&
@@ -252,11 +258,11 @@ if (type === "article") {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: article.headline,
-    url: article.url,
+    url: articleUrl,
     datePublished: article.datePublished,
     dateModified: article.dateModified,
     breadcrumb: {
-      "@id": `${article.url}#breadcrumb`,
+      "@id": `${articleUrl}#breadcrumb`,
     },
     ...(article.image &&
       articleImageUrl && {
@@ -279,19 +285,19 @@ if (type === "article") {
   const breadcrumbSchema: BreadcrumbListSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": `${article.url}#breadcrumb`,
+    "@id": `${articleUrl}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: config.site.base_url,
+        item: SITE_ROOT_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: article.headline,
-        item: article.url,
+        item: articleUrl,
       },
     ],
   };
@@ -306,7 +312,7 @@ if (type === "static") {
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     name: "RocketSim",
-    url: config.site.base_url,
+    url: SITE_ROOT_URL,
     description:
       "RocketSim is the essential developer tool for building better apps faster on iOS, macOS, and visionOS.",
     publisher: { "@id": ORGANIZATION_ID },
@@ -317,6 +323,7 @@ if (type === "static") {
 
 if (type === "product") {
   const { product } = Astro.props;
+  const productUrl = normalizeCanonicalUrl(product.url);
   const productImageUrl = toAbsoluteSecureUrl(product.image);
 
   // 1. SoftwareApplication schema (references Organization via @id).
@@ -337,8 +344,8 @@ if (type === "product") {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: product.name,
-    url: product.url,
-    breadcrumb: { "@id": `${product.url}#breadcrumb` },
+    url: productUrl,
+    breadcrumb: { "@id": `${productUrl}#breadcrumb` },
   };
   schemas.push(webPageSchema);
 
@@ -346,19 +353,19 @@ if (type === "product") {
   const breadcrumbSchema: BreadcrumbListSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": `${product.url}#breadcrumb`,
+    "@id": `${productUrl}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: config.site.base_url,
+        item: SITE_ROOT_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: product.name,
-        item: product.url,
+        item: productUrl,
       },
     ],
   };
@@ -367,6 +374,7 @@ if (type === "product") {
 
 if (type === "offer") {
   const { offers } = Astro.props;
+  const offerUrl = normalizeCanonicalUrl(offers.url);
   // 1. SoftwareApplication with individual Offer schemas for each tier
   const pricingOffers: OfferSchema[] = [
     {
@@ -429,8 +437,8 @@ if (type === "offer") {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: offers.title,
-    url: offers.url,
-    breadcrumb: { "@id": `${offers.url}#breadcrumb` },
+    url: offerUrl,
+    breadcrumb: { "@id": `${offerUrl}#breadcrumb` },
   };
   schemas.push(webPageSchema);
 
@@ -438,19 +446,19 @@ if (type === "offer") {
   const breadcrumbSchema: BreadcrumbListSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": `${offers.url}#breadcrumb`,
+    "@id": `${offerUrl}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: config.site.base_url,
+        item: SITE_ROOT_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: offers.title,
-        item: offers.url,
+        item: offerUrl,
       },
     ],
   };

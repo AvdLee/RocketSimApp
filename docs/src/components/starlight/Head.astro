@@ -113,12 +113,16 @@ const breadcrumbSchema =
         content={String(DEFAULT_BANNER_HEIGHT)}
       />
       <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:alt" content={DEFAULT_BANNER_ALT} />
     </>
   )
 }
-<meta property="og:image:alt" content={DEFAULT_BANNER_ALT} />
 <meta name="twitter:image" content={ogImage} />
-<meta name="twitter:image:alt" content={DEFAULT_BANNER_ALT} />
+{
+  isConfiguredBanner && (
+    <meta name="twitter:image:alt" content={DEFAULT_BANNER_ALT} />
+  )
+}
 
 {
   breadcrumbSchema && (
