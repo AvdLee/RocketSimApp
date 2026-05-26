@@ -35,10 +35,11 @@ const isDefaultOgImage = ogImage === configuredOgImage;
 
 const canonicalUrl = normalizeCanonicalUrl(Astro.url.href);
 
-const pathSegments = Astro.url.pathname
-  .split("/")
-  .filter(Boolean)
-  .map(safeDecodePathSegment);
+// Keep the encoded form for URL construction and a decoded form purely for
+// human-readable breadcrumb names. Building hrefs from decoded segments would
+// drop required percent-encoding (e.g. "%20" → literal space).
+const rawPathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const decodedPathSegments = rawPathSegments.map(safeDecodePathSegment);
 
 // BreadcrumbList is scoped to docs routes only. Use a strict "/docs/" match so
 // hypothetical paths like "/docs-something/" never trigger it.
@@ -53,11 +54,11 @@ const breadcrumbItems = isDocsRoute
         name: "Home",
         item: normalizeCanonicalUrl("/"),
       },
-      ...pathSegments.map((segment, index) => ({
+      ...rawPathSegments.map((segment, index) => ({
         "@type": "ListItem" as const,
         position: index + 2,
-        name: slugToTitle(segment),
-        item: pathToAbsoluteUrl(pathSegments.slice(0, index + 1)),
+        name: slugToTitle(decodedPathSegments[index] ?? segment),
+        item: pathToAbsoluteUrl(rawPathSegments.slice(0, index + 1)),
       })),
     ]
   : [];

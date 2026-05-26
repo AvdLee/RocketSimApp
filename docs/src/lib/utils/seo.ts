@@ -34,15 +34,22 @@ export function toAbsoluteSecureUrl(url?: string | null): string | undefined {
 
 /**
  * Normalize a canonical URL: resolve relatives against the site origin and
- * append a trailing slash when the site is configured for it. Falls back to
- * the site origin when no URL is provided.
+ * append a trailing slash to the path (preserving any query string and
+ * fragment) when the site is configured for it. Falls back to the site
+ * origin when no URL is provided.
  */
 export function normalizeCanonicalUrl(url?: string | null): string {
   const resolved = toAbsoluteUrl(url) ?? config.site.base_url;
-  if (config.site.trailing_slash && !resolved.endsWith("/")) {
-    return `${resolved}/`;
+  if (!config.site.trailing_slash) return resolved;
+  try {
+    const parsed = new URL(resolved);
+    if (!parsed.pathname.endsWith("/")) {
+      parsed.pathname = `${parsed.pathname}/`;
+    }
+    return parsed.toString();
+  } catch {
+    return resolved.endsWith("/") ? resolved : `${resolved}/`;
   }
-  return resolved;
 }
 
 /**
