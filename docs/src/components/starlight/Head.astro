@@ -1,30 +1,76 @@
 ---
 /**
  * Custom Head component for RocketSim docs
- * Includes proper favicon and meta tags matching the main site
+ * Includes proper favicon, OG/Twitter image fallbacks, and a runtime
+ * BreadcrumbList JSON-LD for /docs/* routes.
+ *
+ * NOTE: Starlight's default Head already emits `<title>`, `<link rel="canonical">`,
+ * `og:title`, `og:description`, `og:url`, `og:locale`, `og:site_name`,
+ * `twitter:card`, `twitter:site`, and `<link rel="sitemap">`. We only add tags
+ * Starlight does not provide (image-related OG/Twitter tags) and structured data.
  */
 import Default from "@astrojs/starlight/components/Head.astro";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
 import config from "@/config/config.json";
-import { normalizeCanonicalUrl, toAbsoluteUrl } from "@/lib/utils/seo";
+import {
+  normalizeCanonicalUrl,
+  pathToAbsoluteUrl,
+  safeDecodePathSegment,
+  slugToTitle,
+  toAbsoluteSecureUrl,
+} from "@/lib/utils/seo";
 
+const DEFAULT_OG_IMAGE_FALLBACK = "/images/rocketsim-app-icon.png";
+// Dimensions of `public/og-banner-rocketsim.jpg`. Kept in sync with that asset.
+const DEFAULT_OG_IMAGE_WIDTH = 1600;
+const DEFAULT_OG_IMAGE_HEIGHT = 840;
+const DEFAULT_OG_IMAGE_ALT = "RocketSim — build apps faster";
+
+const configuredOgImage = toAbsoluteSecureUrl(config.metadata.meta_image);
 const ogImage =
-  toAbsoluteUrl(config.metadata.meta_image) ||
-  `${config.site.base_url}/images/rocketsim-app-icon.png`;
+  configuredOgImage ??
+  toAbsoluteSecureUrl(DEFAULT_OG_IMAGE_FALLBACK) ??
+  `${config.site.base_url}${DEFAULT_OG_IMAGE_FALLBACK}`;
+const isDefaultOgImage = ogImage === configuredOgImage;
+
 const canonicalUrl = normalizeCanonicalUrl(Astro.url.href);
-const pathParts = Astro.url.pathname
+
+const pathSegments = Astro.url.pathname
   .split("/")
   .filter(Boolean)
-  .map((segment) => decodeURIComponent(segment));
-const breadcrumbItems = pathParts.map((segment, index) => {
-  const href = `${config.site.base_url}/${pathParts.slice(0, index + 1).join("/")}/`;
-  return {
-    "@type": "ListItem",
-    position: index + 1,
-    name: segment.replace(/-/g, " "),
-    item: href,
-  };
-});
+  .map(safeDecodePathSegment);
+
+// BreadcrumbList is scoped to docs routes only. Use a strict "/docs/" match so
+// hypothetical paths like "/docs-something/" never trigger it.
+const isDocsRoute =
+  Astro.url.pathname === "/docs" || Astro.url.pathname.startsWith("/docs/");
+
+const breadcrumbItems = isDocsRoute
+  ? [
+      {
+        "@type": "ListItem" as const,
+        position: 1,
+        name: "Home",
+        item: normalizeCanonicalUrl("/"),
+      },
+      ...pathSegments.map((segment, index) => ({
+        "@type": "ListItem" as const,
+        position: index + 2,
+        name: slugToTitle(segment),
+        item: pathToAbsoluteUrl(pathSegments.slice(0, index + 1)),
+      })),
+    ]
+  : [];
+
+const breadcrumbSchema =
+  breadcrumbItems.length > 1
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        itemListElement: breadcrumbItems,
+      }
+    : null;
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -41,26 +87,40 @@ const breadcrumbItems = pathParts.map((segment, index) => {
 
 <!-- Additional meta for better SEO -->
 <meta name="author" content="RocketSim" />
+<meta name="apple-mobile-web-app-title" content="RocketSim" />
 
-<!-- Open Graph image for social sharing -->
+<!--
+  Open Graph / Twitter image tags. Starlight emits title/description/url/locale
+  and twitter:card / twitter:site itself, so we only fill in image gaps here.
+-->
 <meta property="og:site_name" content="RocketSim" />
-<meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={ogImage} />
-<meta property="twitter:card" content="summary_large_image" />
+<meta property="og:image:secure_url" content={ogImage} />
+{
+  isDefaultOgImage && (
+    <>
+      <meta
+        property="og:image:width"
+        content={String(DEFAULT_OG_IMAGE_WIDTH)}
+      />
+      <meta
+        property="og:image:height"
+        content={String(DEFAULT_OG_IMAGE_HEIGHT)}
+      />
+      <meta property="og:image:type" content="image/jpeg" />
+    </>
+  )
+}
+<meta property="og:image:alt" content={DEFAULT_OG_IMAGE_ALT} />
 <meta name="twitter:image" content={ogImage} />
-<meta name="twitter:site" content="@rocketsim_app" />
-<link rel="canonical" href={canonicalUrl} />
+<meta name="twitter:image:alt" content={DEFAULT_OG_IMAGE_ALT} />
 
 {
-  Astro.url.pathname.startsWith("/docs") && breadcrumbItems.length > 0 && (
+  breadcrumbSchema && (
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: breadcrumbItems,
-      })}
+      set:html={JSON.stringify(breadcrumbSchema)}
     />
   )
 }

@@ -1,18 +1,83 @@
 import config from "@/config/config.json";
 
-export function toAbsoluteUrl(url?: string): string | undefined {
+const SAFE_SCHEMES = new Set(["http:", "https:"]);
+
+/**
+ * Resolve a possibly-relative URL into an absolute one using `config.site.base_url`
+ * as the base. Returns `undefined` for empty, invalid, or unsafe-scheme inputs.
+ *
+ * Unsafe schemes (e.g. `javascript:`, `data:`, `mailto:`, `tel:`) are rejected so
+ * we never accidentally surface them through SEO meta tags or JSON-LD.
+ */
+export function toAbsoluteUrl(url?: string | null): string | undefined {
   if (!url) return undefined;
   try {
-    return new URL(url, config.site.base_url).toString();
+    const resolved = new URL(url, config.site.base_url);
+    if (!SAFE_SCHEMES.has(resolved.protocol)) return undefined;
+    return resolved.toString();
   } catch {
     return undefined;
   }
 }
 
-export function normalizeCanonicalUrl(url?: string): string {
+/**
+ * Same as `toAbsoluteUrl` but upgrades `http://` to `https://` so OG/Twitter
+ * crawlers (which prefer secure assets) never receive an insecure URL.
+ */
+export function toAbsoluteSecureUrl(url?: string | null): string | undefined {
+  const resolved = toAbsoluteUrl(url);
+  if (!resolved) return undefined;
+  return resolved.startsWith("http://")
+    ? `https://${resolved.slice("http://".length)}`
+    : resolved;
+}
+
+/**
+ * Normalize a canonical URL: resolve relatives against the site origin and
+ * append a trailing slash when the site is configured for it. Falls back to
+ * the site origin when no URL is provided.
+ */
+export function normalizeCanonicalUrl(url?: string | null): string {
   const resolved = toAbsoluteUrl(url) ?? config.site.base_url;
   if (config.site.trailing_slash && !resolved.endsWith("/")) {
     return `${resolved}/`;
   }
   return resolved;
+}
+
+/**
+ * Build an absolute URL from a sequence of path segments, applying trailing
+ * slash policy. Empty segments are ignored.
+ *
+ * @example
+ *   pathToAbsoluteUrl(["docs", "getting-started"])
+ *   // => "https://www.rocketsim.app/docs/getting-started/"
+ */
+export function pathToAbsoluteUrl(segments: string[]): string {
+  const path = segments.filter(Boolean).join("/");
+  return normalizeCanonicalUrl(path ? `/${path}` : "/");
+}
+
+/**
+ * Convert a kebab-case URL slug into a human-readable, title-cased label
+ * suitable for breadcrumb display (e.g. "getting-started" → "Getting Started").
+ */
+export function slugToTitle(slug: string): string {
+  return slug
+    .split(/[-_]/g)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/**
+ * Safe wrapper around `decodeURIComponent` that returns the raw input when
+ * decoding fails (e.g. on malformed `%`-sequences).
+ */
+export function safeDecodePathSegment(segment: string): string {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment;
+  }
 }

@@ -1,11 +1,12 @@
 ---
 import config from "@/config/config.json";
-import { normalizeCanonicalUrl, toAbsoluteUrl } from "@/lib/utils/seo";
+import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
 
 export interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -27,6 +28,7 @@ const {
   title,
   description,
   image,
+  imageAlt,
   article,
   canonical,
   robots,
@@ -41,11 +43,26 @@ const canonicalUrl = normalizeCanonicalUrl(rawCanonicalUrl);
 // Use provided description or fall back to default meta description
 const metaDescription = description || config.metadata.meta_description;
 
-// Use provided image or fall back to default meta image
+// Default banner asset metadata. Kept in sync with `public/og-banner-rocketsim.jpg`.
+const DEFAULT_OG_IMAGE_FALLBACK = "/images/rocketsim-app-icon.png";
+const DEFAULT_OG_IMAGE_WIDTH = 1600;
+const DEFAULT_OG_IMAGE_HEIGHT = 840;
+const DEFAULT_OG_IMAGE_ALT = "RocketSim — build apps faster";
+
+// Use provided image or fall back to default meta image; resolve to an absolute,
+// https-only URL so social crawlers always receive a fully-qualified asset.
+const providedImage = toAbsoluteSecureUrl(image);
+const configuredImage = toAbsoluteSecureUrl(config.metadata.meta_image);
 const ogImage =
-  toAbsoluteUrl(image) ||
-  toAbsoluteUrl(config.metadata.meta_image) ||
-  `${config.site.base_url}/images/rocketsim-app-icon.png`;
+  providedImage ??
+  configuredImage ??
+  toAbsoluteSecureUrl(DEFAULT_OG_IMAGE_FALLBACK) ??
+  `${config.site.base_url}${DEFAULT_OG_IMAGE_FALLBACK}`;
+
+// Only emit width/height when we know them (i.e. we're serving the default banner).
+const isDefaultOgImage = !providedImage && ogImage === configuredImage;
+const ogImageAlt =
+  imageAlt ?? (isDefaultOgImage ? DEFAULT_OG_IMAGE_ALT : title);
 
 // Build robots meta content
 let robotsContent = "";
@@ -91,6 +108,23 @@ const ogType = article ? "article" : "website";
 <meta property="og:description" content={metaDescription} />
 <meta property="og:site_name" content="RocketSim" />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:secure_url" content={ogImage} />
+<meta property="og:image:alt" content={ogImageAlt} />
+{
+  isDefaultOgImage && (
+    <>
+      <meta
+        property="og:image:width"
+        content={String(DEFAULT_OG_IMAGE_WIDTH)}
+      />
+      <meta
+        property="og:image:height"
+        content={String(DEFAULT_OG_IMAGE_HEIGHT)}
+      />
+      <meta property="og:image:type" content="image/jpeg" />
+    </>
+  )
+}
 
 <!-- Article-specific Open Graph tags -->
 {
@@ -111,10 +145,11 @@ const ogType = article ? "article" : "website";
 }
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalUrl} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={metaDescription} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 <meta name="twitter:creator" content={twitterCreator} />
 <meta name="twitter:site" content={twitterSite} />
