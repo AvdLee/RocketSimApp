@@ -185,6 +185,33 @@ const { seo, structuredData } = Astro.props;
         onScroll(); // Check scroll position on page load
       };
 
+      // Hide the top-nav wordmark while the hero wordmark is in view.
+      // Avoids duplicating the brand at the top of the page; the nav
+      // wordmark fades in once the hero scrolls out of view.
+      let shyNavObserver: IntersectionObserver | null = null;
+      const shyNavLogoInit = () => {
+        if (shyNavObserver) {
+          shyNavObserver.disconnect();
+          shyNavObserver = null;
+        }
+        const navBrand = document.querySelector(".navbar-brand");
+        if (!navBrand) return;
+        const heroWordmark = document.getElementById("hero-wordmark");
+        if (!heroWordmark) {
+          navBrand.classList.remove("is-shy");
+          return;
+        }
+        shyNavObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              navBrand.classList.toggle("is-shy", entry.isIntersecting);
+            }
+          },
+          { rootMargin: "-80px 0px 0px 0px", threshold: 0 },
+        );
+        shyNavObserver.observe(heroWordmark);
+      };
+
       // AOS init
       import AOS from "aos";
       import "aos/dist/aos.css";
@@ -206,6 +233,7 @@ const { seo, structuredData } = Astro.props;
 
       document.addEventListener("astro:page-load", () => {
         stickyNavInit();
+        shyNavLogoInit();
         aosInit();
       });
 

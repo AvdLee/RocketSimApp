@@ -3,20 +3,30 @@ import { getCollection, render } from "astro:content";
 
 import Feature from "@/components/Feature.astro";
 
+interface Props {
+  take?: number;
+  skip?: number;
+}
+
+const { take, skip = 0 } = Astro.props;
+
 const rawFeatures = await getCollection(
   "feature",
   (entry) => entry.data.showOnHomepage === true,
 );
+const sortedFeatures = rawFeatures.sort((a, b) => a.id.localeCompare(b.id));
+const slicedFeatures = sortedFeatures.slice(
+  skip,
+  take !== undefined ? skip + take : undefined,
+);
 const features = await Promise.all(
-  rawFeatures
-    .sort((a, b) => a.id.localeCompare(b.id))
-    .map(async (feature) => {
-      const { Content } = await render(feature);
-      return {
-        ...feature,
-        Content,
-      };
-    }),
+  slicedFeatures.map(async (feature) => {
+    const { Content } = await render(feature);
+    return {
+      ...feature,
+      Content,
+    };
+  }),
 );
 ---
 
