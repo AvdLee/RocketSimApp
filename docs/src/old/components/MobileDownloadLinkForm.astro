@@ -1,3 +1,9 @@
+---
+import { Image } from "astro:assets";
+
+import gaugeIcon from "../../assets/gauge.svg";
+---
+
 <style>
   .mobile-download {
     position: fixed;
@@ -48,9 +54,6 @@
     width: 2rem;
     height: 2rem;
 
-    font-weight: 700;
-    color: var(--primary-color);
-
     background: rgb(0 147 255 / 14%);
     border-radius: 999px;
   }
@@ -66,12 +69,15 @@
   }
 
   .mobile-download__title {
+    display: block;
+
     font-size: 0.95rem;
     font-weight: 700;
     line-height: 1.25;
   }
 
   .mobile-download__text {
+    display: block;
     margin-top: 0.2rem;
 
     font-size: 0.8rem;
@@ -105,6 +111,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
+    padding-inline: 0.75rem;
     margin-bottom: 0.75rem;
   }
 
@@ -117,6 +124,7 @@
   }
 
   .mobile-download__description {
+    padding-inline: 0.75rem;
     margin: 0 0 1rem;
 
     font-size: 0.9rem;
@@ -179,7 +187,9 @@
     aria-controls="mobile-download-link-panel"
     data-mobile-download-open
   >
-    <span class="mobile-download__icon" aria-hidden="true">Mac</span>
+    <span class="mobile-download__icon" aria-hidden="true">
+      <Image src={gaugeIcon} alt="" height="20" />
+    </span>
     <span class="mobile-download__copy">
       <span class="mobile-download__title">
         On your phone? Email yourself the Mac download link.
@@ -266,6 +276,10 @@
       if (!container.hidden && !hasTrackedView) {
         track("Mobile Download Banner Viewed");
         hasTrackedView = true;
+      }
+
+      if (!container.hidden) {
+        loadKitForm();
       }
     };
 
