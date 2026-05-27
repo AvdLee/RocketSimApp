@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-import gaugeIcon from "../../assets/gauge.svg";
+import appIcon from "../../assets/rocketsim-app-icon.png";
 ---
 
 <style>
@@ -51,11 +51,17 @@ import gaugeIcon from "../../assets/gauge.svg";
     display: grid;
     flex: 0 0 auto;
     place-items: center;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
 
-    background: rgb(0 147 255 / 14%);
-    border-radius: 999px;
+    overflow: hidden;
+    border-radius: 0.65rem;
+  }
+
+  .mobile-download__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .mobile-download__copy {
@@ -188,7 +194,7 @@ import gaugeIcon from "../../assets/gauge.svg";
     data-mobile-download-open
   >
     <span class="mobile-download__icon" aria-hidden="true">
-      <Image src={gaugeIcon} alt="" height="20" />
+      <Image src={appIcon} alt="" width="40" height="40" />
     </span>
     <span class="mobile-download__copy">
       <span class="mobile-download__title">
