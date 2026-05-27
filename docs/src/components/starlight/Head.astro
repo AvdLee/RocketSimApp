@@ -47,6 +47,10 @@ const canonicalUrl = normalizeCanonicalUrl(Astro.url.href);
 // drop required percent-encoding (e.g. "%20" → literal space).
 const rawPathSegments = Astro.url.pathname.split("/").filter(Boolean);
 const decodedPathSegments = rawPathSegments.map(safeDecodePathSegment);
+const currentSegment = decodedPathSegments[decodedPathSegments.length - 1];
+const currentPageTitle =
+  Astro.locals.starlightRoute?.entry?.data?.title ??
+  (currentSegment ? slugToTitle(currentSegment) : "Docs");
 
 // BreadcrumbList is scoped to docs routes only. Use a strict "/docs/" match so
 // hypothetical paths like "/docs-something/" never trigger it.
@@ -61,12 +65,22 @@ const breadcrumbItems = isDocsRoute
         name: "Home",
         item: normalizeCanonicalUrl("/"),
       },
-      ...rawPathSegments.map((segment, index) => ({
+      {
         "@type": "ListItem" as const,
-        position: index + 2,
-        name: slugToTitle(decodedPathSegments[index] ?? segment),
-        item: pathToAbsoluteUrl(rawPathSegments.slice(0, index + 1)),
-      })),
+        position: 2,
+        name: "Docs",
+        item: pathToAbsoluteUrl(["docs"]),
+      },
+      ...(rawPathSegments.length > 1
+        ? [
+            {
+              "@type": "ListItem" as const,
+              position: 3,
+              name: currentPageTitle,
+              item: canonicalUrl,
+            },
+          ]
+        : []),
     ]
   : [];
 
