@@ -82,6 +82,15 @@ export default defineConfig({
         }),
       ],
       title: "RocketSim Docs",
+      // Replace Starlight's default `og:site_name` (which mirrors `title`) with
+      // the umbrella brand name. Starlight dedupes entries in `head` by
+      // property/name, so this cleanly overrides instead of duplicating.
+      head: [
+        {
+          tag: "meta",
+          attrs: { property: "og:site_name", content: "RocketSim" },
+        },
+      ],
       disable404Route: true,
       lastUpdated: true,
       logo: {
