@@ -16,6 +16,8 @@ import SocialMediaMentions from "../old/components/SocialMediaMentions.astro";
 import SubscribeToNewsletter from "../old/components/SubscribeToNewsletter.astro";
 import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
 
+import TrustedBrands from "@/partials/TrustedBrands.astro";
+
 const {
   site: { base_url, title: siteTitle },
   metadata: { meta_description },
@@ -57,6 +59,7 @@ const seo = {
     >
   </Navigation>
   <AppStore />
+  <TrustedBrands title="Used by iOS developers at" />
   <Reviews />
   <SubscribeToNewsletter />
   <Features />
