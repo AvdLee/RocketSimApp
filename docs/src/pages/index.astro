@@ -16,8 +16,6 @@ import SocialMediaMentions from "../old/components/SocialMediaMentions.astro";
 import SubscribeToNewsletter from "../old/components/SubscribeToNewsletter.astro";
 import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
 
-import logoImage from "../assets/rocketsim-logo.svg";
-
 const {
   site: { base_url, title: siteTitle },
   metadata: { meta_description },
@@ -34,16 +32,14 @@ const seo = {
 <Base seo={seo} structuredData={{ type: "static" }}>
   <Notification />
   <Header
-    title="Build, test, and automate iOS apps faster in the Simulator"
-    logo={logoImage}
-    logoAlt='Written logo spelling: "RocketSim"'
-    scrollText="Scroll down to explore all features ↓"
+    title="The iOS Simulator companion for developers and AI coding agents."
   >
-    RocketSim gives iOS developers and AI coding agents a faster way to <strong
-      >inspect, test, record, and debug apps</strong
-    > in the Simulator without leaving their workflow.
+    RocketSim lets you <strong>inspect, test, and debug</strong> your app in the Simulator
+    — without breaking your flow in Xcode, Codex, or Cursor.
   </Header>
-  <Navigation>
+  <Navigation
+    microcopy="Get started for free, no signup. Works with Xcode 16+."
+  >
     <NavigationLink
       href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
       className="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button"
@@ -52,13 +48,8 @@ const seo = {
       target="_blank"
       rel="noopener"
     >
-      Download now
+      Free download
     </NavigationLink>
-    <NavigationLink
-      href="/team-insights"
-      className="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams"
-      >For Teams &rarr;</NavigationLink
-    >
     <NavigationLink
       href="/features"
       className="plausible-event-name=CTA:+Homepage+Hero+-+Features"

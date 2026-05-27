@@ -7,8 +7,6 @@ import Header from "../old/components/Header.astro";
 import Navigation from "../old/components/Navigation.astro";
 import NavigationLink from "../old/components/NavigationLink.astro";
 
-import logoImage from "../assets/rocketsim-logo.svg";
-
 const pageIndex = await getEntry("privacy", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
@@ -58,11 +56,7 @@ const seo = {
 </style>
 
 <Base seo={seo}>
-  <Header
-    title="RocketSim Privacy statement"
-    logo={logoImage}
-    logoAlt='Written logo spelling: "RocketSim"'
-  >
+  <Header title="RocketSim Privacy statement">
     Your privacy is important to us. This Privacy statement explains how
     RocketSim collects, uses, and protects your personal information.
   </Header>

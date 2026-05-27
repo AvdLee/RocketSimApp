@@ -5,9 +5,10 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
 interface Props {
   showLogin?: boolean;
+  microcopy?: string;
 }
 
-const { showLogin = false } = Astro.props;
+const { showLogin = false, microcopy } = Astro.props;
 ---
 
 <style>
@@ -91,6 +92,7 @@ const { showLogin = false } = Astro.props;
       <ul>
         <slot />
       </ul>
+      {microcopy && <p class="navigation__microcopy">{microcopy}</p>}
     </nav>
     <div class="navigation__right-column">
       {
