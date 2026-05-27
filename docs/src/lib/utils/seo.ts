@@ -81,10 +81,20 @@ export function pathToAbsoluteUrl(segments: string[]): string {
  *   `pathToAbsoluteUrl` for why this needs to be explicitly marked public.
  */
 export function slugToTitle(slug: string): string {
+  const brandWords: Record<string, string> = {
+    rocketsim: "RocketSim",
+    ios: "iOS",
+    macos: "macOS",
+  };
+
   return slug
     .split(/[-_]/g)
     .filter(Boolean)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(
+      (word) =>
+        brandWords[word.toLowerCase()] ??
+        word.charAt(0).toUpperCase() + word.slice(1),
+    )
     .join(" ");
 }
 

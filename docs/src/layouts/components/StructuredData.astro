@@ -464,14 +464,15 @@ if (type === "offer") {
   };
   schemas.push(breadcrumbSchema);
 }
+
+const structuredDataGraph = {
+  "@context": "https://schema.org",
+  "@graph": schemas.map(({ "@context": _schemaContext, ...schema }) => schema),
+};
 ---
 
-{
-  schemas.map((schema) => (
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(schema)}
-    />
-  ))
-}
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(structuredDataGraph)}
+/>
