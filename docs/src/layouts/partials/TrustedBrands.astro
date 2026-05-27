@@ -4,12 +4,19 @@ import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
+interface Props {
+  title?: string;
+}
+
+const { title: titleOverride } = Astro.props;
+
 const sectionData = (await getEntry(
   "trustedBrandsSectionCollection",
   "trusted-brands",
 )) as CollectionEntry<"trustedBrandsSectionCollection">;
 
-const { enable, title, list } = sectionData.data;
+const { enable, title: defaultTitle, list } = sectionData.data;
+const title = titleOverride ?? defaultTitle;
 ---
 
 <style>

@@ -16,6 +16,11 @@ import SocialMediaMentions from "../old/components/SocialMediaMentions.astro";
 import SubscribeToNewsletter from "../old/components/SubscribeToNewsletter.astro";
 import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
 
+import TrustedBrands from "@/partials/TrustedBrands.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+
+import logoImage from "../assets/rocketsim-logo.svg";
+
 const {
   site: { base_url, title: siteTitle },
   metadata: { meta_description },
@@ -33,6 +38,8 @@ const seo = {
   <Notification />
   <Header
     title="The iOS Simulator companion for developers and AI coding agents."
+    logo={logoImage}
+    logoAlt='Written logo spelling: "RocketSim"'
   >
     RocketSim lets you <strong>inspect, test, and debug</strong> your app in the Simulator
     — without breaking your flow in Xcode, Codex, or Cursor.
@@ -57,9 +64,11 @@ const seo = {
     >
   </Navigation>
   <AppStore />
+  <TrustedBrands title="Used by iOS developers at" />
+  <Features take={3} />
   <Reviews />
-  <SubscribeToNewsletter />
-  <Features />
+  <CallToAction />
+  <Features skip={3} />
   <TeamInsights />
   <StatusBar />
   <SubscribeToNewsletter />
