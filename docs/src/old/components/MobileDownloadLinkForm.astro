@@ -101,7 +101,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
   .mobile-download__panel {
     display: none;
-    padding: 1rem;
+    padding: 1.75rem 1rem 1rem;
   }
 
   .mobile-download.is-expanded .mobile-download__bar {
@@ -131,7 +131,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
   .mobile-download__description {
     padding-inline: 0.75rem;
-    margin: 0 0 1rem;
+    margin: 0 0 0.5rem;
 
     font-size: 0.9rem;
     line-height: 1.45;
@@ -170,6 +170,16 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
   .mobile-download__form
     :global(.formkit-form[data-uid="bd3a42d000"] [data-style="clean"]) {
     padding: 0;
+  }
+
+  .mobile-download__form
+    :global(.formkit-form[data-uid="bd3a42d000"] .formkit-fields) {
+    margin-top: 0 !important;
+  }
+
+  .mobile-download__form
+    :global(.formkit-form[data-uid="bd3a42d000"] .formkit-main) {
+    padding-top: 0 !important;
   }
 
   .mobile-download__form
