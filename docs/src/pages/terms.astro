@@ -7,8 +7,6 @@ import Header from "../old/components/Header.astro";
 import Navigation from "../old/components/Navigation.astro";
 import NavigationLink from "../old/components/NavigationLink.astro";
 
-import logoImage from "../assets/rocketsim-logo.svg";
-
 const pageIndex = await getEntry("terms", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
@@ -118,11 +116,7 @@ const seo = {
 </style>
 
 <Base seo={seo}>
-  <Header
-    title="RocketSim Terms and Conditions"
-    logo={logoImage}
-    logoAlt='Written logo spelling: "RocketSim"'
-  >
+  <Header title="RocketSim Terms and Conditions">
     Welcome to RocketSim! These Terms and Conditions govern your use of
     RocketSim, a developer tool designed to enhance app development experiences.
     By accessing or using RocketSim, you agree to these Terms. Please read them

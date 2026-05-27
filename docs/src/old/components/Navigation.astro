@@ -5,9 +5,10 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
 interface Props {
   showLogin?: boolean;
+  microcopy?: string;
 }
 
-const { showLogin = false } = Astro.props;
+const { showLogin = false, microcopy } = Astro.props;
 ---
 
 <style>
@@ -21,10 +22,12 @@ const { showLogin = false } = Astro.props;
     box-sizing: content-box;
   }
 
-  nav {
+  .navigation__primary {
     @media (min-width: 800px) {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
       grid-column: 1 / -2;
     }
   }
@@ -47,6 +50,10 @@ const { showLogin = false } = Astro.props;
     font-size: 0.75rem;
     color: #888;
     text-align: center;
+
+    @media (min-width: 800px) {
+      text-align: left;
+    }
   }
 
   .navigation__right-column {
@@ -87,11 +94,14 @@ const { showLogin = false } = Astro.props;
 
 <div class:list={["navigation-wrapper"]} id="navigation-menu">
   <div class="navigation deprecated-grid">
-    <nav aria-label="Hero navigation">
-      <ul>
-        <slot />
-      </ul>
-    </nav>
+    <div class="navigation__primary">
+      <nav aria-label="Hero navigation">
+        <ul>
+          <slot />
+        </ul>
+      </nav>
+      {microcopy && <p class="navigation__microcopy">{microcopy}</p>}
+    </div>
     <div class="navigation__right-column">
       {
         showLogin ? (
