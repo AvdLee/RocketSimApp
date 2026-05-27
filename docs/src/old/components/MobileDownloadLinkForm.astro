@@ -1,0 +1,306 @@
+<style>
+  .mobile-download {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: max(1rem, env(safe-area-inset-left));
+    z-index: 30;
+
+    display: block;
+
+    @media (min-width: 800px) {
+      display: none;
+    }
+  }
+
+  .mobile-download[hidden] {
+    display: none;
+  }
+
+  .mobile-download__bar,
+  .mobile-download__panel {
+    color: #fff;
+
+    background: rgb(16 16 16 / 92%);
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 1.25rem;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 40%);
+    backdrop-filter: blur(1rem);
+  }
+
+  .mobile-download__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.875rem 1rem;
+
+    font: inherit;
+    text-align: left;
+
+    cursor: pointer;
+  }
+
+  .mobile-download__icon {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+
+    font-weight: 700;
+    color: var(--primary-color);
+
+    background: rgb(0 147 255 / 14%);
+    border-radius: 999px;
+  }
+
+  .mobile-download__copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .mobile-download__title,
+  .mobile-download__text {
+    margin: 0;
+  }
+
+  .mobile-download__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .mobile-download__text {
+    margin-top: 0.2rem;
+
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: #b8b8b8;
+  }
+
+  .mobile-download__action {
+    flex: 0 0 auto;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
+  .mobile-download__panel {
+    display: none;
+    padding: 1rem;
+  }
+
+  .mobile-download.is-expanded .mobile-download__bar {
+    display: none;
+  }
+
+  .mobile-download.is-expanded .mobile-download__panel {
+    display: block;
+  }
+
+  .mobile-download__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .mobile-download__heading {
+    margin: 0;
+
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .mobile-download__description {
+    margin: 0 0 1rem;
+
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: #c7c7c7;
+  }
+
+  .mobile-download__close {
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+
+    font-size: 1.25rem;
+    color: #c7c7c7;
+
+    cursor: pointer;
+    background: rgb(255 255 255 / 8%);
+    border: 0;
+    border-radius: 999px;
+  }
+
+  .mobile-download__bar:focus-visible,
+  .mobile-download__close:focus-visible {
+    outline: 0.25rem solid var(--ring);
+    outline-offset: 0.125rem;
+  }
+
+  .mobile-download__form {
+    min-height: 3.25rem;
+  }
+
+  .mobile-download__form :global(.formkit-form[data-uid="bd3a42d000"]) {
+    max-width: none;
+  }
+
+  .mobile-download__form
+    :global(.formkit-form[data-uid="bd3a42d000"] [data-style="clean"]) {
+    padding: 0;
+  }
+
+  .mobile-download__form
+    :global(.formkit-form[data-uid="bd3a42d000"] .formkit-field),
+  .mobile-download__form
+    :global(.formkit-form[data-uid="bd3a42d000"] .formkit-submit) {
+    margin-bottom: 0.625rem;
+  }
+</style>
+
+<aside
+  class="mobile-download"
+  id="mobile-download-link-form"
+  aria-label="Email a RocketSim download link"
+  hidden
+>
+  <button
+    class="mobile-download__bar"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mobile-download-link-panel"
+    data-mobile-download-open
+  >
+    <span class="mobile-download__icon" aria-hidden="true">Mac</span>
+    <span class="mobile-download__copy">
+      <span class="mobile-download__title">
+        On your phone? Email yourself the Mac download link.
+      </span>
+      <span class="mobile-download__text">
+        Install RocketSim when you're back at your Mac.
+      </span>
+    </span>
+    <span class="mobile-download__action">Send link</span>
+  </button>
+  <div
+    class="mobile-download__panel"
+    id="mobile-download-link-panel"
+    tabindex="-1"
+  >
+    <div class="mobile-download__header">
+      <h2 class="mobile-download__heading">
+        Get the RocketSim download link on your Mac
+      </h2>
+      <button
+        class="mobile-download__close"
+        type="button"
+        aria-label="Dismiss download link form"
+        data-mobile-download-dismiss
+      >
+        &times;
+      </button>
+    </div>
+    <p class="mobile-download__description">
+      RocketSim is a Mac app. Enter your email and we'll send the App Store link
+      so it's ready when you're back at your MacBook.
+    </p>
+    <div class="mobile-download__form" data-mobile-download-form></div>
+  </div>
+</aside>
+
+<script>
+  const mobileDownloadInit = () => {
+    const container = document.getElementById("mobile-download-link-form");
+    if (!container) return;
+    if (container.dataset.initialized === "true") return;
+    container.dataset.initialized = "true";
+
+    const mobileMediaQuery = window.matchMedia("(max-width: 799px)");
+    const openButton = container.querySelector("[data-mobile-download-open]");
+    const dismissButton = container.querySelector(
+      "[data-mobile-download-dismiss]",
+    );
+    const panel = document.getElementById("mobile-download-link-panel");
+    const formContainer = container.querySelector(
+      "[data-mobile-download-form]",
+    );
+    const storageKey = "rocketsim-mobile-download-dismissed";
+    let hasTrackedView = false;
+    let hasLoadedKit = false;
+
+    const track = (eventName: string) => {
+      const plausible = (
+        window as Window & { plausible?: (eventName: string) => void }
+      ).plausible;
+
+      if (typeof plausible === "function") {
+        plausible(eventName);
+      }
+    };
+
+    const shouldShow = () =>
+      mobileMediaQuery.matches && sessionStorage.getItem(storageKey) !== "1";
+
+    const loadKitForm = () => {
+      if (hasLoadedKit || !formContainer) return;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.dataset.uid = "bd3a42d000";
+      script.src = "https://rocketsim.kit.com/bd3a42d000/index.js";
+      formContainer.append(script);
+      hasLoadedKit = true;
+    };
+
+    const setVisibleState = () => {
+      container.hidden = !shouldShow();
+
+      if (!container.hidden && !hasTrackedView) {
+        track("Mobile Download Banner Viewed");
+        hasTrackedView = true;
+      }
+    };
+
+    openButton?.addEventListener("click", () => {
+      container.classList.add("is-expanded");
+      openButton.setAttribute("aria-expanded", "true");
+      loadKitForm();
+      track("Mobile Download Banner Opened");
+      panel?.focus();
+    });
+
+    dismissButton?.addEventListener("click", () => {
+      sessionStorage.setItem(storageKey, "1");
+      container.hidden = true;
+      container.classList.remove("is-expanded");
+      openButton?.setAttribute("aria-expanded", "false");
+      track("Mobile Download Banner Dismissed");
+    });
+
+    document.addEventListener(
+      "submit",
+      (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement)) return;
+        if (form.dataset.svForm !== "9491475") return;
+
+        track("Mobile Download Link Form Submitted");
+        sessionStorage.setItem(storageKey, "1");
+      },
+      true,
+    );
+
+    mobileMediaQuery.addEventListener("change", setVisibleState);
+    setVisibleState();
+  };
+
+  document.addEventListener("astro:page-load", mobileDownloadInit);
+</script>
