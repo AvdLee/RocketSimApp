@@ -22,11 +22,12 @@ const { showLogin = false, microcopy } = Astro.props;
     box-sizing: content-box;
   }
 
-  nav {
+  .navigation__primary {
     @media (min-width: 800px) {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      justify-content: center;
       grid-column: 1 / -2;
     }
   }
@@ -93,12 +94,14 @@ const { showLogin = false, microcopy } = Astro.props;
 
 <div class:list={["navigation-wrapper"]} id="navigation-menu">
   <div class="navigation deprecated-grid">
-    <nav aria-label="Hero navigation">
-      <ul>
-        <slot />
-      </ul>
+    <div class="navigation__primary">
+      <nav aria-label="Hero navigation">
+        <ul>
+          <slot />
+        </ul>
+      </nav>
       {microcopy && <p class="navigation__microcopy">{microcopy}</p>}
-    </nav>
+    </div>
     <div class="navigation__right-column">
       {
         showLogin ? (
