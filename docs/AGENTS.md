@@ -138,6 +138,7 @@ When opening local docs pages in the browser:
 - Always use the configured trailing slash (for example, `http://localhost:4322/docs/features/networking/network-speed-control/`) to avoid stale optimized image URLs or route mismatches.
 
 Available shortcodes (auto-imported, no import statement needed):
+
 - `<Youtube id="..." title="..." />` — embeds a YouTube video
 - `<Accordion>` — collapsible content
 - `<Tweet />` — embedded tweet
@@ -147,3 +148,38 @@ The documentation also generates `llms.txt` and `llms-full.txt` files via the `s
 ### Blog
 
 The blog is powered by a headless WordPress instance. Blog posts are fetched at build time and statically rendered.
+
+Static, hand-coded blog articles live in `src/pages/blog/<slug>.astro` and use the `Base` layout with full `seo` and `structuredData` props. Use them for SEO-targeted articles where we want full control over markup, internal linking, and image handling.
+
+## Writing Blog Articles
+
+When writing or editing blog articles (both static `.astro` posts in `src/pages/blog/` and WordPress drafts):
+
+### Typographic conventions
+
+- **Use `→` (U+2192) for menu paths and step sequences**, never `>` or `&gt;`. For example: `Settings → Accessibility → VoiceOver`, not `Settings > Accessibility > VoiceOver`. This avoids ambiguity with HTML/MDX comparison operators and reads better.
+- Use em dashes (`—`, U+2014) for parenthetical asides, not double hyphens.
+- Use real Unicode arrows for keyboard shortcuts in body text: `↑`, `↓`, `←`, `→`, `⏎`, `Esc`, `⌘`. Wrap them in `<strong>` when listing shortcuts.
+
+### Voice and tone
+
+Articles are written in Antoine van der Lee's voice. Match the existing pattern in `src/pages/blog/15-voiceover-navigator-pro-xcode-simulator-recordings.astro` and `src/pages/blog/how-to-test-voiceover-on-the-xcode-simulator.astro`:
+
+- Direct, opinionated, practitioner voice — not academic.
+- Second person (`you`) for the reader; first person (`I`) for personal asides.
+- Short paragraphs (3–4 sentences max), variable sentence rhythm.
+- No filler openers like "In this section, we will…" or "Let's dive into…".
+- Standard closing pattern: short conclusion paragraph, then a CTA paragraph linking to the Mac App Store (with a `ct=` UTM parameter unique to the article), and end with `Thanks!`.
+
+### SEO requirements
+
+Every static blog article must:
+
+- Have a unique `slug`, `title`, `description`, `publishedTime`, and `modifiedTime`.
+- Keep the `<title>` tag (including ` - RocketSim` suffix) **≤ 60 characters**. If the headline you want to display is longer, declare a separate `pageTitle` constant for the visible `<h1>` and keep `title` short.
+- Keep the meta `description` **≤ 160 characters**, include the primary keyword once, and read as a self-contained value proposition.
+- Place the primary keyword in the URL slug, `<title>`, `<h1>`, the first paragraph, and at least one `<h2>`.
+- Pass `structuredData={{ type: "article", article: { … } }}` so the `Article` + `WebPage` + `BreadcrumbList` JSON-LD graph is emitted automatically.
+- Include at least two internal links (typically one to `/docs/features/<area>/<page>` and one to `/features/<area>`) and one authoritative external link (usually Apple developer documentation).
+- Provide descriptive, keyword-aware `alt` text on every image. Reuse images from `src/assets/blog/<release>/`, `src/assets/features/`, or `src/content/docs/...` instead of duplicating files.
+- Append a Mac App Store install link with a `ct=<article-slug>` UTM parameter in the CTA so installs from the article are attributable.
