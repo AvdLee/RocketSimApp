@@ -31,24 +31,9 @@ Recordings are re-encoded to the correct codec (H.264 or HEVC). A silent audio t
 
 App Store Connect also enforces other rules for app previews: **length must be between 15 and 30 seconds**, file size is capped at 500MB, and there are requirements for frame rate, audio, and file format. RocketSim handles format and resolution; for duration and the full, up-to-date checklist, always check [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) so your previews are accepted.
 
-## Supported device resolutions
+## Supported output resolutions
 
-RocketSim maps each Simulator device to the right [App Store Connect resolution](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8), so you don't have to look them up or resize by hand. Output resolutions include:
-
-**iPhone**
-
-- **886×1920** — 6.9", 6.5", 6.3", 6.1" (e.g. iPhone 16 Pro Max, 15 Plus, 14, 13, 12, X)
-- **1080×1920** — 5.5", 4" (e.g. iPhone 8 Plus, SE 1st gen)
-- **750×1334** — 4.7" (e.g. iPhone 8, SE 2nd/3rd gen)
-
-**iPad**
-
-- **1200×1600** — 13", 12.9", 11", 10.5" (Pro, Air, 10)
-- **900×1200** — 9.7", iPad Mini
-
-**Apple Vision Pro**
-
-- **3840×2160**
+RocketSim maps each Simulator device to the right App Store Connect output resolution, so you don't have to look it up or resize by hand. Apple can update supported devices and resolution requirements over time, so use [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) as the source of truth for the latest supported output resolutions.
 
 ## Drag and drop to App Store Connect
 
