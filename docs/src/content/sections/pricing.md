@@ -49,9 +49,9 @@ plans:
         feature: License management
     price:
       yearly:
-        amount: "App Store price"
+        amount: "In-app"
         period: ""
-        note: "Shown in-app before purchase"
+        note: "Local App Store price shown before purchase"
     microcopy: "Upgrade in-app when Pro saves you time"
     cta:
       enable: true
