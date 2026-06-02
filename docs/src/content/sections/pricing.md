@@ -49,13 +49,13 @@ plans:
         feature: License management
     price:
       yearly:
-        amount: "Local"
-        period: "App Store price"
+        amount: "App Store price"
+        period: ""
         note: "Shown in-app before purchase"
     microcopy: "Upgrade in-app when Pro saves you time"
     cta:
       enable: true
-      label: Download to view price
+      label: Download now
       site: custom
       link: "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=pricing-table-personal&mt=8"
       class: "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-pricing-personal plausible-event-format=button"
