@@ -51,7 +51,7 @@ plans:
       yearly:
         amount: "In-app"
         period: ""
-        note: "Local App Store price shown before purchase"
+        note: "App Store price per country"
     microcopy: "Upgrade in-app when Pro saves you time"
     cta:
       enable: true
