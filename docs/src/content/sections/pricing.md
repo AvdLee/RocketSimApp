@@ -1,10 +1,10 @@
 ---
-title: "Choose a pricing plan best suited <em>for you</em>"
+title: "Choose the RocketSim plan for <em>your workflow</em>"
 
 plans:
   - enable: true
     title: Free
-    description: Explore how our 30+ Xcode Simulator features can increase your productivity
+    description: Start using RocketSim as an individual developer and explore the Simulator workflow improvements.
     price_prefix: "€"
     features:
       - enable: true
@@ -32,8 +32,8 @@ plans:
       class: "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-pricing-free plausible-event-format=button"
   - enable: true
     title: Personal
-    description: Ideal for solo developers—enjoy every Pro feature with an in-app purchase
-    price_prefix: "€"
+    description: For individual developers who want Pro features through the App Store, billed at your local App Store price.
+    price_prefix: ""
     features:
       - enable: true
         included: true
@@ -49,9 +49,10 @@ plans:
         feature: License management
     price:
       yearly:
-        amount: 5
-        period: "/ month"
-    microcopy: "Unlock all Pro features instantly"
+        amount: "In-app"
+        period: ""
+        note: "App Store price per country"
+    microcopy: "Upgrade in-app when Pro saves you time"
     cta:
       enable: true
       label: Download now
@@ -60,7 +61,7 @@ plans:
       class: "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-pricing-personal plausible-event-format=button"
   - enable: true
     title: Teams
-    description: Perfect for teams with multiple developers
+    description: For companies that need shared seats, centralized billing, license management, and team build insights.
     price_prefix: "€"
     features:
       - enable: true
@@ -80,7 +81,7 @@ plans:
         amount: 10
         period: "/ seat / month"
         note: "€120 billed annually"
-    microcopy: "No credit card required"
+    microcopy: "Commercial licensing with a 14-day trial"
     cta:
       enable: true
       label: Start 14-day Trial
@@ -89,7 +90,7 @@ plans:
       class: "plausible-event-name=CTA:+Pricing+Teams+-+Trial"
   - enable: true
     title: Enterprise
-    description: For larger enterprise with a need for more control and security
+    description: For larger organizations that need more control, security, and custom distribution.
     price_prefix: ""
     features:
       - enable: true

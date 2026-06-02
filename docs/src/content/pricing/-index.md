@@ -1,9 +1,9 @@
 ---
 title: "Pricing - RocketSim"
 meta_title: "Pricing - RocketSim"
-description: "Choose a pricing plan best suited for you"
+description: "Choose Free or Personal for individual development, or Teams for commercial licensing, seats, billing, and team build insights."
 draft: false
 
 hero:
-  title: "Choose a pricing plan best suited for you"
+  title: "Choose the RocketSim plan for your workflow"
 ---

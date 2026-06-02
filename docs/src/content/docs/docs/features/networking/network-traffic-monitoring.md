@@ -5,6 +5,10 @@ description: "Monitor HTTP requests and responses from your Simulator app in rea
 
 Powered by RocketSim Connect, you're able to monitor in- and outgoing network requests for your app.
 
+::::tip[Debug networking without leaving the Simulator]
+See live requests, responses, logs, and shareable cURL commands in one place, without proxy certificates or switching tools.
+::::
+
 Open the side window and select the **Networking** tab with the antenna icon. RocketSim shows the latest requests inline, and you can click **Open Network Monitor** to inspect the full real-time console.
 
 ![Dedicated Networking tab showing recent network requests and the Open Network Monitor button](./network-traffic-monitoring/side_window_recent_network_requests_monitor.png)
