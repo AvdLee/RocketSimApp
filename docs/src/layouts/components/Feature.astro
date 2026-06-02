@@ -16,15 +16,37 @@ const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
   : undefined;
 
+async function fetchJson<T>(url: string): Promise<T | undefined> {
+  try {
+    const response = await fetch(url);
+    const contentType = response.headers.get("content-type") ?? "";
+
+    if (!response.ok || !contentType.includes("application/json")) {
+      console.warn(
+        `Skipping WordPress response for "${url}": ${response.status} ${response.statusText} (${contentType || "unknown content type"})`,
+      );
+      return undefined;
+    }
+
+    return (await response.json()) as T;
+  } catch (error) {
+    console.warn(
+      `Skipping WordPress response for "${url}": ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return undefined;
+  }
+}
+
 let blogPath;
 
 if (blogId) {
   const blogBaseUrl = config.blog.base_url;
-  const res = await fetch(
+  const post = await fetchJson<{ slug: string }>(
     `${blogBaseUrl}/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
   );
-  const { slug } = (await res.json()) as { slug: string };
-  blogPath = `/blog/${slug}${blogFragment ? `/#${blogFragment}` : ""}`;
+  blogPath = post
+    ? `/blog/${post.slug}${blogFragment ? `/#${blogFragment}` : ""}`
+    : undefined;
 }
 
 let imageSizes;

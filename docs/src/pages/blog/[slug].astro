@@ -14,11 +14,52 @@ import { dateFormat } from "@/lib/utils/dateFormat";
 
 const { slug } = Astro.params;
 
+async function fetchJson<T>(url: string): Promise<T | undefined> {
+  try {
+    const response = await fetch(url);
+    const contentType = response.headers.get("content-type") ?? "";
+
+    if (!response.ok || !contentType.includes("application/json")) {
+      console.warn(
+        `Skipping WordPress response for "${url}": ${response.status} ${response.statusText} (${contentType || "unknown content type"})`,
+      );
+      return undefined;
+    }
+
+    return (await response.json()) as T;
+  } catch (error) {
+    console.warn(
+      `Skipping WordPress response for "${url}": ${error instanceof Error ? error.message : String(error)}`,
+    );
+    return undefined;
+  }
+}
+
 export async function getStaticPaths() {
   const blogBaseUrl = config.blog.base_url;
+  const postsUrl = `${blogBaseUrl}/wp-json/wp/v2/posts`;
+  let posts: Array<{ slug: string }> | undefined;
 
-  let data = await fetch(`${blogBaseUrl}/wp-json/wp/v2/posts`);
-  let posts = (await data.json()) as Array<{ slug: string }>;
+  try {
+    const response = await fetch(postsUrl);
+    const contentType = response.headers.get("content-type") ?? "";
+
+    if (!response.ok || !contentType.includes("application/json")) {
+      console.warn(
+        `Skipping WordPress response for "${postsUrl}": ${response.status} ${response.statusText} (${contentType || "unknown content type"})`,
+      );
+    } else {
+      posts = (await response.json()) as Array<{ slug: string }>;
+    }
+  } catch (error) {
+    console.warn(
+      `Skipping WordPress response for "${postsUrl}": ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  if (!posts) {
+    return [];
+  }
 
   return posts.map((post) => ({
     params: { slug: post.slug },
@@ -31,13 +72,19 @@ let post;
 const blogBaseUrl = config.blog.base_url;
 
 try {
-  const res = await fetch(
+  const posts = await fetchJson<Array<any>>(
     `${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed`,
   );
-  [post] = await res.json();
+  [post] = posts ?? [];
 } catch (e) {
   throw new Error(
     `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed": ${e instanceof Error ? e.message : String(e)}`,
+  );
+}
+
+if (!post) {
+  throw new Error(
+    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed"`,
   );
 }
 
