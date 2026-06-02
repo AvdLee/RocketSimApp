@@ -7,7 +7,11 @@ sidebar:
 
 App Store Connect rejects assets that don't match its exact specs: wrong resolution, wrong codec, PNG with transparency, or video without a proper audio track. Without RocketSim you end up resizing screenshots per device, converting PNG to JPEG and stripping alpha, re-encoding videos to H.264/HEVC, adding silent audio so previews don't get rejected, and trimming to the right duration — all while keeping [Apple's resolution table](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) open. It's tedious and easy to get wrong.
 
-RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections. This is a Pro feature.
+RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections.
+
+::::tip[Ship App Store assets with fewer manual steps]
+App Preview Optimized handles the tedious conversion work for screenshots and recordings. It is included with RocketSim Pro.
+::::
 
 ## How to enable
 
