@@ -10,7 +10,7 @@ App Store Connect rejects assets that don't match its exact specs: wrong resolut
 RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections.
 
 ::::tip[Ship App Store assets with fewer manual steps]
-App Preview Optimized handles the tedious conversion work for screenshots and recordings. It is included with RocketSim Pro.
+App Preview Optimized handles the tedious conversion work for screenshots and recordings so your captures are ready to upload faster.
 ::::
 
 ## How to enable

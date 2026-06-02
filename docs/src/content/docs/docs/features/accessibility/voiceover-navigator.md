@@ -4,7 +4,7 @@ description: "Visualize VoiceOver element order on the iOS Simulator with number
 ---
 
 ::::tip[Check accessibility faster]
-VoiceOver Navigator helps you verify reading order and activation flow without leaving the Simulator. It is included with RocketSim Pro.
+VoiceOver Navigator helps you verify reading order and activation flow without leaving the Simulator.
 ::::
 
 Testing VoiceOver used to mean grabbing a physical device, enabling VoiceOver, and swiping through your app. VoiceOver Navigator lets you stay in the Simulator: you get a visual overlay of the accessibility element order and keyboard-driven navigation, so you can verify reading order and rotor behavior without leaving your flow.

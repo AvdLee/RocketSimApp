@@ -14,7 +14,7 @@ Standard Simulator recordings run at 30 FPS. RocketSim's 120 FPS mode produces m
 Open **RocketSim Settings → Captures** and enable **120 FPS Recordings**. Once enabled, your recordings will capture at 120 frames per second instead of 30.
 
 ::::tip[Make simulator demos feel smoother]
-120 FPS Recordings helps marketing videos, presentations, and app previews feel more polished. It is included with RocketSim Pro.
+120 FPS Recordings helps marketing videos, presentations, and app previews feel more polished.
 ::::
 
 ![RocketSim Settings → Captures with Enable 120 FPS recordings toggle](./120-fps-recordings/120-fps-setting.png)
