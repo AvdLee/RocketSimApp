@@ -5,7 +5,7 @@ description: "Test camera functionality directly in the iOS Simulator without a 
 
 A top requested feature has always been Simulator camera support. Constantly having to test the camera on an actual device can be a pain and it’s annoying to run into dead ends on the Simulator for apps that come with camera features.
 
-We hear you and we’re excited to share the early beta of RocketSim Camera Simulation.
+RocketSim Camera Simulation lets you test camera flows directly in the Simulator.
 
 Check out these demo’s:
 
@@ -30,7 +30,7 @@ Camera simulation is available from the Capture side window tab:
 
 ## Troubleshooting
 
-Since this is an early version of Camera Simulation, I’m pretty sure you’ll find edge cases that aren’t supported. I’d love to fix these! Could you please:
+If you run into an edge case that isn’t supported yet, I’d love to fix it. Could you please:
 
 1. Add `-com.swiftlee.rocketsim.debug 1` as a launch argument to your app
 2. Relaunch your app and try to get Camera Simulation to work

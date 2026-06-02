@@ -3,10 +3,6 @@ title: "120 FPS Recordings"
 description: "Record smooth 120 FPS videos from the iOS Simulator for high-quality App Preview videos and marketing materials. Requires Apple Silicon."
 ---
 
-:::note
-120 FPS Recordings is available in the latest RocketSim beta. [Join the beta via TestFlight](https://testflight.apple.com/join/emGszFpq) to try it out.
-:::
-
 Standard Simulator recordings run at 30 FPS. RocketSim's 120 FPS mode produces much smoother recordings, which makes a real difference for demo videos, presentations, and social media content.
 
 ## Enabling 120 FPS
