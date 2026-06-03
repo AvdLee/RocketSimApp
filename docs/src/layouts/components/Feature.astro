@@ -3,29 +3,20 @@ import { Image } from "astro:assets";
 import { marked } from "marked";
 import type { CollectionEntry } from "astro:content";
 
-import config from "@/config/config.json";
-
 interface Props {
   data: CollectionEntry<"feature">["data"];
 }
 
 const {
-  data: { asset, tagLine, name, blogId, blogFragment, youtubeLink },
+  data: { asset, tagLine, name, blogSlug, blogFragment, youtubeLink },
 } = Astro.props;
 const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
   : undefined;
 
-let blogPath;
-
-if (blogId) {
-  const blogBaseUrl = config.blog.base_url;
-  const res = await fetch(
-    `${blogBaseUrl}/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
-  );
-  const { slug } = (await res.json()) as { slug: string };
-  blogPath = `/blog/${slug}${blogFragment ? `/#${blogFragment}` : ""}`;
-}
+const blogPath = blogSlug
+  ? `/blog/${blogSlug}${blogFragment ? `/#${blogFragment}` : ""}`
+  : undefined;
 
 let imageSizes;
 

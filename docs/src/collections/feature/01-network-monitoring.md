@@ -2,8 +2,8 @@
 showOnHomepage: true
 name: "Network Monitor"
 youtubeLink: "https://www.youtube.com/watch?v=ihVwU9usxgQ"
-tagLine: "Inspect Network Requests in realtime"
-blogId: 20
+tagLine: "Inspect, summarize, and debug network traffic in realtime"
+blogSlug: "monitor-urlsession-network-requests-without-the-pain-of-custom-certificates"
 featurePage: "networking"
 asset:
   type: "video"

@@ -1,55 +1,25 @@
 ---
+import { getCollection } from "astro:content";
+
 import Base from "@/layouts/Base.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
 import { dateFormat } from "@/lib/utils/dateFormat";
 
-interface WordPressPost {
-  slug: string;
-  title: { rendered: string };
-  modified: string;
-  excerpt?: { rendered?: string };
-  yoast_head_json?: {
-    og_description?: string;
-    description?: string;
-  };
-}
-
-const blogBaseUrl = config.blog.base_url;
 const {
   site: { base_url },
 } = config;
 
-let posts: WordPressPost[] = [];
-
-try {
-  const res = await fetch(
-    `${blogBaseUrl}/wp-json/wp/v2/posts?_embed&per_page=100`,
-  );
-  posts = (await res.json()) as WordPressPost[];
-} catch (e) {
-  throw new Error(
-    `Failed to fetch blog posts from "${blogBaseUrl}/wp-json/wp/v2/posts": ${e instanceof Error ? e.message : String(e)}`,
-  );
-}
+const posts = await getCollection("blog");
 
 const items = posts
-  .map((post) => {
-    const yoast = post.yoast_head_json || {};
-    const rawDescription =
-      yoast.og_description || yoast.description || post.excerpt?.rendered || "";
-    const description = rawDescription.replace(/<[^>]+>/g, "").trim();
-
-    return {
-      slug: post.slug,
-      title: post.title.rendered,
-      modified: post.modified,
-      description,
-    };
-  })
-  .sort(
-    (a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime(),
-  );
+  .map((post) => ({
+    slug: post.id,
+    title: post.data.title,
+    description: post.data.description,
+    date: post.data.modifiedTime ?? post.data.publishedTime,
+  }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
 
 const [featured, ...rest] = items;
 
@@ -118,10 +88,9 @@ const structuredData = {
                   </span>
                 </div>
 
-                <h2
-                  class="text-2xl font-bold leading-snug tracking-tight text-text-light text-balance md:text-[28px]"
-                  set:html={featured.title}
-                />
+                <h2 class="text-2xl font-bold leading-snug tracking-tight text-text-light text-balance md:text-[28px]">
+                  {featured.title}
+                </h2>
 
                 {featured.description && (
                   <p class="max-w-[580px] text-[15.5px] leading-[1.7] text-text-dark/50 text-balance">
@@ -131,7 +100,7 @@ const structuredData = {
 
                 <div class="mt-1 flex items-center gap-4 text-sm text-text-dark/30">
                   <span>
-                    Last updated {dateFormat(featured.modified, "MMM dd, yyyy")}
+                    Last updated {dateFormat(featured.date, "MMM dd, yyyy")}
                   </span>
                 </div>
               </div>
@@ -170,13 +139,12 @@ const structuredData = {
                   <span class="post-accent absolute inset-x-0 top-0 h-[2px] bg-primary opacity-0 transition-opacity duration-200 group-hover:opacity-70" />
 
                   <span class="text-xs text-text-dark/25">
-                    {dateFormat(post.modified, "MMM dd, yyyy")}
+                    {dateFormat(post.date, "MMM dd, yyyy")}
                   </span>
 
-                  <h3
-                    class="text-[17px] font-semibold leading-snug tracking-tight text-text-light/90 text-balance transition-colors duration-150 group-hover:text-text-light"
-                    set:html={post.title}
-                  />
+                  <h3 class="text-[17px] font-semibold leading-snug tracking-tight text-text-light/90 text-balance transition-colors duration-150 group-hover:text-text-light">
+                    {post.title}
+                  </h3>
 
                   {post.description && (
                     <p class="line-clamp-2 text-[13.5px] leading-[1.65] text-text-dark/40 text-balance">

@@ -32,7 +32,7 @@ const feature = defineCollection({
       showOnHomepage: z.boolean().default(false),
       tagLine: z.string().optional(),
       docPath: z.string().optional(),
-      blogId: z.number().optional(),
+      blogSlug: z.string().optional(),
       blogFragment: z.string().optional(),
       youtubeLink: z.string().url().optional(),
       featurePage: z
@@ -74,6 +74,33 @@ const docs = defineCollection({
   schema: docsSchema(),
 });
 
+const blog = defineCollection({
+  // One self-contained folder per post: src/content/blog/<slug>/index.mdx.
+  // The slug is the folder name, so we strip the trailing `/index` the glob
+  // loader would otherwise include in the generated id.
+  loader: glob({
+    pattern: "**/index.{md,mdx}",
+    base: "./src/content/blog",
+    generateId: ({ entry }) => entry.replace(/\/index\.mdx?$/, ""),
+  }),
+  schema: ({ image }) =>
+    z.object({
+      // SEO-facing title: HTML <title> and the listing/overview card.
+      title: z.string(),
+      // On-page <h1> and structured-data headline. May be longer than `title`
+      // for SEO; falls back to `title` when omitted.
+      pageTitle: z.string().optional(),
+      description: z.string(),
+      publishedTime: z.coerce.date(),
+      // Falls back to `publishedTime` when omitted.
+      modifiedTime: z.coerce.date().optional(),
+      // Optional hero image, rendered at the top of the post and used as the
+      // Open Graph image. When omitted, the site's default banner is used.
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+    }),
+});
+
 const featurePage = defineCollection({
   loader: glob({
     pattern: "**/[^_]*.md",
@@ -98,4 +125,5 @@ export const collections = {
   statisticsSectionCollection,
   trustedBrandsSectionCollection,
   docs,
+  blog,
 };

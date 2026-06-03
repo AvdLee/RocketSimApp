@@ -8,9 +8,69 @@ import starlight from "@astrojs/starlight";
 import starlightLlmsTxt from "starlight-llms-txt";
 
 import sitemap from "@astrojs/sitemap";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import type { Plugin, Transformer } from "unified";
+import type { Element, Root } from "hast";
 import { llmsTxtPostProcess } from "./src/integrations/llms-txt-post-process";
 
 import config from "./src/config/config.json";
+
+// Heading anchors are generated at build time for blog posts only. Starlight
+// already manages slugs/anchors for the docs collection, so we scope these
+// plugins to files under `src/content/blog` to avoid double-processing docs.
+const scopeToBlog =
+  <S extends unknown[]>(
+    plugin: Plugin<S, Root>,
+    ...settings: S
+  ): Plugin<[], Root> =>
+  function () {
+    const transformer = plugin.call(this, ...settings) as Transformer<
+      Root,
+      Root
+    >;
+    // Keep this wrapper arity-2 so unified treats it as a synchronous
+    // transformer. The wrapped plugins (slug/autolink) mutate the tree
+    // synchronously and ignore the `next` callback.
+    return (tree, file) => {
+      if (!file?.path?.includes("/content/blog/")) return;
+      transformer(tree, file, () => undefined);
+    };
+  };
+
+// Link icon prepended to each heading anchor (sized via `.heading-anchor svg`).
+const headingAnchorIcon: Element = {
+  type: "element",
+  tagName: "svg",
+  properties: {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    ariaHidden: "true",
+  },
+  children: [
+    {
+      type: "element",
+      tagName: "path",
+      properties: {
+        d: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71",
+      },
+      children: [],
+    },
+    {
+      type: "element",
+      tagName: "path",
+      properties: {
+        d: "M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",
+      },
+      children: [],
+    },
+  ],
+};
 
 // https://astro.build/config
 export default defineConfig({
@@ -50,6 +110,19 @@ export default defineConfig({
     service: {
       entrypoint: "astro/assets/services/sharp",
     },
+  },
+  markdown: {
+    rehypePlugins: [
+      scopeToBlog(rehypeSlug),
+      scopeToBlog(rehypeAutolinkHeadings, {
+        behavior: "prepend",
+        properties: {
+          className: ["heading-anchor"],
+          ariaLabel: "Link to this section",
+        },
+        content: headingAnchorIcon,
+      }),
+    ],
   },
   // TODO: fix later
   vite: { plugins: [tailwindcss() as any] },
