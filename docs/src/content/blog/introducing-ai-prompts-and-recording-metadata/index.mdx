@@ -9,7 +9,6 @@ import networkPrompts from "./network-prompts.png";
 import showMetadataToggle from "./show-metadata-toggle.png";
 import metadataSettings from "./metadata-settings.png";
 import buildInsights from "./build-insights.png";
-import metadataRecording from "./metadata-recording.mp4";
 
 The 14.5.0 release is now officially [available in the App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=blog&mt=8) and introduces two significant new features. With AI prompts generated from the Network Monitor you'll have a first way to benefit from data collected inside RocketSim. Recording metadata allows you to promote your apps with a higher chance of success.
 
@@ -118,12 +117,9 @@ Once enabled, RocketSim will try to fill in the metadata based on your most rece
 Eventually, once configured, your captures can look like this:
 
 <figure>
-  <video
-    src={metadataRecording}
-    controls
-    playsinline
-    class="w-full rounded-2xl"
-  />
+  <video controls playsinline class="w-full rounded-2xl">
+    <source src="/blog/metadata-recording.mp4" type="video/mp4" />
+  </video>
   <figcaption>
     An example RocketSim recording with the metadata visible in the bottom-left
     corner.
