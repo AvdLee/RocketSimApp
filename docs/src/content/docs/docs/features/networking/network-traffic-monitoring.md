@@ -5,11 +5,17 @@ description: "Monitor HTTP requests and responses from your Simulator app in rea
 
 Powered by RocketSim Connect, you're able to monitor in- and outgoing network requests for your app.
 
-![Network traffic monitoring panel showing request list with methods, URLs, and status codes](./network-traffic-monitoring/networking_tools_details.jpeg)
+::::tip[Debug networking without leaving the Simulator]
+See live requests, responses, logs, and shareable cURL commands in one place, without proxy certificates or switching tools.
+::::
+
+Open the side window and select the **Networking** tab with the antenna icon. RocketSim shows the latest requests inline, and you can click **Open Network Monitor** to inspect the full real-time console.
+
+![Dedicated Networking tab showing recent network requests and the Open Network Monitor button](./network-traffic-monitoring/side_window_recent_network_requests_monitor.png)
 
 Being able to see which requests are running is essential for a fast development workflow.
 
-RocketSim 15.1 also adds connected app logs to the Network Monitor, so you can line up request traffic with what your app is printing at the same moment.
+RocketSim also shows connected app logs in the Network Monitor, so you can line up request traffic with what your app is printing at the same moment.
 
 ## Requests and logs together
 
@@ -33,7 +39,7 @@ Open the detail view for any request by double-clicking it in the list or using 
 
 ## Copying summaries and prompts
 
-RocketSim 15 adds more shareable export options for the current request set:
+RocketSim includes shareable export options for the current request set:
 
 - **Copy export** for a compact redacted summary
 - **Copy prompt** for built-in AI prompt templates such as redundant calls, performance, and failures

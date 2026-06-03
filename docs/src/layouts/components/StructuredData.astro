@@ -1,5 +1,11 @@
 ---
 import config from "@/config/config.json";
+import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
+
+// Canonical root URL respecting the site's `trailing_slash` policy. Used as
+// the `url` for Organization/WebSite nodes and the "Home" breadcrumb item so
+// structured data matches the canonical form emitted in meta tags.
+const SITE_ROOT_URL = normalizeCanonicalUrl("/");
 
 type ArticleProps = {
   type: "article";
@@ -68,6 +74,7 @@ interface ImageObject extends SchemaBase {
 
 interface PersonSchema extends SchemaBase {
   "@type": "Person";
+  "@id": string;
   name: string;
   url: string;
   image?: string;
@@ -76,19 +83,22 @@ interface PersonSchema extends SchemaBase {
 
 interface OrganizationSchema extends SchemaBase {
   "@type": "Organization";
+  "@id": string;
   name: string;
   url: string;
   logo?: string;
   sameAs: string[];
 }
 
+type SchemaRef = { "@id": string };
+
 interface ArticleSchema extends SchemaBase {
   "@type": "Article";
   headline: string;
   datePublished: string;
   dateModified: string;
-  author: PersonSchema;
-  publisher: OrganizationSchema;
+  author: PersonSchema | SchemaRef;
+  publisher: OrganizationSchema | SchemaRef;
   mainEntityOfPage: {
     "@type": "WebPage";
     "@id": string;
@@ -101,8 +111,8 @@ interface WebPageSchema extends SchemaBase {
   "@type": "WebPage";
   name: string;
   url: string;
-  datePublished: string;
-  dateModified: string;
+  datePublished?: string;
+  dateModified?: string;
   breadcrumb: {
     "@id": string;
   };
@@ -123,9 +133,11 @@ interface BreadcrumbListSchema extends SchemaBase {
 
 interface WebSiteSchema extends SchemaBase {
   "@type": "WebSite";
+  "@id": string;
   name: string;
   url: string;
   description: string;
+  publisher?: SchemaRef;
 }
 
 interface SoftwareApplicationSchema extends SchemaBase {
@@ -134,7 +146,7 @@ interface SoftwareApplicationSchema extends SchemaBase {
   applicationCategory: string;
   operatingSystem: string;
   description?: string;
-  owner: OrganizationSchema;
+  owner: OrganizationSchema | SchemaRef;
   offers?: OfferSchema | OfferSchema[];
   image?: string;
 }
@@ -159,13 +171,23 @@ interface OfferSchema extends SchemaBase {
 
 const { type } = Astro.props;
 
+// Stable identifiers for the canonical entity nodes. Using URL fragments keeps
+// them resolvable and lets us reference the same entity from multiple schemas
+// without duplicating fields.
+const ORGANIZATION_ID = `${config.site.base_url}/#organization`;
+const AUTHOR_ID = `${config.site.base_url}/#person-twannl`;
+const WEBSITE_ID = `${config.site.base_url}/#website`;
+
 // Author data (hardcoded - single author blog)
 const authorData: PersonSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": AUTHOR_ID,
   name: "Antoine van der Lee",
   url: "https://www.avanderlee.com/",
-  image: `${config.site.base_url}/images/author-image-antoine.jpg`,
+  image:
+    toAbsoluteSecureUrl("/images/author-image-antoine.jpg") ??
+    `${config.site.base_url}/images/author-image-antoine.jpg`,
   sameAs: [
     "https://x.com/twannl",
     "https://www.linkedin.com/in/ajvanderlee",
@@ -177,9 +199,12 @@ const authorData: PersonSchema = {
 const organizationData: OrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": ORGANIZATION_ID,
   name: "RocketSim",
-  url: config.site.base_url,
-  logo: `${config.site.base_url}/images/rocketsim-app-icon.png`,
+  url: SITE_ROOT_URL,
+  logo:
+    toAbsoluteSecureUrl("/images/rocketsim-app-icon.png") ??
+    `${config.site.base_url}/images/rocketsim-app-icon.png`,
   sameAs: [
     "https://x.com/rocketsim_app",
     "https://www.youtube.com/@rocketsimapp",
@@ -189,31 +214,41 @@ const organizationData: OrganizationSchema = {
 // Build schemas based on type
 const schemas: SchemaBase[] = [];
 
+// Add Organization globally for all page types (one lightweight, canonical node).
+schemas.push(organizationData);
+
 if (type === "article") {
   const { article } = Astro.props;
-  // 1. Article schema
+  const articleUrl = normalizeCanonicalUrl(article.url);
+  const articleImageUrl = toAbsoluteSecureUrl(article.image?.url);
+
+  // Author is emitted as a top-level node and referenced by @id below.
+  schemas.push(authorData);
+
+  // 1. Article schema (references Organization/Person via @id, no inline copies)
   const articleSchema: ArticleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.headline,
     datePublished: article.datePublished,
     dateModified: article.dateModified,
-    author: authorData,
-    publisher: organizationData,
+    author: { "@id": AUTHOR_ID },
+    publisher: { "@id": ORGANIZATION_ID },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": article.url,
+      "@id": articleUrl,
     },
     ...(article.wordCount && { wordCount: article.wordCount }),
-    ...(article.image && {
-      image: {
-        "@context": "https://schema.org",
-        "@type": "ImageObject",
-        url: article.image.url,
-        ...(article.image.width && { width: article.image.width }),
-        ...(article.image.height && { height: article.image.height }),
-      } as ImageObject,
-    }),
+    ...(article.image &&
+      articleImageUrl && {
+        image: {
+          "@context": "https://schema.org",
+          "@type": "ImageObject",
+          url: articleImageUrl,
+          ...(article.image.width && { width: article.image.width }),
+          ...(article.image.height && { height: article.image.height }),
+        } as ImageObject,
+      }),
   };
 
   schemas.push(articleSchema);
@@ -223,24 +258,25 @@ if (type === "article") {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: article.headline,
-    url: article.url,
+    url: articleUrl,
     datePublished: article.datePublished,
     dateModified: article.dateModified,
     breadcrumb: {
-      "@id": `${article.url}#breadcrumb`,
+      "@id": `${articleUrl}#breadcrumb`,
     },
-    ...(article.image && {
-      primaryImageOfPage: {
-        "@context": "https://schema.org",
-        "@type": "ImageObject",
-        url: article.image.url,
-        contentUrl: article.image.url,
-        ...(article.image.width && { width: article.image.width }),
-        ...(article.image.height && { height: article.image.height }),
-        ...(article.image.caption && { caption: article.image.caption }),
-      } as ImageObject,
-      thumbnailUrl: article.image.url,
-    }),
+    ...(article.image &&
+      articleImageUrl && {
+        primaryImageOfPage: {
+          "@context": "https://schema.org",
+          "@type": "ImageObject",
+          url: articleImageUrl,
+          contentUrl: articleImageUrl,
+          ...(article.image.width && { width: article.image.width }),
+          ...(article.image.height && { height: article.image.height }),
+          ...(article.image.caption && { caption: article.image.caption }),
+        } as ImageObject,
+        thumbnailUrl: articleImageUrl,
+      }),
   };
 
   schemas.push(webPageSchema);
@@ -249,51 +285,48 @@ if (type === "article") {
   const breadcrumbSchema: BreadcrumbListSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": `${article.url}#breadcrumb`,
+    "@id": `${articleUrl}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: config.site.base_url,
+        item: SITE_ROOT_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: article.headline,
-        item: article.url,
+        item: articleUrl,
       },
     ],
   };
 
   schemas.push(breadcrumbSchema);
-
-  // 4. Person schema (author)
-  schemas.push(authorData);
 }
 
 if (type === "static") {
-  // Static schemas for WebSite and Organization (used on homepage or base layout)
-
-  // WebSite schema
+  // Static schemas for WebSite (Organization is emitted globally above).
   const webSiteSchema: WebSiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
     name: "RocketSim",
-    url: config.site.base_url,
+    url: SITE_ROOT_URL,
     description:
       "RocketSim is the essential developer tool for building better apps faster on iOS, macOS, and visionOS.",
+    publisher: { "@id": ORGANIZATION_ID },
   };
 
   schemas.push(webSiteSchema);
-
-  // Organization schema
-  schemas.push(organizationData);
 }
 
 if (type === "product") {
   const { product } = Astro.props;
-  // 1. SoftwareApplication schema
+  const productUrl = normalizeCanonicalUrl(product.url);
+  const productImageUrl = toAbsoluteSecureUrl(product.image);
+
+  // 1. SoftwareApplication schema (references Organization via @id).
   const softwareSchema: SoftwareApplicationSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -301,8 +334,8 @@ if (type === "product") {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS",
     ...(product.description && { description: product.description }),
-    owner: organizationData,
-    ...(product.image && { image: product.image }),
+    owner: { "@id": ORGANIZATION_ID },
+    ...(productImageUrl && { image: productImageUrl }),
   };
   schemas.push(softwareSchema);
 
@@ -311,10 +344,8 @@ if (type === "product") {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: product.name,
-    url: product.url,
-    datePublished: new Date().toISOString(),
-    dateModified: new Date().toISOString(),
-    breadcrumb: { "@id": `${product.url}#breadcrumb` },
+    url: productUrl,
+    breadcrumb: { "@id": `${productUrl}#breadcrumb` },
   };
   schemas.push(webPageSchema);
 
@@ -322,19 +353,19 @@ if (type === "product") {
   const breadcrumbSchema: BreadcrumbListSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": `${product.url}#breadcrumb`,
+    "@id": `${productUrl}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: config.site.base_url,
+        item: SITE_ROOT_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: product.name,
-        item: product.url,
+        item: productUrl,
       },
     ],
   };
@@ -343,6 +374,7 @@ if (type === "product") {
 
 if (type === "offer") {
   const { offers } = Astro.props;
+  const offerUrl = normalizeCanonicalUrl(offers.url);
   // 1. SoftwareApplication with individual Offer schemas for each tier
   const pricingOffers: OfferSchema[] = [
     {
@@ -392,8 +424,10 @@ if (type === "offer") {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS",
     ...(offers.description && { description: offers.description }),
-    owner: organizationData,
-    image: `${config.site.base_url}/images/rocketsim-app-icon.png`,
+    owner: { "@id": ORGANIZATION_ID },
+    image:
+      toAbsoluteSecureUrl("/images/rocketsim-app-icon.png") ??
+      `${config.site.base_url}/images/rocketsim-app-icon.png`,
     offers: pricingOffers,
   };
   schemas.push(softwareWithOffersSchema);
@@ -403,10 +437,8 @@ if (type === "offer") {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: offers.title,
-    url: offers.url,
-    datePublished: new Date().toISOString(),
-    dateModified: new Date().toISOString(),
-    breadcrumb: { "@id": `${offers.url}#breadcrumb` },
+    url: offerUrl,
+    breadcrumb: { "@id": `${offerUrl}#breadcrumb` },
   };
   schemas.push(webPageSchema);
 
@@ -414,32 +446,33 @@ if (type === "offer") {
   const breadcrumbSchema: BreadcrumbListSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": `${offers.url}#breadcrumb`,
+    "@id": `${offerUrl}#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: config.site.base_url,
+        item: SITE_ROOT_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: offers.title,
-        item: offers.url,
+        item: offerUrl,
       },
     ],
   };
   schemas.push(breadcrumbSchema);
 }
+
+const structuredDataGraph = {
+  "@context": "https://schema.org",
+  "@graph": schemas.map(({ "@context": _schemaContext, ...schema }) => schema),
+};
 ---
 
-{
-  schemas.map((schema) => (
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(schema)}
-    />
-  ))
-}
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(structuredDataGraph)}
+/>

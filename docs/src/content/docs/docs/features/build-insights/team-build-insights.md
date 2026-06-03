@@ -19,6 +19,10 @@ RocketSim silently syncs build data in the background. It syncs at most once per
 
 Team Build Insights requires a Pro subscription with a team license key. Once configured, data flows automatically.
 
+:::tip[For engineering managers]
+Use Team Build Insights when you need evidence for hardware upgrades, Xcode rollouts, or SDK changes. RocketSim gives you project-specific build data without adding build phases or maintaining internal scripts.
+:::
+
 ## Online dashboard
 
 Team insights are available at [teams.rocketsim.app](https://teams.rocketsim.app). You get a web-based overview of your team's build performance, so you can compare machines and spot trends without opening RocketSim.
@@ -47,4 +51,18 @@ Teams that use Team Build Insights often say the same thing: once you see build 
 >
 > — Max Godfrey, iOS Developer at Tilt
 
-If you're on a team, a [team license](https://www.rocketsim.app) gives everyone this visibility — no extra setup, no build phase scripts. You get the dashboard, the P95 breakdowns by machine and Xcode, and data that backs up hardware and tooling decisions. Worth checking out if you've ever wondered how your build times compare to the rest of the team.
+If you're on a team, a [team license](https://www.rocketsim.app/pricing#plan-teams) gives everyone this visibility — no extra setup, no build phase scripts. You get the dashboard, the P95 breakdowns by machine and Xcode, and data that backs up hardware and tooling decisions. Worth checking out if you've ever wondered how your build times compare to the rest of the team.
+
+## Common team questions
+
+**We already track CI build times. Why track local builds too?**
+
+CI tells you how your pipeline performs. Team Build Insights shows the build time developers feel during the day, grouped by machine, Xcode version, macOS version, project, and scheme.
+
+**Do we need to add build phases or scripts?**
+
+No. RocketSim tracks build data in the background and syncs at most once per hour.
+
+**How do we try this with a team?**
+
+[Start a 14-day Teams trial](https://teams.rocketsim.app/signup/trial) and connect developers with the same team license key. No credit card is required.

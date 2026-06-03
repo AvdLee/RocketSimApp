@@ -1,10 +1,12 @@
 ---
 import config from "@/config/config.json";
+import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
 
 export interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -26,6 +28,7 @@ const {
   title,
   description,
   image,
+  imageAlt,
   article,
   canonical,
   robots,
@@ -35,16 +38,39 @@ const {
 
 // Build canonical URL (normalize to trailing slash when the site is configured for it)
 const rawCanonicalUrl = canonical || Astro.url.href;
-const canonicalUrl =
-  config.site.trailing_slash && !rawCanonicalUrl.endsWith("/")
-    ? `${rawCanonicalUrl}/`
-    : rawCanonicalUrl;
+const canonicalUrl = normalizeCanonicalUrl(rawCanonicalUrl);
 
 // Use provided description or fall back to default meta description
 const metaDescription = description || config.metadata.meta_description;
 
-// Use provided image or fall back to default meta image
-const ogImage = image || `${config.site.base_url}${config.metadata.meta_image}`;
+// Dimensions/alt apply to the configured banner (`config.metadata.meta_image`,
+// `public/og-banner-rocketsim.jpg`). They are only emitted when that banner is
+// actually being served. The app-icon path is a separate last-resort fallback
+// whose dimensions we deliberately don't claim at this layer.
+const DEFAULT_BANNER_WIDTH = 1600;
+const DEFAULT_BANNER_HEIGHT = 840;
+const DEFAULT_BANNER_ALT = "RocketSim — build apps faster";
+const APP_ICON_FALLBACK_PATH = "/images/rocketsim-app-icon.png";
+
+// Use provided image or fall back to default meta image; resolve to an absolute,
+// https-only URL so social crawlers always receive a fully-qualified asset.
+const providedImage = toAbsoluteSecureUrl(image);
+const configuredImage = toAbsoluteSecureUrl(config.metadata.meta_image);
+const ogImage =
+  providedImage ??
+  configuredImage ??
+  toAbsoluteSecureUrl(APP_ICON_FALLBACK_PATH) ??
+  `${config.site.base_url}${APP_ICON_FALLBACK_PATH}`;
+
+// Only emit width/height/type when the configured banner is the one we're
+// actually serving. We don't know dimensions for author-supplied images or for
+// the app-icon fallback.
+const isConfiguredBanner =
+  !providedImage &&
+  configuredImage !== undefined &&
+  ogImage === configuredImage;
+const ogImageAlt =
+  imageAlt ?? (isConfiguredBanner ? DEFAULT_BANNER_ALT : title);
 
 // Build robots meta content
 let robotsContent = "";
@@ -90,6 +116,20 @@ const ogType = article ? "article" : "website";
 <meta property="og:description" content={metaDescription} />
 <meta property="og:site_name" content="RocketSim" />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:secure_url" content={ogImage} />
+<meta property="og:image:alt" content={ogImageAlt} />
+{
+  isConfiguredBanner && (
+    <>
+      <meta property="og:image:width" content={String(DEFAULT_BANNER_WIDTH)} />
+      <meta
+        property="og:image:height"
+        content={String(DEFAULT_BANNER_HEIGHT)}
+      />
+      <meta property="og:image:type" content="image/jpeg" />
+    </>
+  )
+}
 
 <!-- Article-specific Open Graph tags -->
 {
@@ -110,10 +150,11 @@ const ogType = article ? "article" : "website";
 }
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalUrl} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={metaDescription} />
-<meta property="twitter:image" content={ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 <meta name="twitter:creator" content={twitterCreator} />
 <meta name="twitter:site" content={twitterSite} />

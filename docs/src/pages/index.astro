@@ -15,6 +15,10 @@ import TeamInsights from "../old/components/TeamInsights.astro";
 import SocialMediaMentions from "../old/components/SocialMediaMentions.astro";
 import SubscribeToNewsletter from "../old/components/SubscribeToNewsletter.astro";
 import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
+import MobileDownloadLinkForm from "../old/components/MobileDownloadLinkForm.astro";
+
+import TrustedBrands from "@/partials/TrustedBrands.astro";
+import CallToAction from "@/partials/CallToAction.astro";
 
 import logoImage from "../assets/rocketsim-logo.svg";
 
@@ -34,47 +38,44 @@ const seo = {
 <Base seo={seo} structuredData={{ type: "static" }}>
   <Notification />
   <Header
-    title="Enhancing the Xcode Simulators"
+    title="The iOS Simulator companion for developers and AI coding agents."
     logo={logoImage}
     logoAlt='Written logo spelling: "RocketSim"'
-    scrollText="Scroll down to explore all features ↓"
   >
-    Boost your productivity and streamline your workflow with our <strong
-      >powerful Xcode Simulator tools</strong
-    >. Developers report building, testing, and verifying apps <strong
-      >up to 2x faster</strong
-    > with RocketSim.
+    RocketSim lets you <strong>inspect, test, and debug</strong> your app in the Simulator
+    — without breaking your flow in Xcode, Codex, or Cursor.
   </Header>
-  <Navigation>
+  <Navigation
+    microcopy="Get started for free, no signup. Works with Xcode 16+."
+  >
     <NavigationLink
       href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
-      className="plausible-event-name=App+Store+Install"
+      className="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button"
       id="js-header-app-store-button"
       asButton
       target="_blank"
+      rel="noopener"
     >
-      Download now
+      Free download
     </NavigationLink>
-    <NavigationLink
-      href="/team-insights"
-      className="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams"
-      >For Teams &rarr;</NavigationLink
-    >
     <NavigationLink
       href="/features"
       className="plausible-event-name=CTA:+Homepage+Hero+-+Features"
-      >All features &rarr;</NavigationLink
+      >Explore features &rarr;</NavigationLink
     >
   </Navigation>
   <AppStore />
+  <TrustedBrands title="Used by iOS developers at" />
+  <Features take={3} />
   <Reviews />
-  <SubscribeToNewsletter />
-  <Features />
+  <CallToAction />
+  <Features skip={3} />
   <TeamInsights />
   <StatusBar />
   <SubscribeToNewsletter />
   <SocialMediaMentions />
   <SupportAndFeedback />
+  <MobileDownloadLinkForm />
 </Base>
 
 <!-- Script to set the button URL using the UTM Campaign -->

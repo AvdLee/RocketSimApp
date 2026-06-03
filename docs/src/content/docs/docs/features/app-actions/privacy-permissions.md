@@ -9,6 +9,8 @@ Testing permission flows is one of those things that's surprisingly tedious. You
 
 RocketSim supports all 15 permission types: Calendar, Camera, Contacts (Limited), Contacts, Location, Location Always, Photos (Read), Photos (Write), Push Notifications, Media Library, Microphone, Motion, Reminders, and Siri. Use **All** for bulk actions across permissions.
 
+When testing GPS behavior, combine these permission actions with [Location Simulation](/docs/features/app-actions/location-simulation). For example, reset Location permissions first, then simulate a saved walking route to validate your app's onboarding and permission recovery flow.
+
 ## Actions
 
 **Grant** (available to all users) sets the permission without showing a dialog. **Revoke** (Pro) denies the permission. **Reset** (Pro) returns to the "not determined" state so the system dialog appears again on next use.

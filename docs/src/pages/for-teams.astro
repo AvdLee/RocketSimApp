@@ -15,8 +15,6 @@ import TeamTestimonial from "../old/components/TeamTestimonial.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import TrustedBrands from "@/partials/TrustedBrands.astro";
 
-import logoImage from "../assets/rocketsim-insights-logo.svg";
-
 const pageIndex = await getEntry("team-insights", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
@@ -43,12 +41,7 @@ const structuredData = {
 ---
 
 <Base seo={seo} structuredData={structuredData}>
-  <Header
-    title="Make your whole team Build Apps Faster"
-    logo={logoImage}
-    logoAlt='Written logo spelling: "RocketSim for Teams"'
-    scrollText="Scroll down to explore all features ↓"
-  >
+  <Header title="Make your whole team Build Apps Faster">
     Connect your team using the same license key and gather team insights like
     p75 build duration, machine benchmarks, and more.
   </Header>
@@ -76,19 +69,19 @@ const structuredData = {
       title: "Build Duration by Machine",
       data: [
         {
-          title: "Mac Studio 2024 / M2 Ultra 24-core / 192 RAM",
+          title: 'MacBook Pro 16" / M4 Max 16-core / 128 RAM',
           value: 12,
           width: 0.36,
         },
         {
-          title: 'MacBook Pro 16" 2023 / M3 Max 16-core / 64 RAM',
+          title: 'MacBook Pro 14" / M4 Pro 14-core / 48 RAM',
           value: 14,
           width: 0.42,
         },
         {
-          title: 'MacBook Pro 16" 2021 / M1 Pro 10-core / 32 RAM',
-          value: 26,
-          width: 0.77,
+          title: 'MacBook Pro 16" / M3 Max 16-core / 64 RAM',
+          value: 18,
+          width: 0.54,
         },
       ],
     }}
@@ -101,22 +94,22 @@ const structuredData = {
     </p>
   </InsightsBreakdown>
   <InsightsBreakdown
-    title="Does Xcode 16 improve our project's build times?"
+    title="Does Xcode 26.5 improve our project's build times?"
     chart={{
       title: "Build Duration by Xcode Version",
       data: [
         {
-          title: "Xcode 16.3 (16E140)",
+          title: "Xcode 26.5",
           value: 13.5,
           width: 0.68,
         },
         {
-          title: "Xcode 15.4 (15F31d)",
+          title: "Xcode 26.4",
           value: 15,
           width: 0.76,
         },
         {
-          title: "Xcode 15.3 (15E204a)",
+          title: "Xcode 26.3",
           value: 15.3,
           width: 0.78,
         },
@@ -134,6 +127,89 @@ const structuredData = {
   </InsightsBreakdown>
   <InsightsActionable />
   <OnlineTeamManager />
+  <section class="section pt-40">
+    <div class="container">
+      <div class="section-container">
+        <div class="section-intro centralize">
+          <h2 class="title hasEmphasize">
+            Give engineering managers build-time answers they can act on
+          </h2>
+          <p class="text-text max-w-3xl mx-auto mt-4">
+            RocketSim for Teams turns local Xcode builds into shared evidence:
+            which machines are fastest, which Xcode versions changed build
+            duration, and where your team is losing time.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 mt-12">
+          <div class="p-6 rounded-2xl bg-black-accent border border-white/10">
+            <h3 class="h5 mb-3 text-white">Justify hardware upgrades</h3>
+            <p class="text-text">
+              Compare build duration by machine so Mac upgrades are backed by
+              project-specific data instead of guesses.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl bg-black-accent border border-white/10">
+            <h3 class="h5 mb-3 text-white">Standardize with confidence</h3>
+            <p class="text-text">
+              See how different Xcode, macOS, and SDK versions affect clean and
+              incremental builds before rolling changes out to everyone.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl bg-black-accent border border-white/10">
+            <h3 class="h5 mb-3 text-white">Skip internal tooling</h3>
+            <p class="text-text">
+              No build phases, no scripts, and no dashboard to maintain.
+              RocketSim syncs build insights quietly in the background.
+            </p>
+          </div>
+        </div>
+        <blockquote
+          class="mt-12 p-8 rounded-2xl bg-primary/10 border border-primary/30"
+        >
+          <p class="text-text-dark text-lg">
+            "RocketSim Team Insights finally gives us visibility into our build
+            times beyond just gut feeling. We can actually measure the impact of
+            adding SDKs or improving configurations, seeing results reflected in
+            incremental and clean builds."
+          </p>
+          <footer class="text-text mt-4">
+            - Max Godfrey, iOS Developer at Tilt
+          </footer>
+        </blockquote>
+        <div class="mt-12 grid md:grid-cols-3 gap-6">
+          <div>
+            <h3 class="h6 mb-2 text-white">Already track builds?</h3>
+            <p class="text-text">
+              RocketSim focuses on local developer build data and setup-free
+              comparisons by project, scheme, machine, and Xcode version.
+            </p>
+          </div>
+          <div>
+            <h3 class="h6 mb-2 text-white">Hard to roll out?</h3>
+            <p class="text-text">
+              Teams use one license key. Developers keep building locally while
+              RocketSim syncs insights in the background.
+            </p>
+          </div>
+          <div>
+            <h3 class="h6 mb-2 text-white">Need to justify another tool?</h3>
+            <p class="text-text">
+              One or two hours saved per developer each month can cover the seat
+              cost while giving managers better decisions.
+            </p>
+          </div>
+        </div>
+        <div class="mt-10 flex justify-center">
+          <a
+            href="https://teams.rocketsim.app/signup/trial"
+            class="btn btn-primary plausible-event-name=CTA:+Team+Page+-+Proof+Start+Trial"
+          >
+            Start 14-Day Trial
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
   <CallToAction />
   <AppStore />
 </Base>

@@ -3,63 +3,113 @@ import { Image } from "astro:assets";
 
 import appStoreReview from "../../assets/app-store-rating.jpg";
 import appStoreFeatured from "../../assets/app-store-featured.jpg";
+
+const appStoreHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=Landing%20Page%20or%20Form%20-%208653523&mt=8";
 ---
 
 <style>
-  .appstore-section {
+  .authority-strip {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-
-    @media (min-width: 520px) {
-      flex-direction: row;
-      justify-content: center;
-      gap: 4rem;
-      margin-top: 4rem;
-      margin-bottom: 4rem;
-    }
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 
     @media (min-width: 800px) {
-      gap: 7rem;
+      flex-direction: row;
+      gap: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
   }
 
+  .authority-strip__badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+
+    @media (min-width: 800px) {
+      gap: 2rem;
+    }
+  }
+
+  .authority-strip__copy {
+    margin: 0;
+
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #c8c8c8;
+    text-align: center;
+    text-wrap: balance;
+
+    @media (min-width: 800px) {
+      font-size: 1rem;
+      text-align: left;
+    }
+  }
+
+  .authority-strip__copy strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .authority-strip__divider {
+    margin: 0 0.5em;
+
+    color: #555;
+  }
+
   .image {
-    width: 10.5rem;
+    width: 5.25rem;
     height: auto;
+
+    @media (min-width: 800px) {
+      width: 6.5rem;
+    }
   }
 </style>
 
 <section
-  class="deprecated-grid appstore-section"
-  aria-label="App Store badges"
+  class="deprecated-grid authority-strip"
+  aria-label="App Store credibility"
   data-aos="fade-in"
 >
-  <a
-    href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=Landing%20Page%20or%20Form%20-%208653523&mt=8"
-    target="_blank"
-    class="plausible-event-name=App+Store+Install"
-  >
-    <Image
-      src={appStoreReview}
-      alt='"4.8 Rating" badge from the Apple App Store, with five gold stars. The badge is black with white text and a white Apple logo, surrounded by a laurel wreath. Text at the bottom reads "App Store Reviews."'
-      width="336"
-      class="image"
-    />
-  </a>
-  <a
-    href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=Landing%20Page%20or%20Form%20-%208653523&mt=8"
-    target="_blank"
-    class="plausible-event-name=App+Store+Install"
-  >
-    <Image
-      src={appStoreFeatured}
-      alt='"Essential Apps for Developers" badge from the Apple App Store. The badge is black with white text and a white Apple logo, surrounded by a laurel wreath.'
-      width="336"
-      class="image"
-    />
-  </a>
+  <div class="authority-strip__badges">
+    <a
+      href={appStoreHref}
+      target="_blank"
+      rel="noopener"
+      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-app-store-reviews plausible-event-format=badge"
+    >
+      <Image
+        src={appStoreReview}
+        alt='"4.8 Rating" badge from the Apple App Store, with five gold stars and a laurel wreath.'
+        width="208"
+        class="image"
+      />
+    </a>
+    <a
+      href={appStoreHref}
+      target="_blank"
+      rel="noopener"
+      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-app-store-featured plausible-event-format=badge"
+    >
+      <Image
+        src={appStoreFeatured}
+        alt='"Essential Apps for Developers" Apple Featured badge with a laurel wreath.'
+        width="208"
+        class="image"
+      />
+    </a>
+  </div>
+  <p class="authority-strip__copy">
+    <strong>25,000+ developers</strong>
+    <span class="authority-strip__divider" aria-hidden="true">·</span>
+    <strong>250+ teams</strong>
+  </p>
 </section>

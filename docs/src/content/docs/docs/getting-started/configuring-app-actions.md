@@ -1,6 +1,6 @@
 ---
 title: "Configuring App Actions"
-description: "Configure RocketSim App Actions for your project to test deep links, push notifications, location simulation, network speed control, and privacy permissions."
+description: "Configure RocketSim App Actions for your project to test deep links, push notifications, location simulation, quick actions, and privacy permissions."
 sidebar:
   order: 3
 ---
@@ -10,7 +10,7 @@ A major part of RocketSim’s functionality is based on so-called App Actions. T
 - Test deeplinks (Universal Links)
 - Test Push Notifications
 - Simulate Locations (Single Locations & Routes)
-- Simulate slow networking conditions using the Network Speed Control
+- Run quick actions like relaunching, terminating, or resetting app state
 - Reset permissions (E.g., location access, photo access)
 
 ## Create a new App Actions Group
@@ -43,6 +43,6 @@ A major part of RocketSim’s functionality is based on so-called App Actions. T
 
 Well done, you’ve configured your first App Actions group and executed a deeplink in the Simulator!
 
-This is just the beginning, there’s much more to discover. While you’re at it, how about creating app actions for locations and Push Notifications?
+This is just the beginning, there’s much more to discover. While you’re at it, how about creating App Actions for [Location Simulation](/docs/features/app-actions/location-simulation) and [Push Notifications](/docs/features/app-actions/push-notifications)?
 
-You can also explore the Network Speed Control, Relaunch buttons, or permissions section. I’m sure there are many features that will help you build apps faster.
+You can also explore relaunch buttons, directory shortcuts, or the permissions section. Networking tools like [Network Speed Control](/docs/features/networking/network-speed-control) and [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring) now live in the dedicated **Networking** tab in the side window.

@@ -1,73 +1,84 @@
 ---
 title: "Agent Skill"
-description: "Install the RocketSim Agent Skill to give AI coding tools a reliable, version-matched way to inspect and interact with iOS Simulator apps through RocketSim."
+description: "Install RocketSim's bundled Agent Skill so AI coding tools can use the version-matched RocketSim CLI safely and reliably."
 sidebar:
   order: 3
 ---
 
-The RocketSim Agent Skill is the only part you need to install. Once installed, it automatically detects the RocketSim version on your machine, connects your agent to RocketSim's built-in interaction layer, and enables reliable Simulator automation through the RocketSim CLI.
+The RocketSim Agent Skill is the recommended way to connect AI coding tools to RocketSim. It teaches your agent how to use the version-matched `rocketsim` CLI, when to read elements, when to interact, how to recover after screen changes, and when to use a screenshot fallback.
 
-## What you install
+Install it from **RocketSim → Settings → CLI & Agent**.
 
-The RocketSim Agent Skill is a lightweight, installable skill that lives in its own repository:
+## Why the skill is recommended
 
-- [RocketSim-Agent-Skill](https://github.com/AvdLee/RocketSim-Agent-Skill)
+You can run the CLI yourself, but agents perform best when they have clear, tool-specific instructions. The RocketSim Agent Skill provides those instructions without requiring you to copy prompts into every project.
 
-It supports popular AI coding tools like Claude Code, Cursor, and Codex. The easiest way to install is through [skills.sh](https://skills.sh):
+The skill helps agents:
 
-```bash
-npx skills add https://github.com/AvdLee/RocketSim-Agent-Skill --skill rocketsim
-```
+- Use RocketSim's compact `--agent` output before deciding what to do
+- Prefer semantic interactions over fragile coordinate taps when possible
+- Work with RocketSim's `rs/1` agent protocol without needing to know its internals
+- Recover when a screen changes between inspection and interaction
+- Use screenshots when accessibility data is sparse or incomplete
+- Run `rocketsim doctor` when setup needs to be checked
 
-For more installation options, see the [RocketSim-Agent-Skill README](https://github.com/AvdLee/RocketSim-Agent-Skill).
+In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster, avoided wrong taps entirely**, and used about **63% fewer estimated tokens** than a popular alternative.
 
-## What happens after installation
+## Install from RocketSim
 
-When an agent triggers the RocketSim skill, the following happens automatically:
+1. Open **RocketSim → Settings → CLI & Agent**
+2. Install the **Command Line Tool** if `rocketsim` is not on your `PATH` yet
+3. In **Agent Skill**, choose **General Agents** for broad support or **Agentic Coding in Xcode** for Xcode's built-in coding assistant
+4. Click **Install** or **Repair**
+5. Restart or refresh your AI coding tool if it does not discover new skills automatically
 
-1. The skill finds a valid RocketSim installation on your machine
-2. It validates that RocketSim includes the built-in skill and CLI
-3. It hands off to the built-in skill, which contains the version-matched CLI reference
-4. The agent can now inspect visible elements and interact with the Simulator
+RocketSim installs the skill as a symlink to the bundled skill inside `RocketSim.app`. When RocketSim updates, the skill keeps pointing at the latest installed app version.
 
-You do not need to configure anything beyond the initial install. The handoff is seamless.
+![CLI & Agent settings showing Agent Skill installation options](./agent-skill/cli-agent-settings.png)
 
-## Why the built-in skill updates automatically
+## Supported destinations
 
-RocketSim ships a built-in skill alongside its CLI inside the app. Every time RocketSim updates, the built-in skill updates with it. That means the CLI reference your agent uses is always accurate for the RocketSim version you have installed.
+We recommend **General Agents** for most setups. It installs the skill into the shared `.agents/skills` location, so multiple AI coding tools can use the same version-matched RocketSim skill instead of each tool needing its own copy.
 
-This is the key advantage of the two-layer architecture:
+Choose **Agentic Coding in Xcode** when you use Xcode's built-in Claude Agent or Codex integration. Xcode keeps its coding assistant configuration in `~/Library/Developer/Xcode/CodingAssistant`, separate from Claude Code's `~/.claude/skills` folder. Restart Xcode after installing or repairing this destination.
 
-- **The public skill** (what you install) stays small, stable, and rarely changes
-- **The built-in skill** (inside RocketSim) stays version-matched and ships with every update
+Use a tool-specific destination like **Cursor**, **Claude**, or **Codex** if that tool only scans its own skill folder. You can also choose a custom skill folder if your tool stores skills somewhere else.
 
-You get a simple installation experience and version-matched accuracy without maintaining anything yourself.
+If RocketSim shows **Repair**, the existing symlink points somewhere unexpected or the app has moved. Repairing updates the symlink to the current RocketSim app.
 
-## You only install the public skill
+## Why it stays up to date
 
-The built-in skill is not something you install separately. It is part of the RocketSim app and is read automatically by the public skill during handoff.
+RocketSim ships the CLI and Agent Skill inside the app bundle. The installed files are symlinks, not copied snapshots. That matters because the CLI surface and skill instructions evolve together.
 
-If you see references to a "bundled skill" or "built-in skill" in other documentation, that is the version-matched layer inside RocketSim that the public skill connects to. You do not need to interact with it directly.
+After an App Store update, your `rocketsim` command and installed skill still resolve to the current app bundle. Agents get the guidance that matches the RocketSim version they are controlling.
 
 ## What the agent can do after setup
 
 Once the skill is installed and RocketSim is running, your agent can:
 
-- Read visible accessibility elements before interacting
+- Read visible accessibility elements, including navigation and tab bar items
 - Tap, long-press, swipe, and type using labels or coordinates
 - Press simulator hardware buttons like Home, Lock, or Siri
 - Navigate multi-step app flows with fewer retries
-- Use compact `--agent` output to spend fewer tokens per screen read
+- Use compact screen summaries to spend fewer tokens per screen read
+- Capture a screenshot when visual context is needed
 
 ## How to verify it works
 
-Open an agent and try:
+First, check your setup:
+
+```bash
+rocketsim doctor
+```
+
+Then open your AI coding tool and try:
 
 > Use RocketSim to navigate through `<your_app_name>` in the Simulator
 
-If the skill is installed and RocketSim is running, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
+If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
 
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) -- the commands agents use to inspect and interact with the Simulator
 - [Agentic Development with RocketSim](/docs/features/agentic-development/) -- scenarios, example prompts, and why RocketSim is effective for agent-driven Simulator automation
+- [CLI & Agent settings](/docs/settings/cli-and-agent) -- installing and repairing the CLI and skill

@@ -5,12 +5,11 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
 interface Props {
   title: string;
-  logo: ImageMetadata;
-  logoAlt: string;
-  scrollText?: string;
+  logo?: ImageMetadata;
+  logoAlt?: string;
 }
 
-const { title, logo, logoAlt, scrollText } = Astro.props;
+const { title, logo, logoAlt } = Astro.props;
 ---
 
 <style>
@@ -32,12 +31,30 @@ const { title, logo, logoAlt, scrollText } = Astro.props;
     }
   }
 
-  h1 {
+  .hero__wordmark {
     display: inline-flex;
     margin: 0 0 1rem;
   }
 
-  h2 {
+  .hero__wordmark a {
+    display: inline-flex;
+
+    &:focus-visible {
+      outline: 0.125rem solid var(--ring);
+      border-radius: 0.25rem;
+    }
+  }
+
+  .hero__wordmark-image {
+    width: 10rem;
+    height: auto;
+
+    @media (min-width: 800px) {
+      width: 16rem;
+    }
+  }
+
+  h1 {
     margin: 0 0 0.5rem;
 
     font-size: 2rem;
@@ -46,19 +63,8 @@ const { title, logo, logoAlt, scrollText } = Astro.props;
     letter-spacing: -0.006rem;
   }
 
-  a {
-    display: inline-flex;
-  }
-
   p {
     margin: 0 0 1rem;
-  }
-
-  .hero__rocketsim {
-    &:focus-visible {
-      outline: 0.125rem solid var(--ring);
-      border-radius: 0.25rem;
-    }
   }
 
   .hero__logo {
@@ -83,16 +89,24 @@ const { title, logo, logoAlt, scrollText } = Astro.props;
 <header>
   <div class="deprecated-grid hero">
     <div class="hero__content">
-      <h1>
-        <a href="/" aria-label="RocketSim" class="hero__rocketsim"
-          ><Image src={logo} alt={logoAlt} height="48" /></a
-        >
-      </h1>
-      <h2>{title}</h2>
+      {
+        logo && (
+          <div class="hero__wordmark" id="hero-wordmark">
+            <a href="/" aria-label="RocketSim">
+              <Image
+                src={logo}
+                alt={logoAlt ?? "RocketSim"}
+                height="48"
+                class="hero__wordmark-image"
+              />
+            </a>
+          </div>
+        )
+      }
+      <h1>{title}</h1>
       <p>
         <slot />
       </p>
-      <p>{scrollText}</p>
     </div>
     <div class="hero__logo">
       <Image

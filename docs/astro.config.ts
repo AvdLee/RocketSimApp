@@ -150,11 +150,20 @@ export default defineConfig({
         starlightLlmsTxt({
           projectName: "RocketSim",
           description:
-            "RocketSim enhances the iOS Simulator with features for capturing screenshots and recordings, comparing designs, testing push notifications, deep links, location simulation, network speed control, accessibility toggles, and more.",
+            "RocketSim enhances iOS Simulator and physical-device development with screenshots and recordings, design comparison, agentic development through the RocketSim CLI and Agent Skill, push notification testing, deep links, location simulation, network tools, accessibility workflows, and more.",
           rawContent: true,
         }),
       ],
       title: "RocketSim Docs",
+      // Replace Starlight's default `og:site_name` (which mirrors `title`) with
+      // the umbrella brand name. Starlight dedupes entries in `head` by
+      // property/name, so this cleanly overrides instead of duplicating.
+      head: [
+        {
+          tag: "meta",
+          attrs: { property: "og:site_name", content: "RocketSim" },
+        },
+      ],
       disable404Route: true,
       lastUpdated: true,
       logo: {
@@ -195,6 +204,7 @@ export default defineConfig({
         PageTitle: "./src/components/starlight/PageTitle.astro",
         Footer: "./src/components/starlight/Footer.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
+        PageSidebar: "./src/components/starlight/PageSidebar.astro",
       },
       sidebar: [
         {
@@ -222,6 +232,10 @@ export default defineConfig({
         {
           label: "Status Bar",
           link: "/docs/features/capturing/statusbar-appearance",
+        },
+        {
+          label: "Physical Devices",
+          link: "/docs/features/capturing/physical-device-support",
         },
         {
           label: "Design Comparison",

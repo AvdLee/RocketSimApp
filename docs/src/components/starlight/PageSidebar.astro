@@ -1,0 +1,84 @@
+---
+/**
+ * Custom PageSidebar override for RocketSim docs.
+ *
+ * Renders the default Starlight PageSidebar (which exposes the
+ * mobile + desktop "On this page" table of contents) and appends a
+ * desktop-only promotional panel with a Mac App Store badge, gated on
+ * the same `toc` flag the default component uses so we don't render it
+ * on pages where TOC is disabled.
+ */
+import Default from "@astrojs/starlight/components/PageSidebar.astro";
+import macAppStoreBadge from "../../assets/mac-app-store-badge.svg";
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+{
+  Astro.locals.starlightRoute.toc && (
+    <div class="right-sidebar-panel sl-hidden lg:sl-block app-store-promo">
+      <div class="sl-container">
+        <a
+          href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=docs-on-this-page&mt=8"
+          target="_blank"
+          rel="noopener"
+          aria-label="Download RocketSim on the Mac App Store"
+          class="plausible-event-name=App+Store+Install plausible-event-surface=docs plausible-event-placement=docs-on-this-page plausible-event-format=badge"
+        >
+          <img src={macAppStoreBadge.src} alt="Download on the Mac App Store" />
+        </a>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  /*
+   * The default `.right-sidebar-panel` padding + `.sl-container` width
+   * rules live in Starlight's own PageSidebar.astro, and Astro scopes
+   * them to that component's hash class — so they DO NOT apply to this
+   * override's panel. We have to reapply the exact same rules here
+   * (panel padding + container width calc + @lg max-width calc) so
+   * this panel measures the same as the TOC panel above it.
+   *
+   * Once both panels match, an extra 0.5rem padding-inline-start on
+   * the container lines the badge's left edge up with each top-level
+   * TOC link's text (Starlight gives every TOC link a built-in
+   * `--pad-inline: 0.5rem` inside its anchor padding).
+   */
+  .app-store-promo {
+    padding: 1rem var(--sl-sidebar-pad-x);
+  }
+
+  .app-store-promo .sl-container {
+    width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));
+    padding-inline-start: 0.5rem;
+  }
+
+  @media (min-width: 72rem) {
+    .app-store-promo .sl-container {
+      max-width: calc(
+        (
+            100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 *
+              var(--sl-sidebar-pad-x)
+          ) *
+          0.25
+      );
+    }
+  }
+
+  .app-store-promo a {
+    display: block;
+    width: max-content;
+    line-height: 0;
+    border-radius: 8px;
+    outline-offset: 2px;
+  }
+
+  .app-store-promo img {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

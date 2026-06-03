@@ -7,7 +7,11 @@ sidebar:
 
 App Store Connect rejects assets that don't match its exact specs: wrong resolution, wrong codec, PNG with transparency, or video without a proper audio track. Without RocketSim you end up resizing screenshots per device, converting PNG to JPEG and stripping alpha, re-encoding videos to H.264/HEVC, adding silent audio so previews don't get rejected, and trimming to the right duration — all while keeping [Apple's resolution table](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) open. It's tedious and easy to get wrong.
 
-RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections. This is a Pro feature.
+RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections.
+
+::::tip[Ship App Store assets with fewer manual steps]
+App Preview Optimized handles the tedious conversion work for screenshots and recordings so your captures are ready to upload faster.
+::::
 
 ## How to enable
 
@@ -27,24 +31,9 @@ Recordings are re-encoded to the correct codec (H.264 or HEVC). A silent audio t
 
 App Store Connect also enforces other rules for app previews: **length must be between 15 and 30 seconds**, file size is capped at 500MB, and there are requirements for frame rate, audio, and file format. RocketSim handles format and resolution; for duration and the full, up-to-date checklist, always check [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) so your previews are accepted.
 
-## Supported device resolutions
+## Supported output resolutions
 
-RocketSim maps each Simulator device to the right [App Store Connect resolution](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8), so you don't have to look them up or resize by hand. Output resolutions include:
-
-**iPhone**
-
-- **886×1920** — 6.9", 6.5", 6.3", 6.1" (e.g. iPhone 16 Pro Max, 15 Plus, 14, 13, 12, X)
-- **1080×1920** — 5.5", 4" (e.g. iPhone 8 Plus, SE 1st gen)
-- **750×1334** — 4.7" (e.g. iPhone 8, SE 2nd/3rd gen)
-
-**iPad**
-
-- **1200×1600** — 13", 12.9", 11", 10.5" (Pro, Air, 10)
-- **900×1200** — 9.7", iPad Mini
-
-**Apple Vision Pro**
-
-- **3840×2160**
+RocketSim maps each Simulator device to the right App Store Connect output resolution, so you don't have to look it up or resize by hand. Apple can update supported devices and resolution requirements over time, so use [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) as the source of truth for the latest supported output resolutions.
 
 ## Drag and drop to App Store Connect
 

@@ -9,9 +9,18 @@
 
 .navbar-brand {
   @apply text-[0rem] font-semibold text-text-dark;
+  transition:
+    opacity 250ms ease,
+    visibility 250ms ease;
   image {
     @apply max-h-full max-w-full;
   }
+}
+
+.navbar-brand.is-shy {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .navbar-nav {

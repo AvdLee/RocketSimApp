@@ -1,19 +1,36 @@
 ---
 /**
  * Custom SiteTitle component for RocketSim docs
- * Shows the RocketSim logo linking to the main site
+ * Shows the RocketSim logo linking to the main site and a Mac App Store
+ * download badge linking to the App Store.
  */
-// Import logo images
 import logoDark from "../../assets/rocketsim-logo.svg";
 import logoLight from "../../assets/rocketsim-logo-dark.svg";
+import macAppStoreBadge from "../../assets/mac-app-store-badge.svg";
 ---
 
-<a href="/docs" class="site-title sl-flex" aria-label="RocketSim">
-  <img class="logo-dark" src={logoDark.src} alt="RocketSim" />
-  <img class="logo-light" src={logoLight.src} alt="RocketSim" />
-</a>
+<div class="site-title-wrapper sl-flex">
+  <a href="/docs" class="site-title sl-flex" aria-label="RocketSim">
+    <img class="logo-dark" src={logoDark.src} alt="RocketSim" />
+    <img class="logo-light" src={logoLight.src} alt="RocketSim" />
+  </a>
+  <a
+    href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=docs-header-badge&mt=8"
+    target="_blank"
+    rel="noopener"
+    aria-label="Download RocketSim on the Mac App Store"
+    class="header-app-store-badge plausible-event-name=App+Store+Install plausible-event-surface=docs plausible-event-placement=docs-header plausible-event-format=badge"
+  >
+    <img src={macAppStoreBadge.src} alt="Download on the Mac App Store" />
+  </a>
+</div>
 
 <style>
+  .site-title-wrapper {
+    align-items: center;
+    gap: 0.75rem;
+  }
+
   .site-title {
     display: flex;
     align-items: center;
@@ -42,5 +59,25 @@ import logoLight from "../../assets/rocketsim-logo-dark.svg";
   }
   :global([data-theme="light"]) .logo-light {
     display: block;
+  }
+
+  /* Mac App Store badge, hidden on narrow viewports to keep the header tidy. */
+  .header-app-store-badge {
+    display: none;
+    line-height: 0;
+    border-radius: 6px;
+    outline-offset: 2px;
+  }
+
+  .header-app-store-badge img {
+    height: 30px;
+    width: auto;
+    display: block;
+  }
+
+  @media (min-width: 50rem) {
+    .header-app-store-badge {
+      display: inline-flex;
+    }
   }
 </style>
