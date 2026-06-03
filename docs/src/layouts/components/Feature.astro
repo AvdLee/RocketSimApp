@@ -3,51 +3,20 @@ import { Image } from "astro:assets";
 import { marked } from "marked";
 import type { CollectionEntry } from "astro:content";
 
-import config from "@/config/config.json";
-
 interface Props {
   data: CollectionEntry<"feature">["data"];
 }
 
 const {
-  data: { asset, tagLine, name, blogId, blogFragment, youtubeLink },
+  data: { asset, tagLine, name, blogSlug, blogFragment, youtubeLink },
 } = Astro.props;
 const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
   : undefined;
 
-async function fetchJson<T>(url: string): Promise<T | undefined> {
-  try {
-    const response = await fetch(url);
-    const contentType = response.headers.get("content-type") ?? "";
-
-    if (!response.ok || !contentType.includes("application/json")) {
-      console.warn(
-        `Skipping WordPress response for "${url}": ${response.status} ${response.statusText} (${contentType || "unknown content type"})`,
-      );
-      return undefined;
-    }
-
-    return (await response.json()) as T;
-  } catch (error) {
-    console.warn(
-      `Skipping WordPress response for "${url}": ${error instanceof Error ? error.message : String(error)}`,
-    );
-    return undefined;
-  }
-}
-
-let blogPath;
-
-if (blogId) {
-  const blogBaseUrl = config.blog.base_url;
-  const post = await fetchJson<{ slug: string }>(
-    `${blogBaseUrl}/wp-json/wp/v2/posts/${blogId}?_fields=slug`,
-  );
-  blogPath = post
-    ? `/blog/${post.slug}${blogFragment ? `/#${blogFragment}` : ""}`
-    : undefined;
-}
+const blogPath = blogSlug
+  ? `/blog/${blogSlug}${blogFragment ? `/#${blogFragment}` : ""}`
+  : undefined;
 
 let imageSizes;
 

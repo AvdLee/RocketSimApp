@@ -13,6 +13,10 @@
       "url": "/pricing"
     },
     {
+      "name": "Blog",
+      "url": "/blog"
+    },
+    {
       "name": "Docs",
       "url": "https://www.rocketsim.app/docs"
     }
@@ -43,6 +47,10 @@
     {
       "name": "Pricing",
       "url": "/pricing"
+    },
+    {
+      "name": "Blog",
+      "url": "/blog"
     },
     {
       "name": "Students",

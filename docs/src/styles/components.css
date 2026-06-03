@@ -204,6 +204,45 @@
   @apply prose-figcaption:text-center;
 }
 
+/* MDX wraps multi-line <figcaption> text in a <p>, which otherwise picks up the
+   large prose paragraph size. Keep caption paragraphs at the figcaption size. */
+.content :where(figcaption) p {
+  margin: 0;
+
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Expressive Code blocks (blog). Mirrors the docs treatment in
+   starlight-custom.css, but uses brand tokens since the Starlight
+   --sl-color-* variables aren't available outside the docs layout.
+   Keeps the syntax theme but swaps its background for the brand surface. */
+.expressive-code {
+  --ec-codeBg: var(--color-light);
+  --ec-codeFg: var(--color-text-dark);
+  --ec-uiFg: var(--color-text);
+  --ec-uiBorderClr: var(--color-border);
+  --ec-frm-shdClr: rgba(0, 0, 0, 0.3);
+
+  /* The visible code/terminal background is painted from these frame vars,
+     which Starlight points at --sl-color-* (undefined outside docs). Pin them
+     to the brand surface so framed blocks don't fall back to transparent. */
+  --ec-frm-edBg: var(--color-light);
+  --ec-frm-trmBg: var(--color-light);
+  --ec-frm-edTabBarBg: var(--color-light);
+  --ec-frm-trmTtbBg: var(--color-light);
+
+  /* Rounded corners (Starlight defaults to square) to match content imagery. */
+  --ec-brdRad: 0.75rem;
+
+  /* Copy button icon/border also point at an undefined --sl-color-* here, so
+     the icon renders transparent. Pin them to a visible brand color. */
+  --ec-frm-inlBtnFg: var(--color-text-dark);
+  --ec-frm-inlBtnBg: var(--color-text-dark);
+  --ec-frm-inlBtnBrd: var(--color-text-dark);
+}
+
 /* Inline code only — leave <pre><code> blocks to their own theme */
 .content :not(pre) > code {
   @apply rounded-md border border-border/60 bg-light px-1.5 py-0.5 text-[0.9em] font-normal text-text-dark;

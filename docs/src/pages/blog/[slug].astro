@@ -1,204 +1,70 @@
 ---
-import { JSDOM } from "jsdom";
-import GithubSlugger from "github-slugger";
-import { createElement } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { FaLink } from "react-icons/fa6";
 import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
 
 import Base from "@/layouts/Base.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
-import { selectOgImage } from "@/lib/utils/selectOgImage";
 import { dateFormat } from "@/lib/utils/dateFormat";
 
-const { slug } = Astro.params;
-
-async function fetchJson<T>(url: string): Promise<T | undefined> {
-  try {
-    const response = await fetch(url);
-    const contentType = response.headers.get("content-type") ?? "";
-
-    if (!response.ok || !contentType.includes("application/json")) {
-      console.warn(
-        `Skipping WordPress response for "${url}": ${response.status} ${response.statusText} (${contentType || "unknown content type"})`,
-      );
-      return undefined;
-    }
-
-    return (await response.json()) as T;
-  } catch (error) {
-    console.warn(
-      `Skipping WordPress response for "${url}": ${error instanceof Error ? error.message : String(error)}`,
-    );
-    return undefined;
-  }
-}
-
 export async function getStaticPaths() {
-  const blogBaseUrl = config.blog.base_url;
-  const postsUrl = `${blogBaseUrl}/wp-json/wp/v2/posts`;
-  let posts: Array<{ slug: string }> | undefined;
-
-  try {
-    const response = await fetch(postsUrl);
-    const contentType = response.headers.get("content-type") ?? "";
-
-    if (!response.ok || !contentType.includes("application/json")) {
-      console.warn(
-        `Skipping WordPress response for "${postsUrl}": ${response.status} ${response.statusText} (${contentType || "unknown content type"})`,
-      );
-    } else {
-      posts = (await response.json()) as Array<{ slug: string }>;
-    }
-  } catch (error) {
-    console.warn(
-      `Skipping WordPress response for "${postsUrl}": ${error instanceof Error ? error.message : String(error)}`,
-    );
-  }
-
-  if (!posts) {
-    return [];
-  }
-
+  const posts = await getCollection("blog");
   return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post: post },
+    params: { slug: post.id },
+    props: { post },
   }));
 }
 
-let post;
-
-const blogBaseUrl = config.blog.base_url;
-
-try {
-  const posts = await fetchJson<Array<any>>(
-    `${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed`,
-  );
-  [post] = posts ?? [];
-} catch (e) {
-  throw new Error(
-    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed": ${e instanceof Error ? e.message : String(e)}`,
-  );
-}
-
-if (!post) {
-  throw new Error(
-    `Failed to fetch blog post for slug "${slug}" from "${blogBaseUrl}/wp-json/wp/v2/posts?slug=${slug}&_embed"`,
-  );
-}
-
-const title = post.title.rendered;
-const articlePublishedTime = post.date;
-const articleModifiedTime = post.modified;
-
-// Extract featured image data
-const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
-const image = featuredMedia
-  ? selectOgImage(featuredMedia.media_details.sizes)
-  : undefined;
-
-// Extract Yoast SEO data
-const yoast = post.yoast_head_json || {};
-const description =
-  yoast.og_description || yoast.description || post.excerpt?.rendered || "";
-
-// Extract Twitter metadata
-const twitterCreator = yoast.twitter_misc?.["Written by"]
-  ? "@twannl"
-  : "@twannl";
-const twitterSite = yoast.twitter_site || "@rocketsim_app";
-
-// Extract word count from schema data
-let wordCount: number | undefined;
-if (yoast.schema?.["@graph"]) {
-  const articleSchema = yoast.schema["@graph"].find(
-    (item: any) => item["@type"] === "Article",
-  );
-  if (articleSchema?.wordCount) {
-    wordCount = articleSchema.wordCount;
-  }
-}
+const { post } = Astro.props;
+const { Content } = await render(post);
 
 const {
   site: { base_url },
 } = config;
 
-// Build canonical URL (transform from cms.rocketsim.app to www.rocketsim.app)
-const canonicalUrl = `${base_url}/blog/${post.slug}`;
+const title = post.data.title;
+const pageTitle = post.data.pageTitle ?? title;
+const description = post.data.description;
+const publishedTime = post.data.publishedTime;
+const modifiedTime = post.data.modifiedTime ?? publishedTime;
+const image = post.data.image;
+const imageAlt = post.data.imageAlt ?? pageTitle;
 
-// Build SEO object for SEO component
+const canonicalUrl = `${base_url}/blog/${post.id}`;
+const ogImage = image ? `${base_url}${image.src}` : undefined;
+
 const seo = {
   title: `${title} - RocketSim`,
   description,
-  image,
+  image: ogImage,
+  imageAlt: image ? imageAlt : undefined,
   canonical: canonicalUrl,
-  twitterCreator,
-  twitterSite,
+  twitterCreator: "@twannl",
+  twitterSite: "@rocketsim_app",
   article: {
-    publishedTime: articlePublishedTime,
-    modifiedTime: articleModifiedTime,
-    wordCount,
+    publishedTime: publishedTime.toISOString(),
+    modifiedTime: modifiedTime.toISOString(),
   },
 };
 
-// Build structured data object for StructuredData component
 const structuredData = {
   type: "article" as const,
   article: {
-    headline: title,
+    headline: pageTitle,
     description,
-    datePublished: articlePublishedTime,
-    dateModified: articleModifiedTime,
-    wordCount,
-    image: image
+    datePublished: publishedTime.toISOString(),
+    dateModified: modifiedTime.toISOString(),
+    url: canonicalUrl,
+    slug: post.id,
+    image: ogImage
       ? {
-          url: image,
-          width: featuredMedia?.media_details?.width,
-          height: featuredMedia?.media_details?.height,
-          caption: featuredMedia?.caption?.rendered,
+          url: ogImage,
+          width: image?.width,
+          height: image?.height,
         }
       : undefined,
-    url: canonicalUrl,
-    slug: post.slug,
   },
 };
-
-/**
- * Manipulate the post content in any way you want here.
- */
-const dom = new JSDOM(post.content.rendered);
-const doc = dom.window.document;
-
-const videos = doc.querySelectorAll("video");
-
-videos.forEach((video) => {
-  video.setAttribute("playsinline", "true");
-  video.setAttribute("controls", "true");
-});
-
-const slugger = new GithubSlugger();
-const headings = doc.querySelectorAll("h1, h2, h3, h4, h5, h6");
-const linkIconMarkup = renderToStaticMarkup(
-  createElement(FaLink, { "aria-hidden": true }),
-);
-
-headings.forEach((heading) => {
-  const text = heading.textContent?.trim() ?? "";
-  if (!text) return;
-
-  const id = heading.id || slugger.slug(text);
-  heading.id = id;
-
-  const anchor = doc.createElement("a");
-  anchor.setAttribute("href", `#${id}`);
-  anchor.setAttribute("class", "heading-anchor");
-  anchor.setAttribute("aria-label", `Link to section: ${text}`);
-  anchor.innerHTML = linkIconMarkup;
-  heading.insertBefore(anchor, heading.firstChild);
-});
-
-const manipulatedDom = dom.serialize();
 ---
 
 <Base seo={seo} structuredData={structuredData}>
@@ -208,29 +74,20 @@ const manipulatedDom = dom.serialize();
         <div class="container">
           <div class="flex flex-col gap-16 lg:gap-28">
             <div class="space-y-3 md:space-y-5 mx-auto w-full max-w-[680px]">
-              {
-                articleModifiedTime && (
-                  <p
-                    class="text-base font-medium text-text pb-2"
-                    data-aos="fade-up-sm"
-                    data-aos-delay="0"
-                  >
-                    Last Updated
-                    <span
-                      set:html={dateFormat(
-                        articleModifiedTime,
-                        " MMM dd, yyyy",
-                      )}
-                    />
-                  </p>
-                )
-              }
+              <p
+                class="text-base font-medium text-text pb-2"
+                data-aos="fade-up-sm"
+                data-aos-delay="0"
+              >
+                Last Updated {dateFormat(modifiedTime, "MMM dd, yyyy")}
+              </p>
               <h1
                 class="page-heading leading-none !mb-6"
                 data-aos="fade-up-sm"
                 data-aos-delay="50"
-                set:html={title}
-              />
+              >
+                {pageTitle}
+              </h1>
             </div>
           </div>
         </div>
@@ -243,7 +100,7 @@ const manipulatedDom = dom.serialize();
               <figure data-aos="fade-up-sm" data-aos-delay="150">
                 <Image
                   src={image}
-                  alt={title}
+                  alt={imageAlt}
                   width={1300}
                   height={768}
                   class="w-full max-h-[580px] object-cover rounded-2xl"
@@ -258,7 +115,7 @@ const manipulatedDom = dom.serialize();
     <section class="section -mt-20">
       <div class="container">
         <div class="content mx-auto max-w-[680px]">
-          <Fragment set:html={manipulatedDom} />
+          <Content />
         </div>
       </div>
     </section>
@@ -310,19 +167,5 @@ const manipulatedDom = dom.serialize();
   .content :global(h6:hover .heading-anchor),
   .content :global(.heading-anchor:focus-visible) {
     opacity: 1;
-  }
-
-  /* Make WordPress YouTube / video oEmbeds fill the content column */
-  .content :global(.wp-embed-aspect-16-9 .wp-block-embed__wrapper) {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-  }
-
-  .content :global(.wp-embed-aspect-16-9 .wp-block-embed__wrapper iframe) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
   }
 </style>

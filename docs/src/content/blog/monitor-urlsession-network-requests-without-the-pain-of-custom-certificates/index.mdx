@@ -1,0 +1,106 @@
+---
+title: Monitor URLSession Network Requests without the pain of custom certificates
+description: Monitor URLSession network requests without installing custom certificates. RocketSim's Network Monitor connects over Bonjour so you can inspect every request and response while you develop.
+publishedTime: 2025-10-08T17:43:58Z
+modifiedTime: 2025-10-15T09:39:01Z
+---
+
+import { Image } from "astro:assets";
+import networkMonitorResponse from "./network-monitor-response.png";
+import failedNetworkRequest from "./failed-network-request.png";
+import sideWindowOverview from "./side-window-overview.png";
+
+Configuring a proxy using many of the popular apps like Proxyman and Charles Proxy often requires you to install custom certificates. It's when you're running into an unexpected network failure when you've realized you didn't have the proxy running.
+
+We knew this workflow could be improved and aimed to design a new solution:
+
+- No need for custom certificates
+- Easy setup that always work
+- A consistent network requests monitor to catch those issues when you don't expect them
+
+The result is what we call "Network Monitoring" and it's demonstrated in the following video:
+
+<Youtube
+  url="https://www.youtube.com/watch?v=ihVwU9usxgQ"
+  title="Network Traffic Monitor - Proxy the iOS Simulator without needing certificates"
+/>
+
+## Setting up RocketSim's Network Monitor
+
+RocketSim works by connecting via Bonjour with your development app. The in-app setup guides you by providing a piece of code that will only run during debug builds.
+
+Here's an example **(note: you need to use the code from the app, not this example)**:
+
+```swift
+private func loadRocketSimConnect() {
+    #if DEBUG
+    guard (Bundle(path: "/Applications/RocketSim.app/Contents/Frameworks/RocketSimConnectLinker.nocache.framework")?.load() == true) else {
+        print("Failed to load linker framework")
+        return
+    }
+    print("RocketSim Connect successfully linked")
+    #endif
+}
+```
+
+As you can see, the method will only run for debug builds due to the `#if DEBUG`. Secondly, this code works for every engineer in your team in case you're using [Team Licenses](https://www.rocketsim.app/team-insights). At least, as long as they've installed RocketSim inside the `/Applications` directory, which we recommend!
+
+Once you've copied the code, it's time to run your app. Every time when you launch your app, RocketSim will connect directly. From that point on, all your network requests will be monitored in the background. **There's no impact on your app's performance.**
+
+The latter is important to point out. We simply swizzle your network requests and send it over Bonjour in a background thread.
+
+## Your debugging partner when the unexpected happens
+
+I'm sure you recognize this:
+
+- You're running your app during regular feature development
+- An edge case occurs and suddenly your app doesn't work as expected
+- The app's failure hints to an unexpected response failure, but you have no way to find out which request, or in which order they fired
+
+These cases are no longer an issue. Now you can go back in time, find the exact order of requests that fired, and explore their responses.
+
+<figure>
+  <Image
+    src={networkMonitorResponse}
+    alt="RocketSim's Network Monitor in action, showing the response for one of the requests. A failed network request is also visible."
+    class="w-full rounded-2xl"
+  />
+  <figcaption>
+    RocketSim's Network Monitor in action, showing the response for one of the
+    requests. A failed network request is also visible.
+  </figcaption>
+</figure>
+
+Here's an example of such a scenario. The screenshot displays the JSON response of the successful request, but we can also see that the other request failed. Selecting that request shows that it failed due to a network error:
+
+<figure>
+  <Image
+    src={failedNetworkRequest}
+    alt="A failed URLSession network request as displayed inside RocketSim's Network Monitor."
+    class="w-full rounded-2xl"
+  />
+  <figcaption>
+    A failed URLSession network request as displayed inside RocketSim's Network
+    Monitor.
+  </figcaption>
+</figure>
+
+You don't always have to dive into detail, though. We also show a quick overview in the side window:
+
+<figure>
+  <Image
+    src={sideWindowOverview}
+    alt="The side window shows a quick overview of requests fired from your app using URLSession."
+    class="w-full rounded-2xl"
+  />
+  <figcaption>
+    The side window shows a quick overview of requests fired from your app using
+    URLSession.
+  </figcaption>
+</figure>
+
+## Download RocketSim today and get started
+
+You can [get RocketSim from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=network-monitoring-rs-article&mt=8), which allows you to try out the network monitor for free.
+
+Enjoy!
