@@ -153,8 +153,23 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     border-radius: 999px;
   }
 
+  .mobile-download__actions {
+    display: flex;
+    justify-content: center;
+    padding-inline: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .mobile-download__fallback {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
   .mobile-download__bar:focus-visible,
-  .mobile-download__close:focus-visible {
+  .mobile-download__close:focus-visible,
+  .mobile-download__fallback:focus-visible {
     outline: 0.25rem solid var(--ring);
     outline-offset: 0.125rem;
   }
@@ -207,14 +222,12 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       <Image src={appIcon} alt="" width="128" height="128" />
     </span>
     <span class="mobile-download__copy">
-      <span class="mobile-download__title">
-        On your phone? Email yourself the Mac download link.
-      </span>
+      <span class="mobile-download__title"> RocketSim is for Mac. </span>
       <span class="mobile-download__text">
-        Install RocketSim when you're back at your Mac.
+        Save the App Store link for when you're back at your Mac.
       </span>
     </span>
-    <span class="mobile-download__action">Send link</span>
+    <span class="mobile-download__action">Save link</span>
   </button>
   <div
     class="mobile-download__panel"
@@ -223,7 +236,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
   >
     <div class="mobile-download__header">
       <h2 class="mobile-download__heading">
-        Get the RocketSim download link on your Mac
+        Want the Mac App Store link in your inbox?
       </h2>
       <button
         class="mobile-download__close"
@@ -235,10 +248,21 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       </button>
     </div>
     <p class="mobile-download__description">
-      RocketSim is a Mac app. Enter your email and we'll send the App Store link
-      so it's ready when you're back at your MacBook.
+      RocketSim runs on macOS. We'll send one email with the download link so
+      it's ready when you're back at your Mac.
     </p>
     <div class="mobile-download__form" data-mobile-download-form></div>
+    <div class="mobile-download__actions">
+      <a
+        class="mobile-download__fallback plausible-event-name=App+Store+Install plausible-event-surface=mobile-download plausible-event-placement=intent-prompt plausible-event-format=text-link"
+        href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=mobile-download-intent-prompt&mt=8"
+        target="_blank"
+        rel="noopener"
+        data-mobile-download-app-store
+      >
+        Open the App Store anyway
+      </a>
+    </div>
   </div>
 </aside>
 
@@ -258,22 +282,49 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     const formContainer = container.querySelector(
       "[data-mobile-download-form]",
     );
+    const appStoreLink = container.querySelector(
+      "[data-mobile-download-app-store]",
+    );
     const storageKey = "rocketsim-mobile-download-dismissed";
     let hasTrackedView = false;
     let hasLoadedKit = false;
+    let hasTrackedEmailFocus = false;
+    let pendingAppStoreHref =
+      appStoreLink instanceof HTMLAnchorElement ? appStoreLink.href : "";
 
-    const track = (eventName: string) => {
+    const track = (eventName: string, props?: Record<string, string>) => {
       const plausible = (
-        window as Window & { plausible?: (eventName: string) => void }
+        window as Window & {
+          plausible?: (
+            eventName: string,
+            options?: { props?: Record<string, string> },
+          ) => void;
+        }
       ).plausible;
 
       if (typeof plausible === "function") {
-        plausible(eventName);
+        plausible(eventName, props ? { props } : undefined);
       }
     };
 
     const shouldShow = () =>
       mobileMediaQuery.matches && sessionStorage.getItem(storageKey) !== "1";
+
+    const getPlausibleProps = (link: HTMLAnchorElement) => {
+      const props: Record<string, string> = {};
+
+      link.classList.forEach((className) => {
+        const prefix = "plausible-event-";
+        if (!className.startsWith(prefix)) return;
+
+        const [rawKey, rawValue] = className.slice(prefix.length).split("=");
+        if (!rawKey || !rawValue || rawKey === "name") return;
+
+        props[rawKey] = rawValue.replace(/\+/g, " ");
+      });
+
+      return props;
+    };
 
     const loadKitForm = () => {
       if (hasLoadedKit || !formContainer) return;
@@ -286,17 +337,38 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       hasLoadedKit = true;
     };
 
-    const setVisibleState = () => {
-      container.hidden = !shouldShow();
+    const showIntentPrompt = (sourceLink: HTMLAnchorElement) => {
+      if (!shouldShow()) return false;
 
-      if (!container.hidden && !hasTrackedView) {
-        track("Mobile Download Banner Viewed");
+      pendingAppStoreHref = sourceLink.href;
+
+      if (appStoreLink instanceof HTMLAnchorElement) {
+        appStoreLink.href = pendingAppStoreHref;
+      }
+
+      container.hidden = false;
+      container.classList.add("is-expanded");
+      openButton?.setAttribute("aria-expanded", "true");
+      loadKitForm();
+
+      const props = getPlausibleProps(sourceLink);
+      track("Mobile Download App Store Clicked", props);
+
+      if (!hasTrackedView) {
+        track("Mobile Download Banner Viewed", props);
         hasTrackedView = true;
       }
 
-      if (!container.hidden) {
-        loadKitForm();
-      }
+      track("Mobile Download Banner Opened", props);
+      panel?.focus();
+
+      return true;
+    };
+
+    const hideIntentPrompt = () => {
+      container.hidden = true;
+      container.classList.remove("is-expanded");
+      openButton?.setAttribute("aria-expanded", "false");
     };
 
     openButton?.addEventListener("click", () => {
@@ -309,27 +381,71 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
     dismissButton?.addEventListener("click", () => {
       sessionStorage.setItem(storageKey, "1");
-      container.hidden = true;
-      container.classList.remove("is-expanded");
-      openButton?.setAttribute("aria-expanded", "false");
+      hideIntentPrompt();
       track("Mobile Download Banner Dismissed");
     });
+
+    appStoreLink?.addEventListener("click", () => {
+      track("Mobile Download App Store Link Clicked");
+      sessionStorage.setItem(storageKey, "1");
+      hideIntentPrompt();
+    });
+
+    document.addEventListener(
+      "click",
+      (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const link = target.closest(
+          'a[href*="apps.apple.com/app/apple-store/id1504940162"]',
+        );
+        if (!(link instanceof HTMLAnchorElement)) return;
+        if (link.hasAttribute("data-mobile-download-app-store")) return;
+        if (!mobileMediaQuery.matches) return;
+
+        if (showIntentPrompt(link)) {
+          event.preventDefault();
+        }
+      },
+      true,
+    );
+
+    document.addEventListener(
+      "focusin",
+      (event) => {
+        if (hasTrackedEmailFocus || !formContainer) return;
+
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        if (!formContainer.contains(target)) return;
+        if (!target.matches("input, textarea")) return;
+
+        hasTrackedEmailFocus = true;
+        track("Mobile Download Email Field Focused");
+      },
+      true,
+    );
 
     document.addEventListener(
       "submit",
       (event) => {
         const form = event.target;
         if (!(form instanceof HTMLFormElement)) return;
-        if (form.dataset.svForm !== "9491475") return;
+        if (!formContainer?.contains(form)) return;
 
         track("Mobile Download Link Form Submitted");
         sessionStorage.setItem(storageKey, "1");
+        hideIntentPrompt();
       },
       true,
     );
 
-    mobileMediaQuery.addEventListener("change", setVisibleState);
-    setVisibleState();
+    mobileMediaQuery.addEventListener("change", () => {
+      if (!mobileMediaQuery.matches) {
+        hideIntentPrompt();
+      }
+    });
   };
 
   document.addEventListener("astro:page-load", mobileDownloadInit);
