@@ -1,5 +1,5 @@
 ---
-title: "Agent Skill"
+title: "Xcode Build Optimization Agent Skill"
 description: "Use the open-source Xcode Build Optimization Agent Skill alongside RocketSim Build Insights to analyze slow builds, generate optimization plans, and verify improvements over time."
 sidebar:
   order: 3
