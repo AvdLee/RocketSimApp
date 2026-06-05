@@ -1,5 +1,5 @@
 ---
-title: "Agent Skill"
+title: "RocketSim Agent Skill"
 description: "Install RocketSim's bundled Agent Skill so AI coding tools can use the version-matched RocketSim CLI safely and reliably."
 sidebar:
   order: 3

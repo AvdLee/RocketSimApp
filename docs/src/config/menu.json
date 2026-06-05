@@ -2,33 +2,33 @@
   "main": [
     {
       "name": "Features",
-      "url": "/features"
+      "url": "/features/"
     },
     {
       "name": "For Teams",
-      "url": "/for-teams"
+      "url": "/for-teams/"
     },
     {
       "name": "Pricing",
-      "url": "/pricing"
+      "url": "/pricing/"
     },
     {
       "name": "Blog",
-      "url": "/blog"
+      "url": "/blog/"
     },
     {
       "name": "Docs",
-      "url": "https://www.rocketsim.app/docs"
+      "url": "https://www.rocketsim.app/docs/"
     }
   ],
   "support": [
     {
       "name": "Documentation",
-      "url": "/docs"
+      "url": "/docs/"
     },
     {
       "name": "FAQ",
-      "url": "/docs/support/faq"
+      "url": "/docs/support/faq/"
     },
     {
       "name": "Email",
@@ -38,23 +38,23 @@
   "footer": [
     {
       "name": "Features",
-      "url": "/features"
+      "url": "/features/"
     },
     {
       "name": "For Teams",
-      "url": "/for-teams"
+      "url": "/for-teams/"
     },
     {
       "name": "Pricing",
-      "url": "/pricing"
+      "url": "/pricing/"
     },
     {
       "name": "Blog",
-      "url": "/blog"
+      "url": "/blog/"
     },
     {
       "name": "Students",
-      "url": "/student"
+      "url": "/student/"
     }
   ]
 }
