@@ -1,28 +1,28 @@
 ---
-title: "Xcode DeviceHub and the Future of RocketSim"
-pageTitle: "Hi DeviceHub, bye RocketSim? Definitely not!"
-description: Xcode DeviceHub replaces the Simulator window in Xcode 27. Here is how to fix it when it won't launch, and why RocketSim is here to stay.
+title: "Xcode Device Hub and the Future of RocketSim"
+pageTitle: "Hi Device Hub, bye RocketSim? Definitely not!"
+description: Xcode Device Hub replaces the Simulator window in Xcode 27. Here is how to fix it when it won't launch, and why RocketSim is here to stay.
 publishedTime: 2026-06-09T09:00:00.000Z
-image: ./devicehub-rocketsim-side-window.png
-imageAlt: RocketSim's Side Window with capture settings shown next to the new Xcode DeviceHub compact window running an iPhone 17 on iOS 27.
-imageCaption: "RocketSim's physical device Side Window, running right next to the new Xcode DeviceHub window."
+image: ./xcode-devicehub-simulator-side-window.jpeg
+imageAlt: The Xcode Device Hub Simulator running an iPhone 17 on iOS 27, with RocketSim's Side Window and capture settings shown right next to it.
+imageCaption: "The Xcode Device Hub Simulator running an iPhone 17, with RocketSim's Side Window right next to it."
 ---
 
-Yes, I was scared when Apple first announced **Xcode's DeviceHub** at WWDC. Would I need to look for a job again? Feeling like you might get sherlocked is scary, but it's also a confirmation that we're working on something special.
+Yes, I was scared when Apple first announced **Xcode's Device Hub** at WWDC. Would I need to look for a job again? Feeling like you might get sherlocked is scary, but it's also a confirmation that we're working on something special.
 
 What seemed scary turned out to be something great: RocketSim is here to stay, and we will become an even bigger part of your development workflow.
 
 ## Expanding our features to physical devices
 
-We're not sleeping, and we kind of expected things to move in this direction. We didn't know about DeviceHub specifically, but we noticed the advantages inside the [`devicectl`](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) command line tool. That made us start implementing [physical device support](/docs/features/capturing/physical-device-support), and we already support many features in internal betas.
+We're not sleeping, and we kind of expected things to move in this direction. We didn't know about Device Hub specifically, but we noticed the advantages inside the [`devicectl`](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) command line tool. That made us start implementing [physical device support](/docs/features/capturing/physical-device-support), and we already support many features in internal betas.
 
 You'll soon be able to welcome many of the features you know from the Simulator today, but for physical devices.
 
 ## How about the side window?
 
-Well, that's an interesting one. The DeviceHub window is large, and there might not be room for the side window. However, I'm keen to see how it's actually going to be used. We're actively exploring how to work around this new way of testing apps, and there's no final goodbye (yet) to the side window.
+Well, that's an interesting one. The Device Hub window is large, and there might not be room for the side window. However, I'm keen to see how it's actually going to be used. We're actively exploring how to work around this new way of testing apps, and there's no final goodbye (yet) to the side window.
 
-## Xcode DeviceHub does not seem to work for me?
+## Xcode Device Hub does not seem to work for me?
 
 We had that at first as well! I'm currently at WWDC, and the great thing is that you can meet engineers at the labs. I spoke with one of the Simulator engineers, and he gave me the command that fixed it all:
 
@@ -30,10 +30,10 @@ We had that at first as well! I'm currently at WWDC, and the great thing is that
 killall -9 CoreDeviceService
 ```
 
-This force-restarts the `CoreDeviceService` daemon that DeviceHub and `devicectl` rely on, which clears up the connection issues you might hit in this first release. I can also tell you that I lost all my worries about the future of RocketSim after playing around more with all the internals.
+This force-restarts the `CoreDeviceService` daemon that Device Hub and `devicectl` rely on, which clears up the connection issues you might hit in this first release. I can also tell you that I lost all my worries about the future of RocketSim after playing around more with all the internals.
 
 ## When can we expect a RocketSim update?
 
 Promises are tricky, but I'm hoping to release a first update in the [App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=devicehub-article&mt=8) next week that will bring back a working version of RocketSim.
 
-Feel free to reach out on [X/Twitter](https://x.com/twannl) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you run into anything or have ideas for how RocketSim should fit into DeviceHub. Thanks!
+Feel free to reach out on [X/Twitter](https://x.com/twannl) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you run into anything or have ideas for how RocketSim should fit into Device Hub. Thanks!
