@@ -48,31 +48,7 @@ const structuredData = {
   <CallToAction />
 </Base>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const videos = document.querySelectorAll(".js-feature-video");
-
-    videos.forEach((video) => {
-      const videoElement = video as HTMLVideoElement;
-      videoElement.load();
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const videoElement = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) {
-            videoElement.play();
-          } else {
-            videoElement.pause();
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-
-    videos.forEach((video) => {
-      observer.observe(video);
-    });
-  });
-</script>
+{
+  /* Feature videos are lazy-loaded and autoplayed by the script colocated in
+    Feature.astro, which handles every `.js-feature-video` on the page. */
+}
