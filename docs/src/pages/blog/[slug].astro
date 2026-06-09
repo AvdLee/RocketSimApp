@@ -29,6 +29,19 @@ const publishedTime = post.data.publishedTime;
 const modifiedTime = post.data.modifiedTime ?? publishedTime;
 const image = post.data.image;
 const imageAlt = post.data.imageAlt ?? pageTitle;
+const imageCaption = post.data.imageCaption;
+
+// Render the hero at the image's natural aspect ratio so it is never cropped.
+// Cap the generated width at 2x the rendered max width (max-w-[1024px]) for
+// retina sharpness, without ever upscaling beyond the source's intrinsic width.
+const HERO_MAX_RENDER_WIDTH = 2048;
+const heroWidth = image
+  ? Math.min(HERO_MAX_RENDER_WIDTH, image.width)
+  : undefined;
+const heroHeight =
+  image && heroWidth
+    ? Math.round((heroWidth * image.height) / image.width)
+    : undefined;
 
 const canonicalUrl = `${base_url}/blog/${post.id}`;
 const ogImage = image ? `${base_url}${image.src}` : undefined;
@@ -97,14 +110,23 @@ const structuredData = {
         image ? (
           <div class="ph-merged-section">
             <div class="container">
-              <figure data-aos="fade-up-sm" data-aos-delay="150">
+              <figure
+                class="mx-auto max-w-[1024px]"
+                data-aos="fade-up-sm"
+                data-aos-delay="150"
+              >
                 <Image
                   src={image}
                   alt={imageAlt}
-                  width={1300}
-                  height={768}
-                  class="w-full max-h-[580px] object-cover rounded-2xl"
+                  width={heroWidth}
+                  height={heroHeight}
+                  class="w-full h-auto rounded-2xl"
                 />
+                {imageCaption ? (
+                  <figcaption class="mt-4 text-center text-sm text-text">
+                    {imageCaption}
+                  </figcaption>
+                ) : null}
               </figure>
             </div>
           </div>
