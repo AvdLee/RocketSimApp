@@ -4,7 +4,7 @@ name: "Simulator Camera"
 featurePage: "simulator-camera"
 asset:
   type: "video"
-  path: "/features/simulator-camera.mov"
+  path: "/features/simulator-camera.mp4"
   alt: "Stream your macOS camera and use it to test AVCapture APIs directly in the Simulator. No need to use a physical device for camera apps anymore!"
   alignment: "left"
   columnSpan: 8
