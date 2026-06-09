@@ -32,11 +32,16 @@ const imageAlt = post.data.imageAlt ?? pageTitle;
 const imageCaption = post.data.imageCaption;
 
 // Render the hero at the image's natural aspect ratio so it is never cropped.
-// Width is capped for a retina-friendly asset; height follows the source ratio.
-const heroWidth = 2640;
-const heroHeight = image
-  ? Math.round((heroWidth * image.height) / image.width)
+// Cap the generated width at 2x the rendered max width (max-w-[1024px]) for
+// retina sharpness, without ever upscaling beyond the source's intrinsic width.
+const HERO_MAX_RENDER_WIDTH = 2048;
+const heroWidth = image
+  ? Math.min(HERO_MAX_RENDER_WIDTH, image.width)
   : undefined;
+const heroHeight =
+  image && heroWidth
+    ? Math.round((heroWidth * image.height) / image.width)
+    : undefined;
 
 const canonicalUrl = `${base_url}/blog/${post.id}`;
 const ogImage = image ? `${base_url}${image.src}` : undefined;
