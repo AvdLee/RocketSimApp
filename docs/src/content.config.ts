@@ -99,6 +99,8 @@ const blog = defineCollection({
       // Open Graph image. When omitted, the site's default banner is used.
       image: image().optional(),
       imageAlt: z.string().optional(),
+      // Optional caption rendered under the hero image.
+      imageCaption: z.string().optional(),
     }),
 });
 
