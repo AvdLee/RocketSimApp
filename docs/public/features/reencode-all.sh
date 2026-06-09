@@ -4,7 +4,7 @@
 # generates a matching poster image for each one.
 #
 # For each .mp4/.mov source it:
-#   - downscales the long edge to at most MAX_WIDTH (keeps aspect ratio)
+#   - downscales the long edge to at most MAX_LONG_EDGE (keeps aspect ratio)
 #   - caps the frame rate at 30fps
 #   - encodes H.264 (high profile, yuv420p) at CRF 28
 #   - drops the audio track (feature videos play muted)
@@ -18,8 +18,13 @@ set -euo pipefail
 
 INPUT_DIR="$(cd "$(dirname "$0")" && pwd)"
 POSTER_DIR="${INPUT_DIR}/posters"
-MAX_WIDTH=1440
+MAX_LONG_EDGE=1440
 CRF=28
+
+# Cap the long edge (width for landscape, height for portrait) at
+# MAX_LONG_EDGE while preserving the aspect ratio. `-2` keeps the other
+# dimension even, which H.264 (yuv420p) requires.
+SCALE_FILTER="scale='if(gt(iw,ih),min(${MAX_LONG_EDGE},iw),-2)':'if(gt(iw,ih),-2,min(${MAX_LONG_EDGE},ih))'"
 
 mkdir -p "$POSTER_DIR"
 
@@ -34,7 +39,7 @@ for file in "$INPUT_DIR"/*.mp4 "$INPUT_DIR"/*.mov; do
   echo "Optimizing $filename → $(basename "$output")"
 
   ffmpeg -y -i "$file" \
-    -vf "scale='min(${MAX_WIDTH},iw)':-2" \
+    -vf "$SCALE_FILTER" \
     -r 30 \
     -c:v libx264 -profile:v high -pix_fmt yuv420p -crf "$CRF" \
     -movflags +faststart \
@@ -48,7 +53,7 @@ for file in "$INPUT_DIR"/*.mp4 "$INPUT_DIR"/*.mov; do
   fi
 
   echo "  Poster → posters/$(basename "$poster")"
-  ffmpeg -y -i "$output" -vf "scale='min(${MAX_WIDTH},iw)':-2" \
+  ffmpeg -y -i "$output" -vf "$SCALE_FILTER" \
     -frames:v 1 -update 1 -q:v 4 "$poster"
 done
 
