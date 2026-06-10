@@ -1,0 +1,63 @@
+---
+// Shared lazy-loader for Senja testimonial widgets.
+//
+// Senja is the single heaviest third party on the homepage (~430 KB across
+// ~10 requests, ~1.5 s of JS, plus a render-blocking Google Fonts/Inter
+// request the site does not otherwise use). Both Senja embeds render well
+// below the fold, so there is no reason to fetch anything before the user
+// scrolls near them.
+//
+// Each embed keeps its loader URL on `data-senja-src` and carries the
+// `js-lazy-senja` class instead of shipping an inline `<script src>`. The
+// observer below injects the loader only once the embed approaches the
+// viewport — mirroring the lazy feature-video pattern in
+// `src/layouts/components/Feature.astro`.
+---
+
+<script>
+  // Astro de-duplicates scripts, so this only runs once even when multiple
+  // Senja embeds are present on the page.
+  function setupLazySenja() {
+    const embeds = document.querySelectorAll<HTMLElement>(".js-lazy-senja");
+    if (embeds.length === 0) return;
+
+    // Track injected loader URLs so two embeds sharing the same loader origin
+    // don't add the same script twice.
+    const injected = new Set<string>();
+
+    const loadEmbed = (embed: HTMLElement) => {
+      if (embed.dataset.senjaLoaded === "true") return;
+      const src = embed.dataset.senjaSrc;
+      embed.dataset.senjaLoaded = "true";
+      if (!src || injected.has(src)) return;
+      injected.add(src);
+
+      // Senja's platform script auto-initialises any `.senja-embed` already in
+      // the DOM once it loads, so injecting the loader is enough — no manual
+      // init call is required.
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.type = "text/javascript";
+      document.body.appendChild(script);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const embed = entry.target as HTMLElement;
+          loadEmbed(embed);
+          observer.unobserve(embed);
+        });
+      },
+      // Start the fetch slightly before the widget is visible so it feels
+      // instant without costing anything on initial load.
+      { threshold: 0, rootMargin: "200px 0px" },
+    );
+
+    embeds.forEach((embed) => observer.observe(embed));
+  }
+
+  document.addEventListener("astro:page-load", setupLazySenja);
+</script>
