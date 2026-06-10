@@ -7,11 +7,32 @@
 <script is:inline>
   (function () {
     var w = window;
-    var ic = w.Intercom;
-    if (typeof ic === "function") {
-      ic("reattach_activator");
-      ic("update", w.intercomSettings);
-    } else {
+
+    // Already fully loaded on an earlier page — just reattach for this view
+    // (Astro view transitions re-run this inline script on each navigation).
+    if (typeof w.Intercom === "function" && w.__intercomLoaded) {
+      w.Intercom("reattach_activator");
+      w.Intercom("update", w.intercomSettings);
+      return;
+    }
+
+    // Deferred loader already armed on a previous navigation — don't double-arm.
+    if (w.__intercomArmed) return;
+    w.__intercomArmed = true;
+
+    var events = ["scroll", "mousemove", "touchstart", "keydown", "click"];
+
+    function cleanup() {
+      events.forEach(function (e) {
+        w.removeEventListener(e, loadIntercom);
+      });
+    }
+
+    function loadIntercom() {
+      if (w.__intercomLoaded) return;
+      w.__intercomLoaded = true;
+      cleanup();
+
       var d = document;
       var i = function () {
         i.c(arguments);
@@ -21,21 +42,24 @@
         i.q.push(args);
       };
       w.Intercom = i;
-      var l = function () {
-        var s = d.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://widget.intercom.io/widget/wbadhzkf";
-        var x = d.getElementsByTagName("script")[0];
-        x.parentNode.insertBefore(s, x);
-      };
-      if (document.readyState === "complete") {
-        l();
-      } else if (w.attachEvent) {
-        w.attachEvent("onload", l);
-      } else {
-        w.addEventListener("load", l, false);
-      }
+      var s = d.createElement("script");
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://widget.intercom.io/widget/wbadhzkf";
+      var x = d.getElementsByTagName("script")[0];
+      x.parentNode.insertBefore(s, x);
+    }
+
+    // Load on the first genuine interaction…
+    events.forEach(function (e) {
+      w.addEventListener(e, loadIntercom, { once: true, passive: true });
+    });
+
+    // …with an idle/time fallback so passive readers still get the launcher.
+    if ("requestIdleCallback" in w) {
+      w.requestIdleCallback(loadIntercom, { timeout: 5000 });
+    } else {
+      setTimeout(loadIntercom, 5000);
     }
   })();
 </script>
