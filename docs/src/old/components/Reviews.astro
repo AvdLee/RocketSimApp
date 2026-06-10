@@ -1,5 +1,6 @@
 ---
 // Senja testimonials widget
+import LazySenja from "../../layouts/components/LazySenja.astro";
 ---
 
 <style>
@@ -7,21 +8,30 @@
     margin-top: 5rem;
     margin-bottom: 5rem;
   }
+
+  /* Reserve space so the lazy-loaded widget does not shove content down when
+     it renders (keeps CLS at 0). */
+  .senja-embed {
+    min-height: 520px;
+  }
+
+  @media (max-width: 768px) {
+    .senja-embed {
+      min-height: 900px;
+    }
+  }
 </style>
 
 <section aria-label="Reviews from users">
   <div
-    class="senja-embed"
+    class="senja-embed js-lazy-senja"
     data-id="3e26a85b-fd07-45d2-88b6-a69564850353"
     data-mode="shadow"
     data-lazyload="false"
+    data-senja-src="https://widget.senja.io/widget/3e26a85b-fd07-45d2-88b6-a69564850353/platform.js"
     style="display: block; width: 100%;"
   >
   </div>
 </section>
 
-<script
-  is:inline
-  src="https://widget.senja.io/widget/3e26a85b-fd07-45d2-88b6-a69564850353/platform.js"
-  type="text/javascript"
-  async></script>
+<LazySenja />
