@@ -108,19 +108,19 @@ rocketsim screenshot \
   --ratio 16:9 > styled.png
 ```
 
-| Option | Description |
-| --- | --- |
-| `--background <value>` | Background color: `transparent`, a preset color, or `#RRGGBB`. |
-| `--bezel <style>` | Device frame style: `none`, `simulator`, or `device`. |
-| `--frame-color <value>` | Device frame tint as a preset color or `#RRGGBB`. |
-| `--device-shadow` | Render a shadow behind the device frame. |
-| `--ratio <ratio>` | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`. |
-| `--asc` | Optimize output dimensions for App Store Connect. |
-| `--watermark` | Render the RocketSim watermark. |
-| `--metadata` | Render app metadata when available and supported by the selected ratio. |
-| `--touches` | Render captured touches. |
-| `--touch-color <value>` | Touch color as a preset color or `#RRGGBB`. |
-| `--touch-stroke` | Render a stroke around touches. |
+| Option                  | Description                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- |
+| `--background <value>`  | Background color: `transparent`, a preset color, or `#RRGGBB`.                              |
+| `--bezel <style>`       | Device frame style: `none`, `simulator`, or `device`.                                       |
+| `--frame-color <value>` | Device frame tint as a preset color or `#RRGGBB`.                                           |
+| `--device-shadow`       | Render a shadow behind the device frame.                                                    |
+| `--ratio <ratio>`       | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`.                                |
+| `--asc`                 | Optimize output dimensions for App Store Connect.                                           |
+| `--watermark`           | Render the RocketSim watermark.                                                             |
+| `--metadata`            | Render app metadata when available and supported by the selected ratio.                     |
+| `--touches`             | Render captured touches.                                                                    |
+| `--touch-color <value>` | Touch color as a preset color or `#RRGGBB`.                                                 |
+| `--touch-stroke`        | Render a stroke around touches.                                                             |
 | `--orientation <value>` | Output orientation: `portrait`, `portraitUpsideDown`, `landscapeLeft`, or `landscapeRight`. |
 
 To preview the capture in RocketSim's [floating thumbnail](/docs/features/capturing/floating-thumbnail) instead of writing bytes to stdout, add `--show-floating-thumbnail`:
