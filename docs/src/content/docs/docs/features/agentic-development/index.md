@@ -84,7 +84,7 @@ RocketSim ships the CLI and Agent Skill inside the app. When RocketSim updates, 
 RocketSim's agentic development support has three layers:
 
 1. **The RocketSim Mac app** keeps the live Simulator connection, caches state, and performs the optimized work.
-2. **The RocketSim CLI** exposes that running app to agents through commands such as `elements`, `interact`, `wait`, `screenshot`, and `doctor`.
+2. **The RocketSim CLI** exposes that running app to agents through commands such as `elements`, `interact`, `wait`, `screenshot`, `video record`, and `doctor`.
 3. **The RocketSim Agent Skill** teaches your AI coding tool how to use the CLI safely and consistently.
 
 Install both the command line tool and Agent Skill from **RocketSim → Settings → CLI & Agent**. RocketSim creates symlinks into your chosen folders, so the CLI and skill keep pointing at the latest installed app.
