@@ -86,7 +86,9 @@ rocketsim snapshot
 
 These commands are optimized for agent workflows and help agents reason about whether the screen changed after an interaction.
 
-### Screenshot fallback
+The JSON snapshot also includes `data.canvasSize` (`[width, height]` in device points), which describes the full screen the elements were laid out in. This is the union of every raw accessibility frame, including the full-screen application root, so it spans the true device bounds rather than just the box around the visible content. Use it to scale element frames onto a rendered screenshot or overlay without re-deriving the device size, which is especially important on scrollable screens where the visible content does not fill the screen.
+
+### Screenshots
 
 When accessibility data is not enough, agents can request a plain PNG screenshot:
 
@@ -94,7 +96,58 @@ When accessibility data is not enough, agents can request a plain PNG screenshot
 rocketsim screenshot > screen.png
 ```
 
-This is useful for visual fallback flows, sparse web content, or debugging what the agent sees.
+This is useful for visual fallback flows, sparse web content, or debugging what the agent sees. The raw PNG bytes are written to stdout, so redirect them to a file. Target a specific simulator with `--udid <udid>` instead of the focused one.
+
+Screenshots can also be styled with the same options RocketSim uses for its capturing tools:
+
+```bash
+rocketsim screenshot \
+  --bezel simulator \
+  --background "#0B1221" \
+  --device-shadow \
+  --ratio 16:9 > styled.png
+```
+
+| Option | Description |
+| --- | --- |
+| `--background <value>` | Background color: `transparent`, a preset color, or `#RRGGBB`. |
+| `--bezel <style>` | Device frame style: `none`, `simulator`, or `device`. |
+| `--frame-color <value>` | Device frame tint as a preset color or `#RRGGBB`. |
+| `--device-shadow` | Render a shadow behind the device frame. |
+| `--ratio <ratio>` | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`. |
+| `--asc` | Optimize output dimensions for App Store Connect. |
+| `--watermark` | Render the RocketSim watermark. |
+| `--metadata` | Render app metadata when available and supported by the selected ratio. |
+| `--touches` | Render captured touches. |
+| `--touch-color <value>` | Touch color as a preset color or `#RRGGBB`. |
+| `--touch-stroke` | Render a stroke around touches. |
+| `--orientation <value>` | Output orientation: `portrait`, `portraitUpsideDown`, `landscapeLeft`, or `landscapeRight`. |
+
+To preview the capture in RocketSim's [floating thumbnail](/docs/features/capturing/floating-thumbnail) instead of writing bytes to stdout, add `--show-floating-thumbnail`:
+
+```bash
+rocketsim screenshot --show-floating-thumbnail
+```
+
+### Video recordings
+
+Agents and scripts can record the simulator to an MP4. Recording continues until you press `Ctrl+C`, at which point RocketSim finalizes the file and writes the bytes to stdout:
+
+```bash
+rocketsim video record > recording.mp4
+```
+
+Press `Ctrl+C` to stop the recording and flush the MP4. Target a specific simulator with `--udid <udid>` and set the frame rate with `--fps <value>` (between 1 and 120, default 30):
+
+```bash
+rocketsim video record --fps 60 --udid <udid> > recording.mp4
+```
+
+`video record` accepts the same styling options as `screenshot` (see the table above), so you can record framed, touch-annotated, or App Store Connect–optimized clips. As with screenshots, add `--show-floating-thumbnail` to send the finished recording to RocketSim's floating thumbnail instead of stdout:
+
+```bash
+rocketsim video record --bezel device --touches --show-floating-thumbnail
+```
 
 ### Waiting for UI changes
 
