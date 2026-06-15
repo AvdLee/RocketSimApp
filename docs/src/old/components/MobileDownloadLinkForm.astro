@@ -326,6 +326,21 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       return props;
     };
 
+    const propsFromLink = (link?: HTMLAnchorElement) =>
+      link ? getPlausibleProps(link) : {};
+
+    const getMobilePromptProps = (link?: HTMLAnchorElement) => {
+      const props = propsFromLink(link);
+
+      return {
+        ...props,
+        surface: props.surface || "mobile-download",
+        placement: props.placement || "intent-prompt",
+        format: props.format || "prompt",
+        source: "mobile-install-intent",
+      };
+    };
+
     const loadKitForm = () => {
       if (hasLoadedKit || !formContainer) return;
 
@@ -351,7 +366,12 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       openButton?.setAttribute("aria-expanded", "true");
       loadKitForm();
 
-      const props = getPlausibleProps(sourceLink);
+      const props = getMobilePromptProps(sourceLink);
+
+      // Preserve the primary install-click KPI even though the mobile prompt
+      // intercepts the original App Store link before Plausible's class-based
+      // click handler can observe it.
+      track("App Store Install", props);
       track("Mobile Download App Store Clicked", props);
 
       if (!hasTrackedView) {
@@ -386,7 +406,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     });
 
     appStoreLink?.addEventListener("click", () => {
-      track("Mobile Download App Store Link Clicked");
+      track("Mobile Download App Store Link Clicked", getMobilePromptProps());
       sessionStorage.setItem(storageKey, "1");
       hideIntentPrompt();
     });
@@ -422,7 +442,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
         if (!target.matches("input, textarea")) return;
 
         hasTrackedEmailFocus = true;
-        track("Mobile Download Email Field Focused");
+        track("Mobile Download Email Field Focused", getMobilePromptProps());
       },
       true,
     );
@@ -432,9 +452,12 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       (event) => {
         const form = event.target;
         if (!(form instanceof HTMLFormElement)) return;
-        if (!formContainer?.contains(form)) return;
+        const isMobileDownloadForm =
+          formContainer?.contains(form) ||
+          (!container.hidden && form.dataset.svForm === "9491475");
+        if (!isMobileDownloadForm) return;
 
-        track("Mobile Download Link Form Submitted");
+        track("Mobile Download Link Form Submitted", getMobilePromptProps());
         sessionStorage.setItem(storageKey, "1");
         hideIntentPrompt();
       },
