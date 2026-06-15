@@ -238,6 +238,10 @@ export default defineConfig({
           link: "/docs/features/capturing/physical-device-support",
         },
         {
+          label: "Device Hub",
+          link: "/docs/features/capturing/device-hub-support",
+        },
+        {
           label: "Design Comparison",
           collapsed: true,
           autogenerate: { directory: "docs/features/design-comparison" },
