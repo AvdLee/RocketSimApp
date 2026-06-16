@@ -286,6 +286,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       "[data-mobile-download-app-store]",
     );
     const storageKey = "rocketsim-mobile-download-dismissed";
+    const mobileDownloadKitFormId = "9491475";
     let hasTrackedView = false;
     let hasLoadedKit = false;
     let hasTrackedEmailFocus = false;
@@ -326,7 +327,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       return props;
     };
 
-    const propsFromLink = (link?: HTMLAnchorElement) =>
+    const propsFromLink = (link?: HTMLAnchorElement): Record<string, string> =>
       link ? getPlausibleProps(link) : {};
 
     const getMobilePromptProps = (link?: HTMLAnchorElement) => {
@@ -406,7 +407,12 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     });
 
     appStoreLink?.addEventListener("click", () => {
-      track("Mobile Download App Store Link Clicked", getMobilePromptProps());
+      const link =
+        appStoreLink instanceof HTMLAnchorElement ? appStoreLink : undefined;
+      track(
+        "Mobile Download App Store Link Clicked",
+        getMobilePromptProps(link),
+      );
       sessionStorage.setItem(storageKey, "1");
       hideIntentPrompt();
     });
@@ -454,7 +460,8 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
         if (!(form instanceof HTMLFormElement)) return;
         const isMobileDownloadForm =
           formContainer?.contains(form) ||
-          (!container.hidden && form.dataset.svForm === "9491475");
+          (!container.hidden &&
+            form.dataset.svForm === mobileDownloadKitFormId);
         if (!isMobileDownloadForm) return;
 
         track("Mobile Download Link Form Submitted", getMobilePromptProps());
