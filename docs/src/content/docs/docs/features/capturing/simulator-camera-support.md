@@ -28,6 +28,18 @@ Camera simulation is available from the Capture side window tab:
 4. Integrate RocketSim Connect following the in-app instructions. For more info, see [Setting up RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect)
 5. Start running your app
 
+## Testing no-camera fallbacks
+
+If you want your app to behave as if no Simulator Camera stream is available, select **None** in the Simulator Camera picker. RocketSim Connect remains active, but video camera discovery behaves as unavailable so apps can show their own fallback UI.
+
+You can also enable this behavior from your app’s launch environment:
+
+```bash
+ROCKETSIM_SIMULATOR_CAMERA=none
+```
+
+For CI or scripted runs, `ROCKETSIM_DISABLE_SIMULATOR_CAMERA=1` is supported as an equivalent explicit opt-out.
+
 ## Troubleshooting
 
 If you run into an edge case that isn’t supported yet, I’d love to fix it. Could you please:
