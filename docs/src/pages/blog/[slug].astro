@@ -44,6 +44,9 @@ const heroHeight =
   image && heroWidth
     ? Math.round((heroWidth * image.height) / image.width)
     : undefined;
+const imageType = image
+  ? `image/${image.format === "jpg" ? "jpeg" : image.format}`
+  : undefined;
 
 const canonicalUrl = `${base_url}/blog/${post.id}`;
 const ogImage = image ? `${base_url}${image.src}` : undefined;
@@ -54,6 +57,9 @@ const seo = {
   description,
   image: ogImage,
   imageAlt: image ? imageAlt : undefined,
+  imageWidth: image?.width,
+  imageHeight: image?.height,
+  imageType,
   canonical: canonicalUrl,
   twitterCreator: "@twannl",
   twitterSite: "@rocketsim_app",
