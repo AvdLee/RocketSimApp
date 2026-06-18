@@ -33,9 +33,29 @@ const seo = {
   description: meta_description,
   canonical: base_url,
 };
+
+const structuredData = {
+  type: "static" as const,
+  software: {
+    description:
+      "RocketSim is the iOS Simulator companion for developers and AI coding agents, with tools for network monitoring, captures, app actions, accessibility testing, and Simulator automation.",
+  },
+  page: {
+    name: "RocketSim",
+    description: meta_description,
+    url: base_url,
+    about: [
+      "iOS Simulator",
+      "URLSession network monitoring",
+      "AI coding agents",
+      "Simulator screenshots and recordings",
+      "iOS app testing",
+    ],
+  },
+};
 ---
 
-<Base seo={seo} structuredData={{ type: "static" }}>
+<Base seo={seo} structuredData={structuredData}>
   <Notification />
   <Header
     title="The iOS Simulator companion for developers and AI coding agents."

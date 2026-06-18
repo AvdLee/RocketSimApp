@@ -23,15 +23,32 @@ const { title, description, hero, bento } = page.data;
 const {
   site: { base_url },
 } = config;
+const canonicalUrl = `${base_url}/features/${page.id}`;
+const featureItems = await getCollection(
+  "feature",
+  (feature) => feature.data.featurePage === page.id,
+);
 
 const seo = {
   title: page.data.meta_title || `${title} - RocketSim`,
   description,
-  canonical: `${base_url}/features/${page.id}`,
+  canonical: canonicalUrl,
 };
 
 const structuredData = {
   type: "static" as const,
+  page: {
+    name: title,
+    description,
+    url: canonicalUrl,
+    breadcrumbName: title,
+    about: [title, "RocketSim", "iOS Simulator"],
+    itemList: featureItems.map((feature) => ({
+      name: feature.data.name,
+      description: feature.data.tagLine,
+      url: canonicalUrl,
+    })),
+  },
 };
 ---
 

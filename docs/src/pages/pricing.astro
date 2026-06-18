@@ -12,6 +12,7 @@ import CallToAction from "@/partials/CallToAction.astro";
 
 const pageIndex = await getEntry("pricing", "-index");
 if (!pageIndex) return null;
+const faqSection = await getEntry("faqSectionCollection", "faq");
 const { hero, title, meta_title, description } = pageIndex.data;
 const {
   site: { base_url },
@@ -31,6 +32,10 @@ const structuredData = {
     description: description,
     url: `${base_url}/pricing`,
   },
+  faq: faqSection?.data.list.map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  })),
 };
 ---
 

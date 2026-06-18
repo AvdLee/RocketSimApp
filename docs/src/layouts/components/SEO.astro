@@ -117,6 +117,13 @@ const ogType = article ? "article" : "website";
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" type="text/plain" title="LLMs" href="/llms.txt" />
+<link
+  rel="alternate"
+  type="text/plain"
+  title="LLMs Full"
+  href="/llms-full.txt"
+/>
 
 <!-- Robots -->
 {robotsContent && <meta name="robots" content={robotsContent} />}

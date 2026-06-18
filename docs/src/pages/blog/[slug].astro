@@ -51,6 +51,7 @@ const imageType = image
 const canonicalUrl = `${base_url}/blog/${post.id}`;
 const ogImage = image ? `${base_url}${image.src}` : undefined;
 const appStoreHref = `https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=blog-${post.id}-sticky-badge&mt=8`;
+const wordCount = (post.body ?? "").trim().split(/\s+/).filter(Boolean).length;
 
 const seo = {
   title: `${title} - RocketSim`,
@@ -66,6 +67,7 @@ const seo = {
   article: {
     publishedTime: publishedTime.toISOString(),
     modifiedTime: modifiedTime.toISOString(),
+    wordCount,
   },
 };
 
@@ -83,8 +85,10 @@ const structuredData = {
           url: ogImage,
           width: image?.width,
           height: image?.height,
+          caption: imageCaption,
         }
       : undefined,
+    wordCount,
   },
 };
 ---
