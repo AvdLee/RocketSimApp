@@ -1,13 +1,13 @@
 ---
-title: "Simulator Camera Support"
+title: "iOS Simulator Camera Support"
 description: "Test camera functionality directly in the iOS Simulator without a physical device. Stream images or video to the Simulator camera via RocketSim Connect."
 ---
 
-A top requested feature has always been Simulator camera support. Constantly having to test the camera on an actual device can be a pain and it’s annoying to run into dead ends on the Simulator for apps that come with camera features.
+Testing camera flows on the iOS Simulator usually ends with a fallback screen, since the Simulator does not expose a real camera like a physical device. That makes every QR scanner, document scanner, profile photo picker, or video capture flow slower to validate.
 
-RocketSim Camera Simulation lets you test camera flows directly in the Simulator.
+RocketSim Camera Simulation lets you stream images or video into your running Simulator app through RocketSim Connect. You can keep your normal Simulator workflow and test camera-dependent UI without repeatedly deploying to an iPhone.
 
-Check out these demo’s:
+Check out these demos:
 
 - [Glimpsify open-source project demo video](https://x.com/twannl/status/1935303234714792340)
 - [Vision object detection demo video](https://x.com/twannl/status/1926715711277203563)
@@ -19,7 +19,7 @@ Camera simulation is available from the Capture side window tab:
 
 1. Open the Simulator
 2. Navigate to the bottom of the capturing side window
-3. Setup camera authorization via RocketSim’s Side Window
+3. Set up camera authorization via RocketSim's side window
 
    ![The side window in its state after camera permissions have been granted.](./simulator-camera-support/simulator_camera.png)
 
@@ -53,11 +53,11 @@ If you run into an edge case that isn’t supported yet, I’d love to fix it. C
 6. Hit send!
 7. (Optional) if you can share me an Xcode project with your camera code in it, I’ll be able to fix your specific case much quicker
 
-That email will give me all I need to dive deeper into your specific issue
+That email will give me all I need to dive deeper into your specific issue.
 
 ## Known issues
 
 - The macOS camera resolution is used as the resolution of returned sample buffers. This means your captures won’t have the resolution of the original (Simulator) device camera.
-- Video’s do not contain any audio
+- Videos do not contain any audio
 - Switching camera from `front` to `back` does nothing since there’s only one camera available
 - `DataScannerViewController` does not yet work (see [this issue](https://github.com/AvdLee/RocketSimApp/issues/769))
