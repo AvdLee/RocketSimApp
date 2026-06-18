@@ -325,10 +325,10 @@ compare_plans:
           free: false
           individual: false
           teams: true
-        - item: Admin-controlled local-only Build Insights mode
+        - item: Local-only mode by disabling build data syncing (extra privacy)
           free: false
           individual: false
-          teams: Enterprise
+          teams: true
     - title: Team manager
       list:
         - item: License management

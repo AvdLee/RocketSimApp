@@ -84,7 +84,7 @@ plans:
         amount: 10
         period: "/ seat / month"
         note: "€120 billed annually"
-    microcopy: "Need RocketSim to pass stricter security reviews? Enterprise can turn Build Insights syncing off so build data stays local. [Get in touch](mailto:antoine@rocketsim.app)"
+    microcopy: "Commercial licensing with a 14-day trial"
     cta:
       enable: true
       label: Start 14-day Trial
