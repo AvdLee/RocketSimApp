@@ -71,6 +71,9 @@ plans:
         included: true
         feature: Team build insights
       - enable: true
+        included: false
+        feature: "Local-only Build Insights mode (Enterprise)"
+      - enable: true
         included: true
         feature: User management
       - enable: true
@@ -81,7 +84,7 @@ plans:
         amount: 10
         period: "/ seat / month"
         note: "€120 billed annually"
-    microcopy: "Commercial licensing with a 14-day trial"
+    microcopy: "Need RocketSim to pass stricter security reviews? Enterprise can turn Build Insights syncing off so build data stays local. [Get in touch](mailto:antoine@rocketsim.app)"
     cta:
       enable: true
       label: Start 14-day Trial
@@ -105,6 +108,9 @@ plans:
       - enable: true
         included: true
         feature: Group based user management
+      - enable: true
+        included: true
+        feature: "Local-only Build Insights mode controlled from the Teams portal"
     price:
       yearly:
         amount: "Custom"
