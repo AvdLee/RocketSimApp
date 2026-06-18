@@ -40,7 +40,7 @@ function getEventName(ctaLabel: string): string {
     }
   } else if (isBlogPage) {
     if (ctaLabel.includes("Download")) {
-      return "plausible-event-name=CTA:+Blog+Bottom+-+Download";
+      return "plausible-event-name=App+Store+Install plausible-event-surface=blog plausible-event-placement=blog-bottom plausible-event-format=button";
     } else if (ctaLabel.includes("Trial")) {
       return "plausible-event-name=CTA:+Blog+Bottom+-+Trial";
     }

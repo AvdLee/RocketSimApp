@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 
+import macAppStoreBadge from "../../assets/mac-app-store-badge.svg";
+import MobileDownloadLinkForm from "../../old/components/MobileDownloadLinkForm.astro";
 import Base from "@/layouts/Base.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
@@ -45,6 +47,7 @@ const heroHeight =
 
 const canonicalUrl = `${base_url}/blog/${post.id}`;
 const ogImage = image ? `${base_url}${image.src}` : undefined;
+const appStoreHref = `https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=blog-${post.id}-sticky-badge&mt=8`;
 
 const seo = {
   title: `${title} - RocketSim`,
@@ -136,17 +139,95 @@ const structuredData = {
 
     <section class="section -mt-20">
       <div class="container">
-        <div class="content mx-auto max-w-[680px]">
-          <Content />
+        <div class="blog-content-layout">
+          <div class="content blog-article-content">
+            <Content />
+          </div>
+          <aside
+            class="blog-app-store-badge"
+            aria-label="Download RocketSim on the Mac App Store"
+            data-blog-app-store-badge
+          >
+            <a
+              href={appStoreHref}
+              target="_blank"
+              rel="noopener"
+              aria-label="Download RocketSim on the Mac App Store"
+              class:list={[
+                "plausible-event-name=App+Store+Install",
+                "plausible-event-surface=blog",
+                "plausible-event-placement=blog-sticky-badge",
+                "plausible-event-format=badge",
+                `plausible-event-article=${post.id}`,
+              ]}
+            >
+              <img
+                src={macAppStoreBadge.src}
+                alt="Download on the Mac App Store"
+              />
+            </a>
+          </aside>
         </div>
       </div>
     </section>
 
     <CallToAction />
+    <MobileDownloadLinkForm />
   </article>
 </Base>
 
 <style>
+  .blog-content-layout {
+    display: block;
+  }
+
+  .blog-article-content {
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .blog-app-store-badge {
+    display: none;
+  }
+
+  @media (min-width: 1180px) {
+    .blog-app-store-badge {
+      position: absolute;
+      top: var(--blog-app-store-top, 0);
+      left: var(--blog-app-store-left, 0);
+      z-index: 20;
+      display: block;
+      width: max-content;
+      max-width: 150px;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .blog-app-store-badge.is-ready {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    .blog-app-store-badge.is-fixed {
+      position: fixed;
+      top: 6rem;
+    }
+
+    .blog-app-store-badge a {
+      display: block;
+      line-height: 0;
+      border-radius: 8px;
+      outline-offset: 2px;
+    }
+
+    .blog-app-store-badge img {
+      display: block;
+      width: 150px;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
   .content :global(h1),
   .content :global(h2),
   .content :global(h3),
@@ -191,3 +272,76 @@ const structuredData = {
     opacity: 1;
   }
 </style>
+
+<script>
+  const blogAppStoreBadgeInit = () => {
+    const badge = document.querySelector("[data-blog-app-store-badge]");
+    const articleContent = document.querySelector(".blog-article-content");
+    const firstParagraph = articleContent?.querySelector("p");
+    const bottomCta = document.querySelector(".cta");
+
+    if (
+      !(badge instanceof HTMLElement) ||
+      !(articleContent instanceof HTMLElement) ||
+      !(firstParagraph instanceof HTMLElement) ||
+      !(bottomCta instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    if (badge.dataset.initialized === "true") return;
+    badge.dataset.initialized = "true";
+
+    const desktopMediaQuery = window.matchMedia("(min-width: 1180px)");
+    let frameRequest = 0;
+
+    const getStickyTop = () => {
+      const rootFontSize = Number.parseFloat(
+        getComputedStyle(document.documentElement).fontSize,
+      );
+
+      return Number.isFinite(rootFontSize) ? rootFontSize * 6 : 96;
+    };
+
+    const updateBadgePosition = () => {
+      if (!desktopMediaQuery.matches) {
+        badge.classList.remove("is-ready", "is-fixed");
+        return;
+      }
+
+      const contentRect = articleContent.getBoundingClientRect();
+      const paragraphRect = firstParagraph.getBoundingClientRect();
+      const paragraphTop = paragraphRect.top + window.scrollY;
+      const badgeLeft = contentRect.right + 32;
+      const stickyTop = getStickyTop();
+      const ctaTop = bottomCta.getBoundingClientRect().top + window.scrollY;
+      const bottomGap = 32;
+      const maxBadgeTop = ctaTop - badge.offsetHeight - bottomGap;
+      const shouldFix = window.scrollY >= paragraphTop - stickyTop;
+      const shouldStop = window.scrollY + stickyTop >= maxBadgeTop;
+      const badgeTop = shouldStop ? maxBadgeTop : paragraphTop;
+
+      badge.style.setProperty("--blog-app-store-top", `${badgeTop}px`);
+      badge.style.setProperty("--blog-app-store-left", `${badgeLeft}px`);
+      badge.classList.add("is-ready");
+      badge.classList.toggle("is-fixed", shouldFix && !shouldStop);
+    };
+
+    const scheduleUpdate = () => {
+      if (frameRequest) return;
+
+      frameRequest = window.requestAnimationFrame(() => {
+        frameRequest = 0;
+        updateBadgePosition();
+      });
+    };
+
+    updateBadgePosition();
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    desktopMediaQuery.addEventListener("change", scheduleUpdate);
+  };
+
+  document.addEventListener("astro:page-load", blogAppStoreBadgeInit);
+</script>
