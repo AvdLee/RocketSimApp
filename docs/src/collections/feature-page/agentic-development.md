@@ -1,7 +1,7 @@
 ---
-title: "Agentic Development"
-description: "Let AI coding agents inspect and interact with your running iOS Simulator app through RocketSim's version-matched CLI and Agent Skill."
+title: "Agentic iOS Simulator Development"
+description: "Let Cursor, Claude, Codex, Xcode, and other AI coding agents inspect, navigate, and verify your running iOS Simulator app."
 hero:
-  title: "Agentic Development"
-  subtitle: "A token-efficient Simulator control layer for AI coding agents"
+  title: "Agentic iOS Simulator Development"
+  subtitle: "A token-efficient Simulator navigation layer for AI coding agents"
 ---

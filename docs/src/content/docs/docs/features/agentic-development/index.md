@@ -1,11 +1,11 @@
 ---
 title: "Agentic Development with RocketSim"
-description: "Let AI coding agents see and interact with your running iOS Simulator app through RocketSim's version-matched CLI and Agent Skill."
+description: "Let AI coding agents inspect, navigate, and verify your running iOS Simulator app through RocketSim's version-matched CLI and Agent Skill."
 sidebar:
   order: 1
 ---
 
-RocketSim helps AI coding agents see and interact with your running Simulator app. The RocketSim Mac app stays connected to the Simulator, keeps useful state warm, and exposes a compact CLI that agents can use to inspect screens, tap controls, type text, and verify UI changes.
+RocketSim helps AI coding agents inspect, navigate, and verify your running iOS Simulator app. The RocketSim Mac app stays connected to the Simulator, keeps useful state warm, and exposes a compact CLI that agents can use to read visible elements, tap controls, type text, capture screenshots, and confirm UI changes.
 
 RocketSim does not build, install, or launch your app from source. Start the app with Xcode or your normal build tooling first, then use RocketSim for fast Simulator inspection and interaction.
 
@@ -24,6 +24,8 @@ Agentic development with RocketSim is useful whenever you want an agent to work 
 ### Navigate and test app flows
 
 Ask your agent to move through multi-step flows like onboarding, login, settings, or purchase screens. RocketSim gives the agent a way to see what is on screen and interact with it step by step.
+
+Instead of relying only on screenshots or brittle coordinate taps, the agent can read accessibility elements and use semantic interactions whenever possible. That makes the loop much closer to how a developer would inspect the same screen manually.
 
 ### Validate UI after code changes
 
@@ -89,8 +91,10 @@ RocketSim's agentic development support has three layers:
 
 Install both the command line tool and Agent Skill from **RocketSim → Settings → CLI & Agent**. RocketSim creates symlinks into your chosen folders, so the CLI and skill keep pointing at the latest installed app.
 
+For most AI coding tools, install the [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill) as well. The skill teaches your agent when to read elements, when to wait, when to interact semantically, and when to fall back to a screenshot.
+
 ## Learn more
 
-- [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) -- how agents inspect and interact with the Simulator
-- [Agent Skill](/docs/features/agentic-development/agent-skill) -- how to install the recommended agent workflow
-- [CLI & Agent settings](/docs/settings/cli-and-agent) -- how to install the CLI and skill from RocketSim
+- [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — how agents inspect and interact with the Simulator
+- [Agent Skill](/docs/features/agentic-development/agent-skill) — how to install the recommended agent workflow
+- [CLI & Agent settings](/docs/settings/cli-and-agent) — how to install the CLI and skill from RocketSim

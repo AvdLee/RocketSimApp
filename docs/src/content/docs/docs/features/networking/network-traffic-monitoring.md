@@ -1,9 +1,9 @@
 ---
-title: "Network Traffic Monitoring"
-description: "Monitor HTTP requests and responses from your Simulator app in real time. Inspect headers, bodies, status codes, and copy cURL commands for debugging."
+title: "Network Monitor"
+description: "Monitor URLSession requests from your iOS Simulator app without proxy certificates. Inspect headers, bodies, status codes, logs, and cURL commands."
 ---
 
-Powered by RocketSim Connect, you're able to monitor in- and outgoing network requests for your app.
+Powered by RocketSim Connect, you can monitor outgoing URLSession requests from your iOS Simulator app without setting up a proxy, installing custom certificates, or switching away from the Simulator.
 
 ::::tip[Debug networking without leaving the Simulator]
 See live requests, responses, logs, and shareable cURL commands in one place, without proxy certificates or switching tools.
@@ -13,7 +13,7 @@ Open the side window and select the **Networking** tab with the antenna icon. Ro
 
 ![Dedicated Networking tab showing recent network requests and the Open Network Monitor button](./network-traffic-monitoring/side_window_recent_network_requests_monitor.png)
 
-Being able to see which requests are running is essential for a fast development workflow.
+Being able to see which requests are running is essential for a fast development workflow. It helps you catch duplicate calls, failed responses, oversized payloads, and unexpected request order while the app is still running in the Simulator.
 
 RocketSim also shows connected app logs in the Network Monitor, so you can line up request traffic with what your app is printing at the same moment.
 
@@ -61,7 +61,9 @@ Nope! Integrating RocketSim Connect is all you need.
 
 ## Are you saying I don’t need Proxyman, Charles Proxy, or any other proxy app anymore?
 
-Basically, yes! However, RocketSim does not yet allow configuring breakpoints or adjusting responses before they return into your app. Though, in most cases, it's enough to be able to see which requests go in and out, what responses they return, and why a request failed.
+For everyday Simulator debugging, often yes. RocketSim is designed for quickly seeing which URLSession requests go in and out, what responses they return, and why a request failed.
+
+Proxy tools like Proxyman or Charles Proxy are still useful when you need advanced proxy workflows such as rewriting responses, breakpoints, or traffic from apps you cannot instrument. RocketSim focuses on the fast development loop for your own app: no proxy certificates, no system proxy setup, and request details next to your Simulator workflow.
 
 ## Powered by open-sourced framework Pulse
 

@@ -1,9 +1,11 @@
 ---
-title: "Exporting Network Requests as Prompts"
-description: "Turn captured network traffic into redacted exports and prompt-ready summaries for AI-assisted debugging, performance reviews, and failure analysis."
+title: "AI Network Request Prompts"
+description: "Export captured URLSession traffic as redacted prompts for Claude, ChatGPT, and other AI assistants to debug failures, duplicate calls, and slow endpoints."
 ---
 
 RocketSim can turn captured network traffic into a format that is much easier to share with AI coding assistants. Instead of pasting raw requests one by one, you can export a filtered request set as a compact summary or generate a built-in prompt tailored to the problem you want to investigate.
+
+This is useful when you want Claude, ChatGPT, or another coding assistant to review a real API session and look for patterns such as duplicate calls, slow endpoints, missing caching, oversized responses, or failure spikes.
 
 ## Where to find it
 
