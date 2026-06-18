@@ -46,7 +46,7 @@ const structuredData = {
     itemList: featureItems.map((feature) => ({
       name: feature.data.name,
       description: feature.data.tagLine,
-      url: canonicalUrl,
+      url: feature.data.docPath ?? canonicalUrl,
     })),
   },
 };
