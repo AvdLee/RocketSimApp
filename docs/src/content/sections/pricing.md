@@ -71,14 +71,14 @@ plans:
         included: true
         feature: Team build insights
       - enable: true
-        included: false
-        feature: "Local-only Build Insights mode (Enterprise)"
-      - enable: true
         included: true
         feature: User management
       - enable: true
         included: true
         feature: License management
+      - enable: true
+        included: false
+        feature: "Local-only Build Insights mode (Enterprise)"
     price:
       yearly:
         amount: 10
@@ -93,7 +93,7 @@ plans:
       class: "plausible-event-name=CTA:+Pricing+Teams+-+Trial"
   - enable: true
     title: Enterprise
-    description: For larger organizations that need more control, security, and custom distribution.
+    description: For larger organizations that need more control, security, custom distribution, and rollout support.
     price_prefix: ""
     features:
       - enable: true

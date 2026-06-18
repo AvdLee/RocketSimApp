@@ -9,13 +9,41 @@ compare_plans:
   teams: Teams
 
   item:
-    - title: Networking Traffic Monitor
+    - title: Agentic Development
       description: |
-        Inspect network requests triggered from your app using URLSession. Explore JSON responses, request headers, copy requests as cURL commands, or export redacted request summaries and prompt-ready debugging context.
+        Let AI coding agents inspect and interact with your running Simulator app through RocketSim's version-matched CLI and Agent Skill. Agents can read compact screen summaries, interact with visible elements, wait for UI changes, and capture screenshots or recordings through the running RocketSim app.
+      list:
+        - item: RocketSim CLI
+          free: true
+          individual: true
+          teams: true
+        - item: RocketSim Agent Skill
+          free: true
+          individual: true
+          teams: true
+        - item: Compact `--agent` screen summaries
+          free: true
+          individual: true
+          teams: true
+        - item: Selector-based taps, swipes, typing, and waits
+          free: true
+          individual: true
+          teams: true
+        - item: Screenshot and video capture from the CLI
+          free: true
+          individual: true
+          teams: true
+        - item: Version-matched CLI and skill updates
+          free: true
+          individual: true
+          teams: true
+    - title: Advanced Network Monitor
+      description: |
+        Inspect network requests in a dedicated monitor window triggered from your app using URLSession. Explore JSON responses, request headers, copy requests as cURL commands, or export redacted request summaries and prompt-ready debugging context.
 
         All of this, without requiring the installation of Simulator certificates, as apps like Proxyman or Charles Proxy do.
       list:
-        - item: Side Window Network Monitor
+        - item: Dedicated Network Monitor Window
           free: true
           individual: true
           teams: true
@@ -211,6 +239,10 @@ compare_plans:
           free: true
           individual: true
           teams: true
+        - item: Reset Keychain
+          free: true
+          individual: true
+          teams: true
         - item: Grant Permissions
           free: true
           individual: true
@@ -241,10 +273,6 @@ compare_plans:
           teams: true
         - item: Unlimited Push Notifications
           free: false
-          individual: true
-          teams: true
-        - item: Reset Keychain
-          free: true
           individual: true
           teams: true
     - title: User Defaults Editor
