@@ -71,6 +71,9 @@ plans:
         included: true
         feature: Team build insights
       - enable: true
+        included: false
+        feature: "Local-only Build Insights mode (Enterprise)"
+      - enable: true
         included: true
         feature: User management
       - enable: true
@@ -105,6 +108,9 @@ plans:
       - enable: true
         included: true
         feature: Group based user management
+      - enable: true
+        included: true
+        feature: "Local-only Build Insights mode controlled from the Teams portal"
     price:
       yearly:
         amount: "Custom"

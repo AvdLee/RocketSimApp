@@ -325,6 +325,10 @@ compare_plans:
           free: false
           individual: false
           teams: true
+        - item: Local-only mode by disabling build data syncing (extra privacy)
+          free: false
+          individual: false
+          teams: true
     - title: Team manager
       list:
         - item: License management

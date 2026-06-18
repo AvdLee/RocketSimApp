@@ -17,4 +17,7 @@ list:
   - enable: true
     question: "Can I download RocketSim outside of the Mac App Store?"
     answer: "Yes, with our enterprise plan, RocketSim can be downloaded and distributed outside of the Mac App Store. **[Contact sales](mailto:ralphduin@rocketsim.app) for details.**"
+  - enable: true
+    question: "Can we disable Build Insights syncing for security reviews?"
+    answer: "Yes. Enterprise teams can disable Build Insights syncing from the Teams portal, so project names, schemes, build durations, workspace lookups, and related Build Insights metadata stay local to the Mac app. RocketSim still communicates with RocketSim Services for license activation and validation."
 ---

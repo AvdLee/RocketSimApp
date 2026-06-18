@@ -19,6 +19,8 @@ RocketSim silently syncs build data in the background. It syncs at most once per
 
 Team Build Insights requires a Pro subscription with a team license key. Once configured, data flows automatically.
 
+Enterprise teams can turn Build Insights syncing off from the Teams portal. When disabled, RocketSim keeps Build Insights data local to the Mac and stops sending project names, scheme names, build durations, workspace lookups, and related Build Insights machine metadata to RocketSim Services. License activation and validation still use RocketSim Services so seats remain protected.
+
 :::tip[For engineering managers]
 Use Team Build Insights when you need evidence for hardware upgrades, Xcode rollouts, or SDK changes. RocketSim gives you project-specific build data without adding build phases or maintaining internal scripts.
 :::
