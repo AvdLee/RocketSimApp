@@ -243,6 +243,34 @@
   --ec-frm-inlBtnBrd: var(--color-text-dark);
 }
 
+/* Plain shell fences can render an empty frame/terminal header. Hide that
+   generated figcaption so one-line snippets don't look like they start with a
+   blank line, while preserving titled frames for future use. */
+.content .expressive-code .frame.is-terminal:not(.has-title) {
+  --button-spacing: 0.4rem;
+  --ec-codePadBlk: 1rem;
+}
+
+.content
+  .expressive-code
+  .frame.is-terminal:not(.has-title)
+  > figcaption.header,
+.content .expressive-code .frame:not(.has-title) > figcaption.header:empty {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+.content .expressive-code .frame.is-terminal:not(.has-title) pre,
+.content .expressive-code .frame.is-terminal:not(.has-title) code {
+  border-top: var(--ec-brdWd) solid var(--ec-brdCol) !important;
+  border-top-left-radius: calc(var(--ec-brdRad) + var(--ec-brdWd)) !important;
+  border-top-right-radius: calc(var(--ec-brdRad) + var(--ec-brdWd)) !important;
+}
+
 /* Inline code only — leave <pre><code> blocks to their own theme */
 .content :not(pre) > code {
   @apply rounded-md border border-border/60 bg-light px-1.5 py-0.5 text-[0.9em] font-normal text-text-dark;
