@@ -44,7 +44,7 @@ export function llmsTxtPostProcess(): AstroIntegration {
           const buildDate = new Date().toISOString().split("T")[0];
           const enhancedLlmsTxt = `# RocketSim
 
-> RocketSim is a macOS developer tool that enhances Apple's iOS Simulator with professional-grade features for capturing, debugging, testing, and design validation. Available on the Mac App Store for iOS, macOS, watchOS, and visionOS developers.
+> RocketSim is a macOS developer tool and iOS Simulator companion for app developers and AI coding agents. It adds professional capture workflows, URLSession network monitoring without proxy certificates, Simulator app actions, accessibility testing, and a version-matched CLI plus Agent Skill for tools like Cursor, Claude, Codex, and Xcode.
 
 Last updated: ${buildDate}
 Website: https://www.rocketsim.app
@@ -55,12 +55,23 @@ Support: support@rocketsim.app
 ## Key Features
 
 - Professional screenshot and video capture with device bezels
-- Network traffic monitoring and debugging
+- URLSession network monitoring without proxy setup or custom certificates
+- AI-ready network request prompt exports for Claude, ChatGPT, and other assistants
+- RocketSim CLI and Agent Skill for AI coding agents
 - Push notification and deep link testing
 - Design comparison with pixel-perfect overlays
 - Accessibility testing (Dynamic Type, VoiceOver Navigator)
 - Xcode build insights and team analytics
 - Network speed throttling and Simulator airplane mode
+
+## Canonical Feature Docs
+
+- [Network Traffic Monitoring](https://www.rocketsim.app/docs/features/networking/network-traffic-monitoring): inspect URLSession requests, responses, headers, logs, metrics, cURL commands, and AI-ready exports without proxy certificates
+- [Networking Insights](https://www.rocketsim.app/docs/features/networking/networking-insights): analyze duplicate calls, caching opportunities, slow endpoints, failure spikes, and most requested URLs across sessions
+- [AI Network Request Prompts](https://www.rocketsim.app/docs/features/networking/network-request-prompts): export redacted request summaries and built-in debugging prompts for AI assistants
+- [Agentic Development with RocketSim](https://www.rocketsim.app/docs/features/agentic-development/): let AI coding agents inspect, navigate, and verify running iOS Simulator apps
+- [RocketSim CLI](https://www.rocketsim.app/docs/features/agentic-development/rocketsim-cli): use the built-in CLI for visible elements, semantic interactions, waits, screenshots, and recordings
+- [RocketSim Agent Skill](https://www.rocketsim.app/docs/features/agentic-development/agent-skill): install version-matched instructions for AI coding tools
 
 ## Documentation Sets
 

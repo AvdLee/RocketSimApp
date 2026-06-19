@@ -32,6 +32,25 @@ const seo = {
 
 const structuredData = {
   type: "static" as const,
+  page: {
+    pageType: "CollectionPage" as const,
+    name: "RocketSim Blog",
+    description: seo.description,
+    url: seo.canonical,
+    breadcrumbName: "Blog",
+    about: [
+      "iOS Simulator development",
+      "RocketSim",
+      "URLSession debugging",
+      "AI coding agents",
+    ],
+    itemList: items.map((post) => ({
+      name: post.title,
+      description: post.description,
+      url: `${base_url}/blog/${post.slug}`,
+      dateModified: post.date.toISOString(),
+    })),
+  },
 };
 ---
 

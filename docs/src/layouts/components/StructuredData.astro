@@ -7,6 +7,20 @@ import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
 // structured data matches the canonical form emitted in meta tags.
 const SITE_ROOT_URL = normalizeCanonicalUrl("/");
 
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+type ItemListEntry = {
+  name: string;
+  url: string;
+  description?: string;
+  dateModified?: string;
+};
+
+type WebPageType = "WebPage" | "CollectionPage";
+
 type ArticleProps = {
   type: "article";
   article: {
@@ -33,6 +47,7 @@ type ProductProps = {
     description: string | undefined;
     image?: string;
     url: string;
+    featureList?: string[];
   };
 };
 
@@ -47,14 +62,31 @@ type OfferProps = {
 
 type StaticProps = {
   type: "static";
+  page?: {
+    name: string;
+    description?: string;
+    url: string;
+    pageType?: WebPageType;
+    breadcrumbName?: string;
+    about?: string[];
+    itemList?: ItemListEntry[];
+  };
+  software?: {
+    description?: string;
+    featureList?: string[];
+  };
 };
 
 type WebsiteProps = {
   type: "website";
 };
 
+type FAQProps = {
+  faq?: FAQItem[];
+};
+
 // prettier-ignore
-export type Props = ArticleProps | ProductProps | OfferProps | StaticProps | WebsiteProps;
+export type Props = (ArticleProps | ProductProps | OfferProps | StaticProps | WebsiteProps) & FAQProps;
 
 // TypeScript interfaces for JSON-LD schemas
 interface SchemaBase {
@@ -93,8 +125,11 @@ interface OrganizationSchema extends SchemaBase {
 type SchemaRef = { "@id": string };
 
 interface ArticleSchema extends SchemaBase {
-  "@type": "Article";
+  "@type": "Article" | "BlogPosting";
+  "@id"?: string;
   headline: string;
+  description?: string;
+  url?: string;
   datePublished: string;
   dateModified: string;
   author: PersonSchema | SchemaRef;
@@ -108,11 +143,18 @@ interface ArticleSchema extends SchemaBase {
 }
 
 interface WebPageSchema extends SchemaBase {
-  "@type": "WebPage";
+  "@type": WebPageType;
+  "@id"?: string;
   name: string;
   url: string;
+  description?: string;
   datePublished?: string;
   dateModified?: string;
+  isPartOf?: SchemaRef;
+  about?: Array<{
+    "@type": "Thing";
+    name: string;
+  }>;
   breadcrumb: {
     "@id": string;
   };
@@ -142,13 +184,17 @@ interface WebSiteSchema extends SchemaBase {
 
 interface SoftwareApplicationSchema extends SchemaBase {
   "@type": "SoftwareApplication";
+  "@id"?: string;
   name: string;
+  url?: string;
   applicationCategory: string;
   operatingSystem: string;
   description?: string;
   owner: OrganizationSchema | SchemaRef;
   offers?: OfferSchema | OfferSchema[];
   image?: string;
+  featureList?: string[];
+  sameAs?: string[];
 }
 
 interface OfferSchema extends SchemaBase {
@@ -169,6 +215,31 @@ interface OfferSchema extends SchemaBase {
   description?: string;
 }
 
+interface ItemListSchema extends SchemaBase {
+  "@type": "ItemList";
+  "@id": string;
+  itemListElement: Array<{
+    "@type": "ListItem";
+    position: number;
+    url: string;
+    name: string;
+    description?: string;
+    dateModified?: string;
+  }>;
+}
+
+interface FAQPageSchema extends SchemaBase {
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+    };
+  }>;
+}
+
 const { type } = Astro.props;
 
 // Stable identifiers for the canonical entity nodes. Using URL fragments keeps
@@ -177,6 +248,18 @@ const { type } = Astro.props;
 const ORGANIZATION_ID = `${config.site.base_url}/#organization`;
 const AUTHOR_ID = `${config.site.base_url}/#person-twannl`;
 const WEBSITE_ID = `${config.site.base_url}/#website`;
+const SOFTWARE_ID = `${config.site.base_url}/#software`;
+
+const softwareFeatureList = [
+  "iOS Simulator screenshots and video recordings",
+  "URLSession network monitoring without proxy certificates",
+  "AI-ready network request prompt exports",
+  "RocketSim CLI and Agent Skill for AI coding agents",
+  "Simulator camera, location, permissions, deeplinks, and push notification testing",
+  "Accessibility testing and VoiceOver workflows",
+  "Network speed control and Simulator airplane mode",
+  "Xcode build insights",
+];
 
 // Author data (hardcoded - single author blog)
 const authorData: PersonSchema = {
@@ -211,6 +294,71 @@ const organizationData: OrganizationSchema = {
   ],
 };
 
+function createSoftwareApplicationSchema({
+  description,
+  image,
+  featureList,
+  offers,
+}: {
+  description?: string;
+  image?: string;
+  featureList?: string[];
+  offers?: OfferSchema[];
+}): SoftwareApplicationSchema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": SOFTWARE_ID,
+    name: "RocketSim",
+    url: SITE_ROOT_URL,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "macOS",
+    description:
+      description ??
+      "RocketSim is an iOS Simulator companion for developers and AI coding agents.",
+    owner: { "@id": ORGANIZATION_ID },
+    image:
+      toAbsoluteSecureUrl(image ?? "/images/rocketsim-app-icon.png") ??
+      `${config.site.base_url}/images/rocketsim-app-icon.png`,
+    featureList: featureList ?? softwareFeatureList,
+    sameAs: [
+      "https://apps.apple.com/app/apple-store/id1504940162",
+      "https://github.com/AvdLee/RocketSimApp",
+      "https://x.com/rocketsim_app",
+      "https://www.youtube.com/@rocketsimapp",
+    ],
+    ...(offers && { offers }),
+  };
+}
+
+function createBreadcrumbSchema({
+  url,
+  name,
+}: {
+  url: string;
+  name: string;
+}): BreadcrumbListSchema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${url}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_ROOT_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name,
+        item: url,
+      },
+    ],
+  };
+}
+
 // Build schemas based on type
 const schemas: SchemaBase[] = [];
 
@@ -228,8 +376,11 @@ if (type === "article") {
   // 1. Article schema (references Organization/Person via @id, no inline copies)
   const articleSchema: ArticleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
     headline: article.headline,
+    description: article.description,
+    url: articleUrl,
     datePublished: article.datePublished,
     dateModified: article.dateModified,
     author: { "@id": AUTHOR_ID },
@@ -247,6 +398,7 @@ if (type === "article") {
           url: articleImageUrl,
           ...(article.image.width && { width: article.image.width }),
           ...(article.image.height && { height: article.image.height }),
+          ...(article.image.caption && { caption: article.image.caption }),
         } as ImageObject,
       }),
   };
@@ -306,6 +458,8 @@ if (type === "article") {
 }
 
 if (type === "static") {
+  const { page, software } = Astro.props;
+
   // Static schemas for WebSite (Organization is emitted globally above).
   const webSiteSchema: WebSiteSchema = {
     "@context": "https://schema.org",
@@ -319,6 +473,54 @@ if (type === "static") {
   };
 
   schemas.push(webSiteSchema);
+
+  if (software) {
+    schemas.push(createSoftwareApplicationSchema(software));
+  }
+
+  if (page) {
+    const pageUrl = normalizeCanonicalUrl(page.url);
+    const webPageSchema: WebPageSchema = {
+      "@context": "https://schema.org",
+      "@type": page.pageType ?? "WebPage",
+      "@id": pageUrl,
+      name: page.name,
+      url: pageUrl,
+      ...(page.description && { description: page.description }),
+      isPartOf: { "@id": WEBSITE_ID },
+      breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+      ...(page.about && {
+        about: page.about.map((name) => ({
+          "@type": "Thing" as const,
+          name,
+        })),
+      }),
+    };
+    schemas.push(webPageSchema);
+    schemas.push(
+      createBreadcrumbSchema({
+        url: pageUrl,
+        name: page.breadcrumbName ?? page.name,
+      }),
+    );
+
+    if (page.itemList?.length) {
+      const itemListSchema: ItemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "@id": `${pageUrl}#item-list`,
+        itemListElement: page.itemList.map((item, index) => ({
+          "@type": "ListItem" as const,
+          position: index + 1,
+          name: item.name,
+          url: normalizeCanonicalUrl(item.url),
+          ...(item.description && { description: item.description }),
+          ...(item.dateModified && { dateModified: item.dateModified }),
+        })),
+      };
+      schemas.push(itemListSchema);
+    }
+  }
 }
 
 if (type === "product") {
@@ -328,14 +530,13 @@ if (type === "product") {
 
   // 1. SoftwareApplication schema (references Organization via @id).
   const softwareSchema: SoftwareApplicationSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    ...createSoftwareApplicationSchema({
+      description: product.description,
+      image: productImageUrl,
+      featureList: product.featureList,
+    }),
     name: product.name,
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "macOS",
-    ...(product.description && { description: product.description }),
-    owner: { "@id": ORGANIZATION_ID },
-    ...(productImageUrl && { image: productImageUrl }),
+    url: productUrl,
   };
   schemas.push(softwareSchema);
 
@@ -350,26 +551,7 @@ if (type === "product") {
   schemas.push(webPageSchema);
 
   // 3. BreadcrumbList schema
-  const breadcrumbSchema: BreadcrumbListSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${productUrl}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_ROOT_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: product.name,
-        item: productUrl,
-      },
-    ],
-  };
-  schemas.push(breadcrumbSchema);
+  schemas.push(createBreadcrumbSchema({ url: productUrl, name: product.name }));
 }
 
 if (type === "offer") {
@@ -417,19 +599,10 @@ if (type === "offer") {
     },
   ];
 
-  const softwareWithOffersSchema: SoftwareApplicationSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "RocketSim",
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "macOS",
-    ...(offers.description && { description: offers.description }),
-    owner: { "@id": ORGANIZATION_ID },
-    image:
-      toAbsoluteSecureUrl("/images/rocketsim-app-icon.png") ??
-      `${config.site.base_url}/images/rocketsim-app-icon.png`,
+  const softwareWithOffersSchema = createSoftwareApplicationSchema({
+    description: offers.description,
     offers: pricingOffers,
-  };
+  });
   schemas.push(softwareWithOffersSchema);
 
   // 2. WebPage schema
@@ -443,26 +616,26 @@ if (type === "offer") {
   schemas.push(webPageSchema);
 
   // 3. BreadcrumbList schema
-  const breadcrumbSchema: BreadcrumbListSchema = {
+  schemas.push(createBreadcrumbSchema({ url: offerUrl, name: offers.title }));
+}
+
+const faqItems = Astro.props.faq?.filter(
+  (item) => item.question.trim() && item.answer.trim(),
+);
+if (faqItems?.length) {
+  const faqSchema: FAQPageSchema = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${offerUrl}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_ROOT_URL,
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: offers.title,
-        item: offerUrl,
-      },
-    ],
+    })),
   };
-  schemas.push(breadcrumbSchema);
+  schemas.push(faqSchema);
 }
 
 const structuredDataGraph = {

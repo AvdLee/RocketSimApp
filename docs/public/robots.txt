@@ -1,4 +1,31 @@
 User-agent: *
 Allow: /
 
+# AI and answer-engine crawlers are allowed to access RocketSim docs.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# LLM-friendly documentation:
+# https://www.rocketsim.app/llms.txt
+# https://www.rocketsim.app/llms-small.txt
+# https://www.rocketsim.app/llms-full.txt
+
 Sitemap: https://www.rocketsim.app/sitemap-index.xml
