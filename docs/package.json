@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/react": "^4.4.2",
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.5.1",
     "@astrojs/starlight": "^0.37.3",
     "aos": "^2.3.4",
