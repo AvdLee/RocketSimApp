@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 import Base from "@/layouts/Base.astro";
@@ -10,6 +12,48 @@ const {
   site: { base_url },
 } = config;
 
+// Last-resort card image when a post has neither a hero image nor an image in
+// its body, served from `public/`.
+const FALLBACK_IMAGE = "/og-banner-rocketsim.jpg";
+
+// Cap generated widths at ~2x their rendered size for retina sharpness without
+// ever upscaling past the source's intrinsic width. The featured overlay spans
+// the full content column; grid cards are roughly a third of it.
+const FEATURED_MAX_RENDER_WIDTH = 1600;
+const CARD_MAX_RENDER_WIDTH = 800;
+
+const imageDimensions = (
+  image: { width: number; height: number },
+  maxWidth: number,
+) => {
+  const width = Math.min(maxWidth, image.width);
+  return { width, height: Math.round((width * image.height) / image.width) };
+};
+
+// All processable images living next to blog posts, keyed by absolute src path.
+// Used to resolve the first image referenced in a post body when the post has
+// no explicit `image` in its frontmatter.
+const blogImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/content/blog/**/*.{png,jpg,jpeg,webp,avif,gif}",
+  { eager: true },
+);
+
+// Find the first image a post imports in its body (the order authors import in
+// matches the order images appear), resolve its relative specifier against the
+// post folder, and return the processed image metadata when it lives in blog/.
+const firstBodyImage = (
+  slug: string,
+  body: string,
+): ImageMetadata | undefined => {
+  const match = body.match(
+    /import\s+\w+\s+from\s+["']([^"']+\.(?:png|jpe?g|webp|avif|gif))["']/i,
+  );
+  if (!match) return undefined;
+  const resolved = new URL(match[1], `file:///src/content/blog/${slug}/`)
+    .pathname;
+  return blogImages[resolved]?.default;
+};
+
 const posts = await getCollection("blog");
 
 const items = posts
@@ -18,10 +62,16 @@ const items = posts
     title: post.data.title,
     description: post.data.description,
     date: post.data.modifiedTime ?? post.data.publishedTime,
+    image: post.data.image ?? firstBodyImage(post.id, post.body ?? ""),
+    imageAlt: post.data.imageAlt ?? post.data.title,
   }))
   .sort((a, b) => b.date.getTime() - a.date.getTime());
 
 const [featured, ...rest] = items;
+
+const featuredImageDims = featured?.image
+  ? imageDimensions(featured.image, FEATURED_MAX_RENDER_WIDTH)
+  : undefined;
 
 const seo = {
   title: "Blog - RocketSim",
@@ -91,55 +141,50 @@ const structuredData = {
           featured && (
             <a
               href={`/blog/${featured.slug}/`}
-              class="featured-card group relative grid grid-cols-1 items-center gap-8 overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] p-8 transition-all duration-200 hover:border-white/14 hover:bg-white/[0.05] md:grid-cols-[1fr_auto] md:gap-12 md:p-11"
+              class="featured-card group relative block min-h-[360px] overflow-hidden rounded-2xl border border-white/8 bg-[#0b0d12] transition-colors duration-200 hover:border-primary/45 md:min-h-[400px]"
               data-aos="fade-up-sm"
               data-aos-delay="0"
             >
-              <span class="featured-accent absolute inset-y-0 left-0 w-[3px] bg-primary opacity-50 transition-opacity duration-200 group-hover:opacity-100" />
+              {featured.image && featuredImageDims ? (
+                <Image
+                  src={featured.image}
+                  alt=""
+                  width={featuredImageDims.width}
+                  height={featuredImageDims.height}
+                  class="ov-img absolute inset-0 h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-[1.03]"
+                />
+              ) : (
+                <img
+                  src={FALLBACK_IMAGE}
+                  alt=""
+                  class="ov-img absolute inset-0 h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-[1.03]"
+                />
+              )}
 
-              <div class="flex flex-col gap-3.5">
+              <div
+                class="absolute inset-0"
+                style="background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.5) 52%,rgba(0,0,0,0.92) 100%)"
+              />
+
+              <div class="absolute inset-x-0 bottom-0 flex flex-col gap-3.5 p-8 md:p-11">
                 <div class="flex items-center gap-2.5">
-                  <span class="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.06em] text-primary">
+                  <span class="inline-flex items-center rounded-full border border-primary/45 bg-primary/25 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.06em] text-white backdrop-blur-sm">
                     Latest
                   </span>
-                  <span class="text-[11px] font-semibold uppercase tracking-[0.06em] text-text-dark/30">
-                    Featured
+                  <span class="text-[11.5px] text-white/60">
+                    {dateFormat(featured.date, "MMM dd, yyyy")}
                   </span>
                 </div>
 
-                <h2 class="text-2xl font-bold leading-snug tracking-tight text-text-light text-balance md:text-[28px]">
+                <h2 class="max-w-[740px] text-2xl font-bold leading-tight tracking-tight text-white text-balance md:text-[31px]">
                   {featured.title}
                 </h2>
 
                 {featured.description && (
-                  <p class="max-w-[580px] text-[15.5px] leading-[1.7] text-text-dark/50 text-balance">
+                  <p class="max-w-[660px] text-[15.5px] leading-[1.6] text-white/70 text-balance">
                     {featured.description}
                   </p>
                 )}
-
-                <div class="mt-1 flex items-center gap-4 text-sm text-text-dark/30">
-                  <span>
-                    Last updated {dateFormat(featured.date, "MMM dd, yyyy")}
-                  </span>
-                </div>
-              </div>
-
-              <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-white/8 bg-white/5 transition-all duration-200 group-hover:border-primary/40 group-hover:bg-primary/20">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  class="text-text-dark/40 transition-colors duration-200 group-hover:text-primary"
-                >
-                  <path
-                    d="M3 8h10M9 4l4 4-4 4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
               </div>
             </a>
           )
@@ -147,31 +192,54 @@ const structuredData = {
 
         {
           rest.length > 0 && (
-            <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {rest.map((post, index) => (
-                <a
-                  href={`/blog/${post.slug}/`}
-                  class="post-card group relative flex flex-col gap-3 overflow-hidden rounded-[14px] border border-white/7 bg-white/[0.025] px-7 pb-6 pt-6 transition-all duration-200 hover:border-white/12 hover:bg-white/[0.05]"
-                  data-aos="fade-up-sm"
-                  data-aos-delay={50 + index * 25}
-                >
-                  <span class="post-accent absolute inset-x-0 top-0 h-[2px] bg-primary opacity-0 transition-opacity duration-200 group-hover:opacity-70" />
+            <div class="grid grid-cols-1 gap-[22px] md:grid-cols-2 lg:grid-cols-3">
+              {rest.map((post, index) => {
+                const dims = post.image
+                  ? imageDimensions(post.image, CARD_MAX_RENDER_WIDTH)
+                  : undefined;
+                return (
+                  <a
+                    href={`/blog/${post.slug}/`}
+                    class="post-card group flex flex-col overflow-hidden rounded-[14px] border border-white/7 bg-white/[0.025] transition-colors duration-200 hover:border-white/16 hover:bg-white/[0.05]"
+                    data-aos="fade-up-sm"
+                    data-aos-delay={50 + index * 25}
+                  >
+                    <div class="relative aspect-[16/10] overflow-hidden bg-[#0b0d12]">
+                      {post.image && dims ? (
+                        <Image
+                          src={post.image}
+                          alt=""
+                          width={dims.width}
+                          height={dims.height}
+                          class="ov-img absolute inset-0 h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-[1.04]"
+                        />
+                      ) : (
+                        <img
+                          src={FALLBACK_IMAGE}
+                          alt=""
+                          class="ov-img absolute inset-0 h-full w-full object-cover transition-transform duration-[450ms] ease-out group-hover:scale-[1.04]"
+                        />
+                      )}
+                    </div>
 
-                  <span class="text-xs text-text-dark/25">
-                    {dateFormat(post.date, "MMM dd, yyyy")}
-                  </span>
+                    <div class="flex flex-col gap-2 px-5 pb-5 pt-[18px]">
+                      <span class="text-[11.5px] text-text-dark/25">
+                        {dateFormat(post.date, "MMM dd, yyyy")}
+                      </span>
 
-                  <h3 class="text-[17px] font-semibold leading-snug tracking-tight text-text-light/90 text-balance transition-colors duration-150 group-hover:text-text-light">
-                    {post.title}
-                  </h3>
+                      <h3 class="text-[16.5px] font-semibold leading-snug tracking-tight text-text-light/90 text-balance transition-colors duration-150 group-hover:text-text-light">
+                        {post.title}
+                      </h3>
 
-                  {post.description && (
-                    <p class="line-clamp-2 text-[13.5px] leading-[1.65] text-text-dark/40 text-balance">
-                      {post.description}
-                    </p>
-                  )}
-                </a>
-              ))}
+                      {post.description && (
+                        <p class="line-clamp-2 text-[13px] leading-[1.6] text-text-dark/40 text-balance">
+                          {post.description}
+                        </p>
+                      )}
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           )
         }
@@ -186,9 +254,5 @@ const structuredData = {
   .featured-card,
   .post-card {
     text-decoration: none;
-  }
-
-  .post-card {
-    min-height: 180px;
   }
 </style>
