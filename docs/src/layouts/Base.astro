@@ -231,6 +231,30 @@ const { seo, structuredData } = Astro.props;
         });
       }
 
+      // The ClientRouter parses the next page inside a detached document and
+      // then moves the nodes into the live one. A `<video>` resolves its
+      // `<source>` during that detached parse, so `currentSrc` is already set
+      // by the time it lands here — but the resource was selected against the
+      // dead document and never fetched/decoded in the live one, so the video
+      // renders blank. The spec only re-runs source selection while
+      // `networkState === NETWORK_EMPTY`, which is no longer true, so we have to
+      // force it with an explicit `load()`. We target videos whose `<source>`
+      // carries a real `src` (the eagerly-sourced blog/MDX videos) and skip the
+      // homepage feature videos, whose sources only have `data-src` and are
+      // managed by their own lazy-load observer.
+      //
+      // This runs on `astro:after-swap` (client-side navigations only), not
+      // `astro:page-load`: on a direct load the native parse already populated
+      // the video correctly, and calling `load()` there would needlessly abort
+      // the in-flight fetch and flash the poster back in.
+      const reloadSwappedVideos = () => {
+        document.querySelectorAll("video").forEach((video) => {
+          if (video.querySelector("source[src]")) {
+            video.load();
+          }
+        });
+      };
+
       document.addEventListener("astro:page-load", () => {
         stickyNavInit();
         shyNavLogoInit();
@@ -242,6 +266,7 @@ const { seo, structuredData } = Astro.props;
         document.querySelectorAll("[data-aos]").forEach((el) => {
           el.classList.remove("aos-animate", "aos-init");
         });
+        reloadSwappedVideos();
       });
     </script>
   </body>
