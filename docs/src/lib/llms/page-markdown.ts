@@ -27,7 +27,8 @@ export function convertShortcodesToLinks(text: string): string {
   result = result.replace(/<Tweet[\s\S]*?\/>/g, (match) => {
     const idMatch = match.match(/id="([^"]+)"/);
     const id = idMatch?.[1];
-    return id ? `https://x.com/x/status/${id}` : match;
+    // `/i/status/` is the canonical, username-independent permalink form.
+    return id ? `https://x.com/i/status/${id}` : match;
   });
 
   return result;
@@ -45,10 +46,21 @@ export function stripJsxArtifacts(text: string): string {
  * blockquotes.
  */
 export function convertDirectivesToBlockquotes(text: string): string {
+  // Handles 3+ colons (`:::`, `::::`) and an optional custom title in brackets
+  // (`:::tip[My title]`). The closer is backreferenced so its colon count
+  // matches the opener.
   return text.replace(
-    /^:::(tip|note|caution|danger)\n([\s\S]*?)^:::/gm,
-    (_match, type: string, content: string) => {
-      const label = type.charAt(0).toUpperCase() + type.slice(1);
+    /^(:{3,})(tip|note|caution|danger)(?:\[([^\]\n]*)\])?[ \t]*\n([\s\S]*?)^\1[ \t]*$/gm,
+    (
+      _match,
+      _colons: string,
+      type: string,
+      customTitle: string | undefined,
+      content: string,
+    ) => {
+      const label = customTitle?.trim()
+        ? customTitle.trim()
+        : type.charAt(0).toUpperCase() + type.slice(1);
       const quoted = content
         .trimEnd()
         .split("\n")
@@ -61,7 +73,10 @@ export function convertDirectivesToBlockquotes(text: string): string {
 
 /** Strip Starlight `:::tip/:::note/:::caution/:::danger` directives entirely. */
 export function stripDirectives(text: string): string {
-  return text.replace(/^:::(tip|note|caution|danger)\n[\s\S]*?^:::/gm, "");
+  return text.replace(
+    /^(:{3,})(tip|note|caution|danger)(?:\[[^\]\n]*\])?[ \t]*\n[\s\S]*?^\1[ \t]*$/gm,
+    "",
+  );
 }
 
 /** Fix escaped bold-in-link markdown: `[\*\*text](url).\*\*` → `[**text**](url).` */
