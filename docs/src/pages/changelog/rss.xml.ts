@@ -5,12 +5,21 @@ import changelogMarkdown from "@/data/changelog.md?raw";
 import releaseDates from "@/data/release-dates.json";
 import { parseChangelog, type ReleaseDateMap } from "@/lib/changelog";
 
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 function releaseContentHtml(
   release: ReturnType<typeof parseChangelog>[number],
 ) {
   return release.sections
     .map(
-      (section) => `<h2>${section.title}</h2>
+      (section) => `<h2>${escapeHtml(section.title)}</h2>
 ${section.html}`,
     )
     .join("\n");
@@ -36,7 +45,7 @@ export function GET(context: { site?: URL }) {
         description: release.summary,
         content: releaseContentHtml(release),
         pubDate: new Date(`${release.date}T00:00:00Z`),
-        link: `${config.site.base_url}/changelog/#${release.slug}`,
+        link: `/changelog/#${release.slug}`,
       })),
   });
 }

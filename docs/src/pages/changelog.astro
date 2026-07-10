@@ -22,6 +22,9 @@ const releases = parseChangelog(
 const latestEntry = releases[0];
 const latestDatedRelease = releases.find((release) => release.date);
 const datedReleases = releases.filter((release) => release.date);
+const latestDatedReleaseIsoDate = latestDatedRelease?.date
+  ? new Date(`${latestDatedRelease.date}T00:00:00Z`).toISOString()
+  : undefined;
 
 function formatShortOrdinalDate(date: string) {
   const releaseDate = new Date(`${date}T00:00:00Z`);
@@ -56,22 +59,26 @@ const seo = {
       href: "/changelog/rss.xml",
     },
   ],
-  article: latestDatedRelease?.date
+  article: latestDatedReleaseIsoDate
     ? {
-        modifiedTime: latestDatedRelease.date,
+        modifiedTime: latestDatedReleaseIsoDate,
       }
     : undefined,
 };
 
+const softwareStructuredData = {
+  description:
+    "RocketSim is actively maintained for iOS developers and AI coding agents that need reliable Xcode Simulator tooling.",
+  softwareVersion: latestDatedRelease?.version,
+  dateModified: latestDatedReleaseIsoDate,
+  ...(latestDatedRelease && {
+    releaseNotes: `${base_url}/changelog/#${latestDatedRelease.slug}`,
+  }),
+};
+
 const structuredData = {
   type: "static" as const,
-  software: {
-    description:
-      "RocketSim is actively maintained for iOS developers and AI coding agents that need reliable Xcode Simulator tooling.",
-    softwareVersion: latestDatedRelease?.version,
-    dateModified: latestDatedRelease?.date,
-    releaseNotes: `${base_url}/changelog/#${latestDatedRelease?.slug ?? ""}`,
-  },
+  software: softwareStructuredData,
   page: {
     name: "RocketSim Changelog",
     description,

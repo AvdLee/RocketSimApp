@@ -421,7 +421,7 @@ We enhanced the captures side window. You can now change the touches and backgro
 
 - Magnifier no longer shows the cursor (Thanks, E. Conty!)
 - Scrolling of thumbnails with the scroll wheel works more reliable
-- A crash happening during GIF conversion should no longer occure
+- A crash happening during GIF conversion should no longer occur
 
 # 13.5.1 (273)
 
@@ -515,7 +515,7 @@ Enable this functionality from the Settings and find out more about it in our do
 
 **NEW:**
 
-- Build insights now show incremental and clean builds seperately
+- Build insights now show incremental and clean builds separately
 - You can open deeplinks in the active simulator using a deeplink: rocketsim://open-deeplink?url=<your_url>
 
 **FIXED:**
@@ -630,7 +630,6 @@ Yes, indeed, a single SwiftUI modifier! Fixed now!
 # 13.0.0
 
 **NEW:**
-sk affecting your Mac's connectivity.
 
 - Onboarding checklist: Try out all RocketSim features by following a features checklist.
 
@@ -732,7 +731,7 @@ sk affecting your Mac's connectivity.
 # 12.11.5
 
 - FIXED: RocketSim's full screen window is no longer visible during screen sharing (Thanks, J. Fabisevich!)
-- FIXED: Network Monitor toolbar no longer disappears or becomes unresponive
+- FIXED: Network Monitor toolbar no longer disappears or becomes unresponsive
 
 # 12.11.4
 
@@ -785,7 +784,7 @@ sk affecting your Mac's connectivity.
 
 # 12.9.4
 
-- FIXED: Side window is no longet cut off (Thanks, D. Vekariya)
+- FIXED: Side window is no longer cut off (Thanks, D. Vekariya)
 
 # 12.9.3
 
