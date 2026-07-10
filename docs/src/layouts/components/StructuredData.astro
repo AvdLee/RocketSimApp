@@ -74,6 +74,9 @@ type StaticProps = {
   software?: {
     description?: string;
     featureList?: string[];
+    softwareVersion?: string;
+    dateModified?: string;
+    releaseNotes?: string;
   };
 };
 
@@ -195,6 +198,9 @@ interface SoftwareApplicationSchema extends SchemaBase {
   image?: string;
   featureList?: string[];
   sameAs?: string[];
+  softwareVersion?: string;
+  dateModified?: string;
+  releaseNotes?: string;
 }
 
 interface OfferSchema extends SchemaBase {
@@ -299,11 +305,17 @@ function createSoftwareApplicationSchema({
   image,
   featureList,
   offers,
+  softwareVersion,
+  dateModified,
+  releaseNotes,
 }: {
   description?: string;
   image?: string;
   featureList?: string[];
   offers?: OfferSchema[];
+  softwareVersion?: string;
+  dateModified?: string;
+  releaseNotes?: string;
 }): SoftwareApplicationSchema {
   return {
     "@context": "https://schema.org",
@@ -321,6 +333,9 @@ function createSoftwareApplicationSchema({
       toAbsoluteSecureUrl(image ?? "/images/rocketsim-app-icon.png") ??
       `${config.site.base_url}/images/rocketsim-app-icon.png`,
     featureList: featureList ?? softwareFeatureList,
+    ...(softwareVersion && { softwareVersion }),
+    ...(dateModified && { dateModified }),
+    ...(releaseNotes && { releaseNotes }),
     sameAs: [
       "https://apps.apple.com/app/apple-store/id1504940162",
       "https://github.com/AvdLee/RocketSimApp",

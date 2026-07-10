@@ -23,6 +23,10 @@ export interface Props {
     maxImagePreview?: string;
     maxVideoPreview?: number;
   };
+  alternateFeeds?: Array<{
+    title: string;
+    href: string;
+  }>;
   twitterCreator?: string;
   twitterSite?: string;
 }
@@ -38,6 +42,7 @@ const {
   article,
   canonical,
   robots,
+  alternateFeeds = [],
   twitterCreator = "@twannl",
   twitterSite = "@rocketsim_app",
 } = Astro.props;
@@ -123,6 +128,16 @@ const ogType = article ? "article" : "website";
   title="RocketSim Blog"
   href="/rss.xml"
 />
+{
+  alternateFeeds.map((feed) => (
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={feed.title}
+      href={feed.href}
+    />
+  ))
+}
 <link rel="alternate" type="text/plain" title="LLMs" href="/llms.txt" />
 <link
   rel="alternate"
