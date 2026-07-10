@@ -1,0 +1,210 @@
+---
+import Base from "@/layouts/Base.astro";
+import CallToAction from "@/partials/CallToAction.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import config from "@/config/config.json";
+import changelogMarkdown from "@/data/changelog.md?raw";
+import releaseDates from "@/data/release-dates.json";
+import {
+  formatReleaseDate,
+  parseChangelog,
+  type ReleaseDateMap,
+} from "@/lib/changelog";
+
+const {
+  site: { base_url },
+} = config;
+
+const releases = parseChangelog(
+  changelogMarkdown,
+  releaseDates as ReleaseDateMap,
+);
+const latestEntry = releases[0];
+const latestDatedRelease = releases.find((release) => release.date);
+const datedReleases = releases.filter((release) => release.date);
+const latestDatedReleaseIsoDate = latestDatedRelease?.date
+  ? new Date(`${latestDatedRelease.date}T00:00:00Z`).toISOString()
+  : undefined;
+
+function formatShortOrdinalDate(date: string) {
+  const releaseDate = new Date(`${date}T00:00:00Z`);
+  const day = releaseDate.getUTCDate();
+  const suffix =
+    day % 100 >= 11 && day % 100 <= 13
+      ? "th"
+      : (["th", "st", "nd", "rd"][day % 10] ?? "th");
+  const month = new Intl.DateTimeFormat("en", {
+    month: "long",
+    timeZone: "UTC",
+  }).format(releaseDate);
+
+  return `${month} ${day}${suffix}`;
+}
+
+const shortReleaseDate = latestDatedRelease?.date
+  ? formatShortOrdinalDate(latestDatedRelease.date)
+  : undefined;
+
+const title = "RocketSim Changelog - Latest App Updates";
+const description =
+  "Read the RocketSim changelog with release notes, App Store dates, and the latest improvements for iOS Simulator development.";
+
+const seo = {
+  title,
+  description,
+  canonical: `${base_url}/changelog`,
+  alternateFeeds: [
+    {
+      title: "RocketSim Changelog",
+      href: "/changelog/rss.xml",
+    },
+  ],
+  article: latestDatedReleaseIsoDate
+    ? {
+        modifiedTime: latestDatedReleaseIsoDate,
+      }
+    : undefined,
+};
+
+const softwareStructuredData = {
+  description:
+    "RocketSim is actively maintained for iOS developers and AI coding agents that need reliable Xcode Simulator tooling.",
+  softwareVersion: latestDatedRelease?.version,
+  dateModified: latestDatedReleaseIsoDate,
+  ...(latestDatedRelease && {
+    releaseNotes: `${base_url}/changelog/#${latestDatedRelease.slug}`,
+  }),
+};
+
+const structuredData = {
+  type: "static" as const,
+  software: softwareStructuredData,
+  page: {
+    name: "RocketSim Changelog",
+    description,
+    url: `${base_url}/changelog`,
+    pageType: "CollectionPage" as const,
+    breadcrumbName: "Changelog",
+    about: [
+      "RocketSim releases",
+      "iOS Simulator tooling",
+      "Xcode Simulator changelog",
+      "AI coding agent tools",
+    ],
+    itemList: datedReleases.slice(0, 25).map((release) => ({
+      name: `RocketSim ${release.version}`,
+      url: `${base_url}/changelog/#${release.slug}`,
+      description: release.summary,
+      dateModified: release.date,
+    })),
+  },
+};
+---
+
+<Base seo={seo} structuredData={structuredData}>
+  <PageHeader title="RocketSim Changelog" isCenter={true} />
+
+  <section class="section pt-0">
+    <div class="container max-w-5xl">
+      <div
+        class="mx-auto mb-16 max-w-3xl text-center text-lg leading-8 text-text"
+      >
+        <p>
+          RocketSim is actively maintained for Xcode Simulator workflows, App
+          Store screenshots and recordings, networking, accessibility testing,
+          and AI coding agents. You can use the <a href="/changelog/rss.xml"
+            >changelog RSS feed</a
+          > to stay updated automatically.
+        </p>
+        {
+          latestEntry && (
+            <p class="mt-6 flex flex-col gap-1">
+              <span>
+                Upcoming release:{" "}
+                <a href={`#${latestEntry.slug}`}>{latestEntry.version}</a>
+              </span>
+              {latestDatedRelease && (
+                <span>
+                  Latest release happened on {shortReleaseDate}:{" "}
+                  <a href={`#${latestDatedRelease.slug}`}>
+                    {latestDatedRelease.version}
+                  </a>
+                </span>
+              )}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <aside class="hidden lg:block">
+          <nav
+            class="sticky top-28 rounded-2xl border border-border/60 bg-theme-light/40 p-5"
+            aria-label="Recent releases"
+          >
+            <h2 class="mb-4 text-sm font-semibold uppercase tracking-wide">
+              Recent Releases
+            </h2>
+            <ol class="space-y-3 text-sm">
+              {
+                releases.slice(0, 12).map((release) => (
+                  <li>
+                    <a href={`#${release.slug}`}>RocketSim {release.version}</a>
+                    <span class="block text-xs text-text">
+                      {release.date
+                        ? formatReleaseDate(release.date)
+                        : "Upcoming"}
+                    </span>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="space-y-10">
+          {
+            releases.map((release) => (
+              <article
+                id={release.slug}
+                class="scroll-mt-28 rounded-3xl border border-border/60 bg-theme-light/40 p-6 md:p-8"
+              >
+                <header class="mb-6">
+                  <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">
+                    {release.date
+                      ? `Released on ${formatReleaseDate(release.date)}`
+                      : "Release date pending"}
+                  </p>
+                  <h2 class="text-3xl font-bold text-text-dark">
+                    RocketSim {release.version}
+                    {release.build && (
+                      <span class="ml-2 text-base font-medium text-text">
+                        build {release.build}
+                      </span>
+                    )}
+                  </h2>
+                </header>
+
+                <div class="space-y-6">
+                  {release.sections.map((section) => (
+                    <section>
+                      <h3 class="mb-3 text-xl font-semibold text-text-dark">
+                        {section.title}
+                      </h3>
+                      <div
+                        class="prose prose-invert max-w-none prose-li:my-1 prose-a:text-primary"
+                        set:html={section.html}
+                      />
+                    </section>
+                  ))}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>
