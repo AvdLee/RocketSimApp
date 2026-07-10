@@ -1,12 +1,63 @@
 ---
 // Custom PageTitle component that displays the description as a subtitle
 // For the docs homepage, add CTA buttons after the description
-const { title, description } = Astro.locals.starlightRoute.entry.data;
+import { docBodyToMarkdown } from "@/lib/llms/page-markdown";
+
+const entry = Astro.locals.starlightRoute.entry;
+const { title, description } = entry.data;
 const id = Astro.locals.starlightRoute.id;
 const isHomepage = id === "docs";
+
+// Precompute the clean Markdown for the "Copy as Markdown" button, reusing the
+// same conversion as the `llms.txt` export (custom shortcodes → plain links).
+// Embedded inline so copying works identically in `astro dev` and production
+// without depending on a separate route. Escape `<` so the JSON payload can't
+// break out of the surrounding <script> tag.
+const pageMarkdown = isHomepage ? "" : docBodyToMarkdown(entry);
+const pageMarkdownJson = JSON.stringify(pageMarkdown).replace(/</g, "\\u003c");
 ---
 
-<h1 id="_top">{title}</h1>
+<div class="page-title-row">
+  <h1 id="_top">{title}</h1>
+  {
+    !isHomepage && (
+      <div class="copy-page-controls">
+        <div class="copy-page-live" aria-live="polite" aria-atomic="true" />
+        <button
+          type="button"
+          class="copy-page-button"
+          data-copy-page
+          data-copy-label="Copy as Markdown"
+          data-copy-success="Copied!"
+          data-copy-error="Copy failed"
+          title="Copy this page as Markdown"
+          aria-label="Copy this page as Markdown"
+        >
+          <span class="copy-page-icon" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 19a2 2 0 0 1-1-2V2a2 2 0 0 1 1-1h13a2 2 0 0 1 2 1" />
+              <rect x="6" y="5" width="16" height="18" rx="1.5" ry="1.5" />
+            </svg>
+          </span>
+          <span class="copy-page-label">Copy as Markdown</span>
+        </button>
+        <script
+          type="application/json"
+          data-copy-page-markdown
+          set:html={pageMarkdownJson}
+        />
+      </div>
+    )
+  }
+</div>
 {description && <p class="page-subtitle">{description}</p>}
 {
   isHomepage && (
@@ -25,13 +76,102 @@ const isHomepage = id === "docs";
 }
 
 <style>
+  .page-title-row {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   h1 {
     margin-bottom: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 0;
+    min-width: 0;
     font-size: var(--sl-text-h1);
     line-height: var(--sl-line-height-headings);
     font-weight: 600;
     color: var(--sl-color-white);
+  }
+
+  .copy-page-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Sit above the title (h1 stays first in the DOM for reading order) and
+       align to the right edge. */
+    order: -1;
+    align-self: flex-end;
+  }
+
+  /* Visually hidden: announces state changes to screen readers only, so the
+     in-button label is the sole visible "Copied!" feedback. */
+  .copy-page-live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .copy-page-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 9999px;
+    background: var(--sl-color-black);
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-xs);
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .copy-page-button:hover {
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-accent);
+  }
+
+  .copy-page-button:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  .copy-page-button.is-success {
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-accent);
+  }
+
+  .copy-page-button.is-error {
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-red-high, #f87171);
+  }
+
+  .copy-page-icon {
+    display: inline-flex;
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .copy-page-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .copy-page-button.is-success .copy-page-icon,
+  .copy-page-button.is-error .copy-page-icon {
+    display: none;
   }
 
   .page-subtitle {
@@ -94,3 +234,78 @@ const isHomepage = id === "docs";
     border-color: #e9ecef;
   }
 </style>
+
+<script is:inline>
+  (() => {
+    if (window.__copyPageMarkdownInit) return;
+    window.__copyPageMarkdownInit = true;
+
+    const REVERT_MS = 2200;
+
+    // Read the Markdown embedded next to the button by the server (same
+    // conversion as the llms export). Works identically in dev and production.
+    const readMarkdown = (button) => {
+      const el = button.parentElement?.querySelector(
+        "[data-copy-page-markdown]",
+      );
+      if (!el?.textContent) throw new Error("No markdown payload");
+      return JSON.parse(el.textContent);
+    };
+
+    const copyText = async (text) => {
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      // Fallback for non-secure contexts (e.g. plain-HTTP previews).
+      const helper = document.createElement("textarea");
+      helper.value = text;
+      helper.setAttribute("readonly", "");
+      helper.style.position = "absolute";
+      helper.style.left = "-9999px";
+      document.body.appendChild(helper);
+      helper.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(helper);
+      if (!ok) throw new Error("Copy command failed");
+    };
+
+    const setState = (button, label, className) => {
+      const labelEl = button.querySelector(".copy-page-label");
+      const live = button.parentElement?.querySelector(".copy-page-live");
+      if (labelEl) labelEl.textContent = label;
+      if (live) live.textContent = label;
+      button.classList.remove("is-success", "is-error");
+      if (className) button.classList.add(className);
+    };
+
+    const reset = (button) => {
+      setState(button, button.dataset.copyLabel || "Copy as Markdown", "");
+      const live = button.parentElement?.querySelector(".copy-page-live");
+      if (live) live.textContent = "";
+    };
+
+    document.addEventListener("click", async (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const button = target.closest("[data-copy-page]");
+      if (!button) return;
+
+      window.clearTimeout(Number(button.dataset.copyTimer));
+
+      try {
+        await copyText(readMarkdown(button));
+        setState(button, button.dataset.copySuccess || "Copied!", "is-success");
+        window.plausible?.("Copy as Markdown", {
+          props: { surface: "docs", placement: "docs-page-title" },
+        });
+      } catch {
+        setState(button, button.dataset.copyError || "Copy failed", "is-error");
+      }
+
+      button.dataset.copyTimer = String(
+        window.setTimeout(() => reset(button), REVERT_MS),
+      );
+    });
+  })();
+</script>

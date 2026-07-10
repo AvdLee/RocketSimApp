@@ -356,7 +356,7 @@ compare_plans:
         - item: Local-only mode by disabling build data syncing (extra privacy)
           free: false
           individual: false
-          teams: true
+          teams: Enterprise
     - title: Team manager
       list:
         - item: License management
@@ -370,7 +370,7 @@ compare_plans:
         - item: SAML based SSO
           free: false
           individual: false
-          teams: Coming soon (Enterprise)
+          teams: Enterprise
         - item: Distribution outside of the App Store
           free: false
           individual: false

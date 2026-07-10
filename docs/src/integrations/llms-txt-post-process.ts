@@ -2,6 +2,14 @@ import type { AstroIntegration } from "astro";
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import {
+  collapseBlankLines,
+  convertDirectivesToBlockquotes,
+  convertShortcodesToLinks,
+  fixBoldInLink,
+  stripDirectives,
+  stripJsxArtifacts,
+} from "../lib/llms/page-markdown";
 
 /**
  * Post-processes the generated llms-full.txt and llms-small.txt files to:
@@ -124,27 +132,10 @@ function transformLlmsTxt(content: string, variant: "full" | "small"): string {
 
   let result = systemHeader + filteredPages.join("");
 
-  // Convert <Youtube> components to markdown links (handles multi-line tags)
-  result = result.replace(/<Youtube[\s\S]*?\/>/g, (match) => {
-    const idMatch = match.match(/id="([^"]+)"/);
-    const titleMatch = match.match(/title="([^"]+)"/);
-    const id = idMatch?.[1];
-    const title = titleMatch?.[1] ?? "YouTube video";
-    return id ? `[${title}](https://www.youtube.com/watch?v=${id})` : match;
-  });
-
-  // Convert <Tweet> components to X links
-  result = result.replace(/<Tweet[\s\S]*?\/>/g, (match) => {
-    const idMatch = match.match(/id="([^"]+)"/);
-    const id = idMatch?.[1];
-    return id ? `https://x.com/x/status/${id}` : match;
-  });
-
-  // Remove import statements
-  result = result.replace(/^import\s+.+$/gm, "");
-
-  // Remove style blocks
-  result = result.replace(/<style>\{`[\s\S]*?`\}<\/style>/g, "");
+  // Convert <Youtube>/<Tweet> shortcodes to links and strip JSX artifacts.
+  // Shared with the per-page "Copy as Markdown" export so both stay identical.
+  result = convertShortcodesToLinks(result);
+  result = stripJsxArtifacts(result);
 
   // Strip all image references for small variant only
   if (variant === "small") {
@@ -154,35 +145,13 @@ function transformLlmsTxt(content: string, variant: "full" | "small"): string {
 
   // Handle :::tip/:::note/:::caution/:::danger directives
   if (variant === "full") {
-    // Convert to blockquotes
-    result = result.replace(
-      /^:::(tip|note|caution|danger)\n([\s\S]*?)^:::/gm,
-      (_match, type: string, content: string) => {
-        const label = type.charAt(0).toUpperCase() + type.slice(1);
-        const quoted = content
-          .trimEnd()
-          .split("\n")
-          .map((line) => `> ${line}`)
-          .join("\n");
-        return `> **${label}:** ${quoted.slice(2)}`;
-      },
-    );
+    result = convertDirectivesToBlockquotes(result);
   } else {
-    // Strip directives entirely for small variant
-    result = result.replace(
-      /^:::(tip|note|caution|danger)\n[\s\S]*?^:::/gm,
-      "",
-    );
+    result = stripDirectives(result);
   }
 
-  // Fix escaped bold-in-link markdown: [\*\*text](url).\*\* → [**text**](url).
-  result = result.replace(
-    /\[\\\*\\\*(.+?)\]\((.+?)\)\.\\\*\\\*/g,
-    "[**$1**]($2).",
-  );
-
-  // Collapse excessive blank lines (3+ newlines → 2)
-  result = result.replace(/\n{3,}/g, "\n\n");
+  result = fixBoldInLink(result);
+  result = collapseBlankLines(result);
 
   return result;
 }
