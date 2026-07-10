@@ -45,7 +45,7 @@ export function GET(context: { site?: URL }) {
         description: release.summary,
         content: releaseContentHtml(release),
         pubDate: new Date(`${release.date}T00:00:00Z`),
-        link: `/changelog/#${release.slug}`,
+        link: new URL(`/changelog/#${release.slug}`, site).toString(),
       })),
   });
 }
