@@ -155,9 +155,27 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
 
   .mobile-download__actions {
     display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
     justify-content: center;
     padding-inline: 0.75rem;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .mobile-download__copy-button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #101010;
+
+    cursor: pointer;
+    background: var(--primary-color);
+    border: 0;
+    border-radius: 999px;
   }
 
   .mobile-download__fallback {
@@ -168,6 +186,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
   }
 
   .mobile-download__bar:focus-visible,
+  .mobile-download__copy-button:focus-visible,
   .mobile-download__close:focus-visible,
   .mobile-download__fallback:focus-visible {
     outline: 0.25rem solid var(--ring);
@@ -202,6 +221,11 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
   .mobile-download__form
     :global(.formkit-form[data-uid="bd3a42d000"] .formkit-submit) {
     margin-bottom: 0.625rem;
+  }
+
+  .mobile-download__form
+    :global(.formkit-form[data-uid="bd3a42d000"] .formkit-submit button) {
+    font-weight: 700 !important;
   }
 </style>
 
@@ -253,6 +277,13 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     </p>
     <div class="mobile-download__form" data-mobile-download-form></div>
     <div class="mobile-download__actions">
+      <button
+        class="mobile-download__copy-button"
+        type="button"
+        data-mobile-download-copy
+      >
+        Copy Mac App Store link
+      </button>
       <a
         class="mobile-download__fallback plausible-event-name=App+Store+Install plausible-event-surface=mobile-download plausible-event-placement=intent-prompt plausible-event-format=text-link"
         href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=mobile-download-intent-prompt&mt=8"
@@ -282,6 +313,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     const formContainer = container.querySelector(
       "[data-mobile-download-form]",
     );
+    const copyButton = container.querySelector("[data-mobile-download-copy]");
     const appStoreLink = container.querySelector(
       "[data-mobile-download-app-store]",
     );
@@ -292,6 +324,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     let hasTrackedEmailFocus = false;
     let pendingAppStoreHref =
       appStoreLink instanceof HTMLAnchorElement ? appStoreLink.href : "";
+    let activePromptProps: Record<string, string> | undefined;
 
     const track = (eventName: string, props?: Record<string, string>) => {
       const plausible = (
@@ -330,7 +363,10 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
     const propsFromLink = (link?: HTMLAnchorElement): Record<string, string> =>
       link ? getPlausibleProps(link) : {};
 
-    const getMobilePromptProps = (link?: HTMLAnchorElement) => {
+    const getMobilePromptProps = (
+      link?: HTMLAnchorElement,
+      trigger = "direct-app-store-click",
+    ) => {
       const props = propsFromLink(link);
 
       return {
@@ -339,8 +375,12 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
         placement: props.placement || "intent-prompt",
         format: props.format || "prompt",
         source: "mobile-install-intent",
+        trigger,
       };
     };
+
+    const getActivePromptProps = () =>
+      activePromptProps || getMobilePromptProps(undefined, "banner-cta");
 
     const loadKitForm = () => {
       if (hasLoadedKit || !formContainer) return;
@@ -367,7 +407,8 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       openButton?.setAttribute("aria-expanded", "true");
       loadKitForm();
 
-      const props = getMobilePromptProps(sourceLink);
+      const props = getMobilePromptProps(sourceLink, "direct-app-store-click");
+      activePromptProps = props;
 
       // Preserve the primary install-click KPI even though the mobile prompt
       // intercepts the original App Store link before Plausible's class-based
@@ -396,14 +437,41 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
       container.classList.add("is-expanded");
       openButton.setAttribute("aria-expanded", "true");
       loadKitForm();
-      track("Mobile Download Banner Opened");
+      activePromptProps = getMobilePromptProps(undefined, "banner-cta");
+      track("Mobile Download Banner Opened", activePromptProps);
       panel?.focus();
     });
 
     dismissButton?.addEventListener("click", () => {
       sessionStorage.setItem(storageKey, "1");
       hideIntentPrompt();
-      track("Mobile Download Banner Dismissed");
+      track("Mobile Download Banner Dismissed", getActivePromptProps());
+    });
+
+    copyButton?.addEventListener("click", async () => {
+      const props = getActivePromptProps();
+      const linkToCopy = pendingAppStoreHref;
+
+      try {
+        if (!navigator.clipboard) throw new Error("Clipboard unavailable");
+        await navigator.clipboard.writeText(linkToCopy);
+      } catch {
+        const textArea = document.createElement("textarea");
+        textArea.value = linkToCopy;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.append(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+      }
+
+      if (copyButton instanceof HTMLButtonElement) {
+        copyButton.textContent = "Copied Mac App Store link";
+      }
+
+      track("Mobile Download Link Copied", props);
     });
 
     appStoreLink?.addEventListener("click", () => {
@@ -411,7 +479,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
         appStoreLink instanceof HTMLAnchorElement ? appStoreLink : undefined;
       track(
         "Mobile Download App Store Link Clicked",
-        getMobilePromptProps(link),
+        getMobilePromptProps(link, "fallback-link"),
       );
       sessionStorage.setItem(storageKey, "1");
       hideIntentPrompt();
@@ -448,7 +516,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
         if (!target.matches("input, textarea")) return;
 
         hasTrackedEmailFocus = true;
-        track("Mobile Download Email Field Focused", getMobilePromptProps());
+        track("Mobile Download Email Field Focused", getActivePromptProps());
       },
       true,
     );
@@ -464,7 +532,7 @@ import appIcon from "../../assets/rocketsim-app-icon.png";
             form.dataset.svForm === mobileDownloadKitFormId);
         if (!isMobileDownloadForm) return;
 
-        track("Mobile Download Link Form Submitted", getMobilePromptProps());
+        track("Mobile Download Link Form Submitted", getActivePromptProps());
         sessionStorage.setItem(storageKey, "1");
         hideIntentPrompt();
       },
