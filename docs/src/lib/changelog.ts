@@ -7,6 +7,11 @@ type ChangelogSection = {
   html: string;
 };
 
+type MarkdownSection = {
+  title: string;
+  markdown: string;
+};
+
 type ChangelogRelease = {
   version: string;
   build?: string;
@@ -95,9 +100,10 @@ function parseEntries(markdown: string) {
   return entries;
 }
 
-function normalizeSections(body: string) {
+function normalizeSections(body: string): MarkdownSection[] {
   const sections = new Map<string, string[]>();
   let currentTitle = "Changes";
+  let skippingMetadata = false;
 
   const appendLine = (title: string, line: string) => {
     const lines = sections.get(title) ?? [];
@@ -112,6 +118,7 @@ function normalizeSections(body: string) {
     const inlineBullet = trimmed.match(/^[-*]\s+([A-Z][A-Z ]+):\s+(.+)$/);
 
     if (boldHeading) {
+      skippingMetadata = false;
       currentTitle = normalizeSectionTitle(boldHeading[1]) ?? boldHeading[1];
       continue;
     }
@@ -119,9 +126,19 @@ function normalizeSections(body: string) {
     if (bareHeading) {
       const normalizedTitle = normalizeSectionTitle(bareHeading[1]);
       if (normalizedTitle) {
+        skippingMetadata = false;
         currentTitle = normalizedTitle;
-        continue;
+      } else {
+        // Unrecognized all-caps headings (e.g. "NEW SUBTITLE", "NEW KEYWORDS")
+        // are App Store metadata leaked into the changelog. Drop the heading
+        // and everything under it until the next real section heading.
+        skippingMetadata = true;
       }
+      continue;
+    }
+
+    if (skippingMetadata) {
+      continue;
     }
 
     if (inlineBullet) {
@@ -141,11 +158,7 @@ function normalizeSections(body: string) {
       title,
       markdown: lines.join("\n").trim(),
     }))
-    .filter((section) => section.markdown.length > 0)
-    .map((section) => ({
-      title: section.title,
-      html: markdownToHtml(section.markdown),
-    }));
+    .filter((section) => section.markdown.length > 0);
 }
 
 function mergeDuplicateVersions(entries: ParsedEntry[]) {
@@ -173,15 +186,20 @@ export function parseChangelog(
   releaseDates: ReleaseDateMap,
 ): ChangelogRelease[] {
   return mergeDuplicateVersions(parseEntries(markdown)).map((entry) => {
-    const sections = normalizeSections(entry.body);
+    const markdownSections = normalizeSections(entry.body);
 
     return {
       version: entry.version,
       build: entry.build,
       date: releaseDates[entry.version],
       slug: slugForVersion(entry.version),
-      sections,
-      summary: summarizeMarkdown(entry.body),
+      sections: markdownSections.map((section) => ({
+        title: section.title,
+        html: markdownToHtml(section.markdown),
+      })),
+      summary: summarizeMarkdown(
+        markdownSections.map((section) => section.markdown).join("\n\n"),
+      ),
     };
   });
 }

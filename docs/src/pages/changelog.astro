@@ -136,7 +136,7 @@ const structuredData = {
         }
       </div>
 
-      <div class="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
         <aside class="hidden lg:block">
           <nav
             class="sticky top-28 rounded-2xl border border-border/60 bg-theme-light/40 p-5"
@@ -162,7 +162,7 @@ const structuredData = {
           </nav>
         </aside>
 
-        <div class="space-y-10">
+        <div class="min-w-0 space-y-10">
           {
             releases.map((release) => (
               <article
@@ -192,7 +192,7 @@ const structuredData = {
                         {section.title}
                       </h3>
                       <div
-                        class="prose prose-invert max-w-none prose-li:my-1 prose-a:text-primary"
+                        class="prose prose-invert max-w-none break-words prose-li:my-1 prose-a:text-primary prose-code:[overflow-wrap:anywhere]"
                         set:html={section.html}
                       />
                     </section>
