@@ -10,8 +10,9 @@ asset:
   columnSpan: 6
 ---
 
-**Configurable actions** for Deeplinks (Universal Links), Push Notifications, locations, permissions, and quick state resets.
+**Configurable actions** for deep links, push notifications, locations, permissions, app lifecycle, and quick state resets.
 
 - **Bundle Identifier based:** actions automatically show up for recent builds
-- Quickly test **Locations, Push Notifications, and Deeplinks**
+- Test **locations and deep links** on Simulator or a physical iOS device
+- Launch, relaunch, localize, terminate, or uninstall physical-device builds
 - Use **Reset Keychain** to clear stubborn authentication state faster

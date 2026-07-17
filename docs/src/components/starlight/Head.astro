@@ -48,9 +48,13 @@ const canonicalUrl = normalizeCanonicalUrl(Astro.url.href);
 const rawPathSegments = Astro.url.pathname.split("/").filter(Boolean);
 const decodedPathSegments = rawPathSegments.map(safeDecodePathSegment);
 const currentSegment = decodedPathSegments[decodedPathSegments.length - 1];
+const entryData = Astro.locals.starlightRoute?.entry?.data;
 const currentPageTitle =
-  Astro.locals.starlightRoute?.entry?.data?.title ??
-  (currentSegment ? slugToTitle(currentSegment) : "Docs");
+  entryData?.title ?? (currentSegment ? slugToTitle(currentSegment) : "Docs");
+const seoParent = entryData?.seoParent;
+const faqItems = entryData?.faq?.filter(
+  (item) => item.question.trim() && item.answer.trim(),
+);
 
 // BreadcrumbList is scoped to docs routes only. Use a strict "/docs/" match so
 // hypothetical paths like "/docs-something/" never trigger it.
@@ -73,9 +77,19 @@ const breadcrumbItems = isDocsRoute
       },
       ...(rawPathSegments.length > 1
         ? [
+            ...(seoParent
+              ? [
+                  {
+                    "@type": "ListItem" as const,
+                    position: 3,
+                    name: seoParent.name,
+                    item: normalizeCanonicalUrl(seoParent.path),
+                  },
+                ]
+              : []),
             {
               "@type": "ListItem" as const,
-              position: 3,
+              position: seoParent ? 4 : 3,
               name: currentPageTitle,
               item: canonicalUrl,
             },
@@ -93,6 +107,22 @@ const breadcrumbSchema =
         itemListElement: breadcrumbItems,
       }
     : null;
+
+const faqSchema = faqItems?.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    }
+  : null;
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -151,6 +181,15 @@ const breadcrumbSchema =
       type="application/ld+json"
       is:inline
       set:html={JSON.stringify(breadcrumbSchema)}
+    />
+  )
+}
+{
+  faqSchema && (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(faqSchema)}
     />
   )
 }

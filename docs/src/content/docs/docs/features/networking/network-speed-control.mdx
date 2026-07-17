@@ -24,6 +24,28 @@ RocketSim’s Network Speed Control allows you to test your app for poor connect
 
 I encourage you to read my article [**Optimizing your app for Network Reachability**](https://www.avanderlee.com/swift/optimizing-network-reachability/) to prepare your app for bad networking conditions using RocketSim. For inspecting requests while testing, see [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring).
 
+## Control network conditions from the CLI
+
+RocketSim 16.3 lets scripts and AI coding agents enable the same profiles through the version-matched `rocketsim` CLI:
+
+```bash
+rocketsim network set 3g
+rocketsim network status
+rocketsim network off
+```
+
+Available profiles are `airplane`, `100-loss`, `3g`, `edge`, `lte`, `wifi`, `dsl`, and `very-bad`.
+
+By default, `network set` targets the apps in RocketSim's Recent Builds list. Pass one or more bundle identifiers when you need explicit targets:
+
+```bash
+rocketsim network set 100-loss \
+  --bundle-id com.example.store \
+  --bundle-id com.example.store.widgets
+```
+
+CLI network control requires RocketSim Pro and the same enabled Network Extension as the side-window control. See [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli/) for the full agent workflow.
+
 ## FAQ
 
 ### How does this feature differ from the Network Link Conditioner?

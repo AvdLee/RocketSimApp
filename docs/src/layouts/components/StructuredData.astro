@@ -262,6 +262,8 @@ const softwareFeatureList = [
   "AI-ready network request prompt exports",
   "RocketSim CLI and Agent Skill for AI coding agents",
   "Simulator camera, location, permissions, deeplinks, and push notification testing",
+  "Physical iPhone and iPad previews, captures, app lifecycle, deeplink, and location testing",
+  "Physical-device time-zone testing through Xcode 27 location simulation",
   "Accessibility testing and VoiceOver workflows",
   "Network speed control and Simulator airplane mode",
   "Xcode build insights",
@@ -578,17 +580,8 @@ if (type === "offer") {
       "@context": "https://schema.org",
       "@type": "Offer",
       name: "Personal",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "5",
-        priceCurrency: "EUR",
-        referenceQuantity: {
-          "@type": "QuantitativeValue",
-          value: "1",
-          unitText: "MONTH",
-        },
-      },
-      description: "Personal license for individual developers",
+      description:
+        "Personal Pro license for individual developers, billed at the local App Store price",
     },
     {
       "@context": "https://schema.org",

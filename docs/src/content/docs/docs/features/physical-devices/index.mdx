@@ -1,0 +1,57 @@
+---
+title: "Physical Device Testing"
+description: "Use RocketSim with a connected iPhone or iPad for live previews, captures, app lifecycle actions, deep-link testing, location simulation, and time-zone testing."
+sidebar:
+  order: 1
+---
+
+RocketSim brings its fastest testing workflows to a connected physical iPhone or iPad. You can mirror the device beside Xcode, create screenshots and recordings, inspect recent builds, launch or relaunch apps, open deep links, and—with RocketSim 16.4 and Xcode 27—simulate locations on real hardware.
+
+<video
+  controls
+  muted
+  playsinline
+  preload="metadata"
+  poster="/features/posters/physical-device-testing.jpg"
+  aria-label="RocketSim simulating a location and opening a deep link on a connected physical iOS device"
+>
+  <source src="/features/physical-device-testing.mp4" type="video/mp4" />
+  The video demonstrates physical-device location simulation and deep-link
+  testing with RocketSim.
+</video>
+
+## What you can test
+
+- [Connect and mirror a physical iPhone or iPad](/docs/features/physical-devices/live-preview-and-captures/) over USB.
+- Capture screenshots, GIFs, and video with device audio.
+- Use design comparison overlays, grids, and rulers on real-device output.
+- [Work with Recent Builds and app lifecycle actions](/docs/features/physical-devices/recent-builds-and-app-actions/).
+- [Test deep links and Universal Links](/docs/features/physical-devices/deep-link-testing/) without keeping URLs in Notes.
+- [Simulate physical-device locations and time zones](/docs/features/physical-devices/location-and-time-zone-simulation/) with Xcode 27.
+
+## Requirements
+
+Physical-device streaming requires an iPhone connected to your Mac over USB. The device must be paired for development and visible to Xcode.
+
+Recent Builds, app lifecycle actions, deep links, and location simulation depend on capabilities exposed by the selected Xcode installation. The newest physical-device actions require **Xcode 27**. RocketSim hides actions that the connected target or selected Xcode cannot perform.
+
+## Simulator and physical-device differences
+
+RocketSim deliberately shows only actions supported by the selected target:
+
+| Workflow                                     | Simulator | Physical iPhone or iPad   |
+| -------------------------------------------- | --------- | ------------------------- |
+| Screenshots and recordings                   | Yes       | Yes                       |
+| Design comparison                            | Yes       | Yes                       |
+| Launch, relaunch, terminate, and uninstall   | Yes       | RocketSim 16.4 + Xcode 27 |
+| Relaunch with locale                         | Yes       | RocketSim 16.4 + Xcode 27 |
+| Deep links and Universal Links               | Yes       | RocketSim 16.4 + Xcode 27 |
+| Location simulation                          | Yes       | RocketSim 16.4 + Xcode 27 |
+| Accessibility toggles                        | Yes       | Coming soon               |
+| Push notification App Actions                | Yes       | Not currently             |
+| Privacy, Keychain, and User Defaults actions | Yes       | Not currently             |
+| Network Monitor and Network Speed Control    | Yes       | Not currently             |
+
+## Manage connected devices
+
+Open **RocketSim → Settings → Physical Devices** to control USB support, network discovery, automatic preview windows, and ignored devices. See [Physical Devices settings](/docs/settings/physical-devices/) for all options.

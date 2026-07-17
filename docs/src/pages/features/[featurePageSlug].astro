@@ -34,6 +34,10 @@ const seo = {
   description,
   canonical: canonicalUrl,
 };
+const pageAbout =
+  page.id === "physical-devices"
+    ? ["Physical iOS devices", "iPhone", "iPad", "Xcode 27"]
+    : [title, "RocketSim", "iOS Simulator"];
 
 const structuredData = {
   type: "static" as const,
@@ -42,7 +46,7 @@ const structuredData = {
     description,
     url: canonicalUrl,
     breadcrumbName: title,
-    about: [title, "RocketSim", "iOS Simulator"],
+    about: pageAbout,
     itemList: featureItems.map((feature) => ({
       name: feature.data.name,
       description: feature.data.tagLine,

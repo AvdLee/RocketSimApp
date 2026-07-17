@@ -118,6 +118,7 @@ type Feature = {
     | "build-insights"
     | "design-comparison"
     | "networking"
+    | "physical-devices"
     | "screenshots-recordings"
     | "simulator-camera"
     | "status-bar"
@@ -155,7 +156,7 @@ asset:
 
 Feature pages are category pages that group related features together. They live in `src/collections/feature-page/` and are rendered at `/features/[slug]`. Each feature page has a hero section and an optional bento grid layout.
 
-The available feature page slugs are: `accessibility`, `app-actions`, `build-insights`, `design-comparison`, `networking`, `screenshots-recordings`, `simulator-camera`, `status-bar`, `user-defaults-editor`.
+The available feature page slugs are: `accessibility`, `app-actions`, `build-insights`, `design-comparison`, `networking`, `physical-devices`, `screenshots-recordings`, `simulator-camera`, `status-bar`, `user-defaults-editor`.
 
 ### Documentation
 

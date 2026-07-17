@@ -149,6 +149,22 @@ rocketsim video record --fps 60 --udid <udid> > recording.mp4
 rocketsim video record --bezel device --touches --show-floating-thumbnail
 ```
 
+### Network conditions
+
+Agents can test offline and poor-network handling without disconnecting the Mac:
+
+```bash
+rocketsim network set airplane
+rocketsim network set 3g
+rocketsim network set 100-loss --bundle-id com.example.app
+rocketsim network status
+rocketsim network off
+```
+
+Network control requires RocketSim Pro and an approved RocketSim Network Extension. Without `--bundle-id`, RocketSim targets the current Recent Builds. Always turn the condition off after the test.
+
+See [Network Speed Control & Simulator Airplane Mode](/docs/features/networking/network-speed-control/) for profiles and setup.
+
 ### Waiting for UI changes
 
 Agents can wait for screen changes or elements before continuing:
@@ -166,8 +182,10 @@ RocketSim supports the most common agent interactions through `rocketsim interac
 
 ```bash
 rocketsim interact tap --label "Continue"
+rocketsim interact activate --label "Hidden Debug Menu"
 rocketsim interact tap 210 642
 rocketsim interact long-press --label "Delete"
+rocketsim interact long-press --label "Debug" --touches 2 --duration 1
 rocketsim interact swipe --direction up
 rocketsim interact swipe --from 200,650 --to 200,150
 rocketsim interact type "hello@example.com"
@@ -175,6 +193,10 @@ rocketsim interact button home
 ```
 
 `interact` is designed to work with fresh screen state. When an agent uses the Agent Skill, RocketSim can guide it toward safer command sequences and recovery paths if the screen changes between inspection and interaction.
+
+Use `interact activate` for an accessibility element that does not respond to coordinate taps, such as a hidden debug control. It performs an accessibility press on the resolved element instead of sending a HID tap.
+
+Use `--touches 2` or `--number-of-touches 2` with `tap` or `long-press` to automate two-finger gestures.
 
 ## Why `--agent` matters
 

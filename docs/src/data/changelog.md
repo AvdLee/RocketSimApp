@@ -1,3 +1,20 @@
+# 16.4.0
+
+**New:**
+
+- Recent Builds now supports launching, terminating, relaunching, and uninstalling apps on physical devices connected over USB.
+- Deeplinks and universal links can now be tested directly in apps installed on physical devices connected over USB.
+- Location actions now work on physical devices connected over USB, including fixed coordinates, saved routes, and built-in scenarios.
+- Apps on physical devices connected over USB can now be relaunched with a selected locale.
+
+**Fixed:**
+
+- Fixed the onboarding window becoming extremely tall on macOS Tahoe, which could place its controls beyond the visible screen. (Thanks, B. Cerceo!)
+- Fixed the RocketSim app icon showing up in the Dock after a recording or screenshot thumbnail appeared, and staying visible after the thumbnail was dismissed. (Thanks, M. Townsend!)
+- Fixed screenshots and video captures using an oversized corner radius for iPad device bezels. (Reported by C. Chlach)
+- Fixed a crash when CoreSimulator temporarily returned incomplete Simulator runtime or device metadata. (Thanks, P. vd Hamer!)
+- Fixed captures appearing black when switching from a device bezel to the Simulator bezel in the post-capture editor. (Thanks, P. Friese!)
+
 # 16.3.0
 
 **New:**
