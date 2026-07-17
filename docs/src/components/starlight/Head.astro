@@ -123,6 +123,9 @@ const faqSchema = faqItems?.length
       })),
     }
   : null;
+
+const serializeJsonLd = (value: unknown) =>
+  JSON.stringify(value).replace(/</g, "\\u003c");
 ---
 
 <Default {...Astro.props}><slot /></Default>
@@ -180,7 +183,7 @@ const faqSchema = faqItems?.length
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(breadcrumbSchema)}
+      set:html={serializeJsonLd(breadcrumbSchema)}
     />
   )
 }
@@ -189,7 +192,7 @@ const faqSchema = faqItems?.length
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(faqSchema)}
+      set:html={serializeJsonLd(faqSchema)}
     />
   )
 }

@@ -14,7 +14,7 @@ RocketSim 16.4 lets you run saved deep links and Universal Links on a connected 
 
 - RocketSim 16.4 or later
 - Xcode 27
-- A paired iPhone connected over USB
+- A paired iPhone or iPad connected over USB
 - An app run on that device from Xcode
 - A saved deeplink App Action matching the app's bundle identifier
 
@@ -26,7 +26,7 @@ RocketSim 16.4 lets you run saved deep links and Universal Links on a connected 
 4. Select the app and open the **Deeplinks** tab.
 5. Choose the URL you want to test.
 
-RocketSim asks Xcode's device-control service to open the URL on the selected iPhone. Custom URL schemes route to the installed app; Universal Links follow the association and routing rules configured by your app and website.
+RocketSim asks Xcode's device-control service to open the URL on the selected physical iOS device. Custom URL schemes route to the installed app; Universal Links follow the association and routing rules configured by your app and website.
 
 ## Reuse dynamic URLs
 
