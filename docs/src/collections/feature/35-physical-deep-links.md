@@ -16,4 +16,3 @@ Open custom URL schemes and universal links on a connected physical device.
 - Reuse URLs with RocketSim's dynamic variables
 - Compare routing behavior between Simulator and real hardware
 - Repeat navigation tests from the same desktop workflow
-

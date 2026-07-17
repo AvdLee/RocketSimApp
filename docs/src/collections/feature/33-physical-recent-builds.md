@@ -16,4 +16,3 @@ Select an app you ran from Xcode and use the actions supported by that physical 
 - Relaunch with one of the app's supported locales
 - Refresh installed builds automatically after an Xcode run
 - Keep Simulator-only actions hidden when the physical device cannot perform them
-

@@ -16,4 +16,3 @@ Test location-aware behavior on real hardware using coordinates and saved scenar
 - Reuse saved locations across Simulator and physical-device testing
 - Test automatic **system time-zone changes with Xcode 27**
 - Clear the simulation to return the device to its real location
-

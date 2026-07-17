@@ -16,4 +16,3 @@ Connect an iPhone or iPad over USB and keep real-device output beside your devel
 - Capture **screenshots, GIFs, and video with audio**
 - Apply grids, rulers, and design comparison on real hardware
 - Preserve familiar RocketSim capture and post-editing workflows
-

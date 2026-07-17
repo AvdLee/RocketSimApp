@@ -6,4 +6,3 @@ hero:
   title: "Physical Device Testing"
   subtitle: "Bring repeatable RocketSim workflows to real iPhones and iPads—without leaving your Mac"
 ---
-
