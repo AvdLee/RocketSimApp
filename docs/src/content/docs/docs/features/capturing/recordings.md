@@ -7,7 +7,7 @@ sidebar:
 
 RocketSim lets you create GIF and MP4 recordings from the **Captures** tab in the side window. You can record the Xcode Simulator with touches, audio, device bezels, and transparent or custom backgrounds. If you need recordings optimized for App Store Connect, see [App Store Connect Optimization](/docs/features/capturing/app-store-connect-optimization).
 
-RocketSim 16 also supports video recordings from connected physical iOS devices, including audio from the device stream. See [Physical Device Support](/docs/features/capturing/physical-device-support) for setup and device-specific behavior.
+RocketSim 16 also supports video recordings from connected physical iOS devices, including audio from the device stream. See [Physical Device Testing](/docs/features/physical-devices/) for setup and device-specific behavior.
 
 For final tweaks after recording, RocketSim includes a built-in [Post Editor](/docs/features/capturing/post-editor) that lets you trim and restyle the exported result.
 

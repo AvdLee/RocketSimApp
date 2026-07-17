@@ -8,7 +8,7 @@ interface Props {
 }
 
 const {
-  data: { asset, tagLine, name, blogSlug, blogFragment, youtubeLink },
+  data: { asset, tagLine, name, docPath, blogSlug, blogFragment, youtubeLink },
 } = Astro.props;
 const parsedCaption = asset.caption
   ? marked.parseInline(asset.caption)
@@ -25,6 +25,7 @@ const posterPath =
 const blogPath = blogSlug
   ? `/blog/${blogSlug}${blogFragment ? `/#${blogFragment}` : ""}`
   : undefined;
+const learnMorePath = docPath ?? blogPath;
 
 let imageSizes;
 
@@ -177,10 +178,10 @@ if (asset.alignment === "full-width") {
     >
       <slot />
       {
-        blogPath || youtubeLink ? (
+        learnMorePath || youtubeLink ? (
           <p>
-            {blogPath ? <a href={blogPath}>Learn more</a> : null}
-            {blogPath && youtubeLink ? (
+            {learnMorePath ? <a href={learnMorePath}>Learn more</a> : null}
+            {learnMorePath && youtubeLink ? (
               <span style="margin: 0 0.5rem;">·</span>
             ) : null}
             {youtubeLink ? (

@@ -105,6 +105,10 @@ export default defineConfig({
       "/docs/features/build-insights/build-insights",
     "/docs/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode":
       "/docs/features/networking/network-speed-control",
+    "/docs/features/capturing/physical-device-support":
+      "/docs/features/physical-devices",
+    "/docs/docs/features/capturing/physical-device-support":
+      "/docs/features/physical-devices",
   },
   image: {
     service: {
@@ -150,7 +154,7 @@ export default defineConfig({
         starlightLlmsTxt({
           projectName: "RocketSim",
           description:
-            "RocketSim enhances iOS Simulator and physical-device development with screenshots and recordings, design comparison, agentic development through the RocketSim CLI and Agent Skill, push notification testing, deep links, location simulation, network tools, accessibility workflows, and more.",
+            "RocketSim enhances iOS Simulator and physical-device development with captures, design comparison, AI agent automation, deep-link and location testing on connected iPhones and iPads, time-zone testing, network tools, accessibility workflows, and more.",
           rawContent: true,
         }),
       ],
@@ -235,7 +239,8 @@ export default defineConfig({
         },
         {
           label: "Physical Devices",
-          link: "/docs/features/capturing/physical-device-support",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/physical-devices" },
         },
         {
           label: "Device Hub",

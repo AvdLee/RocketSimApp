@@ -33,6 +33,8 @@ All the side window features continue to work with Device Hub in Compact Mode, i
 
 ![RocketSim's design comparison tools overlaying a device inside Xcode 27's Device Hub](./device-hub-support/design-comparison.png)
 
+Recent Builds also follows Simulator apps run through Device Hub. For connected iPhones and iPads, RocketSim provides a dedicated USB preview and physical-device actions; see [Physical Device Testing](/docs/features/physical-devices/).
+
 ## Running into issues?
 
 Device Hub is brand new in Xcode 27, and edge cases can still slip through. If the side window doesn't attach the way you expect, or something looks off, please [report an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) with as much detail as you can share. That helps us tighten Device Hub support quickly.

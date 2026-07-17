@@ -79,6 +79,38 @@ compare_plans:
           free: false
           individual: true
           teams: true
+    - title: Physical Device Testing
+      description: |
+        Connect a physical iPhone or iPad over USB for live previews, captures, design comparison, and app testing. With RocketSim 16.4 and Xcode 27, Recent Builds also supports lifecycle actions, deep links, location simulation, and location-driven system time-zone testing.
+      list:
+        - item: Physical iPhone and iPad live preview
+          free: true
+          individual: true
+          teams: true
+        - item: Screenshots, GIFs, and recordings from a physical device
+          free: true
+          individual: true
+          teams: true
+        - item: Design comparison, grids, and rulers
+          free: true
+          individual: true
+          teams: true
+        - item: Launch, relaunch, terminate, uninstall, and relaunch with locale
+          free: true
+          individual: true
+          teams: true
+        - item: Open deep links and Universal Links on a physical device
+          free: true
+          individual: true
+          teams: true
+        - item: Physical-device location and route simulation (Xcode 27)
+          free: true
+          individual: true
+          teams: true
+        - item: Test automatic system time-zone changes from location
+          free: true
+          individual: true
+          teams: true
     - title: Recordings
       description: |
         Create recordings that are optimized for App Store Previews. Customize the status bar, show touches, record the audio, and show device bezels for professional videos.
@@ -225,7 +257,7 @@ compare_plans:
           teams: true
     - title: Quick Actions
       description: |
-        Perform bundle identifier-based quick actions on your most recent build. Simulate locations, open deeplinks, send push notifications, or reset the Simulator keychain without an external server.
+        Perform bundle identifier-based actions on recent Simulator or physical-device builds. Simulate locations, open deep links, control app lifecycle, send Simulator push notifications, or reset the Simulator keychain.
       list:
         - item: Single Location Simulation
           free: true

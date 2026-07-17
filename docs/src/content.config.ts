@@ -43,6 +43,7 @@ const feature = defineCollection({
           "build-insights",
           "design-comparison",
           "networking",
+          "physical-devices",
           "screenshots-recordings",
           "simulator-camera",
           "status-bar",
@@ -72,7 +73,24 @@ const feature = defineCollection({
 
 const docs = defineCollection({
   loader: docsLoader(),
-  schema: docsSchema(),
+  schema: docsSchema({
+    extend: z.object({
+      seoParent: z
+        .object({
+          name: z.string(),
+          path: z.string(),
+        })
+        .optional(),
+      faq: z
+        .array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          }),
+        )
+        .optional(),
+    }),
+  }),
 });
 
 const blog = defineCollection({

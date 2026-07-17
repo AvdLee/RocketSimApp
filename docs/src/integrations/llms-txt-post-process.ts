@@ -52,7 +52,7 @@ export function llmsTxtPostProcess(): AstroIntegration {
           const buildDate = new Date().toISOString().split("T")[0];
           const enhancedLlmsTxt = `# RocketSim
 
-> RocketSim is a macOS developer tool and iOS Simulator companion for app developers and AI coding agents. It adds professional capture workflows, URLSession network monitoring without proxy certificates, Simulator app actions, accessibility testing, and a version-matched CLI plus Agent Skill for tools like Cursor, Claude, Codex, and Xcode.
+> RocketSim is a macOS developer tool for testing Simulator and physical-device apps. It adds professional captures, URLSession network monitoring, app actions, physical iPhone and iPad location and deep-link testing, accessibility workflows, and a version-matched CLI plus Agent Skill for tools like Cursor, Claude, Codex, and Xcode.
 
 Last updated: ${buildDate}
 Website: https://www.rocketsim.app
@@ -63,6 +63,8 @@ Support: support@rocketsim.app
 ## Key Features
 
 - Professional screenshot and video capture with device bezels
+- Physical iPhone and iPad previews, captures, app lifecycle actions, deep links, and location simulation
+- Location-driven physical-device time-zone testing with Xcode 27
 - URLSession network monitoring without proxy setup or custom certificates
 - AI-ready network request prompt exports for Claude, ChatGPT, and other assistants
 - RocketSim CLI and Agent Skill for AI coding agents
@@ -80,6 +82,9 @@ Support: support@rocketsim.app
 - [Agentic Development with RocketSim](https://www.rocketsim.app/docs/features/agentic-development/): let AI coding agents inspect, navigate, and verify running iOS Simulator apps
 - [RocketSim CLI](https://www.rocketsim.app/docs/features/agentic-development/rocketsim-cli): use the built-in CLI for visible elements, semantic interactions, waits, screenshots, and recordings
 - [RocketSim Agent Skill](https://www.rocketsim.app/docs/features/agentic-development/agent-skill): install version-matched instructions for AI coding tools
+- [Physical Device Testing](https://www.rocketsim.app/docs/features/physical-devices/): mirror and test a connected iPhone or iPad with captures, Recent Builds, lifecycle actions, deep links, and locations
+- [Physical-Device Location and Time-Zone Simulation](https://www.rocketsim.app/docs/features/physical-devices/location-and-time-zone-simulation/): test Core Location and automatic iOS time-zone changes on real hardware with Xcode 27
+- [Deep-Link Testing on a Physical Device](https://www.rocketsim.app/docs/features/physical-devices/deep-link-testing/): run saved URL schemes and Universal Links on a connected iPhone or iPad
 
 ## Documentation Sets
 

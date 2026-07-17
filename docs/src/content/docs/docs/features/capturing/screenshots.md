@@ -9,7 +9,7 @@ RocketSim lets you create screenshots from the **Captures** tab in the side wind
 
 If you want to refine the final output after capture, RocketSim includes a built-in [Post Editor](/docs/features/capturing/post-editor) for screenshots and recordings.
 
-RocketSim 16 also supports screenshots from connected physical iOS devices. See [Physical Device Support](/docs/features/capturing/physical-device-support) for setup and device-specific behavior.
+RocketSim 16 also supports screenshots from connected physical iOS devices. See [Physical Device Testing](/docs/features/physical-devices/) for setup and device-specific behavior.
 
 ## Creating a screenshot
 

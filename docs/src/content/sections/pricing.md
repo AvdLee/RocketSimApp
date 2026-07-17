@@ -4,7 +4,7 @@ title: "Choose the RocketSim plan for <em>your workflow</em>"
 plans:
   - enable: true
     title: Free
-    description: Start using RocketSim as an individual developer and explore the Simulator workflow improvements.
+    description: Start using RocketSim as an individual developer and explore Simulator and connected-device workflow improvements.
     price_prefix: "€"
     features:
       - enable: true
@@ -32,7 +32,7 @@ plans:
       class: "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-pricing-free plausible-event-format=button"
   - enable: true
     title: Personal
-    description: For individual developers who want Pro features through the App Store, billed at your local App Store price.
+    description: For individual developers who want unlimited Pro workflows across Simulator and physical-device testing, billed at the local App Store price.
     price_prefix: ""
     features:
       - enable: true

@@ -1,9 +1,9 @@
 ---
 title: "Location Simulation"
-description: "Simulate GPS locations, custom coordinates, driving routes, and walking routes on the iOS Simulator with RocketSim App Actions."
+description: "Simulate GPS locations, custom coordinates, driving routes, and walking routes on the iOS Simulator or a physical iPhone or iPad with RocketSim."
 ---
 
-Testing location-aware apps should not require driving around with a MacBook. RocketSim lets you simulate GPS updates directly on the iOS Simulator, either as one-off actions from the side window or as reusable App Actions for your project.
+Testing location-aware apps should not require driving around with a MacBook. RocketSim lets you simulate GPS updates on the iOS Simulator and, starting with RocketSim 16.4 and Xcode 27, on a connected physical iPhone or iPad.
 
 ## Quick location controls
 
@@ -85,6 +85,14 @@ Enable **Relaunch with time zone** in the Locations tab when your app needs its 
 
 This is helpful for apps that combine location and date logic, such as calendars, travel apps, delivery apps, or booking flows.
 
+This explicit relaunch option is for Simulator apps. On a physical iOS device, iOS can instead update the device's automatic system time zone from the simulated coordinate. See [Physical-Device Location and Time-Zone Simulation](/docs/features/physical-devices/location-and-time-zone-simulation/) for requirements and behavior.
+
+## Simulate locations on a physical device
+
+RocketSim 16.4 reuses the Locations workflow for physical-device builds when Xcode 27's device-control service supports it. You can select a coordinate, run an available scenario, reset the simulation, or execute a saved single-location or route App Action.
+
+The physical workflow requires an app run from Xcode and selected under the device's Recent Builds tab. See the [physical-device location guide](/docs/features/physical-devices/location-and-time-zone-simulation/) for setup, system time-zone testing, and beta limitations.
+
 ## Share location actions with your team
 
 Saved location App Actions are included when you sync App Actions to JSON, including their route option, Follow roads setting, speed, interval, distance, and waypoints. This lets a team keep common test locations and routes in Git next to deeplinks and push notifications.
@@ -95,6 +103,6 @@ See [How Large Teams Use RocketSim](/docs/getting-started/how-large-teams-use-ro
 
 Location simulation changes the Simulator's GPS location. If you also need to test permission states, use [Privacy & Permissions](/docs/features/app-actions/privacy-permissions) to grant, revoke, or reset Location and Location Always permissions.
 
-Location App Actions are Simulator-only. Physical-device support currently focuses on capturing workflows.
+Push notification and privacy App Actions remain Simulator-only. RocketSim filters unavailable actions when a physical target is selected.
 
 For more background, read [Location Simulation in Xcode's Simulator](https://www.avanderlee.com/workflow/location-simulation-xcode-simulator/).
