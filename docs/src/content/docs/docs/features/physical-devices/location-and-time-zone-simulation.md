@@ -42,6 +42,30 @@ RocketSim checks the selected Xcode's capabilities and only exposes the physical
 
 Saved single locations and car or walking routes use the same App Actions as Simulator testing. RocketSim resolves route points and sends them through Xcode's physical-device location service.
 
+<video
+controls
+muted
+playsinline
+preload="metadata"
+poster="/features/posters/physical-device-location-system-behaviors.webp"
+aria-label="RocketSim simulating a route from San Francisco to Apple Park on a physical iPhone"
+
+>
+
+  <source
+    src="/features/physical-device-location-route.mp4"
+    type="video/mp4"
+  />
+  The video demonstrates a simulated route from San Francisco to Apple Park on
+  a physical iPhone.
+</video>
+
+## Test routes with system modes enabled
+
+The demo follows a simulated route from San Francisco to Apple Park while the physical iPhone reports its changing location. Because the route runs on real hardware, you can combine it with iOS features such as Driving Focus and Vehicle Motion Cues to test your app under realistic conditions.
+
+RocketSim provides the simulated route; iOS controls those system modes, so enable them separately when your test requires them.
+
 ## Test the device in another time zone
 
 With **Xcode 27**, simulating a physical-device location can also update the device's system time zone.
