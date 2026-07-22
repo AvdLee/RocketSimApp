@@ -19,11 +19,10 @@ import config from "./src/config/config.json";
 // Heading anchors are generated at build time for blog posts only. Starlight
 // already manages slugs/anchors for the docs collection, so we scope these
 // plugins to files under `src/content/blog` to avoid double-processing docs.
-const scopeToBlog =
-  <S extends unknown[]>(
-    plugin: Plugin<S, Root>,
-    ...settings: S
-  ): Plugin<[], Root> =>
+const scopeToBlog = <S extends unknown[]>(
+  plugin: Plugin<S, Root>,
+  ...settings: S
+): Plugin<[], Root> =>
   function () {
     const transformer = plugin.call(this, ...settings) as Transformer<
       Root,
@@ -133,14 +132,21 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) =>
-        page !== "https://www.rocketsim.app/terms" &&
-        page !== "https://www.rocketsim.app/privacy" &&
-        page !== "https://www.rocketsim.app/thank-you" &&
-        page !== "https://www.rocketsim.app/claim-offer" &&
-        page !== "https://www.rocketsim.app/signup/trial/thank-you" &&
-        page !== "https://www.rocketsim.app/404" &&
-        page !== "https://www.rocketsim.app/docs/404",
+      // Compare without the trailing slash: the site is configured with
+      // `trailingSlash: "always"`, so sitemap entries end in `/`.
+      filter: (page) => {
+        const normalized = page.replace(/\/$/, "");
+        return ![
+          "https://www.rocketsim.app/terms",
+          "https://www.rocketsim.app/privacy",
+          "https://www.rocketsim.app/thank-you",
+          "https://www.rocketsim.app/claim-offer",
+          "https://www.rocketsim.app/emails-notify",
+          "https://www.rocketsim.app/signup/trial/thank-you",
+          "https://www.rocketsim.app/404",
+          "https://www.rocketsim.app/docs/404",
+        ].includes(normalized);
+      },
     }),
     AutoImport({
       imports: [
