@@ -9,15 +9,15 @@ Yes, we do. Get in touch via [support@rocketsim.app](mailto:support@rocketsim.ap
 
 ## Are there non-recurring subscriptions as well?
 
-Yes, you can consider buying [Team Licenses](https://www.rocketsim.app/team-insights/).
+Yes, you can consider buying [Team Licenses](https://www.rocketsim.app/for-teams/).
 
 ## I can’t reimburse App Store subscriptions, is there an alternative?
 
-Yes, we offer [Team Licenses](https://www.rocketsim.app/team-insights/).
+Yes, we offer [Team Licenses](https://www.rocketsim.app/for-teams/).
 
 ## Do you provide the option for commercial or team licenses?
 
-Yes, check out [Team Licenses](https://www.rocketsim.app/team-insights/).
+Yes, check out [Team Licenses](https://www.rocketsim.app/for-teams/).
 
 ## Can I buy a lifetime license?
 
