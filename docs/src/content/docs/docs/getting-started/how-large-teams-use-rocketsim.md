@@ -15,7 +15,7 @@ Brand new since 2025 is our RocketSim for Teams dashboard.
 
 ![RocketSim Teams dashboard showing team build insights](./how-large-teams-use-rocketsim/cleanshot_2025-01-21_at_13.42.472x.png)
 
-You can find more info about this [on our website](https://www.rocketsim.app/team-insights).
+You can find more info about this [on our website](https://www.rocketsim.app/for-teams/).
 
 ## Sharing App Actions using Git
 
@@ -50,4 +50,4 @@ Besides developers, it’s also QA engineers and designers that benefit from Roc
 
 ## Purchasing Team Licenses
 
-You can [order team licenses via our website](https://www.rocketsim.app/team-insights). Batch discounts apply automatically if you order multiple seats.
+You can [order team licenses via our website](https://www.rocketsim.app/for-teams/). Batch discounts apply automatically if you order multiple seats.

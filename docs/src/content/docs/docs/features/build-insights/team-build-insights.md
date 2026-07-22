@@ -67,4 +67,4 @@ No. RocketSim tracks build data in the background and syncs at most once per hou
 
 **How do we try this with a team?**
 
-[Start a 14-day Teams trial](https://teams.rocketsim.app/signup/trial) and connect developers with the same team license key. No credit card is required.
+[Start a 14-day Teams trial](https://teams.rocketsim.app/signup/trial?utm_source=website&utm_medium=website&utm_content=team_build_insights_docs) and connect developers with the same team license key. No credit card is required.

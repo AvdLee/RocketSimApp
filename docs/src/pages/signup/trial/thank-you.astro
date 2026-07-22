@@ -10,7 +10,7 @@ const pageIndex = await getEntry("thank-you", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
 const {
-  site: { base_url },
+  site: { base_url, teams_base_url },
 } = config;
 
 // Build SEO object
@@ -68,6 +68,23 @@ const seo = {
     text-align: center;
   }
 
+  .next-steps {
+    max-width: 42rem;
+    margin: 2rem auto 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .support {
+    margin-top: 1.5rem;
+  }
+
   .newsletter {
     padding: 4rem 0;
     margin: 0;
@@ -87,14 +104,30 @@ const seo = {
   <div class="thank-you-wrapper">
     <section class="deprecated-grid thank-you">
       <SectionHeader title="Check your inbox!" />
-      <p>
-        You&apos;re invited for a 14 days trial for RocketSim for Teams. Check
-        your email on how to get started.
-      </p>
+      <div class="next-steps">
+        <p>
+          Your 14-day RocketSim for Teams trial is ready. Open the invitation
+          email to set your password, then sign in to connect your first
+          developer.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href={`${teams_base_url}/login`}>
+            Open Teams dashboard
+          </a>
+          <a class="btn btn-secondary" href="/docs/getting-started/onboarding/">
+            Read the setup guide
+          </a>
+        </div>
+        <p class="support">
+          Didn&apos;t receive the invitation? Check your spam folder or <a
+            href="mailto:support@rocketsim.app">contact support</a
+          >.
+        </p>
+      </div>
     </section>
     <section class="newsletter">
       <SectionHeader
-        title="While you await your invitation email"
+        title="Get more from RocketSim"
         subtitle="Subscribe to our newsletter"
         smallTitle
         text="And be the first to discover new features & time-saving tricks."
