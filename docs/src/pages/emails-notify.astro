@@ -1,0 +1,67 @@
+---
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: "Email Preferences Updated | RocketSim",
+  description: "Your RocketSim email preferences have been updated.",
+  canonical: `${base_url}/emails-notify`,
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Base seo={seo}>
+  <section class="py-48 text-center">
+    <div class="container mx-auto px-4">
+      <h1 id="notify-title" class="text-4xl font-bold mb-4">
+        Email preferences updated
+      </h1>
+      <p id="notify-body" class="text-xl text-gray-400 mb-8">
+        Your email preferences have been updated.
+      </p>
+      <a href="https://www.rocketsim.app/" class="btn btn-primary"
+        >Back to RocketSim</a
+      >
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Messages are selected by key only; query values are never rendered
+  // directly to avoid content injection on this domain.
+  (function () {
+    var messages = {
+      "trial-tips-stopped": {
+        title: "Trial tips stopped",
+        body: "You'll no longer receive RocketSim for Teams trial tips. You'll still receive essential account emails, such as setup instructions and trial expiry notices.",
+      },
+      subscribed: {
+        title: "You're subscribed",
+        body: "Your email preferences were updated. You'll now receive these emails from RocketSim.",
+      },
+      unsubscribed: {
+        title: "You're unsubscribed",
+        body: "Your email preferences were updated. You won't receive these emails anymore.",
+      },
+    };
+
+    var key = new URLSearchParams(window.location.search).get("m");
+    var message =
+      key && Object.prototype.hasOwnProperty.call(messages, key)
+        ? messages[key]
+        : null;
+    if (!message) return;
+
+    var title = document.getElementById("notify-title");
+    var body = document.getElementById("notify-body");
+    if (title) title.textContent = message.title;
+    if (body) body.textContent = message.body;
+  })();
+</script>
