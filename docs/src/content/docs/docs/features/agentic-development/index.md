@@ -61,9 +61,9 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 ### Stateful by design
 
-RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. In our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**.
+RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**.
 
-The AgentScenarios fixture-only subset was effectively tied at 127.2 and 127.6 seconds, so the result does not imply that every individual workflow is faster. The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage. [Review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-agent-workflow-benchmark.md).
+The AgentScenarios fixture-only subset was effectively tied at 127.2 and 127.6 seconds, so the result does not imply that every individual workflow is faster. The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage.
 
 ### Compact screen summaries
 
