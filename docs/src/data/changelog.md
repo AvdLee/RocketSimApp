@@ -1,3 +1,27 @@
+# 16.4.2
+
+**New:**
+
+- RocketSim Connect onboarding validation can now be skipped.
+- App Store Connect-optimized recordings now show a warning when their duration falls outside the accepted 15–30 second App Preview range.
+- The `rocketsim` CLI now resolves simulators through Device Hub, so agent commands and `rocketsim doctor` find booted Simulators regardless of whether they run in Simulator.app or Xcode's Device Hub.
+
+**Fixed:**
+
+- Fixed RocketSim keeping macOS capture and Mic Mode indicators active while Simulator Camera was idle. (Thanks, E. Sanchez!)
+- Fixed `rocketsim network` commands hanging indefinitely when the Network Extension was not yet approved or responding. They now fail fast with a clear error telling agents whether user approval or a retry is needed.
+- Fixed CLI network failures corrupting the Networking window's status indicator.
+- Fixed `rocketsim wait` reporting a misleading timeout when the accessibility backend itself was failing. The underlying error is now surfaced so agents can recover instead of retrying a wait that can never succeed.
+- Fixed agent commands hanging or crashing against Xcode 27 Simulators. Accessibility limitations of the iOS 27 runtime are now reported as clear, immediate errors, while taps, hardware buttons, and screenshots keep working.
+- Fixed long recent deeplink arguments being truncated. Recent arguments now preserve their full text, wrap into multiple rows, and keep up to six entries in a vertically scrollable history.
+- Fixed long clipboard deeplinks being truncated at the end, so both their menu item and history entry preserve the URL's beginning and end.
+
+# 16.4.1
+
+**Fixed:**
+
+- Fixed RocketSim crashing while agent commands read accessibility elements from Xcode 27 Simulators whose cryptex runtime metadata is unavailable, restoring agent functionality for affected booted Simulators. (Thanks, Skwiggs & S. Houtzager!)
+
 # 16.4.0
 
 **New:**
