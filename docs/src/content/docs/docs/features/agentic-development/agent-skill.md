@@ -24,7 +24,7 @@ The skill helps agents:
 - Use screenshots when accessibility data is sparse or incomplete
 - Run `rocketsim doctor` when setup needs to be checked
 
-In our July 2026 head-to-head benchmark against the AXe 1.8 CLI, AXe emitted **138.8× more command output** and had a **23.4× higher byte-based context estimate** across current scenarios. RocketSim completed the measured command work in **32% less total time**. The context estimate divides skill, prompt, and command-output bytes by four; it is not actual model-token or billing usage. [Review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-axe-1.8-and-device-hub.md).
+In our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The context estimate divides skill, prompt, and command-output bytes by four; it is not actual model-token or billing usage. [Review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-agent-workflow-benchmark.md).
 
 ## Install from RocketSim
 

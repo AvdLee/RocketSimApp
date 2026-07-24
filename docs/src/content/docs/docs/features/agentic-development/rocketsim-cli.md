@@ -43,9 +43,9 @@ RocketSim is not just a standalone command that starts from scratch every time. 
 
 The CLI uses RocketSim's `rs/1` protocol for agent workflows. You do not need to learn the protocol details; it is the compact, agent-optimized layer that lets RocketSim provide reliable screen reads, interaction feedback, and recovery paths while keeping output small.
 
-In our July 2026 head-to-head benchmark against the AXe 1.8 CLI, AXe emitted **138.8× more command output** and had a **23.4× higher byte-based context estimate** across current scenarios. RocketSim completed the measured command work in **32% less total time**, while AgentScenarios fixture-only time was effectively tied at 127.2 seconds for RocketSim and 127.6 seconds for AXe.
+In our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**.
 
-The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage. [Review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-axe-1.8-and-device-hub.md).
+The AgentScenarios fixture-only subset was effectively tied at 127.2 and 127.6 seconds, so the result does not imply that every individual workflow is faster. The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage. [Review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-agent-workflow-benchmark.md).
 
 ## Key commands
 

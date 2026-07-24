@@ -55,9 +55,9 @@ Agent workflows are sensitive to small amounts of friction. Every screen read co
 
 That is why RocketSim's CLI talks to the running Mac app instead of starting from scratch for every command. RocketSim already knows which Simulator is focused, can keep useful state warm, and can return compact `rs/1` output that is designed for agents.
 
-In our July 2026 head-to-head benchmark against the AXe 1.8 CLI, AXe emitted **138.8× more command output** and had a **23.4× higher byte-based context estimate** across current scenarios. RocketSim completed the measured command work in **32% less total time**. The AgentScenarios fixture-only subset was effectively tied at 127.2 seconds for RocketSim and 127.6 seconds for AXe, so the result does not imply that every individual workflow is faster.
+In our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The AgentScenarios fixture-only subset was effectively tied at 127.2 and 127.6 seconds, so the result does not imply that every individual workflow is faster.
 
-Those numbers matter because they show up directly in your day-to-day agent loop. A smaller screen summary gives the model more room to reason about the task, while lower total command time reduces waiting across a longer flow. The context estimate divides skill, prompt, and command-output bytes by four; it is a reproducible proxy, not actual model-token or billing usage. You can [review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-axe-1.8-and-device-hub.md).
+Those numbers matter because they show up directly in your day-to-day agent loop. A smaller screen summary gives the model more room to reason about the task, while lower total command time reduces waiting across a longer flow. The context estimate divides skill, prompt, and command-output bytes by four; it is a reproducible proxy, not actual model-token or billing usage. You can [review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-agent-workflow-benchmark.md).
 
 ## Accessibility elements beat screenshots
 
