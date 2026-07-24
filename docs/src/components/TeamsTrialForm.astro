@@ -231,7 +231,11 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
 
 <script>
   type TrialErrorType =
-    "email" | "business_email" | "full_name" | "trial_team_size" | "composite";
+    | "email"
+    | "business_email"
+    | "full_name"
+    | "trial_team_size"
+    | "composite";
 
   type TrialResponse = {
     error?: {
