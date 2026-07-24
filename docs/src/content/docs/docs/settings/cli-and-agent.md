@@ -49,7 +49,7 @@ Use a tool-specific destination only if your tool does not scan the shared locat
 
 The RocketSim Mac app is already running beside the Simulator. It can keep state, cache expensive work, and optimize repeated agent loops. The CLI exposes that running app to agents, and the Agent Skill helps agents use the CLI in the right order.
 
-In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster, avoided wrong taps entirely**, and used about **63% fewer estimated tokens** than a popular alternative.
+Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The context estimate divides skill, prompt, and command-output bytes by four; it is not actual model-token or billing usage.
 
 ## Verify the setup
 

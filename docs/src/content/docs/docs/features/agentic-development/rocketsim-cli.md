@@ -43,7 +43,9 @@ RocketSim is not just a standalone command that starts from scratch every time. 
 
 The CLI uses RocketSim's `rs/1` protocol for agent workflows. You do not need to learn the protocol details; it is the compact, agent-optimized layer that lets RocketSim provide reliable screen reads, interaction feedback, and recovery paths while keeping output small.
 
-In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster, avoided wrong taps entirely**, and used about **63% fewer estimated tokens** than a popular alternative.
+Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**.
+
+The AgentScenarios fixture-only subset was effectively tied at 127.2 and 127.6 seconds, so the result does not imply that every individual workflow is faster. The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage.
 
 ## Key commands
 
@@ -204,7 +206,7 @@ Use `--touches 2` or `--number-of-touches 2` with `tap` or `long-press` to autom
 
 ## Why `--agent` matters
 
-The `--agent` flag reduces the element output from full JSON to a compact pipe-delimited format. That means fewer tokens per screen read, faster agent decision loops, and easier recovery after each interaction.
+The `--agent` flag reduces the element output from full JSON to a compact pipe-delimited format. That means less context per screen read and easier recovery after each interaction.
 
 Here is the same screen in both formats:
 
