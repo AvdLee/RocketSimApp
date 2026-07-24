@@ -61,7 +61,9 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 ### Stateful by design
 
-RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster, avoided wrong taps entirely**, and used about **63% fewer estimated tokens** than a popular alternative.
+RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. In our July 2026 head-to-head benchmark against the AXe 1.8 CLI, AXe emitted **138.8× more command output** and had a **23.4× higher byte-based context estimate** across current scenarios. RocketSim completed the measured command work in **32% less total time**, while AgentScenarios fixture-only time was effectively tied at 127.2 seconds for RocketSim and 127.6 seconds for AXe.
+
+The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage. [Review the benchmark methodology and results](https://github.com/AvdLee/RocketSim/blob/master/docs/agent-protocol/eval/2026-07-24-axe-1.8-and-device-hub.md).
 
 ### Compact screen summaries
 
