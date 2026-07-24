@@ -163,6 +163,8 @@ rocketsim network off
 
 Network control requires RocketSim Pro and an approved RocketSim Network Extension. Without `--bundle-id`, RocketSim targets the current Recent Builds. Always turn the condition off after the test.
 
+Network commands are bounded: when the extension is not approved or does not respond within roughly ten seconds, the command fails fast with a `network_extension_not_ready` error instead of hanging. Its `context.reason` tells the agent whether to ask you to approve the extension in RocketSim's Networking window (`needs_user_approval`) or to simply retry (`timed_out`).
+
 See [Network Speed Control & Simulator Airplane Mode](/docs/features/networking/network-speed-control/) for profiles and setup.
 
 ### Waiting for UI changes
@@ -175,6 +177,8 @@ rocketsim wait element --label "Continue"
 ```
 
 This keeps agent flows from racing ahead before the app has finished navigating or rendering.
+
+When the perception backend itself is failing (rather than the predicate simply staying false), `wait` reports that backend failure as an `execution_failed` error instead of a misleading timeout, so agents can run `rocketsim doctor` and recover instead of retrying a wait that can never succeed.
 
 ### Interactions
 
