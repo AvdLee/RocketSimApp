@@ -19,6 +19,6 @@ RocketSim ships a version-matched `rocketsim` CLI and Agent Skill so Cursor, Xco
 - Validate setup with `rocketsim doctor`
 - Keep the CLI and Agent Skill in sync through app updates
 
-In RocketSim's benchmark, the `rs/1` agent protocol produced **2.7x lower estimated token usage**, **9.7x fewer output bytes**, and **4x fewer wrong taps** overall.
+Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The context estimate is a reproducible proxy, not actual model-token or billing usage.
 
 [Read the Agentic Development docs](/docs/features/agentic-development/).
