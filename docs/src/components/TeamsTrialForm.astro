@@ -237,12 +237,41 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
     | "trial_team_size"
     | "composite";
 
-  type TrialResponse = {
-    error?: {
-      type: TrialErrorType;
-      message: string;
-    };
-    redirectUrl?: string;
+  type TrialError = {
+    type: TrialErrorType;
+    message: string;
+  };
+
+  // Response contract of the LicenseKit /api/signup/trial endpoint. Keep in
+  // sync with TrialApiResponse in LicenseKit's api.signup.trial route.
+  type TrialResponse = { error: TrialError } | { redirectUrl: string };
+
+  declare global {
+    interface Window {
+      plausible?: (
+        eventName: string,
+        options?: { props?: Record<string, string> },
+      ) => void;
+    }
+  }
+
+  const isTrialResponse = (payload: unknown): payload is TrialResponse => {
+    if (typeof payload !== "object" || payload === null) return false;
+    if ("redirectUrl" in payload) {
+      return typeof payload.redirectUrl === "string";
+    }
+    if ("error" in payload) {
+      const error = payload.error;
+      return (
+        typeof error === "object" &&
+        error !== null &&
+        "type" in error &&
+        typeof error.type === "string" &&
+        "message" in error &&
+        typeof error.message === "string"
+      );
+    }
+    return false;
   };
 
   const teamsTrialFormInit = () => {
@@ -252,16 +281,7 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
     form.dataset.initialized = "true";
 
     const track = (eventName: string, props: Record<string, string>) => {
-      const plausible = (
-        window as Window & {
-          plausible?: (
-            eventName: string,
-            options?: { props?: Record<string, string> },
-          ) => void;
-        }
-      ).plausible;
-
-      plausible?.(eventName, { props });
+      window.plausible?.(eventName, { props });
     };
 
     const baseProps = {
@@ -284,11 +304,12 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
         });
     };
 
-    const showError = (type: TrialErrorType, message: string) => {
+    const showError = (type: string, message: string) => {
       const fieldName = type === "business_email" ? "email" : type;
-      const errorElement = form.querySelector<HTMLElement>(
-        `[data-trial-error="${fieldName}"]`,
-      );
+      const errorElement =
+        form.querySelector<HTMLElement>(`[data-trial-error="${fieldName}"]`) ??
+        // Unknown error types still need to surface something to the visitor.
+        form.querySelector<HTMLElement>('[data-trial-error="composite"]');
       if (!errorElement) return;
 
       errorElement.textContent = message;
@@ -307,8 +328,12 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
       track("Teams Trial Form Started", baseProps);
     });
 
+    let isSubmitting = false;
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (isSubmitting) return;
+      isSubmitting = true;
       clearErrors();
 
       const teamSizeInput = form.elements.namedItem("trial_team_size");
@@ -340,20 +365,33 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
         submitButton.textContent = "Starting trial…";
       }
 
+      let isRedirecting = false;
+
       try {
         const response = await fetch(form.action, {
           method: "POST",
           headers: { Accept: "application/json" },
           body: new FormData(form),
         });
-        const payload = (await response.json()) as TrialResponse;
+        const payload: unknown = await response.json();
 
-        if (response.ok && payload.redirectUrl) {
+        if (!isTrialResponse(payload)) {
+          showError(
+            "composite",
+            "We couldn't start your trial. Please try again.",
+          );
+          return;
+        }
+
+        if ("redirectUrl" in payload && response.ok) {
+          // Keep the form disabled while the browser navigates away, so the
+          // trial can't be submitted twice.
+          isRedirecting = true;
           window.location.assign(payload.redirectUrl);
           return;
         }
 
-        if (payload.error) {
+        if ("error" in payload) {
           showError(payload.error.type, payload.error.message);
           return;
         }
@@ -368,9 +406,12 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
           "We couldn't start your trial. Please try again.",
         );
       } finally {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = submitLabel ?? "Start free Teams trial";
+        if (!isRedirecting) {
+          isSubmitting = false;
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = submitLabel ?? "Start free Teams trial";
+          }
         }
       }
     });
