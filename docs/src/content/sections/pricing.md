@@ -90,7 +90,7 @@ plans:
       label: Start 14-day Trial
       site: teams
       link: "/signup/trial?utm_source=website&utm_medium=website&utm_content=pricing"
-      class: "plausible-event-name=CTA:+Pricing+Teams+-+Trial"
+      class: "plausible-event-name=CTA:+Pricing+Teams+-+Trial plausible-event-surface=pricing plausible-event-placement=pricing-teams-card plausible-event-format=button plausible-event-source=website"
   - enable: true
     title: Enterprise
     description: For larger organizations that need more control, security, custom distribution, and rollout support.

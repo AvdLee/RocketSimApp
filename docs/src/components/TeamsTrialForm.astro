@@ -1,0 +1,376 @@
+---
+import config from "@/config/config.json";
+
+// In dev, post to the local LicenseKit server so the whole trial flow can be
+// tested without touching production.
+const teamsBaseUrl = import.meta.env.DEV
+  ? "http://localhost:5173"
+  : config.site.teams_base_url;
+
+const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_medium=website&utm_content=for_teams_hero_form`;
+---
+
+<style>
+  .trial-card {
+    width: 100%;
+    padding: 1.5rem;
+
+    background: #101010;
+    border: 0.0625rem solid rgb(255 255 255 / 12%);
+    border-radius: 1rem;
+  }
+
+  .trial-card__eyebrow {
+    margin: 0 0 0.375rem;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .trial-card h2 {
+    margin: 0;
+
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .trial-card__intro {
+    margin: 0.5rem 0 1.25rem;
+
+    font-size: 0.875rem;
+    color: var(--text-color);
+  }
+
+  .trial-form {
+    display: grid;
+    gap: 0.875rem;
+  }
+
+  .trial-form__field {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .trial-form label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-color-light);
+  }
+
+  .trial-form input {
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+
+    font: inherit;
+    color: #fff;
+
+    background: #050505;
+    border: 0.0625rem solid rgb(255 255 255 / 18%);
+    border-radius: 0.5rem;
+  }
+
+  .trial-form input::placeholder {
+    color: #777;
+  }
+
+  .trial-form input:focus-visible {
+    border-color: var(--primary-color);
+    outline: 0.0625rem solid var(--ring);
+    outline-offset: 0.0625rem;
+  }
+
+  .trial-form input[aria-invalid="true"] {
+    border-color: #ff7b7b;
+  }
+
+  .trial-form__error {
+    margin: 0;
+
+    font-size: 0.75rem;
+    color: #ff9b9b;
+    line-height: 1.4;
+  }
+
+  .trial-form__submit {
+    width: 100%;
+    margin-top: 0.25rem;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .trial-form__submit:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  .trial-form__trust {
+    margin: 0;
+
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .trial-form__pricing {
+    display: block;
+    margin-top: 1rem;
+
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .trial-form__pricing:hover {
+    text-decoration: underline;
+  }
+
+  .trial-form__pricing:focus-visible {
+    border-radius: 0.25rem;
+    outline: 0.125rem solid var(--ring);
+  }
+</style>
+
+<div class="trial-card">
+  <p class="trial-card__eyebrow">14-day free trial</p>
+  <h2>Start with your team</h2>
+  <p class="trial-card__intro">Use your work email. No credit card required.</p>
+  <form
+    class="trial-form"
+    action={trialAction}
+    method="post"
+    data-teams-trial-form
+  >
+    <div class="trial-form__field">
+      <label for="teams-trial-email">Work email</label>
+      <input
+        id="teams-trial-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="you@company.com"
+        aria-describedby="teams-trial-email-error"
+        required
+      />
+      <p
+        class="trial-form__error"
+        id="teams-trial-email-error"
+        data-trial-error="email"
+        hidden
+      >
+      </p>
+    </div>
+    <div class="trial-form__field">
+      <label for="teams-trial-name">Full name</label>
+      <input
+        id="teams-trial-name"
+        name="full_name"
+        type="text"
+        autocomplete="name"
+        placeholder="Your name"
+        aria-describedby="teams-trial-name-error"
+        required
+      />
+      <p
+        class="trial-form__error"
+        id="teams-trial-name-error"
+        data-trial-error="full_name"
+        hidden
+      >
+      </p>
+    </div>
+    <div class="trial-form__field">
+      <label for="teams-trial-size">Number of iOS developers</label>
+      <input
+        id="teams-trial-size"
+        name="trial_team_size"
+        type="number"
+        inputmode="numeric"
+        min="1"
+        max="1000"
+        placeholder="5"
+        aria-describedby="teams-trial-size-error"
+        required
+      />
+      <p
+        class="trial-form__error"
+        id="teams-trial-size-error"
+        data-trial-error="trial_team_size"
+        hidden
+      >
+      </p>
+    </div>
+    <p
+      class="trial-form__error"
+      data-trial-error="composite"
+      role="alert"
+      aria-live="polite"
+      hidden
+    >
+    </p>
+    <button class="button trial-form__submit" type="submit">
+      Start free Teams trial
+    </button>
+    <p class="trial-form__trust">
+      One shared license key. Essential setup and expiry emails are included.
+    </p>
+  </form>
+  <a
+    class="trial-form__pricing plausible-event-name=CTA:+Team+Page+-+See+Pricing plausible-event-surface=for-teams plausible-event-placement=for-teams-hero plausible-event-format=text-link plausible-event-source=website"
+    href="/pricing/#plan-teams"
+  >
+    Compare team pricing &rarr;
+  </a>
+</div>
+
+<script>
+  type TrialErrorType =
+    "email" | "business_email" | "full_name" | "trial_team_size" | "composite";
+
+  type TrialResponse = {
+    error?: {
+      type: TrialErrorType;
+      message: string;
+    };
+    redirectUrl?: string;
+  };
+
+  const teamsTrialFormInit = () => {
+    const form = document.querySelector("[data-teams-trial-form]");
+    if (!(form instanceof HTMLFormElement)) return;
+    if (form.dataset.initialized === "true") return;
+    form.dataset.initialized = "true";
+
+    const track = (eventName: string, props: Record<string, string>) => {
+      const plausible = (
+        window as Window & {
+          plausible?: (
+            eventName: string,
+            options?: { props?: Record<string, string> },
+          ) => void;
+        }
+      ).plausible;
+
+      plausible?.(eventName, { props });
+    };
+
+    const baseProps = {
+      surface: "for-teams",
+      placement: "for-teams-hero",
+      format: "inline-form",
+      source: "website",
+    };
+    let hasTrackedInteraction = false;
+
+    const clearErrors = () => {
+      form
+        .querySelectorAll<HTMLInputElement>("[aria-invalid]")
+        .forEach((input) => input.removeAttribute("aria-invalid"));
+      form
+        .querySelectorAll<HTMLElement>("[data-trial-error]")
+        .forEach((errorElement) => {
+          errorElement.hidden = true;
+          errorElement.textContent = "";
+        });
+    };
+
+    const showError = (type: TrialErrorType, message: string) => {
+      const fieldName = type === "business_email" ? "email" : type;
+      const errorElement = form.querySelector<HTMLElement>(
+        `[data-trial-error="${fieldName}"]`,
+      );
+      if (!errorElement) return;
+
+      errorElement.textContent = message;
+      errorElement.hidden = false;
+
+      const input = form.elements.namedItem(fieldName);
+      if (input instanceof HTMLInputElement) {
+        input.setAttribute("aria-invalid", "true");
+        input.focus();
+      }
+    };
+
+    form.addEventListener("focusin", () => {
+      if (hasTrackedInteraction) return;
+      hasTrackedInteraction = true;
+      track("Teams Trial Form Started", baseProps);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearErrors();
+
+      const teamSizeInput = form.elements.namedItem("trial_team_size");
+      const teamSize =
+        teamSizeInput instanceof HTMLInputElement
+          ? Number(teamSizeInput.value)
+          : 0;
+      const teamSizeBucket =
+        teamSize <= 5
+          ? "1-5"
+          : teamSize <= 10
+            ? "6-10"
+            : teamSize <= 25
+              ? "11-25"
+              : teamSize <= 50
+                ? "26-50"
+                : "51+";
+      const props = { ...baseProps, team_size: teamSizeBucket };
+
+      track("Teams Trial Signup Submitted", props);
+      track("CTA: Team Page - Start Trial", props);
+
+      const submitButton = form.querySelector<HTMLButtonElement>(
+        ".trial-form__submit",
+      );
+      const submitLabel = submitButton?.textContent;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Starting trial…";
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const payload = (await response.json()) as TrialResponse;
+
+        if (response.ok && payload.redirectUrl) {
+          window.location.assign(payload.redirectUrl);
+          return;
+        }
+
+        if (payload.error) {
+          showError(payload.error.type, payload.error.message);
+          return;
+        }
+
+        showError(
+          "composite",
+          "We couldn't start your trial. Please try again.",
+        );
+      } catch {
+        showError(
+          "composite",
+          "We couldn't start your trial. Please try again.",
+        );
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = submitLabel ?? "Start free Teams trial";
+        }
+      }
+    });
+  };
+
+  document.addEventListener("astro:page-load", teamsTrialFormInit);
+</script>
