@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { title, logo, logoAlt } = Astro.props;
+const hasAside = Astro.slots.has("aside");
 ---
 
 <style>
@@ -67,7 +68,7 @@ const { title, logo, logoAlt } = Astro.props;
     margin: 0 0 1rem;
   }
 
-  .hero__logo {
+  .hero__aside {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,14 +109,20 @@ const { title, logo, logoAlt } = Astro.props;
         <slot />
       </p>
     </div>
-    <div class="hero__logo">
-      <Image
-        src={appIcon}
-        widths={[128, 512]}
-        sizes="(max-width: 767px) 4rem, 16rem"
-        alt="RocketSim app icon"
-        class="logo-image"
-      />
+    <div class="hero__aside">
+      {
+        hasAside ? (
+          <slot name="aside" />
+        ) : (
+          <Image
+            src={appIcon}
+            widths={[128, 512]}
+            sizes="(max-width: 767px) 4rem, 16rem"
+            alt="RocketSim app icon"
+            class="logo-image"
+          />
+        )
+      }
     </div>
   </div>
 </header>
