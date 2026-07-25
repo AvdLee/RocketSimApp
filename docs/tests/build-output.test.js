@@ -51,3 +51,16 @@ test("homepage videos stay deferred", () => {
     "every homepage video must keep preload=none",
   );
 });
+
+test("airplane-mode doc leads its title with the searched phrase", () => {
+  const html = readDist(
+    "docs/features/networking/network-speed-control/index.html",
+  );
+  const title = html.match(/<title>([^<]*)<\/title>/)[1];
+  assert.match(
+    title,
+    /^Simulator Airplane Mode/,
+    `title should lead with the query phrase, got: ${title}`,
+  );
+  assert.ok(title.length <= 60, `title is ${title.length} chars, max 60`);
+});
