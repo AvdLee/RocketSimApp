@@ -56,7 +56,9 @@ test("airplane-mode doc leads its title with the searched phrase", () => {
   const html = readDist(
     "docs/features/networking/network-speed-control/index.html",
   );
-  const title = html.match(/<title>([^<]*)<\/title>/)[1];
+  const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+  assert.ok(titleMatch, "no <title> tag found in the built page");
+  const title = titleMatch[1];
   assert.match(
     title,
     /^Simulator Airplane Mode/,
