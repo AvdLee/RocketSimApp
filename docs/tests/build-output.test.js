@@ -51,3 +51,17 @@ test("homepage videos stay deferred", () => {
     "every homepage video must keep preload=none",
   );
 });
+
+test("homepage disambiguates the brand from rocketry", () => {
+  const html = readDist("index.html");
+  assert.match(
+    html,
+    /Xcode iOS Simulator/,
+    "homepage must state the actual product category",
+  );
+  assert.match(
+    html,
+    /not (a )?model[- ]rocket/i,
+    "homepage must rule out model rocketry explicitly",
+  );
+});
