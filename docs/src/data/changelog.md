@@ -13,6 +13,8 @@
 - Fixed CLI network failures corrupting the Networking window's status indicator.
 - Fixed `rocketsim wait` reporting a misleading timeout when the accessibility backend itself was failing. The underlying error is now surfaced so agents can recover instead of retrying a wait that can never succeed.
 - Fixed agent commands hanging or crashing against Xcode 27 Simulators. Accessibility limitations of the iOS 27 runtime are now reported as clear, immediate errors, while taps, hardware buttons, and screenshots keep working.
+- Fixed `rocketsim interact biometric` not completing Face ID match and non-match requests.
+- Fixed coordinate-only agent batches requiring an accessibility snapshot, allowing them to keep working when accessibility data is unavailable.
 - Fixed long recent deeplink arguments being truncated. Recent arguments now preserve their full text, wrap into multiple rows, and keep up to six entries in a vertically scrollable history.
 - Fixed long clipboard deeplinks being truncated at the end, so both their menu item and history entry preserve the URL's beginning and end.
 
