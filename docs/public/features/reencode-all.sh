@@ -9,12 +9,15 @@
 #   - encodes H.264 (high profile, yuv420p) at CRF 28
 #   - drops the audio track (feature videos play muted)
 #   - moves the moov atom to the front (+faststart) for progressive streaming
-#   - exports the first frame to ./posters/<name>.jpg as a lightweight poster
+#   - exports the first frame to ./posters/<name>.webp as a lightweight poster
 #
 # .mov sources are converted to .mp4 and the original .mov is removed.
 # Re-encoding is idempotent enough to re-run; outputs replace the originals.
 
 set -euo pipefail
+
+# Requires ffmpeg (video encode) and cwebp (poster encode: brew install webp).
+command -v cwebp >/dev/null || { echo "cwebp not found — brew install webp"; exit 1; }
 
 INPUT_DIR="$(cd "$(dirname "$0")" && pwd)"
 POSTER_DIR="${INPUT_DIR}/posters"
@@ -34,7 +37,7 @@ for file in "$INPUT_DIR"/*.mp4 "$INPUT_DIR"/*.mov; do
   name="${filename%.*}"
   tmp="${INPUT_DIR}/${name}.tmp.mp4"
   output="${INPUT_DIR}/${name}.mp4"
-  poster="${POSTER_DIR}/${name}.jpg"
+  poster="${POSTER_DIR}/${name}.webp"
 
   echo "Optimizing $filename → $(basename "$output")"
 
@@ -54,7 +57,9 @@ for file in "$INPUT_DIR"/*.mp4 "$INPUT_DIR"/*.mov; do
 
   echo "  Poster → posters/$(basename "$poster")"
   ffmpeg -y -i "$output" -vf "$SCALE_FILTER" \
-    -frames:v 1 -update 1 -q:v 4 "$poster"
+    -frames:v 1 -update 1 -f image2 -c:v png "${POSTER_DIR}/${name}.tmp.png"
+  cwebp -quiet -q 78 "${POSTER_DIR}/${name}.tmp.png" -o "$poster"
+  rm -f "${POSTER_DIR}/${name}.tmp.png"
 done
 
 echo "Done. Remember to update any .md asset paths if a .mov became .mp4."
