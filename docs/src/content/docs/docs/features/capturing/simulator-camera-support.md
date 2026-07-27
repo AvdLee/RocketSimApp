@@ -1,15 +1,22 @@
 ---
 title: "iOS Simulator Camera: Test Camera Flows Without a Device"
-description: "The iOS Simulator has no camera by default. RocketSim streams your Mac camera, images, or video into the Simulator so you can test camera flows."
+description: "The iOS Simulator has no camera by default. RocketSim streams your Mac's camera into the Simulator so you can test camera flows without a device."
 sidebar:
   label: "Simulator Camera Support"
+faq:
+  - question: "Can the iOS Simulator use my Mac's camera?"
+    answer: "Not on its own. The Simulator has no camera access, so RocketSim Connect streams your selected Mac camera into the Simulator's camera feed instead."
+  - question: "Do I need a physical iPhone to test camera features?"
+    answer: "No. RocketSim streams a camera connected to your Mac into the Simulator, so you can test scanning, capture, and preview flows without a device."
+  - question: "Does camera streaming require RocketSim Connect?"
+    answer: "Yes. The camera feed is delivered through RocketSim Connect, which the recommended setup enables automatically for Xcode debug sessions, without any package, framework, or build change."
 ---
 
 Testing camera flows on the iOS Simulator usually ends with a fallback screen, since the Simulator does not expose a real camera like a physical device. That makes every QR scanner, document scanner, profile photo picker, or video capture flow slower to validate.
 
 ## Does the iOS Simulator have a camera?
 
-No, Xcode's Simulator does not come with camera support: apps won't discover any capture device. RocketSim adds this missing camera by streaming your Mac's camera, a photo, or a video into your running Simulator app through RocketSim Connect. You can keep your normal Simulator workflow and test camera-dependent UI without repeatedly deploying to an iPhone.
+No, Xcode's Simulator does not come with camera support: apps won't discover any capture device. RocketSim adds this missing camera by streaming a camera connected to your Mac, like the built-in camera or an iPhone via Continuity Camera, into your running Simulator app through RocketSim Connect. You can keep your normal Simulator workflow and test camera-dependent UI without repeatedly deploying to an iPhone.
 
 You can find an overview of what's possible on the [Simulator Camera feature page](/features/simulator-camera/).
 
