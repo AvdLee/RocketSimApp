@@ -5,6 +5,8 @@
 - RocketSim Connect onboarding validation can now be skipped.
 - App Store Connect-optimized recordings now show a warning when their duration falls outside the accepted 15–30 second App Preview range.
 - The `rocketsim` CLI now resolves simulators through Device Hub, so agent commands and `rocketsim doctor` find booted Simulators regardless of whether they run in Simulator.app or Xcode's Device Hub.
+- RocketSimConnect now loads efficiently via a LLDB init file. Optimized for both Xcode 26 and 27.
+- RocketSimConnect initialization is faster and more optimized.
 
 **Fixed:**
 
