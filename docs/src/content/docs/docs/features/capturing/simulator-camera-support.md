@@ -3,6 +3,13 @@ title: "iOS Simulator Camera: Test Camera Flows Without a Device"
 description: "The iOS Simulator has no camera by default. RocketSim streams your Mac camera, images, or video into the Simulator so you can test camera flows."
 sidebar:
   label: "Simulator Camera Support"
+faq:
+  - question: "Can the iOS Simulator use my Mac's camera?"
+    answer: "Not on its own. The Simulator has no camera access, so RocketSim Connect streams images or video from your Mac into the Simulator's camera feed instead."
+  - question: "Do I need a physical iPhone to test camera features?"
+    answer: "No. RocketSim streams a still image or a video file to the Simulator camera, so you can test scanning, capture, and preview flows without a device."
+  - question: "Does camera streaming require RocketSim Connect?"
+    answer: "Yes. The camera feed is delivered through RocketSim Connect, which the recommended setup enables automatically for Xcode debug sessions — no package, framework, or build change required."
 ---
 
 Testing camera flows on the iOS Simulator usually ends with a fallback screen, since the Simulator does not expose a real camera like a physical device. That makes every QR scanner, document scanner, profile photo picker, or video capture flow slower to validate.

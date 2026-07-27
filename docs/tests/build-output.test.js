@@ -63,3 +63,23 @@ test("homepage videos stay deferred", () => {
   const eager = videoTags.filter((tag) => !tag.includes('preload="none"'));
   assert.deepEqual(eager, [], "every homepage video must keep preload=none");
 });
+
+test("camera doc emits FAQPage structured data", () => {
+  const html = readDist(
+    "docs/features/capturing/simulator-camera-support/index.html",
+  );
+  const blocks = [
+    ...html.matchAll(
+      /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
+    ),
+  ].map((m) => JSON.parse(m[1]));
+  const faq = blocks.find((b) => b["@type"] === "FAQPage");
+  assert.ok(faq, "expected a FAQPage JSON-LD block");
+  const questions = (faq.mainEntity || []).filter(
+    (entry) => entry["@type"] === "Question",
+  );
+  assert.ok(
+    questions.length >= 3,
+    `expected at least 3 questions in the FAQPage, found ${questions.length}`,
+  );
+});
