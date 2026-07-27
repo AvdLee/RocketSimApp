@@ -1,8 +1,9 @@
 ---
-title: "Network Speed Control & Simulator Airplane Mode"
-description: "Throttle network speed on the iOS Simulator to test your app under 3G, Edge, or airplane mode conditions. Your Mac stays online while the Simulator is throttled."
+title: "Slow Network & Airplane Mode on the iOS Simulator"
+description: "Throttle the iOS Simulator to 3G or Edge, turn off its network completely, or enable airplane mode, all without a proxy and while your Mac stays online."
 sidebar:
   order: 1
+  label: "Network Speed Control"
 ---
 
 It's essential to test your app in bad networking conditions during app development. Historically, you've had to test this on an actual device using Airplane mode or turn off your Mac's WiFi. Both are not ideal and often slow you down during development.
@@ -22,7 +23,13 @@ To see this in action, you can watch our Network Monitoring demo on YouTube:
 
 RocketSim’s Network Speed Control allows you to test your app for poor connections within the Simulator. The best thing of all: your Mac’s internet connection stays working, so you can still access ChatGPT or Stack Overflow while developing your app.
 
-I encourage you to read my article [**Optimizing your app for Network Reachability**](https://www.avanderlee.com/swift/optimizing-network-reachability/) to prepare your app for bad networking conditions using RocketSim. For inspecting requests while testing, see [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring).
+I encourage you to read my article [**Optimizing your app for Network Reachability**](https://www.avanderlee.com/swift/optimizing-network-reachability/) to prepare your app for bad networking conditions using RocketSim. For inspecting requests while testing, see [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring). Network Speed Control is part of RocketSim's [networking tools for the iOS Simulator](/features/networking/).
+
+## Turn off the network for the Simulator only
+
+You don't have to turn off your Mac's WiFi to test your app offline. Select **Simulator Airplane Mode** to block all connections for your app, or use **100% packet loss** to simulate a connection that looks alive but never delivers data. Both profiles only affect the Simulator app you configured, so your Mac stays online.
+
+This is the quickest way to test offline mode, empty states, and error handling. You switch profiles from the side window while your app keeps running, so you can immediately see how your app responds.
 
 ## Control network conditions from the CLI
 

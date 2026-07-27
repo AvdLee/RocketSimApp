@@ -1,6 +1,8 @@
 ---
-title: "Location Simulation"
+title: "Location Simulation on the iOS Simulator and Devices"
 description: "Simulate GPS locations, custom coordinates, driving routes, and walking routes on the iOS Simulator or a physical iPhone or iPad with RocketSim."
+sidebar:
+  label: "Location Simulation"
 ---
 
 Testing location-aware apps should not require driving around with a MacBook. RocketSim lets you simulate GPS updates on the iOS Simulator and, starting with RocketSim 16.4 and Xcode 27, on a connected physical iPhone or iPad.
