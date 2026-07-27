@@ -5,12 +5,12 @@ description: "Use the iOS Simulator camera with RocketSim to test QR scanners, p
 publishedTime: 2026-06-18T18:45:00.000Z
 image: ../../docs/docs/features/capturing/simulator-camera-support/simulator_camera.png
 imageAlt: "RocketSim side window showing Simulator Camera support with camera authorization enabled for an iOS Simulator."
-imageCaption: "RocketSim Camera Simulation lets your Simulator app receive image or video input while you keep working from the Mac."
+imageCaption: "RocketSim Camera Simulation lets your Simulator app receive your Mac's camera feed while you keep working from the Mac."
 ---
 
 The **iOS Simulator camera** is one of those things you expect to just work until you build a feature that depends on it. A QR scanner, document scanner, profile photo picker, or video onboarding flow quickly reminds you that the Simulator does not expose a real camera like an iPhone does.
 
-That usually means you switch to a physical device, grant camera permissions, reproduce the flow, and then go back to Xcode for the next change. It works, but it is slow. RocketSim Camera Simulation closes that gap by streaming images or video into the Simulator through [RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect).
+That usually means you switch to a physical device, grant camera permissions, reproduce the flow, and then go back to Xcode for the next change. It works, but it is slow. RocketSim Camera Simulation closes that gap by streaming your Mac's camera into the Simulator through [RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect).
 
 ## Why camera testing is slow
 
@@ -34,8 +34,8 @@ I have made this mistake myself while building camera-related flows: I postponed
     <source src="/features/simulator-camera.mp4" type="video/mp4" />
   </video>
   <figcaption>
-    RocketSim can stream media into your Simulator app so you can test camera
-    flows without deploying to a physical device.
+    RocketSim can stream your Mac's camera into your Simulator app so you can
+    test camera flows without deploying to a physical device.
   </figcaption>
 </figure>
 
@@ -52,7 +52,7 @@ You can use the iOS Simulator camera workflow for scenarios like:
 - Testing QR code or barcode scanning
 - Validating profile photo and avatar flows
 - Checking document capture or identity screens
-- Replaying a known video input for repeatable testing
+- Using your iPhone as the camera input through Continuity Camera
 - Verifying permission and empty states
 - Testing how your UI behaves when no camera is available
 
