@@ -3,6 +3,10 @@ title: "FAQ"
 description: "Frequently asked questions about RocketSim — licensing, App Store Connect issues, transparent captures, network speed control troubleshooting, and more."
 ---
 
+## How can I get my manager to approve RocketSim?
+
+Use the [RocketSim manager approval guide](/docs/support/how-to-get-rocketsim-approved-at-work/) for a copyable request, a simple payback summary, and answers to common procurement questions.
+
 ## Do you offer out-of-the App Store distribution?
 
 Yes, we do. Get in touch via [support@rocketsim.app](mailto:support@rocketsim.app)
@@ -13,7 +17,7 @@ Yes, you can consider buying [Team Licenses](https://www.rocketsim.app/for-teams
 
 ## I can’t reimburse App Store subscriptions, is there an alternative?
 
-Yes, we offer [Team Licenses](https://www.rocketsim.app/for-teams/).
+Yes, we offer [Team Licenses](https://www.rocketsim.app/for-teams/). The [manager approval guide](/docs/support/how-to-get-rocketsim-approved-at-work/) gives you a copyable request for centralized billing.
 
 ## Do you provide the option for commercial or team licenses?
 

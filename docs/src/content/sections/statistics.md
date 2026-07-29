@@ -9,8 +9,8 @@ list:
     title: "30+"
     description: "RocketSim adds 30+ new features to Xcode's Simulator"
   - enable: true
-    title: "200+"
-    description: "Join **200+ teams** that already signed up for RocketSim for Teams"
+    title: "250+"
+    description: "Join **250+ teams** that already signed up for RocketSim for Teams"
   - enable: true
     title: "80.000+"
     description: "80k+ developers used RocketSim last year. Only 4% churned." # TODO: add one more fact
