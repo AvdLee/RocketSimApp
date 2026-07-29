@@ -12,9 +12,11 @@ RocketSim does not build, install, or launch your app from source. Start the app
 With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your agent can:
 
 - Read visible accessibility elements, including common navigation and tab bar items
-- Tap, swipe, type, and navigate through your app reliably
+- Tap, activate, swipe, scroll, type, use multitouch, and press hardware buttons
+- Answer Face ID prompts and test offline or poor-network states
+- Batch known steps while refreshing screen state between interactions
 - Stay in a tight interaction loop without rebuilding context between steps
-- Use compact screen summaries to spend fewer tokens per UI read
+- Use compact screen summaries to spend less context per UI read
 - Fall back to screenshots when accessibility data is not enough
 
 ## What you can do with it
@@ -61,9 +63,11 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 ### Stateful by design
 
-RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**.
+RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot.
 
-The AgentScenarios fixture-only subset was effectively tied at 127.2 and 127.6 seconds, so the result does not imply that every individual workflow is faster. The context estimate divides skill, prompt, and command-output bytes by four. It is a reproducible comparison proxy, not actual model-token or billing usage.
+Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
+
+Read [how we test and improve the RocketSim CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, limitations, and improvement findings.
 
 ### Compact screen summaries
 
@@ -100,3 +104,4 @@ For most AI coding tools, install the [RocketSim Agent Skill](/docs/features/age
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — how agents inspect and interact with the Simulator
 - [Agent Skill](/docs/features/agentic-development/agent-skill) — how to install the recommended agent workflow
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — how to install the CLI and skill from RocketSim
+- [How we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) — repeatable scenarios, benchmark methodology, and results

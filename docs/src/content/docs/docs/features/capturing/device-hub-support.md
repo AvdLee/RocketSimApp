@@ -35,6 +35,12 @@ All the side window features continue to work with Device Hub in Compact Mode, i
 
 Recent Builds also follows Simulator apps run through Device Hub. For connected iPhones and iPads, RocketSim provides a dedicated USB preview and physical-device actions; see [Physical Device Testing](/docs/features/physical-devices/).
 
+## Use Device Hub with AI agents
+
+Starting with RocketSim 16.4.2, the [`rocketsim` CLI](/docs/features/agentic-development/rocketsim-cli/) and `rocketsim doctor` resolve booted Simulators through Device Hub as well as Simulator.app. Your agent can inspect and interact with the focused Simulator without opening the standalone Simulator app.
+
+Keep Device Hub in Compact Mode, focus the device you want to control, and ask the agent to start with `rocketsim screen`. If discovery fails, run `rocketsim doctor` to verify the selected device and RocketSim connection.
+
 ## Running into issues?
 
 Device Hub is brand new in Xcode 27, and edge cases can still slip through. If the side window doesn't attach the way you expect, or something looks off, please [report an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) with as much detail as you can share. That helps us tighten Device Hub support quickly.
