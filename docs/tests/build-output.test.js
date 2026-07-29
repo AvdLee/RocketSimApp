@@ -64,6 +64,38 @@ test("homepage videos stay deferred", () => {
   assert.deepEqual(eager, [], "every homepage video must keep preload=none");
 });
 
+test("Teams page preserves its conversion funnel contract", () => {
+  const html = readDist("for-teams/index.html");
+
+  assert.match(html, /data-teams-trial-form/);
+  assert.match(html, /utm_content=for_teams_hero_form/);
+  assert.match(html, /utm_content=for_teams_proof/);
+  assert.match(html, /utm_content=for_teams_bottom/);
+  assert.match(html, /CTA:\+Team\+Page\+-\+Proof\+Start\+Trial/);
+  assert.match(html, /CTA:\+Team\+Page\+-\+Start\+Trial/);
+  assert.match(
+    html,
+    /\/docs\/support\/how-to-get-rocketsim-approved-at-work\//,
+  );
+  assert.match(html, /€10 per seat\/month, billed annually/);
+});
+
+test("Teams page keeps its SEO metadata and legacy redirect", () => {
+  const html = readDist("for-teams/index.html");
+  assert.match(
+    html,
+    /RocketSim for Teams: Faster iOS Development and Build Insights/,
+  );
+  assert.match(
+    html,
+    /Give your iOS team over 30 faster Simulator and physical-device workflows/,
+  );
+  assert.match(html, /https:\/\/www\.rocketsim\.app\/for-teams/);
+
+  const redirect = readDist("team-insights/index.html");
+  assert.match(redirect, /\/for-teams/);
+});
+
 test("camera doc emits FAQPage structured data", () => {
   const html = readDist(
     "docs/features/capturing/simulator-camera-support/index.html",

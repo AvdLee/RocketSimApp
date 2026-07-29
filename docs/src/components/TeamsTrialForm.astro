@@ -116,6 +116,15 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
     text-align: center;
   }
 
+  .trial-form__proof {
+    margin: 1rem 0 0;
+
+    font-size: 0.8125rem;
+    color: var(--text-color-light);
+    line-height: 1.5;
+    text-align: center;
+  }
+
   .trial-form__pricing {
     display: block;
     margin-top: 1rem;
@@ -218,9 +227,12 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
       Start free Teams trial
     </button>
     <p class="trial-form__trust">
-      One shared license key. Essential setup and expiry emails are included.
+      €10 per seat/month, billed annually. One shared license key.
     </p>
   </form>
+  <p class="trial-form__proof">
+    Trusted by 250+ teams, including Meta, Strava, and Google.
+  </p>
   <a
     class="trial-form__pricing plausible-event-name=CTA:+Team+Page+-+See+Pricing plausible-event-surface=for-teams plausible-event-placement=for-teams-hero plausible-event-format=text-link plausible-event-source=website"
     href="/pricing/#plan-teams"
