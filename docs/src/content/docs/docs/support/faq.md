@@ -21,7 +21,7 @@ Yes, check out [Team Licenses](https://www.rocketsim.app/for-teams/).
 
 ## Can I buy a lifetime license?
 
-No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://www.avanderlee.com/swiftlee-weekly-subscribe/) and follow the instructions in the email.
+No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://swiftlee-weekly.com/?utm_source=rocketsim&utm_medium=referral&utm_campaign=swiftlee_weekly&utm_content=faq_lifetime_license) and follow the instructions in the email.
 
 ## Why is my video not accepted by App Store Connect?
 
