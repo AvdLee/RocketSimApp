@@ -11,6 +11,7 @@ interface Props {
 
 const { title, logo, logoAlt } = Astro.props;
 const hasAside = Astro.slots.has("aside");
+const hasBelowCopy = Astro.slots.has("below-copy");
 ---
 
 <style>
@@ -68,6 +69,10 @@ const hasAside = Astro.slots.has("aside");
     margin: 0 0 1rem;
   }
 
+  .hero__below-copy {
+    margin-top: 1.5rem;
+  }
+
   .hero__aside {
     display: flex;
     justify-content: center;
@@ -108,6 +113,13 @@ const hasAside = Astro.slots.has("aside");
       <p>
         <slot />
       </p>
+      {
+        hasBelowCopy && (
+          <div class="hero__below-copy">
+            <slot name="below-copy" />
+          </div>
+        )
+      }
     </div>
     <div class="hero__aside">
       {
