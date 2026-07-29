@@ -3,6 +3,7 @@ showOnHomepage: true
 name: "Agentic iOS development"
 tagLine: "Let your AI coding agent see and control the Simulator"
 featurePage: "agentic-development"
+blogSlug: "testing-ai-agents-ios-simulator"
 asset:
   type: "video"
   path: "/features/agentic-demo.mp4"
@@ -13,12 +14,13 @@ asset:
 
 RocketSim ships a version-matched `rocketsim` CLI and Agent Skill so Cursor, Xcode, Claude, Codex, and other AI coding tools can inspect and interact with your running Simulator app.
 
-- Read compact visible-element summaries with fewer tokens per screen read
-- Tap, swipe, type, wait, and capture screenshots through the running RocketSim app
-- Use selector-based interactions instead of fragile coordinate-only taps
+- Read compact `nav`, `act`, and `debug` screen summaries
+- Tap, activate, swipe, scroll, type, use multitouch, and press hardware buttons
+- Answer Face ID prompts and test offline or poor-network states
+- Batch known steps while RocketSim refreshes screen state
 - Validate setup with `rocketsim doctor`
 - Keep the CLI and Agent Skill in sync through app updates
 
-Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The context estimate is a reproducible proxy, not actual model-token or billing usage.
+Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
 
 [Read the Agentic Development docs](/docs/features/agentic-development/).

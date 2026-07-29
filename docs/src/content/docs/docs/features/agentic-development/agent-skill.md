@@ -24,7 +24,7 @@ The skill helps agents:
 - Use screenshots when accessibility data is sparse or incomplete
 - Run `rocketsim doctor` when setup needs to be checked
 
-Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The context estimate divides skill, prompt, and command-output bytes by four; it is not actual model-token or billing usage.
+Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the methodology and improvement findings.
 
 ## Install from RocketSim
 
@@ -37,6 +37,8 @@ Compared to a popular alternative in our July 2026 head-to-head benchmark, Rocke
 RocketSim installs the skill as a symlink to the bundled skill inside `RocketSim.app`. When RocketSim updates, the skill keeps pointing at the latest installed app version.
 
 ![CLI & Agent settings showing Agent Skill installation options](./agent-skill/cli-agent-settings.png)
+
+If the agent reports that `rocketsim` is not on its `PATH`, it should also check `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, and the helper inside `/Applications/RocketSim.app`. Agent shells can use a different `PATH` than Terminal. Reinstall the command from RocketSim only when none of those locations contains it.
 
 ## Supported destinations
 
@@ -53,6 +55,14 @@ If RocketSim shows **Repair**, the existing symlink points somewhere unexpected 
 RocketSim ships the CLI and Agent Skill inside the app bundle. The installed files are symlinks, not copied snapshots. That matters because the CLI surface and skill instructions evolve together.
 
 After an App Store update, your `rocketsim` command and installed skill still resolve to the current app bundle. Agents get the guidance that matches the RocketSim version they are controlling.
+
+For you as a developer, this means you only have to keep RocketSim updated to the latest App Store version. Your agents will automatically use the latest guidance and the best available way to interact with the Simulator.
+
+## The skill-guided interaction loop
+
+The current skill teaches agents to start with a compact `nav` or `act` screen read, prefer labels over coordinates, guard interactions with `--screen latest`, and combine known sequential actions with `rocketsim do`. It uses interaction deltas and concrete waits to avoid unnecessary screen reads. Debug snapshots and screenshots are fallbacks when normal accessibility output is insufficient.
+
+The agent should run `rocketsim doctor` only when setup appears broken: the CLI cannot connect, no Simulator can be found, or perception and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or `rocketsim elements --agent`.
 
 ## What the agent can do after setup
 
@@ -79,8 +89,11 @@ Then open your AI coding tool and try:
 
 If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
 
+The same command discovers booted Simulators shown through Xcode 27's Device Hub. If `doctor` cannot find one, put Device Hub in Compact Mode, focus the device, and retry. For network-condition tests, the agent may need you to approve RocketSim's Network Extension once; macOS does not allow an agent to complete that approval headlessly.
+
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — the commands agents use to inspect and interact with the Simulator
 - [Agentic Development with RocketSim](/docs/features/agentic-development/) — scenarios, example prompts, and why RocketSim is effective for agent-driven Simulator automation
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — installing and repairing the CLI and skill
+- [How we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) — repeatable scenarios, benchmark methodology, and results

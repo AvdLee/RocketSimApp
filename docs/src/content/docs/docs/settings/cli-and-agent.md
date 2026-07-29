@@ -49,7 +49,7 @@ Use a tool-specific destination only if your tool does not scan the shared locat
 
 The RocketSim Mac app is already running beside the Simulator. It can keep state, cache expensive work, and optimize repeated agent loops. The CLI exposes that running app to agents, and the Agent Skill helps agents use the CLI in the right order.
 
-Compared to a popular alternative in our July 2026 head-to-head benchmark, RocketSim produced **over 99% less command output**, had an **approximately 96% lower byte-based context estimate**, and completed the measured command work in **32% less total time**. The context estimate divides skill, prompt, and command-output bytes by four; it is not actual model-token or billing usage.
+Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
 
 ## Verify the setup
 
@@ -59,7 +59,7 @@ Run:
 rocketsim doctor
 ```
 
-The doctor command checks whether RocketSim, the CLI install, the Simulator, accessibility permissions, and agent workflow state are ready.
+The doctor command checks whether RocketSim, the CLI install, the Simulator, accessibility permissions, and agent workflow state are ready. Run it when setup appears broken, not before every interaction. RocketSim 16.4.2 also discovers booted Simulators shown through Xcode 27's Device Hub.
 
 Then ask your AI coding tool:
 
@@ -71,7 +71,7 @@ If everything is installed correctly, the agent should use RocketSim to read the
 
 ### The command is not found
 
-Make sure you chose a folder that is on your shell `PATH`. You can reinstall from **Settings → CLI & Agent** and choose another folder.
+Agent shells can have a different `PATH` than Terminal. Check `/opt/homebrew/bin/rocketsim`, `/usr/local/bin/rocketsim`, `~/.local/bin/rocketsim`, and `/Applications/RocketSim.app/Contents/Helpers/rocketsim`. If none is available, reinstall from **Settings → CLI & Agent** and choose a folder on the agent's `PATH`.
 
 ### RocketSim says the command needs repair
 
@@ -86,3 +86,11 @@ If you are using Claude Agent inside Xcode, install **Agentic Coding in Xcode** 
 ### I use a custom skill folder
 
 Use **Choose Custom Skill Folder...** in the Agent Skill section and select the folder your tool scans for skills.
+
+### Device Hub is open, but no Simulator is found
+
+Put Xcode 27's Device Hub in Compact Mode and focus the device you want to control. Then run `rocketsim doctor` again. RocketSim 16.4.2 resolves booted Simulators through Device Hub as well as Simulator.app.
+
+### A network command asks for approval
+
+Open RocketSim's Networking window and approve the Network Extension once. macOS requires this user action and agents cannot complete it headlessly. If a command reports a timeout instead, retry once; RocketSim 16.4.2 now fails after a bounded wait instead of hanging indefinitely.

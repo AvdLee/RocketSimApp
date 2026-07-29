@@ -1,0 +1,125 @@
+---
+title: "How We Test AI Agents for the iOS Simulator"
+description: "See how RocketSim benchmarks its CLI and Agent Skill with repeatable iOS Simulator scenarios to improve reliability, speed, and context efficiency."
+publishedTime: 2026-07-24T08:00:00.000Z
+modifiedTime: 2026-07-29T10:02:43.000Z
+image: ./agent-scenarios-testing-face-id.png
+imageAlt: "RocketSim Agent Benchmark app showing a Face ID test scenario next to the RocketSim side window."
+---
+
+**Testing AI agents for the iOS Simulator** requires more than asking an agent to tap through an app once. A successful run can be luck, while a failed run can come from the model, the CLI, the Agent Skill, or the app itself. We wanted a repeatable way to tell those causes apart.
+
+That is why we built AgentScenarios: a small, deterministic iOS app for testing and improving the [RocketSim CLI and Agent Skill](/docs/features/agentic-development/). It helps us reproduce difficult Simulator interactions, benchmark the complete command workflow, and turn every weakness into a scenario we can run again.
+
+## Why agent testing needs scenarios
+
+An agent usually follows a short loop: inspect the screen, choose a target, interact, wait for the UI to change, and inspect again. Each step looks simple until the app contains two buttons with the same label, a web view with sparse accessibility data, or an image that only makes sense visually.
+
+Those are exactly the situations a happy-path demo skips. AgentScenarios deliberately includes them:
+
+- Nested navigation with repeated row structures
+- Duplicate button labels that require surrounding context
+- A photo target that needs visual reasoning
+- Sparse web content and native-to-web transitions
+- Face ID prompts backed by `LocalAuthentication`
+- Upside-down orientation and coordinate mapping
+- A hidden debug menu that requires accessibility activation
+- Swipe, long-press, text-entry, two-finger, and Home-button delivery
+- Multi-step command batches that need to refresh screen state correctly
+
+The app is intentionally local and deterministic. We can reset it before every run, start each tool from the same screen, and verify the result through visible state in the app. This gives us a much better signal than testing against a changing third-party app.
+
+The scenarios also complement Apple's regular UI testing tools. Apple recommends preparing apps for automation with accessibility and writing stable, high-quality automation code in its [UI automation guidance](https://developer.apple.com/videos/play/wwdc2025/344/). RocketSim uses that same structured UI foundation, but exposes it to coding agents that need to inspect and control the app while working on your code.
+
+## Testing the CLI and Agent Skill together
+
+A CLI command can be correct while an agent still uses it incorrectly. The command surface and the instructions therefore need to be tested as one workflow.
+
+The [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) provides compact element reads, semantic interactions, screen-change waits, screenshots, biometric controls, and setup diagnostics. The [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill) explains when and how an agent should combine those commands.
+
+For example, the skill encourages an agent to:
+
+1. Read compact visible-element output
+2. Prefer an element identifier or semantic selector
+3. Include the current screen identifier when interacting
+4. Wait for the screen to change
+5. Read again before deciding on the next step
+6. Fall back to a screenshot when accessibility data is not enough
+
+You might wonder why the Agent Skill is part of the measurement if the CLI performs the actual interaction. The skill itself uses context, and its guidance can add or remove command turns. Our byte-based context estimate therefore includes the skill size, scenario prompt, and textual command output.
+
+<figure>
+  <video
+    controls
+    playsinline
+    preload="metadata"
+    poster="/blog/agent-scenarios-testing-poster.jpg"
+    class="w-full rounded-2xl"
+  >
+    <source src="/blog/agent-scenarios-testing.mp4" type="video/mp4" />
+  </video>
+  <figcaption>
+    AgentScenarios reproduces orientation and interaction cases so changes to
+    RocketSim can be verified against the same UI repeatedly.
+  </figcaption>
+</figure>
+
+This setup also keeps RocketSim's CLI and Agent Skill version-matched. Both ship inside the RocketSim app, and their installed symlinks continue to point at the current version after an update. New commands and new guidance can evolve together instead of slowly drifting apart. For you as a developer, this means you only have to keep RocketSim updated to the latest App Store version. Your agents will automatically use the latest guidance and the best available way to interact with the Simulator.
+
+## How we benchmark agent workflows
+
+Our latest benchmark combines fifteen AgentScenarios flows with five workflows in the iOS Settings app. The fixture app covers nested navigation, duplicate labels, visual targets, web login, native-to-web transitions, hidden accessibility activation, Face ID, upside-down orientation, command batches, swipe, long-press, text entry, two-finger input, and Home-button delivery. The Settings scenarios add realistic scrolling, account entry, toggles, and stale-screen recovery.
+
+Every comparable scenario ran three times with RocketSim and other tooling available to control the iOS Simulator. The latest run contains **108 head-to-head tool/scenario records** and **six RocketSim-only capability records**, for **114 records in total**. Face ID and two-finger input remain capability-only because equivalent commands were not available across the tested tools.
+
+The runner uses dedicated Simulators, pins the tested tools and Agent Skills, automates AgentScenarios setup, and scopes orientation and biometric state to the selected device. This run used RocketSim 16.4.2 build 326, Xcode 26.6, iOS 26.5, and macOS 26.5.2. It separates comparable scenarios from capability-only checks and records timing distributions instead of relying on a single run.
+
+For each scenario, we record:
+
+- Command turns
+- Standard output and error bytes
+- A byte-based context estimate
+- Total elapsed time
+- Wrong taps
+- Unexpected failures
+
+The byte-based context estimate includes the skill, prompt, and textual command output. It is a reproducible comparison proxy rather than actual model-token or billing usage. Screenshots are stored as artifacts, but their binary file contents are not included.
+
+Freezing the scenarios makes the comparison repeatable, but it also means this is a benchmark of the agent substrate rather than a ranking of AI models. Fixed drivers execute documented command patterns, so the run measures the tools and their recommended workflows without measuring an LLM's reasoning quality. Model choice, context, caching, and decision-making can still change the result of a real coding session.
+
+## What the benchmark taught us
+
+Compared with other tools available to control the iOS Simulator, RocketSim produced **118.88× fewer output bytes**, had a **21.06× lower byte-based context estimate**, and used **about 24% less measured command time** across the head-to-head records. That saved 88.6 seconds in total. In rounded customer-facing terms, that is over 99% less command output and about a 95% lower context proxy.
+
+Those numbers support the design behind RocketSim's compact `rs/1` output. An agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
+
+The benchmark does not imply that every individual workflow is faster. RocketSim used more command turns: the comparison runs used 0.69× as many turns. The fixture-only command time was 228.7 seconds for RocketSim and 217.4 seconds for the comparison runs, while the larger difference came from the frozen Settings workflows.
+
+Correctness is equally important. All measured A1–A15 fixture interactions passed in every round, including swipe, long-press, text entry, Home-button delivery, Face ID, and two-finger input. The frozen Settings scripts recorded six wrong interactions for RocketSim and fifteen across the comparison runs. Current Settings UI drift caused the shared account-entry and accessibility-toggle failures, while all three comparison runs also missed stale-navigation recovery. We keep those failures visible instead of normalizing the scripts until every run passes.
+
+We consider that result valuable. A benchmark should reveal what to improve, not just produce a marketing number. Comparing the latest run with our earlier baseline shows how measured weaknesses can turn into product improvements:
+
+- Face ID interactions now provide reliable completion notifications
+- Accessibility failures return typed, actionable errors
+- Multi-step command batches can start without requiring a seeded snapshot
+- Refresh failures remain correctly wrapped in the agent protocol response
+
+The latest harness also automates hidden debug-menu activation, upside-down orientation, swipe, long-press, text entry, two-finger input, and Home-button checks. Face ID and two-finger input remain RocketSim-only capability scenarios because equivalent commands were not available across all tested tools. Whenever the CLI or Agent Skill changes, these focused scenarios make it easier to verify the behavior that motivated the change.
+
+## Why this matters for agentic iOS development
+
+Agentic development becomes useful when an agent can close the feedback loop. Editing Swift code is only half the work; the agent should also navigate to the changed screen and verify the result in the iOS Simulator.
+
+Reliability matters more as those flows become longer. One wrong tap near the start of onboarding can invalidate every step after it. Oversized element output can fill the context window before the agent reaches the screen it needs. A missing wait can make a correct interaction look like a failure.
+
+RocketSim's [agentic iOS Simulator development tools](/features/agentic-development) are built around these constraints. The running Mac app keeps Simulator state warm, the CLI exposes a compact interaction layer, and the Agent Skill teaches coding tools how to use that layer consistently.
+
+Testing all three parts against repeatable scenarios gives us confidence that an improvement works beyond a single demo. It also keeps the product honest: if a richer response costs too many tokens or a faster interaction causes more wrong taps, the benchmark makes that trade-off visible.
+
+## Conclusion
+
+Testing AI agents for the iOS Simulator works best with small, repeatable scenarios and measurements that cover more than success or failure. AgentScenarios lets us measure output size, byte-based context estimates, elapsed time, and wrong interactions while continuously expanding our regression coverage.
+
+If you want your coding agent to inspect and navigate a running app, install [RocketSim from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=testing-ai-agents-ios-simulator&mt=8), then open **RocketSim → Settings → CLI & Agent** to install the CLI and Agent Skill. Feel free to [contact us](https://www.avanderlee.com/contact/) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you have a difficult Simulator workflow we should add to AgentScenarios.
+
+Thanks!

@@ -29,7 +29,7 @@ Screenshots are converted from PNG to JPEG (App Store Connect doesn't accept alp
 
 Recordings are re-encoded to the correct codec (H.264 or HEVC). A silent audio track is added if missing — App Store Connect requires it for app previews. Empty frames are trimmed, and the video is resized to the correct App Store Connect preview resolution for that device.
 
-App Store Connect also enforces other rules for app previews: **length must be between 15 and 30 seconds**, file size is capped at 500MB, and there are requirements for frame rate, audio, and file format. RocketSim handles format and resolution; for duration and the full, up-to-date checklist, always check [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) so your previews are accepted.
+App Store Connect also enforces other rules for app previews: **length must be between 15 and 30 seconds**, file size is capped at 500MB, and there are requirements for frame rate, audio, and file format. RocketSim 16.4.2 warns you when an App Preview Optimized recording falls outside that accepted duration, so you can adjust it before uploading. RocketSim handles format and resolution; for the full, up-to-date checklist, always check [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8).
 
 ## Supported output resolutions
 

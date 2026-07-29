@@ -30,7 +30,7 @@ That makes it easy to keep one reusable deeplink around for many test cases inst
 
 When you trigger that deeplink from the side window, RocketSim opens a compact input view right there in the Simulator context. Enter the value you want to use and RocketSim substitutes it into the final URL before launching your app.
 
-RocketSim also keeps a few recently used values as quick relaunch pills, so repeating the same test case only takes one click.
+RocketSim also keeps recently used values as quick relaunch actions, so repeating the same test case only takes one click. RocketSim 16.4.2 preserves long arguments without truncating the important URL text. The history wraps long values across rows, keeps up to six recent entries, and becomes vertically scrollable when needed.
 
 ![Side window deeplink prompt showing a runtime argument field and recent values for quick relaunch.](./deeplinks-universal-links/deeplinks_with_argument_side_window.png)
 

@@ -53,6 +53,13 @@ rocketsim network set 100-loss \
 
 CLI network control requires RocketSim Pro and the same enabled Network Extension as the side-window control. See [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli/) for the full agent workflow.
 
+RocketSim 16.4.2 prevents network commands from waiting indefinitely when the extension is unavailable. A `network_extension_not_ready` response includes a reason:
+
+- `needs_user_approval`: open RocketSim's Networking window and approve the Network Extension. macOS requires this user action.
+- `timed_out`: the bounded backend operation did not finish. Retry once before checking the extension in System Settings.
+
+Always run `rocketsim network off` when the test is complete.
+
 ## FAQ
 
 ### How does this feature differ from the Network Link Conditioner?

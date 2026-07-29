@@ -58,13 +58,15 @@ Press **Start Setup** and follow the displayed steps:
 3. Run your app from Xcode.
 4. The setup view completes after the first debug-launched app connects.
 
+RocketSim 16.4.2 also offers **Validate Later** when you want to finish onboarding before launching a debug build. The LLDB init hook remains installed, and RocketSim validates the connection the next time an eligible Simulator app starts.
+
 If file access does not work, RocketSim also provides an inspectable Terminal command. It creates the helper script and updates only RocketSim's managed block. The command does not use `sudo` or request broad access to your home folder.
 
 Existing symbolic-breakpoint setups are considered legacy. RocketSim can prompt older installations to move to the LLDB init workflow so Connect setup remains consistent across projects.
 
 ### Why RocketSim uses a separate helper script
 
-Keeping the implementation in RocketSim's Application Support folder leaves your personal LLDB init file readable and minimal. It also lets RocketSim repair a stale framework path if RocketSim.app moves or is reinstalled.
+Keeping the implementation in RocketSim's Application Support folder leaves your personal LLDB init file readable and minimal. It also lets RocketSim repair a stale framework path if RocketSim.app moves or is reinstalled. RocketSim 16.4.2 reduces the work performed during LLDB startup, making Connect initialization faster in both Xcode 26 and Xcode 27.
 
 After a RocketSim update, the setup continues to load the framework from the installed app. If RocketSim reports that the hook is outdated, reopen the Connect setup and let RocketSim repair it.
 
