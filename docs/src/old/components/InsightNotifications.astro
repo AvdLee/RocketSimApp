@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+
+import gaugeIcon from "../../assets/gauge.svg";
+import gaugeAlertIcon from "../../assets/gauge-alert.svg";
+
+const notifications = [
+  {
+    icon: gaugeIcon,
+    iconAlt: "Speedometer icon",
+    text: "Save up to 2 hours per month by upgrading older team MacBooks to an M5 Max.",
+  },
+  {
+    icon: gaugeAlertIcon,
+    iconAlt: "Speedometer icon with exclamation mark",
+    text: "Antoine is the only one building with Xcode 26.5, which can lead to different build results.",
+  },
+  {
+    icon: gaugeIcon,
+    iconAlt: "Speedometer icon",
+    text: "Xcode 27 is your fastest version so far. Consider rolling it out to the whole team.",
+  },
+];
+---
+
+<style>
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+
+    list-style-type: none;
+  }
+
+  article {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+
+    color: #fff;
+
+    background: linear-gradient(
+      138deg,
+      rgba(73, 96, 202, 0.7) 22%,
+      rgba(52, 11, 122, 0.2) 82%
+    );
+    border-radius: 1.25rem;
+
+    box-shadow:
+      0px 1px 0px 0px rgba(255, 255, 255, 0.1) inset,
+      0px 0px 20px 3px rgba(7, 13, 79, 0.05),
+      0px 0px 40px 20px rgba(7, 13, 79, 0.05),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  }
+
+  /* The alert icon is wider than the plain gauge, so a fixed slot keeps every
+     text block on the same leading edge. */
+  .icon {
+    display: flex;
+    flex: 0 0 2rem;
+  }
+
+  img {
+    position: relative;
+    top: 0.125rem;
+  }
+
+  p {
+    margin: 0 2.5rem 0 0;
+
+    font-size: 0.9375rem;
+    text-wrap: balance;
+  }
+</style>
+
+<ul>
+  {
+    notifications.map((notification) => (
+      <li>
+        <article>
+          <span class="icon">
+            <Image
+              src={notification.icon}
+              alt={notification.iconAlt}
+              height="20"
+            />
+          </span>
+          <p>{notification.text}</p>
+        </article>
+      </li>
+    ))
+  }
+</ul>

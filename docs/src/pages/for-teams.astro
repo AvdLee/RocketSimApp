@@ -5,9 +5,9 @@ import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import TeamsTrialForm from "../components/TeamsTrialForm.astro";
 import Header from "../old/components/Header.astro";
+import InsightNotifications from "../old/components/InsightNotifications.astro";
 import Insights from "../old/components/Insights.astro";
 import InsightsBreakdown from "../old/components/InsightsBreakdown.astro";
-import InsightsActionable from "../old/components/InsightsActionable.astro";
 import OnlineTeamManager from "../old/components/OnlineTeamManager.astro";
 import TeamTestimonial from "../old/components/TeamTestimonial.astro";
 import TrustedBrands from "@/partials/TrustedBrands.astro";
@@ -47,23 +47,24 @@ const structuredData = {
     Give every developer over 30 faster Simulator and physical-device workflows,
     while shared local-build insights compare machines, Xcode versions,
     projects, and schemes.
+    <InsightNotifications slot="below-copy" />
     <TeamsTrialForm slot="aside" />
   </Header>
   <TrustedBrands />
   <TeamTestimonial />
   <Insights />
   <InsightsBreakdown
-    title="Is it worth getting an M4 Max?"
+    title="Is it worth getting an M5 Max?"
     chart={{
       title: "Build Duration by Machine",
       data: [
         {
-          title: 'MacBook Pro 16" / M4 Max 16-core / 128 RAM',
+          title: 'MacBook Pro 16" / M5 Max 16-core / 128 RAM',
           value: 12,
           width: 0.36,
         },
         {
-          title: 'MacBook Pro 14" / M4 Pro 14-core / 48 RAM',
+          title: 'MacBook Pro 14" / M5 Pro 14-core / 48 RAM',
           value: 14,
           width: 0.42,
         },
@@ -122,7 +123,6 @@ const structuredData = {
       data.
     </p>
   </InsightsBreakdown>
-  <InsightsActionable />
   <OnlineTeamManager />
   <section class="section pt-40">
     <div class="container">
