@@ -83,6 +83,12 @@ const hasBelowCopy = Astro.slots.has("below-copy");
     }
   }
 
+  .hero__aside--after-copy {
+    @media (max-width: 799px) {
+      margin-top: 1.5rem;
+    }
+  }
+
   .logo-image {
     width: 4rem;
     height: auto;
@@ -121,7 +127,9 @@ const hasBelowCopy = Astro.slots.has("below-copy");
         )
       }
     </div>
-    <div class="hero__aside">
+    <div
+      class:list={["hero__aside", { "hero__aside--after-copy": hasBelowCopy }]}
+    >
       {
         hasAside ? (
           <slot name="aside" />
