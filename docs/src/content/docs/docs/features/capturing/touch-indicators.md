@@ -1,5 +1,5 @@
 ---
-title: "Touch Indicators"
+title: "Touch Indicators" '
 description: "Display touch indicators in your iOS Simulator recordings and screenshots. Show taps visually for App Preview videos and demo recordings."
 sidebar:
   order: 5
