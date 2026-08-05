@@ -19,7 +19,7 @@ The skill helps agents:
 
 - Use RocketSim's compact `--agent` output before deciding what to do
 - Prefer semantic interactions over fragile coordinate taps when possible
-- Work with RocketSim's `rs/1` agent protocol without needing to know its internals
+- Work with RocketSim's [`rs/1` agent protocol](/docs/features/agentic-development/rs1-protocol) without needing to know its internals
 - Recover when a screen changes between inspection and interaction
 - Use screenshots when accessibility data is sparse or incomplete
 - Run `rocketsim doctor` when setup needs to be checked
