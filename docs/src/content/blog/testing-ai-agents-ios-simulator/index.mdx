@@ -2,7 +2,7 @@
 title: "How We Test AI Agents for the iOS Simulator"
 description: "See how RocketSim benchmarks its CLI and Agent Skill with repeatable iOS Simulator scenarios to improve reliability, speed, and context efficiency."
 publishedTime: 2026-07-24T08:00:00.000Z
-modifiedTime: 2026-07-31T19:20:00.000Z
+modifiedTime: 2026-08-05T09:37:00.000Z
 image: ./agent-scenarios-testing-face-id.png
 imageAlt: "RocketSim Agent Benchmark app showing a Face ID test scenario next to the RocketSim side window."
 ---
@@ -72,7 +72,7 @@ Our latest benchmark combines fifteen AgentScenarios flows with five workflows i
 
 Every comparable scenario ran three times in a single session against three pinned tools: RocketSim 16.4.2 build 326, [AXe](https://github.com/cameroncooke/AXe) 1.8.0, and [XcodeBuildMCP](https://github.com/cameroncooke/XcodeBuildMCP) 2.7.0, driven through its MCP server interface. An earlier version of this post only said "other tools", which was rightfully criticized. The latest run, dated July 31st, contains **156 records in total**: **150 head-to-head tool/scenario records** and **six RocketSim-only capability records**.
 
-One thing I want to state clearly, because Cameron Cooke, the author of both AXe and XcodeBuildMCP, rightfully pointed it out: these two tools sit at different layers. AXe is deliberately a raw, non-agentic primitive layer. Returning the full accessibility tree is a design choice, not a flaw, and it leaves filtering to whatever builds on top of it. XcodeBuildMCP is such a layer: it builds on AXe and adds state management and compact output in the same spirit as RocketSim's `rs/1` format. Keep that in mind when reading the multipliers below.
+One thing I want to state clearly, because Cameron Cooke, the author of both AXe and XcodeBuildMCP, rightfully pointed it out: these two tools sit at different layers. AXe is deliberately a raw, non-agentic primitive layer. Returning the full accessibility tree is a design choice, not a flaw, and it leaves filtering to whatever builds on top of it. XcodeBuildMCP is such a layer: it builds on AXe and adds state management and compact output. That compact output follows the approach of `rs/1`, the agent protocol we designed for RocketSim. Cameron mentioned to me that the rs/1 approach was a good direction that he also incorporated into XcodeBuildMCP. I consider that a great validation of the design. Keep these layers in mind when reading the multipliers below.
 
 Not every scenario could run on every tool. Face ID and two-finger input remain RocketSim-only capability records because neither AXe 1.8.0 nor XcodeBuildMCP 2.7.0 offers equivalent commands. XcodeBuildMCP 2.7.0 also sat out the web login, hybrid web, cross-screen batch, and coordinate swipe scenarios: its runtime snapshot does not expose WKWebView content, it has no coordinate tap or swipe fallback, and its batch command only accepts same-screen steps. Those scenarios stay head-to-head between RocketSim and AXe.
 
@@ -101,9 +101,9 @@ No tool had a perfect run, including ours. RocketSim recorded **seven wrong inte
 
 On efficiency, an earlier version of this post claimed **118.88× fewer output bytes compared with other tools**. That multiplier came from comparing with raw AXe only, and I should have said so. Against AXe 1.8.0, the new frozen run shows a similar picture: 119.3× fewer output bytes, a 21.0× lower byte-based context estimate, and 66.5 seconds less total command time. That still rounds to over 99% less command output and about a 95% lower context proxy, but it is a comparison against a primitive layer that returns the full accessibility tree on purpose.
 
-The XcodeBuildMCP comparison is the fairer one, because it produces compact output like RocketSim does. Over the fourteen scenarios both tools ran head-to-head, XcodeBuildMCP produced **3.0× RocketSim's tool-response bytes**, an **8.2× higher byte-based context estimate** (which charges its MCP tool catalog once per scenario, exactly like the skill files for the CLI tools), and finished **171.5 seconds slower** in total. RocketSim used more command turns to get there: XcodeBuildMCP needed 0.79× as many turns, and AXe 0.70×.
+The XcodeBuildMCP comparison is the fairer one, because its compact output builds on the same rs/1 approach that RocketSim introduced. Over the fourteen scenarios both tools ran head-to-head, XcodeBuildMCP produced **3.0× RocketSim's tool-response bytes**, an **8.2× higher byte-based context estimate** (which charges its MCP tool catalog once per scenario, exactly like the skill files for the CLI tools), and finished **171.5 seconds slower** in total. RocketSim used more command turns to get there: XcodeBuildMCP needed 0.79× as many turns, and AXe 0.70×.
 
-Those numbers still support the design behind RocketSim's compact `rs/1` output. An agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
+Those numbers still support the design behind `rs/1`, the compact agent protocol we designed for RocketSim. Seeing other tools adopt the same approach confirms the direction, and this benchmark shows the original implementation still leads. An agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
 
 We consider that result valuable. A benchmark should reveal what to improve, not just produce a marketing number. Comparing the latest run with our earlier baseline shows how measured weaknesses can turn into product improvements:
 
