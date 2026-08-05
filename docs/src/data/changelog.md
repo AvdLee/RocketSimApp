@@ -1,3 +1,10 @@
+# 16.4.3
+
+**Fixed:**
+
+- Fixed App Store Connect rejecting App Previews exported with the "App Store Connect" option enabled. Those recordings were encoded as HEVC and could keep the recording's frame rate, while App Store Connect only accepts H.264 at up to 30 FPS. (Thanks, L. Mikusiak!)
+- Fixed deeply nested VoiceOver Overlay elements consuming too much horizontal space by capping their indentation.
+
 # 16.4.2
 
 **New:**
