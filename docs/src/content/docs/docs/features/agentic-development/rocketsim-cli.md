@@ -43,7 +43,7 @@ RocketSim resolves booted Simulators through the same device service used by the
 
 RocketSim is not just a standalone command that starts from scratch every time. The CLI talks to the running Mac app, which can keep simulator state, reuse context between commands, and optimize repeated screen reads and interactions.
 
-The CLI uses RocketSim's `rs/1` protocol for agent workflows. You do not need to learn the protocol details; it is the compact, agent-optimized layer that lets RocketSim provide reliable screen reads, interaction feedback, and recovery paths while keeping output small.
+The CLI uses RocketSim's [`rs/1` protocol](/docs/features/agentic-development/rs1-protocol) for agent workflows. You do not need to learn the protocol details; it is the compact, agent-optimized layer that lets RocketSim provide reliable screen reads, interaction feedback, and recovery paths while keeping output small.
 
 Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
 
