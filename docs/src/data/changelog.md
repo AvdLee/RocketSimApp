@@ -1,10 +1,18 @@
 # 16.4.3
 
+**New:**
+
+- Touch pointer size can now be adjusted from Captures settings. (Thanks, J. Williams!)
+
 **Fixed:**
 
+- Fixed touch strokes appearing inconsistently between capture previews and exported recordings. (Thanks, J. Williams!)
 - Fixed an empty black circle appearing on the side window's More button. (Thanks, H. v.d. Ploeg!)
 - Fixed App Store Connect rejecting App Previews exported with the "App Store Connect" option enabled. Those recordings were encoded as HEVC and could keep the recording's frame rate, while App Store Connect only accepts H.264 at up to 30 FPS. (Thanks, L. Mikusiak!)
 - Fixed deeply nested VoiceOver Overlay elements consuming too much horizontal space by capping their indentation.
+- Fixed touch indicators following mouse movement after releasing a touch in recordings without Touch Attention enabled. (Thanks, J. Scalo!)
+- Fixed touch indicators being absent from recordings of Simulators hosted in Xcode's Device Hub.
+- Fixed touch indicators drifting out of sync with the recording when video stream startup was slow. Touch timestamps are now anchored to the video's own timeline.
 - Fixed RocketSim Connect's LLDB hook injecting into app-hosted test runs, which could pause snapshot tests at `UIApplicationMain` and surface duplicate Objective-C class warnings. Test hosts are now excluded by detecting loaded XCTest runtime modules. (Thanks, M. Caron!)
 - Fixed a race in RocketSim Connect's LLDB hook that could leave app launches paused at `UIApplicationMain` until manually continued, with Connect never attaching. The loader now captures the launch thread identity before resuming and safely recovers its own stops without ever touching user breakpoints or pauses. (Thanks, M. Heiberg and R. Mirzoyan!)
 - Fixed RocketSim Connect's LLDB hook suspending background threads while running to `UIApplicationMain`, which could permanently deadlock apps that wait on background work during startup (for example analytics SDK or telephony setup). The run-to-main plan now keeps all threads running.
