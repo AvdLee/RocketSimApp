@@ -108,6 +108,8 @@ export default defineConfig({
       "/docs/features/physical-devices",
     "/docs/docs/features/capturing/physical-device-support":
       "/docs/features/physical-devices",
+    "/blog/debug-urlsession-requests-without-proxy":
+      "/blog/monitor-urlsession-network-requests-without-the-pain-of-custom-certificates",
   },
   image: {
     service: {
