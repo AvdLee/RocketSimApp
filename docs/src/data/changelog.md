@@ -6,6 +6,7 @@
 
 **Fixed:**
 
+- Fixed truncated action button labels on the Unlock Pro Recordings floating thumbnail by wrapping the dual CTAs onto two lines.
 - Fixed touch strokes appearing inconsistently between capture previews and exported recordings. (Thanks, J. Williams!)
 - Fixed an empty black circle appearing on the side window's More button. (Thanks, H. v.d. Ploeg!)
 - Fixed App Store Connect rejecting App Previews exported with the "App Store Connect" option enabled. Those recordings were encoded as HEVC and could keep the recording's frame rate, while App Store Connect only accepts H.264 at up to 30 FPS. (Thanks, L. Mikusiak!)
