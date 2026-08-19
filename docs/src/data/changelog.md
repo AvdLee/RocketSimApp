@@ -1,4 +1,10 @@
-# 16.4.3
+# 16.4.4
+
+**Fixed:**
+
+- Fixed Xcode selection failures showing a misleading user-directory warning instead of explaining why the selected Xcode could not be used. (Thanks, H. v.d. Ploeg!)
+
+# 16.4.3 (328)
 
 **New:**
 
