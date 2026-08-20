@@ -1,8 +1,24 @@
 # 16.4.4
 
+**New:**
+
+- Physical-device preview windows now match Simulator's Command-1/2/3/4 Physical Size, Point Accurate, Pixel Accurate, and Fit Screen modes.
+
 **Fixed:**
 
+- Fixed `rocketsim interact tap <x> <y>` resolving to an accessibility press on the enclosing element instead of delivering a true point-precise touch, which made taps inside large custom-drawn views (such as a SwiftUI `Canvas` exposed as a single accessibility element) land on the wrong target. Raw-coordinate taps now always dispatch a HID touch at the exact point; use `interact activate` when you need accessibility activation semantics. (Thanks, S. Gardner!)
+- Fixed agent coordinate handling on landscape simulators: raw-coordinate taps, swipes, and gestures are now rotated from interface space into the device's portrait-native HID space, so they land where `elements` frames say they will. (Thanks, S. Gardner!)
+- Fixed `rocketsim screenshot` and `rocketsim snapshot` returning a transposed portrait-native framebuffer on rotated simulators. PNGs now always come out upright in interface orientation, matching the `elements` coordinate space. (Thanks, S. Gardner!)
+- Fixed `rocketsim elements` silently omitting accessibility elements with very small frames. Elements as small as 1x1 points are now included so hidden test-instrumentation elements stay readable; elements with accessibility content but a zero-size frame are reported via a `zero_size_elements_omitted` perception row instead of disappearing without a trace. (Thanks, S. Gardner!)
+- Fixed sibling accessibility elements with identical rendered text being collapsed into one in `rocketsim elements` output. (Thanks, S. Gardner!)
+
+**Improved:**
+
+- Agent `elements` output now exposes the app-supplied `accessibilityIdentifier` per element in debug mode, and cross-snapshot element identity incorporates it so same-labeled elements no longer collide in `interact` deltas. (Thanks, S. Gardner!)
+- Fixed Build Insights syncing remaining disabled after license validation refreshed stale cached license metadata.
 - Fixed Xcode selection failures showing a misleading user-directory warning instead of explaining why the selected Xcode could not be used. (Thanks, H. v.d. Ploeg!)
+- Fixed subscription purchase sheets sometimes omitting the Subscribe button by anchoring StoreKit confirmation to the originating RocketSim window.
+- Fixed Simulator-linked windows failing to load device frame information when modern Xcode resources could only be found in the shared Developer directory.
 
 # 16.4.3 (328)
 
