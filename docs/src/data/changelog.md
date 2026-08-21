@@ -6,11 +6,14 @@
 
 **Fixed:**
 
+- Improved Magnifier stability and performance during rapid movement and zoom changes.
 - Fixed `rocketsim interact tap <x> <y>` resolving to an accessibility press on the enclosing element instead of delivering a true point-precise touch, which made taps inside large custom-drawn views (such as a SwiftUI `Canvas` exposed as a single accessibility element) land on the wrong target. Raw-coordinate taps now always dispatch a HID touch at the exact point; use `interact activate` when you need accessibility activation semantics. (Thanks, S. Gardner!)
 - Fixed agent coordinate handling on landscape simulators: raw-coordinate taps, swipes, and gestures are now rotated from interface space into the device's portrait-native HID space, so they land where `elements` frames say they will. (Thanks, S. Gardner!)
 - Fixed `rocketsim screenshot` and `rocketsim snapshot` returning a transposed portrait-native framebuffer on rotated simulators. PNGs now always come out upright in interface orientation, matching the `elements` coordinate space. (Thanks, S. Gardner!)
 - Fixed `rocketsim elements` silently omitting accessibility elements with very small frames. Elements as small as 1x1 points are now included so hidden test-instrumentation elements stay readable; elements with accessibility content but a zero-size frame are reported via a `zero_size_elements_omitted` perception row instead of disappearing without a trace. (Thanks, S. Gardner!)
 - Fixed sibling accessibility elements with identical rendered text being collapsed into one in `rocketsim elements` output. (Thanks, S. Gardner!)
+- Fixed malformed Simulator accessibility responses crashing RocketSim instead of reporting accessibility as unavailable.
+- Fixed disconnected CLI sockets terminating RocketSim while it was writing a response.
 
 **Improved:**
 
