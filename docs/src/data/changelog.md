@@ -6,6 +6,8 @@
 
 **Fixed:**
 
+- Fixed a crash that could occur while recording export progress was updating in a floating capture thumbnail.
+- Fixed a crash that could occur when the Simulator side window's spring animation received an invalid or stale window frame.
 - Improved Magnifier stability and performance during rapid movement and zoom changes.
 - Fixed `rocketsim interact tap <x> <y>` resolving to an accessibility press on the enclosing element instead of delivering a true point-precise touch, which made taps inside large custom-drawn views (such as a SwiftUI `Canvas` exposed as a single accessibility element) land on the wrong target. Raw-coordinate taps now always dispatch a HID touch at the exact point; use `interact activate` when you need accessibility activation semantics. (Thanks, S. Gardner!)
 - Fixed agent coordinate handling on landscape simulators: raw-coordinate taps, swipes, and gestures are now rotated from interface space into the device's portrait-native HID space, so they land where `elements` frames say they will. (Thanks, S. Gardner!)
@@ -42,6 +44,7 @@
 - Fixed RocketSim Connect's LLDB hook injecting into app-hosted test runs, which could pause snapshot tests at `UIApplicationMain` and surface duplicate Objective-C class warnings. Test hosts are now excluded by detecting loaded XCTest runtime modules. (Thanks, M. Caron!)
 - Fixed a race in RocketSim Connect's LLDB hook that could leave app launches paused at `UIApplicationMain` until manually continued, with Connect never attaching. The loader now captures the launch thread identity before resuming and safely recovers its own stops without ever touching user breakpoints or pauses. (Thanks, M. Heiberg and R. Mirzoyan!)
 - Fixed RocketSim Connect's LLDB hook suspending background threads while running to `UIApplicationMain`, which could permanently deadlock apps that wait on background work during startup (for example analytics SDK or telephony setup). The run-to-main plan now keeps all threads running.
+- Fixed RocketSim Connect silently skipping injection on Xcode 26.3, intermittently pausing launches on Xcode 27 beta 5, and rejecting apps whose executable name differs from their `.app` bundle name. (Thanks, E. Baba!)
 
 # 16.4.2
 
