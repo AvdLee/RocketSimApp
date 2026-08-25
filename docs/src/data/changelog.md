@@ -3,6 +3,7 @@
 **New:**
 
 - Physical-device preview windows now match Simulator's Command-1/2/3/4 Physical Size, Point Accurate, Pixel Accurate, and Fit Screen modes.
+- The side window now always appears for Simulators in Xcode's Device Hub, including in expanded mode.
 
 **Fixed:**
 
