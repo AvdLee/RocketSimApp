@@ -1,7 +1,8 @@
-# 16.4.4
+# 16.4.4 (329)
 
 **New:**
 
+- Added iPad A16 device bezels (Thanks, H. v.d. Ploeg!)
 - Physical-device preview windows now match Simulator's Command-1/2/3/4 Physical Size, Point Accurate, Pixel Accurate, and Fit Screen modes.
 - The side window now always appears for Simulators in Xcode's Device Hub, including in expanded mode.
 
@@ -10,6 +11,14 @@
 - Fixed a crash that could occur while recording export progress was updating in a floating capture thumbnail.
 - Fixed a crash that could occur when the Simulator side window's spring animation received an invalid or stale window frame.
 - Improved Magnifier stability and performance during rapid movement and zoom changes.
+- Fixed the optional RocketSim Connect setup prompt reappearing after being dismissed.
+- Fixed the Simulator side window appearing incorrectly when switching Spaces.
+- Fixed launch arguments, including locale overrides, for apps on physical devices.
+- Fixed captures, recordings, and touch indicators using the wrong orientation after rotating a Simulator.
+- Fixed deeplinks and push notifications switching from Device Hub to Simulator.app.
+- Fixed relaunching apps with a locale or time zone occasionally deadlocking.
+- Fixed RocketSim Connect occasionally stranding an app launch paused at UIApplicationMain when the debugger briefly auto-resumed during Connect setup.
+- Fixed RocketSim occasionally crashing when it became active after the sales window was closed.
 - Fixed `rocketsim interact tap <x> <y>` resolving to an accessibility press on the enclosing element instead of delivering a true point-precise touch, which made taps inside large custom-drawn views (such as a SwiftUI `Canvas` exposed as a single accessibility element) land on the wrong target. Raw-coordinate taps now always dispatch a HID touch at the exact point; use `interact activate` when you need accessibility activation semantics. (Thanks, S. Gardner!)
 - Fixed agent coordinate handling on landscape simulators: raw-coordinate taps, swipes, and gestures are now rotated from interface space into the device's portrait-native HID space, so they land where `elements` frames say they will. (Thanks, S. Gardner!)
 - Fixed `rocketsim screenshot` and `rocketsim snapshot` returning a transposed portrait-native framebuffer on rotated simulators. PNGs now always come out upright in interface orientation, matching the `elements` coordinate space. (Thanks, S. Gardner!)
@@ -20,6 +29,7 @@
 
 **Improved:**
 
+- Diagnostics reports now identify the outcome of the latest RocketSim Connect LLDB injection and which recovery paths were needed.
 - Agent `elements` output now exposes the app-supplied `accessibilityIdentifier` per element in debug mode, and cross-snapshot element identity incorporates it so same-labeled elements no longer collide in `interact` deltas. (Thanks, S. Gardner!)
 - Fixed Build Insights syncing remaining disabled after license validation refreshed stale cached license metadata.
 - Fixed Xcode selection failures showing a misleading user-directory warning instead of explaining why the selected Xcode could not be used. (Thanks, H. v.d. Ploeg!)
