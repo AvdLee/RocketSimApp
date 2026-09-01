@@ -1,3 +1,15 @@
+# 16.4.5
+
+**Improved:**
+
+- LLDB RocketSimConnect improved for slow launches that occasionally happen on busy machines.
+
+**Fixed:**
+
+- Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted.
+
+# 16.4.4 (329)
+
 # 16.4.4 (330)
 
 **New:**
