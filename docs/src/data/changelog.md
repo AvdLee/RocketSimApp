@@ -1,4 +1,4 @@
-# 16.4.5
+# 16.4.5 (330)
 
 **Improved:**
 
@@ -6,11 +6,12 @@
 
 **Fixed:**
 
-- Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted.
+- Fixed RocketSim onboarding windows appearing while app-hosted tests run in the background.
+- Fixed the Screen Recording permission alert repeatedly appearing after opening System Settings or denying access. (Thanks, E. Sanchez!)
+- Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted. (Thanks, H. v.d. Ploeg)
+- Fixed the side window not appearing for Simulators booted in Xcode's Device Hub after RocketSim launched. (Thanks, E. Sanchez and S. Figlie!)
 
 # 16.4.4 (329)
-
-# 16.4.4 (330)
 
 **New:**
 
@@ -41,6 +42,7 @@
 
 **Improved:**
 
+- RocketSim Connect setup now makes it clear that it also enables Simulator Camera. (Thanks, C. Jacobsson!)
 - Diagnostics reports now identify the outcome of the latest RocketSim Connect LLDB injection and which recovery paths were needed.
 - Agent `elements` output now exposes the app-supplied `accessibilityIdentifier` per element in debug mode, and cross-snapshot element identity incorporates it so same-labeled elements no longer collide in `interact` deltas. (Thanks, S. Gardner!)
 - Fixed Build Insights syncing remaining disabled after license validation refreshed stale cached license metadata.
