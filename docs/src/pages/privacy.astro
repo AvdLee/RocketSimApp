@@ -69,7 +69,8 @@ const seo = {
       <section>
         <p>
           <em
-            >This privacy statement was most recently revised on 18 June 2026</em
+            >This privacy statement was most recently revised on 4 September
+            2026</em
           >
         </p>
         <p>
@@ -255,6 +256,62 @@ const seo = {
           will be permanently deleted within 30 days.
         </p>
       </section>
+      <section aria-labelledby="sso-authentication">
+        <h3 id="sso-authentication" class="title--underline">
+          <em>Single Sign-On (SSO) authentication</em>
+        </h3>
+        <p>
+          <strong>Purpose:</strong> To allow users to authenticate through their organization's
+          identity provider using Single Sign-On (SSO).
+        </p>
+        <p><strong>Personal data:</strong></p>
+        <ul>
+          <li>Email address</li>
+          <li>Full name</li>
+          <li>Email verification status</li>
+          <li>Whether the user authenticated through SSO</li>
+          <li>
+            Authentication tokens required to establish, maintain, or terminate
+            the authenticated session
+          </li>
+        </ul>
+        <p>
+          This information is received from the user's identity provider or
+          generated as part of the authentication flow. RocketSim does not
+          create or store a password for users who authenticate through SSO. The
+          authentication flow requests the <code>openid</code>,
+          <code>profile</code>, and <code>email</code> scopes.
+        </p>
+        <p><strong>Temporary session data:</strong></p>
+        <p>
+          State, nonce, and a PKCE code verifier are temporarily processed to
+          complete the authentication flow securely. This data is deleted after
+          successful authentication or when the authentication attempt expires.
+        </p>
+        <p><strong>Cookies:</strong></p>
+        <p>
+          A temporary, secure, HTTP-only cookie named
+          <code>sso_session_code</code> is used to exchange the authentication session
+          for access and refresh tokens. It is cleared after the exchange or upon
+          expiration and is not used for advertising, analytics, or cross-site tracking.
+        </p>
+        <p><strong>Legal basis:</strong></p>
+        <ul>
+          <li>
+            Execution of an agreement with the data subject or our legitimate
+            interest in providing secure access to the services under the
+            agreement with the user's organization.
+          </li>
+        </ul>
+        <p>
+          <strong>Retention period:</strong><br />Account data is retained
+          during the subscription term and permanently deleted within 30 days
+          after termination of the subscription. Temporary session data and
+          cookies are deleted after use or upon expiration. Authentication
+          tokens expire or are revoked in accordance with the applicable session
+          settings.
+        </p>
+      </section>
       <section aria-labelledby="contact">
         <h3 id="contact"><em>Contact</em></h3>
         <p>
@@ -335,6 +392,10 @@ const seo = {
         <p>Third parties processing personal data on our behalf or yours:</p>
         <ul>
           <li>MailGun – to send emails</li>
+          <li>
+            Auth0 (by Okta) – to broker SSO authentication between RocketSim and
+            the customer's identity provider
+          </li>
         </ul>
         <p>
           RocketSim may provide your personal data to parties located outside
