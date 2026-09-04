@@ -321,12 +321,12 @@ const structuredData = {
     background:
       radial-gradient(
         circle at 20% 15%,
-        rgb(89 72 203 / 15%),
+        rgb(0 147 255 / 13%),
         transparent 32rem
       ),
       radial-gradient(
         circle at 85% 25%,
-        rgb(54 68 154 / 12%),
+        rgb(0 105 217 / 10%),
         transparent 28rem
       );
   }
@@ -386,7 +386,7 @@ const structuredData = {
   .teams-hero__benefits li::before {
     position: absolute;
     left: 0;
-    color: #9488ff;
+    color: var(--primary-color);
     content: "✓";
   }
 
@@ -459,7 +459,7 @@ const structuredData = {
   .deep-dive__copy li::before {
     position: absolute;
     left: 0;
-    color: #8f82f4;
+    color: var(--primary-color);
     content: "•";
   }
 
@@ -476,20 +476,21 @@ const structuredData = {
 
   .deep-dive__cards--stacked {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     align-items: stretch;
   }
 
   .deep-dive__cards--stacked :global(.insight-card) {
     width: 100%;
+    min-height: 0;
     min-width: 0;
   }
 
   .testimonial {
     padding: 7rem 0;
     background:
-      linear-gradient(135deg, rgb(109 92 255 / 11%), transparent 45%), #101012;
+      linear-gradient(135deg, rgb(0 147 255 / 9%), transparent 45%), #101012;
   }
 
   .testimonial figure {

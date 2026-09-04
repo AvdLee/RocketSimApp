@@ -75,304 +75,380 @@ const insight = content[variant];
   class:list={["insight-card", { "insight-card--featured": featured }]}
   data-insight-variant={variant}
 >
-  <header class="insight-card__header">
-    <span class:list={["insight-card__icon", `is-${insight.severity}`]}>
+  <div
+    class:list={[
+      "insight-card__icon",
       {
-        variant === "versions" || variant === "rollout" ? (
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3v4m0 10v4M5.6 5.6l2.8 2.8m7.2 7.2 2.8 2.8M3 12h4m10 0h4M5.6 18.4l2.8-2.8m7.2-7.2 2.8-2.8" />
-            <circle cx="12" cy="12" r="4" />
+        "insight-card__icon--warning": insight.severity === "warning",
+        "insight-card__icon--xcode": variant === "versions",
+      },
+    ]}
+    aria-hidden="true"
+  >
+    {
+      variant === "prediction" || variant === "machine" ? (
+        <svg viewBox="0 0 24 24">
+          <rect x="4" y="5" width="16" height="11" rx="1.5" />
+          <path d="M2.5 19h19M9 19l.5-3h5l.5 3" />
+        </svg>
+      ) : variant === "composition" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M19 8a8 8 0 1 0 1 7" />
+          <path d="M19 3v5h-5" />
+        </svg>
+      ) : variant === "activity" ? (
+        <svg viewBox="0 0 24 24">
+          <circle cx="8" cy="8" r="3" />
+          <circle cx="17" cy="9" r="2.5" />
+          <path d="M2.5 19c.5-4 2.5-6 5.5-6s5 2 5.5 6M14 14c3.7-.8 6.3 1 7 4.5" />
+        </svg>
+      ) : variant === "regression" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M4 18V6m0 12h16M7 15l4-4 3 2 5-6" />
+          <path d="M16 7h3v3" />
+        </svg>
+      ) : variant === "rollout" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M14 5c3-1 5-1 6-1 0 1 0 3-1 6l-5 5-5-5 5-5Z" />
+          <path d="m9 10-3 1-2 2 5 1m5 1-1 5 2-2 1-3M7 17l-2 2" />
+        </svg>
+      ) : (
+        <span class="xcode-mark">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="4" />
+            <path d="m8 16 5-9m-7 6h11m-1-5 2 4" />
           </svg>
-        ) : variant === "activity" ? (
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 17l5-5 4 3 7-8m0 0h-5m5 0v5" />
-          </svg>
-        ) : (
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 18a8 8 0 1 1 16 0M12 10v5m0 0 3-3m-3 3-3-3" />
-          </svg>
-        )
-      }
-    </span>
-    <div>
-      <h3>{insight.title}</h3>
-      <p class="insight-card__date">{insight.date}</p>
-    </div>
-  </header>
+          <b>!</b>
+        </span>
+      )
+    }
+  </div>
 
-  <p class="insight-card__message">{insight.message}</p>
+  <div class="insight-card__content">
+    <header class="insight-card__header">
+      <h3>
+        {insight.title}
+        <span class="insight-card__date">{insight.date}</span>
+      </h3>
+      {variant !== "versions" && <p>{insight.message}</p>}
+    </header>
 
-  {
-    variant === "prediction" && (
-      <div class="prediction">
-        <div
-          class="prediction__p95"
-          role="img"
-          aria-label="Current P95 1 minute 40 seconds, predicted P95 1 minute 10 seconds to 1 minute 20 seconds"
-        >
-          <span>
-            <small>Current P95</small>
-            <strong>1m 40s</strong>
-          </span>
-          <span class="prediction__arrow" aria-hidden="true">
-            →
-          </span>
-          <span>
-            <small>Predicted P95</small>
-            <strong>1m 10s–1m 20s</strong>
-          </span>
+    {
+      variant === "prediction" && (
+        <div class="evidence-box prediction">
+          <div
+            class="prediction__p95"
+            role="img"
+            aria-label="Current P95 1 minute 40 seconds, predicted P95 1 minute 10 seconds to 1 minute 20 seconds"
+          >
+            <span>
+              <small>Current P95</small>
+              <strong>1m 40s</strong>
+            </span>
+            <span class="prediction__arrow" aria-hidden="true">
+              →
+            </span>
+            <span>
+              <small>Predicted P95</small>
+              <strong>1m 10s–1m 20s</strong>
+            </span>
+          </div>
+          <p class="prediction__saving">
+            <span>Estimated build runtime saved</span>
+            <strong>3–5h / licensed engineer / month</strong>
+          </p>
         </div>
-        <div class="prediction__saving">
-          <span>Estimated build runtime saved</span>
-          <strong>3–5h</strong>
-          <small>/ licensed engineer / month</small>
-        </div>
-        <p>Anonymous benchmarks from 40+ teams · matched workloads</p>
-      </div>
-    )
-  }
+      )
+    }
 
-  {
-    variant === "machine" && (
-      <div class="insight-table">
-        <div class="insight-table__row insight-table__head">
-          <>
-            <span>Machine</span>
-            <span>P95</span>
-            <span>Saved / seat</span>
-          </>
-        </div>
-        <div class="insight-table__row">
-          <span>
+    {
+      variant === "machine" && (
+        <div class="insight-table">
+          <div class="insight-table__row insight-table__head">
             <>
-              <strong>M5 Max</strong>
-              <small>482 matched builds</small>
+              <span>Machine</span>
+              <span>P95</span>
+              <span>Saved / engineer / month</span>
             </>
-          </span>
-          <>
-            <span>38s</span>
-            <span class="positive">3h 42m</span>
-          </>
-        </div>
-        <div class="insight-table__row">
-          <span>
+          </div>
+          <div class="insight-table__row">
+            <span>
+              <>
+                <strong>M5 Max</strong>
+                <small>482 matched builds</small>
+              </>
+            </span>
             <>
-              <strong>M3 Max</strong>
-              <small>391 matched builds</small>
+              <span>38s</span>
+              <span class="positive">3h 42m</span>
             </>
-          </span>
-          <>
-            <span>54s</span>
-            <span>—</span>
-          </>
-        </div>
-      </div>
-    )
-  }
-
-  {
-    variant === "rollout" && (
-      <div class="comparison-bars">
-        <div>
-          <>
-            <span>Xcode 16.4</span>
-            <strong>55s</strong>
-          </>
-          <i style="--bar-width: 100%" />
-        </div>
-        <div>
-          <>
-            <span>Xcode 26.0</span>
-            <strong>
-              38s <small>(−30%)</small>
-            </strong>
-          </>
-          <i class="is-positive" style="--bar-width: 69%" />
-        </div>
-        <p>300 matched builds across Mac configurations</p>
-      </div>
-    )
-  }
-
-  {
-    variant === "regression" && (
-      <div class="trend">
-        <div class="trend__primary">
-          <span>Current P95</span>
-          <strong>54s</strong>
-          <em>+13s&nbsp; (+29.5%)</em>
-        </div>
-        <div class="trend__row">
-          <>
-            <span>Previous P95</span>
-            <strong>41s</strong>
-          </>
-        </div>
-        <div class="trend__row">
-          <>
-            <span>Typical build (P75)</span>
-            <strong>24s</strong>
-          </>
-        </div>
-      </div>
-    )
-  }
-
-  {
-    variant === "versions" && (
-      <div class="insight-table insight-table--versions">
-        <div class="insight-table__row insight-table__head">
-          <>
-            <span>Xcode version</span>
-            <span>Builds</span>
-          </>
-        </div>
-        <div class="insight-table__row">
-          <>
-            <span>26.0 (17A324)</span>
-            <strong>600</strong>
-          </>
-        </div>
-        <div class="insight-table__row">
-          <>
-            <span>16.4 (16F6)</span>
-            <strong>214</strong>
-          </>
-        </div>
-        <p>Standardize after validating performance.</p>
-      </div>
-    )
-  }
-
-  {
-    variant === "composition" && (
-      <div class="composition">
-        <div
-          class="composition__bar"
-          role="img"
-          aria-label="70 builds: 40 incremental, 20 clean, 10 unclassified"
-        >
-          <span class="is-incremental" style="width: 57.14%" />
-          <span class="is-clean" style="width: 28.57%" />
-          <span class="is-unclassified" style="width: 14.29%" />
-        </div>
-        <ul>
-          <li>
+          </div>
+          <div class="insight-table__row">
+            <span>
+              <>
+                <strong>M3 Max</strong>
+                <small>391 matched builds</small>
+              </>
+            </span>
             <>
-              <i class="is-incremental" />
-              <span>Incremental</span>
-              <strong>40</strong>
+              <span>54s</span>
+              <span>—</span>
             </>
-          </li>
-          <li>
-            <>
-              <i class="is-clean" />
-              <span>Clean</span>
-              <strong>
-                20 <em>+8.5 pts</em>
-              </strong>
-            </>
-          </li>
-          <li>
-            <>
-              <i class="is-unclassified" />
-              <span>Unclassified</span>
-              <strong>10</strong>
-            </>
-          </li>
-        </ul>
-      </div>
-    )
-  }
+          </div>
+        </div>
+      )
+    }
 
-  {
-    variant === "activity" && (
-      <div class="insight-table insight-table--activity">
-        <div class="insight-table__row insight-table__head">
-          <>
-            <span>Signal</span>
-            <span>Previous</span>
-            <span>Current</span>
-          </>
+    {
+      variant === "rollout" && (
+        <div class="evidence-box comparison-bars">
+          <div>
+            <p>
+              <>
+                <span>Xcode 16.4</span>
+                <strong>55s</strong>
+              </>
+            </p>
+            <i>
+              <b style="width: 100%" />
+            </i>
+            <small>300 matched builds across 1 Mac configuration</small>
+          </div>
+          <div class="is-improved">
+            <p>
+              <>
+                <span>Xcode 26.0</span>
+                <strong>
+                  38s <em>(−30%)</em>
+                </strong>
+              </>
+            </p>
+            <i>
+              <b style="width: 69%" />
+            </i>
+            <small>300 matched builds across 1 Mac configuration</small>
+          </div>
         </div>
-        <div class="insight-table__row">
-          <>
-            <span>Builds</span>
-            <span>892</span>
-            <strong>
-              678 <em>−24%</em>
-            </strong>
-          </>
+      )
+    }
+
+    {
+      variant === "regression" && (
+        <div class="insight-table insight-table--trend">
+          <div class="insight-table__row insight-table__head">
+            <>
+              <span>Percentile</span>
+              <span>Previous</span>
+              <span>Current</span>
+              <span>Change</span>
+            </>
+          </div>
+          <div class="insight-table__row">
+            <>
+              <span>P95</span>
+              <span>41s</span>
+              <span>54s</span>
+              <strong class="destructive">+13s (+29.5%)</strong>
+            </>
+          </div>
+          <div class="insight-table__row">
+            <>
+              <span>P75</span>
+              <span>18s</span>
+              <span>24s</span>
+              <strong class="destructive">+6s (+33.3%)</strong>
+            </>
+          </div>
         </div>
-        <div class="insight-table__row">
-          <>
-            <span>Reporting Macs</span>
-            <span>12</span>
-            <strong>
-              10 <em>−17%</em>
-            </strong>
-          </>
+      )
+    }
+
+    {
+      variant === "versions" && (
+        <>
+          <div class="insight-table insight-table--versions">
+            <div class="insight-table__row insight-table__head">
+              <>
+                <span>Xcode version</span>
+                <span>Builds</span>
+              </>
+            </div>
+            <div class="insight-table__row">
+              <>
+                <span>26.0 (17A324)</span>
+                <strong>600</strong>
+              </>
+            </div>
+            <div class="insight-table__row">
+              <>
+                <span>16.4 (16F6)</span>
+                <strong>214</strong>
+              </>
+            </div>
+          </div>
+          <p class="insight-card__recommendation">{insight.message}</p>
+        </>
+      )
+    }
+
+    {
+      variant === "composition" && (
+        <div class="evidence-box composition">
+          <div class="composition__main">
+            <div
+              class="composition__bar"
+              role="img"
+              aria-label="70 builds: 40 incremental, 20 clean, 10 unclassified"
+            >
+              <span class="is-incremental" style="width: 57.14%">
+                40
+              </span>
+              <span class="is-clean" style="width: 28.57%">
+                20
+              </span>
+              <span class="is-unclassified" style="width: 14.29%">
+                10
+              </span>
+            </div>
+            <p>
+              <>
+                <strong>70</strong>
+                <span>Total builds</span>
+              </>
+            </p>
+          </div>
+          <ul>
+            <li>
+              <>
+                <i class="is-incremental" />
+                <span>Incremental</span>
+                <strong>40</strong>
+              </>
+            </li>
+            <li>
+              <>
+                <i class="is-clean" />
+                <span>Clean</span>
+                <strong>20 (+8.5 pts)</strong>
+              </>
+            </li>
+            <li>
+              <>
+                <i class="is-unclassified" />
+                <span>Unclassified</span>
+                <strong>10</strong>
+              </>
+            </li>
+          </ul>
         </div>
-        <p>Engineering-flow signal — not a productivity score.</p>
-      </div>
-    )
-  }
+      )
+    }
+
+    {
+      variant === "activity" && (
+        <div class="insight-table insight-table--activity">
+          <div class="insight-table__row insight-table__head">
+            <>
+              <span>Metric</span>
+              <span>Previous</span>
+              <span>Current</span>
+              <span>Change</span>
+            </>
+          </div>
+          <div class="insight-table__row">
+            <>
+              <span>Builds</span>
+              <span>892</span>
+              <span>678</span>
+              <strong class="destructive">−214 (−24%)</strong>
+            </>
+          </div>
+          <div class="insight-table__row">
+            <>
+              <span>Reporting Macs</span>
+              <span>12</span>
+              <span>10</span>
+              <strong class="destructive">−2 (−17%)</strong>
+            </>
+          </div>
+        </div>
+      )
+    }
+
+    <details class="insight-card__support">
+      <summary>
+        {
+          variant === "prediction" || variant === "machine"
+            ? "View supporting data"
+            : "How this was calculated"
+        }
+      </summary>
+      <p>
+        {
+          variant === "prediction"
+            ? "Anonymous benchmarks from 40+ teams · matched workloads"
+            : variant === "machine"
+              ? "Estimated from reported monthly builds; missing activity makes the estimate conservative."
+              : variant === "rollout"
+                ? "Compares equivalent builds on the same Mac configurations."
+                : variant === "regression"
+                  ? "Compares equivalent current and previous periods."
+                  : variant === "versions"
+                    ? "Uses build activity reported by the team."
+                    : variant === "composition"
+                      ? "All reported build types remain visible."
+                      : "Build activity is an engineering-flow signal, not a productivity score."
+        }
+      </p>
+    </details>
+  </div>
 </article>
 
 <style>
   .insight-card {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
     width: min(24rem, calc(100vw - 3rem));
-    min-height: 25rem;
-    padding: 1.35rem;
-    overflow: hidden;
-    color: #f7f7f8;
-    background:
-      radial-gradient(circle at 90% 0%, rgb(83 74 196 / 16%), transparent 38%),
-      #141416;
-    border: 1px solid rgb(255 255 255 / 10%);
-    border-radius: 1.25rem;
-    box-shadow:
-      inset 0 1px rgb(255 255 255 / 5%),
-      0 1.25rem 3rem rgb(0 0 0 / 22%);
+    min-height: 21rem;
+    padding: 1rem;
+    color: #f5f5f7;
+    background: #000;
+    border: 1px solid #27272a;
+    border-radius: 0.5rem;
   }
 
   .insight-card--featured {
     width: 100%;
     min-height: 0;
-    background:
-      radial-gradient(circle at 85% 0%, rgb(102 88 255 / 24%), transparent 40%),
-      linear-gradient(145deg, #19191f, #101012);
-    border-color: rgb(136 124 255 / 28%);
+    background: #000;
+    border-color: #27272a;
   }
 
-  .insight-card__header {
-    display: grid;
-    grid-template-columns: 2.2rem 1fr;
-    gap: 0.75rem;
-    align-items: center;
+  .insight-card__content {
+    min-width: 0;
   }
 
   .insight-card__icon {
-    display: grid;
-    width: 2.2rem;
-    height: 2.2rem;
-    place-items: center;
-    color: #a89cff;
-    background: rgb(119 100 255 / 14%);
-    border: 1px solid rgb(154 141 255 / 22%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--primary-color);
+    background: #222834;
+    border: 1px solid #2c374b;
     border-radius: 0.75rem;
   }
 
-  .insight-card__icon.is-warning {
-    color: #ffb86b;
-    background: rgb(255 153 70 / 12%);
-    border-color: rgb(255 174 92 / 20%);
+  .insight-card__icon--warning {
+    background: transparent;
+    border-color: transparent;
   }
 
   .insight-card__icon svg {
-    width: 1.2rem;
+    width: 1.75rem;
+    height: 1.75rem;
     fill: none;
     stroke: currentColor;
     stroke-linecap: round;
@@ -380,107 +456,122 @@ const insight = content[variant];
     stroke-width: 1.8;
   }
 
+  .xcode-mark {
+    position: relative;
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #88cfff;
+  }
+
+  .xcode-mark b {
+    position: absolute;
+    right: -0.125rem;
+    bottom: -0.125rem;
+    display: grid;
+    width: 1.25rem;
+    height: 1.25rem;
+    place-items: center;
+    font-size: 0.8rem;
+    color: #fff;
+    line-height: 1;
+    background: #c82020;
+    border: 0.125rem solid #000;
+    border-radius: 50%;
+  }
+
+  .insight-card__header {
+    display: grid;
+    gap: 0.375rem;
+  }
+
   h3 {
     margin: 0;
-    font-size: 0.98rem;
-    font-weight: 650;
+    font-size: 1rem;
+    font-weight: 700;
     color: #fff;
-    letter-spacing: -0.01em;
+    line-height: 1.35;
   }
 
   .insight-card__date {
-    margin: 0.15rem 0 0;
-    font-size: 0.72rem;
-    color: #7f7f89;
+    margin-left: 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #8e97a6;
   }
 
-  .insight-card__message {
-    min-height: 4.5rem;
-    margin: 1.2rem 0;
-    font-size: 0.88rem;
-    color: #b7b7bf;
-    line-height: 1.55;
+  .insight-card__header p {
+    max-width: 48rem;
+    margin: 0;
+    color: #c0c6d6;
+    line-height: 1.5;
   }
 
-  .insight-card--featured .insight-card__message {
-    min-height: 0;
-    font-size: 0.95rem;
-  }
-
-  .prediction {
+  .evidence-box {
     display: grid;
-    gap: 0.9rem;
-    margin-top: auto;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #111;
+    border: 1px solid #27272a;
+    border-radius: 0.5rem;
   }
 
   .prediction__p95 {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: 0.65rem;
     align-items: center;
-    padding: 0.9rem;
-    background: rgb(0 0 0 / 23%);
-    border: 1px solid rgb(255 255 255 / 7%);
-    border-radius: 0.85rem;
+    gap: 1rem;
   }
 
   .prediction__p95 span:not(.prediction__arrow) {
     display: grid;
-    gap: 0.2rem;
+    gap: 0.125rem;
+  }
+
+  .prediction__p95 span:last-child {
+    text-align: right;
   }
 
   small {
     display: block;
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: #80808a;
+    font-size: 0.75rem;
+    color: #8e97a6;
   }
 
   .prediction__p95 strong {
-    font-size: 0.95rem;
+    font-size: 1.125rem;
   }
 
   .prediction__arrow {
-    color: #777;
+    color: #8e97a6;
   }
 
   .prediction__saving {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    padding: 0.95rem;
-    background: linear-gradient(120deg, rgb(98 78 255 / 16%), rgb(0 0 0 / 8%));
-    border-radius: 0.85rem;
+    gap: 0.125rem;
+    margin: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid #27272a;
   }
 
   .prediction__saving span {
     font-size: 0.72rem;
-    color: #a6a6af;
+    color: #8e97a6;
   }
 
   .prediction__saving strong {
-    font-size: 1.7rem;
-    color: #bcb3ff;
-    line-height: 1;
-  }
-
-  .prediction__saving small {
-    grid-column: 1 / -1;
-    margin-top: 0.3rem;
-  }
-
-  .prediction > p,
-  .comparison-bars > p,
-  .insight-table > p {
-    margin: 0;
-    font-size: 0.66rem;
-    color: #777781;
-    line-height: 1.45;
+    font-size: 1rem;
+    color: #f5f5f7;
   }
 
   .insight-table {
-    margin-top: auto;
-    font-size: 0.76rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    font-size: 0.75rem;
+    background: #111;
+    border: 1px solid #27272a;
+    border-radius: 0.5rem;
   }
 
   .insight-table__row {
@@ -488,8 +579,9 @@ const insight = content[variant];
     grid-template-columns: minmax(0, 1.7fr) 0.55fr 0.8fr;
     gap: 0.5rem;
     align-items: center;
-    padding: 0.7rem 0.25rem;
-    border-top: 1px solid rgb(255 255 255 / 7%);
+    min-width: 18rem;
+    padding: 0.625rem 0.75rem;
+    border-top: 1px solid #27272a;
   }
 
   .insight-table__row > :not(:first-child) {
@@ -501,153 +593,157 @@ const insight = content[variant];
   }
 
   .insight-table__head {
-    padding-top: 0;
-    color: #777781;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #8e97a6;
     border-top: 0;
   }
 
   .positive {
-    color: #72d6ad;
+    color: #18ab66;
   }
 
   .insight-table--versions .insight-table__row {
     grid-template-columns: 1fr auto;
   }
 
-  .insight-table--versions > p,
-  .insight-table--activity > p {
-    margin-top: 0.8rem;
-  }
-
-  .insight-table--activity .insight-table__row {
-    grid-template-columns: 1.1fr 0.7fr 0.9fr;
+  .insight-table--activity .insight-table__row,
+  .insight-table--trend .insight-table__row {
+    grid-template-columns: minmax(5rem, 1fr) repeat(3, auto);
+    min-width: 25rem;
   }
 
   em {
     font-style: normal;
-    color: #ff9a83;
+    color: #18ab66;
+  }
+
+  .destructive {
+    color: #fb645e;
+    white-space: nowrap;
   }
 
   .comparison-bars {
     display: grid;
     gap: 1rem;
-    margin-top: auto;
   }
 
   .comparison-bars > div {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.45rem;
-    font-size: 0.75rem;
+    min-width: 0;
+  }
+
+  .comparison-bars p {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0;
   }
 
   .comparison-bars i {
-    grid-column: 1 / -1;
-    width: var(--bar-width);
-    height: 0.55rem;
-    background: #565663;
+    display: block;
+    height: 0.5rem;
+    margin-top: 0.375rem;
+    overflow: hidden;
+    background: #000;
     border-radius: 999px;
   }
 
-  .comparison-bars i.is-positive {
-    background: linear-gradient(90deg, #7164e8, #9e91ff);
+  .comparison-bars i b {
+    display: block;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: inherit;
+  }
+
+  .comparison-bars .is-improved i b {
+    background: #18ab66;
   }
 
   .comparison-bars small {
-    display: inline;
-    color: #72d6ad;
+    margin-top: 0.375rem;
+    color: #8e97a6;
   }
 
-  .trend {
-    display: grid;
-    gap: 0.55rem;
-    margin-top: auto;
-  }
-
-  .trend__primary {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    padding: 1rem;
-    background: rgb(255 141 94 / 8%);
-    border: 1px solid rgb(255 155 112 / 16%);
-    border-radius: 0.85rem;
-  }
-
-  .trend__primary span {
-    font-size: 0.75rem;
-    color: #a0a0aa;
-  }
-
-  .trend__primary strong {
-    font-size: 1.45rem;
-  }
-
-  .trend__primary em {
-    grid-column: 1 / -1;
-    margin-top: 0.25rem;
-    font-size: 0.72rem;
-    text-align: right;
-  }
-
-  .trend__row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.55rem 0.25rem;
-    font-size: 0.74rem;
-    color: #92929c;
-    border-bottom: 1px solid rgb(255 255 255 / 6%);
-  }
-
-  .trend__row strong {
-    color: #dddde1;
+  .insight-card__recommendation {
+    margin: 0.875rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #c0c6d6;
+    line-height: 1.5;
   }
 
   .composition {
-    display: grid;
+    margin-top: 1rem;
+  }
+
+  .composition__main {
+    display: flex;
     gap: 1rem;
-    margin-top: auto;
+    align-items: center;
   }
 
   .composition__bar {
     display: flex;
-    height: 0.75rem;
+    flex: 1;
+    min-width: 0;
+    height: 2rem;
     overflow: hidden;
-    background: #29292e;
-    border-radius: 999px;
+    border-radius: 0.375rem;
   }
 
-  .composition__bar span + span {
-    border-left: 2px solid #141416;
+  .composition__bar span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
   }
 
   .composition .is-incremental {
-    background: #7569e8;
+    background: var(--primary-color);
   }
 
   .composition .is-clean {
-    background: #de8e63;
+    background: #f59e0b;
   }
 
   .composition .is-unclassified {
-    background: #555560;
+    background: #8e97a6;
+  }
+
+  .composition__main > p {
+    display: grid;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .composition__main > p strong {
+    font-size: 1.125rem;
+  }
+
+  .composition__main > p span {
+    font-size: 0.6875rem;
+    color: #8e97a6;
+    text-transform: uppercase;
   }
 
   .composition ul {
-    display: grid;
-    gap: 0.55rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
     padding: 0;
-    margin: 0;
+    margin: 0.875rem 0 0;
     list-style: none;
   }
 
   .composition li {
-    display: grid;
-    grid-template-columns: 0.5rem 1fr auto;
-    gap: 0.5rem;
+    display: flex;
+    gap: 0.375rem;
     align-items: center;
-    font-size: 0.72rem;
-    color: #a4a4ad;
+    font-size: 0.75rem;
+    color: #8e97a6;
   }
 
   .composition li i {
@@ -657,21 +753,57 @@ const insight = content[variant];
   }
 
   .composition li strong {
-    color: #e7e7ea;
+    color: #f5f5f7;
   }
 
-  .composition li em {
-    font-size: 0.65rem;
+  .insight-card__support {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: #8e97a6;
+    line-height: 1.45;
+  }
+
+  .insight-card__support summary {
+    width: fit-content;
+    font-weight: 600;
+    color: #c0c6d6;
+    cursor: pointer;
+  }
+
+  .insight-card__support summary:hover {
+    color: #f5f5f7;
+  }
+
+  .insight-card__support p {
+    margin: 0.625rem 0 0;
   }
 
   @media (min-width: 600px) {
     .insight-card {
       width: 25rem;
-      padding: 1.5rem;
     }
 
     .insight-card--featured {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .insight-card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .prediction__p95 {
+      grid-template-columns: 1fr;
+    }
+
+    .prediction__p95 span:last-child {
+      text-align: left;
+    }
+
+    .composition__main {
+      align-items: stretch;
+      flex-direction: column;
     }
   }
 </style>
