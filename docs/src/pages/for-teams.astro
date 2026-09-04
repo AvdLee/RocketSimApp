@@ -3,13 +3,10 @@ import { getEntry } from "astro:content";
 
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
+import InsightMarquee from "../components/insights/InsightMarquee.astro";
+import InsightShowcaseCard from "../components/insights/InsightShowcaseCard.astro";
 import TeamsTrialForm from "../components/TeamsTrialForm.astro";
-import Header from "../old/components/Header.astro";
-import InsightNotifications from "../old/components/InsightNotifications.astro";
-import Insights from "../old/components/Insights.astro";
-import InsightsBreakdown from "../old/components/InsightsBreakdown.astro";
 import OnlineTeamManager from "../old/components/OnlineTeamManager.astro";
-import TeamTestimonial from "../old/components/TeamTestimonial.astro";
 import TrustedBrands from "@/partials/TrustedBrands.astro";
 
 const pageIndex = await getEntry("team-insights", "-index");
@@ -43,88 +40,145 @@ const structuredData = {
 ---
 
 <Base seo={seo} structuredData={structuredData}>
-  <Header title="Turn local Xcode builds into decisions backed by data">
-    Give every developer over 30 faster Simulator and physical-device workflows,
-    while shared local-build insights compare machines, Xcode versions,
-    projects, and schemes.
-    <InsightNotifications slot="below-copy" />
-    <TeamsTrialForm slot="aside" />
-  </Header>
+  <header class="teams-hero">
+    <div class="container teams-hero__grid">
+      <div class="teams-hero__copy">
+        <p class="eyebrow">RocketSim for Teams</p>
+        <h1>
+          Know which Mac, Xcode version, and workflow helps your team build
+          faster
+        </h1>
+        <p class="teams-hero__intro">
+          Give every iOS developer 30+ Simulator and physical-device workflows,
+          then use shared local-build insights to make hardware and rollout
+          decisions with evidence.
+        </p>
+        <ul class="teams-hero__benefits">
+          <li>Compare project-specific performance across Macs</li>
+          <li>Validate Xcode rollouts on matched configurations</li>
+          <li>Spot regressions and workflow shifts early</li>
+        </ul>
+        <div class="teams-hero__prediction">
+          <InsightShowcaseCard variant="prediction" featured={true} />
+          <p>
+            Representative example: your dashboard uses your team's actual local
+            build data. Predictions are estimates based on comparable,
+            anonymized workloads.
+          </p>
+        </div>
+      </div>
+      <div class="teams-hero__form">
+        <TeamsTrialForm />
+      </div>
+    </div>
+  </header>
+
   <TrustedBrands />
-  <TeamTestimonial />
-  <Insights />
-  <InsightsBreakdown
-    title="Is it worth getting an M5 Max?"
-    chart={{
-      title: "Build Duration by Machine",
-      data: [
-        {
-          title: 'MacBook Pro 16" / M5 Max 16-core / 128 RAM',
-          value: 12,
-          width: 0.36,
-        },
-        {
-          title: 'MacBook Pro 14" / M5 Pro 14-core / 48 RAM',
-          value: 14,
-          width: 0.42,
-        },
-        {
-          title: 'MacBook Pro 16" / M3 Max 16-core / 64 RAM',
-          value: 18,
-          width: 0.54,
-        },
-      ],
-    }}
-    contentTitle="Benchmark your team's project"
-  >
-    <p>
-      With team licenses, your <strong>local</strong> builds will be synced. You'll
-      find out{" "}
-      <strong>which machine setup performs best</strong> for your Xcode project.
-    </p>
-    <p class="mt-4 text-sm text-text">
-      Representative example: your dashboard uses your team's actual local build
-      data.
-    </p>
-  </InsightsBreakdown>
-  <InsightsBreakdown
-    title="Does Xcode 27 improve our project's build times?"
-    chart={{
-      title: "Build Duration by Xcode Version",
-      data: [
-        {
-          title: "Xcode 27",
-          value: 12.5,
-          width: 0.63,
-        },
-        {
-          title: "Xcode 26.5",
-          value: 13.5,
-          width: 0.68,
-        },
-        {
-          title: "Xcode 26.4",
-          value: 15,
-          width: 0.76,
-        },
-      ],
-    }}
-    contentTitle="Build duration grouped by Xcode version"
-  >
-    <p>
-      RocketSim for Teams automatically benchmarks your team's <strong
-        >local</strong
-      > build durations to tell you <strong
-        >how much an Xcode version improves build times</strong
-      > for your Xcode project.
-    </p>
-    <p class="mt-4 text-sm text-text">
-      Representative example: your dashboard uses your team's actual local build
-      data.
-    </p>
-  </InsightsBreakdown>
+
+  <InsightMarquee />
+
+  <section class="deep-dives" aria-label="Build insight decisions">
+    <div class="container">
+      <div class="deep-dive">
+        <div class="deep-dive__copy">
+          <p class="eyebrow">Hardware decisions</p>
+          <h2>Make the next Mac upgrade easier to justify</h2>
+          <p>
+            Compare the machines already building your project, then estimate
+            how much build runtime a newer configuration could save per licensed
+            engineer. Actual savings can be higher when repeated local builds
+            are not reported.
+          </p>
+          <ul>
+            <li>Project-specific P95 build comparisons</li>
+            <li>Matched-build sample sizes</li>
+            <li>Estimated monthly savings per seat</li>
+          </ul>
+          <p class="representative">
+            Representative example: your dashboard uses your team's actual local
+            build data.
+          </p>
+        </div>
+        <div class="deep-dive__cards deep-dive__cards--stacked">
+          <InsightShowcaseCard variant="prediction" />
+          <InsightShowcaseCard variant="machine" />
+        </div>
+      </div>
+
+      <div class="deep-dive deep-dive--reverse">
+        <div class="deep-dive__copy">
+          <p class="eyebrow">Xcode decisions</p>
+          <h2>Roll out new Xcode versions with observed evidence</h2>
+          <p>
+            Compare versions on matching Mac configurations before asking the
+            whole team to move. Version distribution also shows where mixed
+            tooling could make results harder to compare.
+          </p>
+          <ul>
+            <li>Matched Mac and Xcode cohorts</li>
+            <li>Version adoption across reported builds</li>
+            <li>Rollout opportunities without absolute promises</li>
+          </ul>
+          <p class="representative">
+            Representative example: your dashboard uses your team's actual local
+            build data.
+          </p>
+        </div>
+        <div class="deep-dive__cards deep-dive__cards--stacked">
+          <InsightShowcaseCard variant="rollout" />
+          <InsightShowcaseCard variant="versions" />
+        </div>
+      </div>
+
+      <div class="deep-dive">
+        <div class="deep-dive__copy">
+          <p class="eyebrow">Team flow</p>
+          <h2>Bring useful build signals into retros and planning</h2>
+          <p>
+            See whether clean builds gained share, slow builds regressed, or
+            reporting activity changed. Treat activity as a prompt to
+            investigate engineering flow — never as an individual productivity
+            score.
+          </p>
+          <ul>
+            <li>Clean, incremental, and unclassified build mix</li>
+            <li>Current-versus-previous period comparisons</li>
+            <li>Team-level signals with the context attached</li>
+          </ul>
+          <p class="representative">
+            Representative example: your dashboard uses your team's actual local
+            build data.
+          </p>
+        </div>
+        <div class="deep-dive__cards deep-dive__cards--stacked">
+          <InsightShowcaseCard variant="composition" />
+          <InsightShowcaseCard variant="activity" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonial" aria-label="Customer testimonial">
+    <div class="container">
+      <figure>
+        <blockquote>
+          “RocketSim Team Insights finally gives us visibility into our build
+          times beyond just gut feeling. We can actually measure the impact of
+          adding SDKs or improving configurations, seeing results reflected in
+          incremental and clean builds. No extra setup or build phase hacks
+          required — it just works quietly in the background.”
+        </blockquote>
+        <figcaption>
+          <strong>Max Godfrey</strong>
+          <span>iOS Developer at Tilt</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <OnlineTeamManager />
-  <section class="section pt-40">
+
+  <section class="section proof-section">
     <div class="container">
       <div class="section-container">
         <div class="section-intro centralize">
@@ -137,22 +191,22 @@ const structuredData = {
             duration, and where your team is losing time.
           </p>
         </div>
-        <div class="grid md:grid-cols-3 gap-6 mt-12">
-          <div class="p-6 rounded-2xl bg-black-accent border border-white/10">
+        <div class="proof-grid proof-grid--primary">
+          <div class="proof-card">
             <h3 class="h5 mb-3 text-white">Justify hardware upgrades</h3>
             <p class="text-text">
               Compare build duration by machine so Mac upgrades are backed by
               project-specific data instead of guesses.
             </p>
           </div>
-          <div class="p-6 rounded-2xl bg-black-accent border border-white/10">
+          <div class="proof-card">
             <h3 class="h5 mb-3 text-white">Standardize with confidence</h3>
             <p class="text-text">
               See how different Xcode, macOS, and SDK versions affect clean and
               incremental builds before rolling changes out to everyone.
             </p>
           </div>
-          <div class="p-6 rounded-2xl bg-black-accent border border-white/10">
+          <div class="proof-card">
             <h3 class="h5 mb-3 text-white">Skip internal tooling</h3>
             <p class="text-text">
               No build phases, no scripts, and no dashboard to maintain.
@@ -160,22 +214,22 @@ const structuredData = {
             </p>
           </div>
         </div>
-        <div class="mt-12 grid md:grid-cols-2 gap-8">
-          <div>
+        <div class="proof-grid proof-grid--objections">
+          <div class="objection">
             <h3 class="h6 mb-2 text-white">Already track builds?</h3>
             <p class="text-text">
               RocketSim focuses on local developer build data and setup-free
               comparisons by project, scheme, machine, and Xcode version.
             </p>
           </div>
-          <div>
+          <div class="objection">
             <h3 class="h6 mb-2 text-white">Hard to roll out?</h3>
             <p class="text-text">
               Teams use one license key. Developers keep building locally while
               RocketSim syncs insights in the background.
             </p>
           </div>
-          <div>
+          <div class="objection">
             <h3 class="h6 mb-2 text-white">Need to justify another tool?</h3>
             <p class="text-text">
               Saving about ten minutes per developer each month can cover the
@@ -185,7 +239,7 @@ const structuredData = {
               > for a copy-ready request and payback summary.
             </p>
           </div>
-          <div>
+          <div class="objection">
             <h3 class="h6 mb-2 text-white">
               Need security or procurement details?
             </h3>
@@ -211,7 +265,8 @@ const structuredData = {
       </div>
     </div>
   </section>
-  <section class="section-sm pt-20 lg:pt-24">
+
+  <section class="section-sm trial-band">
     <div class="container">
       <div
         class="bg-[#1d1d1f] rounded-3xl px-8 py-10 sm:p-12 lg:px-14 lg:py-12"
@@ -258,3 +313,289 @@ const structuredData = {
     </div>
   </section>
 </Base>
+
+<style>
+  .teams-hero {
+    padding: 8rem 0 3rem;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 20% 15%,
+        rgb(89 72 203 / 15%),
+        transparent 32rem
+      ),
+      radial-gradient(
+        circle at 85% 25%,
+        rgb(54 68 154 / 12%),
+        transparent 28rem
+      );
+  }
+
+  .teams-hero__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .teams-hero__copy {
+    max-width: 46rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  h1 {
+    max-width: 48rem;
+    margin: 0;
+    font-size: clamp(2.6rem, 6vw, 5.2rem);
+    font-weight: 650;
+    color: #fff;
+    line-height: 0.99;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+
+  .teams-hero__intro {
+    max-width: 42rem;
+    margin: 1.5rem 0 0;
+    font-size: 1.08rem;
+    color: var(--text-color);
+    line-height: 1.65;
+  }
+
+  .teams-hero__benefits {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0;
+    margin: 1.5rem 0 2rem;
+    color: #d4d4d8;
+    list-style: none;
+  }
+
+  .teams-hero__benefits li {
+    position: relative;
+    padding-left: 1.6rem;
+  }
+
+  .teams-hero__benefits li::before {
+    position: absolute;
+    left: 0;
+    color: #9488ff;
+    content: "✓";
+  }
+
+  .teams-hero__prediction {
+    max-width: 38rem;
+  }
+
+  .teams-hero__prediction > p {
+    margin: 0.75rem 0 0;
+    font-size: 0.7rem;
+    color: #74747e;
+    line-height: 1.5;
+  }
+
+  .teams-hero__form {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+  }
+
+  .deep-dives {
+    padding: 3rem 0 8rem;
+    background: #080809;
+  }
+
+  .deep-dive {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    padding: 6rem 0;
+    border-bottom: 1px solid rgb(255 255 255 / 7%);
+  }
+
+  .deep-dive:last-child {
+    border-bottom: 0;
+  }
+
+  .deep-dive__copy h2 {
+    max-width: 36rem;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 650;
+    color: #fff;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .deep-dive__copy > p:not(.eyebrow, .representative) {
+    max-width: 36rem;
+    margin: 1.25rem 0 0;
+    color: var(--text-color);
+    line-height: 1.7;
+  }
+
+  .deep-dive__copy ul {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    color: #d1d1d6;
+    list-style: none;
+  }
+
+  .deep-dive__copy li {
+    position: relative;
+    padding-left: 1.35rem;
+  }
+
+  .deep-dive__copy li::before {
+    position: absolute;
+    left: 0;
+    color: #8f82f4;
+    content: "•";
+  }
+
+  .representative {
+    max-width: 35rem;
+    margin: 1.25rem 0 0;
+    font-size: 0.72rem;
+    color: #71717b;
+  }
+
+  .deep-dive__cards {
+    min-width: 0;
+  }
+
+  .deep-dive__cards--stacked {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .deep-dive__cards--stacked :global(.insight-card) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .testimonial {
+    padding: 7rem 0;
+    background:
+      linear-gradient(135deg, rgb(109 92 255 / 11%), transparent 45%), #101012;
+  }
+
+  .testimonial figure {
+    max-width: 62rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .testimonial blockquote {
+    margin: 0;
+    font-size: clamp(1.45rem, 3.2vw, 2.55rem);
+    font-weight: 500;
+    color: #f2f2f4;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .testimonial figcaption {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 1.75rem;
+    color: #fff;
+  }
+
+  .testimonial figcaption span {
+    font-size: 0.85rem;
+    color: var(--text-color);
+  }
+
+  .proof-section {
+    padding-top: 8rem;
+  }
+
+  .proof-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .proof-grid--primary {
+    margin-top: 3rem;
+  }
+
+  .proof-card {
+    padding: 1.6rem;
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 4%), transparent), #151517;
+    border: 1px solid rgb(255 255 255 / 9%);
+    border-radius: 1.2rem;
+  }
+
+  .proof-grid--objections {
+    gap: 2rem 3rem;
+    margin-top: 3rem;
+  }
+
+  .objection {
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 10%);
+  }
+
+  .trial-band {
+    padding-top: 5rem;
+  }
+
+  @media (min-width: 800px) {
+    .teams-hero {
+      padding: 11rem 0 6rem;
+    }
+
+    .teams-hero__grid {
+      grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.75fr);
+      gap: 4rem;
+    }
+
+    .teams-hero__form {
+      position: sticky;
+      top: 7rem;
+    }
+
+    .deep-dive {
+      grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
+      gap: 5rem;
+      padding-block: 8rem;
+    }
+
+    .deep-dive--reverse .deep-dive__copy {
+      order: 2;
+    }
+
+    .deep-dive--reverse .deep-dive__cards {
+      order: 1;
+    }
+
+    .proof-grid--primary {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .proof-grid--objections {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .deep-dive__cards--stacked {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

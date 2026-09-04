@@ -9,6 +9,9 @@ export function initInfiniteSliders(): void {
     document.querySelectorAll(".inf-slider");
 
   sliders.forEach((slider: HTMLElement) => {
+    if (slider.dataset.infSliderInitialized === "true") return;
+    slider.dataset.infSliderInitialized = "true";
+
     const options: SliderOptions = {
       scrollSpeed: slider.dataset.infScrollSpeed || "100", // Default scroll speed 100px/s
       direction: (slider.dataset.infDirection === "reverse"

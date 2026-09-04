@@ -1,0 +1,172 @@
+---
+import InsightShowcaseCard from "./InsightShowcaseCard.astro";
+
+const insightVariants = [
+  "prediction",
+  "machine",
+  "rollout",
+  "regression",
+  "versions",
+  "composition",
+  "activity",
+] as const;
+---
+
+<section class="insight-showcase" aria-labelledby="insight-showcase-title">
+  <div class="container insight-showcase__intro">
+    <p class="eyebrow">Team Build Insights</p>
+    <h2 id="insight-showcase-title">
+      Insights your team gets from real local builds
+    </h2>
+    <p>
+      Move from build-time charts to a practical next step: compare hardware,
+      validate an Xcode rollout, or spot a workflow change worth discussing.
+    </p>
+  </div>
+
+  <div class="insight-showcase__viewport">
+    <div
+      class="inf-slider"
+      data-inf-scroll-speed="22"
+      data-inf-direction="normal"
+      data-inf-slide-pause-on-hover="true"
+      aria-label="Build insight examples"
+    >
+      <div class="inf-slide-track">
+        {
+          insightVariants.map((variant) => (
+            <div class="inf-slide">
+              <InsightShowcaseCard variant={variant} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <p class="container insight-showcase__disclaimer">
+    Representative example: your dashboard uses your team's actual local build
+    data.
+  </p>
+</section>
+
+<script>
+  import { initInfiniteSliders } from "@/lib/utils/infSlider";
+
+  document.addEventListener("astro:page-load", initInfiniteSliders);
+</script>
+
+<style>
+  .insight-showcase {
+    padding: 6rem 0;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgb(89 72 203 / 12%),
+        transparent 35rem
+      ),
+      #0a0a0b;
+    border-block: 1px solid rgb(255 255 255 / 6%);
+  }
+
+  .insight-showcase__intro {
+    max-width: 48rem;
+    margin-bottom: 2.75rem;
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  h2 {
+    max-width: 44rem;
+    margin: 0 auto;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 650;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .insight-showcase__intro > p:last-child {
+    max-width: 39rem;
+    margin: 1.25rem auto 0;
+    color: var(--text-color);
+    line-height: 1.65;
+    text-wrap: balance;
+  }
+
+  .insight-showcase__viewport {
+    position: relative;
+  }
+
+  .insight-showcase__viewport::before,
+  .insight-showcase__viewport::after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    width: min(10vw, 8rem);
+    pointer-events: none;
+    content: "";
+  }
+
+  .insight-showcase__viewport::before {
+    left: 0;
+    background: linear-gradient(90deg, #0a0a0b, transparent);
+  }
+
+  .insight-showcase__viewport::after {
+    right: 0;
+    background: linear-gradient(-90deg, #0a0a0b, transparent);
+  }
+
+  .inf-slider {
+    overflow: hidden;
+  }
+
+  .inf-slide {
+    padding-right: 1rem;
+  }
+
+  .insight-showcase__disclaimer {
+    margin-top: 1.25rem;
+    font-size: 0.72rem;
+    color: #777781;
+    text-align: center;
+  }
+
+  @media (min-width: 800px) {
+    .insight-showcase {
+      padding-block: 8rem;
+    }
+
+    .inf-slide {
+      padding-right: 1.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .inf-slider {
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    :global(.insight-showcase .inf-slide-track) {
+      width: max-content !important;
+      animation: none !important;
+    }
+
+    :global(.insight-showcase .inf-slide:nth-child(n + 8)) {
+      display: none;
+    }
+  }
+</style>

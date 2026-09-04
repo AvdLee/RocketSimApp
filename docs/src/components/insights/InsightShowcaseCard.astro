@@ -1,0 +1,677 @@
+---
+type Variant =
+  | "prediction"
+  | "machine"
+  | "rollout"
+  | "regression"
+  | "versions"
+  | "composition"
+  | "activity";
+
+interface Props {
+  variant: Variant;
+  featured?: boolean;
+}
+
+const { variant, featured = false } = Astro.props;
+
+const content = {
+  prediction: {
+    title: "Newest MacBook Pro prediction",
+    message:
+      "A MacBook Pro with M5 Max is predicted to save 3–5 hours of build runtime per licensed engineer each month.",
+    severity: "opportunity",
+    date: "Aug 1 – Aug 28",
+  },
+  machine: {
+    title: "Fastest observed machine",
+    message:
+      "Your project builds fastest on the observed MacBook Pro with M5 Max.",
+    severity: "opportunity",
+    date: "Aug 1 – Aug 28",
+  },
+  rollout: {
+    title: "Xcode rollout opportunity",
+    message:
+      "Xcode 26.0 was consistently faster across matched Mac configurations.",
+    severity: "opportunity",
+    date: "Aug 1 – Aug 28",
+  },
+  regression: {
+    title: "P95 build regression",
+    message: "P95 builds were 13 seconds longer than in the previous period.",
+    severity: "warning",
+    date: "Aug 15 – Aug 28",
+  },
+  versions: {
+    title: "Multiple Xcode versions",
+    message:
+      "Validate performance, then standardize across the team for consistent outcomes.",
+    severity: "warning",
+    date: "Aug 1 – Aug 28",
+  },
+  composition: {
+    title: "Clean builds increased",
+    message: "Clean builds made up a larger share than in the previous period.",
+    severity: "opportunity",
+    date: "Aug 15 – Aug 28",
+  },
+  activity: {
+    title: "Build activity dropped",
+    message:
+      "Build activity fell 24%, primarily because two fewer Macs reported builds.",
+    severity: "warning",
+    date: "Aug 15 – Aug 28",
+  },
+} satisfies Record<
+  Variant,
+  { title: string; message: string; severity: string; date: string }
+>;
+
+const insight = content[variant];
+---
+
+<article
+  class:list={["insight-card", { "insight-card--featured": featured }]}
+  data-insight-variant={variant}
+>
+  <header class="insight-card__header">
+    <span class:list={["insight-card__icon", `is-${insight.severity}`]}>
+      {
+        variant === "versions" || variant === "rollout" ? (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v4m0 10v4M5.6 5.6l2.8 2.8m7.2 7.2 2.8 2.8M3 12h4m10 0h4M5.6 18.4l2.8-2.8m7.2-7.2 2.8-2.8" />
+            <circle cx="12" cy="12" r="4" />
+          </svg>
+        ) : variant === "activity" ? (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 17l5-5 4 3 7-8m0 0h-5m5 0v5" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 18a8 8 0 1 1 16 0M12 10v5m0 0 3-3m-3 3-3-3" />
+          </svg>
+        )
+      }
+    </span>
+    <div>
+      <h3>{insight.title}</h3>
+      <p class="insight-card__date">{insight.date}</p>
+    </div>
+  </header>
+
+  <p class="insight-card__message">{insight.message}</p>
+
+  {
+    variant === "prediction" && (
+      <div class="prediction">
+        <div
+          class="prediction__p95"
+          role="img"
+          aria-label="Current P95 1 minute 40 seconds, predicted P95 1 minute 10 seconds to 1 minute 20 seconds"
+        >
+          <span>
+            <small>Current P95</small>
+            <strong>1m 40s</strong>
+          </span>
+          <span class="prediction__arrow" aria-hidden="true">
+            →
+          </span>
+          <span>
+            <small>Predicted P95</small>
+            <strong>1m 10s–1m 20s</strong>
+          </span>
+        </div>
+        <div class="prediction__saving">
+          <span>Estimated build runtime saved</span>
+          <strong>3–5h</strong>
+          <small>/ licensed engineer / month</small>
+        </div>
+        <p>Anonymous benchmarks from 40+ teams · matched workloads</p>
+      </div>
+    )
+  }
+
+  {
+    variant === "machine" && (
+      <div class="insight-table">
+        <div class="insight-table__row insight-table__head">
+          <>
+            <span>Machine</span>
+            <span>P95</span>
+            <span>Saved / seat</span>
+          </>
+        </div>
+        <div class="insight-table__row">
+          <span>
+            <>
+              <strong>M5 Max</strong>
+              <small>482 matched builds</small>
+            </>
+          </span>
+          <>
+            <span>38s</span>
+            <span class="positive">3h 42m</span>
+          </>
+        </div>
+        <div class="insight-table__row">
+          <span>
+            <>
+              <strong>M3 Max</strong>
+              <small>391 matched builds</small>
+            </>
+          </span>
+          <>
+            <span>54s</span>
+            <span>—</span>
+          </>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    variant === "rollout" && (
+      <div class="comparison-bars">
+        <div>
+          <>
+            <span>Xcode 16.4</span>
+            <strong>55s</strong>
+          </>
+          <i style="--bar-width: 100%" />
+        </div>
+        <div>
+          <>
+            <span>Xcode 26.0</span>
+            <strong>
+              38s <small>(−30%)</small>
+            </strong>
+          </>
+          <i class="is-positive" style="--bar-width: 69%" />
+        </div>
+        <p>300 matched builds across Mac configurations</p>
+      </div>
+    )
+  }
+
+  {
+    variant === "regression" && (
+      <div class="trend">
+        <div class="trend__primary">
+          <span>Current P95</span>
+          <strong>54s</strong>
+          <em>+13s&nbsp; (+29.5%)</em>
+        </div>
+        <div class="trend__row">
+          <>
+            <span>Previous P95</span>
+            <strong>41s</strong>
+          </>
+        </div>
+        <div class="trend__row">
+          <>
+            <span>Typical build (P75)</span>
+            <strong>24s</strong>
+          </>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    variant === "versions" && (
+      <div class="insight-table insight-table--versions">
+        <div class="insight-table__row insight-table__head">
+          <>
+            <span>Xcode version</span>
+            <span>Builds</span>
+          </>
+        </div>
+        <div class="insight-table__row">
+          <>
+            <span>26.0 (17A324)</span>
+            <strong>600</strong>
+          </>
+        </div>
+        <div class="insight-table__row">
+          <>
+            <span>16.4 (16F6)</span>
+            <strong>214</strong>
+          </>
+        </div>
+        <p>Standardize after validating performance.</p>
+      </div>
+    )
+  }
+
+  {
+    variant === "composition" && (
+      <div class="composition">
+        <div
+          class="composition__bar"
+          role="img"
+          aria-label="70 builds: 40 incremental, 20 clean, 10 unclassified"
+        >
+          <span class="is-incremental" style="width: 57.14%" />
+          <span class="is-clean" style="width: 28.57%" />
+          <span class="is-unclassified" style="width: 14.29%" />
+        </div>
+        <ul>
+          <li>
+            <>
+              <i class="is-incremental" />
+              <span>Incremental</span>
+              <strong>40</strong>
+            </>
+          </li>
+          <li>
+            <>
+              <i class="is-clean" />
+              <span>Clean</span>
+              <strong>
+                20 <em>+8.5 pts</em>
+              </strong>
+            </>
+          </li>
+          <li>
+            <>
+              <i class="is-unclassified" />
+              <span>Unclassified</span>
+              <strong>10</strong>
+            </>
+          </li>
+        </ul>
+      </div>
+    )
+  }
+
+  {
+    variant === "activity" && (
+      <div class="insight-table insight-table--activity">
+        <div class="insight-table__row insight-table__head">
+          <>
+            <span>Signal</span>
+            <span>Previous</span>
+            <span>Current</span>
+          </>
+        </div>
+        <div class="insight-table__row">
+          <>
+            <span>Builds</span>
+            <span>892</span>
+            <strong>
+              678 <em>−24%</em>
+            </strong>
+          </>
+        </div>
+        <div class="insight-table__row">
+          <>
+            <span>Reporting Macs</span>
+            <span>12</span>
+            <strong>
+              10 <em>−17%</em>
+            </strong>
+          </>
+        </div>
+        <p>Engineering-flow signal — not a productivity score.</p>
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .insight-card {
+    display: flex;
+    flex-direction: column;
+    width: min(24rem, calc(100vw - 3rem));
+    min-height: 25rem;
+    padding: 1.35rem;
+    overflow: hidden;
+    color: #f7f7f8;
+    background:
+      radial-gradient(circle at 90% 0%, rgb(83 74 196 / 16%), transparent 38%),
+      #141416;
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 1.25rem;
+    box-shadow:
+      inset 0 1px rgb(255 255 255 / 5%),
+      0 1.25rem 3rem rgb(0 0 0 / 22%);
+  }
+
+  .insight-card--featured {
+    width: 100%;
+    min-height: 0;
+    background:
+      radial-gradient(circle at 85% 0%, rgb(102 88 255 / 24%), transparent 40%),
+      linear-gradient(145deg, #19191f, #101012);
+    border-color: rgb(136 124 255 / 28%);
+  }
+
+  .insight-card__header {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .insight-card__icon {
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    place-items: center;
+    color: #a89cff;
+    background: rgb(119 100 255 / 14%);
+    border: 1px solid rgb(154 141 255 / 22%);
+    border-radius: 0.75rem;
+  }
+
+  .insight-card__icon.is-warning {
+    color: #ffb86b;
+    background: rgb(255 153 70 / 12%);
+    border-color: rgb(255 174 92 / 20%);
+  }
+
+  .insight-card__icon svg {
+    width: 1.2rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 650;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .insight-card__date {
+    margin: 0.15rem 0 0;
+    font-size: 0.72rem;
+    color: #7f7f89;
+  }
+
+  .insight-card__message {
+    min-height: 4.5rem;
+    margin: 1.2rem 0;
+    font-size: 0.88rem;
+    color: #b7b7bf;
+    line-height: 1.55;
+  }
+
+  .insight-card--featured .insight-card__message {
+    min-height: 0;
+    font-size: 0.95rem;
+  }
+
+  .prediction {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: auto;
+  }
+
+  .prediction__p95 {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.9rem;
+    background: rgb(0 0 0 / 23%);
+    border: 1px solid rgb(255 255 255 / 7%);
+    border-radius: 0.85rem;
+  }
+
+  .prediction__p95 span:not(.prediction__arrow) {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  small {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: #80808a;
+  }
+
+  .prediction__p95 strong {
+    font-size: 0.95rem;
+  }
+
+  .prediction__arrow {
+    color: #777;
+  }
+
+  .prediction__saving {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 0.95rem;
+    background: linear-gradient(120deg, rgb(98 78 255 / 16%), rgb(0 0 0 / 8%));
+    border-radius: 0.85rem;
+  }
+
+  .prediction__saving span {
+    font-size: 0.72rem;
+    color: #a6a6af;
+  }
+
+  .prediction__saving strong {
+    font-size: 1.7rem;
+    color: #bcb3ff;
+    line-height: 1;
+  }
+
+  .prediction__saving small {
+    grid-column: 1 / -1;
+    margin-top: 0.3rem;
+  }
+
+  .prediction > p,
+  .comparison-bars > p,
+  .insight-table > p {
+    margin: 0;
+    font-size: 0.66rem;
+    color: #777781;
+    line-height: 1.45;
+  }
+
+  .insight-table {
+    margin-top: auto;
+    font-size: 0.76rem;
+  }
+
+  .insight-table__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) 0.55fr 0.8fr;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.7rem 0.25rem;
+    border-top: 1px solid rgb(255 255 255 / 7%);
+  }
+
+  .insight-table__row > :not(:first-child) {
+    text-align: right;
+  }
+
+  .insight-table__row strong {
+    font-weight: 600;
+  }
+
+  .insight-table__head {
+    padding-top: 0;
+    color: #777781;
+    border-top: 0;
+  }
+
+  .positive {
+    color: #72d6ad;
+  }
+
+  .insight-table--versions .insight-table__row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .insight-table--versions > p,
+  .insight-table--activity > p {
+    margin-top: 0.8rem;
+  }
+
+  .insight-table--activity .insight-table__row {
+    grid-template-columns: 1.1fr 0.7fr 0.9fr;
+  }
+
+  em {
+    font-style: normal;
+    color: #ff9a83;
+  }
+
+  .comparison-bars {
+    display: grid;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .comparison-bars > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+  }
+
+  .comparison-bars i {
+    grid-column: 1 / -1;
+    width: var(--bar-width);
+    height: 0.55rem;
+    background: #565663;
+    border-radius: 999px;
+  }
+
+  .comparison-bars i.is-positive {
+    background: linear-gradient(90deg, #7164e8, #9e91ff);
+  }
+
+  .comparison-bars small {
+    display: inline;
+    color: #72d6ad;
+  }
+
+  .trend {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: auto;
+  }
+
+  .trend__primary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1rem;
+    background: rgb(255 141 94 / 8%);
+    border: 1px solid rgb(255 155 112 / 16%);
+    border-radius: 0.85rem;
+  }
+
+  .trend__primary span {
+    font-size: 0.75rem;
+    color: #a0a0aa;
+  }
+
+  .trend__primary strong {
+    font-size: 1.45rem;
+  }
+
+  .trend__primary em {
+    grid-column: 1 / -1;
+    margin-top: 0.25rem;
+    font-size: 0.72rem;
+    text-align: right;
+  }
+
+  .trend__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 0.25rem;
+    font-size: 0.74rem;
+    color: #92929c;
+    border-bottom: 1px solid rgb(255 255 255 / 6%);
+  }
+
+  .trend__row strong {
+    color: #dddde1;
+  }
+
+  .composition {
+    display: grid;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .composition__bar {
+    display: flex;
+    height: 0.75rem;
+    overflow: hidden;
+    background: #29292e;
+    border-radius: 999px;
+  }
+
+  .composition__bar span + span {
+    border-left: 2px solid #141416;
+  }
+
+  .composition .is-incremental {
+    background: #7569e8;
+  }
+
+  .composition .is-clean {
+    background: #de8e63;
+  }
+
+  .composition .is-unclassified {
+    background: #555560;
+  }
+
+  .composition ul {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .composition li {
+    display: grid;
+    grid-template-columns: 0.5rem 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.72rem;
+    color: #a4a4ad;
+  }
+
+  .composition li i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+  }
+
+  .composition li strong {
+    color: #e7e7ea;
+  }
+
+  .composition li em {
+    font-size: 0.65rem;
+  }
+
+  @media (min-width: 600px) {
+    .insight-card {
+      width: 25rem;
+      padding: 1.5rem;
+    }
+
+    .insight-card--featured {
+      width: 100%;
+    }
+  }
+</style>
