@@ -82,6 +82,7 @@ Support: support@rocketsim.app
 - [Agentic Development with RocketSim](https://www.rocketsim.app/docs/features/agentic-development/): let AI coding agents inspect, navigate, and verify running iOS Simulator apps
 - [RocketSim CLI](https://www.rocketsim.app/docs/features/agentic-development/rocketsim-cli): use the built-in CLI for visible elements, semantic interactions, waits, screenshots, and recordings
 - [RocketSim Agent Skill](https://www.rocketsim.app/docs/features/agentic-development/agent-skill): install version-matched instructions for AI coding tools
+- [rs/1 Protocol](https://www.rocketsim.app/docs/features/agentic-development/rs1-protocol): RocketSim's agent protocol with one compact JSON envelope, typed errors, and screen-state hashes
 - [Physical Device Testing](https://www.rocketsim.app/docs/features/physical-devices/): mirror and test a connected iPhone or iPad with captures, Recent Builds, lifecycle actions, deep links, and locations
 - [Physical-Device Location and Time-Zone Simulation](https://www.rocketsim.app/docs/features/physical-devices/location-and-time-zone-simulation/): test Core Location and automatic iOS time-zone changes on real hardware with Xcode 27
 - [Deep-Link Testing on a Physical Device](https://www.rocketsim.app/docs/features/physical-devices/deep-link-testing/): run saved URL schemes and Universal Links on a connected iPhone or iPad

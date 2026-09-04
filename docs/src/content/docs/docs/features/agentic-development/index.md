@@ -81,7 +81,7 @@ Agents can target elements by label, type, or value instead of guessing coordina
 
 ### Agent-optimized protocol
 
-The CLI uses RocketSim's `rs/1` protocol for agent workflows. You do not need to learn the protocol details; the important part is that it is designed for compact, reliable interaction through the running RocketSim app.
+The CLI uses RocketSim's [`rs/1` protocol](/docs/features/agentic-development/rs1-protocol) for agent workflows. You do not need to learn the protocol details; the important part is that it is designed for compact, reliable interaction through the running RocketSim app.
 
 ### Version-matched automation
 

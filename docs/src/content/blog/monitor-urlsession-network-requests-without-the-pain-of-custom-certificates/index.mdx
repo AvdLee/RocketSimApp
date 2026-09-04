@@ -1,14 +1,20 @@
 ---
 title: Monitor URLSession Network Requests without the pain of custom certificates
-description: Monitor URLSession network requests without installing custom certificates. RocketSim's Network Monitor connects over Bonjour so you can inspect every request and response while you develop.
+description: Monitor URLSession network requests without installing custom certificates or a proxy. Inspect responses, failures, duplicate calls, and AI-ready exports.
 publishedTime: 2025-10-08T17:43:58Z
-modifiedTime: 2025-10-15T09:39:01Z
+modifiedTime: 2026-08-17T09:30:00Z
+image: ../../docs/docs/features/networking/network-traffic-monitoring/network_monitor_logs.png
+imageAlt: "RocketSim Network Monitor showing URLSession requests and app logs next to a running iOS Simulator app."
+imageCaption: "RocketSim shows URLSession requests and app logs in one timeline: 1) switch between requests, logs, or both; 2) inspect debug logs next to the request that caused them."
 ---
 
 import { Image } from "astro:assets";
 import networkMonitorResponse from "./network-monitor-response.png";
 import failedNetworkRequest from "./failed-network-request.png";
 import sideWindowOverview from "./side-window-overview.png";
+import networkInsightsOverview from "../../docs/docs/features/networking/network-traffic-monitoring/network-insights-overview.png";
+import networkRequestDetail from "../../docs/docs/features/networking/network-traffic-monitoring/network-request-detail.png";
+import networkRequestPromptsToolbar from "../../docs/docs/features/networking/network-request-prompts/network-request-prompts-toolbar.png";
 
 Configuring a proxy using many of the popular apps like Proxyman and Charles Proxy often requires you to install custom certificates. It's when you're running into an unexpected network failure when you've realized you didn't have the proxy running.
 
@@ -99,8 +105,78 @@ You don't always have to dive into detail, though. We also show a quick overview
   </figcaption>
 </figure>
 
+## Copy a failing request as cURL
+
+A network bug rarely starts with "the backend is down." More often, it is a missing header, an unexpected response body, a stale token, a validation error, or a request that fires at the wrong time.
+
+<figure>
+  <Image
+    src={networkRequestDetail}
+    alt="RocketSim Network Monitor showing URLSession request details with headers, response body, metrics, and cURL export options."
+    class="w-full rounded-2xl"
+  />
+  <figcaption>
+    The request detail view gives you headers, response bodies, metrics, and a
+    cURL export for the selected URLSession request.
+  </figcaption>
+</figure>
+
+Copying a request as cURL is especially useful when you need to share a failing call with a teammate or backend engineer. It moves the conversation from "something is wrong" to "this exact request returns this exact response."
+
+## Find duplicate calls
+
+Network debugging is not only about failures. A lot of app performance issues come from repeated or wasteful requests: the same endpoint fires when a view reappears, a list reloads too often, or a detail screen fetches more data than it needs.
+
+[Networking Insights](/docs/features/networking/networking-insights) gives you a historical view of those patterns. You can look for duplicate calls, caching opportunities, slow endpoints, failure spikes, and the most requested URLs across sessions.
+
+<figure>
+  <Image
+    src={networkInsightsOverview}
+    alt="RocketSim Networking Insights overview showing failure spikes, duplicate calls, caching opportunities, slow endpoints, and most requested URLs."
+    class="w-full rounded-2xl"
+  />
+  <figcaption>
+    Networking Insights turns captured traffic into patterns you can act on,
+    like duplicate calls, slow endpoints, and failure spikes.
+  </figcaption>
+</figure>
+
+This is the kind of debugging I like because it turns invisible waste into something concrete. You might feel that a screen is slow, but seeing five duplicate calls in a row makes the fix obvious.
+
+## Export requests to AI
+
+RocketSim can also export network requests as redacted prompts for AI-assisted debugging. Instead of pasting raw request data into Claude or ChatGPT, you can use [AI Network Request Prompts](/docs/features/networking/network-request-prompts) to generate focused summaries.
+
+The built-in prompt types target common problems:
+
+- **Redundant calls & caching** for duplicate requests and missing cache strategy
+- **Performance / overfetching** for slow endpoints and oversized payloads
+- **Failures & error spikes** for non-2xx responses and likely causes
+
+<figure>
+  <Image
+    src={networkRequestPromptsToolbar}
+    alt="RocketSim Network Monitor toolbar showing Copy export and Copy prompt menus for AI-assisted URLSession debugging."
+    class="w-full rounded-2xl"
+  />
+  <figcaption>
+    Copy export and Copy prompt turn a filtered request set into redacted,
+    AI-ready debugging context.
+  </figcaption>
+</figure>
+
+The redaction is important. Network traffic often contains bearer tokens, user identifiers, or private payloads. RocketSim keeps the export compact and removes sensitive values so you can ask an AI assistant for help without dumping raw traffic into a chat.
+
+## Keep proxy tools for proxy-specific jobs
+
+Proxy tools are still the right choice when you need proxy-specific power: response rewriting, breakpoints, advanced SSL inspection, or traffic from apps you cannot instrument. Tools like [Charles Proxy](https://www.charlesproxy.com/) and [Proxyman](https://proxyman.io/) are excellent for those jobs.
+
+RocketSim is for the everyday debug-build loop. You are working on your own iOS app, running it in the Simulator, and you want request visibility without setup friction. That covers a lot of debugging sessions.
+
+The nice part is that both workflows can exist together. Use RocketSim for the fast loop, then reach for a full proxy when the bug specifically needs proxy behavior.
+
 ## Download RocketSim today and get started
 
-You can [get RocketSim from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=network-monitoring-rs-article&mt=8), which allows you to try out the network monitor for free.
+You can [get RocketSim from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=network-monitoring-rs-article&mt=8), which allows you to try out the network monitor for free. If you want to dive deeper into the setup, follow the [Network Monitor documentation](/docs/features/networking/network-traffic-monitoring).
 
-Enjoy!
+Feel free to reach out on [X/Twitter](https://x.com/twannl) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you have ideas for better network debugging workflows. Thanks!

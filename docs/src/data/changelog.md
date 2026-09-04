@@ -1,3 +1,76 @@
+# 16.4.5 (330)
+
+**Improved:**
+
+- LLDB RocketSimConnect improved for slow launches that occasionally happen on busy machines.
+
+**Fixed:**
+
+- Fixed RocketSim onboarding windows appearing while app-hosted tests run in the background.
+- Fixed the Screen Recording permission alert repeatedly appearing after opening System Settings or denying access. (Thanks, E. Sanchez!)
+- Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted. (Thanks, H. v.d. Ploeg)
+- Fixed the side window not appearing for Simulators booted in Xcode's Device Hub after RocketSim launched. (Thanks, E. Sanchez and S. Figlie!)
+
+# 16.4.4 (329)
+
+**New:**
+
+- Added iPad A16 device bezels (Thanks, H. v.d. Ploeg!)
+- Physical-device preview windows now match Simulator's Command-1/2/3/4 Physical Size, Point Accurate, Pixel Accurate, and Fit Screen modes.
+- The side window now always appears for Simulators in Xcode's Device Hub, including in expanded mode.
+
+**Fixed:**
+
+- Fixed a crash that could occur while recording export progress was updating in a floating capture thumbnail.
+- Fixed a crash that could occur when the Simulator side window's spring animation received an invalid or stale window frame.
+- Improved Magnifier stability and performance during rapid movement and zoom changes.
+- Fixed the optional RocketSim Connect setup prompt reappearing after being dismissed.
+- Fixed the Simulator side window appearing incorrectly when switching Spaces.
+- Fixed launch arguments, including locale overrides, for apps on physical devices.
+- Fixed captures, recordings, and touch indicators using the wrong orientation after rotating a Simulator.
+- Fixed deeplinks and push notifications switching from Device Hub to Simulator.app.
+- Fixed relaunching apps with a locale or time zone occasionally deadlocking.
+- Fixed RocketSim Connect occasionally stranding an app launch paused at UIApplicationMain when the debugger briefly auto-resumed during Connect setup.
+- Fixed RocketSim occasionally crashing when it became active after the sales window was closed.
+- Fixed `rocketsim interact tap <x> <y>` resolving to an accessibility press on the enclosing element instead of delivering a true point-precise touch, which made taps inside large custom-drawn views (such as a SwiftUI `Canvas` exposed as a single accessibility element) land on the wrong target. Raw-coordinate taps now always dispatch a HID touch at the exact point; use `interact activate` when you need accessibility activation semantics. (Thanks, S. Gardner!)
+- Fixed agent coordinate handling on landscape simulators: raw-coordinate taps, swipes, and gestures are now rotated from interface space into the device's portrait-native HID space, so they land where `elements` frames say they will. (Thanks, S. Gardner!)
+- Fixed `rocketsim screenshot` and `rocketsim snapshot` returning a transposed portrait-native framebuffer on rotated simulators. PNGs now always come out upright in interface orientation, matching the `elements` coordinate space. (Thanks, S. Gardner!)
+- Fixed `rocketsim elements` silently omitting accessibility elements with very small frames. Elements as small as 1x1 points are now included so hidden test-instrumentation elements stay readable; elements with accessibility content but a zero-size frame are reported via a `zero_size_elements_omitted` perception row instead of disappearing without a trace. (Thanks, S. Gardner!)
+- Fixed sibling accessibility elements with identical rendered text being collapsed into one in `rocketsim elements` output. (Thanks, S. Gardner!)
+- Fixed malformed Simulator accessibility responses crashing RocketSim instead of reporting accessibility as unavailable.
+- Fixed disconnected CLI sockets terminating RocketSim while it was writing a response.
+
+**Improved:**
+
+- RocketSim Connect setup now makes it clear that it also enables Simulator Camera. (Thanks, C. Jacobsson!)
+- Diagnostics reports now identify the outcome of the latest RocketSim Connect LLDB injection and which recovery paths were needed.
+- Agent `elements` output now exposes the app-supplied `accessibilityIdentifier` per element in debug mode, and cross-snapshot element identity incorporates it so same-labeled elements no longer collide in `interact` deltas. (Thanks, S. Gardner!)
+- Fixed Build Insights syncing remaining disabled after license validation refreshed stale cached license metadata.
+- Fixed Xcode selection failures showing a misleading user-directory warning instead of explaining why the selected Xcode could not be used. (Thanks, H. v.d. Ploeg!)
+- Fixed subscription purchase sheets sometimes omitting the Subscribe button by anchoring StoreKit confirmation to the originating RocketSim window.
+- Fixed Simulator-linked windows failing to load device frame information when modern Xcode resources could only be found in the shared Developer directory.
+
+# 16.4.3 (328)
+
+**New:**
+
+- Touch pointer size can now be adjusted from Captures settings. (Thanks, J. Williams!)
+
+**Fixed:**
+
+- Fixed truncated action button labels on the Unlock Pro Recordings floating thumbnail by wrapping the dual CTAs onto two lines.
+- Fixed touch strokes appearing inconsistently between capture previews and exported recordings. (Thanks, J. Williams!)
+- Fixed an empty black circle appearing on the side window's More button. (Thanks, H. v.d. Ploeg!)
+- Fixed App Store Connect rejecting App Previews exported with the "App Store Connect" option enabled. Those recordings were encoded as HEVC and could keep the recording's frame rate, while App Store Connect only accepts H.264 at up to 30 FPS. (Thanks, L. Mikusiak!)
+- Fixed deeply nested VoiceOver Overlay elements consuming too much horizontal space by capping their indentation.
+- Fixed touch indicators following mouse movement after releasing a touch in recordings without Touch Attention enabled. (Thanks, J. Scalo!)
+- Fixed touch indicators being absent from recordings of Simulators hosted in Xcode's Device Hub.
+- Fixed touch indicators drifting out of sync with the recording when video stream startup was slow. Touch timestamps are now anchored to the video's own timeline.
+- Fixed RocketSim Connect's LLDB hook injecting into app-hosted test runs, which could pause snapshot tests at `UIApplicationMain` and surface duplicate Objective-C class warnings. Test hosts are now excluded by detecting loaded XCTest runtime modules. (Thanks, M. Caron!)
+- Fixed a race in RocketSim Connect's LLDB hook that could leave app launches paused at `UIApplicationMain` until manually continued, with Connect never attaching. The loader now captures the launch thread identity before resuming and safely recovers its own stops without ever touching user breakpoints or pauses. (Thanks, M. Heiberg and R. Mirzoyan!)
+- Fixed RocketSim Connect's LLDB hook suspending background threads while running to `UIApplicationMain`, which could permanently deadlock apps that wait on background work during startup (for example analytics SDK or telephony setup). The run-to-main plan now keeps all threads running.
+- Fixed RocketSim Connect silently skipping injection on Xcode 26.3, intermittently pausing launches on Xcode 27 beta 5, and rejecting apps whose executable name differs from their `.app` bundle name. (Thanks, E. Baba!)
+
 # 16.4.2
 
 **New:**
