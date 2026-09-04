@@ -69,7 +69,23 @@ export function initInfiniteSliders(): void {
       });
 
       slider.addEventListener("mouseleave", () => {
-        track.style.animationPlayState = "running";
+        if (!slider.contains(document.activeElement)) {
+          track.style.animationPlayState = "running";
+        }
+      });
+
+      slider.addEventListener("focusin", () => {
+        track.style.animationPlayState = "paused";
+      });
+
+      slider.addEventListener("focusout", (event: FocusEvent) => {
+        const nextTarget = event.relatedTarget;
+        if (
+          !(nextTarget instanceof Node && slider.contains(nextTarget)) &&
+          !slider.matches(":hover")
+        ) {
+          track.style.animationPlayState = "running";
+        }
       });
     }
   });

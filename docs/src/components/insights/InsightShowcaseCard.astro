@@ -74,6 +74,7 @@ const insight = content[variant];
 <article
   class:list={["insight-card", { "insight-card--featured": featured }]}
   data-insight-variant={variant}
+  tabindex="0"
 >
   <div
     class:list={[
@@ -375,32 +376,20 @@ const insight = content[variant];
       )
     }
 
-    <details class="insight-card__support">
-      <summary>
-        {
-          variant === "prediction" || variant === "machine"
-            ? "View supporting data"
-            : "How this was calculated"
-        }
-      </summary>
-      <p>
-        {
-          variant === "prediction"
-            ? "Anonymous benchmarks from 40+ teams · matched workloads"
-            : variant === "machine"
-              ? "Estimated from reported monthly builds; missing activity makes the estimate conservative."
-              : variant === "rollout"
-                ? "Compares equivalent builds on the same Mac configurations."
-                : variant === "regression"
-                  ? "Compares equivalent current and previous periods."
-                  : variant === "versions"
-                    ? "Uses build activity reported by the team."
-                    : variant === "composition"
-                      ? "All reported build types remain visible."
-                      : "Build activity is an engineering-flow signal, not a productivity score."
-        }
-      </p>
-    </details>
+    {
+      variant === "prediction" && (
+        <p class="insight-card__credibility">
+          Anonymous benchmarks from 40+ teams · matched workloads
+        </p>
+      )
+    }
+    {
+      variant === "activity" && (
+        <p class="insight-card__credibility">
+          Engineering-flow signal — not a productivity score.
+        </p>
+      )
+    }
   </div>
 </article>
 
@@ -409,13 +398,18 @@ const insight = content[variant];
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 1rem;
-    width: min(24rem, calc(100vw - 3rem));
-    min-height: 21rem;
+    width: min(34rem, calc(100vw - 3rem));
+    min-height: 22rem;
     padding: 1rem;
     color: #f5f5f7;
     background: #000;
     border: 1px solid #27272a;
     border-radius: 0.5rem;
+  }
+
+  .insight-card:focus-visible {
+    outline: 0.125rem solid var(--primary-color);
+    outline-offset: 0.25rem;
   }
 
   .insight-card--featured {
@@ -441,11 +435,6 @@ const insight = content[variant];
     border-radius: 0.75rem;
   }
 
-  .insight-card__icon--warning {
-    background: transparent;
-    border-color: transparent;
-  }
-
   .insight-card__icon svg {
     width: 1.75rem;
     height: 1.75rem;
@@ -454,6 +443,7 @@ const insight = content[variant];
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.8;
+    vector-effect: non-scaling-stroke;
   }
 
   .xcode-mark {
@@ -568,7 +558,7 @@ const insight = content[variant];
   .insight-table {
     margin-top: 1rem;
     overflow-x: auto;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     background: #111;
     border: 1px solid #27272a;
     border-radius: 0.5rem;
@@ -593,7 +583,7 @@ const insight = content[variant];
   }
 
   .insight-table__head {
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: #8e97a6;
     border-top: 0;
@@ -756,31 +746,17 @@ const insight = content[variant];
     color: #f5f5f7;
   }
 
-  .insight-card__support {
+  .insight-card__credibility {
     margin-top: 0.75rem;
-    font-size: 0.8125rem;
+    margin-bottom: 0;
+    font-size: 0.75rem;
     color: #8e97a6;
     line-height: 1.45;
   }
 
-  .insight-card__support summary {
-    width: fit-content;
-    font-weight: 600;
-    color: #c0c6d6;
-    cursor: pointer;
-  }
-
-  .insight-card__support summary:hover {
-    color: #f5f5f7;
-  }
-
-  .insight-card__support p {
-    margin: 0.625rem 0 0;
-  }
-
   @media (min-width: 600px) {
     .insight-card {
-      width: 25rem;
+      width: 34rem;
     }
 
     .insight-card--featured {
