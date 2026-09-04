@@ -1,0 +1,47 @@
+---
+interface Props {
+  context?: "hero" | "section" | "marquee";
+  independentExamples?: boolean;
+  predictions?: boolean;
+}
+
+const {
+  context = "section",
+  independentExamples = false,
+  predictions = false,
+} = Astro.props;
+---
+
+<p class:list={["representative-data-note", `is-${context}`]}>
+  Representative example: your dashboard uses your team's actual local build
+  data.{independentExamples ? " Each card shows an independent example." : ""}
+  {
+    predictions
+      ? " Predictions are estimates based on comparable, anonymized workloads."
+      : ""
+  }
+</p>
+
+<style>
+  .representative-data-note {
+    margin: 1.25rem 0 0;
+    font-size: 0.72rem;
+    color: #777781;
+    line-height: 1.5;
+  }
+
+  .is-hero {
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+    color: #74747e;
+  }
+
+  .is-section {
+    max-width: 35rem;
+  }
+
+  .is-marquee {
+    max-width: none;
+    text-align: center;
+  }
+</style>

@@ -5,6 +5,14 @@ import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
 const DIST = fileURLToPath(new URL("../dist/", import.meta.url));
+const INF_SLIDER_SOURCE = readFileSync(
+  fileURLToPath(new URL("../src/lib/utils/infSlider.ts", import.meta.url)),
+  "utf8",
+);
+const LAZY_VIDEO_SOURCE = readFileSync(
+  fileURLToPath(new URL("../src/lib/utils/lazyVideo.ts", import.meta.url)),
+  "utf8",
+);
 
 export function readDist(relativePath) {
   return readFileSync(join(DIST, relativePath), "utf8");
@@ -78,6 +86,47 @@ test("Teams page preserves its conversion funnel contract", () => {
     /\/docs\/support\/how-to-get-rocketsim-approved-at-work\//,
   );
   assert.match(html, /€10 per seat\/month, billed annually/);
+});
+
+test("Teams portal media ships with immediate and lazy-loaded fallbacks", () => {
+  const html = readDist("for-teams/index.html");
+
+  assert.match(
+    html,
+    /poster="\/features\/posters\/team-insights-dashboard\.webp"/,
+  );
+  assert.match(html, /data-src="\/features\/team-insights-dashboard\.mp4"/);
+  assert.match(html, /class="js-lazy-video\b/);
+  assert.match(html, /RocketSim for Teams user settings showing active users/);
+  assert.match(
+    html,
+    /RocketSim for Teams subscription settings showing the license key/,
+  );
+});
+
+test("Teams insight examples keep their accessibility and evidence contracts", () => {
+  const html = readDist("for-teams/index.html");
+
+  assert.match(
+    html,
+    /Scrolling build insight examples; focus to pause animation/,
+  );
+  assert.match(html, /Each card shows an independent example/);
+  assert.match(html, /\+13s \(\+31\.7%\)/);
+  assert.match(html, /one matched Mac configuration/);
+  assert.match(html, /<th scope="col"[^>]*>Percentile<\/th>/);
+  assert.match(html, /something we could never have justified/);
+  assert.match(html, /total game-changer/);
+  assert.doesNotMatch(html, /<article[^>]*data-insight-variant[^>]*tabindex=/);
+  assert.match(INF_SLIDER_SOURCE, /aria-hidden/);
+  assert.match(INF_SLIDER_SOURCE, /element\.tabIndex = -1/);
+  assert.match(INF_SLIDER_SOURCE, /ResizeObserver/);
+});
+
+test("lazy video utility preserves explicit pauses", () => {
+  assert.match(LAZY_VIDEO_SOURCE, /userPaused/);
+  assert.match(LAZY_VIDEO_SOURCE, /if \(!state\.userPaused\)/);
+  assert.match(LAZY_VIDEO_SOURCE, /state\.autoPausing = true/);
 });
 
 test("Teams page keeps its SEO metadata and legacy redirect", () => {
