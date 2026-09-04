@@ -18,7 +18,7 @@ import usersSeatsImage from "../../assets/features/team-manager-users-seats.png"
 
     <div class="team-manager__dashboard">
       <video
-        class="js-team-dashboard-video"
+        class="js-lazy-video"
         poster="/features/posters/team-insights-dashboard.webp"
         autoplay
         muted
@@ -222,46 +222,7 @@ import usersSeatsImage from "../../assets/features/team-manager-users-seats.png"
 </style>
 
 <script>
-  function setupTeamDashboardVideo() {
-    const videos = document.querySelectorAll<HTMLVideoElement>(
-      ".js-team-dashboard-video",
-    );
+  import { initLazyVideos } from "@/lib/utils/lazyVideo";
 
-    videos.forEach((video) => {
-      if (video.dataset.observed === "true") return;
-      video.dataset.observed = "true";
-
-      const loadVideo = () => {
-        if (video.dataset.loaded === "true") return;
-        const source =
-          video.querySelector<HTMLSourceElement>("source[data-src]");
-        const src = source?.dataset.src;
-        if (!source || !src) return;
-
-        source.src = src;
-        video.load();
-        video.dataset.loaded = "true";
-      };
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry) return;
-          if (entry.isIntersecting) {
-            loadVideo();
-            void video.play().catch(() => {
-              // The poster and native controls remain useful when autoplay is
-              // blocked or the visitor prefers to start playback themselves.
-            });
-          } else if (!video.paused) {
-            video.pause();
-          }
-        },
-        { threshold: 0.2, rootMargin: "200px 0px" },
-      );
-
-      observer.observe(video);
-    });
-  }
-
-  document.addEventListener("astro:page-load", setupTeamDashboardVideo);
+  document.addEventListener("astro:page-load", initLazyVideos);
 </script>

@@ -220,7 +220,7 @@ if (asset.alignment === "full-width") {
         />
       ) : (
         <video
-          class="image js-feature-video"
+          class="image js-lazy-video"
           aria-label={asset.alt}
           poster={posterPath}
           preload="none"
@@ -247,47 +247,7 @@ if (asset.alignment === "full-width") {
 </article>
 
 <script>
-  // Astro de-duplicates scripts, so this only runs once even when there are
-  // multiple feature components on the page.
-  //
-  // Feature videos are intentionally NOT downloaded on page load. Each video
-  // ships with `preload="none"` and its URL on `data-src`, so the homepage's
-  // initial paint costs zero video bytes. We only fetch a video once the user
-  // scrolls near it, then autoplay/pause it as it enters/leaves the viewport.
-  function setupLazyFeatureVideos() {
-    const videos =
-      document.querySelectorAll<HTMLVideoElement>(".js-feature-video");
+  import { initLazyVideos } from "@/lib/utils/lazyVideo";
 
-    const loadVideo = (video: HTMLVideoElement) => {
-      if (video.dataset.loaded === "true") return;
-      const source = video.querySelector<HTMLSourceElement>("source[data-src]");
-      const src = source?.dataset.src;
-      if (source && src) {
-        source.src = src;
-        video.load();
-        video.dataset.loaded = "true";
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) {
-            loadVideo(video);
-            void video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      // `rootMargin` starts the download slightly before the video is visible
-      // so playback feels instant without fetching anything up front.
-      { threshold: 0.25, rootMargin: "200px 0px" },
-    );
-
-    videos.forEach((video) => observer.observe(video));
-  }
-
-  document.addEventListener("astro:page-load", setupLazyFeatureVideos);
+  document.addEventListener("astro:page-load", initLazyVideos);
 </script>

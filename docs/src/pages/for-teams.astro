@@ -4,6 +4,7 @@ import { getEntry } from "astro:content";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import InsightMarquee from "../components/insights/InsightMarquee.astro";
+import RepresentativeDataNote from "../components/insights/RepresentativeDataNote.astro";
 import InsightShowcaseCard from "../components/insights/InsightShowcaseCard.astro";
 import TeamsTrialForm from "../components/TeamsTrialForm.astro";
 import OnlineTeamManager from "../old/components/OnlineTeamManager.astro";
@@ -60,11 +61,7 @@ const structuredData = {
         </ul>
         <div class="teams-hero__prediction">
           <InsightShowcaseCard variant="prediction" featured={true} />
-          <p>
-            Representative example: your dashboard uses your team's actual local
-            build data. Predictions are estimates based on comparable,
-            anonymized workloads.
-          </p>
+          <RepresentativeDataNote context="hero" predictions={true} />
         </div>
       </div>
       <div class="teams-hero__form">
@@ -83,7 +80,7 @@ const structuredData = {
         <div class="deep-dive__copy">
           <p class="eyebrow">Hardware decisions</p>
           <h2>Make the next Mac upgrade easier to justify</h2>
-          <p>
+          <p class="deep-dive__body">
             Compare the machines already building your project, then estimate
             how much build runtime a newer configuration could save per licensed
             engineer. Actual savings can be higher when repeated local builds
@@ -94,10 +91,7 @@ const structuredData = {
             <li>Matched-build sample sizes</li>
             <li>Estimated monthly savings per seat</li>
           </ul>
-          <p class="representative">
-            Representative example: your dashboard uses your team's actual local
-            build data.
-          </p>
+          <RepresentativeDataNote />
         </div>
         <div class="deep-dive__cards deep-dive__cards--stacked">
           <InsightShowcaseCard variant="prediction" />
@@ -109,7 +103,7 @@ const structuredData = {
         <div class="deep-dive__copy">
           <p class="eyebrow">Xcode decisions</p>
           <h2>Roll out new Xcode versions with observed evidence</h2>
-          <p>
+          <p class="deep-dive__body">
             Compare versions on matching Mac configurations before asking the
             whole team to move. Version distribution also shows where mixed
             tooling could make results harder to compare.
@@ -119,10 +113,7 @@ const structuredData = {
             <li>Version adoption across reported builds</li>
             <li>Rollout opportunities without absolute promises</li>
           </ul>
-          <p class="representative">
-            Representative example: your dashboard uses your team's actual local
-            build data.
-          </p>
+          <RepresentativeDataNote />
         </div>
         <div class="deep-dive__cards deep-dive__cards--stacked">
           <InsightShowcaseCard variant="rollout" />
@@ -134,7 +125,7 @@ const structuredData = {
         <div class="deep-dive__copy">
           <p class="eyebrow">Team flow</p>
           <h2>Bring useful build signals into retros and planning</h2>
-          <p>
+          <p class="deep-dive__body">
             See whether clean builds gained share, slow builds regressed, or
             reporting activity changed. Treat activity as a prompt to
             investigate engineering flow — never as an individual productivity
@@ -145,10 +136,7 @@ const structuredData = {
             <li>Current-versus-previous period comparisons</li>
             <li>Team-level signals with the context attached</li>
           </ul>
-          <p class="representative">
-            Representative example: your dashboard uses your team's actual local
-            build data.
-          </p>
+          <RepresentativeDataNote />
         </div>
         <div class="deep-dive__cards deep-dive__cards--stacked">
           <InsightShowcaseCard variant="composition" />
@@ -165,8 +153,12 @@ const structuredData = {
           “RocketSim Team Insights finally gives us visibility into our build
           times beyond just gut feeling. We can actually measure the impact of
           adding SDKs or improving configurations, seeing results reflected in
-          incremental and clean builds. No extra setup or build phase hacks
-          required — it just works quietly in the background.”
+          incremental and clean builds. It’s been invaluable for decisions like
+          upgrading hardware—we can point to real data showing how different
+          machines affect build times. The metrics are broken down beautifully,
+          no extra setup or build phase hacks required—it just works quietly in
+          the background. Honestly, it’s something we could never have justified
+          building in-house, but it’s been a total game-changer.”
         </blockquote>
         <figcaption>
           <strong>Max Godfrey</strong>
@@ -317,7 +309,7 @@ const structuredData = {
 <style>
   .teams-hero {
     padding: 8rem 0 3rem;
-    overflow: hidden;
+    overflow-x: clip;
     background:
       radial-gradient(
         circle at 20% 15%,
@@ -394,13 +386,6 @@ const structuredData = {
     max-width: 38rem;
   }
 
-  .teams-hero__prediction > p {
-    margin: 0.75rem 0 0;
-    font-size: 0.7rem;
-    color: #74747e;
-    line-height: 1.5;
-  }
-
   .teams-hero__form {
     width: 100%;
     max-width: 30rem;
@@ -435,7 +420,7 @@ const structuredData = {
     text-wrap: balance;
   }
 
-  .deep-dive__copy > p:not(.eyebrow, .representative) {
+  .deep-dive__body {
     max-width: 36rem;
     margin: 1.25rem 0 0;
     color: var(--text-color);
@@ -461,13 +446,6 @@ const structuredData = {
     left: 0;
     color: var(--primary-color);
     content: "•";
-  }
-
-  .representative {
-    max-width: 35rem;
-    margin: 1.25rem 0 0;
-    font-size: 0.72rem;
-    color: #71717b;
   }
 
   .deep-dive__cards {

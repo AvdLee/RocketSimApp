@@ -33,7 +33,7 @@ const content = {
   rollout: {
     title: "Xcode rollout opportunity",
     message:
-      "Xcode 26.0 was consistently faster across matched Mac configurations.",
+      "Xcode 26.0 was consistently faster across one matched Mac configuration.",
     severity: "opportunity",
     date: "Aug 1 – Aug 28",
   },
@@ -74,7 +74,6 @@ const insight = content[variant];
 <article
   class:list={["insight-card", { "insight-card--featured": featured }]}
   data-insight-variant={variant}
-  tabindex="0"
 >
   <div
     class:list={[
@@ -164,38 +163,34 @@ const insight = content[variant];
 
     {
       variant === "machine" && (
-        <div class="insight-table">
-          <div class="insight-table__row insight-table__head">
-            <>
-              <span>Machine</span>
-              <span>P95</span>
-              <span>Saved / engineer / month</span>
-            </>
-          </div>
-          <div class="insight-table__row">
-            <span>
-              <>
-                <strong>M5 Max</strong>
-                <small>482 matched builds</small>
-              </>
-            </span>
-            <>
-              <span>38s</span>
-              <span class="positive">3h 42m</span>
-            </>
-          </div>
-          <div class="insight-table__row">
-            <span>
-              <>
-                <strong>M3 Max</strong>
-                <small>391 matched builds</small>
-              </>
-            </span>
-            <>
-              <span>54s</span>
-              <span>—</span>
-            </>
-          </div>
+        <div class="insight-table" data-scroll-region>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Machine</th>
+                <th scope="col">P95</th>
+                <th scope="col">Saved / engineer / month</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <strong>M5 Max</strong>
+                  <small>482 matched builds</small>
+                </th>
+                <td>38s</td>
+                <td class="positive">3h 42m</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <strong>M3 Max</strong>
+                  <small>391 matched builds</small>
+                </th>
+                <td>54s</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )
     }
@@ -235,31 +230,31 @@ const insight = content[variant];
 
     {
       variant === "regression" && (
-        <div class="insight-table insight-table--trend">
-          <div class="insight-table__row insight-table__head">
-            <>
-              <span>Percentile</span>
-              <span>Previous</span>
-              <span>Current</span>
-              <span>Change</span>
-            </>
-          </div>
-          <div class="insight-table__row">
-            <>
-              <span>P95</span>
-              <span>41s</span>
-              <span>54s</span>
-              <strong class="destructive">+13s (+29.5%)</strong>
-            </>
-          </div>
-          <div class="insight-table__row">
-            <>
-              <span>P75</span>
-              <span>18s</span>
-              <span>24s</span>
-              <strong class="destructive">+6s (+33.3%)</strong>
-            </>
-          </div>
+        <div class="insight-table insight-table--trend" data-scroll-region>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Percentile</th>
+                <th scope="col">Previous</th>
+                <th scope="col">Current</th>
+                <th scope="col">Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">P95</th>
+                <td>41s</td>
+                <td>54s</td>
+                <td class="destructive">+13s (+31.7%)</td>
+              </tr>
+              <tr>
+                <th scope="row">P75</th>
+                <td>18s</td>
+                <td>24s</td>
+                <td class="destructive">+6s (+33.3%)</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )
     }
@@ -268,24 +263,24 @@ const insight = content[variant];
       variant === "versions" && (
         <>
           <div class="insight-table insight-table--versions">
-            <div class="insight-table__row insight-table__head">
-              <>
-                <span>Xcode version</span>
-                <span>Builds</span>
-              </>
-            </div>
-            <div class="insight-table__row">
-              <>
-                <span>26.0 (17A324)</span>
-                <strong>600</strong>
-              </>
-            </div>
-            <div class="insight-table__row">
-              <>
-                <span>16.4 (16F6)</span>
-                <strong>214</strong>
-              </>
-            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Xcode version</th>
+                  <th scope="col">Builds</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">26.0 (17A324)</th>
+                  <td>600</td>
+                </tr>
+                <tr>
+                  <th scope="row">16.4 (16F6)</th>
+                  <td>214</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <p class="insight-card__recommendation">{insight.message}</p>
         </>
@@ -347,31 +342,31 @@ const insight = content[variant];
 
     {
       variant === "activity" && (
-        <div class="insight-table insight-table--activity">
-          <div class="insight-table__row insight-table__head">
-            <>
-              <span>Metric</span>
-              <span>Previous</span>
-              <span>Current</span>
-              <span>Change</span>
-            </>
-          </div>
-          <div class="insight-table__row">
-            <>
-              <span>Builds</span>
-              <span>892</span>
-              <span>678</span>
-              <strong class="destructive">−214 (−24%)</strong>
-            </>
-          </div>
-          <div class="insight-table__row">
-            <>
-              <span>Reporting Macs</span>
-              <span>12</span>
-              <span>10</span>
-              <strong class="destructive">−2 (−17%)</strong>
-            </>
-          </div>
+        <div class="insight-table insight-table--activity" data-scroll-region>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Metric</th>
+                <th scope="col">Previous</th>
+                <th scope="col">Current</th>
+                <th scope="col">Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Builds</th>
+                <td>892</td>
+                <td>678</td>
+                <td class="destructive">−214 (−24%)</td>
+              </tr>
+              <tr>
+                <th scope="row">Reporting Macs</th>
+                <td>12</td>
+                <td>10</td>
+                <td class="destructive">−2 (−17%)</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )
     }
@@ -405,11 +400,6 @@ const insight = content[variant];
     background: #000;
     border: 1px solid #27272a;
     border-radius: 0.5rem;
-  }
-
-  .insight-card:focus-visible {
-    outline: 0.125rem solid var(--primary-color);
-    outline-offset: 0.25rem;
   }
 
   .insight-card--featured {
@@ -564,42 +554,51 @@ const insight = content[variant];
     border-radius: 0.5rem;
   }
 
-  .insight-table__row {
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) 0.55fr 0.8fr;
-    gap: 0.5rem;
-    align-items: center;
+  .insight-table table {
+    width: 100%;
     min-width: 18rem;
+    border-collapse: collapse;
+  }
+
+  .insight-table th,
+  .insight-table td {
     padding: 0.625rem 0.75rem;
+    text-align: left;
     border-top: 1px solid #27272a;
   }
 
-  .insight-table__row > :not(:first-child) {
+  .insight-table th:not(:first-child),
+  .insight-table td:not(:first-child) {
     text-align: right;
+    white-space: nowrap;
   }
 
-  .insight-table__row strong {
-    font-weight: 600;
-  }
-
-  .insight-table__head {
+  .insight-table thead th {
     font-size: 0.75rem;
     font-weight: 600;
     color: #8e97a6;
     border-top: 0;
   }
 
+  .insight-table tbody th {
+    font-weight: 400;
+  }
+
+  .insight-table:focus-visible {
+    outline: 0.125rem solid var(--primary-color);
+    outline-offset: 0.125rem;
+  }
+
   .positive {
     color: #18ab66;
   }
 
-  .insight-table--versions .insight-table__row {
-    grid-template-columns: 1fr auto;
+  .insight-table--versions table {
+    min-width: 0;
   }
 
-  .insight-table--activity .insight-table__row,
-  .insight-table--trend .insight-table__row {
-    grid-template-columns: minmax(5rem, 1fr) repeat(3, auto);
+  .insight-table--activity table,
+  .insight-table--trend table {
     min-width: 25rem;
   }
 
@@ -783,3 +782,40 @@ const insight = content[variant];
     }
   }
 </style>
+
+<script>
+  function setupInsightTableScrollRegions() {
+    document
+      .querySelectorAll<HTMLElement>("[data-scroll-region]")
+      .forEach((region) => {
+        if (region.closest("[data-inf-slider-clone]")) {
+          region.tabIndex = -1;
+          region.setAttribute("aria-hidden", "true");
+          return;
+        }
+
+        const updateAccessibility = () => {
+          const overflows = region.scrollWidth > region.clientWidth + 1;
+          if (overflows) {
+            region.tabIndex = 0;
+            region.setAttribute("role", "region");
+            region.setAttribute(
+              "aria-label",
+              "Scrollable build insight evidence",
+            );
+          } else {
+            region.removeAttribute("tabindex");
+            region.removeAttribute("role");
+            region.removeAttribute("aria-label");
+          }
+        };
+
+        updateAccessibility();
+        if (region.dataset.resizeObserved === "true") return;
+        region.dataset.resizeObserved = "true";
+        new ResizeObserver(updateAccessibility).observe(region);
+      });
+  }
+
+  document.addEventListener("astro:page-load", setupInsightTableScrollRegions);
+</script>

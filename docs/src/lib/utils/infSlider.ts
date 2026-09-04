@@ -2,15 +2,28 @@ interface SliderOptions {
   scrollSpeed: string; // Pixels per second
   direction: "normal" | "reverse";
   pauseOnHover: boolean;
+  pauseOnFocus: boolean;
 }
+
+interface SliderState {
+  remeasure: () => void;
+}
+
+const sliderStates = new WeakMap<HTMLElement, SliderState>();
+const cloneSelector = "[data-inf-slider-clone]";
+const focusableSelector =
+  'a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])';
 
 export function initInfiniteSliders(): void {
   const sliders: NodeListOf<HTMLElement> =
     document.querySelectorAll(".inf-slider");
 
   sliders.forEach((slider: HTMLElement) => {
-    if (slider.dataset.infSliderInitialized === "true") return;
-    slider.dataset.infSliderInitialized = "true";
+    const existingState = sliderStates.get(slider);
+    if (existingState) {
+      existingState.remeasure();
+      return;
+    }
 
     const options: SliderOptions = {
       scrollSpeed: slider.dataset.infScrollSpeed || "100", // Default scroll speed 100px/s
@@ -18,75 +31,111 @@ export function initInfiniteSliders(): void {
         ? "reverse"
         : "normal") as "normal" | "reverse",
       pauseOnHover: slider.dataset.infSlidePauseOnHover === "true",
+      pauseOnFocus: slider.dataset.infSlidePauseOnFocus === "true",
     };
 
-    const track: HTMLElement | null = slider.querySelector(".inf-slide-track");
-    if (!track) return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let resizeTimer: number | undefined;
 
-    const slides: HTMLCollectionOf<HTMLElement> = track.getElementsByClassName(
-      "inf-slide",
-    ) as HTMLCollectionOf<HTMLElement>;
-    const numSlides: number = slides.length;
+    const setAnimationState = (state: "paused" | "running") => {
+      const track = slider.querySelector<HTMLElement>(".inf-slide-track");
+      if (track) track.style.animationPlayState = state;
+    };
 
-    if (numSlides === 0) return;
+    const remeasure = () => {
+      const track = slider.querySelector<HTMLElement>(".inf-slide-track");
+      if (!track) return;
 
-    // Calculate total width of all slides
-    let totalWidth = 0;
-    const slideWidths: number[] = [];
+      track.querySelectorAll<HTMLElement>(cloneSelector).forEach((clone) => {
+        clone.remove();
+      });
+      track.style.removeProperty("animation");
+      track.style.removeProperty("animation-play-state");
+      track.style.removeProperty("width");
 
-    Array.from(slides).forEach((slide: HTMLElement) => {
-      const width = slide.offsetWidth;
-      slideWidths.push(width);
-      totalWidth += width;
-    });
+      const slides = Array.from(
+        track.querySelectorAll<HTMLElement>(`.inf-slide:not(${cloneSelector})`),
+      );
+      if (slides.length === 0 || motionQuery.matches) return;
 
-    // Clone slides
-    Array.from(slides).forEach((slide: HTMLElement, index: number) => {
-      const clone: Node = slide.cloneNode(true);
-      (clone as HTMLElement).style.width = `${slideWidths[index]}px`; // Set explicit width on clones
-      track.appendChild(clone);
-    });
+      const slideWidths = slides.map(
+        (slide) => slide.getBoundingClientRect().width,
+      );
+      const totalWidth = slideWidths.reduce((sum, width) => sum + width, 0);
 
-    // Set track width to accommodate all slides (original + cloned)
-    track.style.width = `${totalWidth * 2}px`;
+      slides.forEach((slide, index) => {
+        const clone = slide.cloneNode(true) as HTMLElement;
+        clone.dataset.infSliderClone = "true";
+        clone.setAttribute("aria-hidden", "true");
+        clone.style.boxSizing = "border-box";
+        clone.style.width = `${slideWidths[index]}px`;
 
-    // Calculate animation duration based on scrollSpeed (pixels per second)
-    const scrollSpeed: number = parseFloat(options.scrollSpeed);
-    const animationDuration: number = (totalWidth * 2) / scrollSpeed; // time = distance / speed
+        clone.querySelectorAll<HTMLElement>("[id]").forEach((element) => {
+          element.removeAttribute("id");
+        });
+        if (clone.matches(focusableSelector)) clone.tabIndex = -1;
+        clone
+          .querySelectorAll<HTMLElement>(focusableSelector)
+          .forEach((element) => {
+            element.tabIndex = -1;
+          });
+        track.appendChild(clone);
+      });
 
-    // Create a custom property with all slide widths
-    const slideWidthsString = slideWidths.join("px ") + "px";
-    slider.style.setProperty("--slide-widths", slideWidthsString);
+      track.style.width = `${totalWidth * 2}px`;
+      const parsedSpeed = parseFloat(options.scrollSpeed);
+      const scrollSpeed =
+        Number.isFinite(parsedSpeed) && parsedSpeed > 0 ? parsedSpeed : 100;
+      const animationDuration = totalWidth / scrollSpeed;
+      const animationName = `inf-scroll${options.direction === "reverse" ? "-reverse" : ""}`;
+      track.style.animation = `${animationName} ${animationDuration}s linear infinite`;
 
-    // Set the animation with calculated duration
-    const animationName = `inf-scroll${options.direction === "reverse" ? "-reverse" : ""}`;
-    track.style.animation = `${animationName} ${animationDuration}s linear infinite`;
+      if (
+        (options.pauseOnHover && slider.matches(":hover")) ||
+        (options.pauseOnFocus && slider.contains(document.activeElement))
+      ) {
+        setAnimationState("paused");
+      }
+    };
 
-    // Add pause on hover functionality
+    sliderStates.set(slider, { remeasure });
+    slider.dataset.infSliderInitialized = "true";
+
     if (options.pauseOnHover) {
       slider.addEventListener("mouseenter", () => {
-        track.style.animationPlayState = "paused";
+        setAnimationState("paused");
       });
 
       slider.addEventListener("mouseleave", () => {
-        if (!slider.contains(document.activeElement)) {
-          track.style.animationPlayState = "running";
+        if (!options.pauseOnFocus || !slider.contains(document.activeElement)) {
+          setAnimationState("running");
         }
       });
+    }
 
+    if (options.pauseOnFocus) {
       slider.addEventListener("focusin", () => {
-        track.style.animationPlayState = "paused";
+        setAnimationState("paused");
       });
 
       slider.addEventListener("focusout", (event: FocusEvent) => {
         const nextTarget = event.relatedTarget;
         if (
           !(nextTarget instanceof Node && slider.contains(nextTarget)) &&
-          !slider.matches(":hover")
+          (!options.pauseOnHover || !slider.matches(":hover"))
         ) {
-          track.style.animationPlayState = "running";
+          setAnimationState("running");
         }
       });
     }
+
+    const resizeObserver = new ResizeObserver(() => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(remeasure, 120);
+    });
+    resizeObserver.observe(slider);
+    motionQuery.addEventListener("change", remeasure);
+
+    remeasure();
   });
 }
