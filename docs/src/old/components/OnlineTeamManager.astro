@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 
-import userSettingsImage from "../../assets/features/user-settings.png";
-import subscriptionSettingsImage from "../../assets/features/subscription-settings.png";
+import licenseManagementImage from "../../assets/features/team-manager-license-management.png";
+import usersSeatsImage from "../../assets/features/team-manager-users-seats.png";
 ---
 
 <section class="team-manager" aria-labelledby="team-manager-title">
@@ -18,14 +18,24 @@ import subscriptionSettingsImage from "../../assets/features/subscription-settin
 
     <div class="team-manager__dashboard">
       <video
-        src="/features/team-insights-dashboard.mp4"
+        class="js-team-dashboard-video"
+        poster="/features/posters/team-insights-dashboard.webp"
         autoplay
         muted
         loop
         playsinline
-        preload="metadata"
+        controls
+        preload="none"
         aria-label="RocketSim for Teams dashboard showing build insights"
-      ></video>
+      >
+        <source
+          data-src="/features/team-insights-dashboard.mp4"
+          type="video/mp4"
+        />
+        <a href="https://www.youtube.com/watch?v=1Ie_ia8hZPI">
+          Watch the RocketSim Team Build Insights dashboard tour
+        </a>
+      </video>
       <div class="team-manager__dashboard-copy">
         <p>Build Insights dashboard</p>
         <h3>Keep the decision and its supporting data together</h3>
@@ -53,10 +63,11 @@ import subscriptionSettingsImage from "../../assets/features/subscription-settin
           </span>
         </div>
         <Image
-          src={userSettingsImage}
-          alt="RocketSim Team Manager showing active and invited users"
-          widths={[480, 720, 960]}
+          src={usersSeatsImage}
+          alt="RocketSim for Teams user settings showing active users, invited users, roles, and seat management"
+          widths={[480, 720, 960, 1200]}
           sizes="(max-width: 799px) 100vw, 50vw"
+          quality={95}
         />
       </article>
       <article>
@@ -69,10 +80,11 @@ import subscriptionSettingsImage from "../../assets/features/subscription-settin
           </span>
         </div>
         <Image
-          src={subscriptionSettingsImage}
-          alt="RocketSim Team Manager showing license and subscription details"
-          widths={[480, 720, 960]}
+          src={licenseManagementImage}
+          alt="RocketSim for Teams subscription settings showing the license key, expiry date, and used seats"
+          widths={[480, 720, 960, 1200]}
           sizes="(max-width: 799px) 100vw, 50vw"
+          quality={95}
         />
       </article>
     </div>
@@ -130,9 +142,10 @@ import subscriptionSettingsImage from "../../assets/features/subscription-settin
   }
 
   video {
+    display: block;
     width: 100%;
-    height: 100%;
-    min-height: 18rem;
+    height: auto;
+    aspect-ratio: 72 / 55;
     object-fit: cover;
     background: #111;
   }
@@ -207,3 +220,48 @@ import subscriptionSettingsImage from "../../assets/features/subscription-settin
     }
   }
 </style>
+
+<script>
+  function setupTeamDashboardVideo() {
+    const videos = document.querySelectorAll<HTMLVideoElement>(
+      ".js-team-dashboard-video",
+    );
+
+    videos.forEach((video) => {
+      if (video.dataset.observed === "true") return;
+      video.dataset.observed = "true";
+
+      const loadVideo = () => {
+        if (video.dataset.loaded === "true") return;
+        const source =
+          video.querySelector<HTMLSourceElement>("source[data-src]");
+        const src = source?.dataset.src;
+        if (!source || !src) return;
+
+        source.src = src;
+        video.load();
+        video.dataset.loaded = "true";
+      };
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+          if (entry.isIntersecting) {
+            loadVideo();
+            void video.play().catch(() => {
+              // The poster and native controls remain useful when autoplay is
+              // blocked or the visitor prefers to start playback themselves.
+            });
+          } else if (!video.paused) {
+            video.pause();
+          }
+        },
+        { threshold: 0.2, rootMargin: "200px 0px" },
+      );
+
+      observer.observe(video);
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupTeamDashboardVideo);
+</script>

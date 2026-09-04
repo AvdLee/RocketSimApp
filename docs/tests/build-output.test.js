@@ -80,6 +80,22 @@ test("Teams page preserves its conversion funnel contract", () => {
   assert.match(html, /€10 per seat\/month, billed annually/);
 });
 
+test("Teams portal media ships with immediate and lazy-loaded fallbacks", () => {
+  const html = readDist("for-teams/index.html");
+
+  assert.match(
+    html,
+    /poster="\/features\/posters\/team-insights-dashboard\.webp"/,
+  );
+  assert.match(html, /data-src="\/features\/team-insights-dashboard\.mp4"/);
+  assert.match(html, /class="js-team-dashboard-video\b/);
+  assert.match(html, /RocketSim for Teams user settings showing active users/);
+  assert.match(
+    html,
+    /RocketSim for Teams subscription settings showing the license key/,
+  );
+});
+
 test("Teams page keeps its SEO metadata and legacy redirect", () => {
   const html = readDist("for-teams/index.html");
   assert.match(
