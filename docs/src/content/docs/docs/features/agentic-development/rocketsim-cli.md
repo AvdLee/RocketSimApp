@@ -37,7 +37,7 @@ The CLI gives agents a compact workflow:
 
 That loop is fast because RocketSim is already connected to the Simulator. There is no reconnection overhead between steps, and the running app can cache and optimize work across repeated commands.
 
-RocketSim resolves booted Simulators through the same device service used by the Mac app. Commands therefore work whether the Simulator is shown in Simulator.app or Xcode 27's Device Hub. In Device Hub, use Compact Mode and focus the device you want RocketSim to control.
+RocketSim resolves booted Simulators through the same device service used by the Mac app. Commands therefore work whether the Simulator is shown in Simulator.app, Xcode 27's Device Hub, or booted headlessly with `simctl boot`. Without a focused Simulator window, RocketSim automatically targets the only booted Simulator. If several are booted, pass `--udid` to choose one. In Device Hub, use Compact Mode and focus the device you want RocketSim to control.
 
 ## Why RocketSim is fast for agents
 
@@ -75,9 +75,11 @@ rocketsim elements [--udid <udid>] [--agent] [--agent-mode nav|act|debug]
 
 The `--agent` flag is the recommended default for agent workflows. It returns compact rows inside the `rs/1` response:
 
-- `nav` focuses on headings, tabs, navigation bars, and top-level controls
+- `nav` focuses on headings, tabs, navigation bars, and top-level controls while omitting plain static text, images, and nested duplicate text composites
 - `act` includes interactive element identifiers, labels, roles, values, and state
 - `debug` returns the full hierarchy when an action fails or an element looks wrong
+
+Both compact modes omit individual software-keyboard keys because keyboard visibility is already reported in the response header. They also omit elements whose frames are fully outside the device canvas. Debug and plain JSON output remain unchanged when you need the complete hierarchy.
 
 RocketSim's element pipeline is designed for real app navigation. It can include visible controls from top bars, navigation bars, tab bars, and other chrome that agents often need to move through a flow. When web content or other complex views expose limited accessibility data, RocketSim can add recovery hints so the agent knows when to use visual context.
 
@@ -183,10 +185,11 @@ Agents can wait for screen changes or elements before continuing:
 ```bash
 rocketsim wait screen-changed
 rocketsim wait element --label "Continue"
+rocketsim wait keyboard --state shown
 rocketsim wait keyboard --state hidden --timeout 1
 ```
 
-This keeps agent flows from racing ahead before the app has finished navigating or rendering.
+This keeps agent flows from racing ahead before the app has finished navigating or rendering. For keyboard waits, `shown` is an alias for `visible`; use `hidden` to wait for dismissal.
 
 When the perception backend itself is failing (rather than the predicate simply staying false), `wait` reports that backend failure as an `execution_failed` error instead of a misleading timeout, so agents can run `rocketsim doctor` and recover instead of retrying a wait that can never succeed.
 
@@ -210,7 +213,7 @@ rocketsim interact biometric match
 rocketsim interact biometric nomatch
 ```
 
-`interact` is designed to work with fresh screen state. When an agent uses the Agent Skill, RocketSim can guide it toward safer command sequences and recovery paths if the screen changes between inspection and interaction.
+`interact` is designed to work with fresh screen state. After dispatching an interaction, RocketSim actively refreshes snapshots during a bounded settlement window before computing the result delta. The returned `screen_changed` value therefore reflects the post-interaction screen instead of a stale cached snapshot.
 
 Use `interact activate` for an accessibility element that does not respond to coordinate taps, such as a hidden debug control. It performs an accessibility press on the resolved element instead of sending a HID tap.
 
@@ -266,6 +269,8 @@ rocketsim interact long-press --label "Reorder" --duration 1.5 --screen latest
 ```
 
 RocketSim will first try semantic accessibility activation, which is more reliable than a coordinate tap when the visual affordance does not align perfectly with the accessibility frame. This matters for controls like toggles, list rows, and buttons where the tappable area is asymmetric.
+
+When a selector matches several elements with the same label, RocketSim automatically chooses the only actionable match if the others are non-actionable containers around it. Genuinely ambiguous matches still return `multiple_matches`.
 
 Coordinates are still available as a fallback when the element is visible on screen but not exposed with a stable label.
 

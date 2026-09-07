@@ -103,6 +103,18 @@ When something goes wrong, the envelope switches to a typed error:
 
 Error codes such as `snapshot_changed`, `accessibility_unavailable`, and `network_extension_not_ready` are documented behaviors, and each carries context the agent can act on. That is what turns a failure into a recovery path instead of a dead end.
 
+## Reliability and compact-output behavior
+
+The compact `nav` and `act` snapshot modes deliberately remove rows that do not help an agent act. Both omit software-keyboard keys—the header already reports keyboard visibility—and elements whose frames are fully outside the device canvas. `nav` also omits plain static text and images, plus nested text composites that repeat an ancestor's label. Full debug and plain JSON output remain unchanged.
+
+Interaction deltas are computed from actively refreshed snapshots during a bounded settlement window. This means `screen_changed` reflects the post-interaction screen instead of whichever snapshot happened to be cached when the interaction finished.
+
+Selector resolution also handles a common accessibility-tree ambiguity. If several matches share the same label and exactly one is actionable while the others are non-actionable containers around it, RocketSim selects the actionable element automatically. Other ambiguous selectors still return `multiple_matches`.
+
+Simulator selection does not require a visible Simulator window. When no window is focused, RocketSim targets the single booted Simulator, including one started headlessly with `simctl boot`. If multiple Simulators are booted, the typed error tells the agent to pass `--udid`.
+
+For keyboard synchronization, `wait keyboard --state shown` is accepted as an alias for `visible`. `hidden` continues to wait for keyboard dismissal.
+
 The protocol is served by the running RocketSim Mac app, not by a standalone binary that starts from scratch on every call. The app stays connected to the Simulator, keeps screen state warm, and refreshes snapshots after each interaction. See the [RocketSim CLI documentation](/docs/features/agentic-development/rocketsim-cli) for the full command surface, including `elements --agent`, `interact`, `wait`, and batched `do` flows.
 
 ## History and adoption
