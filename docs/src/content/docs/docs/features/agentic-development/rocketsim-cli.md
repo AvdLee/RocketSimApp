@@ -278,7 +278,7 @@ rocketsim interact tap --type Button --label "OK" --screen latest
 rocketsim interact long-press --label "Reorder" --duration 1.5 --screen latest
 ```
 
-Selector-based taps resolve the matching accessibility element, then send a precise HID tap to its frame. Use `interact activate` when you explicitly need an accessibility press (`AXPress`), such as for an invisible control or one that ignores coordinate hit-testing.
+Selector-based taps first try semantic accessibility activation, which is more reliable than a coordinate tap when the visual affordance does not align perfectly with the accessibility frame — think toggles, list rows, and buttons with asymmetric tappable areas. When semantic activation is unavailable, RocketSim falls back to a precise HID tap at the element's center. Coordinate taps and multi-touch taps always use HID directly. Use `interact activate` when you explicitly need an accessibility press without any HID fallback, such as for a hidden debug control that ignores coordinate hit-testing.
 
 When a selector matches several elements with the same label, RocketSim automatically chooses the only actionable match if the others are non-actionable containers around it. Genuinely ambiguous matches still return `multiple_matches`.
 
