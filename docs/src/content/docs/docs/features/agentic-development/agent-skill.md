@@ -2,7 +2,7 @@
 title: "RocketSim Agent Skill"
 description: "Install RocketSim's bundled Agent Skill so Cursor, Claude, Codex, Xcode, and other AI coding tools can navigate the iOS Simulator safely."
 sidebar:
-  order: 3
+  order: 4
 ---
 
 The RocketSim Agent Skill is the recommended way to connect AI coding tools to RocketSim. It teaches your agent how to use the version-matched `rocketsim` CLI, when to read visible elements, when to interact, how to recover after screen changes, and when to use a screenshot fallback.
@@ -74,6 +74,7 @@ Once the skill is installed and RocketSim is running, your agent can:
 - Navigate multi-step app flows with fewer retries
 - Use compact screen summaries to spend fewer tokens per screen read
 - Capture a screenshot when visual context is needed
+- Start a live [Browser Preview](/docs/features/agentic-development/browser-preview) for hands-on review and agent-ready visual feedback
 
 ## How to verify it works
 
@@ -94,6 +95,7 @@ The same command discovers booted Simulators shown through Xcode 27's Device Hub
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — the commands agents use to inspect and interact with the Simulator
+- [Browser Preview](/docs/features/agentic-development/browser-preview) — live interaction and visual feedback from your browser
 - [Agentic Development with RocketSim](/docs/features/agentic-development/) — scenarios, example prompts, and why RocketSim is effective for agent-driven Simulator automation
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — installing and repairing the CLI and skill
 - [How we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) — repeatable scenarios, benchmark methodology, and results

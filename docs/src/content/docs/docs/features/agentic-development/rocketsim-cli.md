@@ -2,7 +2,7 @@
 title: "RocketSim CLI"
 description: "Install and use RocketSim's built-in CLI to inspect visible elements, automate interactions, and give agents a fast path into your running Simulator."
 sidebar:
-  order: 2
+  order: 3
 ---
 
 RocketSim includes a built-in CLI that lets agents inspect visible UI and interact with the Simulator through the running RocketSim Mac app. The app stays connected to the Simulator, keeps useful state warm, and exposes a compact command line surface for agents and local automation.
@@ -64,6 +64,16 @@ Returns the currently focused simulator as JSON, including name, runtime, and UD
 ```bash
 rocketsim simulator focused
 ```
+
+### Browser Preview
+
+Starts a live, interactive Simulator preview and prints its local URL:
+
+```bash
+rocketsim preview
+```
+
+Pass `--port <port>` to choose a localhost port or `--udid <udid>` to target a specific booted Simulator. See [Browser Preview](/docs/features/agentic-development/browser-preview) for the interactive controls and visual feedback workflow.
 
 ### Visible elements
 
@@ -268,7 +278,7 @@ rocketsim interact tap --type Button --label "OK" --screen latest
 rocketsim interact long-press --label "Reorder" --duration 1.5 --screen latest
 ```
 
-RocketSim will first try semantic accessibility activation, which is more reliable than a coordinate tap when the visual affordance does not align perfectly with the accessibility frame. This matters for controls like toggles, list rows, and buttons where the tappable area is asymmetric.
+Selector-based taps resolve the matching accessibility element, then send a precise HID tap to its frame. Use `interact activate` when you explicitly need an accessibility press (`AXPress`), such as for an invisible control or one that ignores coordinate hit-testing.
 
 When a selector matches several elements with the same label, RocketSim automatically chooses the only actionable match if the others are non-actionable containers around it. Genuinely ambiguous matches still return `multiple_matches`.
 

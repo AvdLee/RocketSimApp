@@ -2,7 +2,7 @@
 title: "rs/1 Protocol: RocketSim's Agent Protocol for the iOS Simulator"
 description: "rs/1 is RocketSim's agent protocol for the iOS Simulator: one compact JSON envelope, typed errors, and screen hashes for reliable AI agent automation."
 sidebar:
-  order: 4
+  order: 5
   label: "rs/1 Protocol"
 head:
   - tag: script
