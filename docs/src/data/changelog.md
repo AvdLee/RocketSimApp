@@ -24,6 +24,7 @@
 - CLI: `interact` now reports `screen_changed` from actively refreshed snapshots, so change detection reflects the post-interaction screen.
 - CLI: `wait keyboard` accepts `shown` as an alias for `visible`.
 - CLI: selectors matching one actionable element wrapped in non-actionable containers resolve automatically instead of returning `multiple_matches`.
+- CLI: agent commands now automatically keep a live browser preview available and include its URL in the `rs/1` response context.
 
 # 16.4.5 (331)
 
