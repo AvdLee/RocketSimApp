@@ -62,6 +62,8 @@ For you as a developer, this means you only have to keep RocketSim updated to th
 
 The current skill teaches agents to start with a compact `nav` or `act` screen read, prefer labels over coordinates, guard interactions with `--screen latest`, and combine known sequential actions with `rocketsim do`. It uses interaction deltas and concrete waits to avoid unnecessary screen reads. Debug snapshots and screenshots are fallbacks when normal accessibility output is insufficient.
 
+Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the command's `context.preview_url`, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
+
 The agent should run `rocketsim doctor` only when setup appears broken: the CLI cannot connect, no Simulator can be found, or perception and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or `rocketsim elements --agent`.
 
 ## What the agent can do after setup
@@ -73,6 +75,7 @@ Once the skill is installed and RocketSim is running, your agent can:
 - Press simulator hardware buttons like Home, Lock, or Siri
 - Navigate multi-step app flows with fewer retries
 - Use compact screen summaries to spend fewer tokens per screen read
+- Follow the live Simulator and review its final state in an IDE browser
 - Capture a screenshot when visual context is needed
 
 ## How to verify it works
@@ -87,7 +90,7 @@ Then open your AI coding tool and try:
 
 > Use RocketSim to navigate through `<your_app_name>` in the Simulator
 
-If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
+If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen. It should also share a `Live preview:` URL and open it in the IDE browser when the coding tool provides one.
 
 The same command discovers booted Simulators shown through Xcode 27's Device Hub. If `doctor` cannot find one, put Device Hub in Compact Mode, focus the device, and retry. For network-condition tests, the agent may need you to approve RocketSim's Network Extension once; macOS does not allow an agent to complete that approval headlessly.
 

@@ -75,6 +75,9 @@ Every agent-facing RocketSim CLI command emits one JSON envelope. The `rs` field
 {
   "rs": "1",
   "ok": true,
+  "context": {
+    "preview_url": "http://127.0.0.1:4995/?token=..."
+  },
   "data": {
     "mode": "act",
     "screen": "a3f291bc",
@@ -82,6 +85,8 @@ Every agent-facing RocketSim CLI command emits one JSON envelope. The `rs` field
   }
 }
 ```
+
+The optional top-level `context` contains metadata that applies to the command result rather than its payload. For Simulator-targeting commands, RocketSim automatically ensures a browser preview is running and returns its URL as `context.preview_url`. Agents can open that URL in a user-visible IDE browser so you can follow their work and interactively review the final state. Older clients can ignore the optional field.
 
 The `rows` array shows the compact element rows concept: instead of a nested accessibility tree, each visible element becomes one pipe-delimited row with an ephemeral id, role, label, value, and state. The agent reads a handful of short rows, picks an element, and acts on it by id or label.
 
