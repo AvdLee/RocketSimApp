@@ -305,4 +305,6 @@ The CLI works when:
 
 Run `rocketsim doctor` when the CLI cannot connect, a booted Simulator is not discovered, or accessibility and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or compact elements output instead.
 
+RocketSim refreshes stale Simulator service caches once before failing a command. If the retry is exhausted, the rs/1 response uses `simulator_not_booted` with `context.reason` set to `simulator_control_lookup_failed`. Boot the Simulator, verify its UDID, and retry once. When several Simulators are booted without a focused window, `simulator_not_focused` tells you to focus one or pass `--udid`.
+
 On Xcode 27 runtimes, accessibility may be unavailable because of Apple's remote-automation restrictions. RocketSim returns `accessibility_unavailable` immediately instead of hanging. In that state, use plain screenshots and coordinate interactions; do not keep retrying accessibility reads, selector interactions, waits, or annotated snapshots for that Simulator.
