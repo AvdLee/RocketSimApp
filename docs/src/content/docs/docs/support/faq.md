@@ -51,10 +51,6 @@ Issues and feature requests are managed on [GitHub](https://github.com/AvdLee/R
 
 You've likely enabled App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer. Disable the option and you should get PNGs again.
 
-## Why are my iPad captures upside-down?
-
-RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording.
-
 ## Can I create transparent captures?
 
 Yes, make sure to disable **App Preview Optimized** and set your background color to transparent.

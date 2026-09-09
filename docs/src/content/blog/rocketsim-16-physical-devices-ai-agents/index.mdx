@@ -3,7 +3,7 @@ title: "RocketSim 16: Physical Devices and AI Agents"
 pageTitle: "RocketSim 16: Physical Device Testing, AI Agents, and Xcode 27"
 description: "RocketSim 16 expands iOS testing with physical device App Actions, AI agent workflows, Xcode 27 Device Hub support, and better recordings."
 publishedTime: 2026-07-30T11:05:00.000Z
-modifiedTime: 2026-07-30T11:05:00.000Z
+modifiedTime: 2026-09-09T15:00:00.000Z
 image: ../../../assets/features/physical-device-location-simulation.webp
 imageAlt: "RocketSim running location simulation beside an app on a connected physical iPhone."
 ---
@@ -120,10 +120,20 @@ Face ID commands now report completion correctly, and coordinate-only batches ke
 
 These changes might not create the most exciting screenshots, but they matter once agents start running longer workflows. A clear failure gives an agent a way to recover; an endless wait does not. You can find every patch-level improvement in the [RocketSim changelog](/changelog/).
 
+## What's new in RocketSim 16.4.6?
+
+RocketSim 16.4.6 adds [Browser Preview](/blog/ios-simulator-browser-preview/) as a beta. The `rocketsim preview` command opens a live, interactive Simulator in your browser, where you can navigate the app, inspect accessibility elements, leave visual feedback across screens, and copy a structured prompt for your coding agent.
+
+Agent commands keep this preview available automatically and include its URL in the `rs/1` response context. This means your coding agent can open the Simulator in a user-visible IDE browser while it works, allowing you to follow the navigation and review the final state yourself.
+
+The release also reduces background CPU usage from recent-build scans and accessibility refreshes during agent sessions. Compact `nav` and `act` snapshots omit irrelevant keyboard, off-canvas, and duplicate elements, while improved recovery errors help agents respond to stale Simulator services and unavailable accessibility instead of failing with a generic error.
+
+Capture workflows improve as well. A new **Open editor directly after recording** setting skips the initial conversion, so you can trim the recording before exporting. RocketSim also adds real device bezels for the 11-inch and 13-inch iPad Pro (M5) and prevents physical-device preview windows from becoming too narrow.
+
 ## Conclusion
 
 RocketSim 16 expands the product in two directions: testing on physical iPhones and iPads, and letting coding agents close the feedback loop in the Simulator. Xcode 27 and Device Hub support connect those workflows, while better recordings, location testing, Simulator Camera compatibility, and RocketSim Connect setup make the complete release feel more polished.
 
-If you already use RocketSim, install [RocketSim 16.4.2 from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=rocketsim-16-physical-devices-ai-agents&mt=8). We recommend connecting a physical device to try Recent Builds, then opening **RocketSim → Settings → CLI & Agent** to install the CLI and Agent Skill. Feel free to [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you have a physical-device or agent workflow you would like to see next.
+If you already use RocketSim, install the [latest RocketSim version from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=rocketsim-16-physical-devices-ai-agents&mt=8). We recommend connecting a physical device to try Recent Builds, then opening **RocketSim → Settings → CLI & Agent** to install the CLI and Agent Skill. Feel free to [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you have a physical-device or agent workflow you would like to see next.
 
 Thanks!

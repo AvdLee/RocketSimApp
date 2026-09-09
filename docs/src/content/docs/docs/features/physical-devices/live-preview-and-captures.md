@@ -25,6 +25,17 @@ Network discovery can tell RocketSim that a paired device is nearby, but live st
 
 ![A network-discovered physical device asking to connect via USB](../capturing/physical-device-support/connect-via-usb.png)
 
+## Resize the physical-device preview
+
+Physical-device preview windows use the same keyboard shortcuts and scale modes as Simulator:
+
+- `Command-1` — **Physical Size**
+- `Command-2` — **Point Accurate**
+- `Command-3` — **Pixel Accurate**
+- `Command-4` — **Fit Screen**
+
+Use Point Accurate when you want iOS points to match macOS points, Pixel Accurate to inspect individual captured pixels, or Fit Screen when the full device is too large for the available space. RocketSim remembers the preview window frame when you reconnect the device.
+
 ## Capture real-device output
 
 The physical-device stream supports:

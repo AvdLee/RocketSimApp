@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-App Store Connect rejects assets that don't match its exact specs: wrong resolution, wrong codec, PNG with transparency, or video without a proper audio track. Without RocketSim you end up resizing screenshots per device, converting PNG to JPEG and stripping alpha, re-encoding videos to H.264/HEVC, adding silent audio so previews don't get rejected, and trimming to the right duration — all while keeping [Apple's resolution table](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) open. It's tedious and easy to get wrong.
+App Store Connect rejects assets that don't match its exact specs: wrong resolution, wrong codec, PNG with transparency, or video without a proper audio track. Without RocketSim you end up resizing screenshots per device, converting PNG to JPEG and stripping alpha, re-encoding videos to H.264, adding silent audio so previews don't get rejected, and trimming to the right duration — all while keeping [Apple's resolution table](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) open. It's tedious and easy to get wrong.
 
 RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections.
 
@@ -27,7 +27,7 @@ Screenshots are converted from PNG to JPEG (App Store Connect doesn't accept alp
 
 ### Recordings
 
-Recordings are re-encoded to the correct codec (H.264 or HEVC). A silent audio track is added if missing — App Store Connect requires it for app previews. Empty frames are trimmed, and the video is resized to the correct App Store Connect preview resolution for that device.
+Recordings are re-encoded to H.264 at no more than 30 frames per second. A silent audio track is added if missing — App Store Connect requires it for app previews. Empty frames are trimmed, and the video is resized to the correct App Store Connect preview resolution for that device.
 
 App Store Connect also enforces other rules for app previews: **length must be between 15 and 30 seconds**, file size is capped at 500MB, and there are requirements for frame rate, audio, and file format. RocketSim 16.4.2 warns you when an App Preview Optimized recording falls outside that accepted duration, so you can adjust it before uploading. RocketSim handles format and resolution; for the full, up-to-date checklist, always check [Apple's official app preview specifications](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8).
 
