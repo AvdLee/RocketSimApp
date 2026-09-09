@@ -2,7 +2,7 @@
 title: "RocketSim Agent Skill"
 description: "Install RocketSim's bundled Agent Skill so Cursor, Claude, Codex, Xcode, and other AI coding tools can navigate the iOS Simulator safely."
 sidebar:
-  order: 3
+  order: 4
 ---
 
 The RocketSim Agent Skill is the recommended way to connect AI coding tools to RocketSim. It teaches your agent how to use the version-matched `rocketsim` CLI, when to read visible elements, when to interact, how to recover after screen changes, and when to use a screenshot fallback.
@@ -62,6 +62,8 @@ For you as a developer, this means you only have to keep RocketSim updated to th
 
 The current skill teaches agents to start with a compact `nav` or `act` screen read, prefer labels over coordinates, guard interactions with `--screen latest`, and combine known sequential actions with `rocketsim do`. It uses interaction deltas and concrete waits to avoid unnecessary screen reads. Debug snapshots and screenshots are fallbacks when normal accessibility output is insufficient.
 
+Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the command's `context.preview_url`, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
+
 The agent should run `rocketsim doctor` only when setup appears broken: the CLI cannot connect, no Simulator can be found, or perception and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or `rocketsim elements --agent`.
 
 ## What the agent can do after setup
@@ -73,7 +75,9 @@ Once the skill is installed and RocketSim is running, your agent can:
 - Press simulator hardware buttons like Home, Lock, or Siri
 - Navigate multi-step app flows with fewer retries
 - Use compact screen summaries to spend fewer tokens per screen read
+- Follow the live Simulator and review its final state in an IDE browser
 - Capture a screenshot when visual context is needed
+- Start a live [Browser Preview](/docs/features/agentic-development/browser-preview) for hands-on review and agent-ready visual feedback
 
 ## How to verify it works
 
@@ -87,13 +91,14 @@ Then open your AI coding tool and try:
 
 > Use RocketSim to navigate through `<your_app_name>` in the Simulator
 
-If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen.
+If the skill is installed, RocketSim is running, and your app is already open in the Simulator, the agent should detect RocketSim, read the visible UI, and start interacting with the app based on what is on screen. It should also share a `Live preview:` URL and open it in the IDE browser when the coding tool provides one.
 
-The same command discovers booted Simulators shown through Xcode 27's Device Hub. If `doctor` cannot find one, put Device Hub in Compact Mode, focus the device, and retry. For network-condition tests, the agent may need you to approve RocketSim's Network Extension once; macOS does not allow an agent to complete that approval headlessly.
+The same command discovers booted Simulators shown through Xcode 27's Device Hub. RocketSim selects the only booted Simulator automatically; if several are available, focus one or pass its UDID using `--udid <udid>`. For network-condition tests, the agent may need you to approve RocketSim's Network Extension once; macOS does not allow an agent to complete that approval headlessly.
 
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — the commands agents use to inspect and interact with the Simulator
+- [Browser Preview](/docs/features/agentic-development/browser-preview) — live interaction and visual feedback from your browser
 - [Agentic Development with RocketSim](/docs/features/agentic-development/) — scenarios, example prompts, and why RocketSim is effective for agent-driven Simulator automation
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — installing and repairing the CLI and skill
 - [How we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) — repeatable scenarios, benchmark methodology, and results

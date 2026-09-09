@@ -25,6 +25,8 @@ RocketSim 16 also supports screenshots from connected physical iOS devices. See 
 
 You can set the background, bezels, and other capture options before taking a screenshot in the **Captures** tab or in **Settings → Captures**. For the full list of options, see [Creating Recordings](/docs/features/capturing/recordings) — the same options apply to screenshots.
 
+Real device bezels are available for supported iPhone and iPad models, including the iPad (A16) and 11-inch and 13-inch iPad Pro (M5).
+
 ## Editing a screenshot after capture
 
 After taking a screenshot, you can open it in the [Post Editor](/docs/features/capturing/post-editor) to adjust the final framing, background, ratio, metadata, and export styling without taking the screenshot again.
@@ -62,10 +64,6 @@ The Simulator has a few flaws in their screenshots:
 - The resolution output is not accepted by App Store Connect
 
 Other than that, you’ll see similar results with RocketSim.
-
-### Why are my iPad screenshots upside-down?
-
-RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and create another screenshot.
 
 ### Can I create transparent screenshots?
 

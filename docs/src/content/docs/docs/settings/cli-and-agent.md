@@ -89,7 +89,7 @@ Use **Choose Custom Skill Folder...** in the Agent Skill section and select the 
 
 ### Device Hub is open, but no Simulator is found
 
-Put Xcode 27's Device Hub in Compact Mode and focus the device you want to control. Then run `rocketsim doctor` again. RocketSim 16.4.2 resolves booted Simulators through Device Hub as well as Simulator.app.
+RocketSim 16.4.2 resolves booted Simulators through Device Hub as well as Simulator.app. If only one Simulator is booted, RocketSim selects it automatically. If several are available, focus one or pass its UDID using `--udid <udid>`, then run `rocketsim doctor` again.
 
 ### A network command asks for approval
 

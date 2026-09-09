@@ -18,6 +18,7 @@ With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your
 - Stay in a tight interaction loop without rebuilding context between steps
 - Use compact screen summaries to spend less context per UI read
 - Fall back to screenshots when accessibility data is not enough
+- Open a live Browser Preview for hands-on testing and visual feedback
 
 ## What you can do with it
 
@@ -102,6 +103,7 @@ For most AI coding tools, install the [RocketSim Agent Skill](/docs/features/age
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — how agents inspect and interact with the Simulator
+- [Browser Preview](/docs/features/agentic-development/browser-preview) — stream, control, and visually review a Simulator from your browser
 - [Agent Skill](/docs/features/agentic-development/agent-skill) — how to install the recommended agent workflow
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — how to install the CLI and skill from RocketSim
 - [How we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) — repeatable scenarios, benchmark methodology, and results

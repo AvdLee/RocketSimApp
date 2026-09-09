@@ -1,6 +1,6 @@
 ---
 title: "Device Hub Support"
-description: "RocketSim works with Xcode 27's new Device Hub. Attach the side window in Compact Mode and keep using VoiceOver Navigator, design comparison, and capture tools."
+description: "RocketSim works with Xcode 27's Device Hub in expanded and Compact Mode for captures, accessibility, design comparison, and agent workflows."
 sidebar:
   order: 4
 ---
@@ -9,27 +9,27 @@ Device Hub is the new app introduced in **Xcode 27**. It brings Simulators and c
 
 ![RocketSim's side window showing the VoiceOver Navigator next to an iPhone running inside Xcode 27's Device Hub](./device-hub-support/voiceover-navigator.png)
 
-## The side window and Compact Mode
+## Using the side window
 
-RocketSim's side window attaches to a single, focused device window — just like it does with the Simulator. Device Hub only exposes that kind of window when it runs in **Compact Mode**, showing one device at a time.
+RocketSim's side window appears for Simulators in both the expanded Device Hub and **Compact Mode**. You can take screenshots, create recordings, and use side-window actions in either layout.
 
-When Device Hub is in Compact Mode, RocketSim's side window appears automatically next to the device, giving you the familiar capture, comparison, and accessibility tools right where you expect them.
+Screen-relative overlays still require Compact Mode because RocketSim needs a single device window to align them correctly. Switch to Compact Mode when using design comparison, grids, rulers, or VoiceOver overlays directly on top of the Simulator.
 
-If you don't see the side window, switch Device Hub into Compact Mode so a single device is in focus.
+If you don't see the side window, focus the Simulator inside Device Hub. RocketSim detects Simulators that are already open when it launches and ones that you boot afterward.
 
 ## Run Device Hub on its own
 
-For the best experience, we recommend running **Device Hub on its own**, without also running Simulator.app at the same time. Both apps can drive Simulator windows, and running them together makes it ambiguous which window RocketSim should attach to.
+For the most predictable window attachment, run **Device Hub on its own** without displaying the same Simulator in Simulator.app at the same time.
 
-Keeping Device Hub as your single Simulator surface keeps the side window predictable and avoids duplicate or misplaced windows.
+RocketSim keeps app actions inside the surface you are using, so deep links and push notifications no longer switch your workflow from Device Hub to Simulator.app.
 
 ## What keeps working
 
-All the side window features continue to work with Device Hub in Compact Mode, including:
+Side-window features continue to work with Device Hub, including:
 
 - Screenshots and recordings
-- Design comparison, grids, and rulers
-- The VoiceOver Navigator and other accessibility tools
+- Design comparison, grids, and rulers in Compact Mode
+- The VoiceOver Navigator and screen-relative accessibility overlays in Compact Mode
 
 ![RocketSim's design comparison tools overlaying a device inside Xcode 27's Device Hub](./device-hub-support/design-comparison.png)
 
@@ -37,9 +37,9 @@ Recent Builds also follows Simulator apps run through Device Hub. For connected 
 
 ## Use Device Hub with AI agents
 
-Starting with RocketSim 16.4.2, the [`rocketsim` CLI](/docs/features/agentic-development/rocketsim-cli/) and `rocketsim doctor` resolve booted Simulators through Device Hub as well as Simulator.app. Your agent can inspect and interact with the focused Simulator without opening the standalone Simulator app.
+Starting with RocketSim 16.4.2, the [`rocketsim` CLI](/docs/features/agentic-development/rocketsim-cli/) and `rocketsim doctor` resolve booted Simulators through Device Hub as well as Simulator.app. Your agent can inspect and interact without opening the standalone Simulator app.
 
-Keep Device Hub in Compact Mode, focus the device you want to control, and ask the agent to start with `rocketsim screen`. If discovery fails, run `rocketsim doctor` to verify the selected device and RocketSim connection.
+When only one Simulator is booted, RocketSim selects it automatically. If several are booted, focus the one you want to control or pass its UDID using `--udid <udid>`. Compact Mode is only required when the workflow depends on a screen-relative overlay.
 
 ## Running into issues?
 

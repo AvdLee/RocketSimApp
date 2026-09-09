@@ -30,13 +30,14 @@ Configure how your recordings look and what they include. All of the following a
 
 ### Device bezels
 
-You can add a device frame around the Simulator content. Choose **None**, **Simulator Bezel** (the standard Simulator chrome), or a **real device bezel** (device-specific frames for supported iPhone and iPad models). Use the **Device Bezel** picker in the Captures tab. Your choice is stored per device, so each Simulator type can have its own preference.
+You can add a device frame around the Simulator content. Choose **None**, **Simulator Bezel** (the standard Simulator chrome), or a **real device bezel** (device-specific frames for supported iPhone and iPad models). Current iPad coverage includes the iPad (A16) and 11-inch and 13-inch iPad Pro (M5). Use the **Device Bezel** picker in the Captures tab. Your choice is stored per device, so each Simulator type can have its own preference.
 
 ### Touches and touch attention
 
 - **Show touches in recordings** — Renders touch indicators so viewers can see taps and gestures. You can also enable **Show stroke around touches** in Settings → Captures.
 - **Touch Attention Mode** — Keeps a single touch indicator on screen that follows your mouse pointer the whole time, useful for directing attention in demos.
 - **Touches color** — Pick a custom color for the touch indicators in the Captures tab or in Settings → Captures (plain colors only).
+- **Touch pointer size** — Make touch indicators smaller or larger using the slider in Settings → Captures.
 
 See also [Touch indicators](/docs/features/capturing/touch-indicators) for more on how touches appear in captures.
 
@@ -66,6 +67,8 @@ Enable **Record audio** (Simulator audio) or pick a **Microphone** (or both) in 
 ## Editing and trimming a recording
 
 Once your recording is done, open it from the [floating thumbnail](/docs/features/capturing/floating-thumbnail) to continue in the [Post Editor](/docs/features/capturing/post-editor). There you can trim the beginning and end of the recording, preview playback, and refine the final styling before converting the result.
+
+Enable **Open editor directly after recording** under **RocketSim → Settings → Captures → Editing** when you always want to trim before exporting. RocketSim opens the editor as soon as recording stops and skips the initial conversion, so you avoid converting frames you are about to trim away. Closing the editor without exporting starts the normal conversion for the original recording.
 
 ![Recording post editor showing the trim timeline, preview, and export controls.](./post-editor/video-post-editor.png)
 
@@ -104,7 +107,3 @@ Make sure you don't have any audio routing enabled. Doing so can prevent RocketS
 ### Does RocketSim install a custom audio driver for audio recording?
 
 No, there's nothing you need to install for audio recording to work.
-
-### Why are my iPad recordings upside-down?
-
-RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording.
