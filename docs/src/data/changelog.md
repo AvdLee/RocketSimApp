@@ -1,20 +1,24 @@
-# 16.4.6
+# 16.4.6 (332)
 
 **New:**
 
+- Added support for the latest iPhone 18 Simulators.
 - Browser Preview (beta): stream and interact with a booted Simulator from your browser via the new `rocketsim preview` CLI command, including an AI-native visual review workflow.
 - Capture setting: open editor directly after recording a video to skip the initial conversion. (Thanks, Mustafa!)
-- Added iPad Pro M5 bezels.
+- Added iPad Pro M5 device bezels.
 
 **Improved:**
 
 - Significantly reduced CPU usage while Simulators are running: recent-build scans are now debounced, scoped to the affected Simulator, and reuse cached container and DerivedData lookups instead of rescanning everything on every file change.
 - Reduced CPU usage during agent (CLI) sessions: the annotated snapshot command reuses fresh accessibility snapshots, and the Accessibility overlay no longer runs its own refresh cadence while agent commands already deliver fresh data.
 - CLI: compact `nav`/`act` snapshots omit keyboard keys, off-canvas elements, and duplicate text composites, reducing agent token usage.
-- Physical-device preview windows now have a minimum width of 300 points to prevent them from becoming too small.
+- Engaged free users can now receive rating prompts, with a higher lifetime cap and cooldown between requests.
+- CLI: agent commands now automatically keep a live browser preview available and include its URL in the `rs/1` response context.
 
 **Fixed:**
 
+- Fixed idle browser preview sessions continuously encoding Simulator frames and consuming CPU when no browser was connected.
+- Fixed the physical devices window becoming too narrow by enforcing a minimum width of 300.
 - Fixed recent build names remaining dark while highlighted in the menu bar menu. (Thanks, E. Sanchez!)
 - CLI: simulator commands now resolve the single booted Simulator when no Simulator window is focused (e.g. headless `simctl boot`), suggesting `--udid` when several are booted.
 - CLI: `interact` now reports `screen_changed` from actively refreshed snapshots, so change detection reflects the post-interaction screen.
@@ -23,7 +27,6 @@
 - CLI: stale Simulator services are refreshed once before returning typed Simulator or accessibility recovery errors instead of a generic `execution_failed`.
 - Physical-device version mismatch errors now explain how to restore compatible Xcode and device support.
 - Recovered RocketSim Connect app relaunches are no longer counted as connection failures.
-- CLI: agent commands now automatically keep a live browser preview available and include its URL in the `rs/1` response context.
 
 # 16.4.5 (331)
 
