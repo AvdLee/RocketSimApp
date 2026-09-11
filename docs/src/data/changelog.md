@@ -1,3 +1,11 @@
+# 16.4.7 (333)
+
+**Fixed:**
+
+- CLI: `rocketsim` commands now work for macOS usernames longer than 22 characters, which previously pushed the IPC socket path past the system limit and made every command fail.
+- RocketSim no longer crashes on launch when its shared app group container is unavailable; it now keeps running with the CLI reported as unavailable.
+- Simulator command failures now report their exit status and bounded, redacted error details, so repeated `simctl` problems can be diagnosed instead of all looking alike.
+
 # 16.4.6 (332)
 
 **New:**
