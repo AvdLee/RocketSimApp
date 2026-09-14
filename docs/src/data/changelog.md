@@ -1,10 +1,21 @@
+# 16.4.8 (335)
+
+**Fixed:**
+
+- CLI agent flows are more reliable and token-efficient: batched interaction steps accept direct action aliases, fixed-duration waits stay inside `rocketsim do`, screen guards work with coordinate actions, duplicate labels support `--index`, large interaction deltas are compacted, ambiguous multi-Simulator targeting no longer guesses, and video recordings finalize on termination signals or after `--duration`.
+
 # 16.4.7 (334)
+
+**Improved:**
+
+- Screen Recording onboarding now explains how to clear a stale permission entry when System Settings looks enabled but RocketSim still cannot detect access, and diagnostics logs now separate preflight results from window-proof counts. (Thanks, E. Sanchez!)
 
 **Fixed:**
 
 - CLI: `rocketsim` commands now work for macOS usernames longer than 22 characters, which previously pushed the IPC socket path past the system limit and made every command fail.
 - RocketSim no longer crashes on launch when its shared app group container is unavailable; it now keeps running with the CLI reported as unavailable.
 - Simulator command failures now report their exit status and bounded, redacted error details, so repeated `simctl` problems can be diagnosed instead of all looking alike.
+- Accessibility elements now load successfully for iOS 27 Simulators when using Xcode 27 RC.
 
 # 16.4.6 (332)
 
