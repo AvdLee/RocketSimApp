@@ -112,9 +112,9 @@ Error codes such as `snapshot_changed`, `accessibility_unavailable`, and `networ
 
 The compact `nav` and `act` snapshot modes deliberately remove rows that do not help an agent act. Both omit software-keyboard keys—the header already reports keyboard visibility—and elements whose frames are fully outside the device canvas. `nav` also omits plain static text and images, plus nested text composites that repeat an ancestor's label. Full debug and plain JSON output remain unchanged.
 
-Interaction deltas are computed from actively refreshed snapshots during a bounded settlement window. This means `screen_changed` reflects the post-interaction screen instead of whichever snapshot happened to be cached when the interaction finished.
+Interaction deltas are computed from actively refreshed snapshots during a bounded settlement window. This means `screen_changed` reflects the post-interaction screen instead of whichever snapshot happened to be cached when the interaction finished. To bound token usage on large transitions, `appeared` and `disappeared` include at most 20 details while `appeared_count` and `disappeared_count` report the complete totals.
 
-Selector resolution also handles a common accessibility-tree ambiguity. If several matches share the same label and exactly one is actionable while the others are non-actionable containers around it, RocketSim selects the actionable element automatically. Other ambiguous selectors still return `multiple_matches`.
+Selector resolution also handles a common accessibility-tree ambiguity. If several matches share the same label and exactly one is actionable while the others are non-actionable containers around it, RocketSim selects the actionable element automatically. Other repeated labels can be selected in reading order with 1-based `--index`.
 
 Simulator selection does not require a visible Simulator window. When no window is focused, RocketSim targets the single booted Simulator, including one started headlessly with `simctl boot`. If multiple Simulators are booted, the typed error tells the agent to pass `--udid`.
 
