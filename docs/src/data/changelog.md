@@ -3,6 +3,7 @@
 **Fixed:**
 
 - CLI agent flows are more reliable and token-efficient: batched interaction steps accept direct action aliases, fixed-duration waits stay inside `rocketsim do`, screen guards work with coordinate actions, duplicate labels support `--index`, large interaction deltas are compacted, ambiguous multi-Simulator targeting no longer guesses, and video recordings finalize on termination signals or after `--duration`.
+- Direct-download builds once again embed Sparkle.framework, preventing a launch crash after installing or updating RocketSim.
 
 # 16.4.7 (334)
 
