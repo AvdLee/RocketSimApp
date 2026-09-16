@@ -1,9 +1,22 @@
-# 16.4.8 (335)
+# 16.5.0 (335)
+
+**New:**
+
+- Added RocketSim Connect settings with connection status, LLDB setup diagnostics, manual setup commands, and an option to remove the Xcode debugger integration.
+- Simulator actions that Xcode 27's Device Hub dropped are back: shake the device, toggle light/dark appearance, and simulate a memory warning. Find them in the menu bar's new Simulator submenu and in the Compare tab's six-button panel alongside Grid, Rulers, and Slow Animations.
+- Shut down the active Simulator or every other booted Simulator from the Simulator submenu to reclaim the memory Device Hub keeps in use.
+- All Simulator actions have assignable shortcuts under Settings > Shortcuts, so you can restore Simulator.app bindings like ⇧⌘A for appearance.
+- Drag & drop imports are back for Xcode 27's Device Hub: drop `.apns` push payloads, root certificates, photos, videos, `.app` bundles, or links onto RocketSim's side window to import them into the active Simulator. The window turns into a dashed drop target while you drag, and a notification confirms what was imported.
 
 **Fixed:**
 
+- Keyboard shortcuts now work while Xcode 27's Device Hub is the frontmost app; previously they only activated for Simulator.app, so toggles like slow animations silently did nothing.
+- Unrelated macOS Services no longer appear in RocketSim's app menu or block assigning their key combinations to RocketSim shortcuts.
 - CLI agent flows are more reliable and token-efficient: batched interaction steps accept direct action aliases, fixed-duration waits stay inside `rocketsim do`, screen guards work with coordinate actions, duplicate labels support `--index`, large interaction deltas are compacted, ambiguous multi-Simulator targeting no longer guesses, and video recordings finalize on termination signals or after `--duration`.
+- Improved LLDB hook script by removing redundant queries.
+- Fixed the side window not appearing for Device Hub Simulators whose names include a hyphenated number (for example `17 Pro Max - 27`). (Thanks, M. Martino!)
 - Direct-download builds once again embed Sparkle.framework, preventing a launch crash after installing or updating RocketSim.
+- Fixed touch indicators appearing upside down in landscape recordings or vertically offset in recordings with an off-center device frame. (Thanks, S. Gardner and H. v.d. Ploeg!)
 
 # 16.4.7 (334)
 
