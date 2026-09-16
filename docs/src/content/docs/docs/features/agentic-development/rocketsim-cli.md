@@ -152,16 +152,16 @@ rocketsim screenshot --show-floating-thumbnail
 
 ### Video recordings
 
-Agents and scripts can record the simulator to an MP4. Recording continues until you press `Ctrl+C`, at which point RocketSim finalizes the file and writes the bytes to stdout:
+Agents and scripts can record the simulator to an MP4. Recording continues until `Ctrl+C`, SIGTERM, or an optional duration elapses, at which point RocketSim finalizes the file and writes the bytes to stdout:
 
 ```bash
 rocketsim video record > recording.mp4
 ```
 
-Press `Ctrl+C` to stop the recording and flush the MP4. Target a specific simulator with `--udid <udid>` and set the frame rate with `--fps <value>` (between 1 and 120, default 30):
+Press `Ctrl+C`, send SIGTERM, or pass `--duration <seconds>` to stop and flush the MP4. Target a specific simulator with `--udid <udid>` and set the frame rate with `--fps <value>` (between 1 and 120, default 30):
 
 ```bash
-rocketsim video record --fps 60 --udid <udid> > recording.mp4
+rocketsim video record --fps 60 --duration 5 --udid <udid> > recording.mp4
 ```
 
 `video record` accepts the same styling options as `screenshot` (see the table above), so you can record framed, touch-annotated, or App Store Connect–optimized clips. As with screenshots, add `--show-floating-thumbnail` to send the finished recording to RocketSim's floating thumbnail instead of stdout:
@@ -197,9 +197,10 @@ rocketsim wait screen-changed
 rocketsim wait element --label "Continue"
 rocketsim wait keyboard --state shown
 rocketsim wait keyboard --state hidden --timeout 1
+rocketsim wait time --ms 800
 ```
 
-This keeps agent flows from racing ahead before the app has finished navigating or rendering. For keyboard waits, `shown` is an alias for `visible`; use `hidden` to wait for dismissal.
+This keeps agent flows from racing ahead before the app has finished navigating or rendering. For keyboard waits, `shown` is an alias for `visible`; use `hidden` to wait for dismissal. Prefer observable waits; use the capped `wait time --ms <1...10000>` fallback only when no screen, element, or keyboard postcondition exists.
 
 When the perception backend itself is failing (rather than the predicate simply staying false), `wait` reports that backend failure as an `execution_failed` error instead of a misleading timeout, so agents can run `rocketsim doctor` and recover instead of retrying a wait that can never succeed.
 
@@ -209,6 +210,7 @@ RocketSim supports the most common agent interactions through `rocketsim interac
 
 ```bash
 rocketsim interact tap --label "Continue"
+rocketsim interact tap --label "Delete" --index 2 --screen latest
 rocketsim interact activate --label "Hidden Debug Menu"
 rocketsim interact tap 210 642
 rocketsim interact long-press --label "Delete"
@@ -223,7 +225,7 @@ rocketsim interact biometric match
 rocketsim interact biometric nomatch
 ```
 
-`interact` is designed to work with fresh screen state. After dispatching an interaction, RocketSim actively refreshes snapshots during a bounded settlement window before computing the result delta. The returned `screen_changed` value therefore reflects the post-interaction screen instead of a stale cached snapshot.
+`interact` is designed to work with fresh screen state. After dispatching an interaction, RocketSim actively refreshes snapshots during a bounded settlement window before computing the result delta. The returned `screen_changed` value therefore reflects the post-interaction screen instead of a stale cached snapshot. Large `appeared` and `disappeared` detail arrays are capped while `appeared_count` and `disappeared_count` retain the complete totals.
 
 Use `interact activate` for an accessibility element that does not respond to coordinate taps, such as a hidden debug control. It performs an accessibility press on the resolved element instead of sending a HID tap.
 
@@ -246,6 +248,8 @@ rocketsim do \
 
 Prefer a concrete postcondition such as an element appearing or the keyboard hiding. Interaction responses already include a screen delta, so an extra screen-change wait is often unnecessary.
 
+Each step normally starts with `interact`, `wait`, `elements`, or `screen`. Interaction actions such as `tap`, `swipe`, and `focus` are also accepted directly as shorthand inside a batch.
+
 ## Why `--agent` matters
 
 The `--agent` flag replaces the full accessibility hierarchy with compact pipe-delimited rows inside the `rs/1` response. That means less context per screen read and easier recovery after each interaction.
@@ -264,7 +268,7 @@ An `act` response looks like this:
 }
 ```
 
-The identifiers are ephemeral and belong to that screen. Prefer a label selector, or use an identifier with `--screen latest` when duplicate labels make the selector ambiguous. Use `debug` mode or omit `--agent` when you need parent relationships, raw frames, scrollable-container metadata, or the complete hierarchy.
+The identifiers are ephemeral and belong to that screen. Prefer a label selector, use 1-based `--index` for repeated labels, or use an identifier with `--screen latest` when duplicate labels make the selector ambiguous. Use `debug` mode or omit `--agent` when you need parent relationships, raw frames, scrollable-container metadata, or the complete hierarchy.
 
 This structured output for agents works especially well with the [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill), which connects your AI coding tool to the CLI automatically. We highly recommend using the Agent Skill instead of asking an agent to invent CLI calls on its own.
 
@@ -280,9 +284,9 @@ rocketsim interact long-press --label "Reorder" --duration 1.5 --screen latest
 
 Selector-based taps first try semantic accessibility activation, which is more reliable than a coordinate tap when the visual affordance does not align perfectly with the accessibility frame — think toggles, list rows, and buttons with asymmetric tappable areas. When semantic activation is unavailable, RocketSim falls back to a precise HID tap at the element's center. Coordinate taps and multi-touch taps always use HID directly. Use `interact activate` when you explicitly need an accessibility press without any HID fallback, such as for a hidden debug control that ignores coordinate hit-testing.
 
-When a selector matches several elements with the same label, RocketSim automatically chooses the only actionable match if the others are non-actionable containers around it. Genuinely ambiguous matches still return `multiple_matches`.
+When a selector matches several elements with the same label, RocketSim automatically chooses the only actionable match if the others are non-actionable containers around it. For genuinely distinct matches, pass 1-based `--index <N>` in reading order or use an element id.
 
-Coordinates are still available as a fallback when the element is visible on screen but not exposed with a stable label.
+Coordinates are still available as a fallback when the element is visible on screen but not exposed with a stable label. Raw coordinate and untargeted actions accept the same `--screen` flag; pass the explicit hash from the snapshot where you chose the coordinate to detect a stale screen before dispatch.
 
 ## Named swipe directions
 
