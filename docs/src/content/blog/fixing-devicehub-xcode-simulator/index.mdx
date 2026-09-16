@@ -3,6 +3,7 @@ title: "Xcode Device Hub and the Future of RocketSim"
 pageTitle: "Hi Device Hub, bye RocketSim? Definitely not!"
 description: Xcode Device Hub replaces the Simulator window in Xcode 27. Here is how to fix it when it won't launch, and why RocketSim is here to stay.
 publishedTime: 2026-06-09T09:00:00.000Z
+modifiedTime: 2026-09-22T09:00:00.000Z
 image: ./xcode-devicehub-simulator-side-window.jpeg
 imageAlt: The Xcode Device Hub Simulator running an iPhone 17 on iOS 27, with RocketSim's Side Window and capture settings shown right next to it.
 imageCaption: "The Xcode Device Hub Simulator running an iPhone 17, with RocketSim's Side Window right next to it."
@@ -32,8 +33,10 @@ killall -9 CoreDeviceService
 
 This force-restarts the `CoreDeviceService` daemon that Device Hub and `devicectl` rely on, which clears up the connection issues you might hit in this first release. I can also tell you that I lost all my worries about the future of RocketSim after playing around more with all the internals.
 
-## When can we expect a RocketSim update?
+## Restoring missing Simulator features
 
-Promises are tricky, but I'm hoping to release a first update in the [App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=devicehub-article&mt=8) next week that will bring back a working version of RocketSim.
+RocketSim now supports Simulators in Device Hub for captures, design comparison, accessibility, app actions, and AI agent workflows. RocketSim 16.5 also restores Shake, Slow Animations, appearance and memory-warning shortcuts, Simulator shutdown actions, and drag-and-drop file imports.
+
+Read [how to restore missing Simulator features in Xcode 27 Device Hub](/blog/xcode-device-hub-simulator-features/) or follow the [Device Hub support guide](/docs/features/capturing/device-hub-support/) to configure your setup.
 
 Feel free to reach out on [X/Twitter](https://x.com/twannl) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you run into anything or have ideas for how RocketSim should fit into Device Hub. Thanks!
