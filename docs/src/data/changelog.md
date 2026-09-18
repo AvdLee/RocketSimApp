@@ -1,3 +1,9 @@
+# 16.6.0
+
+**New:**
+
+- CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
+
 # 16.5.0 (335)
 
 **New:**
