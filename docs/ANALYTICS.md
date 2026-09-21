@@ -29,13 +29,28 @@ event only when tracking a genuinely new action.
 
 - `Teams Trial Form Started` fires once when a visitor first interacts with the
   inline form on `/for-teams/`.
-- `Teams Trial Signup Submitted` fires when the inline form is submitted.
-- `CTA: Team Page - Start Trial` also fires on inline form submission to
-  preserve the historical series.
+- `Teams Trial Form Validation Failed` fires when native validation blocks
+  submit. Properties: `field` (`email`, `full_name`, `team_size`) and `reason`
+  (`required`, `email_format`, `range`).
+- `Teams Trial Signup Submitted` is a submit attempt, not a completed trial.
+- `Teams Trial Signup Succeeded` fires only after a thank-you redirect, before
+  navigation.
+- `Teams Trial Signup Failed` fires when the API returns an error or the
+  response cannot be read. Properties: `error_type`
+  (`business_email`, `validation`, `origin`, `upstream`, `unknown`) and
+  `http_status`.
+- `Teams Trial Signup Redirected` fires when the API sends the visitor
+  somewhere other than the thank-you page, including existing-license login
+  recovery. Property: `reason` (`existing_license`, `other`).
 
-These events include `surface`, `placement`, `format`, and `source`. Submission
-events include a coarse `team_size` bucket. Never send names, email addresses,
-or exact team sizes to Plausible.
+`CTA: Team Page - Start Trial` stays on hosted trial links. It no longer fires
+for an inline submit.
+
+These events include `surface`, `placement`, `format`, `source`, and
+`signup_surface=inline_hero` on attempt and outcome events. Submission and
+outcome events include a coarse `team_size` bucket. Never send names, email
+addresses, or exact team sizes to Plausible. Add the new event names as
+Plausible goals before treating zero counts as real.
 
 ## Trial completion
 

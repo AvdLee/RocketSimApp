@@ -340,6 +340,85 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
       track("Teams Trial Form Started", baseProps);
     });
 
+    const validationField = (
+      input: HTMLInputElement,
+    ): "email" | "full_name" | "team_size" | null => {
+      if (input.name === "email") return "email";
+      if (input.name === "full_name") return "full_name";
+      if (input.name === "trial_team_size") return "team_size";
+      return null;
+    };
+
+    const validationReason = (
+      input: HTMLInputElement,
+    ): "required" | "email_format" | "range" => {
+      if (input.validity.typeMismatch) return "email_format";
+      if (
+        input.validity.rangeUnderflow ||
+        input.validity.rangeOverflow ||
+        input.validity.stepMismatch
+      ) {
+        return "range";
+      }
+      return "required";
+    };
+
+    // Native validation blocks submit, so record it on the invalid event.
+    form.addEventListener(
+      "invalid",
+      (event) => {
+        const input = event.target;
+        if (!(input instanceof HTMLInputElement)) return;
+        const field = validationField(input);
+        if (!field) return;
+        track("Teams Trial Form Validation Failed", {
+          ...baseProps,
+          field,
+          reason: validationReason(input),
+        });
+      },
+      true,
+    );
+
+    const failureType = (status: number, type: string): string => {
+      if (
+        type === "business_email" ||
+        type === "upstream" ||
+        type === "origin"
+      ) {
+        return type;
+      }
+      if (
+        type === "email" ||
+        type === "full_name" ||
+        type === "trial_team_size"
+      ) {
+        return "validation";
+      }
+      if (status === 403) return "origin";
+      if (status >= 500) return "upstream";
+      return "unknown";
+    };
+
+    const redirectOutcome = (
+      redirectUrl: string,
+    ): "created" | "existing_license" | "other" => {
+      let parsed: URL;
+      try {
+        parsed = new URL(redirectUrl);
+      } catch {
+        return "other";
+      }
+      if (parsed.pathname.includes("/signup/trial/thank-you")) return "created";
+      if (
+        parsed.pathname.includes("/login") ||
+        parsed.searchParams.get("error") === "license_already_exists"
+      ) {
+        return "existing_license";
+      }
+      return "other";
+    };
+
     let isSubmitting = false;
 
     form.addEventListener("submit", async (event) => {
@@ -363,10 +442,14 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
               : teamSize <= 50
                 ? "26-50"
                 : "51+";
-      const props = { ...baseProps, team_size: teamSizeBucket };
+      // Attempt only. Outcome events below are the decision-grade results.
+      const props = {
+        ...baseProps,
+        team_size: teamSizeBucket,
+        signup_surface: "inline_hero",
+      };
 
       track("Teams Trial Signup Submitted", props);
-      track("CTA: Team Page - Start Trial", props);
 
       const submitButton = form.querySelector<HTMLButtonElement>(
         ".trial-form__submit",
@@ -379,6 +462,14 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
 
       let isRedirecting = false;
 
+      const trackFailure = (status: number, type: string) => {
+        track("Teams Trial Signup Failed", {
+          ...props,
+          error_type: failureType(status, type),
+          http_status: String(status),
+        });
+      };
+
       try {
         const response = await fetch(form.action, {
           method: "POST",
@@ -388,6 +479,7 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
         const payload: unknown = await response.json();
 
         if (!isTrialResponse(payload)) {
+          trackFailure(response.status, "unknown");
           showError(
             "composite",
             "We couldn't start your trial. Please try again.",
@@ -396,6 +488,16 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
         }
 
         if ("redirectUrl" in payload && response.ok) {
+          const outcome = redirectOutcome(payload.redirectUrl);
+          if (outcome === "created") {
+            track("Teams Trial Signup Succeeded", props);
+          } else {
+            track("Teams Trial Signup Redirected", {
+              ...props,
+              reason:
+                outcome === "existing_license" ? "existing_license" : "other",
+            });
+          }
           // Keep the form disabled while the browser navigates away, so the
           // trial can't be submitted twice.
           isRedirecting = true;
@@ -404,15 +506,18 @@ const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_med
         }
 
         if ("error" in payload) {
+          trackFailure(response.status, payload.error.type);
           showError(payload.error.type, payload.error.message);
           return;
         }
 
+        trackFailure(response.status, "unknown");
         showError(
           "composite",
           "We couldn't start your trial. Please try again.",
         );
       } catch {
+        trackFailure(0, "upstream");
         showError(
           "composite",
           "We couldn't start your trial. Please try again.",
