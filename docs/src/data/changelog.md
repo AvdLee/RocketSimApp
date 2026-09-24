@@ -2,6 +2,7 @@
 
 **New:**
 
+- Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in.
 - CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
 
 # 16.5.1
