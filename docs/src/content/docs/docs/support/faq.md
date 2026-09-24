@@ -23,6 +23,10 @@ Yes, we offer [Team Licenses](https://www.rocketsim.app/for-teams/). The [manage
 
 Yes, check out [Team Licenses](https://www.rocketsim.app/for-teams/).
 
+## How do I renew my team license or update payment details?
+
+Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and go to **Settings → Subscription**. From there, you can re-subscribe after your license expired or was canceled, update a payment method that failed, add seats, and download invoices. The [team subscription guide](/docs/support/managing-your-team-subscription/) walks you through each step.
+
 ## Can I buy a lifetime license?
 
 No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://swiftlee-weekly.com/?utm_source=rocketsim&utm_medium=referral&utm_campaign=swiftlee_weekly&utm_content=faq_lifetime_license) and follow the instructions in the email.

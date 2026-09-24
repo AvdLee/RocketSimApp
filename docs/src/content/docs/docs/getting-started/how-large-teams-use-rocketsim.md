@@ -48,6 +48,8 @@ Besides developers, it’s also QA engineers and designers that benefit from Roc
 - Relaunch apps in specific locale or timezone without resetting the Simulator greatly improves the QA testing cycle.
 - Accessibility toggles in RocketSim’s side window takes away the need to teach your testers how they can switch common accessibility modes.
 
-## Purchasing Team Licenses
+## Purchasing and renewing Team Licenses
 
 You can [order team licenses via our website](https://www.rocketsim.app/for-teams/). Batch discounts apply automatically if you order multiple seats.
+
+Renewing an expired license, re-subscribing, fixing a failed payment, or adding seats is self-serve from the Teams dashboard. Follow the [team subscription guide](/docs/support/managing-your-team-subscription/) for step-by-step instructions.
