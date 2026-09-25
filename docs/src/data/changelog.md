@@ -5,11 +5,10 @@
 - Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in.
 - CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
 
-# 16.5.1
-
 **Fixed:**
 
 - CLI: `rocketsim` no longer exits silently with signal 133/134 when invoked from Codex's default sandboxed shell. The installed launcher now returns an actionable `sandbox_unavailable` response, while the agent skill requests the required escalation up front. Existing CLI symlinks installed through RocketSim migrate automatically. (Thanks, U. Di Profio!)
+- Fixed individual rulers that could no longer be removed by dragging them outside the horizontal or vertical ruler strip. (Thanks, A. Hershberger!)
 
 # 16.5.0 (335)
 
