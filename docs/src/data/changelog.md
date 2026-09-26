@@ -5,8 +5,19 @@
 - Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in.
 - CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
 
+**Improved:**
+
+- Browser Preview uses about 75% less CPU per streamed Simulator. Frames are now JPEG-encoded by the Mac's hardware video encoder and capped at 30 fps, and streams send about 80% less data to each browser.
+- Browser Preview lowers its frame rate to 15 fps while any Simulator is recording, and recordings get priority when your Mac is busy, so previews never slow down a recording.
+- Previews that no browser is watching, including the ones CLI agent commands start automatically, no longer stream or encode Simulator frames, so they leave RocketSim idle.
+- Browser Preview skips accessibility refreshes while the screen is unchanged or the Simulator is recording.
+- Recordings no longer contain bursts of repeated frames after a brief system stall.
+
 **Fixed:**
 
+- Starting a Browser Preview no longer freezes RocketSim's interface for up to a second.
+- CLI: `rocketsim video record` no longer fails for recordings larger than 10 MB (about 20 seconds at 60 fps). Large results are now handed over through a temporary file.
+- Browser Preview sessions now stop when their Simulator is deleted.
 - CLI: `rocketsim` no longer exits silently with signal 133/134 when invoked from Codex's default sandboxed shell. The installed launcher now returns an actionable `sandbox_unavailable` response, while the agent skill requests the required escalation up front. Existing CLI symlinks installed through RocketSim migrate automatically. (Thanks, U. Di Profio!)
 - Fixed individual rulers that could no longer be removed by dragging them outside the horizontal or vertical ruler strip. (Thanks, A. Hershberger!)
 
