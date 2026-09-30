@@ -5,7 +5,7 @@ title: "Reach the states that are hard to reach."
 color: testing
 tile:
   title: "Push, deep links, routes, and real iPhones."
-  poster: /features/posters/physical-device-testing.webp
+  image: ../../assets/features/physical-device-location-simulation.webp
 presentation: tabs
 items:
   - feature: 01-physical-device-testing
@@ -20,6 +20,10 @@ items:
   - feature: 23-deeplinks-universal-links
     title: "Deep links"
     description: "Parameterized links and Universal Links."
+    media:
+      type: image
+      path: ../../content/docs/docs/features/app-actions/deeplinks-universal-links/deeplinks_with_argument_side_window.png
+      alt: "Stock Detail deep link asking for a Symbol argument, with recent values AAPL, NET, and FTNT"
   - feature: 24-privacy-permissions
     title: "Permissions"
     description: "Grant, revoke, or reset without reinstalling."
@@ -33,4 +37,4 @@ links:
     href: /features/physical-devices/
 ---
 
-Send push notifications, open deep links, simulate walking and driving routes, reset permissions, and edit User Defaults in one click. Then run the **same actions on a real iPhone or iPad**.
+Send push notifications, open deep links, simulate walking and driving routes, and reset permissions in one click. Then open the **same deep links and routes on a real iPhone or iPad**.
