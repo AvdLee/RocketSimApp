@@ -1,12 +1,8 @@
 ---
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
 
-import appStoreRating from "@/assets/app-store-rating.jpg";
-import appStoreFeatured from "@/assets/app-store-featured.jpg";
-import { appStoreUrl } from "@/lib/utils/appStoreUrl";
 import { svgSize } from "@/lib/utils/svgSize";
 
 import StatValue from "./extras/StatValue.astro";
@@ -30,22 +26,6 @@ const stats = [
   { value: "80,000+", label: "developers last year" },
   { value: "250+", label: "teams" },
   { value: "Up to 2×", label: "faster, developers report" },
-];
-
-// The App Store badges moved here from the hero, which keeps to the pitch.
-// They keep the campaign they have on the live homepage.
-const badgeHref = appStoreUrl("Landing Page or Form - 8653523");
-const badges = [
-  {
-    image: appStoreRating,
-    alt: "4.8 rating on the App Store, five stars",
-    placement: "landing-app-store-reviews",
-  },
-  {
-    image: appStoreFeatured,
-    alt: "Apple featured RocketSim in Essential Apps for Developers",
-    placement: "landing-app-store-featured",
-  },
 ];
 ---
 
@@ -84,25 +64,5 @@ const badges = [
         ))
       }
     </ul>
-    <div class="mt-10 flex flex-wrap justify-center gap-10">
-      {
-        badges.map(({ image, alt, placement }) => (
-          <a
-            href={badgeHref}
-            class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
-            target="_blank"
-            rel="noopener"
-          >
-            <Image
-              src={image}
-              alt={alt}
-              width={165}
-              densities={[1, 2]}
-              class="h-[84px] w-auto md:h-[100px]"
-            />
-          </a>
-        ))
-      }
-    </div>
   </div>
 </section>

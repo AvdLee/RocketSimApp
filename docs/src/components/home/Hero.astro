@@ -2,20 +2,38 @@
 import { Image } from "astro:assets";
 
 import appIcon from "@/assets/rocketsim-app-icon.png";
+import appStoreRating from "@/assets/app-store-rating.jpg";
+import appStoreFeatured from "@/assets/app-store-featured.jpg";
 import { appStoreUrl } from "@/lib/utils/appStoreUrl";
 
 // `ct=` is rewritten client-side to the stored first-touch referer, see
 // src/lib/utils/storedReferer.ts.
 const appStoreHref = appStoreUrl("website-header");
+// The badges keep the campaign they have on the live homepage.
+const badgeHref = appStoreUrl("Landing Page or Form - 8653523");
 const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
+
+const badges = [
+  {
+    image: appStoreRating,
+    alt: "4.8 rating on the App Store, five stars",
+    placement: "landing-app-store-reviews",
+  },
+  {
+    image: appStoreFeatured,
+    alt: "Apple featured RocketSim in Essential Apps for Developers",
+    placement: "landing-app-store-featured",
+  },
+];
 ---
 
 <!-- The items enter one after another as the page loads, and the hero
      recedes as it scrolls away (src/styles/animations.css).
      The hero fills the window under the sticky header (HomeHeader.astro:
      52px, 4rem from `md` and 82px from `lg`, plus its 1px border), so the
-     glance grid always starts just below the fold. The App Store badges sit
-     under the grid (Brands.astro). -->
+     glance grid always starts just below the fold. On short windows, such as
+     13" and 14" laptops, the app icon gives way so the badges still fit;
+     the header shows the logo. -->
 <section
   class="mx-auto flex min-h-[calc(100svh-53px)] max-w-[1120px] flex-col px-5 text-center md:min-h-[calc(100svh-4rem-1px)] lg:min-h-[calc(100svh-83px)]"
   data-recede
@@ -27,7 +45,7 @@ const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
       width={96}
       height={96}
       densities={[1, 2]}
-      class="mx-auto mb-10 size-24"
+      class="mx-auto mb-10 size-24 [@media(max-height:940px)]:hidden"
       data-hero-item
       style="--hero-order: 0"
     />
@@ -82,12 +100,36 @@ const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
     >
       {microcopy}
     </p>
+    <div
+      class="mt-8 flex flex-wrap justify-center gap-8"
+      data-hero-item
+      style="--hero-order: 5"
+    >
+      {
+        badges.map(({ image, alt, placement }) => (
+          <a
+            href={badgeHref}
+            class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
+            target="_blank"
+            rel="noopener"
+          >
+            <Image
+              src={image}
+              alt={alt}
+              width={165}
+              densities={[1, 2]}
+              class="h-16 w-auto md:h-[72px]"
+            />
+          </a>
+        ))
+      }
+    </div>
   </div>
   <a
     href="#glance"
     class="mx-auto mb-6 text-small text-muted no-underline transition-colors hover:text-text-dark"
     data-hero-item
-    style="--hero-order: 5"
+    style="--hero-order: 6"
   >
     What's inside <span aria-hidden="true">↓</span>
   </a>
