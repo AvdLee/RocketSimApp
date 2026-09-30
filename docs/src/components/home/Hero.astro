@@ -27,8 +27,11 @@ const badges = [
 ];
 ---
 
+<!-- The items enter one after another as the page loads, and the hero
+     recedes as it scrolls away (src/styles/animations.css). -->
 <section
   class="mx-auto max-w-[1120px] px-5 pt-[88px] pb-14 text-center md:pt-[136px] md:pb-[72px]"
+  data-recede
 >
   <Image
     src={appIcon}
@@ -37,18 +40,36 @@ const badges = [
     height={96}
     densities={[1, 2]}
     class="mx-auto mb-10 size-24"
+    data-hero-item
+    style="--hero-order: 0"
   />
-  <h1 class="mb-6 text-small font-semibold text-muted md:text-intro">
+  <h1
+    class="mb-6 text-small font-semibold text-muted md:text-intro"
+    data-hero-item
+    style="--hero-order: 1"
+  >
     The iOS Simulator companion for developers and AI coding agents
   </h1>
-  <p class="text-display text-balance text-text-dark">
+  <p
+    class="text-display text-balance text-text-dark"
+    data-hero-item
+    style="--hero-order: 2"
+  >
     The Simulator,<br />supercharged.
   </p>
-  <p class="mx-auto mt-8 max-w-[30em] text-lead text-muted">
+  <p
+    class="mx-auto mt-8 max-w-[30em] text-lead text-muted"
+    data-hero-item
+    style="--hero-order: 3"
+  >
     RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
     AI coding agent can inspect, test, and capture your app without leaving your flow.
   </p>
-  <div class="mt-12 flex flex-wrap justify-center gap-3.5">
+  <div
+    class="mt-12 flex flex-wrap justify-center gap-3.5"
+    data-hero-item
+    style="--hero-order: 4"
+  >
     <a
       id="js-header-app-store-button"
       href={appStoreHref}
@@ -65,8 +86,18 @@ const badges = [
       For Teams
     </a>
   </div>
-  <p class="mt-5 text-caption text-muted">{microcopy}</p>
-  <div class="mt-14 flex flex-wrap justify-center gap-10">
+  <p
+    class="mt-5 text-caption text-muted"
+    data-hero-item
+    style="--hero-order: 4"
+  >
+    {microcopy}
+  </p>
+  <div
+    class="mt-14 flex flex-wrap justify-center gap-10"
+    data-hero-item
+    style="--hero-order: 5"
+  >
     {
       badges.map(({ image, alt, placement }) => (
         <a

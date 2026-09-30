@@ -21,42 +21,46 @@ const chapters = await Promise.all(
   <h2 class="sr-only" id="glance-label">RocketSim at a glance</h2>
   <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     {
-      chapters.map(({ id, name, color, tile }) => (
-        <a
-          href={`#${id}`}
-          data-glance-tile
-          class="relative flex min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline"
-          style={`--chapter: var(--color-chapter-${color})`}
-        >
-          <span class="text-caption font-semibold text-(--chapter)">
-            {name}
-          </span>
-          <h3 class="mt-1.5 text-title-4">{tile.title}</h3>
-          <span class="mt-2 text-small text-muted">
-            Jump to chapter <span aria-hidden="true">↓</span>
-          </span>
-          {/* A fixed frame that shows the top of the image; it sizes the
+      chapters.map(({ id, name, color, tile }, index) => (
+        // Tiles in a row reveal one after another. The wrapper reveals, so
+        // the tile's own hover lift keeps its transition.
+        <div data-reveal style={`--reveal-order: ${index % 3}`}>
+          <a
+            href={`#${id}`}
+            data-glance-tile
+            class="group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            style={`--chapter: var(--color-chapter-${color})`}
+          >
+            <span class="text-caption font-semibold text-(--chapter)">
+              {name}
+            </span>
+            <h3 class="mt-1.5 text-title-4">{tile.title}</h3>
+            <span class="mt-2 text-small text-muted">
+              Jump to chapter <span aria-hidden="true">↓</span>
+            </span>
+            {/* A fixed frame that shows the top of the image; it sizes the
               poster too, which Astro doesn't process. */}
-          <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
-            {tile.image ? (
-              <Image
-                src={tile.image}
-                alt=""
-                widths={[360, 720]}
-                sizes="(min-width: 1024px) 340px, (min-width: 540px) 50vw, 100vw"
-                class="size-full rounded-t-[10px] object-cover object-top"
-              />
-            ) : (
-              <img
-                src={tile.poster}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                class="size-full rounded-t-[10px] object-cover object-top"
-              />
-            )}
-          </div>
-        </a>
+            <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
+              {tile.image ? (
+                <Image
+                  src={tile.image}
+                  alt=""
+                  widths={[360, 720]}
+                  sizes="(min-width: 1024px) 340px, (min-width: 540px) 50vw, 100vw"
+                  class="size-full rounded-t-[10px] object-cover object-top transition-[scale] duration-700 group-hover:scale-[1.04] motion-reduce:transition-none"
+                />
+              ) : (
+                <img
+                  src={tile.poster}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="size-full rounded-t-[10px] object-cover object-top transition-[scale] duration-700 group-hover:scale-[1.04] motion-reduce:transition-none"
+                />
+              )}
+            </div>
+          </a>
+        </div>
       ))
     }
   </div>

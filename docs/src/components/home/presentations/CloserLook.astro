@@ -41,7 +41,7 @@ const { id, chapterName, items } = Astro.props;
               class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-small font-medium text-text-soft transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
             >
               <span
-                class="w-4 flex-none text-center text-intro leading-none text-muted group-aria-expanded:rotate-90 group-aria-expanded:text-white"
+                class="w-4 flex-none text-center text-intro leading-none text-muted transition-transform duration-200 ease-smooth group-aria-expanded:rotate-90 group-aria-expanded:text-white motion-reduce:transition-none"
                 aria-hidden="true"
               >
                 ›
@@ -50,7 +50,7 @@ const { id, chapterName, items } = Astro.props;
             </button>
             <p
               id={`${id}-tool-${index}`}
-              class="pt-2 pr-3 pb-3 pl-[38px] text-small text-muted"
+              class="animate-disclose pt-2 pr-3 pb-3 pl-[38px] text-small text-muted motion-reduce:animate-none"
               hidden={index !== 0}
             >
               {item.description}
@@ -62,32 +62,43 @@ const { id, chapterName, items } = Astro.props;
   </div>
 
   <div
-    class="relative bg-surface max-md:order-1 max-md:aspect-square max-md:border-b max-md:border-border md:min-h-[360px]"
+    data-closer-look-stage
+    data-stage
+    class="relative overflow-hidden bg-surface max-md:order-1 max-md:aspect-square max-md:border-b max-md:border-border md:min-h-[360px]"
   >
-    {
-      items.map((item, index) => (
-        <div
-          data-closer-look-frame
-          class="absolute inset-0 p-4 md:p-7"
-          hidden={index !== 0}
-        >
-          <Media
-            media={item.media}
-            sizes="(min-width: 1120px) 760px, (min-width: 768px) 70vw, 100vw"
-            class="size-full rounded-lg object-contain"
-          />
-        </div>
-      ))
-    }
+    {/* The media settles from slightly zoomed in as the stage scrolls in. */}
+    <div class="absolute inset-0" data-settle>
+      {
+        items.map((item, index) => (
+          <div
+            data-closer-look-frame
+            class="absolute inset-0 p-4 transition-[opacity,visibility,scale] duration-500 ease-smooth inert:invisible inert:scale-[1.03] inert:opacity-0 motion-reduce:transition-none md:p-7"
+            inert={index !== 0}
+          >
+            <Media
+              media={item.media}
+              sizes="(min-width: 1120px) 760px, (min-width: 768px) 70vw, 100vw"
+              class="size-full rounded-lg object-contain"
+            />
+          </div>
+        ))
+      }
+    </div>
   </div>
 </div>
 
 <script>
+  import { loadVideo } from "@/lib/utils/lazyVideo";
+  import { prefersReducedMotion } from "@/lib/utils/motion";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
 
   // One tool is open at a time: its description shows under its button and
-  // its media fills the stage. Up and down arrows move between tools.
+  // its media fades in on the stage. Up and down arrows move between tools.
+  // The open tool's video loops while the stage is in view. With reduced
+  // motion it waits on its poster, with controls to start it.
   function initCloserLooks() {
+    const reducedMotion = prefersReducedMotion();
+
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="closer-look"]')
       .forEach((root) => {
@@ -97,8 +108,33 @@ const { id, chapterName, items } = Astro.props;
         const frames = [
           ...root.querySelectorAll<HTMLElement>("[data-closer-look-frame]"),
         ];
+        const videos = frames.map((frame) => frame.querySelector("video"));
+        const stage = root.querySelector<HTMLElement>(
+          "[data-closer-look-stage]",
+        );
+        let current = 0;
+        let inView = false;
+
+        const syncVideos = () => {
+          videos.forEach((video, i) => {
+            if (!video) return;
+            if (i !== current || !inView) {
+              video.pause();
+              return;
+            }
+            loadVideo(video);
+            if (reducedMotion) {
+              video.controls = true;
+              return;
+            }
+            void video.play().catch(() => {
+              // The poster stays when playback cannot start.
+            });
+          });
+        };
 
         const open = (index: number) => {
+          current = index;
           buttons.forEach((button, i) => {
             const expanded = i === index;
             button.setAttribute("aria-expanded", String(expanded));
@@ -106,14 +142,25 @@ const { id, chapterName, items } = Astro.props;
               button.getAttribute("aria-controls") ?? "",
             );
             if (description) description.hidden = !expanded;
-            if (frames[i]) frames[i].hidden = !expanded;
+            if (frames[i]) frames[i].inert = !expanded;
           });
+          syncVideos();
         };
 
         buttons.forEach((button, index) =>
           button.addEventListener("click", () => open(index)),
         );
         bindRovingKeys(buttons, "vertical", open);
+
+        if (stage) {
+          new IntersectionObserver(
+            ([entry]) => {
+              inView = entry.isIntersecting;
+              syncVideos();
+            },
+            { threshold: 0.25 },
+          ).observe(stage);
+        }
       });
   }
 

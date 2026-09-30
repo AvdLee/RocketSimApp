@@ -5,6 +5,8 @@ import { getEntry } from "astro:content";
 
 import { svgSize } from "@/lib/utils/svgSize";
 
+import StatValue from "./extras/StatValue.astro";
+
 const brands = await getEntry(
   "trustedBrandsSectionCollection",
   "trusted-brands",
@@ -28,7 +30,7 @@ const stats = [
 ---
 
 <section class="border-y border-line py-14" aria-label="Who uses RocketSim">
-  <div class="mx-auto max-w-[1120px] px-5">
+  <div class="mx-auto max-w-[1120px] px-5" data-reveal>
     <p class="mb-6 text-center text-small text-muted">
       Used by iOS developers at
     </p>
@@ -54,7 +56,10 @@ const stats = [
       {
         stats.map(({ value, label }) => (
           <li>
-            <b class="text-text-dark tabular-nums">{value}</b> {label}
+            <b class="text-text-dark tabular-nums">
+              <StatValue value={value} />
+            </b>{" "}
+            {label}
           </li>
         ))
       }
