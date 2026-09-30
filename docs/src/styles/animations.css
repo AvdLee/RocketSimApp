@@ -291,9 +291,13 @@ main:has([data-chapter]) {
     }
 
     /* A row of progress bars (`--draw-count` of them) draws one segment
-       after another; each segment gives its `--draw-index`. */
+       after another; each segment gives its `--draw-index`. The row sits
+       under a tall stage, so it draws as soon as it comes into view, and is
+       done before the stage above starts leaving the top. */
     [data-draw-row] {
       view-timeline: --draw-row block;
+      --draw-start: 10px;
+      --draw-span: min(110px, 14vh);
     }
 
     [data-draw] {
@@ -301,17 +305,23 @@ main:has([data-chapter]) {
       animation: draw both linear;
       animation-timeline: --draw-row;
       animation-range: cover
-        calc(60px + var(--draw-index) / var(--draw-count) * min(360px, 40vh))
+        calc(
+          var(--draw-start) + var(--draw-index) / var(--draw-count) *
+            var(--draw-span)
+        )
         cover
         calc(
-          60px + (var(--draw-index) + 1) / var(--draw-count) * min(360px, 40vh)
+          var(--draw-start) + (var(--draw-index) + 1) / var(--draw-count) *
+            var(--draw-span)
         );
     }
 
+    /* The controls slide in alongside the line, and land with it. */
     [data-draw-control] {
       animation: slide-in both var(--ease-smooth);
       animation-timeline: --draw-row;
-      animation-range: cover 180px cover calc(180px + min(300px, 35vh));
+      animation-range: cover calc(var(--draw-start) + var(--draw-span) * 0.3)
+        cover calc(var(--draw-start) + var(--draw-span));
     }
 
     [data-recede] {
