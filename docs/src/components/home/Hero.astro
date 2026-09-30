@@ -113,12 +113,15 @@ const badges = [
             target="_blank"
             rel="noopener"
           >
+            {/* From `md`, the badges grow into the room a taller window
+              leaves: from 72px at 940px, where the app icon comes back and
+              the hero is full, up to 136px. `width` matches that cap. */}
             <Image
               src={image}
               alt={alt}
-              width={165}
+              width={188}
               densities={[1, 2]}
-              class="h-16 w-auto md:h-[72px]"
+              class="h-16 w-auto md:h-[clamp(72px,calc(72px+(100svh-940px)*0.4),136px)]"
             />
           </a>
         ))
