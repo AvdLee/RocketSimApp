@@ -7,124 +7,90 @@ import { appStoreUrl } from "@/lib/utils/appStoreUrl";
 // `ct=` is rewritten client-side to the stored first-touch referer, see
 // src/lib/utils/storedReferer.ts.
 const appStoreHref = appStoreUrl("website-header");
-// The proof links keep the campaign the badges have on the live homepage.
-const proofHref = appStoreUrl("Landing Page or Form - 8653523");
 const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
-
-// One line of proof under the buttons, where badge images would cost the
-// room the glance tiles need above the fold. The links keep the badges'
-// placements; `format=link` tells them apart from the badges in Plausible.
-const proof = [
-  {
-    text: "4.8 on the App Store",
-    stars: true,
-    placement: "landing-app-store-reviews",
-  },
-  {
-    text: "Featured in Apple's Essential Apps for Developers",
-    placement: "landing-app-store-featured",
-  },
-  { text: "80,000+ developers last year" },
-];
 ---
 
 <!-- The items enter one after another as the page loads, and the hero
-     recedes as it scrolls away (src/styles/animations.css). Vertical spacing
-     follows the window height, so the first row of glance tiles peeks above
-     the fold on laptop screens. -->
+     recedes as it scrolls away (src/styles/animations.css).
+     The hero fills the window under the sticky header (HomeHeader.astro:
+     52px, 4rem from `md` and 82px from `lg`, plus its 1px border), so the
+     glance grid always starts just below the fold. The App Store badges sit
+     under the grid (Brands.astro). -->
 <section
-  class="mx-auto max-w-[1120px] px-5 pt-[clamp(32px,5vh,88px)] pb-8 text-center md:pb-10"
+  class="mx-auto flex min-h-[calc(100svh-53px)] max-w-[1120px] flex-col px-5 text-center md:min-h-[calc(100svh-4rem-1px)] lg:min-h-[calc(100svh-83px)]"
   data-recede
 >
-  <Image
-    src={appIcon}
-    alt=""
-    width={56}
-    height={56}
-    densities={[1, 2]}
-    class="mx-auto mb-5 size-14"
-    data-hero-item
-    style="--hero-order: 0"
-  />
-  <h1
-    class="mb-5 text-small font-semibold text-muted md:text-intro"
-    data-hero-item
-    style="--hero-order: 1"
-  >
-    The iOS Simulator companion for developers and AI coding agents
-  </h1>
-  <p
-    class="text-display text-balance text-text-dark"
-    data-hero-item
-    style="--hero-order: 2"
-  >
-    The Simulator,<br />supercharged.
-  </p>
-  <p
-    class="mx-auto mt-6 max-w-[36em] text-lead text-balance text-muted"
-    data-hero-item
-    style="--hero-order: 3"
-  >
-    RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
-    AI coding agent can inspect, test, and capture your app without leaving your flow.
-  </p>
-  <div
-    class="mt-8 flex flex-wrap justify-center gap-3.5"
-    data-hero-item
-    style="--hero-order: 4"
-  >
-    <a
-      id="js-header-app-store-button"
-      href={appStoreHref}
-      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
-      target="_blank"
-      rel="noopener"
+  <div class="my-auto pt-10 pb-6">
+    <Image
+      src={appIcon}
+      alt=""
+      width={96}
+      height={96}
+      densities={[1, 2]}
+      class="mx-auto mb-10 size-24"
+      data-hero-item
+      style="--hero-order: 0"
+    />
+    <h1
+      class="mb-6 text-small font-semibold text-muted md:text-intro"
+      data-hero-item
+      style="--hero-order: 1"
     >
-      Free download
-    </a>
-    <a
-      href="/for-teams/"
-      class="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams inline-flex rounded-full px-5 py-2.5 font-medium text-primary no-underline inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+      The iOS Simulator companion for developers and AI coding agents
+    </h1>
+    <p
+      class="text-display text-balance text-text-dark"
+      data-hero-item
+      style="--hero-order: 2"
     >
-      For Teams
-    </a>
+      The Simulator,<br />supercharged.
+    </p>
+    <p
+      class="mx-auto mt-8 max-w-[36em] text-lead text-balance text-muted"
+      data-hero-item
+      style="--hero-order: 3"
+    >
+      RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
+      AI coding agent can inspect, test, and capture your app without leaving your
+      flow.
+    </p>
+    <div
+      class="mt-12 flex flex-wrap justify-center gap-3.5"
+      data-hero-item
+      style="--hero-order: 4"
+    >
+      <a
+        id="js-header-app-store-button"
+        href={appStoreHref}
+        class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
+        target="_blank"
+        rel="noopener"
+      >
+        Free download
+      </a>
+      <a
+        href="/for-teams/"
+        class="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams inline-flex rounded-full px-5 py-2.5 font-medium text-primary no-underline inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+      >
+        For Teams
+      </a>
+    </div>
+    <p
+      class="mt-5 text-caption text-muted"
+      data-hero-item
+      style="--hero-order: 4"
+    >
+      {microcopy}
+    </p>
   </div>
-  <p
-    class="mt-4 text-caption text-muted"
-    data-hero-item
-    style="--hero-order: 4"
-  >
-    {microcopy}
-  </p>
-  <ul
-    class="mt-5 flex flex-col items-center gap-1.5 text-small text-muted lg:flex-row lg:justify-center"
+  <a
+    href="#glance"
+    class="mx-auto mb-6 text-small text-muted no-underline transition-colors hover:text-text-dark"
     data-hero-item
     style="--hero-order: 5"
   >
-    {
-      proof.map(({ text, stars, placement }) => (
-        <li class="lg:[&+&]:before:mx-3 lg:[&+&]:before:text-muted/50 lg:[&+&]:before:content-['·']">
-          {placement ? (
-            <a
-              href={proofHref}
-              class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=link text-muted no-underline transition-colors hover:text-text-dark`}
-              target="_blank"
-              rel="noopener"
-            >
-              {stars && (
-                <span class="mr-1 text-chapter-teams" aria-hidden="true">
-                  ★★★★★
-                </span>
-              )}
-              {text}
-            </a>
-          ) : (
-            text
-          )}
-        </li>
-      ))
-    }
-  </ul>
+    What's inside <span aria-hidden="true">↓</span>
+  </a>
 </section>
 
 <script>

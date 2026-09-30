@@ -13,55 +13,34 @@ const chapters = await Promise.all(
 );
 ---
 
-<!-- The grid sits right under the hero, so its first row peeks above the
-     fold; the visible label tells it apart from a cut-off section. -->
 <section
   id="glance"
-  class="mx-auto max-w-[1120px] px-5 pb-[120px]"
+  class="mx-auto max-w-[1120px] px-5 pt-[72px] pb-[120px]"
   aria-labelledby="glance-label"
 >
-  <h2
-    class="mb-4 text-center text-small text-muted"
-    id="glance-label"
-    data-hero-item
-    style="--hero-order: 6"
-  >
-    What's inside <span aria-hidden="true">↓</span>
-  </h2>
+  <h2 class="sr-only" id="glance-label">RocketSim at a glance</h2>
   <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     {
       chapters.map(({ id, name, color, tile }, index) => (
         // Tiles in a row reveal one after another. The wrapper reveals, so
-        // the tile's own hover lift keeps its transition. Once the grid has
-        // columns, its first row peeks above the fold and enters with the
-        // hero instead: `data-hero-row` names the breakpoint from which the
-        // tile is in that row (src/styles/animations.css).
-        <div
-          data-reveal
-          data-hero-row={index < 2 ? "sm" : index < 3 ? "lg" : undefined}
-          style={`--reveal-order: ${index % 3}; --hero-order: ${6.5 + index * 0.5}`}
-        >
+        // the tile's own hover lift keeps its transition.
+        <div data-reveal style={`--reveal-order: ${index % 3}`}>
           <a
             href={`#${id}`}
             data-glance-tile
             class="group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             style={`--chapter: var(--color-chapter-${color})`}
           >
-            {/* The arrow replaces a "Jump to chapter" line, so the image
-                starts higher and shows in the tiles' peek above the fold. */}
-            <span class="flex items-baseline justify-between gap-3 text-caption font-semibold text-(--chapter)">
+            <span class="text-caption font-semibold text-(--chapter)">
               {name}
-              <span
-                class="text-muted transition-transform group-hover:translate-y-0.5 motion-reduce:transition-none"
-                aria-hidden="true"
-              >
-                ↓
-              </span>
             </span>
             <h3 class="mt-1.5 text-title-4">{tile.title}</h3>
+            <span class="mt-2 text-small text-muted">
+              Jump to chapter <span aria-hidden="true">↓</span>
+            </span>
             {/* A fixed frame that shows the top of the image; it sizes the
               poster too, which Astro doesn't process. */}
-            <div class="mt-auto h-40 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
+            <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
               {tile.image ? (
                 <Image
                   src={tile.image}
