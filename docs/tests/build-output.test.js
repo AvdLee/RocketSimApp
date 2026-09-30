@@ -106,6 +106,7 @@ test("homepage preview keeps the live App Store campaign attribution", () => {
     "landing-hero",
     "landing-app-store-reviews",
     "landing-app-store-featured",
+    "landing-cta-banner",
   ]) {
     const expected = campaigns(live, placement);
     assert.ok(expected.length > 0, `expected ${placement} on the homepage`);
@@ -390,4 +391,129 @@ test("homepage Teams chapter keeps its Plausible events", () => {
   ]) {
     assert.match(link(event) ?? "", /href="\/for-teams\/"/, event);
   }
+});
+
+// The homepage preview's header, without its scripts.
+function homepageHeader() {
+  const html = readDist("home-next/index.html").replace(
+    /<script\b[\s\S]*?<\/script>/g,
+    "",
+  );
+  const header = html.match(/<header\b[^>]*data-home-header[\s\S]*?<\/header>/);
+  assert.ok(header, "expected the homepage header");
+  return header[0];
+}
+
+const anchors = (markup) =>
+  [...markup.matchAll(/<a[^>]*href="#([^"]+)"/g)].map(([, id]) => id);
+
+test("homepage header's chapter menu follows the chapters on the page", () => {
+  const header = homepageHeader();
+  const sections = homepageChapters().map(({ id }) => id);
+
+  // The chapter layer starts hidden: the main menu shows until the visitor
+  // scrolls past the glance grid.
+  const layer = header.match(
+    /<div[^>]*data-header-layer="chapters"[^>]*>[\s\S]*?<\/nav>/,
+  )?.[0];
+  assert.ok(layer, "expected the chapter layer");
+  assert.ok(isHidden(layer.match(/^<div[^>]*>/)[0]), "chapter layer hidden");
+  assert.match(layer, /<a[^>]*href="#glance"/, "Features jumps to the grid");
+
+  const bar = layer.match(/<nav[^>]*aria-label="Chapters"[\s\S]*?<\/nav>/);
+  assert.ok(bar, "expected the chapters nav");
+  assert.deepEqual(anchors(bar[0]), sections);
+
+  // Phones and tablets open the chapters from a panel instead.
+  const toggle = header.match(
+    /<button[^>]*data-header-toggle="chapters"[^>]*>/,
+  )?.[0];
+  assert.ok(toggle, "expected the chapters toggle");
+  assert.match(toggle, /aria-expanded="false"/);
+  const panelId = toggle.match(/aria-controls="([^"]+)"/)?.[1];
+  const panel = header.match(
+    new RegExp(`<div[^>]*id="${panelId}"[^>]*>[\\s\\S]*?</ul>`),
+  )?.[0];
+  assert.ok(panel, "expected the chapters panel");
+  assert.ok(isHidden(panel.match(/^<div[^>]*>/)[0]), "chapters panel closed");
+  assert.deepEqual(anchors(panel), ["glance", ...sections]);
+
+  // Nothing is highlighted until the visitor reaches a chapter.
+  assert.doesNotMatch(header, /aria-current/);
+});
+
+test("homepage preview carries every Plausible event from the rebuild plan", () => {
+  // The analytics mapping in docs/plans/homepage-rebuild.md and ANALYTICS.md.
+  const html = readDist("home-next/index.html");
+  const links = html.match(/<a\b[^>]*plausible-event-name=[^>]*>/g) || [];
+  const withEvent = (event) =>
+    links.filter((tag) =>
+      new RegExp(`plausible-event-name=${event}[\\s"]`).test(tag),
+    );
+
+  for (const placement of [
+    "landing-topbar",
+    "landing-hero",
+    "landing-app-store-reviews",
+    "landing-app-store-featured",
+    "landing-cta-banner",
+    "landing-footer",
+  ]) {
+    assert.ok(
+      withEvent("App\\+Store\\+Install").some((tag) =>
+        tag.includes(`plausible-event-placement=${placement} `),
+      ),
+      `App Store Install from ${placement}`,
+    );
+  }
+  for (const event of [
+    "CTA:\\+Homepage\\+Hero\\+-\\+For\\+Teams",
+    "CTA:\\+Homepage\\+Split\\+-\\+Trial",
+    "CTA:\\+Homepage\\+Insights\\+-\\+Trial",
+    "CTA:\\+Homepage\\+Insights\\+-\\+Learn\\+More",
+    "CTA:\\+Homepage\\+Mid\\+2\\+-\\+Trial",
+  ]) {
+    assert.equal(withEvent(event).length, 1, event);
+  }
+
+  // The split CTA's trial button opens the hosted trial form.
+  assert.match(
+    withEvent("CTA:\\+Homepage\\+Split\\+-\\+Trial")[0],
+    /href="[^"]*\/signup\/trial\?[^"]*utm_content=homepage_split"/,
+  );
+  // Retired with the hero's "Explore features" link.
+  assert.doesNotMatch(html, /CTA:\+Homepage\+Hero\+-\+Features/);
+});
+
+test("homepage preview shows the live Senja widgets, loaded lazily", () => {
+  const embeds = (html) => html.match(/<div[^>]*\bsenja-embed\b[^>]*>/g) || [];
+  const widgetIds = (html) =>
+    embeds(html).map((tag) => tag.match(/data-id="([^"]+)"/)?.[1]);
+
+  const preview = readDist("home-next/index.html");
+  const live = widgetIds(readDist("index.html"));
+  assert.equal(live.length, 2, "reviews and mentions on the homepage");
+  assert.deepEqual(widgetIds(preview), live);
+
+  for (const tag of embeds(preview)) {
+    // LazySenja injects the loader near the viewport, and the reserved
+    // height keeps the widget from shifting the page when it renders.
+    assert.match(tag, /\bjs-lazy-senja\b/);
+    assert.match(tag, /data-senja-src="https:\/\/[^"]+"/);
+    assert.match(tag, /\bmin-h-/);
+  }
+  assert.doesNotMatch(preview, /<script[^>]*src="[^"]*senja/);
+});
+
+test("homepage preview keeps the newsletter, download card and subscribe notice", () => {
+  const html = readDist("home-next/index.html");
+  // The Kit form; Base.astro sends `Newsletter Form Conversion` on submit.
+  assert.match(
+    html,
+    /<script[^>]*data-uid="2152b53c8b"[^>]*src="https:\/\/rocketsim\.kit\.com\/2152b53c8b\/index\.js"/,
+  );
+  // Phones get the "RocketSim is for Mac" card when they tap an App Store link.
+  assert.match(html, /<aside[^>]*id="mobile-download-link-form"/);
+  // Shown after the newsletter's confirmation redirect.
+  assert.match(html, /You're now subscribed/);
 });

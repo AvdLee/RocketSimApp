@@ -1,5 +1,6 @@
 ---
 name: "Screenshots & Videos"
+menuLabel: "Captures"
 title: "Captures worth sharing."
 color: captures
 tile:

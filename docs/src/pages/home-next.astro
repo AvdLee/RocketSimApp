@@ -4,11 +4,19 @@
 import Base from "@/layouts/Base.astro";
 import config from "@/config/config.json";
 
+import Notification from "../old/components/Notification.astro";
+import MobileDownloadLinkForm from "../old/components/MobileDownloadLinkForm.astro";
 import HomeHeader from "../components/home/HomeHeader.astro";
 import Hero from "../components/home/Hero.astro";
 import Glance from "../components/home/Glance.astro";
 import Brands from "../components/home/Brands.astro";
 import Chapter from "../components/home/Chapter.astro";
+import Reviews from "../components/home/Reviews.astro";
+import SplitCta from "../components/home/SplitCta.astro";
+import Everyday from "../components/home/Everyday.astro";
+import Mentions from "../components/home/Mentions.astro";
+import FinalCta from "../components/home/FinalCta.astro";
+import Newsletter from "../components/home/Newsletter.astro";
 import Credit from "../components/home/extras/Credit.astro";
 import Quote from "../components/home/extras/Quote.astro";
 import Stat from "../components/home/extras/Stat.astro";
@@ -20,7 +28,7 @@ const {
   metadata: { meta_description },
 } = config;
 
-// Order of the glance tiles and, later, the header's chapter menu. Keep it in
+// Order of the glance tiles and the header's chapter menu. Keep it in
 // step with the `<Chapter>` lines below; a build test checks they match.
 const chapters = [
   "agents",
@@ -39,7 +47,8 @@ const seo = {
 ---
 
 <Base seo={seo} header="home">
-  <HomeHeader slot="header" />
+  <HomeHeader slot="header" chapters={chapters} />
+  <Notification />
   <Hero />
   <Glance chapters={chapters} />
   <Brands />
@@ -68,12 +77,14 @@ const seo = {
     />
   </Chapter>
   <Chapter id="captures" />
+  <Reviews />
   <Chapter id="network">
     <Credit>
       Made possible by <a href="https://github.com/kean/Pulse">Pulse</a>, an
       open-source project created by Alex Grebenyuk.
     </Credit>
   </Chapter>
+  <SplitCta />
   <Chapter id="testing" />
   <Chapter id="design" />
   <Chapter id="teams">
@@ -84,4 +95,9 @@ const seo = {
     />
     <TeamCta />
   </Chapter>
+  <Everyday />
+  <Mentions />
+  <FinalCta />
+  <Newsletter />
+  <MobileDownloadLinkForm />
 </Base>

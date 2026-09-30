@@ -1,0 +1,35 @@
+---
+// The closing call to action. Its download button is a new `landing-footer`
+// placement of the existing App Store Install event (ANALYTICS.md).
+const downloadHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-footer&mt=8";
+const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 py-[120px] text-center md:py-[184px]"
+>
+  <h2
+    class="text-[clamp(36px,6vw,64px)] leading-[1.05] font-bold tracking-[-0.035em] text-balance"
+  >
+    Spend less time operating the Simulator.<br />
+    <span class="text-muted">Spend more time building your app.</span>
+  </h2>
+  <div class="mt-9 flex flex-wrap justify-center gap-3.5">
+    <a
+      href={downloadHref}
+      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-footer plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
+      target="_blank"
+      rel="noopener"
+    >
+      Free download
+    </a>
+    <a
+      href="/pricing/"
+      class="inline-flex rounded-full px-5 py-2.5 font-medium text-primary no-underline inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+    >
+      View pricing
+    </a>
+  </div>
+  <p class="mt-5 text-[13px] text-muted">{microcopy}</p>
+</section>

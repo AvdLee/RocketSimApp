@@ -1,0 +1,65 @@
+---
+import { teamsUrl } from "@/lib/utils/teamsUrl";
+
+// The mid-page call to action, one card for developers and one for teams.
+// It replaces the live homepage's CTA banner, whose download button keeps its
+// `landing-cta-banner` placement and campaign. Event names follow ANALYTICS.md.
+const downloadHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-cta-banner&mt=8";
+const trialHref = `${teamsUrl}/signup/trial?utm_source=website&utm_medium=website&utm_content=homepage_split`;
+const buttonClass =
+  "mt-auto inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover";
+
+const cards = [
+  {
+    who: "For you",
+    title: "Start building faster today.",
+    text: "Free to download, no signup. Unlock Pro when you need more.",
+    label: "Free download",
+    href: downloadHref,
+    event:
+      "plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-cta-banner plausible-event-format=button",
+    external: true,
+  },
+  {
+    who: "For your team",
+    title: "Make the whole team faster.",
+    text: "Shared licenses and Team Build Insights. Try it free for 14 days.",
+    label: "Start a 14-day Teams Trial",
+    href: trialHref,
+    event: "plausible-event-name=CTA:+Homepage+Split+-+Trial",
+    external: false,
+  },
+];
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-[120px] md:pt-[184px]"
+  aria-label="Get started"
+>
+  <div class="grid gap-5 md:grid-cols-2">
+    {
+      cards.map(({ who, title, text, label, href, event, external }) => (
+        <div class="flex flex-col items-start gap-3 rounded-lg bg-surface p-9">
+          <p class="text-[17px] font-semibold text-primary">{who}</p>
+          <h2 class="text-[clamp(26px,3.4vw,36px)] leading-[1.1] font-bold tracking-[-0.03em]">
+            {title}
+          </h2>
+          <p class="mb-2 text-[17px] text-muted">{text}</p>
+          <a
+            href={href}
+            class:list={[event, buttonClass]}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener" : undefined}
+          >
+            {label}
+          </a>
+        </div>
+      ))
+    }
+  </div>
+  <p class="mt-5 text-center text-sm text-muted">
+    Developers report building, testing, and verifying apps up to 2× faster with
+    RocketSim.
+  </p>
+</section>

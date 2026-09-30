@@ -1,5 +1,6 @@
 ---
 name: "Build Insights for Teams"
+menuLabel: "Teams"
 title: "Know when your builds get slower."
 color: teams
 tile:
