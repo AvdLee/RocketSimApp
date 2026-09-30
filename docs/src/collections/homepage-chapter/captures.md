@@ -24,11 +24,15 @@ items:
     title: "Drag it anywhere"
     description: "App Store Connect, GitHub, Slack, or iMessage, straight from the floating capture."
   - feature: 17-status-bar-editing
-    title: "Always 09:41"
-    description: "A keynote-ready status bar, with full battery and signal."
+    title: "09:41 in one click"
+    description: "The keynote-ready status bar, full bars included."
   - feature: 15-professional-captures
     title: "Bezels, backgrounds, ratios"
     description: "Marketing-ready screenshots without opening a design tool."
+    media:
+      type: image
+      path: ../../content/docs/docs/features/capturing/post-editor/screenshot-post-editor.png
+      alt: "A Simulator screenshot framed in a Cosmic Orange iPhone 17 Pro bezel on a red gradient background at a 3:2 ratio"
 links:
   - label: "Explore Screenshots & Videos"
     href: /features/screenshots-recordings/

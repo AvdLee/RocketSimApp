@@ -2,6 +2,7 @@
 import type { HomepageItem } from "@/lib/homepageItems";
 
 import Media from "../Media.astro";
+import MediaBackdrop from "../MediaBackdrop.astro";
 import AutoplayControl from "./AutoplayControl.astro";
 
 interface Props {
@@ -47,6 +48,7 @@ const { id, chapterName, items, aside } = Astro.props;
             class="absolute inset-0 rounded-lg transition-[opacity,visibility,scale] duration-500 ease-smooth focus-visible:-outline-offset-2 inert:invisible inert:scale-[1.03] inert:opacity-0 motion-reduce:transition-none"
             inert={index !== 0}
           >
+            <MediaBackdrop media={item.media} />
             <Media
               media={item.media}
               sizes={
@@ -55,20 +57,16 @@ const { id, chapterName, items, aside } = Astro.props;
                   : "(min-width: 1120px) 1080px, 100vw"
               }
               class:list={[
-                "size-full",
-                item.media.type === "image"
-                  ? "object-contain p-6"
-                  : "object-cover",
+                // Contain, never crop: the stage is 16:9 (or as tall as the
+                // aside), and media of any other shape letterboxes. 16:9
+                // videos still fill the stage edge to edge.
+                "relative size-full object-contain",
+                item.media.type === "image" && "p-6",
               ]}
             />
           </div>
         ))
       }
-    </div>
-    <div
-      data-glow
-      class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-[radial-gradient(60%_100%_at_50%_100%,color-mix(in_srgb,var(--chapter)_22%,transparent),transparent)]"
-    >
     </div>
   </div>
 
