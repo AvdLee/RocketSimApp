@@ -7,12 +7,11 @@ interface Props {
   media: HomepageMedia;
   sizes: string;
   class?: string;
-  // Videos play on their own once in view (lazyVideo). Set false when the
-  // parent's script controls playback.
-  autoplay?: boolean;
 }
 
-const { media, sizes, class: className, autoplay = true } = Astro.props;
+// Videos stay on their poster until the presentation's script loads and
+// plays them (src/lib/utils/autoplay.ts, CloserLook.astro).
+const { media, sizes, class: className } = Astro.props;
 ---
 
 {
@@ -26,7 +25,7 @@ const { media, sizes, class: className, autoplay = true } = Astro.props;
     />
   ) : (
     <video
-      class:list={[autoplay && "js-lazy-video", className]}
+      class={className}
       aria-label={media.alt}
       poster={media.poster}
       preload="none"
@@ -34,14 +33,8 @@ const { media, sizes, class: className, autoplay = true } = Astro.props;
       playsinline
       loop
     >
-      {/* The data-src attribute defers the download until the video nears the viewport. */}
+      {/* The data-src attribute defers the download until the presentation plays the video. */}
       <source data-src={media.src} type="video/mp4" />
     </video>
   )
 }
-
-<script>
-  import { initLazyVideos } from "@/lib/utils/lazyVideo";
-
-  document.addEventListener("astro:page-load", initLazyVideos);
-</script>

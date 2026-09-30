@@ -57,7 +57,6 @@ const { id, chapterName, items, aside } = Astro.props;
                 ? "object-contain p-6"
                 : "object-cover",
             ]}
-            autoplay={false}
           />
         </div>
       ))
@@ -91,7 +90,7 @@ const { id, chapterName, items, aside } = Astro.props;
               class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
             >
               {/* One line runs under the tabs and fills up as autoplay moves on. */}
-              <span class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted/50 md:-mr-6">
+              <span class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted md:-mr-6">
                 <span
                   data-autoplay-fill
                   class="absolute inset-0 origin-left scale-x-0 bg-primary"
@@ -201,22 +200,23 @@ const { id, chapterName, items, aside } = Astro.props;
 
         const autoplay = createAutoplay({
           stage,
-          fills: tabs.map((tab) =>
-            tab.querySelector<HTMLElement>("[data-autoplay-fill]"),
-          ),
-          videos: panels.map((panel) => panel?.querySelector("video") ?? null),
+          items: tabs.map((tab, i) => ({
+            fill: tab.querySelector<HTMLElement>("[data-autoplay-fill]"),
+            video: panels[i]?.querySelector("video") ?? null,
+          })),
           control,
           show: select,
         });
-        const choose = (index: number) => {
+        // The visitor picked a tab by click or key.
+        const pickTab = (index: number) => {
           select(index);
           autoplay.pick(index);
         };
 
         tabs.forEach((tab, index) =>
-          tab.addEventListener("click", () => choose(index)),
+          tab.addEventListener("click", () => pickTab(index)),
         );
-        bindRovingKeys(tabs, "horizontal", choose);
+        bindRovingKeys(tabs, "horizontal", pickTab);
       });
   }
 

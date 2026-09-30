@@ -149,7 +149,10 @@ html:has([data-home-header]) {
   scroll-behavior: smooth;
 }
 
-body:has([data-home-header]) {
+/* The homepage's own header and content; the shared footer keeps the site's
+   defaults. */
+[data-home-header],
+main:has([data-chapter]) {
   --default-transition-duration: 200ms;
   --default-transition-timing-function: var(--ease-smooth);
 }
@@ -164,17 +167,24 @@ body:has([data-home-header]) {
 /* Scroll-in reveals. src/lib/utils/reveal.ts marks `data-reveal` elements
    below the window as pending, then shows each as it scrolls in. Without the
    script, or with reduced motion, nothing is ever pending. Siblings stagger
-   through `--reveal-delay`. */
+   by their `--reveal-order`. */
 [data-reveal] {
   transition:
     opacity 0.9s var(--ease-enter),
     translate 0.9s var(--ease-enter);
-  transition-delay: var(--reveal-delay, 0s);
+  transition-delay: calc(var(--reveal-order, 0) * 80ms);
 }
 
 [data-reveal="pending"] {
   opacity: 0;
   translate: 0 32px;
+}
+
+@media print {
+  [data-reveal="pending"] {
+    opacity: 1;
+    translate: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

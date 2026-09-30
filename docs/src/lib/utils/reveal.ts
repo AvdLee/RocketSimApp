@@ -1,3 +1,5 @@
+import { prefersReducedMotion } from "./motion";
+
 // Scroll-in reveals for the homepage, styled in src/styles/animations.css.
 // The homepage uses these instead of AOS, which stays for the shared footer
 // and the rest of the site: they respect reduced motion, share the
@@ -7,7 +9,7 @@ let observer: IntersectionObserver | undefined;
 
 export function initReveals(): void {
   observer?.disconnect();
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (prefersReducedMotion()) return;
 
   observer = new IntersectionObserver(
     (entries, self) => {

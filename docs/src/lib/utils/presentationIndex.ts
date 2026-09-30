@@ -1,5 +1,6 @@
-// Index logic shared by the homepage chapter presentations (tabs, gallery,
-// closer look). Kept free of the DOM so it can be unit-tested with `node --test`.
+// Index and scroll logic shared by the homepage chapter presentations (tabs,
+// gallery, closer look). Kept free of the DOM so it can be unit-tested with
+// `node --test`.
 
 export type Orientation = "horizontal" | "vertical";
 

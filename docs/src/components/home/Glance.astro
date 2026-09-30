@@ -24,11 +24,11 @@ const chapters = await Promise.all(
       chapters.map(({ id, name, color, tile }, index) => (
         // Tiles in a row reveal one after another. The wrapper reveals, so
         // the tile's own hover lift keeps its transition.
-        <div data-reveal style={`--reveal-delay: ${(index % 3) * 80}ms`}>
+        <div data-reveal style={`--reveal-order: ${index % 3}`}>
           <a
             href={`#${id}`}
             data-glance-tile
-            class="relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-[#161618] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            class="relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             style={`--chapter: var(--color-chapter-${color})`}
           >
             <span class="text-caption font-semibold text-(--chapter)">

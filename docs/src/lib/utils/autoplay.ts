@@ -7,6 +7,7 @@ import {
   type AutoplayState,
 } from "./autoplayState";
 import { loadVideo } from "./lazyVideo";
+import { prefersReducedMotion } from "./motion";
 
 // How long an image shows before autoplay moves on. A video shows until it
 // ends.
@@ -15,13 +16,17 @@ const IMAGE_MS = 5000;
 // doesn't skip items when it comes back.
 const MAX_FRAME_MS = 100;
 
+interface AutoplayItem {
+  // The fill of the item's progress bar.
+  fill: HTMLElement | null;
+  video: HTMLVideoElement | null;
+}
+
 interface AutoplayOptions {
   // Autoplay only runs while this is in view.
   stage: HTMLElement;
-  // Per item, in order: the fill of its progress bar, and its video if it
-  // has one.
-  fills: (HTMLElement | null)[];
-  videos: (HTMLVideoElement | null)[];
+  // In display order.
+  items: AutoplayItem[];
   // The pause, play and replay button (AutoplayControl.astro).
   control: HTMLButtonElement;
   // Shows an item autoplay moved to. The presentation shows the visitor's
@@ -31,24 +36,24 @@ interface AutoplayOptions {
 
 // Plays a homepage tabs or gallery presentation: each item's bar fills as it
 // plays, then the next item shows. It stops after two laps, only runs while
-// the stage is in view, and starts paused for reduced motion.
+// the stage is in view, and starts paused for reduced motion, where the
+// current video gets controls to play it by hand.
 export function createAutoplay({
   stage,
-  fills,
-  videos,
+  items,
   control,
   show,
 }: AutoplayOptions): { pick: (index: number) => void } {
-  let state: AutoplayState = startAutoplay(fills.length, {
-    reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
-  });
+  const reducedMotion = prefersReducedMotion();
+  let state: AutoplayState = startAutoplay(items.length, { reducedMotion });
+  const videos = items.map(({ video }) => video);
   let inView = false;
   // How long the current image has shown.
   let elapsed = 0;
   let frame = 0;
   let last = 0;
-  // Items whose video could not play. They keep their poster and run on the
-  // clock, like images.
+  // Items whose video could not play or load. They keep their poster and run
+  // on the clock, like images.
   const timed = new Set<number>();
   const name = control.dataset.autoplayName ?? "";
 
@@ -63,7 +68,7 @@ export function createAutoplay({
 
   const render = () => {
     progressFills(state, progress()).forEach((fill, index) => {
-      const bar = fills[index];
+      const bar = items[index].fill;
       if (bar) bar.style.scale = `${fill} 1`;
     });
   };
@@ -79,8 +84,13 @@ export function createAutoplay({
   const syncVideos = () => {
     videos.forEach((video, index) => {
       if (!video) return;
-      if (index !== state.index || !running() || timed.has(index)) {
+      const current = index === state.index && inView;
+      if (!current || !running() || timed.has(index)) {
         video.pause();
+        if (current && reducedMotion) {
+          loadVideo(video);
+          video.controls = true;
+        }
         return;
       }
       loadVideo(video);
@@ -89,8 +99,7 @@ export function createAutoplay({
         if (error instanceof DOMException && error.name === "AbortError") {
           return;
         }
-        timed.add(index);
-        start();
+        runOnClock(index);
       });
     });
   };
@@ -99,12 +108,15 @@ export function createAutoplay({
     frame = 0;
     // A client-side navigation removed the presentation.
     if (!running() || !stage.isConnected) return;
-    elapsed += Math.min(now - last, MAX_FRAME_MS);
-    last = now;
-    if (!videoAt(state.index) && elapsed >= IMAGE_MS) {
-      moveOn();
-      return;
+    // A video's own playback sets its progress; only images run the clock.
+    if (!videoAt(state.index)) {
+      elapsed += Math.min(now - last, MAX_FRAME_MS);
+      if (elapsed >= IMAGE_MS) {
+        moveOn();
+        return;
+      }
     }
+    last = now;
     render();
     frame = requestAnimationFrame(tick);
   };
@@ -113,6 +125,11 @@ export function createAutoplay({
     if (!running() || frame) return;
     last = performance.now();
     frame = requestAnimationFrame(tick);
+  }
+
+  function runOnClock(index: number) {
+    timed.add(index);
+    start();
   }
 
   const refresh = () => {
@@ -145,6 +162,10 @@ export function createAutoplay({
     video.addEventListener("ended", () => {
       if (index === state.index && state.status === "playing") moveOn();
     });
+    // A source that fails to load never ends.
+    video
+      .querySelector("source")
+      ?.addEventListener("error", () => runOnClock(index));
   });
 
   control.addEventListener("click", () => {

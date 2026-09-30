@@ -44,7 +44,11 @@ const currentClass =
     Skip to content
   </a>
   <div class="mx-auto max-w-[1320px] px-5 md:px-[25px]">
-    <div class="relative h-[52px] overflow-hidden md:h-16 lg:h-[82px]">
+    <!-- Clips the sliding layers top and bottom only, so the focus rings of
+         the logo and the button at either end still show. -->
+    <div
+      class="relative h-[52px] [clip-path:inset(0_-8px)] md:h-16 lg:h-[82px]"
+    >
       <!-- Main layer, until the visitor scrolls past the glance grid. -->
       <div
         class:list={[layerClass, "inert:-translate-y-full"]}

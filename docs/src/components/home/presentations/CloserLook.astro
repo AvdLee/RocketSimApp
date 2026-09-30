@@ -76,7 +76,6 @@ const { id, chapterName, items } = Astro.props;
             media={item.media}
             sizes="(min-width: 1120px) 760px, (min-width: 768px) 70vw, 100vw"
             class="size-full rounded-lg object-contain"
-            autoplay={false}
           />
         </div>
       ))
@@ -86,6 +85,7 @@ const { id, chapterName, items } = Astro.props;
 
 <script>
   import { loadVideo } from "@/lib/utils/lazyVideo";
+  import { prefersReducedMotion } from "@/lib/utils/motion";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
 
   // One tool is open at a time: its description shows under its button and
@@ -93,9 +93,7 @@ const { id, chapterName, items } = Astro.props;
   // The open tool's video loops while the stage is in view. With reduced
   // motion it waits on its poster, with controls to start it.
   function initCloserLooks() {
-    const reducedMotion = matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reducedMotion = prefersReducedMotion();
 
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="closer-look"]')
