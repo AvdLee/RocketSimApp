@@ -11,19 +11,17 @@ const { value, label, details = [], source } = Astro.props;
 ---
 
 <div class="flex flex-1 flex-col justify-end rounded-lg bg-surface p-6">
-  <p
-    class="text-[clamp(56px,7vw,80px)] leading-none font-bold tracking-[-0.04em] text-(--chapter)"
-  >
+  <p class="text-display leading-none text-(--chapter)">
     {value}
   </p>
-  <p class="mt-2 text-[15px] text-muted">{label}</p>
+  <p class="mt-2 text-small text-muted">{label}</p>
   {
     details.length > 0 && (
       <dl class="mt-4 flex gap-6 border-t border-line pt-3.5">
         {details.map((detail) => (
           <div class="flex flex-col-reverse">
-            <dt class="text-[13px] text-muted">{detail.label}</dt>
-            <dd class="m-0 text-2xl font-bold tracking-[-0.02em] text-text-dark tabular-nums">
+            <dt class="text-caption text-muted">{detail.label}</dt>
+            <dd class="m-0 text-title-4 text-text-dark tabular-nums">
               {detail.value}
             </dd>
           </div>
@@ -31,5 +29,5 @@ const { value, label, details = [], source } = Astro.props;
       </dl>
     )
   }
-  {source && <p class="mt-3 text-xs text-muted">{source}</p>}
+  {source && <p class="mt-3 text-caption text-muted">{source}</p>}
 </div>

@@ -20,7 +20,7 @@ const { id, chapterName, items } = Astro.props;
   class="mt-16 grid overflow-hidden rounded-lg border border-border bg-card md:min-h-[560px] md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] md:grid-rows-[auto_1fr]"
 >
   <div
-    class="flex h-10 items-center gap-2 border-b border-border bg-surface px-3.5 text-[13px] text-muted md:col-span-2"
+    class="flex h-10 items-center gap-2 border-b border-border bg-surface px-3.5 text-caption text-muted md:col-span-2"
     aria-hidden="true"
   >
     <i class="size-3 rounded-full bg-window-control"></i>
@@ -38,10 +38,10 @@ const { id, chapterName, items } = Astro.props;
               type="button"
               aria-expanded={index === 0 ? "true" : "false"}
               aria-controls={`${id}-tool-${index}`}
-              class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-[15px] font-medium text-text-soft transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
+              class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-small font-medium text-text-soft transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
             >
               <span
-                class="w-4 flex-none text-center text-lg leading-none text-muted group-aria-expanded:rotate-90 group-aria-expanded:text-white"
+                class="w-4 flex-none text-center text-intro leading-none text-muted group-aria-expanded:rotate-90 group-aria-expanded:text-white"
                 aria-hidden="true"
               >
                 ›
@@ -50,7 +50,7 @@ const { id, chapterName, items } = Astro.props;
             </button>
             <p
               id={`${id}-tool-${index}`}
-              class="pt-2 pr-3 pb-3 pl-[38px] text-sm leading-[1.45] text-muted"
+              class="pt-2 pr-3 pb-3 pl-[38px] text-small text-muted"
               hidden={index !== 0}
             >
               {item.description}

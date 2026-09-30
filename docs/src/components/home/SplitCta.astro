@@ -41,11 +41,9 @@ const cards = [
     {
       cards.map(({ who, title, text, label, href, event, external }) => (
         <div class="flex flex-col items-start gap-3 rounded-lg bg-surface p-9">
-          <p class="text-[17px] font-semibold text-primary">{who}</p>
-          <h2 class="text-[clamp(26px,3.4vw,36px)] leading-[1.1] font-bold tracking-[-0.03em]">
-            {title}
-          </h2>
-          <p class="mb-2 text-[17px] text-muted">{text}</p>
+          <p class="text-copy font-semibold text-primary">{who}</p>
+          <h2 class="text-title-3">{title}</h2>
+          <p class="mb-2 text-copy text-muted">{text}</p>
           <a
             href={href}
             class:list={[event, buttonClass]}
@@ -58,7 +56,7 @@ const cards = [
       ))
     }
   </div>
-  <p class="mt-5 text-center text-sm text-muted">
+  <p class="mt-5 text-center text-small text-muted">
     Developers report building, testing, and verifying apps up to 2× faster with
     RocketSim.
   </p>

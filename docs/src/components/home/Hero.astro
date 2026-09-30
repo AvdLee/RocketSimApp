@@ -38,19 +38,13 @@ const badges = [
     densities={[1, 2]}
     class="mx-auto mb-10 size-24"
   />
-  <h1
-    class="mb-6 text-[clamp(15px,1.6vw,19px)] font-semibold tracking-[-0.01em] text-muted"
-  >
+  <h1 class="mb-6 text-small font-semibold text-muted md:text-intro">
     The iOS Simulator companion for developers and AI coding agents
   </h1>
-  <p
-    class="text-[clamp(44px,8vw,88px)] leading-[1.02] font-bold tracking-[-0.035em] text-balance text-text-dark"
-  >
+  <p class="text-display text-balance text-text-dark">
     The Simulator,<br />supercharged.
   </p>
-  <p
-    class="mx-auto mt-8 max-w-[30em] text-[clamp(19px,2.4vw,26px)] leading-[1.35] font-medium text-muted"
-  >
+  <p class="mx-auto mt-8 max-w-[30em] text-lead text-muted">
     RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
     AI coding agent can inspect, test, and capture your app without leaving your flow.
   </p>
@@ -71,7 +65,7 @@ const badges = [
       For Teams
     </a>
   </div>
-  <p class="mt-5 text-[13px] text-muted">{microcopy}</p>
+  <p class="mt-5 text-caption text-muted">{microcopy}</p>
   <div class="mt-14 flex flex-wrap justify-center gap-10">
     {
       badges.map(({ image, alt, placement }) => (

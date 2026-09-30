@@ -48,13 +48,10 @@ const items = [
   class="mx-auto max-w-[1120px] px-5 pt-[120px] pb-10 md:pt-[184px]"
   aria-labelledby="everyday-title"
 >
-  <h2
-    id="everyday-title"
-    class="text-[clamp(32px,5vw,48px)] font-bold tracking-[-0.03em] text-balance"
-  >
+  <h2 id="everyday-title" class="text-title-2 text-balance">
     And the small things you'll use every day.
   </h2>
-  <p class="mt-3 max-w-[34em] text-[19px] text-muted">
+  <p class="mt-3 max-w-[34em] text-intro text-muted">
     Details that save a few seconds each time, and hours every month.
   </p>
   <ul
@@ -63,9 +60,11 @@ const items = [
     {
       items.map(({ key, title, text }) => (
         <li class="bg-body p-[22px]">
-          <span class="mb-2.5 block font-mono text-xs text-muted">{key}</span>
-          <h3 class="text-[17px] font-semibold tracking-[-0.01em]">{title}</h3>
-          <p class="mt-1 text-sm text-muted">{text}</p>
+          <span class="mb-2.5 block font-mono text-caption tracking-normal text-muted">
+            {key}
+          </span>
+          <h3 class="text-copy font-semibold">{title}</h3>
+          <p class="mt-1 text-small text-muted">{text}</p>
         </li>
       ))
     }
@@ -73,7 +72,7 @@ const items = [
   <div class="mt-12">
     <a
       href="/features/"
-      class="text-[17px] text-primary no-underline hover:underline"
+      class="text-copy text-primary no-underline hover:underline"
     >
       See all features →
     </a>

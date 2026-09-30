@@ -44,6 +44,51 @@
   --color-code: #c9c9cf;
   --color-window-control: #3a3a3d;
   --color-text-soft: #d8d8dc;
+
+  /* Type scale, set in the site's system font (`src/config/theme.json`).
+     Each step brings its own line height, tracking and weight, so a single
+     `text-*` class sets the whole style. Tracking tightens as the size grows,
+     and headings are semibold: SF's display cut is already tight, and bold
+     with heavy negative tracking at every size is what made the prototype
+     read as generic. Sizes are in px, because the root font size shrinks to
+     13.6px below `md` (`src/styles/base.css`). */
+  --text-display: clamp(44px, 8vw, 88px);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.025em;
+  --text-display--font-weight: 600;
+  --text-title-1: clamp(36px, 6vw, 64px);
+  --text-title-1--line-height: 1.06;
+  --text-title-1--letter-spacing: -0.02em;
+  --text-title-1--font-weight: 600;
+  --text-title-2: clamp(30px, 4.5vw, 48px);
+  --text-title-2--line-height: 1.1;
+  --text-title-2--letter-spacing: -0.015em;
+  --text-title-2--font-weight: 600;
+  --text-title-3: clamp(24px, 3vw, 32px);
+  --text-title-3--line-height: 1.15;
+  --text-title-3--letter-spacing: -0.01em;
+  --text-title-3--font-weight: 600;
+  --text-title-4: 22px;
+  --text-title-4--line-height: 1.25;
+  --text-title-4--letter-spacing: -0.008em;
+  --text-title-4--font-weight: 600;
+  /* Running text, from the hero's lead paragraph down to captions. */
+  --text-lead: clamp(19px, 2.2vw, 24px);
+  --text-lead--line-height: 1.4;
+  --text-lead--letter-spacing: -0.01em;
+  --text-intro: 19px;
+  --text-intro--line-height: 1.45;
+  --text-intro--letter-spacing: -0.014em;
+  /* The site's body text; `body` in base.css uses it too. */
+  --text-copy: 17px;
+  --text-copy--line-height: 1.5;
+  --text-copy--letter-spacing: -0.022em;
+  --text-small: 15px;
+  --text-small--line-height: 1.45;
+  --text-small--letter-spacing: -0.012em;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: -0.004em;
 }
 
 /* One hue per homepage chapter, picked by the chapter's `color` field.

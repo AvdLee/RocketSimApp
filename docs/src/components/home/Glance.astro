@@ -28,13 +28,11 @@ const chapters = await Promise.all(
           class="relative flex min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline"
           style={`--chapter: var(--color-chapter-${color})`}
         >
-          <span class="text-[13px] font-semibold tracking-[0.01em] text-(--chapter)">
+          <span class="text-caption font-semibold text-(--chapter)">
             {name}
           </span>
-          <h3 class="mt-1.5 text-[22px] leading-[1.18] font-semibold">
-            {tile.title}
-          </h3>
-          <span class="mt-2 text-sm text-muted">Jump to chapter ↓</span>
+          <h3 class="mt-1.5 text-title-4">{tile.title}</h3>
+          <span class="mt-2 text-small text-muted">Jump to chapter ↓</span>
           <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
             {tile.image ? (
               <Image
