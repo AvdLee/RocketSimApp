@@ -32,6 +32,26 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-3xl-sm: 19.6px;
+
+  /* Homepage palette. `body`, `border`, `light` and `primary` come from
+     `src/config/theme.json`. */
+  --color-surface: #111113;
+  --color-card: #0a0a0b;
+  --color-line: #2a2a2d;
+  --color-muted: #8e8e93;
+  --color-primary-hover: #3aa9ff;
+}
+
+/* One hue per homepage chapter, picked by the chapter's `color` field.
+   `static` keeps them in the output: the names are built at runtime
+   (`var(--color-chapter-${color})`), so Tailwind cannot see them in use. */
+@theme static {
+  --color-chapter-agents: #bf8bff;
+  --color-chapter-captures: #ff5c8a;
+  --color-chapter-network: #36c3ff;
+  --color-chapter-testing: #56c590;
+  --color-chapter-design: #ff8a5c;
+  --color-chapter-teams: #ffd25c;
 }
 
 :root {

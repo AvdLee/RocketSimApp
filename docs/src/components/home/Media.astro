@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+
+import type { HomepageMedia } from "@/lib/homepageItems";
+
+interface Props {
+  media: HomepageMedia;
+  sizes: string;
+  class?: string;
+}
+
+const { media, sizes, class: className } = Astro.props;
+---
+
+{
+  media.type === "image" ? (
+    <Image
+      src={media.src}
+      alt={media.alt}
+      widths={[360, 640, 800, 1200, 1600]}
+      sizes={sizes}
+      class={className}
+    />
+  ) : (
+    <video
+      class:list={["js-lazy-video", className]}
+      aria-label={media.alt}
+      poster={media.poster}
+      preload="none"
+      muted
+      playsinline
+      loop
+    >
+      {/* The data-src attribute defers the download until the video nears the viewport. */}
+      <source data-src={media.src} type="video/mp4" />
+    </video>
+  )
+}
+
+<script>
+  import { initLazyVideos } from "@/lib/utils/lazyVideo";
+
+  document.addEventListener("astro:page-load", initLazyVideos);
+</script>

@@ -1,0 +1,102 @@
+---
+import { Image } from "astro:assets";
+
+import appIcon from "@/assets/rocketsim-app-icon.png";
+import appStoreRating from "@/assets/app-store-rating.jpg";
+import appStoreFeatured from "@/assets/app-store-featured.jpg";
+
+// `ct=` is rewritten client-side to the stored first-touch referer, see
+// src/lib/utils/storedReferer.ts.
+const appStoreHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8";
+// The badges keep the campaign they have on the live homepage.
+const badgeHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=Landing%20Page%20or%20Form%20-%208653523&mt=8";
+const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
+
+const badges = [
+  {
+    image: appStoreRating,
+    alt: "4.8 rating on the App Store, five stars",
+    placement: "landing-app-store-reviews",
+  },
+  {
+    image: appStoreFeatured,
+    alt: "Apple featured RocketSim in Essential Apps for Developers",
+    placement: "landing-app-store-featured",
+  },
+];
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-[88px] pb-14 text-center md:pt-[136px] md:pb-[72px]"
+>
+  <Image
+    src={appIcon}
+    alt=""
+    width={96}
+    height={96}
+    densities={[1, 2]}
+    class="mx-auto mb-10 size-24"
+  />
+  <h1
+    class="mb-6 text-[clamp(15px,1.6vw,19px)] font-semibold tracking-[-0.01em] text-muted"
+  >
+    The iOS Simulator companion for developers and AI coding agents
+  </h1>
+  <p
+    class="text-[clamp(44px,8vw,88px)] leading-[1.02] font-bold tracking-[-0.035em] text-balance text-text-dark"
+  >
+    The Simulator,<br />supercharged.
+  </p>
+  <p
+    class="mx-auto mt-8 max-w-[30em] text-[clamp(19px,2.4vw,26px)] leading-[1.35] font-medium text-muted"
+  >
+    RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
+    AI coding agent can inspect, test, and capture your app without leaving your flow.
+  </p>
+  <div class="mt-12 flex flex-wrap justify-center gap-3.5">
+    <a
+      id="js-header-app-store-button"
+      href={appStoreHref}
+      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
+      target="_blank"
+      rel="noopener"
+    >
+      Free download
+    </a>
+    <a
+      href="/for-teams/"
+      class="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams inline-flex rounded-full px-5 py-2.5 font-medium text-primary no-underline inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+    >
+      For Teams
+    </a>
+  </div>
+  <p class="mt-5 text-[13px] text-muted">{microcopy}</p>
+  <div class="mt-14 flex flex-wrap justify-center gap-10">
+    {
+      badges.map(({ image, alt, placement }) => (
+        <a
+          href={badgeHref}
+          class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
+          target="_blank"
+          rel="noopener"
+        >
+          <Image
+            src={image}
+            alt={alt}
+            width={165}
+            densities={[1, 2]}
+            class="h-[84px] w-auto md:h-[100px]"
+          />
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { initStoredReferer } from "@/lib/utils/storedReferer";
+
+  document.addEventListener("DOMContentLoaded", initStoredReferer);
+</script>

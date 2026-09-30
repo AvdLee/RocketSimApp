@@ -147,6 +147,8 @@ export default defineConfig({
           "https://www.rocketsim.app/signup/trial/thank-you",
           "https://www.rocketsim.app/404",
           "https://www.rocketsim.app/docs/404",
+          // Homepage rebuild preview, until it replaces `/` at launch.
+          "https://www.rocketsim.app/home-next",
         ].includes(normalized);
       },
     }),

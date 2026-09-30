@@ -1,0 +1,79 @@
+---
+import { getHomepageChapter } from "@/lib/homepage";
+
+import Media from "./Media.astro";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const { name, title, color, presentation, items, links, Content } =
+  await getHomepageChapter(id);
+
+// A plain item list for now; the presentation field picks the tabs, gallery or
+// closer-look component once those exist.
+---
+
+<section
+  id={id}
+  data-chapter
+  data-presentation={presentation}
+  class="mx-auto max-w-[1120px] px-5 pt-[120px] pb-4 md:pt-[184px] md:pb-8"
+  style={`--chapter: var(--color-chapter-${color})`}
+>
+  <div
+    class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
+  >
+    <div>
+      <p class="mb-3 text-[19px] font-semibold text-(--chapter)">{name}</p>
+      <h2
+        class="max-w-[14em] text-[clamp(36px,6vw,64px)] leading-[1.04] font-bold tracking-[-0.03em] text-balance"
+      >
+        {title}
+      </h2>
+    </div>
+    <div
+      class="max-w-[32em] text-muted [&_p]:text-[19px] [&_p]:leading-[1.42] [&_strong]:text-text-dark"
+    >
+      <Content />
+    </div>
+  </div>
+
+  <ul class="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {
+      items.map((item) => (
+        <li class="overflow-hidden rounded-lg border border-border bg-card">
+          <Media
+            media={item.media}
+            sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
+            class="aspect-[16/10] w-full bg-surface object-cover object-top"
+          />
+          <div class="px-5 pt-4 pb-5">
+            <h3 class="text-[17px] font-bold tracking-[-0.01em]">
+              {item.title}
+            </h3>
+            <p class="mt-1 text-[15px] leading-[1.45] text-muted">
+              {item.description}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    links.length > 0 && (
+      <div class="mt-12 flex flex-wrap gap-[22px]">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-[17px] text-primary no-underline hover:underline"
+          >
+            {link.label} →
+          </a>
+        ))}
+      </div>
+    )
+  }
+</section>

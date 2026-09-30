@@ -1,0 +1,128 @@
+---
+import { Image } from "astro:assets";
+
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+import logo from "@/assets/rocketsim-logo.svg";
+
+// The chapter layer (menu swap past the glance grid) arrives in a later PR;
+// this is the main layer only.
+const [download] = config.navigation_buttons;
+---
+
+<header
+  class="home-header sticky top-0 z-30 border-b border-border bg-body/30 backdrop-blur-lg"
+>
+  <div class="mx-auto max-w-[1320px] px-5 md:px-[25px]">
+    <div class="flex h-[52px] items-center gap-[30px] md:h-16 lg:h-[82px]">
+      <a href="/" class="inline-flex no-underline" aria-label="RocketSim home">
+        <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
+      </a>
+      <nav aria-label="Main" class="ml-auto hidden lg:block">
+        <ul class="flex items-center gap-[34px] text-[15px]">
+          {
+            menu.main.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  class="block py-3 whitespace-nowrap text-white no-underline opacity-80 transition-opacity hover:opacity-100"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <a
+        href={download.link}
+        class:list={[
+          "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-[15px] leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0",
+          download.class,
+        ]}
+        target="_blank"
+        rel="noopener"
+      >
+        {download.label}
+      </a>
+      <button
+        type="button"
+        class="js-home-nav-toggle group ml-auto p-1.5 text-white md:ml-4 lg:hidden"
+        aria-expanded="false"
+        aria-controls="home-nav-panel"
+        aria-label="Menu"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          class="size-5 fill-current group-aria-expanded:hidden"
+          aria-hidden="true"
+        >
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        </svg>
+        <svg
+          viewBox="0 0 20 20"
+          class="hidden size-5 fill-current group-aria-expanded:block"
+          aria-hidden="true"
+        >
+          <polygon
+            points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+            transform="rotate(45 10 10)"></polygon>
+        </svg>
+      </button>
+    </div>
+    <div id="home-nav-panel" class="pb-5 lg:hidden" hidden>
+      <ul class="rounded-lg bg-light p-3">
+        {
+          menu.main.map((link) => (
+            <li>
+              <a
+                href={link.url}
+                class="block rounded-lg px-5 py-3 text-[17px] text-white no-underline hover:bg-primary/5"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+        <li class="md:hidden">
+          <a
+            href={download.link}
+            class:list={[
+              "mx-5 mt-2 mb-1 inline-flex rounded-full bg-primary px-9 py-3.5 text-[17px] text-white no-underline",
+              download.class,
+            ]}
+            target="_blank"
+            rel="noopener"
+          >
+            {download.label}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const header = document.querySelector(".home-header");
+    const toggle = document.querySelector<HTMLElement>(".js-home-nav-toggle");
+    const panel = document.getElementById("home-nav-panel");
+    if (!header || !toggle || !panel) return;
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      panel.hidden = !open;
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    // Escape closes the menu and hands focus back to the toggle.
+    header.addEventListener("keydown", (event) => {
+      if (!(event instanceof KeyboardEvent) || event.key !== "Escape") return;
+      if (panel.hidden) return;
+      setOpen(false);
+      toggle.focus();
+    });
+  });
+</script>

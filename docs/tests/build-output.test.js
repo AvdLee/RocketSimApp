@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
@@ -65,11 +65,78 @@ test("no rendered page references a .jpg poster", () => {
 });
 
 test("homepage videos stay deferred", () => {
-  const html = readDist("index.html");
-  const videoTags = html.match(/<video\b[^>]*>/g) || [];
-  assert.ok(videoTags.length > 0, "expected videos on the homepage");
-  const eager = videoTags.filter((tag) => !tag.includes('preload="none"'));
-  assert.deepEqual(eager, [], "every homepage video must keep preload=none");
+  // Covers the homepage rebuild preview until it replaces `/` at launch.
+  for (const page of ["index.html", "home-next/index.html"]) {
+    const html = readDist(page);
+    const videoTags = html.match(/<video\b[^>]*>/g) || [];
+    assert.ok(videoTags.length > 0, `expected videos on ${page}`);
+    const eager = videoTags.filter((tag) => !tag.includes('preload="none"'));
+    assert.deepEqual(
+      eager,
+      [],
+      `every video on ${page} must keep preload=none`,
+    );
+  }
+});
+
+test("homepage preview stays out of search until launch", () => {
+  const html = readDist("home-next/index.html");
+  assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+
+  const sitemap = readDist("sitemap-0.xml");
+  assert.doesNotMatch(sitemap, /home-next/);
+});
+
+test("homepage preview keeps the live App Store campaign attribution", () => {
+  // The `ct=` campaign feeds App Store Connect, so each placement must keep
+  // the value it has on the live homepage.
+  const campaigns = (html, placement) =>
+    [
+      ...html.matchAll(
+        new RegExp(
+          `<a[^>]*plausible-event-placement=${placement}\\b[^>]*>`,
+          "g",
+        ),
+      ),
+    ].map(([tag]) => tag.match(/[?&]ct=([^&"]+)/)?.[1]);
+
+  const live = readDist("index.html");
+  const preview = readDist("home-next/index.html");
+  for (const placement of [
+    "landing-hero",
+    "landing-app-store-reviews",
+    "landing-app-store-featured",
+  ]) {
+    const expected = campaigns(live, placement);
+    assert.ok(expected.length > 0, `expected ${placement} on the homepage`);
+    assert.deepEqual(campaigns(preview, placement), expected, placement);
+  }
+});
+
+test("homepage preview only references media that ships", () => {
+  // Tile posters are plain public paths, so a typo would not fail the build.
+  const html = readDist("home-next/index.html");
+  const paths = [...html.matchAll(/(?:src|poster|data-src)="(\/[^"]+)"/g)]
+    .map(([, path]) => path)
+    .filter((path) => !path.startsWith("//"));
+  assert.ok(paths.length > 0, "expected local media on the page");
+  const missing = paths.filter((path) => !existsSync(join(DIST, path)));
+  assert.deepEqual(missing, []);
+});
+
+test("homepage glance tiles follow the chapters placed on the page", () => {
+  // The `chapters` array in the page orders the tiles; the `<Chapter>` lines
+  // order the sections. They must list the same chapters in the same order.
+  const html = readDist("home-next/index.html");
+  const tiles = [...html.matchAll(/<a[^>]*data-glance-tile[^>]*>/g)].map(
+    ([tag]) => tag.match(/href="#([^"]+)"/)?.[1],
+  );
+  const sections = [...html.matchAll(/<section[^>]*data-chapter[^>]*>/g)].map(
+    ([tag]) => tag.match(/id="([^"]+)"/)?.[1],
+  );
+
+  assert.ok(sections.length > 0, "expected chapters on the page");
+  assert.deepEqual(tiles, sections);
 });
 
 test("Teams page preserves its conversion funnel contract", () => {
