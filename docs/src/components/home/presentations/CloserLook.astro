@@ -1,0 +1,132 @@
+---
+import type { HomepageItem } from "@/lib/homepageItems";
+
+import Media from "../Media.astro";
+
+interface Props {
+  // Chapter ID, used to keep the description IDs unique on the page.
+  id: string;
+  // Chapter name, shown in the panel's title bar.
+  label: string;
+  items: HomepageItem[];
+}
+
+const { id, label, items } = Astro.props;
+---
+
+<!-- A Mac-style tools window: a list of tools beside a stage. -->
+<div
+  data-presentation-root="closer-look"
+  class="mt-16 grid overflow-hidden rounded-lg border border-border bg-card md:min-h-[560px] md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] md:grid-rows-[auto_1fr]"
+>
+  <div
+    class="flex h-10 items-center gap-2 border-b border-border bg-surface px-3.5 text-[13px] text-muted md:col-span-2"
+    aria-hidden="true"
+  >
+    <i class="size-3 rounded-full bg-[#3a3a3d]"></i>
+    <i class="size-3 rounded-full bg-[#3a3a3d]"></i>
+    <i class="size-3 rounded-full bg-[#3a3a3d]"></i>
+    <span class="ml-2.5 font-semibold">{label} tools</span>
+  </div>
+
+  <div class="px-2.5 py-3.5 max-md:order-2 md:border-r md:border-border">
+    <ul class="flex flex-col gap-0.5">
+      {
+        items.map((item, index) => (
+          <li>
+            <button
+              type="button"
+              aria-expanded={index === 0 ? "true" : "false"}
+              aria-controls={`${id}-tool-${index}`}
+              class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-[15px] font-medium text-[#d8d8dc] transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
+            >
+              <span
+                class="w-4 flex-none text-center text-lg leading-none text-muted transition-transform group-aria-expanded:rotate-90 group-aria-expanded:text-white"
+                aria-hidden="true"
+              >
+                ›
+              </span>
+              {item.title}
+            </button>
+            <p
+              id={`${id}-tool-${index}`}
+              class="pt-2 pr-3 pb-3 pl-[38px] text-sm leading-[1.45] text-muted"
+              hidden={index !== 0}
+            >
+              {item.description}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div
+    class="relative bg-surface max-md:order-1 max-md:aspect-square max-md:border-b max-md:border-border md:min-h-[360px]"
+  >
+    {
+      items.map((item, index) => (
+        <div
+          data-closer-look-frame
+          class="absolute inset-0 p-4 md:p-7"
+          hidden={index !== 0}
+        >
+          <Media
+            media={item.media}
+            sizes="(min-width: 1120px) 760px, (min-width: 768px) 65vw, 100vw"
+            class="size-full rounded-lg object-contain"
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import { indexForKey } from "@/lib/utils/presentationIndex";
+
+  // One tool is open at a time: its description shows under its button and
+  // its media fills the stage. Up and down arrows move between tools.
+  function initCloserLooks() {
+    document
+      .querySelectorAll<HTMLElement>('[data-presentation-root="closer-look"]')
+      .forEach((root) => {
+        const buttons = [
+          ...root.querySelectorAll<HTMLButtonElement>("[aria-expanded]"),
+        ];
+        const frames = [
+          ...root.querySelectorAll<HTMLElement>("[data-closer-look-frame]"),
+        ];
+
+        const open = (index: number) => {
+          buttons.forEach((button, i) => {
+            const on = i === index;
+            button.setAttribute("aria-expanded", String(on));
+            const description = document.getElementById(
+              button.getAttribute("aria-controls") ?? "",
+            );
+            if (description) description.hidden = !on;
+            if (frames[i]) frames[i].hidden = !on;
+          });
+        };
+
+        buttons.forEach((button, index) => {
+          button.addEventListener("click", () => open(index));
+          button.addEventListener("keydown", (event) => {
+            const next = indexForKey(
+              event.key,
+              index,
+              buttons.length,
+              "vertical",
+            );
+            if (next === undefined) return;
+            event.preventDefault();
+            open(next);
+            buttons[next].focus();
+          });
+        });
+      });
+  }
+
+  document.addEventListener("astro:page-load", initCloserLooks);
+</script>

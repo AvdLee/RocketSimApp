@@ -1,7 +1,9 @@
 ---
 import { getHomepageChapter } from "@/lib/homepage";
 
-import Media from "./Media.astro";
+import CloserLook from "./presentations/CloserLook.astro";
+import Gallery from "./presentations/Gallery.astro";
+import Tabs from "./presentations/Tabs.astro";
 
 interface Props {
   id: string;
@@ -11,8 +13,12 @@ const { id } = Astro.props;
 const { name, title, color, presentation, items, links, Content } =
   await getHomepageChapter(id);
 
-// A plain item list for now; the presentation field picks the tabs, gallery or
-// closer-look component once those exist.
+// Extras come in as children from the page template: the `aside` slot sits
+// beside the tabs stage, and the default slot follows the links. Other
+// presentations have no room beside the stage, so they show the aside below.
+const aside = Astro.slots.has("aside")
+  ? await Astro.slots.render("aside")
+  : undefined;
 ---
 
 <section
@@ -40,27 +46,24 @@ const { name, title, color, presentation, items, links, Content } =
     </div>
   </div>
 
-  <ul class="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-    {
-      items.map((item) => (
-        <li class="overflow-hidden rounded-lg border border-border bg-card">
-          <Media
-            media={item.media}
-            sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
-            class="aspect-[16/10] w-full bg-surface object-cover object-top"
-          />
-          <div class="px-5 pt-4 pb-5">
-            <h3 class="text-[17px] font-bold tracking-[-0.01em]">
-              {item.title}
-            </h3>
-            <p class="mt-1 text-[15px] leading-[1.45] text-muted">
-              {item.description}
-            </p>
-          </div>
-        </li>
-      ))
-    }
-  </ul>
+  {
+    presentation === "tabs" && (
+      <Tabs id={id} label={name} items={items} aside={aside} />
+    )
+  }
+  {presentation === "gallery" && <Gallery id={id} label={name} items={items} />}
+  {
+    presentation === "closer-look" && (
+      <CloserLook id={id} label={name} items={items} />
+    )
+  }
+  {
+    presentation !== "tabs" && aside && (
+      <div class="mt-5 grid gap-5 md:grid-cols-2">
+        <Fragment set:html={aside} />
+      </div>
+    )
+  }
 
   {
     links.length > 0 && (
@@ -76,4 +79,6 @@ const { name, title, color, presentation, items, links, Content } =
       </div>
     )
   }
+
+  <slot />
 </section>
