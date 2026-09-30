@@ -7,9 +7,9 @@ Prototype: <https://claude.ai/artifact/KEcvfejMmJ6SdS9AzVDuDt> (v31)
 
 Rebuild the rocketsim.app homepage based on the prototype, in small PRs that can
 each be reviewed and merged. Build the structure first, then fine-tune it, then
-add animations. Chapters, their features, and the order of both must stay
-content-driven, so we can add or reorder chapters without touching components.
-The other sections are fixed in code.
+add animations. Chapters and their features are content, so we can add chapters,
+and add or reorder their features, without touching components. The page template
+decides where each chapter goes.
 
 ## Decisions
 
@@ -17,7 +17,7 @@ The other sections are fixed in code.
 | --- | --- |
 | Rollout | Build on master at an unlinked, noindex path: `/home-next/`. Swap it in at `/` in the last PR. |
 | Content | A new `homepage-chapter` collection. Each chapter lists **feature references** in display order. Each item can **override** its title, description or media, and **inline items** are allowed for things that have no feature entry. |
-| Page order | The page template sets the order of the fixed sections. Only chapters are dynamic: they're sorted by an `order` field and fill slots in the template. |
+| Page order | The page template sets the order of everything. It places each chapter by ID (`<Chapter id="agents" />`). There is no order field and no config file. |
 | Styling | Tailwind v4, with prototype colors and chapter hues as theme tokens. No new `src/old`-style scoped CSS. |
 | Header | A homepage-only header, with the chapter-menu swap, selected through an option on `Base.astro`. Other pages keep today's header. |
 | Font | Keep the site's system font stack from `src/config/theme.json` (`-apple-system, system-ui, …`). Phase 2 tunes the type scale, weights and tracking, not the typeface. |
@@ -63,25 +63,40 @@ The other sections are fixed in code.
 
 ### Page order
 
-The chapter collection is the only new content. Everything else is fixed in the
-page template, `src/pages/home-next.astro`:
+The chapter collection is the only new content. The page template,
+`src/pages/home-next.astro`, reads top to bottom like the page and places each
+chapter by ID:
 
-```text
-hero → glance → brands
-→ chapters 1–2 → reviews (Senja)
-→ chapter 3    → split CTA
-→ remaining chapters
-→ everyday grid → mentions (Senja) → final CTA → newsletter
+```astro
+---
+// Order of the glance tiles and the header's chapter menu.
+const chapters = ["agents", "captures", "network", "testing", "design", "teams"];
+---
+<Base header="home" …>
+  <HomeHeader chapters={chapters} />
+  <Hero />
+  <Glance chapters={chapters} />
+  <Brands />
+  <Chapter id="agents" />
+  <Chapter id="captures" />
+  <Reviews />
+  <Chapter id="network" />
+  <SplitCta />
+  <Chapter id="testing" />
+  <Chapter id="design" />
+  <Chapter id="teams" />
+  <Everyday />
+  <Mentions />
+  <FinalCta />
+  <Newsletter />
+</Base>
 ```
 
-- Chapters are sorted by their `order` field. Use steps of 10, so a new chapter can
-  go in between without renumbering.
-- Reviews and the split CTA are placed **by position**, not by chapter ID: reviews
-  always come after the second chapter, whichever chapter that is. With fewer
-  chapters, a slot renders after the last chapter.
-- The glance grid and the chapter menu in the header are both **derived** from the
-  sorted chapters, so they can't drift.
-- A chapter file with `draft: true` is skipped everywhere.
+- The chapter ID is the filename and the anchor (`#agents`).
+- The `chapters` array gives the glance tiles and the header menu their order. The
+  resolver checks that every ID exists, and a build check fails if the array and
+  the `<Chapter>` lines disagree.
+- To remove a chapter, delete its line. No `draft` flag is needed.
 - Copy for the fixed sections (hero, split CTA, final CTA, everyday grid, stats)
   lives in their components. The brands row keeps reading
   `src/content/sections/trusted-brands.md`.
@@ -93,7 +108,6 @@ and the Markdown body is the chapter's intro paragraph.
 
 ```yaml
 ---
-order: 10                           # position among chapters
 name: "Agentic Coding"              # eyebrow, nav label, tile label
 title: "Your agent can finally see the Simulator."
 color: agents                       # maps to a theme token (--color-chapter-agents)
@@ -120,7 +134,6 @@ extras:                             # optional, typed blocks, rendered in order
 links:
   - label: "Explore Agentic Coding"
     href: /features/agentic-development/
-draft: false
 ---
 The built-in **CLI and Agent Skill** let Cursor, Claude, Codex, and Xcode …
 ```
@@ -152,7 +165,7 @@ avoid the `@/components` alias: tsconfig and knip resolve it to different folder
 - `SplitCta.astro`, `Everyday.astro`, `FinalCta.astro`
 - Reused as they are: `Reviews` and `SocialMediaMentions` (Senja), `NewsLetterForm`
   (Kit), `MobileDownloadLinkForm`, `Notification`
-- `src/lib/homepage.ts`: loads and sorts the chapters, and resolves their items
+- `src/lib/homepage.ts`: loads a chapter by ID, and resolves its items
   against the feature collection. This is the only place that knows how content
   becomes props.
 
@@ -272,13 +285,14 @@ Aim for correct markup, content and layout, with basic working interaction
 
 ## Definition of done: "flexible content"
 
-- Adding a chapter takes one new `homepage-chapter` file. The glance tile, header
-  menu entry and anchor appear automatically.
-- Reordering chapters means changing their `order` values.
+- Adding a chapter takes one new `homepage-chapter` file, one `<Chapter>` line and
+  one entry in the `chapters` array. The glance tile, header menu entry and anchor
+  follow from that.
+- Reordering chapters means moving `<Chapter>` lines and array entries.
 - Adding, removing or reordering features in a chapter means editing its `items`
   list.
 - Changing a chapter's presentation means changing one field.
-- None of these need a component change.
+- None of these need a change inside a component.
 
 ## Resolved questions
 
