@@ -2,6 +2,7 @@
 import type { HomepageItem } from "@/lib/homepageItems";
 
 import Media from "../Media.astro";
+import MediaBackdrop from "../MediaBackdrop.astro";
 import AutoplayControl from "./AutoplayControl.astro";
 
 interface Props {
@@ -47,7 +48,8 @@ const arrowButtonClass =
               splits the difference between the landscape and square media;
               16:9 from sm fits most of it exactly. Neighbouring slides dim
               their media only, so their captions stay readable. */}
-          <div class="relative aspect-[4/3] border-b border-border bg-surface opacity-50 transition-opacity duration-500 ease-smooth group-data-current:opacity-100 motion-reduce:transition-none sm:aspect-video">
+          <div class="relative aspect-[4/3] overflow-hidden border-b border-border bg-surface opacity-50 transition-opacity duration-500 ease-smooth group-data-current:opacity-100 motion-reduce:transition-none sm:aspect-video">
+            <MediaBackdrop media={item.media} />
             <Media
               media={item.media}
               sizes="(min-width: 1048px) 880px, 84vw"

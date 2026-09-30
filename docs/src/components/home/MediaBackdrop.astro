@@ -1,0 +1,31 @@
+---
+import { getImage } from "astro:assets";
+
+import type { HomepageMedia } from "@/lib/homepageItems";
+
+interface Props {
+  media: HomepageMedia;
+}
+
+const { media } = Astro.props;
+
+// A small copy is enough once it's blurred. Videos use their poster, which
+// the page loads anyway.
+const src =
+  media.type === "image"
+    ? (await getImage({ src: media.src, width: 160 })).src
+    : media.poster;
+---
+
+<!-- A faint, blurred copy of contained media behind it: its edge colours
+     spill into the letterbox bars and fade out. Place it before the media,
+     inside the same positioned frame; the media needs `relative` (or
+     `absolute`) to paint on top. -->
+<img
+  src={src}
+  alt=""
+  aria-hidden="true"
+  loading="lazy"
+  decoding="async"
+  class="pointer-events-none absolute inset-0 size-full scale-110 object-contain opacity-35 blur-3xl"
+/>

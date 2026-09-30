@@ -221,14 +221,6 @@ main:has([data-chapter]) {
   }
 }
 
-/* The chapter's glow under the stage grows up from its bottom edge. */
-@keyframes glow {
-  from {
-    opacity: 0;
-    scale: 1 0.3;
-  }
-}
-
 /* A progress line draws itself from the left. */
 @keyframes draw {
   from {
@@ -281,13 +273,6 @@ main:has([data-chapter]) {
       animation: settle both ease-out;
       animation-timeline: --stage;
       animation-range: cover 0% cover 55%;
-    }
-
-    [data-glow] {
-      transform-origin: bottom;
-      animation: glow both ease-out;
-      animation-timeline: --stage;
-      animation-range: cover 15% cover 55%;
     }
 
     /* A row of progress bars (`--draw-count` of them) draws one segment
