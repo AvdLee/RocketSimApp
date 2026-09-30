@@ -2,8 +2,7 @@
 import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
-
-import config from "src/config/config.json";
+import { teamsUrl } from "@/lib/utils/teamsUrl";
 
 const { isPageHeader } = Astro.props;
 const sectionData = (await getEntry(
@@ -11,11 +10,6 @@ const sectionData = (await getEntry(
   "pricing",
 )) as CollectionEntry<"pricingSectionCollection">;
 const { title, plans } = sectionData.data;
-
-const teamsUrl =
-  import.meta.env.MODE === "production"
-    ? config.site.teams_base_url
-    : "http://localhost:5173";
 
 const stripePaymentLink =
   import.meta.env.MODE === "production"

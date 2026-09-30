@@ -22,7 +22,7 @@ export type HomepageMedia =
   | { type: "image"; src: ImageMetadata; alt: string }
   | { type: "video"; src: string; poster: string; alt: string };
 
-interface HomepageItem {
+export interface HomepageItem {
   title: string;
   description: string;
   media: HomepageMedia;

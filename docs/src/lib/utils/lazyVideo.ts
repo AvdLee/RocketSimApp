@@ -8,7 +8,9 @@ interface LazyVideoState {
 const videoStates = new WeakMap<HTMLVideoElement, LazyVideoState>();
 let observer: IntersectionObserver | undefined;
 
-function loadVideo(video: HTMLVideoElement): void {
+// Swaps in the deferred `data-src` source. Also used by presentations that
+// control playback themselves.
+export function loadVideo(video: HTMLVideoElement): void {
   if (video.dataset.loaded === "true") return;
   const source = video.querySelector<HTMLSourceElement>("source[data-src]");
   const src = source?.dataset.src;

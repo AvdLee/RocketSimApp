@@ -231,3 +231,163 @@ test("camera doc emits FAQPage structured data", () => {
     `expected at least 3 questions in the FAQPage, found ${questions.length}`,
   );
 });
+
+// The chapter sections on the homepage preview, with their inner markup.
+// Scripts are left out: Astro renders a component's script inline, next to
+// the first instance, and its selectors would read as markup.
+function homepageChapters() {
+  const html = readDist("home-next/index.html").replace(
+    /<script\b[\s\S]*?<\/script>/g,
+    "",
+  );
+  return [
+    ...html.matchAll(
+      /<section[^>]*\bid="([^"]+)"[^>]*data-chapter[^>]*>([\s\S]*?)<\/section>/g,
+    ),
+  ].map(([tag, id, body]) => ({
+    id,
+    presentation: tag.match(/data-presentation="([^"]+)"/)?.[1],
+    body,
+  }));
+}
+
+// The opening tag of the element a control points at through aria-controls.
+function controlledElement(body, control) {
+  const id = control.match(/aria-controls="([^"]+)"/)?.[1];
+  assert.ok(id, `expected aria-controls on ${control}`);
+  const element = body.match(new RegExp(`<[^>]*\\bid="${id}"[^>]*>`))?.[0];
+  assert.ok(element, `expected an element with id "${id}"`);
+  return element;
+}
+
+const isHidden = (tag) => /\shidden\b/.test(tag);
+
+test("homepage chapters render the presentation their content asks for", () => {
+  const chapters = homepageChapters();
+  assert.ok(chapters.length > 0, "expected chapters on the page");
+  for (const { id, presentation, body } of chapters) {
+    const rendered = [
+      ...body.matchAll(/data-presentation-root="([^"]+)"/g),
+    ].map(([, name]) => name);
+    assert.deepEqual(rendered, [presentation], id);
+  }
+});
+
+test("homepage tabs follow the ARIA tabs pattern", () => {
+  const tabsChapters = homepageChapters().filter(
+    ({ presentation }) => presentation === "tabs",
+  );
+  assert.ok(tabsChapters.length > 0, "expected a tabs chapter");
+  for (const { id, body } of tabsChapters) {
+    const lists = body.match(/<[^>]*role="tablist"[^>]*>/g) || [];
+    assert.equal(lists.length, 1, `${id}: one tab list`);
+    assert.match(lists[0], /aria-label="[^"]+"/, `${id}: named tab list`);
+
+    const tabs = body.match(/<button[^>]*role="tab"[^>]*>/g) || [];
+    assert.ok(tabs.length > 1, `${id}: expected tabs`);
+    const selected = tabs.filter((tab) => /aria-selected="true"/.test(tab));
+    assert.equal(selected.length, 1, `${id}: exactly one selected tab`);
+    // Roving focus: only the selected tab is in the tab order.
+    assert.match(selected[0], /tabindex="0"/, `${id}: selected tab focusable`);
+    assert.equal(
+      tabs.filter((tab) => /tabindex="-1"/.test(tab)).length,
+      tabs.length - 1,
+      `${id}: other tabs leave the tab order`,
+    );
+
+    for (const tab of tabs) {
+      const tabId = tab.match(/\bid="([^"]+)"/)?.[1];
+      const panel = controlledElement(body, tab);
+      assert.match(panel, /role="tabpanel"/, id);
+      assert.match(panel, new RegExp(`aria-labelledby="${tabId}"`), id);
+      // Only the selected tab's panel shows.
+      assert.equal(
+        isHidden(panel),
+        !/aria-selected="true"/.test(tab),
+        `${id}: panel visibility follows ${tabId}`,
+      );
+    }
+  }
+});
+
+test("homepage closer-look buttons disclose their descriptions", () => {
+  const closerLooks = homepageChapters().filter(
+    ({ presentation }) => presentation === "closer-look",
+  );
+  assert.ok(closerLooks.length > 0, "expected a closer-look chapter");
+  for (const { id, body } of closerLooks) {
+    const buttons = body.match(/<button[^>]*aria-expanded[^>]*>/g) || [];
+    assert.ok(buttons.length > 1, `${id}: expected tool buttons`);
+    const expanded = buttons.filter((b) => /aria-expanded="true"/.test(b));
+    assert.equal(expanded.length, 1, `${id}: the first tool starts open`);
+    for (const button of buttons) {
+      assert.equal(
+        isHidden(controlledElement(body, button)),
+        !/aria-expanded="true"/.test(button),
+        `${id}: description visibility follows its button`,
+      );
+    }
+  }
+});
+
+test("homepage galleries follow the ARIA carousel pattern", () => {
+  const galleries = homepageChapters().filter(
+    ({ presentation }) => presentation === "gallery",
+  );
+  assert.ok(galleries.length > 0, "expected a gallery chapter");
+  for (const { id, body } of galleries) {
+    const root = body.match(
+      /<[^>]*data-presentation-root="gallery"[^>]*>/,
+    )?.[0];
+    assert.match(root, /aria-roledescription="carousel"/, id);
+    assert.match(root, /aria-label="[^"]+"/, `${id}: named carousel`);
+
+    const slides =
+      body.match(/<[^>]*aria-roledescription="slide"[^>]*>/g) || [];
+    assert.ok(slides.length > 1, `${id}: expected slides`);
+    slides.forEach((slide, index) => {
+      assert.match(slide, /role="group"/, `${id}: slide ${index + 1}`);
+      assert.match(
+        slide,
+        new RegExp(`aria-label="${index + 1} of ${slides.length}"`),
+        `${id}: slide ${index + 1} names its position`,
+      );
+    });
+
+    // One picker button per slide, and the first slide starts current.
+    const pickers = body.match(/<button[^>]*data-gallery-picker[^>]*>/g) || [];
+    assert.equal(pickers.length, slides.length, `${id}: a picker per slide`);
+    assert.deepEqual(
+      pickers.map((picker) => /aria-current="true"/.test(picker)),
+      slides.map((_, index) => index === 0),
+      `${id}: first slide current`,
+    );
+    // The visual counter is aria-hidden; slide changes are announced here.
+    assert.match(body, /<[^>]*aria-live="polite"[^>]*data-gallery-status/, id);
+    assert.match(body, /<button[^>]*aria-label="Previous highlight"/);
+    assert.match(body, /<button[^>]*aria-label="Next highlight"/);
+  }
+});
+
+test("homepage Teams chapter keeps its Plausible events", () => {
+  // See ANALYTICS.md: the names are part of the historical reporting contract.
+  const teams = homepageChapters().find(({ id }) => id === "teams");
+  assert.ok(teams, "expected the teams chapter");
+  const link = (event) =>
+    teams.body.match(
+      new RegExp(`<a[^>]*plausible-event-name=${event}[\\s"][^>]*>`),
+    )?.[0];
+
+  const trial = link("CTA:\\+Homepage\\+Insights\\+-\\+Trial");
+  assert.ok(trial, "trial button carries CTA: Homepage Insights - Trial");
+  assert.match(
+    trial,
+    /href="[^"]*\/signup\/trial\?[^"]*utm_content=homepage_insights"/,
+  );
+  for (const event of [
+    "CTA:\\+Homepage\\+Insights\\+-\\+Learn\\+More",
+    "CTA:\\+Homepage\\+Mid\\+2\\+-\\+Trial",
+  ]) {
+    assert.match(link(event) ?? "", /href="\/for-teams\/"/, event);
+  }
+});

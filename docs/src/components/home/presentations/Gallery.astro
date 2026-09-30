@@ -1,0 +1,241 @@
+---
+import type { HomepageItem } from "@/lib/homepageItems";
+
+import Media from "../Media.astro";
+
+interface Props {
+  // Chapter ID, used to keep the slide IDs unique on the page.
+  id: string;
+  // For the carousel's accessible name.
+  chapterName: string;
+  items: HomepageItem[];
+}
+
+const { id, chapterName, items } = Astro.props;
+const total = String(items.length).padStart(2, "0");
+const arrowButtonClass =
+  "grid size-9 flex-none cursor-pointer place-items-center rounded-lg border border-border bg-card text-[13px] text-text-dark transition-colors hover:border-primary hover:bg-primary/8 disabled:cursor-default disabled:border-border disabled:bg-card disabled:opacity-35";
+---
+
+<!-- Full-bleed track; `--edge` lines the first slide up with the chapter text. -->
+<div
+  data-presentation-root="gallery"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label={`${chapterName} highlights`}
+  class="mx-[calc(50%-50vw)] mt-16 [--edge:max(20px,calc((100vw-1080px)/2))]"
+>
+  <div
+    id={`${id}-track`}
+    data-gallery-track
+    tabindex="0"
+    class="flex snap-x snap-mandatory scroll-px-(--edge) gap-5 overflow-x-auto overscroll-x-contain px-(--edge) [scrollbar-width:none]"
+  >
+    {
+      items.map((item, index) => (
+        <div
+          id={`${id}-slide-${index}`}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${index + 1} of ${items.length}`}
+          data-current={index === 0 ? "" : undefined}
+          class="flex aspect-[4/5] max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card opacity-50 data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))] data-current:opacity-100 sm:aspect-[16/11]"
+        >
+          <div class="min-h-0 flex-1 border-b border-border bg-surface">
+            <Media
+              media={item.media}
+              sizes="(min-width: 1048px) 880px, 84vw"
+              class="size-full object-cover object-top"
+              autoplay={false}
+            />
+          </div>
+          <p class="px-4 pt-3.5 pb-4 text-[15px] leading-[1.45] text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">
+            <b class="mb-0.5 block text-[17px] font-bold text-text-dark">
+              {item.title}
+            </b>
+            {item.description}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-[22px] flex items-center gap-2.5 px-(--edge)">
+    <span
+      class="min-w-[4.5em] font-mono text-[13px] text-muted tabular-nums"
+      aria-hidden="true"
+    >
+      <b data-gallery-count class="font-normal text-text-dark">01</b> / {total}
+    </span>
+    <p class="sr-only" aria-live="polite" data-gallery-status></p>
+    <div class="mr-auto flex max-w-[420px] flex-1 items-center gap-1.5">
+      {
+        items.map((item, index) => (
+          <button
+            type="button"
+            data-gallery-picker
+            aria-controls={`${id}-slide-${index}`}
+            aria-current={index === 0 ? "true" : "false"}
+            aria-label={`Show highlight ${index + 1}: ${item.title}`}
+            class="relative h-[3px] flex-1 cursor-pointer rounded-sm bg-border after:absolute after:inset-x-0 after:-inset-y-2.5 aria-[current=true]:bg-primary"
+          />
+        ))
+      }
+    </div>
+    <button
+      type="button"
+      data-gallery-prev
+      aria-controls={`${id}-track`}
+      aria-label="Previous highlight"
+      class={arrowButtonClass}
+      disabled
+    >
+      ←
+    </button>
+    <button
+      type="button"
+      data-gallery-next
+      aria-controls={`${id}-track`}
+      aria-label="Next highlight"
+      class={arrowButtonClass}
+    >
+      →
+    </button>
+  </div>
+</div>
+
+<script>
+  import { loadVideo } from "@/lib/utils/lazyVideo";
+  import { nearestIndex } from "@/lib/utils/presentationIndex";
+
+  // The pickers and arrows scroll the track to a slide. Swipes, trackpad
+  // scrolls and arrow keys on the focused track scroll it natively, and the
+  // current slide follows once the track settles. Neighbouring slides are on
+  // screen too, so only the current slide's video plays, and only while the
+  // gallery is in view.
+  function initGalleries() {
+    document
+      .querySelectorAll<HTMLElement>('[data-presentation-root="gallery"]')
+      .forEach((root) => {
+        const track = root.querySelector<HTMLElement>("[data-gallery-track]");
+        const prev = root.querySelector<HTMLButtonElement>(
+          "[data-gallery-prev]",
+        );
+        const next = root.querySelector<HTMLButtonElement>(
+          "[data-gallery-next]",
+        );
+        const count = root.querySelector("[data-gallery-count]");
+        const status = root.querySelector("[data-gallery-status]");
+        const slides = [
+          ...root.querySelectorAll<HTMLElement>(
+            '[aria-roledescription="slide"]',
+          ),
+        ];
+        const pickers = [
+          ...root.querySelectorAll<HTMLButtonElement>("[data-gallery-picker]"),
+        ];
+        if (!track || !prev || !next || slides.length === 0) return;
+
+        let current = 0;
+        let inView = false;
+        // Set while the track scrolls to a picked slide, so the scroll it
+        // causes doesn't pick another one.
+        let picked: number | undefined;
+        let settle: number | undefined;
+
+        const starts = () =>
+          slides.map((slide) => slide.offsetLeft - slides[0].offsetLeft);
+
+        const syncVideos = () => {
+          slides.forEach((slide, i) => {
+            const video = slide.querySelector("video");
+            if (!video) return;
+            if (i === current && inView) {
+              loadVideo(video);
+              void video.play().catch(() => {
+                // The poster stays when playback cannot start.
+              });
+            } else {
+              video.pause();
+            }
+          });
+        };
+
+        const mark = (index: number) => {
+          current = index;
+          slides.forEach((slide, i) =>
+            slide.toggleAttribute("data-current", i === index),
+          );
+          pickers.forEach((picker, i) =>
+            picker.setAttribute("aria-current", String(i === index)),
+          );
+          if (count) count.textContent = String(index + 1).padStart(2, "0");
+          if (status) {
+            status.textContent = `Highlight ${index + 1} of ${slides.length}: ${slides[index].querySelector("b")?.textContent?.trim() ?? ""}`;
+          }
+          prev.disabled = index === 0;
+          next.disabled = index === slides.length - 1;
+          syncVideos();
+        };
+
+        // Where the track scrolls to for a slide; the last slides may stop
+        // short of their start.
+        const scrollTarget = (index: number) =>
+          Math.min(starts()[index], track.scrollWidth - track.clientWidth);
+
+        const show = (index: number) => {
+          mark(index);
+          const left = scrollTarget(index);
+          // Already there: no scroll follows to clear `picked`.
+          if (Math.abs(track.scrollLeft - left) < 1) return;
+          picked = index;
+          track.scrollTo({ left });
+        };
+
+        pickers.forEach((picker, index) =>
+          picker.addEventListener("click", () => show(index)),
+        );
+        prev.addEventListener("click", () => show(Math.max(0, current - 1)));
+        next.addEventListener("click", () =>
+          show(Math.min(slides.length - 1, current + 1)),
+        );
+
+        track.addEventListener(
+          "scroll",
+          () => {
+            window.clearTimeout(settle);
+            settle = window.setTimeout(() => {
+              // A picked slide the track reached stays current, even if
+              // another slide's start is nearer. A swipe that interrupted the
+              // scroll to it picks by position instead.
+              const target =
+                picked === undefined ? undefined : scrollTarget(picked);
+              picked = undefined;
+              if (
+                target !== undefined &&
+                Math.abs(track.scrollLeft - target) < 2
+              )
+                return;
+              const index = nearestIndex(
+                starts(),
+                track.scrollLeft,
+                track.scrollWidth - track.clientWidth,
+              );
+              if (index !== current) mark(index);
+            }, 120);
+          },
+          { passive: true },
+        );
+
+        new IntersectionObserver(
+          ([entry]) => {
+            inView = entry.isIntersecting;
+            syncVideos();
+          },
+          { threshold: 0.25 },
+        ).observe(track);
+      });
+  }
+
+  document.addEventListener("astro:page-load", initGalleries);
+</script>

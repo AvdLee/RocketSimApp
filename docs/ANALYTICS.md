@@ -12,6 +12,10 @@ event only when tracking a genuinely new action.
 - `CTA: Homepage Mid 2 - Trial` opens `/for-teams`. The historical name says
   "Trial," but the action only opens Teams information. Keep the event name and
   describe it as a Teams information click in Plausible.
+- `CTA: Homepage Insights - Trial` opens the Teams trial form from the
+  homepage's Teams chapter (`utm_content=homepage_insights`). It is new with the
+  homepage rebuild and only on the `/home-next/` preview until launch. Add it as
+  a Plausible goal before the launch.
 - `CTA: Team Page - See Pricing` opens `/pricing/`.
 - `CTA: Team Page - Start Trial` opens the Teams trial form from the hero or
   bottom call-to-action.

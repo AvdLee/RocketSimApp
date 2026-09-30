@@ -40,6 +40,10 @@
   --color-line: #2a2a2d;
   --color-muted: #8e8e93;
   --color-primary-hover: #3aa9ff;
+  /* Terminal text, the tools window's controls, and its tool labels. */
+  --color-code: #c9c9cf;
+  --color-window-control: #3a3a3d;
+  --color-text-soft: #d8d8dc;
 }
 
 /* One hue per homepage chapter, picked by the chapter's `color` field.

@@ -1,0 +1,164 @@
+---
+import type { HomepageItem } from "@/lib/homepageItems";
+
+import Media from "../Media.astro";
+
+interface Props {
+  // Chapter ID, used to keep the tab and panel IDs unique on the page.
+  id: string;
+  // For the tab list's accessible name.
+  chapterName: string;
+  items: HomepageItem[];
+  // Rendered extras shown beside the stage, such as the agents terminal.
+  aside?: string;
+}
+
+const { id, chapterName, items, aside } = Astro.props;
+---
+
+<div
+  data-presentation-root="tabs"
+  class:list={[
+    "mt-16 grid grid-cols-[minmax(0,1fr)] gap-5",
+    aside && "md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]",
+  ]}
+>
+  <div
+    class:list={[
+      "relative aspect-video overflow-hidden rounded-lg bg-surface",
+      aside && "md:aspect-auto",
+    ]}
+  >
+    {
+      items.map((item, index) => (
+        <div
+          id={`${id}-panel-${index}`}
+          role="tabpanel"
+          aria-labelledby={`${id}-tab-${index}`}
+          tabindex="0"
+          class="absolute inset-0"
+          hidden={index !== 0}
+        >
+          <Media
+            media={item.media}
+            sizes={
+              aside
+                ? "(min-width: 1120px) 660px, (min-width: 768px) 60vw, 100vw"
+                : "(min-width: 1120px) 1080px, 100vw"
+            }
+            class:list={[
+              "size-full",
+              item.media.type === "image"
+                ? "object-contain p-6"
+                : "object-cover",
+            ]}
+          />
+        </div>
+      ))
+    }
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-[radial-gradient(60%_100%_at_50%_100%,color-mix(in_srgb,var(--chapter)_22%,transparent),transparent)]"
+    >
+    </div>
+  </div>
+
+  {
+    aside && (
+      <div class="flex flex-col gap-5 max-md:order-last">
+        <Fragment set:html={aside} />
+      </div>
+    )
+  }
+
+  <div class:list={["mt-5", aside && "md:col-span-2"]}>
+    <div
+      role="tablist"
+      aria-label={`${chapterName} features`}
+      class="grid auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto [scrollbar-width:none] md:auto-cols-fr md:overflow-visible"
+    >
+      {
+        items.map((item, index) => (
+          <button
+            type="button"
+            role="tab"
+            id={`${id}-tab-${index}`}
+            aria-controls={`${id}-panel-${index}`}
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-labelledby={`${id}-tab-${index}-title`}
+            aria-describedby={`${id}-tab-${index}-description`}
+            tabindex={index === 0 ? 0 : -1}
+            class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
+          >
+            <span class="-mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-primary md:-mr-6" />
+            <span
+              id={`${id}-tab-${index}-title`}
+              class="text-[14px] leading-[1.25] font-bold tracking-[-0.01em] transition-colors group-hover:text-text-dark group-aria-selected:text-text-dark md:text-[17px]"
+            >
+              {item.title}
+            </span>
+            <span
+              id={`${id}-tab-${index}-description`}
+              class="text-[15px] leading-[1.4] max-md:sr-only"
+            >
+              {item.description}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+    {
+      items.map((item, index) => (
+        <p
+          data-tab-caption
+          class="mt-3.5 min-h-[2.8em] text-[15px] text-muted md:hidden"
+          hidden={index !== 0}
+          aria-hidden="true"
+        >
+          {item.description}
+        </p>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import { bindRovingKeys } from "@/lib/utils/rovingFocus";
+
+  // Click or arrow keys select a tab; the selected tab's panel (and, on
+  // phones, its caption) shows. Videos in hidden panels never load, and
+  // lazyVideo pauses a video once its panel hides.
+  function initTabs() {
+    document
+      .querySelectorAll<HTMLElement>('[data-presentation-root="tabs"]')
+      .forEach((root) => {
+        const tabs = [
+          ...root.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
+        ];
+        const captions = [
+          ...root.querySelectorAll<HTMLElement>("[data-tab-caption]"),
+        ];
+
+        const select = (index: number) => {
+          tabs.forEach((tab, i) => {
+            const selected = i === index;
+            tab.setAttribute("aria-selected", String(selected));
+            tab.tabIndex = selected ? 0 : -1;
+            const panel = document.getElementById(
+              tab.getAttribute("aria-controls") ?? "",
+            );
+            if (panel) panel.hidden = !selected;
+            if (captions[i]) captions[i].hidden = !selected;
+          });
+          // On phones the tab row scrolls sideways; keep the tab in view.
+          tabs[index].scrollIntoView({ block: "nearest", inline: "nearest" });
+        };
+
+        tabs.forEach((tab, index) =>
+          tab.addEventListener("click", () => select(index)),
+        );
+        bindRovingKeys(tabs, "horizontal", select);
+      });
+  }
+
+  document.addEventListener("astro:page-load", initTabs);
+</script>

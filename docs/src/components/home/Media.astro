@@ -7,9 +7,12 @@ interface Props {
   media: HomepageMedia;
   sizes: string;
   class?: string;
+  // Videos play on their own once in view (lazyVideo). Set false when the
+  // parent's script controls playback.
+  autoplay?: boolean;
 }
 
-const { media, sizes, class: className } = Astro.props;
+const { media, sizes, class: className, autoplay = true } = Astro.props;
 ---
 
 {
@@ -23,7 +26,7 @@ const { media, sizes, class: className } = Astro.props;
     />
   ) : (
     <video
-      class:list={["js-lazy-video", className]}
+      class:list={[autoplay && "js-lazy-video", className]}
       aria-label={media.alt}
       poster={media.poster}
       preload="none"
