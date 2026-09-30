@@ -33,18 +33,21 @@ if (aside && presentation !== "tabs") {
   style={`--chapter: var(--color-chapter-${color})`}
 >
   <!-- Each part rises into place as it scrolls in; the intro follows the
-       title (src/styles/animations.css). -->
+       title (src/styles/animations.css). Beside the intro, the title sizes
+       to the intro's height (the script below). -->
   <div
+    data-chapter-heading
     class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
   >
     <div data-reveal>
       <p class="mb-3 text-intro font-semibold text-(--chapter)">{name}</p>
-      <h2 class="max-w-[14em] text-title-1 text-balance">
+      <h2 class="max-w-[14em] text-title-1 text-balance" data-chapter-title>
         {title}
       </h2>
     </div>
     <div
       class="max-w-[32em] text-muted [&_p]:text-intro [&_strong]:text-text-dark"
+      data-chapter-intro
       data-reveal
       style="--reveal-order: 1"
     >
@@ -93,3 +96,53 @@ if (aside && presentation !== "tabs") {
     )
   }
 </section>
+
+<script>
+  import { fitFontSize } from "@/lib/utils/fitFontSize";
+
+  // Between the phone layout's stacked title and the type scale's largest
+  // title-1 (src/styles/main.css).
+  const bounds = { min: 32, max: 64 };
+
+  // Side by side, each title takes the size that sets it closest to the
+  // height of its intro, so the two start and end level. Stacked, the title
+  // keeps the type scale's size.
+  function fitTitle(heading: HTMLElement) {
+    const title = heading.querySelector<HTMLElement>("[data-chapter-title]");
+    const intro = heading.querySelector<HTMLElement>("[data-chapter-intro]");
+    if (!title || !intro) return;
+
+    title.style.fontSize = "";
+    const columns = getComputedStyle(heading).gridTemplateColumns.split(" ");
+    if (columns.length < 2) return;
+
+    const size = fitFontSize(
+      (size) => {
+        title.style.fontSize = `${size}px`;
+        return title.offsetHeight;
+      },
+      intro.offsetHeight,
+      bounds,
+    );
+    title.style.fontSize = `${size}px`;
+  }
+
+  let observer: ResizeObserver | undefined;
+
+  // The intro's height follows the column width, so a resize that rewraps
+  // it refits the title. The title's size never feeds back into the intro.
+  function initTitleFit() {
+    observer?.disconnect();
+    observer = new ResizeObserver((entries) => {
+      entries.forEach(({ target }) => {
+        const heading = target.closest<HTMLElement>("[data-chapter-heading]");
+        if (heading) fitTitle(heading);
+      });
+    });
+    document
+      .querySelectorAll<HTMLElement>("[data-chapter-intro]")
+      .forEach((intro) => observer?.observe(intro));
+  }
+
+  document.addEventListener("astro:page-load", initTitleFit);
+</script>
