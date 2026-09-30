@@ -443,7 +443,7 @@ test("homepage header's chapter menu follows the chapters on the page", () => {
 });
 
 test("homepage preview carries every Plausible event from the rebuild plan", () => {
-  // The analytics mapping in docs/plans/homepage-rebuild.md and ANALYTICS.md.
+  // The analytics mapping in docs/docs/plans/homepage-rebuild.md and ANALYTICS.md.
   const html = readDist("home-next/index.html");
   const links = html.match(/<a\b[^>]*plausible-event-name=[^>]*>/g) || [];
   const withEvent = (event) =>

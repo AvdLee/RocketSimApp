@@ -1,12 +1,12 @@
 ---
-import { teamsUrl } from "@/lib/utils/teamsUrl";
+import { appStoreUrl } from "@/lib/utils/appStoreUrl";
+import { teamsTrialUrl } from "@/lib/utils/teamsUrl";
 
 // The mid-page call to action, one card for developers and one for teams.
 // It replaces the live homepage's CTA banner, whose download button keeps its
 // `landing-cta-banner` placement and campaign. Event names follow ANALYTICS.md.
-const downloadHref =
-  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-cta-banner&mt=8";
-const trialHref = `${teamsUrl}/signup/trial?utm_source=website&utm_medium=website&utm_content=homepage_split`;
+const downloadHref = appStoreUrl("website-cta-banner");
+const trialHref = teamsTrialUrl("homepage_split");
 const buttonClass =
   "mt-auto inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover";
 

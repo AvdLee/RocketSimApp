@@ -1,8 +1,9 @@
 ---
+import { appStoreUrl } from "@/lib/utils/appStoreUrl";
+
 // The closing call to action. Its download button is a new `landing-footer`
 // placement of the existing App Store Install event (ANALYTICS.md).
-const downloadHref =
-  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-footer&mt=8";
+const downloadHref = appStoreUrl("website-footer");
 const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
 ---
 

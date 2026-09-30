@@ -268,26 +268,26 @@ const currentClass =
     );
     if (!glance || !mainLayer || !chapterLayer) return;
 
-    let showsChapters = false;
+    let showsChapterMenu = false;
     let current: string | undefined;
     let frame = 0;
     const update = () => {
       frame = 0;
       const state = chapterMenuState({
-        header: header.getBoundingClientRect().bottom,
-        height: window.innerHeight,
+        headerBottom: header.getBoundingClientRect().bottom,
         glanceBottom: glance.getBoundingClientRect().bottom,
-        chapters: sections.map((section) => {
-          const { top, bottom } = section.getBoundingClientRect();
-          return { id: section.id, top, bottom };
-        }),
+        viewportHeight: window.innerHeight,
+        chapters: sections.map((section) => ({
+          id: section.id,
+          top: section.getBoundingClientRect().top,
+        })),
       });
 
-      if (state.chapters !== showsChapters) {
-        showsChapters = state.chapters;
+      if (state.showChapterMenu !== showsChapterMenu) {
+        showsChapterMenu = state.showChapterMenu;
         closeAll();
-        mainLayer.hidden = showsChapters;
-        chapterLayer.hidden = !showsChapters;
+        mainLayer.hidden = showsChapterMenu;
+        chapterLayer.hidden = !showsChapterMenu;
       }
       if (state.current !== current) {
         current = state.current;

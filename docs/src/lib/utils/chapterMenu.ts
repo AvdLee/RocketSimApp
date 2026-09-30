@@ -4,35 +4,38 @@
 interface ChapterBox {
   id: string;
   top: number;
-  bottom: number;
 }
 
+// All positions are viewport coordinates, as getBoundingClientRect() reports.
 interface ChapterMenuInput {
-  // Bottom edge of the header and the window height.
-  header: number;
-  height: number;
-  // Bottom edge of the glance grid.
+  headerBottom: number;
   glanceBottom: number;
-  // Chapter sections in page order. All positions are viewport coordinates.
+  viewportHeight: number;
+  // Chapter sections in page order.
   chapters: readonly ChapterBox[];
 }
 
-// How far down the window a chapter must reach to count as the one being read.
+// How far up the window a chapter must scroll to count as the one being read.
 const READING_LINE = 0.45;
 
 export function chapterMenuState({
-  header,
-  height,
+  headerBottom,
   glanceBottom,
+  viewportHeight,
   chapters,
-}: ChapterMenuInput): { chapters: boolean; current: string | undefined } {
+}: ChapterMenuInput): {
+  showChapterMenu: boolean;
+  current: string | undefined;
+} {
   // The chapter menu takes over once the glance grid has scrolled under the
   // header; until then the main menu shows and no chapter is current.
-  if (glanceBottom > header) return { chapters: false, current: undefined };
+  if (glanceBottom > headerBottom) {
+    return { showChapterMenu: false, current: undefined };
+  }
 
-  const line = height * READING_LINE;
-  const current = chapters.find(
-    ({ top, bottom }) => top <= line && bottom > line,
-  )?.id;
-  return { chapters: true, current };
+  // The last chapter to reach the reading line stays current through the
+  // sections after it, such as the reviews or the everyday grid.
+  const line = viewportHeight * READING_LINE;
+  const current = chapters.findLast(({ top }) => top <= line)?.id;
+  return { showChapterMenu: true, current };
 }

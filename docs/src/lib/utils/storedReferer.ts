@@ -1,5 +1,4 @@
-const APP_STORE_BASE =
-  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=";
+import { appStoreUrl } from "./appStoreUrl";
 
 // Remembers the first-touch referer (cookie, 7 days), points the hero App Store
 // button (`#js-header-app-store-button`) at it as the `ct=` campaign, and sends
@@ -46,7 +45,7 @@ export function initStoredReferer(): void {
 
   const a = document.getElementById("js-header-app-store-button");
   if (a instanceof HTMLAnchorElement) {
-    a.href = `${APP_STORE_BASE}${encodeURIComponent(campaign)}&mt=8`;
+    a.href = appStoreUrl(campaign);
   }
 
   plausible("Stored Referer", { props: { stored_referer: campaign } });
