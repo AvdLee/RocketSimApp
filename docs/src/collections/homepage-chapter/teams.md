@@ -5,12 +5,16 @@ title: "Know when your builds get slower."
 color: teams
 tile:
   title: "Know when your builds get slower."
-  image: ../../assets/features/team-build-insights.png
+  image: ../../content/docs/docs/features/build-insights/team-build-insights/build-insights-six-months.png
 presentation: tabs
 items:
   - feature: 30-team-build-insights
     title: "Team dashboard"
     description: "P75 and P95 build times for the whole team."
+    media:
+      type: image
+      path: ../../content/docs/docs/features/build-insights/team-build-insights/build-insights-six-months.png
+      alt: "RocketSim for Teams dashboard with P95 and P75 build times and a six-month build duration chart"
   - feature: 28-build-insights-inapp
     title: "Every build tracked"
     description: "Clean vs. incremental, per scheme, for months."
