@@ -21,7 +21,9 @@ const stats = [
     <p class="mb-6 text-center text-[15px] text-muted">
       Used by iOS developers at
     </p>
-    <ul class="flex flex-wrap items-center justify-center gap-x-11 gap-y-6">
+    <ul
+      class="flex flex-wrap items-center justify-center gap-x-11 gap-y-6 lg:flex-nowrap lg:justify-between lg:gap-x-5"
+    >
       {
         brands.data.list.map(({ brand, logo }) => (
           <li>
