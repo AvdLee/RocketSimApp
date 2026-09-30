@@ -7,7 +7,7 @@ featurePage: "networking"
 asset:
   type: "image"
   path: "../../assets/features/network-ai-prompts.png"
-  alt: "Exported network request prompt showing redacted request and response data, ready to paste into an AI assistant."
+  alt: "Network Monitor Copy prompt menu with the Redundant calls & caching, Performance / overfetching, and Failures & error spikes templates."
   alignment: "left"
   columnSpan: 8
 ---
