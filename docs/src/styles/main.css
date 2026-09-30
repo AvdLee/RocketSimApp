@@ -45,6 +45,13 @@
   --color-window-control: #3a3a3d;
   --color-text-soft: #d8d8dc;
 
+  /* Homepage rhythm. `section` is the space above each chapter and the
+     sections between them; `stack` separates a section's heading and intro
+     from what it presents. Both grow with the window, like the type scale,
+     instead of jumping at `md`. */
+  --spacing-section: clamp(120px, 16vw, 184px);
+  --spacing-stack: clamp(40px, 6vw, 64px);
+
   /* Type scale, set in the site's system font (`src/config/theme.json`).
      Each step brings its own line height, tracking and weight, so a single
      `text-*` class sets the whole style. Tracking tightens as the size grows,

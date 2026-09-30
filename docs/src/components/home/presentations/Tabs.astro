@@ -16,17 +16,19 @@ interface Props {
 const { id, chapterName, items, aside } = Astro.props;
 ---
 
+<!-- The aside sits beside the stage from lg, and after the tabs below it,
+     so the DOM reads stage, tabs, extras at every width. -->
 <div
   data-presentation-root="tabs"
   class:list={[
-    "mt-16 grid grid-cols-[minmax(0,1fr)] gap-5",
-    aside && "md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]",
+    "mt-stack grid grid-cols-[minmax(0,1fr)] gap-5",
+    aside && "lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]",
   ]}
 >
   <div
     class:list={[
       "relative aspect-video overflow-hidden rounded-lg bg-surface",
-      aside && "md:aspect-auto",
+      aside && "lg:aspect-auto",
     ]}
   >
     {
@@ -36,14 +38,14 @@ const { id, chapterName, items, aside } = Astro.props;
           role="tabpanel"
           aria-labelledby={`${id}-tab-${index}`}
           tabindex="0"
-          class="absolute inset-0"
+          class="absolute inset-0 rounded-lg focus-visible:-outline-offset-2"
           hidden={index !== 0}
         >
           <Media
             media={item.media}
             sizes={
               aside
-                ? "(min-width: 1120px) 660px, (min-width: 768px) 60vw, 100vw"
+                ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
                 : "(min-width: 1120px) 1080px, 100vw"
             }
             class:list={[
@@ -62,19 +64,13 @@ const { id, chapterName, items, aside } = Astro.props;
     </div>
   </div>
 
-  {
-    aside && (
-      <div class="flex flex-col gap-5 max-md:order-last">
-        <Fragment set:html={aside} />
-      </div>
-    )
-  }
-
-  <div class:list={["mt-5", aside && "md:col-span-2"]}>
+  <div class:list={["mt-5", aside && "lg:col-span-2"]}>
+    <!-- On phones the row scrolls sideways to the screen edge, so the cut-off
+         tab shows there is more. -->
     <div
       role="tablist"
       aria-label={`${chapterName} features`}
-      class="grid auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto [scrollbar-width:none] md:auto-cols-fr md:overflow-visible"
+      class="-mx-5 grid scroll-px-5 auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:auto-cols-fr md:overflow-visible md:px-0"
     >
       {
         items.map((item, index) => (
@@ -119,6 +115,17 @@ const { id, chapterName, items, aside } = Astro.props;
       ))
     }
   </div>
+
+  {
+    aside && (
+      <div
+        data-tabs-aside
+        class="flex flex-col gap-5 lg:col-start-2 lg:row-start-1"
+      >
+        <Fragment set:html={aside} />
+      </div>
+    )
+  }
 </div>
 
 <script>

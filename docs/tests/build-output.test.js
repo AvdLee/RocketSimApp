@@ -263,6 +263,21 @@ function controlledElement(body, control) {
 
 const isHidden = (tag) => /\shidden\b/.test(tag);
 
+// The homepage preview's markup, without its scripts.
+function homepageMarkup() {
+  return readDist("home-next/index.html").replace(
+    /<script\b[\s\S]*?<\/script>/g,
+    "",
+  );
+}
+
+// One homepage chapter by ID, from homepageChapters().
+function homepageChapter(chapterId) {
+  const chapter = homepageChapters().find(({ id }) => id === chapterId);
+  assert.ok(chapter, `expected the ${chapterId} chapter`);
+  return chapter;
+}
+
 test("homepage chapters render the presentation their content asks for", () => {
   const chapters = homepageChapters();
   assert.ok(chapters.length > 0, "expected chapters on the page");
@@ -372,8 +387,7 @@ test("homepage galleries follow the ARIA carousel pattern", () => {
 
 test("homepage Teams chapter keeps its Plausible events", () => {
   // See ANALYTICS.md: the names are part of the historical reporting contract.
-  const teams = homepageChapters().find(({ id }) => id === "teams");
-  assert.ok(teams, "expected the teams chapter");
+  const teams = homepageChapter("teams");
   const link = (event) =>
     teams.body.match(
       new RegExp(`<a[^>]*plausible-event-name=${event}[\\s"][^>]*>`),
@@ -385,21 +399,22 @@ test("homepage Teams chapter keeps its Plausible events", () => {
     trial,
     /href="[^"]*\/signup\/trial\?[^"]*utm_content=homepage_insights"/,
   );
-  for (const event of [
-    "CTA:\\+Homepage\\+Insights\\+-\\+Learn\\+More",
-    "CTA:\\+Homepage\\+Mid\\+2\\+-\\+Trial",
-  ]) {
-    assert.match(link(event) ?? "", /href="\/for-teams\/"/, event);
-  }
+  assert.match(
+    link("CTA:\\+Homepage\\+Insights\\+-\\+Learn\\+More") ?? "",
+    /href="\/for-teams\/"/,
+  );
+  // "Explore Build Insights" lands on the insights showcase of /for-teams/.
+  const insights = link("CTA:\\+Homepage\\+Mid\\+2\\+-\\+Trial") ?? "";
+  const anchor = insights.match(/href="\/for-teams\/#([^"]+)"/)?.[1];
+  assert.ok(anchor, "Mid 2 link points into /for-teams/");
+  assert.match(readDist("for-teams/index.html"), new RegExp(`id="${anchor}"`));
 });
 
 // The homepage preview's header, without its scripts.
 function homepageHeader() {
-  const html = readDist("home-next/index.html").replace(
-    /<script\b[\s\S]*?<\/script>/g,
-    "",
+  const header = homepageMarkup().match(
+    /<header\b[^>]*data-home-header[\s\S]*?<\/header>/,
   );
-  const header = html.match(/<header\b[^>]*data-home-header[\s\S]*?<\/header>/);
   assert.ok(header, "expected the homepage header");
   return header[0];
 }
@@ -516,4 +531,86 @@ test("homepage preview keeps the newsletter, download card and subscribe notice"
   assert.match(html, /<aside[^>]*id="mobile-download-link-form"/);
   // Shown after the newsletter's confirmation redirect.
   assert.match(html, /You're now subscribed/);
+});
+
+test("homepage preview sections share one spacing rhythm", () => {
+  // `--spacing-section` in src/styles/main.css sets the space above every
+  // chapter and the sections between them, instead of a hand-picked
+  // `pt-[120px] md:pt-[184px]` on each.
+  const html = readDist("home-next/index.html");
+  const sections = html.match(/<section\b[^>]*>/g) || [];
+  const rhythm = sections.filter((tag) =>
+    /class="[^"]*\bp[ty]-section\b/.test(tag),
+  );
+  // Every chapter, plus reviews, split CTA, everyday, mentions and the final
+  // CTA.
+  assert.equal(rhythm.length, homepageChapters().length + 5);
+  assert.doesNotMatch(html, /\bp[ty]-\[(?:120|184)px\]/);
+});
+
+test("homepage preview lets keyboard users skip the header", () => {
+  const html = readDist("home-next/index.html");
+  const header = homepageHeader();
+  const firstLink = header.match(/<a\b[^>]*>[\s\S]*?<\/a>/)?.[0] ?? "";
+  assert.match(firstLink, /href="#main-content"/);
+  assert.match(firstLink, /Skip to content/);
+  assert.match(html, /<main\b[^>]*id="main-content"/);
+});
+
+test("homepage preview hides decorative arrows from screen readers", () => {
+  // VoiceOver reads "→" as "right arrow"; the link text says enough.
+  const html = homepageMarkup();
+  const spoken = (markup) =>
+    markup
+      .replace(/<([a-z]+)\b[^>]*aria-hidden="true"[^>]*>[\s\S]*?<\/\1>/g, "")
+      .replace(/<[^>]+>/g, "");
+  const links = html.match(/<a\b[^>]*>[\s\S]*?<\/a>/g) || [];
+  const noisy = links
+    .map((link) => spoken(link).replace(/\s+/g, " ").trim())
+    .filter((text) => /[→↓←↑]/.test(text));
+  assert.deepEqual(noisy, []);
+});
+
+test("homepage preview gives every image its dimensions", () => {
+  // Without a size the browser can't reserve the image's space. An image
+  // sized by CSS in a fixed frame, such as a glance tile poster, is fine.
+  const main = readDist("home-next/index.html").match(
+    /<main\b[\s\S]*<\/main>/,
+  )?.[0];
+  assert.ok(main, "expected the main element");
+  const unsized = (main.match(/<img\b[^>]*>/g) || []).filter(
+    (tag) =>
+      !/class="[^"]*\bsize-full\b/.test(tag) &&
+      !(/\swidth="\d+"/.test(tag) && /\sheight="\d+"/.test(tag)),
+  );
+  assert.deepEqual(unsized, []);
+});
+
+test("homepage stat figures read naturally", () => {
+  // "~95%" would be read as "tilde 95 percent".
+  const agents = homepageChapter("agents");
+  assert.match(agents.body, /<span[^>]*aria-hidden="true"[^>]*>~95%<\/span>/);
+  assert.match(agents.body, /<span class="sr-only">About 95%<\/span>/);
+});
+
+test("homepage tabs read in the order they show on phones", () => {
+  // The extras beside the stage come after the tab list, so screen readers
+  // and phones get stage, tabs, extras.
+  const agents = homepageChapter("agents");
+  const tablist = agents.body.search(/role="tablist"/);
+  const aside = agents.body.search(/data-tabs-aside/);
+  assert.ok(aside > 0, "expected the agents aside");
+  assert.ok(tablist < aside, "tab list before the aside");
+});
+
+test("homepage mentions wall collapses behind a Show more button", () => {
+  const html = homepageMarkup();
+  const button = html.match(/<button\b[^>]*data-mentions-toggle[^>]*>/)?.[0];
+  assert.ok(button, "expected the Show more button");
+  assert.match(button, /aria-expanded="false"/);
+  // It shows once the wall is taller than its collapsed height.
+  assert.ok(isHidden(button), "hidden until the wall overflows");
+  const wall = controlledElement(html, button);
+  assert.match(wall, /data-mentions-wall/);
+  assert.match(wall, /data-collapsed/);
 });

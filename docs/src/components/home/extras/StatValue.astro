@@ -1,0 +1,21 @@
+---
+// A stat value, such as "~95%". Screen readers read "~" as "tilde", so an
+// approximate figure gets a spoken version.
+interface Props {
+  value: string;
+}
+
+const { value } = Astro.props;
+const spoken = value.replace(/^~/, "About ");
+---
+
+{
+  spoken === value ? (
+    value
+  ) : (
+    <>
+      <span aria-hidden="true">{value}</span>
+      <span class="sr-only">{spoken}</span>
+    </>
+  )
+}
