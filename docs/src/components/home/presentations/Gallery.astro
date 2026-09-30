@@ -40,14 +40,18 @@ const arrowButtonClass =
           aria-roledescription="slide"
           aria-label={`${index + 1} of ${items.length}`}
           data-current={index === 0 ? "" : undefined}
-          class="group flex aspect-[4/5] max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors duration-500 ease-smooth motion-reduce:transition-none data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))] sm:aspect-[16/11]"
+          class="group flex max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors duration-500 ease-smooth motion-reduce:transition-none data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))]"
         >
-          {/* Neighbouring slides dim their media only, so their captions stay readable. */}
-          <div class="min-h-0 flex-1 border-b border-border bg-surface opacity-50 transition-opacity duration-500 ease-smooth group-data-current:opacity-100 motion-reduce:transition-none">
+          {/* The frame has a fixed shape so every slide lines up, and the
+              media letterboxes inside it rather than cropping. 4:3 on phones
+              splits the difference between the landscape and square media;
+              16:9 from sm fits most of it exactly. Neighbouring slides dim
+              their media only, so their captions stay readable. */}
+          <div class="relative aspect-[4/3] border-b border-border bg-surface opacity-50 transition-opacity duration-500 ease-smooth group-data-current:opacity-100 motion-reduce:transition-none sm:aspect-video">
             <Media
               media={item.media}
               sizes="(min-width: 1048px) 880px, 84vw"
-              class="size-full object-cover object-top"
+              class="absolute inset-0 size-full object-contain"
             />
           </div>
           <p class="px-4 pt-3.5 pb-4 text-small text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">

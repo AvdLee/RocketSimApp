@@ -55,10 +55,11 @@ const { id, chapterName, items, aside } = Astro.props;
                   : "(min-width: 1120px) 1080px, 100vw"
               }
               class:list={[
-                "size-full",
-                item.media.type === "image"
-                  ? "object-contain p-6"
-                  : "object-cover",
+                // Contain, never crop: the stage is 16:9 (or as tall as the
+                // aside), and media of any other shape letterboxes. 16:9
+                // videos still fill the stage edge to edge.
+                "size-full object-contain",
+                item.media.type === "image" && "p-6",
               ]}
             />
           </div>
