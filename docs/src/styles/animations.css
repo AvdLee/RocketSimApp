@@ -142,3 +142,230 @@
     opacity: 1;
   }
 }
+
+/* Homepage motion (src/components/home/), after Apple's product pages:
+   things rise into place as they scroll in, tied to the scroll position
+   rather than a timer. Jumps to a chapter glide, and hover and state changes
+   ease with the homepage's own curve. Every effect here stops for reduced
+   motion. */
+html:has([data-home-header]) {
+  scroll-behavior: smooth;
+}
+
+/* The homepage's own header and content; the shared footer keeps the site's
+   defaults. */
+[data-home-header],
+main:has([data-chapter]) {
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: var(--ease-smooth);
+}
+
+@keyframes disclose {
+  from {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+}
+
+/* The hero's entrance as the page loads: each `data-hero-item` rises out of
+   a soft blur, one after another by `--hero-order`. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+    filter: blur(8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero-item] {
+    animation: hero-in 1.2s var(--ease-enter) both;
+    animation-delay: calc(80ms + var(--hero-order, 0) * 90ms);
+  }
+}
+
+/* Muted until it lights up. The colour lives here rather than in a
+   `text-muted` class, which would outrank the light-up below. */
+[data-light-up] {
+  color: var(--color-muted);
+}
+
+/* Scroll-in reveals, where scroll-driven animations aren't supported.
+   src/lib/utils/reveal.ts marks `data-reveal` elements below the window as
+   pending, then shows each as it scrolls in. Without the script, or with
+   reduced motion, nothing is ever pending. Siblings stagger by their
+   `--reveal-order`. */
+[data-reveal] {
+  transition:
+    opacity 0.9s var(--ease-enter),
+    translate 0.9s var(--ease-enter);
+  transition-delay: calc(var(--reveal-order, 0) * 80ms);
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  translate: 0 32px;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 30px;
+  }
+}
+
+/* The stage's media starts zoomed in and settles as it scrolls in. */
+@keyframes settle {
+  from {
+    scale: 1.1;
+  }
+}
+
+/* The chapter's glow under the stage grows up from its bottom edge. */
+@keyframes glow {
+  from {
+    opacity: 0;
+    scale: 1 0.3;
+  }
+}
+
+/* A progress line draws itself from the left. */
+@keyframes draw {
+  from {
+    scale: 0 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    translate: 24px 0;
+  }
+}
+
+/* The hero recedes as it scrolls away. */
+@keyframes recede {
+  to {
+    opacity: 0.25;
+    scale: 0.94;
+  }
+}
+
+/* Muted text lights up in reading order. */
+@keyframes light-up {
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Scroll-linked motion. Each effect runs over a stretch of scrolling that
+   starts as its element enters from the bottom of the window; `min()` keeps
+   it short enough on phones. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      transition: none;
+      animation: reveal both var(--ease-smooth);
+      animation-timeline: view();
+      animation-range: cover calc(var(--reveal-order, 0) * 60px) cover
+        calc(min(420px, 50vh) + var(--reveal-order, 0) * 60px);
+    }
+
+    /* A stage clips its media, which makes it a scroll container of its
+       own; its media follows the stage's place in the window instead. */
+    [data-stage] {
+      view-timeline: --stage block;
+    }
+
+    [data-settle] {
+      animation: settle both ease-out;
+      animation-timeline: --stage;
+      animation-range: cover 0% cover 55%;
+    }
+
+    [data-glow] {
+      transform-origin: bottom;
+      animation: glow both ease-out;
+      animation-timeline: --stage;
+      animation-range: cover 15% cover 55%;
+    }
+
+    /* A row of progress bars (`--draw-count` of them) draws one segment
+       after another; each segment gives its `--draw-index`. The row sits
+       under a tall stage, so it draws as soon as it comes into view, and is
+       done before the stage above starts leaving the top. */
+    [data-draw-row] {
+      view-timeline: --draw-row block;
+      --draw-start: 10px;
+      --draw-span: min(110px, 14vh);
+    }
+
+    [data-draw] {
+      transform-origin: left;
+      animation: draw both linear;
+      animation-timeline: --draw-row;
+      animation-range: cover
+        calc(
+          var(--draw-start) + var(--draw-index) / var(--draw-count) *
+            var(--draw-span)
+        )
+        cover
+        calc(
+          var(--draw-start) + (var(--draw-index) + 1) / var(--draw-count) *
+            var(--draw-span)
+        );
+    }
+
+    /* The controls slide in alongside the line, and land with it. */
+    [data-draw-control] {
+      animation: slide-in both var(--ease-smooth);
+      animation-timeline: --draw-row;
+      animation-range: cover calc(var(--draw-start) + var(--draw-span) * 0.3)
+        cover calc(var(--draw-start) + var(--draw-span));
+    }
+
+    [data-recede] {
+      animation: recede both linear;
+      animation-timeline: view();
+      animation-range: exit 0% exit 90%;
+    }
+
+    [data-light-up] {
+      color: transparent;
+      background-image: linear-gradient(
+        90deg,
+        var(--color-text-dark) 45%,
+        var(--color-muted) 55%
+      );
+      background-size: 220% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: light-up both linear;
+      animation-timeline: view();
+      animation-range: cover 35% cover 60%;
+    }
+  }
+}
+
+@media print {
+  [data-reveal="pending"] {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has([data-home-header]) {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    transition: none;
+  }
+
+  [data-reveal="pending"] {
+    opacity: 1;
+    translate: none;
+  }
+}

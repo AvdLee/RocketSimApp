@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   indexForKey,
   nearestIndex,
+  scrollToReveal,
 } from "../src/lib/utils/presentationIndex.ts";
 
 test("arrow keys along the orientation move to the neighbouring item", () => {
@@ -46,4 +47,20 @@ test("a track scrolled all the way to its end settles on the last slide", () => 
   const starts = [0, 920, 1840, 2760];
   assert.equal(nearestIndex(starts, 2300, 2300), 3);
   assert.equal(nearestIndex(starts, 1900, 2300), 2);
+});
+
+test("a tab already inside the scrolling row needs no scroll", () => {
+  const row = { scrollLeft: 0, start: 0, end: 375, padding: 20 };
+  assert.equal(scrollToReveal(row, { start: 124, end: 228 }), undefined);
+});
+
+test("a tab cut off at the end scrolls in up to the row's padding", () => {
+  // The fourth 104px tab of a 375px row, starting at 332.
+  const row = { scrollLeft: 0, start: 0, end: 375, padding: 20 };
+  assert.equal(scrollToReveal(row, { start: 332, end: 436 }), 81);
+});
+
+test("a tab cut off at the start scrolls back to the row's padding", () => {
+  const row = { scrollLeft: 180, start: 0, end: 375, padding: 20 };
+  assert.equal(scrollToReveal(row, { start: -76, end: 28 }), 84);
 });

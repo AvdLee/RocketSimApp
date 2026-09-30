@@ -39,8 +39,12 @@ const cards = [
 >
   <div class="grid gap-5 md:grid-cols-2">
     {
-      cards.map(({ who, title, text, label, href, event, external }) => (
-        <div class="flex flex-col items-start gap-3 rounded-lg bg-surface p-9">
+      cards.map(({ who, title, text, label, href, event, external }, index) => (
+        <div
+          class="flex flex-col items-start gap-3 rounded-lg bg-surface p-9"
+          data-reveal
+          style={`--reveal-order: ${index}`}
+        >
           <p class="text-copy font-semibold text-primary">{who}</p>
           <h2 class="text-title-3">{title}</h2>
           <p class="mb-2 text-copy text-muted">{text}</p>

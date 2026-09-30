@@ -27,65 +27,112 @@ const badges = [
 ];
 ---
 
+<!-- The items enter one after another as the page loads, and the hero
+     recedes as it scrolls away (src/styles/animations.css).
+     The hero fills the window under the sticky header (HomeHeader.astro:
+     52px, 4rem from `md` and 82px from `lg`, plus its 1px border), so the
+     glance grid always starts just below the fold. On short windows, such as
+     13" and 14" laptops, the app icon gives way so the badges still fit;
+     the header shows the logo. -->
 <section
-  class="mx-auto max-w-[1120px] px-5 pt-[88px] pb-14 text-center md:pt-[136px] md:pb-[72px]"
+  class="mx-auto flex min-h-[calc(100svh-53px)] max-w-[1120px] flex-col px-5 text-center md:min-h-[calc(100svh-4rem-1px)] lg:min-h-[calc(100svh-83px)]"
+  data-recede
 >
-  <Image
-    src={appIcon}
-    alt=""
-    width={96}
-    height={96}
-    densities={[1, 2]}
-    class="mx-auto mb-10 size-24"
-  />
-  <h1 class="mb-6 text-small font-semibold text-muted md:text-intro">
-    The iOS Simulator companion for developers and AI coding agents
-  </h1>
-  <p class="text-display text-balance text-text-dark">
-    The Simulator,<br />supercharged.
-  </p>
-  <p class="mx-auto mt-8 max-w-[30em] text-lead text-muted">
-    RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
-    AI coding agent can inspect, test, and capture your app without leaving your flow.
-  </p>
-  <div class="mt-12 flex flex-wrap justify-center gap-3.5">
-    <a
-      id="js-header-app-store-button"
-      href={appStoreHref}
-      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
-      target="_blank"
-      rel="noopener"
+  <div class="my-auto pt-10 pb-6">
+    <Image
+      src={appIcon}
+      alt=""
+      width={96}
+      height={96}
+      densities={[1, 2]}
+      class="mx-auto mb-10 size-24 [@media(max-height:940px)]:hidden"
+      data-hero-item
+      style="--hero-order: 0"
+    />
+    <h1
+      class="mb-6 text-small font-semibold text-muted md:text-intro"
+      data-hero-item
+      style="--hero-order: 1"
     >
-      Free download
-    </a>
-    <a
-      href="/for-teams/"
-      class="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams inline-flex rounded-full px-5 py-2.5 font-medium text-primary no-underline inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+      The iOS Simulator companion for developers and AI coding agents
+    </h1>
+    <p
+      class="text-display text-balance text-text-dark"
+      data-hero-item
+      style="--hero-order: 2"
     >
-      For Teams
-    </a>
+      The Simulator,<br />supercharged.
+    </p>
+    <p
+      class="mx-auto mt-8 max-w-[36em] text-lead text-balance text-muted"
+      data-hero-item
+      style="--hero-order: 3"
+    >
+      RocketSim adds <b>30+ developer tools</b> to Xcode's Simulator, so you and your
+      AI coding agent can inspect, test, and capture your app without leaving your
+      flow.
+    </p>
+    <div
+      class="mt-12 flex flex-wrap justify-center gap-3.5"
+      data-hero-item
+      style="--hero-order: 4"
+    >
+      <a
+        id="js-header-app-store-button"
+        href={appStoreHref}
+        class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
+        target="_blank"
+        rel="noopener"
+      >
+        Free download
+      </a>
+      <a
+        href="/for-teams/"
+        class="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams inline-flex rounded-full px-5 py-2.5 font-medium text-primary no-underline inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+      >
+        For Teams
+      </a>
+    </div>
+    <p
+      class="mt-5 text-caption text-muted"
+      data-hero-item
+      style="--hero-order: 4"
+    >
+      {microcopy}
+    </p>
+    <div
+      class="mt-8 flex flex-wrap justify-center gap-8"
+      data-hero-item
+      style="--hero-order: 5"
+    >
+      {
+        badges.map(({ image, alt, placement }) => (
+          <a
+            href={badgeHref}
+            class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
+            target="_blank"
+            rel="noopener"
+          >
+            <Image
+              src={image}
+              alt={alt}
+              width={165}
+              densities={[1, 2]}
+              class="h-16 w-auto md:h-[72px]"
+            />
+          </a>
+        ))
+      }
+    </div>
   </div>
-  <p class="mt-5 text-caption text-muted">{microcopy}</p>
-  <div class="mt-14 flex flex-wrap justify-center gap-10">
-    {
-      badges.map(({ image, alt, placement }) => (
-        <a
-          href={badgeHref}
-          class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
-          target="_blank"
-          rel="noopener"
-        >
-          <Image
-            src={image}
-            alt={alt}
-            width={165}
-            densities={[1, 2]}
-            class="h-[84px] w-auto md:h-[100px]"
-          />
-        </a>
-      ))
-    }
-  </div>
+  <a
+    href="#glance"
+    class="mx-auto mb-6 text-small text-muted no-underline transition-colors hover:text-text-dark"
+    data-hero-item
+    style="--hero-order: 6"
+  >
+    What's inside <span aria-hidden="true">↓</span>
+  </a>
 </section>
 
 <script>

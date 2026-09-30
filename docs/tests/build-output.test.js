@@ -262,6 +262,8 @@ function controlledElement(body, control) {
 }
 
 const isHidden = (tag) => /\shidden\b/.test(tag);
+// Crossfading panels and header layers stay rendered, and go inert instead.
+const isInert = (tag) => /\sinert(?=[\s>])/.test(tag);
 
 // The homepage preview's markup, without its scripts.
 function homepageMarkup() {
@@ -318,7 +320,7 @@ test("homepage tabs follow the ARIA tabs pattern", () => {
       assert.match(panel, new RegExp(`aria-labelledby="${tabId}"`), id);
       // Only the selected tab's panel shows.
       assert.equal(
-        isHidden(panel),
+        isInert(panel),
         !/aria-selected="true"/.test(tab),
         `${id}: panel visibility follows ${tabId}`,
       );
@@ -385,6 +387,86 @@ test("homepage galleries follow the ARIA carousel pattern", () => {
   }
 });
 
+test("homepage tabs and galleries autoplay with a progress bar per item", () => {
+  const autoplaying = homepageChapters().filter(({ presentation }) =>
+    ["tabs", "gallery"].includes(presentation),
+  );
+  assert.ok(autoplaying.length > 0, "expected autoplaying chapters");
+  for (const { id, presentation, body } of autoplaying) {
+    const items =
+      presentation === "tabs"
+        ? body.match(/<button[^>]*role="tab"[^>]*>[\s\S]*?<\/button>/g)
+        : body.match(
+            /<button[^>]*data-gallery-picker[^>]*>[\s\S]*?<\/button>/g,
+          );
+    assert.ok(items?.length > 1, `${id}: expected items`);
+    for (const item of items) {
+      assert.match(item, /data-autoplay-fill/, `${id}: a bar per item`);
+    }
+
+    // One control, labelled for what it plays; it starts as a pause button,
+    // and the script turns it into play for reduced motion.
+    const controls =
+      body.match(/<button[^>]*data-autoplay-control[^>]*>/g) || [];
+    assert.equal(controls.length, 1, `${id}: one autoplay control`);
+    assert.match(controls[0], /data-autoplay-status="playing"/, id);
+    assert.match(controls[0], /aria-label="Pause [^"]+"/, id);
+  }
+});
+
+test("homepage reveals never hide content before their script runs", () => {
+  const html = homepageMarkup();
+  assert.match(html, /data-reveal/, "expected scroll-in reveals");
+  // Only the script marks reveals pending, so the page reads fine without it.
+  assert.doesNotMatch(html, /data-reveal="pending"/);
+});
+
+// The at-rules around a position in a stylesheet, outermost first.
+function enclosingAtRules(css, index) {
+  const stack = [];
+  let prelude = "";
+  for (let i = 0; i < index; i++) {
+    const char = css[i];
+    if (char === "{") {
+      stack.push(prelude.trim());
+      prelude = "";
+    } else if (char === "}") {
+      stack.pop();
+      prelude = "";
+    } else if (char === ";") {
+      prelude = "";
+    } else {
+      prelude += char;
+    }
+  }
+  return stack.filter((rule) => rule.startsWith("@"));
+}
+
+test("homepage motion stops for reduced motion", () => {
+  const css = readdirSync(join(DIST, "_astro"))
+    .filter((file) => file.endsWith(".css"))
+    .map((file) => readDist(`_astro/${file}`))
+    .join("\n");
+  // Scroll-linked effects and the hero's entrance only run for visitors who
+  // haven't asked for less motion.
+  const animations = [
+    // Declarations only, not the `@supports` test for the feature.
+    ...css.matchAll(
+      /(?<=[{;])(?:animation-timeline:|animation:[^;}]*hero-in)/g,
+    ),
+  ];
+  assert.ok(animations.length > 0, "expected homepage motion in the CSS");
+  for (const { index, 0: match } of animations) {
+    const rules = enclosingAtRules(css, index).map((rule) =>
+      rule.replaceAll(" ", ""),
+    );
+    assert.ok(
+      rules.includes("@media(prefers-reduced-motion:no-preference)"),
+      `${match} runs outside a no-preference block`,
+    );
+  }
+});
+
 test("homepage Teams chapter keeps its Plausible events", () => {
   // See ANALYTICS.md: the names are part of the historical reporting contract.
   const teams = homepageChapter("teams");
@@ -426,13 +508,15 @@ test("homepage header's chapter menu follows the chapters on the page", () => {
   const header = homepageHeader();
   const sections = homepageChapters().map(({ id }) => id);
 
-  // The chapter layer starts hidden: the main menu shows until the visitor
+  // The chapter layer starts inert: the main menu shows until the visitor
   // scrolls past the glance grid.
   const layer = header.match(
     /<div[^>]*data-header-layer="chapters"[^>]*>[\s\S]*?<\/nav>/,
   )?.[0];
   assert.ok(layer, "expected the chapter layer");
-  assert.ok(isHidden(layer.match(/^<div[^>]*>/)[0]), "chapter layer hidden");
+  assert.ok(isInert(layer.match(/^<div[^>]*>/)[0]), "chapter layer inert");
+  const main = header.match(/<div[^>]*data-header-layer="main"[^>]*>/)?.[0];
+  assert.ok(main && !isInert(main), "main layer in use");
   assert.match(layer, /<a[^>]*href="#glance"/, "Features jumps to the grid");
 
   const bar = layer.match(/<nav[^>]*aria-label="Chapters"[\s\S]*?<\/nav>/);
