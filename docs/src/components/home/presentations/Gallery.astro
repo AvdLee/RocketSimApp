@@ -14,7 +14,6 @@ interface Props {
 }
 
 const { id, chapterName, items } = Astro.props;
-const total = String(items.length).padStart(2, "0");
 const arrowButtonClass =
   "grid size-9 flex-none cursor-pointer place-items-center rounded-lg border border-border bg-card text-caption text-text-dark transition-colors hover:border-primary hover:bg-primary/8 disabled:cursor-default disabled:border-border disabled:bg-card disabled:opacity-35";
 ---
@@ -74,12 +73,6 @@ const arrowButtonClass =
     data-draw-row
     style={`--draw-count: ${items.length}`}
   >
-    <span
-      class="min-w-[4.5em] font-mono text-caption tracking-normal text-muted tabular-nums"
-      aria-hidden="true"
-    >
-      <b data-gallery-count class="font-normal text-text-dark">01</b> / {total}
-    </span>
     <p class="sr-only" aria-live="polite" data-gallery-status></p>
     <div class="mr-auto flex max-w-[420px] flex-1 items-center gap-1.5">
       {
@@ -151,7 +144,6 @@ const arrowButtonClass =
         const control = root.querySelector<HTMLButtonElement>(
           "[data-autoplay-control]",
         );
-        const count = root.querySelector("[data-gallery-count]");
         const status = root.querySelector("[data-gallery-status]");
         const slides = [
           ...root.querySelectorAll<HTMLElement>(
@@ -184,7 +176,6 @@ const arrowButtonClass =
           pickers.forEach((picker, i) =>
             picker.setAttribute("aria-current", String(i === index)),
           );
-          if (count) count.textContent = String(index + 1).padStart(2, "0");
           if (status && announce) {
             status.textContent = `Highlight ${index + 1} of ${slides.length}: ${slides[index].querySelector("b")?.textContent?.trim() ?? ""}`;
           }
