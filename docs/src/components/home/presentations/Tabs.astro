@@ -6,14 +6,14 @@ import Media from "../Media.astro";
 interface Props {
   // Chapter ID, used to keep the tab and panel IDs unique on the page.
   id: string;
-  // Chapter name, for the tab list's accessible name.
-  label: string;
+  // For the tab list's accessible name.
+  chapterName: string;
   items: HomepageItem[];
   // Rendered extras shown beside the stage, such as the agents terminal.
   aside?: string;
 }
 
-const { id, label, items, aside } = Astro.props;
+const { id, chapterName, items, aside } = Astro.props;
 ---
 
 <div
@@ -73,7 +73,7 @@ const { id, label, items, aside } = Astro.props;
   <div class:list={["mt-5", aside && "md:col-span-2"]}>
     <div
       role="tablist"
-      aria-label={`${label} features`}
+      aria-label={`${chapterName} features`}
       class="grid auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto [scrollbar-width:none] md:auto-cols-fr md:overflow-visible"
     >
       {
@@ -122,7 +122,7 @@ const { id, label, items, aside } = Astro.props;
 </div>
 
 <script>
-  import { indexForKey } from "@/lib/utils/presentationIndex";
+  import { bindRovingKeys } from "@/lib/utils/rovingFocus";
 
   // Click or arrow keys select a tab; the selected tab's panel (and, on
   // phones, its caption) shows. Videos in hidden panels never load, and
@@ -153,21 +153,10 @@ const { id, label, items, aside } = Astro.props;
           tabs[index].scrollIntoView({ block: "nearest", inline: "nearest" });
         };
 
-        tabs.forEach((tab, index) => {
-          tab.addEventListener("click", () => select(index));
-          tab.addEventListener("keydown", (event) => {
-            const next = indexForKey(
-              event.key,
-              index,
-              tabs.length,
-              "horizontal",
-            );
-            if (next === undefined) return;
-            event.preventDefault();
-            select(next);
-            tabs[next].focus();
-          });
-        });
+        tabs.forEach((tab, index) =>
+          tab.addEventListener("click", () => select(index)),
+        );
+        bindRovingKeys(tabs, "horizontal", select);
       });
   }
 

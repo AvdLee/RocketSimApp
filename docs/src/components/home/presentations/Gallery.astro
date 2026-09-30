@@ -6,14 +6,14 @@ import Media from "../Media.astro";
 interface Props {
   // Chapter ID, used to keep the slide IDs unique on the page.
   id: string;
-  // Chapter name, for the carousel's accessible name.
-  label: string;
+  // For the carousel's accessible name.
+  chapterName: string;
   items: HomepageItem[];
 }
 
-const { id, label, items } = Astro.props;
+const { id, chapterName, items } = Astro.props;
 const total = String(items.length).padStart(2, "0");
-const squareButton =
+const arrowButtonClass =
   "grid size-9 flex-none cursor-pointer place-items-center rounded-lg border border-border bg-card text-[13px] text-text-dark transition-colors hover:border-primary hover:bg-primary/8 disabled:cursor-default disabled:border-border disabled:bg-card disabled:opacity-35";
 ---
 
@@ -22,7 +22,7 @@ const squareButton =
   data-presentation-root="gallery"
   role="region"
   aria-roledescription="carousel"
-  aria-label={`${label} highlights`}
+  aria-label={`${chapterName} highlights`}
   class="mx-[calc(50%-50vw)] mt-16 [--edge:max(20px,calc((100vw-1080px)/2))]"
 >
   <div
@@ -39,13 +39,14 @@ const squareButton =
           aria-roledescription="slide"
           aria-label={`${index + 1} of ${items.length}`}
           data-current={index === 0 ? "" : undefined}
-          class="flex aspect-[4/5] max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card opacity-50 transition-[opacity,border-color] duration-400 data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))] data-current:opacity-100 sm:aspect-[16/11]"
+          class="flex aspect-[4/5] max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card opacity-50 data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))] data-current:opacity-100 sm:aspect-[16/11]"
         >
           <div class="min-h-0 flex-1 border-b border-border bg-surface">
             <Media
               media={item.media}
               sizes="(min-width: 1048px) 880px, 84vw"
               class="size-full object-cover object-top"
+              autoplay={false}
             />
           </div>
           <p class="px-4 pt-3.5 pb-4 text-[15px] leading-[1.45] text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">
@@ -66,6 +67,7 @@ const squareButton =
     >
       <b data-gallery-count class="font-normal text-text-dark">01</b> / {total}
     </span>
+    <p class="sr-only" aria-live="polite" data-gallery-status></p>
     <div class="mr-auto flex max-w-[420px] flex-1 items-center gap-1.5">
       {
         items.map((item, index) => (
@@ -85,7 +87,7 @@ const squareButton =
       data-gallery-prev
       aria-controls={`${id}-track`}
       aria-label="Previous highlight"
-      class={squareButton}
+      class={arrowButtonClass}
       disabled
     >
       ←
@@ -95,7 +97,7 @@ const squareButton =
       data-gallery-next
       aria-controls={`${id}-track`}
       aria-label="Next highlight"
-      class={squareButton}
+      class={arrowButtonClass}
     >
       →
     </button>
@@ -103,16 +105,15 @@ const squareButton =
 </div>
 
 <script>
+  import { loadVideo } from "@/lib/utils/lazyVideo";
   import { nearestIndex } from "@/lib/utils/presentationIndex";
 
   // The pickers and arrows scroll the track to a slide. Swipes, trackpad
   // scrolls and arrow keys on the focused track scroll it natively, and the
-  // current slide follows once the track settles.
+  // current slide follows once the track settles. Neighbouring slides are on
+  // screen too, so only the current slide's video plays, and only while the
+  // gallery is in view.
   function initGalleries() {
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="gallery"]')
       .forEach((root) => {
@@ -124,6 +125,7 @@ const squareButton =
           "[data-gallery-next]",
         );
         const count = root.querySelector("[data-gallery-count]");
+        const status = root.querySelector("[data-gallery-status]");
         const slides = [
           ...root.querySelectorAll<HTMLElement>(
             '[aria-roledescription="slide"]',
@@ -135,6 +137,7 @@ const squareButton =
         if (!track || !prev || !next || slides.length === 0) return;
 
         let current = 0;
+        let inView = false;
         // Set while the track scrolls to a picked slide, so the scroll it
         // causes doesn't pick another one.
         let picked: number | undefined;
@@ -142,6 +145,21 @@ const squareButton =
 
         const starts = () =>
           slides.map((slide) => slide.offsetLeft - slides[0].offsetLeft);
+
+        const syncVideos = () => {
+          slides.forEach((slide, i) => {
+            const video = slide.querySelector("video");
+            if (!video) return;
+            if (i === current && inView) {
+              loadVideo(video);
+              void video.play().catch(() => {
+                // The poster stays when playback cannot start.
+              });
+            } else {
+              video.pause();
+            }
+          });
+        };
 
         const mark = (index: number) => {
           current = index;
@@ -152,8 +170,12 @@ const squareButton =
             picker.setAttribute("aria-current", String(i === index)),
           );
           if (count) count.textContent = String(index + 1).padStart(2, "0");
+          if (status) {
+            status.textContent = `Highlight ${index + 1} of ${slides.length}: ${slides[index].querySelector("b")?.textContent?.trim() ?? ""}`;
+          }
           prev.disabled = index === 0;
           next.disabled = index === slides.length - 1;
+          syncVideos();
         };
 
         // Where the track scrolls to for a slide; the last slides may stop
@@ -167,7 +189,7 @@ const squareButton =
           // Already there: no scroll follows to clear `picked`.
           if (Math.abs(track.scrollLeft - left) < 1) return;
           picked = index;
-          track.scrollTo({ left, behavior: reduceMotion ? "auto" : "smooth" });
+          track.scrollTo({ left });
         };
 
         pickers.forEach((picker, index) =>
@@ -204,6 +226,14 @@ const squareButton =
           },
           { passive: true },
         );
+
+        new IntersectionObserver(
+          ([entry]) => {
+            inView = entry.isIntersecting;
+            syncVideos();
+          },
+          { threshold: 0.25 },
+        ).observe(track);
       });
   }
 

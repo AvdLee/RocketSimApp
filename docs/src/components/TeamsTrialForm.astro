@@ -1,13 +1,7 @@
 ---
-import config from "@/config/config.json";
+import { teamsUrl } from "@/lib/utils/teamsUrl";
 
-// In dev, post to the local LicenseKit server so the whole trial flow can be
-// tested without touching production.
-const teamsBaseUrl = import.meta.env.DEV
-  ? "http://localhost:5173"
-  : config.site.teams_base_url;
-
-const trialAction = `${teamsBaseUrl}/api/signup/trial?utm_source=website&utm_medium=website&utm_content=for_teams_hero_form`;
+const trialAction = `${teamsUrl}/api/signup/trial?utm_source=website&utm_medium=website&utm_content=for_teams_hero_form`;
 ---
 
 <style>

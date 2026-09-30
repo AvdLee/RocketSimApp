@@ -14,11 +14,15 @@ const { name, title, color, presentation, items, links, Content } =
   await getHomepageChapter(id);
 
 // Extras come in as children from the page template: the `aside` slot sits
-// beside the tabs stage, and the default slot follows the links. Other
-// presentations have no room beside the stage, so they show the aside below.
+// beside the tabs stage, and the default slot follows the links.
 const aside = Astro.slots.has("aside")
   ? await Astro.slots.render("aside")
   : undefined;
+if (aside && presentation !== "tabs") {
+  throw new Error(
+    `Homepage chapter "${id}": only the tabs presentation has room for the aside slot. Move the extras or switch the chapter back to tabs.`,
+  );
+}
 ---
 
 <section
@@ -48,20 +52,17 @@ const aside = Astro.slots.has("aside")
 
   {
     presentation === "tabs" && (
-      <Tabs id={id} label={name} items={items} aside={aside} />
+      <Tabs id={id} chapterName={name} items={items} aside={aside} />
     )
   }
-  {presentation === "gallery" && <Gallery id={id} label={name} items={items} />}
+  {
+    presentation === "gallery" && (
+      <Gallery id={id} chapterName={name} items={items} />
+    )
+  }
   {
     presentation === "closer-look" && (
-      <CloserLook id={id} label={name} items={items} />
-    )
-  }
-  {
-    presentation !== "tabs" && aside && (
-      <div class="mt-5 grid gap-5 md:grid-cols-2">
-        <Fragment set:html={aside} />
-      </div>
+      <CloserLook id={id} chapterName={name} items={items} />
     )
   }
 

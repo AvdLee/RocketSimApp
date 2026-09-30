@@ -1,9 +1,9 @@
 ---
 import ImageMod from "@/components/ImageMod.astro";
-import config from "@/config/config.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
+import { teamsUrl } from "@/lib/utils/teamsUrl";
 
 const sectionData = (await getEntry(
   "ctaSectionCollection",
@@ -18,11 +18,6 @@ const isBlogPage = Astro.url.pathname.startsWith("/blog/");
 const callToActions = isTeamPage
   ? [...call_to_actions].reverse()
   : call_to_actions;
-
-const teamsUrl =
-  import.meta.env.MODE === "production"
-    ? config.site.teams_base_url
-    : "http://localhost:5173";
 
 // Get page-specific event names
 function getEventName(ctaLabel: string): string {

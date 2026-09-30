@@ -3,6 +3,7 @@ import { getEntry } from "astro:content";
 
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
+import { teamsUrl } from "@/lib/utils/teamsUrl";
 import InsightMarquee from "../components/insights/InsightMarquee.astro";
 import RepresentativeDataNote from "../components/insights/RepresentativeDataNote.astro";
 import InsightShowcaseCard from "../components/insights/InsightShowcaseCard.astro";
@@ -14,12 +15,8 @@ const pageIndex = await getEntry("team-insights", "-index");
 if (!pageIndex) return null;
 const { title, meta_title, description } = pageIndex.data;
 const {
-  site: { base_url, teams_base_url },
+  site: { base_url },
 } = config;
-const teamsUrl =
-  import.meta.env.MODE === "production"
-    ? teams_base_url
-    : "http://localhost:5173";
 const bottomTrialUrl = `${teamsUrl}/signup/trial?utm_source=website&utm_medium=website&utm_content=for_teams_bottom`;
 
 // Build SEO object

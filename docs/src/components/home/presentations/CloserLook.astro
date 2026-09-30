@@ -6,12 +6,12 @@ import Media from "../Media.astro";
 interface Props {
   // Chapter ID, used to keep the description IDs unique on the page.
   id: string;
-  // Chapter name, shown in the panel's title bar.
-  label: string;
+  // Shown in the panel's title bar.
+  chapterName: string;
   items: HomepageItem[];
 }
 
-const { id, label, items } = Astro.props;
+const { id, chapterName, items } = Astro.props;
 ---
 
 <!-- A Mac-style tools window: a list of tools beside a stage. -->
@@ -23,10 +23,10 @@ const { id, label, items } = Astro.props;
     class="flex h-10 items-center gap-2 border-b border-border bg-surface px-3.5 text-[13px] text-muted md:col-span-2"
     aria-hidden="true"
   >
-    <i class="size-3 rounded-full bg-[#3a3a3d]"></i>
-    <i class="size-3 rounded-full bg-[#3a3a3d]"></i>
-    <i class="size-3 rounded-full bg-[#3a3a3d]"></i>
-    <span class="ml-2.5 font-semibold">{label} tools</span>
+    <i class="size-3 rounded-full bg-window-control"></i>
+    <i class="size-3 rounded-full bg-window-control"></i>
+    <i class="size-3 rounded-full bg-window-control"></i>
+    <span class="ml-2.5 font-semibold">{chapterName} tools</span>
   </div>
 
   <div class="px-2.5 py-3.5 max-md:order-2 md:border-r md:border-border">
@@ -38,10 +38,10 @@ const { id, label, items } = Astro.props;
               type="button"
               aria-expanded={index === 0 ? "true" : "false"}
               aria-controls={`${id}-tool-${index}`}
-              class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-[15px] font-medium text-[#d8d8dc] transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
+              class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-[15px] font-medium text-text-soft transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
             >
               <span
-                class="w-4 flex-none text-center text-lg leading-none text-muted transition-transform group-aria-expanded:rotate-90 group-aria-expanded:text-white"
+                class="w-4 flex-none text-center text-lg leading-none text-muted group-aria-expanded:rotate-90 group-aria-expanded:text-white"
                 aria-hidden="true"
               >
                 ›
@@ -83,7 +83,7 @@ const { id, label, items } = Astro.props;
 </div>
 
 <script>
-  import { indexForKey } from "@/lib/utils/presentationIndex";
+  import { bindRovingKeys } from "@/lib/utils/rovingFocus";
 
   // One tool is open at a time: its description shows under its button and
   // its media fills the stage. Up and down arrows move between tools.
@@ -100,31 +100,20 @@ const { id, label, items } = Astro.props;
 
         const open = (index: number) => {
           buttons.forEach((button, i) => {
-            const on = i === index;
-            button.setAttribute("aria-expanded", String(on));
+            const expanded = i === index;
+            button.setAttribute("aria-expanded", String(expanded));
             const description = document.getElementById(
               button.getAttribute("aria-controls") ?? "",
             );
-            if (description) description.hidden = !on;
-            if (frames[i]) frames[i].hidden = !on;
+            if (description) description.hidden = !expanded;
+            if (frames[i]) frames[i].hidden = !expanded;
           });
         };
 
-        buttons.forEach((button, index) => {
-          button.addEventListener("click", () => open(index));
-          button.addEventListener("keydown", (event) => {
-            const next = indexForKey(
-              event.key,
-              index,
-              buttons.length,
-              "vertical",
-            );
-            if (next === undefined) return;
-            event.preventDefault();
-            open(next);
-            buttons[next].focus();
-          });
-        });
+        buttons.forEach((button, index) =>
+          button.addEventListener("click", () => open(index)),
+        );
+        bindRovingKeys(buttons, "vertical", open);
       });
   }
 

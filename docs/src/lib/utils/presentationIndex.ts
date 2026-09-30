@@ -1,7 +1,7 @@
 // Index logic shared by the homepage chapter presentations (tabs, gallery,
 // closer look). Kept free of the DOM so it can be unit-tested with `node --test`.
 
-type Orientation = "horizontal" | "vertical";
+export type Orientation = "horizontal" | "vertical";
 
 const steps: Record<Orientation, Record<string, number>> = {
   horizontal: { ArrowLeft: -1, ArrowRight: 1 },

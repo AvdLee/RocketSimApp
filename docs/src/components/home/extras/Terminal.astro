@@ -11,7 +11,7 @@ const { label, commands } = Astro.props;
 <figure class="m-0">
   <figcaption class="sr-only">{label}</figcaption>
   <pre
-    class="m-0 overflow-hidden rounded-lg bg-surface px-[18px] py-4 font-mono text-[13px] leading-[1.6] whitespace-pre-wrap text-[#c9c9cf]"><code>{
+    class="m-0 overflow-hidden rounded-lg bg-surface px-[18px] py-4 font-mono text-[13px] leading-[1.6] whitespace-pre-wrap text-code"><code>{
     commands.map((command) => (
       <span class="block pl-[2ch] -indent-[2ch]"><span class="text-(--chapter)" aria-hidden="true">$</span> {command}</span>
     ))

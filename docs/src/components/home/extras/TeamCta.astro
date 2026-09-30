@@ -1,12 +1,8 @@
 ---
-import config from "@/config/config.json";
+import { teamsUrl } from "@/lib/utils/teamsUrl";
 
 // The Teams chapter's call to action. Event names follow ANALYTICS.md: the
 // second /for-teams/ link keeps the historical `Mid 2 - Trial` name.
-const teamsUrl =
-  import.meta.env.MODE === "production"
-    ? config.site.teams_base_url
-    : "http://localhost:5173";
 const trialHref = `${teamsUrl}/signup/trial?utm_source=website&utm_medium=website&utm_content=homepage_insights`;
 const linkClass = "text-[17px] text-primary no-underline hover:underline";
 ---

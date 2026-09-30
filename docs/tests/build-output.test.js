@@ -251,6 +251,17 @@ function homepageChapters() {
   }));
 }
 
+// The opening tag of the element a control points at through aria-controls.
+function controlledElement(body, control) {
+  const id = control.match(/aria-controls="([^"]+)"/)?.[1];
+  assert.ok(id, `expected aria-controls on ${control}`);
+  const element = body.match(new RegExp(`<[^>]*\\bid="${id}"[^>]*>`))?.[0];
+  assert.ok(element, `expected an element with id "${id}"`);
+  return element;
+}
+
+const isHidden = (tag) => /\shidden\b/.test(tag);
+
 test("homepage chapters render the presentation their content asks for", () => {
   const chapters = homepageChapters();
   assert.ok(chapters.length > 0, "expected chapters on the page");
@@ -286,19 +297,14 @@ test("homepage tabs follow the ARIA tabs pattern", () => {
 
     for (const tab of tabs) {
       const tabId = tab.match(/\bid="([^"]+)"/)?.[1];
-      const panelId = tab.match(/aria-controls="([^"]+)"/)?.[1];
-      assert.ok(tabId && panelId, `${id}: tab has an id and controls a panel`);
-      const panel = body.match(
-        new RegExp(`<[^>]*\\bid="${panelId}"[^>]*>`),
-      )?.[0];
-      assert.ok(panel, `${id}: panel ${panelId} exists`);
-      assert.match(panel, /role="tabpanel"/);
-      assert.match(panel, new RegExp(`aria-labelledby="${tabId}"`));
+      const panel = controlledElement(body, tab);
+      assert.match(panel, /role="tabpanel"/, id);
+      assert.match(panel, new RegExp(`aria-labelledby="${tabId}"`), id);
       // Only the selected tab's panel shows.
       assert.equal(
-        /\shidden\b/.test(panel),
+        isHidden(panel),
         !/aria-selected="true"/.test(tab),
-        `${id}: ${panelId} visibility follows its tab`,
+        `${id}: panel visibility follows ${tabId}`,
       );
     }
   }
@@ -315,14 +321,10 @@ test("homepage closer-look buttons disclose their descriptions", () => {
     const expanded = buttons.filter((b) => /aria-expanded="true"/.test(b));
     assert.equal(expanded.length, 1, `${id}: the first tool starts open`);
     for (const button of buttons) {
-      const descId = button.match(/aria-controls="([^"]+)"/)?.[1];
-      assert.ok(descId, `${id}: button controls a description`);
-      const desc = body.match(new RegExp(`<[^>]*\\bid="${descId}"[^>]*>`))?.[0];
-      assert.ok(desc, `${id}: description ${descId} exists`);
       assert.equal(
-        /\shidden\b/.test(desc),
+        isHidden(controlledElement(body, button)),
         !/aria-expanded="true"/.test(button),
-        `${id}: ${descId} visibility follows its button`,
+        `${id}: description visibility follows its button`,
       );
     }
   }
@@ -360,6 +362,8 @@ test("homepage galleries follow the ARIA carousel pattern", () => {
       slides.map((_, index) => index === 0),
       `${id}: first slide current`,
     );
+    // The visual counter is aria-hidden; slide changes are announced here.
+    assert.match(body, /<[^>]*aria-live="polite"[^>]*data-gallery-status/, id);
     assert.match(body, /<button[^>]*aria-label="Previous highlight"/);
     assert.match(body, /<button[^>]*aria-label="Next highlight"/);
   }
