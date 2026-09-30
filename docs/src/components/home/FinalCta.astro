@@ -11,11 +11,15 @@ const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
   class="mx-auto max-w-[1120px] px-5 py-section text-center"
   aria-labelledby="final-cta-title"
 >
-  <h2 id="final-cta-title" class="text-title-1 text-balance">
+  <h2 id="final-cta-title" class="text-title-1 text-balance" data-reveal>
     Spend less time operating the Simulator.<br />
     <span class="text-muted">Spend more time building your app.</span>
   </h2>
-  <div class="mt-9 flex flex-wrap justify-center gap-3.5">
+  <div
+    class="mt-9 flex flex-wrap justify-center gap-3.5"
+    data-reveal
+    style="--reveal-delay: 80ms"
+  >
     <a
       href={downloadHref}
       class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-footer plausible-event-format=button inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"

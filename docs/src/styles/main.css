@@ -52,6 +52,16 @@
   --spacing-section: clamp(120px, 16vw, 184px);
   --spacing-stack: clamp(40px, 6vw, 64px);
 
+  /* Homepage motion. `smooth` eases changes in place, such as crossfades and
+     the header's layer swap; `enter` eases things arriving, such as the
+     scroll-in reveals (src/styles/animations.css). Every animation on the
+     homepage stops for `prefers-reduced-motion`. */
+  --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  /* A closer-look tool's description as it opens; the keyframes are in
+     animations.css. */
+  --animate-disclose: disclose 0.3s var(--ease-enter);
+
   /* Type scale, set in the site's system font (`src/config/theme.json`).
      Each step brings its own line height, tracking and weight, so a single
      `text-*` class sets the whole style. Tracking tightens as the size grows,

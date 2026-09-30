@@ -33,6 +33,7 @@ if (aside && presentation !== "tabs") {
   style={`--chapter: var(--color-chapter-${color})`}
 >
   <div
+    data-reveal
     class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
   >
     <div>
@@ -48,21 +49,23 @@ if (aside && presentation !== "tabs") {
     </div>
   </div>
 
-  {
-    presentation === "tabs" && (
-      <Tabs id={id} chapterName={name} items={items} aside={aside} />
-    )
-  }
-  {
-    presentation === "gallery" && (
-      <Gallery id={id} chapterName={name} items={items} />
-    )
-  }
-  {
-    presentation === "closer-look" && (
-      <CloserLook id={id} chapterName={name} items={items} />
-    )
-  }
+  <div data-reveal>
+    {
+      presentation === "tabs" && (
+        <Tabs id={id} chapterName={name} items={items} aside={aside} />
+      )
+    }
+    {
+      presentation === "gallery" && (
+        <Gallery id={id} chapterName={name} items={items} />
+      )
+    }
+    {
+      presentation === "closer-look" && (
+        <CloserLook id={id} chapterName={name} items={items} />
+      )
+    }
+  </div>
 
   {
     links.length > 0 && (

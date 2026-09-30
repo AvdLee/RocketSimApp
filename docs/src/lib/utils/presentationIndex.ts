@@ -38,3 +38,28 @@ export function nearestIndex(
   });
   return nearest;
 }
+
+interface ScrollRow {
+  scrollLeft: number;
+  // The row's visible edges and its scroll padding.
+  start: number;
+  end: number;
+  padding: number;
+}
+
+// The scroll offset that brings an item fully into a sideways-scrolling row,
+// or `undefined` when it already is. Unlike scrollIntoView(), it never
+// scrolls the page, which autoplay must not do. Edges are viewport
+// coordinates, as getBoundingClientRect() reports them.
+export function scrollToReveal(
+  row: ScrollRow,
+  item: { start: number; end: number },
+): number | undefined {
+  if (item.start < row.start + row.padding) {
+    return row.scrollLeft + item.start - (row.start + row.padding);
+  }
+  if (item.end > row.end - row.padding) {
+    return row.scrollLeft + item.end - (row.end - row.padding);
+  }
+  return undefined;
+}

@@ -2,6 +2,7 @@
 import type { HomepageItem } from "@/lib/homepageItems";
 
 import Media from "../Media.astro";
+import AutoplayControl from "./AutoplayControl.astro";
 
 interface Props {
   // Chapter ID, used to keep the tab and panel IDs unique on the page.
@@ -17,7 +18,8 @@ const { id, chapterName, items, aside } = Astro.props;
 ---
 
 <!-- The aside sits beside the stage from lg, and after the tabs below it,
-     so the DOM reads stage, tabs, extras at every width. -->
+     so the DOM reads stage, tabs, extras at every width. Autoplay moves
+     through the tabs (src/lib/utils/autoplay.ts). -->
 <div
   data-presentation-root="tabs"
   class:list={[
@@ -26,6 +28,7 @@ const { id, chapterName, items, aside } = Astro.props;
   ]}
 >
   <div
+    data-tabs-stage
     class:list={[
       "relative aspect-video overflow-hidden rounded-lg bg-surface",
       aside && "lg:aspect-auto",
@@ -38,8 +41,8 @@ const { id, chapterName, items, aside } = Astro.props;
           role="tabpanel"
           aria-labelledby={`${id}-tab-${index}`}
           tabindex="0"
-          class="absolute inset-0 rounded-lg focus-visible:-outline-offset-2"
-          hidden={index !== 0}
+          class="absolute inset-0 rounded-lg transition-[opacity,visibility] duration-500 ease-smooth focus-visible:-outline-offset-2 inert:invisible inert:opacity-0 motion-reduce:transition-none"
+          inert={index !== 0}
         >
           <Media
             media={item.media}
@@ -54,6 +57,7 @@ const { id, chapterName, items, aside } = Astro.props;
                 ? "object-contain p-6"
                 : "object-cover",
             ]}
+            autoplay={false}
           />
         </div>
       ))
@@ -65,42 +69,51 @@ const { id, chapterName, items, aside } = Astro.props;
   </div>
 
   <div class:list={["mt-5", aside && "lg:col-span-2"]}>
-    <!-- On phones the row scrolls sideways to the screen edge, so the cut-off
-         tab shows there is more. -->
-    <div
-      role="tablist"
-      aria-label={`${chapterName} features`}
-      class="-mx-5 grid scroll-px-5 auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:auto-cols-fr md:overflow-visible md:px-0"
-    >
-      {
-        items.map((item, index) => (
-          <button
-            type="button"
-            role="tab"
-            id={`${id}-tab-${index}`}
-            aria-controls={`${id}-panel-${index}`}
-            aria-selected={index === 0 ? "true" : "false"}
-            aria-labelledby={`${id}-tab-${index}-title`}
-            aria-describedby={`${id}-tab-${index}-description`}
-            tabindex={index === 0 ? 0 : -1}
-            class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
-          >
-            <span class="-mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-primary md:-mr-6" />
-            <span
-              id={`${id}-tab-${index}-title`}
-              class="text-small font-semibold transition-colors group-hover:text-text-dark group-aria-selected:text-text-dark md:text-copy"
+    <!-- On phones the row scrolls sideways from the screen edge to the
+         autoplay control, so the cut-off tab shows there is more. -->
+    <div class="flex items-start gap-2.5 md:gap-5">
+      <div
+        role="tablist"
+        aria-label={`${chapterName} features`}
+        class="-ml-5 grid min-w-0 flex-1 scroll-px-5 auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto scroll-smooth pl-5 [scrollbar-width:none] motion-reduce:scroll-auto md:ml-0 md:auto-cols-fr md:overflow-visible md:pl-0"
+      >
+        {
+          items.map((item, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`${id}-tab-${index}`}
+              aria-controls={`${id}-panel-${index}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-labelledby={`${id}-tab-${index}-title`}
+              aria-describedby={`${id}-tab-${index}-description`}
+              tabindex={index === 0 ? 0 : -1}
+              class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
             >
-              {item.title}
-            </span>
-            <span
-              id={`${id}-tab-${index}-description`}
-              class="text-small max-md:sr-only"
-            >
-              {item.description}
-            </span>
-          </button>
-        ))
-      }
+              {/* One line runs under the tabs and fills up as autoplay moves on. */}
+              <span class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted/50 md:-mr-6">
+                <span
+                  data-autoplay-fill
+                  class="absolute inset-0 origin-left scale-x-0 bg-primary"
+                />
+              </span>
+              <span
+                id={`${id}-tab-${index}-title`}
+                class="text-small font-semibold transition-colors group-hover:text-text-dark group-aria-selected:text-text-dark md:text-copy"
+              >
+                {item.title}
+              </span>
+              <span
+                id={`${id}-tab-${index}-description`}
+                class="text-small max-md:sr-only"
+              >
+                {item.description}
+              </span>
+            </button>
+          ))
+        }
+      </div>
+      <AutoplayControl name={`${chapterName} features`} class="-mt-[17px]" />
     </div>
     {
       items.map((item, index) => (
@@ -129,41 +142,81 @@ const { id, chapterName, items, aside } = Astro.props;
 </div>
 
 <script>
+  import { createAutoplay } from "@/lib/utils/autoplay";
+  import { scrollToReveal } from "@/lib/utils/presentationIndex";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
 
   // Click or arrow keys select a tab; the selected tab's panel (and, on
-  // phones, its caption) shows. Videos in hidden panels never load, and
-  // lazyVideo pauses a video once its panel hides.
+  // phones, its caption) shows. Autoplay selects the tabs in turn and plays
+  // the videos; videos in other panels never load.
   function initTabs() {
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="tabs"]')
       .forEach((root) => {
+        const stage = root.querySelector<HTMLElement>("[data-tabs-stage]");
+        const tablist = root.querySelector<HTMLElement>('[role="tablist"]');
+        const control = root.querySelector<HTMLButtonElement>(
+          "[data-autoplay-control]",
+        );
         const tabs = [
           ...root.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
         ];
         const captions = [
           ...root.querySelectorAll<HTMLElement>("[data-tab-caption]"),
         ];
+        const panels = tabs.map((tab) =>
+          document.getElementById(tab.getAttribute("aria-controls") ?? ""),
+        );
+        if (!stage || !tablist || !control) return;
+
+        // On phones the tab row scrolls sideways; bring the tab into it
+        // without scrolling the page.
+        const reveal = (tab: HTMLElement) => {
+          if (tablist.scrollWidth <= tablist.clientWidth) return;
+          const row = tablist.getBoundingClientRect();
+          const item = tab.getBoundingClientRect();
+          const left = scrollToReveal(
+            {
+              scrollLeft: tablist.scrollLeft,
+              start: row.left,
+              end: row.right,
+              padding: parseFloat(getComputedStyle(tablist).scrollPaddingLeft),
+            },
+            { start: item.left, end: item.right },
+          );
+          if (left !== undefined) tablist.scrollTo({ left });
+        };
 
         const select = (index: number) => {
           tabs.forEach((tab, i) => {
             const selected = i === index;
             tab.setAttribute("aria-selected", String(selected));
             tab.tabIndex = selected ? 0 : -1;
-            const panel = document.getElementById(
-              tab.getAttribute("aria-controls") ?? "",
-            );
-            if (panel) panel.hidden = !selected;
+            const panel = panels[i];
+            if (panel) panel.inert = !selected;
             if (captions[i]) captions[i].hidden = !selected;
           });
-          // On phones the tab row scrolls sideways; keep the tab in view.
-          tabs[index].scrollIntoView({ block: "nearest", inline: "nearest" });
+          reveal(tabs[index]);
+        };
+
+        const autoplay = createAutoplay({
+          stage,
+          fills: tabs.map((tab) =>
+            tab.querySelector<HTMLElement>("[data-autoplay-fill]"),
+          ),
+          videos: panels.map((panel) => panel?.querySelector("video") ?? null),
+          control,
+          show: select,
+        });
+        const choose = (index: number) => {
+          select(index);
+          autoplay.pick(index);
         };
 
         tabs.forEach((tab, index) =>
-          tab.addEventListener("click", () => select(index)),
+          tab.addEventListener("click", () => choose(index)),
         );
-        bindRovingKeys(tabs, "horizontal", select);
+        bindRovingKeys(tabs, "horizontal", choose);
       });
   }
 

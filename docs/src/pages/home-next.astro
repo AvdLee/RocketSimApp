@@ -101,3 +101,9 @@ const seo = {
   <Newsletter />
   <MobileDownloadLinkForm />
 </Base>
+
+<script>
+  import { initReveals } from "@/lib/utils/reveal";
+
+  document.addEventListener("astro:page-load", initReveals);
+</script>
