@@ -348,6 +348,37 @@ main:has([data-chapter]) {
   }
 }
 
+/* Once the glance grid has columns, its first row peeks above the fold,
+   where a scroll-linked reveal would leave it half faded as the page loads.
+   It enters with the hero instead, and is never pending. `data-hero-row`
+   names the breakpoint from which a tile is in the first row; on phones the
+   grid is one column and its tiles reveal like everything else. */
+@media (prefers-reduced-motion: no-preference) {
+  @media (min-width: 640px) {
+    [data-reveal][data-hero-row="sm"] {
+      opacity: 1;
+      translate: none;
+      transition: none;
+      animation: hero-in 1.2s var(--ease-enter) both;
+      animation-delay: calc(80ms + var(--hero-order, 0) * 90ms);
+      animation-timeline: auto;
+      animation-range: normal;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    [data-reveal][data-hero-row="lg"] {
+      opacity: 1;
+      translate: none;
+      transition: none;
+      animation: hero-in 1.2s var(--ease-enter) both;
+      animation-delay: calc(80ms + var(--hero-order, 0) * 90ms);
+      animation-timeline: auto;
+      animation-range: normal;
+    }
+  }
+}
+
 @media print {
   [data-reveal="pending"] {
     opacity: 1;

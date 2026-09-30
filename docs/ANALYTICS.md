@@ -51,7 +51,8 @@ when comparing before and after.
 - `landing-hero` (`format=button`): the hero's Free download button. Its `ct=`
   is rewritten to the stored first-touch referer (`Stored Referer`).
 - `landing-app-store-reviews` and `landing-app-store-featured`
-  (`format=badge`): the App Store badges under the hero.
+  (`format=link`): the rating and "Featured by Apple" links in the hero's
+  proof line, which replace the live homepage's badges (`format=badge`).
 - `landing-cta-banner` (`format=button`): the Free download button in the
   split call-to-action, which replaces the CTA banner.
 - `landing-footer` (`format=button`): the closing call-to-action's Free

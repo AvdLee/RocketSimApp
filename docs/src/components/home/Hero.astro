@@ -2,49 +2,52 @@
 import { Image } from "astro:assets";
 
 import appIcon from "@/assets/rocketsim-app-icon.png";
-import appStoreRating from "@/assets/app-store-rating.jpg";
-import appStoreFeatured from "@/assets/app-store-featured.jpg";
 import { appStoreUrl } from "@/lib/utils/appStoreUrl";
 
 // `ct=` is rewritten client-side to the stored first-touch referer, see
 // src/lib/utils/storedReferer.ts.
 const appStoreHref = appStoreUrl("website-header");
-// The badges keep the campaign they have on the live homepage.
-const badgeHref = appStoreUrl("Landing Page or Form - 8653523");
+// The proof links keep the campaign the badges have on the live homepage.
+const proofHref = appStoreUrl("Landing Page or Form - 8653523");
 const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
 
-const badges = [
+// One line of proof under the buttons, where badge images would cost the
+// room the glance tiles need above the fold. The links keep the badges'
+// placements; `format=link` tells them apart from the badges in Plausible.
+const proof = [
   {
-    image: appStoreRating,
-    alt: "4.8 rating on the App Store, five stars",
+    text: "4.8 on the App Store",
+    stars: true,
     placement: "landing-app-store-reviews",
   },
   {
-    image: appStoreFeatured,
-    alt: "Apple featured RocketSim in Essential Apps for Developers",
+    text: "Featured in Apple's Essential Apps for Developers",
     placement: "landing-app-store-featured",
   },
+  { text: "80,000+ developers last year" },
 ];
 ---
 
 <!-- The items enter one after another as the page loads, and the hero
-     recedes as it scrolls away (src/styles/animations.css). -->
+     recedes as it scrolls away (src/styles/animations.css). Vertical spacing
+     follows the window height, so the first row of glance tiles peeks above
+     the fold on laptop screens. -->
 <section
-  class="mx-auto max-w-[1120px] px-5 pt-[88px] pb-14 text-center md:pt-[136px] md:pb-[72px]"
+  class="mx-auto max-w-[1120px] px-5 pt-[clamp(32px,5vh,88px)] pb-8 text-center md:pb-10"
   data-recede
 >
   <Image
     src={appIcon}
     alt=""
-    width={96}
-    height={96}
+    width={56}
+    height={56}
     densities={[1, 2]}
-    class="mx-auto mb-10 size-24"
+    class="mx-auto mb-5 size-14"
     data-hero-item
     style="--hero-order: 0"
   />
   <h1
-    class="mb-6 text-small font-semibold text-muted md:text-intro"
+    class="mb-5 text-small font-semibold text-muted md:text-intro"
     data-hero-item
     style="--hero-order: 1"
   >
@@ -58,7 +61,7 @@ const badges = [
     The Simulator,<br />supercharged.
   </p>
   <p
-    class="mx-auto mt-8 max-w-[30em] text-lead text-muted"
+    class="mx-auto mt-6 max-w-[36em] text-lead text-balance text-muted"
     data-hero-item
     style="--hero-order: 3"
   >
@@ -66,7 +69,7 @@ const badges = [
     AI coding agent can inspect, test, and capture your app without leaving your flow.
   </p>
   <div
-    class="mt-12 flex flex-wrap justify-center gap-3.5"
+    class="mt-8 flex flex-wrap justify-center gap-3.5"
     data-hero-item
     style="--hero-order: 4"
   >
@@ -87,36 +90,41 @@ const badges = [
     </a>
   </div>
   <p
-    class="mt-5 text-caption text-muted"
+    class="mt-4 text-caption text-muted"
     data-hero-item
     style="--hero-order: 4"
   >
     {microcopy}
   </p>
-  <div
-    class="mt-14 flex flex-wrap justify-center gap-10"
+  <ul
+    class="mt-5 flex flex-col items-center gap-1.5 text-small text-muted lg:flex-row lg:justify-center"
     data-hero-item
     style="--hero-order: 5"
   >
     {
-      badges.map(({ image, alt, placement }) => (
-        <a
-          href={badgeHref}
-          class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
-          target="_blank"
-          rel="noopener"
-        >
-          <Image
-            src={image}
-            alt={alt}
-            width={165}
-            densities={[1, 2]}
-            class="h-[84px] w-auto md:h-[100px]"
-          />
-        </a>
+      proof.map(({ text, stars, placement }) => (
+        <li class="lg:[&+&]:before:mx-3 lg:[&+&]:before:text-muted/50 lg:[&+&]:before:content-['·']">
+          {placement ? (
+            <a
+              href={proofHref}
+              class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=link text-muted no-underline transition-colors hover:text-text-dark`}
+              target="_blank"
+              rel="noopener"
+            >
+              {stars && (
+                <span class="mr-1 text-chapter-teams" aria-hidden="true">
+                  ★★★★★
+                </span>
+              )}
+              {text}
+            </a>
+          ) : (
+            text
+          )}
+        </li>
       ))
     }
-  </div>
+  </ul>
 </section>
 
 <script>
