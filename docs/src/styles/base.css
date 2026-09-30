@@ -28,6 +28,7 @@ h6 {
    utilities still win. */
 :is(h1, h2, h3, h4, h5, h6):is(
   .text-display,
+  .text-figure,
   .text-title-1,
   .text-title-2,
   .text-title-3,

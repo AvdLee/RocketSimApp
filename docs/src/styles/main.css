@@ -51,11 +51,21 @@
      and headings are semibold: SF's display cut is already tight, and bold
      with heavy negative tracking at every size is what made the prototype
      read as generic. Sizes are in px, because the root font size shrinks to
-     13.6px below `md` (`src/styles/base.css`). */
+     13.6px below `md` (`src/styles/base.css`).
+     Headings elsewhere on the site keep theme.json's `text-h*` scale for now:
+     moving them over restyles headings on every other page, which is
+     beyond the homepage rebuild. A new step also needs adding to the heading
+     list in base.css; a test checks the two match. */
   --text-display: clamp(44px, 8vw, 88px);
   --text-display--line-height: 1.04;
   --text-display--letter-spacing: -0.025em;
   --text-display--font-weight: 600;
+  /* A standalone figure, such as a benchmark result; one line, so no
+     leading. */
+  --text-figure: clamp(56px, 7vw, 80px);
+  --text-figure--line-height: 1;
+  --text-figure--letter-spacing: -0.025em;
+  --text-figure--font-weight: 600;
   --text-title-1: clamp(36px, 6vw, 64px);
   --text-title-1--line-height: 1.06;
   --text-title-1--letter-spacing: -0.02em;
@@ -79,8 +89,10 @@
   --text-intro: 19px;
   --text-intro--line-height: 1.45;
   --text-intro--letter-spacing: -0.014em;
-  /* The site's body text; `body` in base.css uses it too. */
-  --text-copy: 17px;
+  /* The site's body text; `body` in base.css uses it too. Its size is
+     `font_size.base` in theme.json, which the theme plugin sets as
+     `--text-base`. */
+  --text-copy: var(--text-base);
   --text-copy--line-height: 1.5;
   --text-copy--letter-spacing: -0.022em;
   --text-small: 15px;
