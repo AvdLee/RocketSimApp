@@ -2,20 +2,20 @@
 enable: true
 title: "Trusted by developers at leading tech companies."
 list:
-  - brand: Calendly,
+  - brand: Calendly
     logo: "/images/brands/calendly.svg"
-  - brand: Strava,
+  - brand: Strava
     logo: "/images/brands/strava.svg"
-  - brand: Jetbrains,
+  - brand: JetBrains
     logo: "/images/brands/jetbrains.svg"
   - brand: Google
     logo: "/images/brands/google.svg"
-  - brand: monday.com,
+  - brand: monday.com
     logo: "/images/brands/monday.svg"
-  - brand: Oura,
+  - brand: Oura
     logo: "/images/brands/oura.svg"
-  - brand: Doist,
+  - brand: Doist
     logo: "/images/brands/doist.svg"
-  - brand: Stanford University,
+  - brand: Stanford University
     logo: "/images/brands/stanford.svg"
 ---

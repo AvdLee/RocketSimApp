@@ -1,0 +1,47 @@
+---
+// Preview of the rebuilt homepage (docs/docs/plans/homepage-rebuild.md).
+// Unlinked and noindex until it replaces src/pages/index.astro at launch.
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+
+import HomeHeader from "../components/home/HomeHeader.astro";
+import Hero from "../components/home/Hero.astro";
+import Glance from "../components/home/Glance.astro";
+import Brands from "../components/home/Brands.astro";
+import Chapter from "../components/home/Chapter.astro";
+
+const {
+  site: { title: siteTitle },
+  metadata: { meta_description },
+} = config;
+
+// Order of the glance tiles and, later, the header's chapter menu. Keep it in
+// step with the `<Chapter>` lines below; a build test checks they match.
+const chapters = [
+  "agents",
+  "captures",
+  "network",
+  "testing",
+  "design",
+  "teams",
+];
+
+const seo = {
+  title: siteTitle,
+  description: meta_description,
+  robots: { index: false, follow: false },
+};
+---
+
+<Base seo={seo} header="home">
+  <HomeHeader slot="header" />
+  <Hero />
+  <Glance chapters={chapters} />
+  <Brands />
+  <Chapter id="agents" />
+  <Chapter id="captures" />
+  <Chapter id="network" />
+  <Chapter id="testing" />
+  <Chapter id="design" />
+  <Chapter id="teams" />
+</Base>

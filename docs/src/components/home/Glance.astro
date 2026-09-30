@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+
+import { getHomepageChapter } from "@/lib/homepage";
+
+interface Props {
+  // Tile order; matches the order of the `<Chapter>` lines on the page.
+  chapters: string[];
+}
+
+const chapters = await Promise.all(
+  Astro.props.chapters.map((id) => getHomepageChapter(id)),
+);
+---
+
+<section
+  id="glance"
+  class="mx-auto max-w-[1120px] px-5 pt-[72px] pb-[120px]"
+  aria-labelledby="glance-label"
+>
+  <h2 class="sr-only" id="glance-label">RocketSim at a glance</h2>
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      chapters.map(({ id, name, color, tile }) => (
+        <a
+          href={`#${id}`}
+          data-glance-tile
+          class="relative flex min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline"
+          style={`--chapter: var(--color-chapter-${color})`}
+        >
+          <span class="text-[13px] font-semibold tracking-[0.01em] text-(--chapter)">
+            {name}
+          </span>
+          <h3 class="mt-1.5 text-[22px] leading-[1.18] font-semibold">
+            {tile.title}
+          </h3>
+          <span class="mt-2 text-sm text-muted">Jump to chapter ↓</span>
+          <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
+            {tile.image ? (
+              <Image
+                src={tile.image}
+                alt=""
+                widths={[360, 720]}
+                sizes="(min-width: 1024px) 340px, (min-width: 540px) 50vw, 100vw"
+                class="w-full rounded-t-[10px]"
+              />
+            ) : (
+              <img
+                src={tile.poster}
+                alt=""
+                loading="lazy"
+                class="w-full rounded-t-[10px]"
+              />
+            )}
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>

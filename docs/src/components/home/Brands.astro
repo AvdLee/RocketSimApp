@@ -1,0 +1,48 @@
+---
+import { getEntry } from "astro:content";
+
+const brands = await getEntry(
+  "trustedBrandsSectionCollection",
+  "trusted-brands",
+);
+if (!brands) {
+  throw new Error("Missing src/content/sections/trusted-brands.md.");
+}
+
+const stats = [
+  { value: "80,000+", label: "developers last year" },
+  { value: "250+", label: "teams" },
+  { value: "Up to 2×", label: "faster, developers report" },
+];
+---
+
+<section class="border-y border-line py-14" aria-label="Who uses RocketSim">
+  <div class="mx-auto max-w-[1120px] px-5">
+    <p class="mb-6 text-center text-[15px] text-muted">
+      Used by iOS developers at
+    </p>
+    <ul class="flex flex-wrap items-center justify-center gap-x-11 gap-y-6">
+      {
+        brands.data.list.map(({ brand, logo }) => (
+          <li>
+            <img
+              src={logo}
+              alt={brand}
+              loading="lazy"
+              class="h-6 w-auto opacity-60 brightness-0 invert sm:h-7"
+            />
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="mt-7 flex flex-wrap justify-center gap-9 text-[17px] text-muted">
+      {
+        stats.map(({ value, label }) => (
+          <li>
+            <b class="text-text-dark tabular-nums">{value}</b> {label}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
