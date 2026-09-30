@@ -17,13 +17,13 @@ const chapters = (
 
 const [download] = config.navigation_buttons;
 const downloadClass = [
-  "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-[15px] leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0",
+  "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-small leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0",
   download.class,
 ];
 const barLinkClass =
   "block py-3 whitespace-nowrap text-white no-underline opacity-80 transition-opacity hover:opacity-100";
 const panelLinkClass =
-  "block rounded-lg px-5 py-3 text-[17px] text-white no-underline hover:bg-primary/5";
+  "block rounded-lg px-5 py-3 text-copy text-white no-underline hover:bg-primary/5";
 // The chapter being read, set by the script below.
 const currentClass =
   "aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
@@ -43,7 +43,7 @@ const currentClass =
         <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
       </a>
       <nav aria-label="Main" class="ml-auto hidden lg:block">
-        <ul class="flex items-center gap-[34px] text-[15px]">
+        <ul class="flex items-center gap-[34px] text-small">
           {
             menu.main.map((link) => (
               <li>
@@ -103,13 +103,13 @@ const currentClass =
       ></span>
       <a
         href="#glance"
-        class="hidden text-[17px] font-semibold whitespace-nowrap text-white no-underline lg:block"
+        class="hidden text-copy font-semibold whitespace-nowrap text-white no-underline lg:block"
       >
         Features
       </a>
       <button
         type="button"
-        class="group inline-flex items-center gap-1 py-1.5 text-[17px] font-semibold text-white lg:hidden"
+        class="group inline-flex items-center gap-1 py-1.5 text-copy font-semibold text-white lg:hidden"
         aria-expanded="false"
         aria-controls="home-chapters-panel"
         aria-label="Features, show chapters"
@@ -127,7 +127,7 @@ const currentClass =
         </svg>
       </button>
       <nav aria-label="Chapters" class="ml-auto hidden lg:block">
-        <ul class="flex items-center gap-[30px] text-[15px]">
+        <ul class="flex items-center gap-[30px] text-small">
           {
             chapters.map(({ id, label }) => (
               <li>
@@ -168,7 +168,7 @@ const currentClass =
           <a
             href={download.link}
             class:list={[
-              "mx-5 mt-2 mb-1 inline-flex rounded-full bg-primary px-9 py-3.5 text-[17px] text-white no-underline",
+              "mx-5 mt-2 mb-1 inline-flex rounded-full bg-primary px-9 py-3.5 text-copy text-white no-underline",
               download.class,
             ]}
             target="_blank"

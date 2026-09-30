@@ -36,15 +36,13 @@ if (aside && presentation !== "tabs") {
     class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
   >
     <div>
-      <p class="mb-3 text-[19px] font-semibold text-(--chapter)">{name}</p>
-      <h2
-        class="max-w-[14em] text-[clamp(36px,6vw,64px)] leading-[1.04] font-bold tracking-[-0.03em] text-balance"
-      >
+      <p class="mb-3 text-intro font-semibold text-(--chapter)">{name}</p>
+      <h2 class="max-w-[14em] text-title-1 text-balance">
         {title}
       </h2>
     </div>
     <div
-      class="max-w-[32em] text-muted [&_p]:text-[19px] [&_p]:leading-[1.42] [&_strong]:text-text-dark"
+      class="max-w-[32em] text-muted [&_p]:text-intro [&_strong]:text-text-dark"
     >
       <Content />
     </div>
@@ -72,7 +70,7 @@ if (aside && presentation !== "tabs") {
         {links.map((link) => (
           <a
             href={link.href}
-            class="text-[17px] text-primary no-underline hover:underline"
+            class="text-copy text-primary no-underline hover:underline"
           >
             {link.label} →
           </a>

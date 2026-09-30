@@ -14,7 +14,7 @@ interface Props {
 const { id, chapterName, items } = Astro.props;
 const total = String(items.length).padStart(2, "0");
 const arrowButtonClass =
-  "grid size-9 flex-none cursor-pointer place-items-center rounded-lg border border-border bg-card text-[13px] text-text-dark transition-colors hover:border-primary hover:bg-primary/8 disabled:cursor-default disabled:border-border disabled:bg-card disabled:opacity-35";
+  "grid size-9 flex-none cursor-pointer place-items-center rounded-lg border border-border bg-card text-caption text-text-dark transition-colors hover:border-primary hover:bg-primary/8 disabled:cursor-default disabled:border-border disabled:bg-card disabled:opacity-35";
 ---
 
 <!-- Full-bleed track; `--edge` lines the first slide up with the chapter text. -->
@@ -49,10 +49,8 @@ const arrowButtonClass =
               autoplay={false}
             />
           </div>
-          <p class="px-4 pt-3.5 pb-4 text-[15px] leading-[1.45] text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">
-            <b class="mb-0.5 block text-[17px] font-bold text-text-dark">
-              {item.title}
-            </b>
+          <p class="px-4 pt-3.5 pb-4 text-small text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">
+            <b class="mb-0.5 block text-copy text-text-dark">{item.title}</b>
             {item.description}
           </p>
         </div>
@@ -62,7 +60,7 @@ const arrowButtonClass =
 
   <div class="mt-[22px] flex items-center gap-2.5 px-(--edge)">
     <span
-      class="min-w-[4.5em] font-mono text-[13px] text-muted tabular-nums"
+      class="min-w-[4.5em] font-mono text-caption tracking-normal text-muted tabular-nums"
       aria-hidden="true"
     >
       <b data-gallery-count class="font-normal text-text-dark">01</b> / {total}
