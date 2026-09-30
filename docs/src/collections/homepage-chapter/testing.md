@@ -37,4 +37,4 @@ links:
     href: /features/physical-devices/
 ---
 
-Send push notifications, open deep links, simulate walking and driving routes, and reset permissions in one click. Then open the **same deep links and routes on a real iPhone or iPad**.
+Send push notifications, open deep links, simulate walking and driving routes, and reset permissions in one click. Then test the **same deep links and routes on a real iPhone or iPad**.

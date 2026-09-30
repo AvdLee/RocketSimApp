@@ -21,7 +21,7 @@ items:
       path: ../../content/blog/testing-ai-agents-ios-simulator/agent-scenarios-testing-face-id.png
       alt: "Agent benchmark app answering a Face ID prompt in the Simulator"
   - title: "Always in sync"
-    description: "One-click install for Cursor, Claude, Codex, and Xcode, kept up to date."
+    description: "One-click install for Cursor, Claude, Codex, and Xcode, always up to date."
     media:
       type: image
       path: ../../content/blog/ai-agents-ios-simulator/cli-agent-settings-hero.png
