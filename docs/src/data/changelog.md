@@ -4,6 +4,10 @@
 
 - Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in.
 - CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
+- Added real-device bezels for iPhone 18 Pro, iPhone 18 Pro Max, and folded and unfolded iPhone Duo.
+- Added iPhone Duo capture support: screenshots and recordings capture both displays and the live hinge angle, and render the fold pose through Apple's 3D folding model in the app, editor, previews, and thumbnails. Renders follow the Simulator orientation with upright interface content, support transparent or custom backgrounds, and use an automatic ratio that stays compact while folded and expands when the device unfolds.
+- CLI: iPhone Duo support. `screenshot` and `video record` render the fold pose for every styled bezel, including the Duo-only `--bezel device3d`. `duo pose` controls the simulator hinge directly (without Device Hub or macOS Accessibility permission), and `duo hinge` reports the hinge state and angle. Plain Duo screenshots capture the display that shows the interface (outer while closed, inner while open) in that display's orientation.
+- Rotating an iPhone, iPad, or iPhone Duo Simulator while recording is now preserved and smoothly animated in editor previews, thumbnails, and exported videos.
 
 **Improved:**
 
@@ -12,9 +16,11 @@
 - Previews that no browser is watching, including the ones CLI agent commands start automatically, no longer stream or encode Simulator frames, so they leave RocketSim idle.
 - Browser Preview skips accessibility refreshes while the screen is unchanged or the Simulator is recording.
 - Recordings no longer contain bursts of repeated frames after a brief system stall.
+- iPhone Duo touches, the grid, and the rulers now line up with the device in Device Hub when the Duo is closed or fully unfolded, instead of reporting that Device Hub is in expanded mode. The grid and rulers follow the orientation Device Hub draws, including after unfolding the Duo with the hinge control.
 
 **Fixed:**
 
+- CLI: installing the `rocketsim` command into `~/.local/bin` no longer fails with "The selected folder doesn't appear to be on your PATH", including on machines where the user isn't your main account (for example a CI user). (Thanks, G. Ambrozio!)
 - Starting a Browser Preview no longer freezes RocketSim's interface for up to a second.
 - CLI: `rocketsim video record` no longer fails for recordings larger than 10 MB (about 20 seconds at 60 fps). Large results are now handed over through a temporary file.
 - Browser Preview sessions now stop when their Simulator is deleted.
