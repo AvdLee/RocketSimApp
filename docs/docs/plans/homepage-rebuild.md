@@ -21,7 +21,7 @@ decides where each chapter goes.
 | Styling | Tailwind v4, with prototype colors and chapter hues as theme tokens. No new `src/old`-style scoped CSS. |
 | Header | A homepage-only header, with the chapter-menu swap, selected through an option on `Base.astro`. Other pages keep today's header. |
 | Font | Keep the site's system font stack from `src/config/theme.json` (`-apple-system, system-ui, …`). Phase 2 tunes the type scale, weights and tracking, not the typeface. |
-| Media | Use the image and video files from the prototype. Reuse existing repo assets where the file is identical. |
+| Media | Reuse the original images and videos already in the repo. The prototype's files are smaller copies of them, and Astro already makes responsive webp from the originals. |
 | Numbers | "80,000+ developers" replaces "25,000+ developers". |
 
 ## Constraints from feedback and the current site
@@ -113,7 +113,8 @@ title: "Your agent can finally see the Simulator."
 color: agents                       # maps to a theme token (--color-chapter-agents)
 tile:
   title: "Your AI agent sees and drives the Simulator."
-  image: ../../assets/home/tiles/agents.webp
+  image: ../../content/blog/ios-simulator-browser-preview/browser-preview.webp
+  # or `poster: /features/posters/<video>.webp` for a public path
 presentation: tabs                  # tabs | gallery | closer-look
 items:
   - feature: 00-agentic-video       # reference('feature')
@@ -124,13 +125,7 @@ items:
     description: "Follow along live and mark up what to change."
   - title: "Always in sync"         # inline item, no feature entry
     description: "One-click setup for Cursor, Claude, Codex, and Xcode."
-    media: { type: image, path: ../../assets/home/cli-agent-settings.webp, alt: "…" }
-extras:                             # optional, typed blocks, rendered in order
-  - type: terminal
-    lines: ["rocketsim doctor", "rocketsim elements --agent-mode nav"]
-  - type: stat
-    value: "~95%"
-    label: "less context than other Simulator-control tools."
+    media: { type: image, path: ../../content/blog/ai-agents-ios-simulator/cli-agent-settings-hero.png, alt: "…" }
 links:
   - label: "Explore Agentic Coding"
     href: /features/agentic-development/
@@ -141,16 +136,33 @@ The built-in **CLI and Agent Skill** let Cursor, Claude, Codex, and Xcode …
 - **Item resolution:** an override field wins, and anything not overridden falls
   back to the referenced feature (`name`, `tagLine`, `asset`). The order of
   `items` is the display order. Feature files and `/features/*` pages are not
-  changed.
-- **Extras** are a small, closed set of typed blocks: `terminal`, `stat`, `quote`,
-  `credit` and `cta`. They cover the prototype's agents, network and teams
-  chapters. New block types are added in code on purpose, so free-form HTML never
-  ends up in content.
+  changed. Video items get their poster from `posters/<name>.webp` next to the
+  video, the same convention `Feature.astro` uses.
+- **Item media:** an item without a feature entry points at the original image
+  where it already lives, in a docs or blog folder, instead of a copy. A docs
+  screenshot update therefore also changes the homepage. That is intended: the
+  homepage shows the current product.
+- **Tiles** set either `image` (a local asset) or `poster` (a public path, such as
+  a video poster). Astro's `image()` cannot load public paths, so one field
+  cannot take both.
+- **Build guards:** an unknown chapter or feature, an item with nothing to fall
+  back on, or a tile with both or neither of `image` and `poster` fails the build.
+- **Extras** (terminal, stat, quote, credit, team CTA) are components, not
+  content. They are not in the schema. Few chapters need them, and components keep
+  their markup and analytics in code, so free-form HTML never ends up in content.
 - **Presentations** are components that take the same resolved item list, so a
   chapter can switch between `tabs`, `gallery` and `closer-look` by changing one
   field.
+- **Colors:** a chapter's `color` picks a `--color-chapter-*` theme token from
+  `src/styles/main.css`. A new hue needs a token and an enum value. A new chapter
+  can also reuse an existing hue.
+- **Rejected alternatives:** an `order` field or a config file for chapter order,
+  because the order would be split between content and the template, and fixed
+  sections would need their own entries. Copying feature copy and media into each
+  chapter, because the homepage and `/features/*` would drift apart. Extras as
+  typed content blocks, for the reasons above.
 - Document the model in [CONTENT-AUTHORING.md](../../CONTENT-AUTHORING.md) in the
-  launch PR, and add an ADR (`docs/adr/0002-homepage-chapters.md`) in PR 1.
+  launch PR.
 
 ### Components
 
@@ -168,6 +180,8 @@ avoid the `@/components` alias: tsconfig and knip resolve it to different folder
 - `src/lib/homepage.ts`: loads a chapter by ID, and resolves its items
   against the feature collection. This is the only place that knows how content
   becomes props.
+- `src/lib/homepageItems.ts`: the item resolution itself. It is pure (no
+  `astro:content` import), so it is unit-tested with `node --test`.
 
 The referer/`ct=` script in the current `index.astro` moves into a shared module
 used by both pages, so hero install attribution keeps working on `/home-next/`.
@@ -217,18 +231,19 @@ Aim for correct markup, content and layout, with basic working interaction
 - **PR 1: foundation and content model**
   - `/home-next/` route: noindex, excluded from the sitemap, with a build test.
   - A `header` option on `Base.astro`, plus a first `HomeHeader` (main layer only).
-  - The `homepage-chapter` collection schema, the `src/lib/homepage.ts` resolver,
-    and the ADR.
+  - The `homepage-chapter` collection schema, and the `src/lib/homepage.ts`
+    loader with the unit-tested `src/lib/homepageItems.ts` resolver.
   - Tailwind tokens for the page palette and the chapter hues.
   - Hero, glance and brands.
   - All six chapters with real copy, each rendered as a plain static item list.
-  - Media import: take the files from the prototype artifact. Reuse existing repo
-    assets where the file is the same, and put new ones in `src/assets/home/`
-    (images) and `public/home/` (videos, with posters in `public/home/posters/`).
+  - Media: reuse the original images and videos in the repo. No new media files.
+  - Build tests: glance tiles match the chapter order, and no local media on the
+    page is missing.
 - **PR 2: chapter presentations**
   - `Tabs`, `Gallery` and `CloserLook`, with click and keyboard interaction and
     ARIA tab/carousel semantics.
-  - Extras: terminal, stat, quote, credit and team CTA.
+  - Extras as components: terminal, stat, quote, credit and team CTA. The team
+    CTA brings the Teams chapter's links.
   - Wire each chapter to its prototype presentation.
 - **PR 3: the rest of the page**
   - Reviews and mentions (the live Senja widgets), split CTA, everyday grid, final
@@ -305,5 +320,6 @@ Aim for correct markup, content and layout, with basic working interaction
    `CTA: Homepage Hero - Features`.
 4. **Numbers:** 80,000+ developers.
 5. **Font:** the existing system font stack.
-6. **New media:** use the files from the prototype.
+6. **New media:** reuse the originals in the repo. The prototype's files are
+   smaller copies of them.
 7. **Preview path:** `/home-next/`.
