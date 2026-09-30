@@ -9,6 +9,9 @@ import appStoreFeatured from "@/assets/app-store-featured.jpg";
 // src/lib/utils/storedReferer.ts.
 const appStoreHref =
   "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8";
+// The badges keep the campaign they have on the live homepage.
+const badgeHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=Landing%20Page%20or%20Form%20-%208653523&mt=8";
 const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
 
 const badges = [
@@ -74,7 +77,7 @@ const badges = [
     {
       badges.map(({ image, alt, placement }) => (
         <a
-          href={appStoreHref}
+          href={badgeHref}
           class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=badge`}
           target="_blank"
           rel="noopener"

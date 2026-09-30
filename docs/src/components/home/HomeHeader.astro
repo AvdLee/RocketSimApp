@@ -47,13 +47,26 @@ const [download] = config.navigation_buttons;
       </a>
       <button
         type="button"
-        class="js-home-nav-toggle ml-auto p-1.5 text-white md:ml-4 lg:hidden"
+        class="js-home-nav-toggle group ml-auto p-1.5 text-white md:ml-4 lg:hidden"
         aria-expanded="false"
         aria-controls="home-nav-panel"
         aria-label="Menu"
       >
-        <svg viewBox="0 0 20 20" class="size-5 fill-current" aria-hidden="true">
+        <svg
+          viewBox="0 0 20 20"
+          class="size-5 fill-current group-aria-expanded:hidden"
+          aria-hidden="true"
+        >
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        </svg>
+        <svg
+          viewBox="0 0 20 20"
+          class="hidden size-5 fill-current group-aria-expanded:block"
+          aria-hidden="true"
+        >
+          <polygon
+            points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+            transform="rotate(45 10 10)"></polygon>
         </svg>
       </button>
     </div>
@@ -91,14 +104,25 @@ const [download] = config.navigation_buttons;
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const toggle = document.querySelector(".js-home-nav-toggle");
+    const header = document.querySelector(".home-header");
+    const toggle = document.querySelector<HTMLElement>(".js-home-nav-toggle");
     const panel = document.getElementById("home-nav-panel");
-    if (!toggle || !panel) return;
+    if (!header || !toggle || !panel) return;
 
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") !== "true";
+    const setOpen = (open: boolean) => {
       toggle.setAttribute("aria-expanded", String(open));
       panel.hidden = !open;
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    // Escape closes the menu and hands focus back to the toggle.
+    header.addEventListener("keydown", (event) => {
+      if (!(event instanceof KeyboardEvent) || event.key !== "Escape") return;
+      if (panel.hidden) return;
+      setOpen(false);
+      toggle.focus();
     });
   });
 </script>
