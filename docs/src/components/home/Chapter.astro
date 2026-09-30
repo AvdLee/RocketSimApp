@@ -29,7 +29,7 @@ if (aside && presentation !== "tabs") {
   id={id}
   data-chapter
   data-presentation={presentation}
-  class="mx-auto max-w-[1120px] px-5 pt-[120px] pb-4 md:pt-[184px] md:pb-8"
+  class="mx-auto max-w-[1120px] px-5 pt-section pb-4 md:pb-8"
   style={`--chapter: var(--color-chapter-${color})`}
 >
   <div
@@ -72,7 +72,7 @@ if (aside && presentation !== "tabs") {
             href={link.href}
             class="text-copy text-primary no-underline hover:underline"
           >
-            {link.label} →
+            {link.label} <span aria-hidden="true">→</span>
           </a>
         ))}
       </div>

@@ -11,7 +11,9 @@ event only when tracking a genuinely new action.
 - `CTA: Homepage Insights - Learn More` opens `/for-teams`.
 - `CTA: Homepage Mid 2 - Trial` opens `/for-teams`. The historical name says
   "Trial," but the action only opens Teams information. Keep the event name and
-  describe it as a Teams information click in Plausible.
+  describe it as a Teams information click in Plausible. On the rebuilt
+  homepage it is the "Explore Build Insights" link, which lands on the page's
+  Build Insights showcase (`/for-teams/#insight-showcase-title`).
 - `CTA: Homepage Insights - Trial` opens the Teams trial form from the
   homepage's Teams chapter (`utm_content=homepage_insights`). It is new with the
   homepage rebuild and only on the `/home-next/` preview until launch. Add it as

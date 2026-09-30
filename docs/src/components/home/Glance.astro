@@ -32,7 +32,11 @@ const chapters = await Promise.all(
             {name}
           </span>
           <h3 class="mt-1.5 text-title-4">{tile.title}</h3>
-          <span class="mt-2 text-small text-muted">Jump to chapter ↓</span>
+          <span class="mt-2 text-small text-muted">
+            Jump to chapter <span aria-hidden="true">↓</span>
+          </span>
+          {/* A fixed frame that shows the top of the image; it sizes the
+              poster too, which Astro doesn't process. */}
           <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
             {tile.image ? (
               <Image
@@ -40,14 +44,15 @@ const chapters = await Promise.all(
                 alt=""
                 widths={[360, 720]}
                 sizes="(min-width: 1024px) 340px, (min-width: 540px) 50vw, 100vw"
-                class="w-full rounded-t-[10px]"
+                class="size-full rounded-t-[10px] object-cover object-top"
               />
             ) : (
               <img
                 src={tile.poster}
                 alt=""
                 loading="lazy"
-                class="w-full rounded-t-[10px]"
+                decoding="async"
+                class="size-full rounded-t-[10px] object-cover object-top"
               />
             )}
           </div>

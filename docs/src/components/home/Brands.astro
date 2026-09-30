@@ -1,5 +1,9 @@
 ---
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { getEntry } from "astro:content";
+
+import { svgSize } from "@/lib/utils/svgSize";
 
 const brands = await getEntry(
   "trustedBrandsSectionCollection",
@@ -8,6 +12,13 @@ const brands = await getEntry(
 if (!brands) {
   throw new Error("Missing src/content/sections/trusted-brands.md.");
 }
+
+// The logos are SVGs in public/; their size lets the row reserve its space.
+const logos = brands.data.list.map(({ brand, logo }) => ({
+  brand,
+  logo,
+  ...svgSize(readFileSync(join(process.cwd(), "public", logo), "utf8"), logo),
+}));
 
 const stats = [
   { value: "80,000+", label: "developers last year" },
@@ -25,11 +36,13 @@ const stats = [
       class="flex flex-wrap items-center justify-center gap-x-11 gap-y-6 lg:flex-nowrap lg:justify-between lg:gap-x-5"
     >
       {
-        brands.data.list.map(({ brand, logo }) => (
+        logos.map(({ brand, logo, width, height }) => (
           <li>
             <img
               src={logo}
               alt={brand}
+              width={width}
+              height={height}
               loading="lazy"
               class="h-6 w-auto opacity-60 brightness-0 invert sm:h-7"
             />

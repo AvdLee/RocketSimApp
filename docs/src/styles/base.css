@@ -12,6 +12,14 @@ main {
   overflow-x: clip;
 }
 
+/* One keyboard focus ring across the site, matching the docs
+   (starlight-custom.css). `:where` keeps it at zero specificity, so a
+   component's own focus style still wins. */
+:where(:focus-visible) {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 h1,
 h2,
 h3,

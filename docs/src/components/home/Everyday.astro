@@ -45,7 +45,7 @@ const items = [
 ---
 
 <section
-  class="mx-auto max-w-[1120px] px-5 pt-[120px] pb-10 md:pt-[184px]"
+  class="mx-auto max-w-[1120px] px-5 pt-section pb-10"
   aria-labelledby="everyday-title"
 >
   <h2 id="everyday-title" class="text-title-2 text-balance">
@@ -55,7 +55,7 @@ const items = [
     Details that save a few seconds each time, and hours every month.
   </p>
   <ul
-    class="mt-9 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border lg:grid-cols-4"
+    class="mt-stack grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border lg:grid-cols-4"
   >
     {
       items.map(({ key, title, text }) => (
@@ -74,7 +74,7 @@ const items = [
       href="/features/"
       class="text-copy text-primary no-underline hover:underline"
     >
-      See all features →
+      See all features <span aria-hidden="true">→</span>
     </a>
   </div>
 </section>

@@ -36,4 +36,4 @@ links:
     href: /features/accessibility/
 ---
 
-Overlay the design on your running app, measure with grids and rulers, and slow animations down to catch every frame. **VoiceOver Navigator** shows the reading order right on the Simulator, no device needed.
+Overlay the design on your running app, measure with grids and rulers, and slow animations down to catch every frame. **VoiceOver Navigator** shows the reading order right on the Simulator — no device needed.

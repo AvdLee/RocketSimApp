@@ -23,13 +23,13 @@ const arrowButtonClass =
   role="region"
   aria-roledescription="carousel"
   aria-label={`${chapterName} highlights`}
-  class="mx-[calc(50%-50vw)] mt-16 [--edge:max(20px,calc((100vw-1080px)/2))]"
+  class="mx-[calc(50%-50vw)] mt-stack [--edge:max(20px,calc((100vw-1080px)/2))]"
 >
   <div
     id={`${id}-track`}
     data-gallery-track
     tabindex="0"
-    class="flex snap-x snap-mandatory scroll-px-(--edge) gap-5 overflow-x-auto overscroll-x-contain px-(--edge) [scrollbar-width:none]"
+    class="flex snap-x snap-mandatory scroll-px-(--edge) gap-5 overflow-x-auto overscroll-x-contain px-(--edge) [scrollbar-width:none] focus-visible:-outline-offset-2"
   >
     {
       items.map((item, index) => (
@@ -39,9 +39,10 @@ const arrowButtonClass =
           aria-roledescription="slide"
           aria-label={`${index + 1} of ${items.length}`}
           data-current={index === 0 ? "" : undefined}
-          class="flex aspect-[4/5] max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card opacity-50 data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))] data-current:opacity-100 sm:aspect-[16/11]"
+          class="group flex aspect-[4/5] max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))] sm:aspect-[16/11]"
         >
-          <div class="min-h-0 flex-1 border-b border-border bg-surface">
+          {/* Neighbouring slides dim their media only, so their captions stay readable. */}
+          <div class="min-h-0 flex-1 border-b border-border bg-surface opacity-50 group-data-current:opacity-100">
             <Media
               media={item.media}
               sizes="(min-width: 1048px) 880px, 84vw"
@@ -50,7 +51,9 @@ const arrowButtonClass =
             />
           </div>
           <p class="px-4 pt-3.5 pb-4 text-small text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">
-            <b class="mb-0.5 block text-copy text-text-dark">{item.title}</b>
+            <b class="mb-0.5 block text-copy text-muted group-data-current:text-text-dark">
+              {item.title}
+            </b>
             {item.description}
           </p>
         </div>

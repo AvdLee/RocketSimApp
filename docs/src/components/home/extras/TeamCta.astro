@@ -2,7 +2,8 @@
 import { teamsTrialUrl } from "@/lib/utils/teamsUrl";
 
 // The Teams chapter's call to action. Event names follow ANALYTICS.md: the
-// second /for-teams/ link keeps the historical `Mid 2 - Trial` name.
+// second /for-teams/ link keeps the historical `Mid 2 - Trial` name, and
+// lands on that page's Build Insights showcase.
 const trialHref = teamsTrialUrl("homepage_insights");
 const linkClass = "text-copy text-primary no-underline hover:underline";
 ---
@@ -21,12 +22,12 @@ const linkClass = "text-copy text-primary no-underline hover:underline";
       linkClass,
     ]}
   >
-    Learn more about RocketSim for Teams →
+    Learn more about RocketSim for Teams <span aria-hidden="true">→</span>
   </a>
   <a
-    href="/for-teams/"
+    href="/for-teams/#insight-showcase-title"
     class:list={["plausible-event-name=CTA:+Homepage+Mid+2+-+Trial", linkClass]}
   >
-    Explore Build Insights →
+    Explore Build Insights <span aria-hidden="true">→</span>
   </a>
 </div>
