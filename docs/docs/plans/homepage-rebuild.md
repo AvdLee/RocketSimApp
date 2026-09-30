@@ -9,6 +9,7 @@ Rebuild the rocketsim.app homepage based on the prototype, in small PRs that can
 each be reviewed and merged. Build the structure first, then fine-tune it, then
 add animations. Chapters, their features, and the order of both must stay
 content-driven, so we can add or reorder chapters without touching components.
+The other sections are fixed in code.
 
 ## Decisions
 
@@ -16,12 +17,12 @@ content-driven, so we can add or reorder chapters without touching components.
 | --- | --- |
 | Rollout | Build on master at an unlinked, noindex path: `/home-next/`. Swap it in at `/` in the last PR. |
 | Content | A new `homepage-chapter` collection. Each chapter lists **feature references** in display order. Each item can **override** its title, description or media, and **inline items** are allowed for things that have no feature entry. |
-| Page order | One composition file lists every homepage section in order, with chapters included by ID. |
+| Page order | The page template sets the order of the fixed sections. Only chapters are dynamic: they're sorted by an `order` field and fill slots in the template. |
 | Styling | Tailwind v4, with prototype colors and chapter hues as theme tokens. No new `src/old`-style scoped CSS. |
 | Header | A homepage-only header, with the chapter-menu swap, selected through an option on `Base.astro`. Other pages keep today's header. |
 | Font | Keep the site's system font stack from `src/config/theme.json` (`-apple-system, system-ui, …`). Phase 2 tunes the type scale, weights and tracking, not the typeface. |
 | Media | Use the image and video files from the prototype. Reuse existing repo assets where the file is identical. |
-| Numbers | "80,000+ developers" replaces "25,000+ developers". Stats live in content, not in components. |
+| Numbers | "80,000+ developers" replaces "25,000+ developers". |
 
 ## Constraints from feedback and the current site
 
@@ -60,44 +61,30 @@ content-driven, so we can add or reorder chapters without touching components.
 
 ## Content model
 
-### Page composition
+### Page order
 
-One ordered list decides what the homepage shows. Adding a chapter means one new
-file plus one line here. Reordering means moving lines.
+The chapter collection is the only new content. Everything else is fixed in the
+page template, `src/pages/home-next.astro`:
 
-```yaml
-# src/content/sections/homepage.yaml
-sections:
-  - type: hero
-  - type: glance        # tiles generated from the chapters below, in order
-  - type: brands        # reuses trusted-brands.md
-  - type: chapter
-    id: agents
-  - type: chapter
-    id: captures
-  - type: reviews       # Senja widget 1
-  - type: chapter
-    id: network
-  - type: split-cta
-  - type: chapter
-    id: testing
-  - type: chapter
-    id: design
-  - type: chapter
-    id: teams
-  - type: everyday      # "And the small things you'll use every day."
-  - type: mentions      # Senja widget 2
-  - type: final-cta
-  - type: newsletter
+```text
+hero → glance → brands
+→ chapters 1–2 → reviews (Senja)
+→ chapter 3    → split CTA
+→ remaining chapters
+→ everyday grid → mentions (Senja) → final CTA → newsletter
 ```
 
+- Chapters are sorted by their `order` field. Use steps of 10, so a new chapter can
+  go in between without renumbering.
+- Reviews and the split CTA are placed **by position**, not by chapter ID: reviews
+  always come after the second chapter, whichever chapter that is. With fewer
+  chapters, a slot renders after the last chapter.
 - The glance grid and the chapter menu in the header are both **derived** from the
-  `chapter` entries in this list, so they can't drift.
-- An unknown chapter ID fails the build. A chapter file with `draft: true` is
-  skipped everywhere.
-- Section copy (hero, split CTA, final CTA, everyday grid) lives in the same file
-  or in sibling section files, following the existing `src/content/sections/`
-  pattern.
+  sorted chapters, so they can't drift.
+- A chapter file with `draft: true` is skipped everywhere.
+- Copy for the fixed sections (hero, split CTA, final CTA, everyday grid, stats)
+  lives in their components. The brands row keeps reading
+  `src/content/sections/trusted-brands.md`.
 
 ### Chapter collection
 
@@ -106,6 +93,7 @@ and the Markdown body is the chapter's intro paragraph.
 
 ```yaml
 ---
+order: 10                           # position among chapters
 name: "Agentic Coding"              # eyebrow, nav label, tile label
 title: "Your agent can finally see the Simulator."
 color: agents                       # maps to a theme token (--color-chapter-agents)
@@ -164,8 +152,9 @@ avoid the `@/components` alias: tsconfig and knip resolve it to different folder
 - `SplitCta.astro`, `Everyday.astro`, `FinalCta.astro`
 - Reused as they are: `Reviews` and `SocialMediaMentions` (Senja), `NewsLetterForm`
   (Kit), `MobileDownloadLinkForm`, `Notification`
-- `src/lib/homepage.ts`: loads the composition file, resolves chapters and items,
-  and validates IDs. This is the only place that knows how content becomes props.
+- `src/lib/homepage.ts`: loads and sorts the chapters, and resolves their items
+  against the feature collection. This is the only place that knows how content
+  becomes props.
 
 The referer/`ct=` script in the current `index.astro` moves into a shared module
 used by both pages, so hero install attribution keeps working on `/home-next/`.
@@ -215,8 +204,8 @@ Aim for correct markup, content and layout, with basic working interaction
 - **PR 1: foundation and content model**
   - `/home-next/` route: noindex, excluded from the sitemap, with a build test.
   - A `header` option on `Base.astro`, plus a first `HomeHeader` (main layer only).
-  - The `homepage-chapter` collection schema, the composition file, the
-    `src/lib/homepage.ts` resolver with validation, and the ADR.
+  - The `homepage-chapter` collection schema, the `src/lib/homepage.ts` resolver,
+    and the ADR.
   - Tailwind tokens for the page palette and the chapter hues.
   - Hero, glance and brands.
   - All six chapters with real copy, each rendered as a plain static item list.
@@ -283,11 +272,9 @@ Aim for correct markup, content and layout, with basic working interaction
 
 ## Definition of done: "flexible content"
 
-- Adding a chapter takes one new `homepage-chapter` file and one line in
-  `homepage.yaml`. The glance tile, header menu entry and anchor appear
-  automatically.
-- Reordering chapters or interstitial sections means moving lines in
-  `homepage.yaml`.
+- Adding a chapter takes one new `homepage-chapter` file. The glance tile, header
+  menu entry and anchor appear automatically.
+- Reordering chapters means changing their `order` values.
 - Adding, removing or reordering features in a chapter means editing its `items`
   list.
 - Changing a chapter's presentation means changing one field.
