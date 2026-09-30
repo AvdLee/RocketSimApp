@@ -58,11 +58,11 @@ const seo = {
       label="RocketSim CLI commands an agent can run"
       commands={[
         "rocketsim doctor",
-        "rocketsim elements --agent-mode nav",
+        "rocketsim elements --agent",
         'rocketsim interact tap --label "Continue"',
         "rocketsim wait screen-changed",
         "rocketsim network set 3g",
-        "rocketsim video record --bezel device --touches",
+        "rocketsim video record --touches > demo.mp4",
       ]}
     />
     <Stat
@@ -73,7 +73,7 @@ const seo = {
         { value: "99%+", label: "less command output" },
         { value: "~24%", label: "less command time" },
       ]}
-      source="Head-to-head benchmark, July 2026."
+      source="Head-to-head benchmark, July 2026. Context estimated in bytes."
     />
   </Chapter>
   <Chapter id="captures" />
