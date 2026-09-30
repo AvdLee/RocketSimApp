@@ -7,3 +7,8 @@ export const teamsUrl =
   import.meta.env.MODE === "production"
     ? config.site.teams_base_url
     : "http://localhost:5173";
+
+// The hosted Teams trial form. `content` becomes `utm_content`, telling the
+// Teams app which call to action sent the visitor.
+export const teamsTrialUrl = (content: string) =>
+  `${teamsUrl}/signup/trial?utm_source=website&utm_medium=website&utm_content=${content}`;

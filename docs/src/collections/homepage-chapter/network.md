@@ -1,5 +1,6 @@
 ---
 name: "Network Monitoring"
+menuLabel: "Network"
 title: "See every request. Before you set a breakpoint."
 color: network
 tile:

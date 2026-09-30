@@ -1,0 +1,39 @@
+---
+import LazySenja from "../../layouts/components/LazySenja.astro";
+
+// The Senja widgets on the homepage. Each embed keeps its loader on
+// `data-senja-src`, and LazySenja injects it once the embed nears the
+// viewport. The min-heights reserve the widget's space so it does not shift
+// the page when it renders (keeps CLS at 0).
+const widgets = {
+  reviews: {
+    id: "3e26a85b-fd07-45d2-88b6-a69564850353",
+    src: "https://widget.senja.io/widget/3e26a85b-fd07-45d2-88b6-a69564850353/platform.js",
+    lazyload: "false",
+    class: "min-h-[900px] md:min-h-[520px]",
+  },
+  mentions: {
+    id: "7b8ef1aa-201a-401a-a9d3-99fdf5325311",
+    src: "https://static.senja.io/dist/platform.js",
+    lazyload: "true",
+    class: "min-h-[1000px] md:min-h-[600px]",
+  },
+};
+
+interface Props {
+  widget: keyof typeof widgets;
+}
+
+const widget = widgets[Astro.props.widget];
+---
+
+<div
+  class:list={["senja-embed js-lazy-senja block w-full", widget.class]}
+  data-id={widget.id}
+  data-mode="shadow"
+  data-lazyload={widget.lazyload}
+  data-senja-src={widget.src}
+>
+</div>
+
+<LazySenja />

@@ -1,0 +1,21 @@
+---
+import SenjaWidget from "./SenjaWidget.astro";
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-[120px] md:pt-[184px]"
+  aria-labelledby="mentions-title"
+>
+  <h2
+    id="mentions-title"
+    class="max-w-[16em] text-[clamp(32px,5vw,48px)] leading-[1.08] font-bold tracking-[-0.03em] text-balance"
+  >
+    Join thousands of productive developers.
+  </h2>
+  <p class="mt-3 max-w-[34em] text-[19px] text-muted">
+    See what others say about RocketSim on social media.
+  </p>
+  <div class="mt-9">
+    <SenjaWidget widget="mentions" />
+  </div>
+</section>

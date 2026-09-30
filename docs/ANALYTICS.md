@@ -16,6 +16,12 @@ event only when tracking a genuinely new action.
   homepage's Teams chapter (`utm_content=homepage_insights`). It is new with the
   homepage rebuild and only on the `/home-next/` preview until launch. Add it as
   a Plausible goal before the launch.
+- `CTA: Homepage Split - Trial` opens the Teams trial form from the "For your
+  team" card in the homepage's split call-to-action
+  (`utm_content=homepage_split`). The live homepage's CTA banner had no event
+  for this button. It is new with the homepage rebuild and only on the
+  `/home-next/` preview until launch. Add it as a Plausible goal before the
+  launch.
 - `CTA: Team Page - See Pricing` opens `/pricing/`.
 - `CTA: Team Page - Start Trial` opens the Teams trial form from the hero or
   bottom call-to-action.
@@ -28,6 +34,36 @@ event only when tracking a genuinely new action.
   page's bottom call-to-action.
 - `CTA: Blog Bottom - Trial` opens the Teams trial form from a blog post's
   bottom call-to-action.
+
+## Homepage rebuild events
+
+The rebuilt homepage (`/home-next/` until launch, see
+[the rebuild plan](./docs/plans/homepage-rebuild.md)) keeps the live event
+names. The preview shares the live Plausible script, so filter on `page = /`
+when comparing before and after.
+
+`App Store Install` placements (`surface=landing`):
+
+- `landing-topbar` (`format=button`): the header's Download button, in both
+  the main and the chapter menu.
+- `landing-hero` (`format=button`): the hero's Free download button. Its `ct=`
+  is rewritten to the stored first-touch referer (`Stored Referer`).
+- `landing-app-store-reviews` and `landing-app-store-featured`
+  (`format=badge`): the App Store badges under the hero.
+- `landing-cta-banner` (`format=button`): the Free download button in the
+  split call-to-action, which replaces the CTA banner.
+- `landing-footer` (`format=button`): the closing call-to-action's Free
+  download button. A new placement value, not a new event.
+
+Other homepage events: `CTA: Homepage Hero - For Teams`, and the Teams events
+above (`CTA: Homepage Split - Trial`, `CTA: Homepage Insights - Trial`,
+`CTA: Homepage Insights - Learn More`, `CTA: Homepage Mid 2 - Trial`). The
+`Mobile Download …` events, `Newsletter Form Conversion` and `Stored Referer`
+come from the same components as on the live homepage.
+
+`CTA: Homepage Hero - Features` is retired with the rebuild: the glance grid
+replaces the hero's "Explore features" link. It keeps firing on the live
+homepage until launch.
 
 ## Inline trial form events
 

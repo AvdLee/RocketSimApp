@@ -1,23 +1,11 @@
 ---
 import SectionHeader from "./SectionHeader.astro";
-import LazySenja from "../../layouts/components/LazySenja.astro";
+import SenjaWidget from "../../components/home/SenjaWidget.astro";
 ---
 
 <style>
   .mentions {
     margin-top: 3rem;
-  }
-
-  /* Reserve space so the lazy-loaded widget does not shove content down when
-     it renders (keeps CLS at 0). */
-  .senja-embed {
-    min-height: 600px;
-  }
-
-  @media (max-width: 768px) {
-    .senja-embed {
-      min-height: 1000px;
-    }
   }
 </style>
 
@@ -30,15 +18,6 @@ import LazySenja from "../../layouts/components/LazySenja.astro";
     />
   </div>
   <div class="deprecated-grid mentions">
-    <div
-      class="senja-embed js-lazy-senja"
-      data-id="7b8ef1aa-201a-401a-a9d3-99fdf5325311"
-      data-lazyload="true"
-      data-mode="shadow"
-      data-senja-src="https://static.senja.io/dist/platform.js"
-    >
-    </div>
+    <SenjaWidget widget="mentions" />
   </div>
 </section>
-
-<LazySenja />

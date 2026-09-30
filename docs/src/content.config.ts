@@ -85,8 +85,10 @@ const homepageChapter = defineCollection({
     ]);
 
     return z.object({
-      // Eyebrow, glance tile label and chapter menu label.
+      // Eyebrow and glance tile label.
       name: z.string(),
+      // The header's chapter menu label, when `name` is too long for it.
+      menuLabel: z.string().optional(),
       title: z.string(),
       // Picks the `--color-chapter-*` theme token.
       color: z.enum([

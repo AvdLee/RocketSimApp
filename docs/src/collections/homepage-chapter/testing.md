@@ -1,5 +1,6 @@
 ---
 name: "Real-World Testing"
+menuLabel: "Testing"
 title: "Reach the states that are hard to reach."
 color: testing
 tile:

@@ -1,5 +1,6 @@
 ---
 name: "Design & Accessibility"
+menuLabel: "Design"
 title: "Pixel-perfect, and usable by everyone."
 color: design
 tile:
