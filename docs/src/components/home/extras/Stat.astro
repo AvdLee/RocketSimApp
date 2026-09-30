@@ -1,5 +1,5 @@
 ---
-import Figure from "./Figure.astro";
+import StatValue from "./StatValue.astro";
 
 interface Props {
   value: string;
@@ -14,7 +14,7 @@ const { value, label, details = [], source } = Astro.props;
 
 <div class="flex flex-1 flex-col justify-end rounded-lg bg-surface p-6">
   <p class="text-figure text-(--chapter)">
-    <Figure value={value} />
+    <StatValue value={value} />
   </p>
   <p class="mt-2 text-small text-muted">{label}</p>
   {
@@ -24,7 +24,7 @@ const { value, label, details = [], source } = Astro.props;
           <div class="flex flex-col-reverse">
             <dt class="text-caption text-muted">{detail.label}</dt>
             <dd class="m-0 text-title-4 text-text-dark tabular-nums">
-              <Figure value={detail.value} />
+              <StatValue value={detail.value} />
             </dd>
           </div>
         ))}

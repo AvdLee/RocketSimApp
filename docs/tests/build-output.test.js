@@ -263,6 +263,21 @@ function controlledElement(body, control) {
 
 const isHidden = (tag) => /\shidden\b/.test(tag);
 
+// The homepage preview's markup, without its scripts.
+function homepageMarkup() {
+  return readDist("home-next/index.html").replace(
+    /<script\b[\s\S]*?<\/script>/g,
+    "",
+  );
+}
+
+// One homepage chapter by ID, from homepageChapters().
+function homepageChapter(chapterId) {
+  const chapter = homepageChapters().find(({ id }) => id === chapterId);
+  assert.ok(chapter, `expected the ${chapterId} chapter`);
+  return chapter;
+}
+
 test("homepage chapters render the presentation their content asks for", () => {
   const chapters = homepageChapters();
   assert.ok(chapters.length > 0, "expected chapters on the page");
@@ -372,8 +387,7 @@ test("homepage galleries follow the ARIA carousel pattern", () => {
 
 test("homepage Teams chapter keeps its Plausible events", () => {
   // See ANALYTICS.md: the names are part of the historical reporting contract.
-  const teams = homepageChapters().find(({ id }) => id === "teams");
-  assert.ok(teams, "expected the teams chapter");
+  const teams = homepageChapter("teams");
   const link = (event) =>
     teams.body.match(
       new RegExp(`<a[^>]*plausible-event-name=${event}[\\s"][^>]*>`),
@@ -398,11 +412,9 @@ test("homepage Teams chapter keeps its Plausible events", () => {
 
 // The homepage preview's header, without its scripts.
 function homepageHeader() {
-  const html = readDist("home-next/index.html").replace(
-    /<script\b[\s\S]*?<\/script>/g,
-    "",
+  const header = homepageMarkup().match(
+    /<header\b[^>]*data-home-header[\s\S]*?<\/header>/,
   );
-  const header = html.match(/<header\b[^>]*data-home-header[\s\S]*?<\/header>/);
   assert.ok(header, "expected the homepage header");
   return header[0];
 }
@@ -530,8 +542,9 @@ test("homepage preview sections share one spacing rhythm", () => {
   const rhythm = sections.filter((tag) =>
     /class="[^"]*\bp[ty]-section\b/.test(tag),
   );
-  // Six chapters, reviews, split CTA, everyday, mentions and the final CTA.
-  assert.equal(rhythm.length, 11);
+  // Every chapter, plus reviews, split CTA, everyday, mentions and the final
+  // CTA.
+  assert.equal(rhythm.length, homepageChapters().length + 5);
   assert.doesNotMatch(html, /\bp[ty]-\[(?:120|184)px\]/);
 });
 
@@ -546,10 +559,7 @@ test("homepage preview lets keyboard users skip the header", () => {
 
 test("homepage preview hides decorative arrows from screen readers", () => {
   // VoiceOver reads "→" as "right arrow"; the link text says enough.
-  const html = readDist("home-next/index.html").replace(
-    /<script\b[\s\S]*?<\/script>/g,
-    "",
-  );
+  const html = homepageMarkup();
   const spoken = (markup) =>
     markup
       .replace(/<([a-z]+)\b[^>]*aria-hidden="true"[^>]*>[\s\S]*?<\/\1>/g, "")
@@ -578,8 +588,7 @@ test("homepage preview gives every image its dimensions", () => {
 
 test("homepage stat figures read naturally", () => {
   // "~95%" would be read as "tilde 95 percent".
-  const agents = homepageChapters().find(({ id }) => id === "agents");
-  assert.ok(agents, "expected the agents chapter");
+  const agents = homepageChapter("agents");
   assert.match(agents.body, /<span[^>]*aria-hidden="true"[^>]*>~95%<\/span>/);
   assert.match(agents.body, /<span class="sr-only">About 95%<\/span>/);
 });
@@ -587,8 +596,7 @@ test("homepage stat figures read naturally", () => {
 test("homepage tabs read in the order they show on phones", () => {
   // The extras beside the stage come after the tab list, so screen readers
   // and phones get stage, tabs, extras.
-  const agents = homepageChapters().find(({ id }) => id === "agents");
-  assert.ok(agents, "expected the agents chapter");
+  const agents = homepageChapter("agents");
   const tablist = agents.body.search(/role="tablist"/);
   const aside = agents.body.search(/data-tabs-aside/);
   assert.ok(aside > 0, "expected the agents aside");
@@ -596,10 +604,7 @@ test("homepage tabs read in the order they show on phones", () => {
 });
 
 test("homepage mentions wall collapses behind a Show more button", () => {
-  const html = readDist("home-next/index.html").replace(
-    /<script\b[\s\S]*?<\/script>/g,
-    "",
-  );
+  const html = homepageMarkup();
   const button = html.match(/<button\b[^>]*data-mentions-toggle[^>]*>/)?.[0];
   assert.ok(button, "expected the Show more button");
   assert.match(button, /aria-expanded="false"/);
