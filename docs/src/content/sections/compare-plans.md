@@ -71,14 +71,18 @@ compare_plans:
       description: |
         Test camera functionality without a physical device by streaming your macOS camera. Scan QR codes or capture assets. All plug & play, you can just use the same AVCapture APIs as normal.
       list:
-        - item: Simulator Camera Captures
-          free: false
+        - item: Simulator Camera side window
+          free: true
           individual: true
           teams: true
+        - item: Simulator Camera streaming days
+          free: "5 days"
+          individual: Unlimited
+          teams: Unlimited
         - item: Barcode & QR Code Scanning
-          free: false
-          individual: true
-          teams: true
+          free: "5 days"
+          individual: Unlimited
+          teams: Unlimited
     - title: Physical Device Testing
       description: |
         Connect a physical iPhone or iPad over USB for live previews, captures, design comparison, and app testing. With RocketSim 16.4 and Xcode 27, Recent Builds also supports lifecycle actions, deep links, location simulation, and location-driven system time-zone testing.
