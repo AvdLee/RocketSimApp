@@ -61,7 +61,13 @@ const arrowButtonClass =
     }
   </div>
 
-  <div class="mt-[22px] flex items-center gap-2.5 px-(--edge)">
+  <!-- The picker line draws itself and the buttons slide in as the controls
+       scroll in (src/styles/animations.css). -->
+  <div
+    class="mt-[22px] flex items-center gap-2.5 px-(--edge)"
+    data-draw-row
+    style={`--draw-count: ${items.length}`}
+  >
     <span
       class="min-w-[4.5em] font-mono text-caption tracking-normal text-muted tabular-nums"
       aria-hidden="true"
@@ -78,6 +84,8 @@ const arrowButtonClass =
             aria-controls={`${id}-slide-${index}`}
             aria-current={index === 0 ? "true" : "false"}
             aria-label={`Show highlight ${index + 1}: ${item.title}`}
+            data-draw
+            style={`--draw-index: ${index}`}
             class="relative h-[3px] flex-1 cursor-pointer rounded-sm bg-border after:absolute after:inset-x-0 after:-inset-y-2.5 aria-[current=true]:bg-muted"
           >
             {/* Fills up while autoplay shows the slide. */}
@@ -95,6 +103,7 @@ const arrowButtonClass =
       aria-controls={`${id}-track`}
       aria-label="Previous highlight"
       class={arrowButtonClass}
+      data-draw-control
       disabled
     >
       ←
@@ -106,6 +115,7 @@ const arrowButtonClass =
       aria-controls={`${id}-track`}
       aria-label="Next highlight"
       class={arrowButtonClass}
+      data-draw-control
     >
       →
     </button>

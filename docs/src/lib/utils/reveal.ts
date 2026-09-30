@@ -1,15 +1,20 @@
 import { prefersReducedMotion } from "./motion";
 
-// Scroll-in reveals for the homepage, styled in src/styles/animations.css.
-// The homepage uses these instead of AOS, which stays for the shared footer
-// and the rest of the site: they respect reduced motion, share the
-// homepage's easing, and never hide content that is already on screen.
+// Timed scroll-in reveals for the homepage, where the browser can't tie them
+// to the scroll position (see src/styles/animations.css). Either way the
+// homepage reveals instead of using AOS, which stays for the shared footer
+// and the rest of the site: its reveals respect reduced motion and share the
+// homepage's easing. This fallback never hides content already on screen.
 
 let observer: IntersectionObserver | undefined;
 
 export function initReveals(): void {
   observer?.disconnect();
-  if (prefersReducedMotion()) return;
+  // Browsers with scroll-driven animations reveal in CSS, tied to the
+  // scroll position (src/styles/animations.css).
+  if (prefersReducedMotion() || CSS.supports("animation-timeline: view()")) {
+    return;
+  }
 
   observer = new IntersectionObserver(
     (entries, self) => {

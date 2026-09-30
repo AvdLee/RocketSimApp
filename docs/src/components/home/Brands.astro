@@ -5,6 +5,8 @@ import { getEntry } from "astro:content";
 
 import { svgSize } from "@/lib/utils/svgSize";
 
+import StatValue from "./extras/StatValue.astro";
+
 const brands = await getEntry(
   "trustedBrandsSectionCollection",
   "trusted-brands",
@@ -54,7 +56,10 @@ const stats = [
       {
         stats.map(({ value, label }) => (
           <li>
-            <b class="text-text-dark tabular-nums">{value}</b> {label}
+            <b class="text-text-dark tabular-nums">
+              <StatValue value={value} />
+            </b>{" "}
+            {label}
           </li>
         ))
       }

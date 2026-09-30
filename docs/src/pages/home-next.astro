@@ -103,7 +103,11 @@ const seo = {
 </Base>
 
 <script>
+  import { initCountUps } from "@/lib/utils/countUp";
   import { initReveals } from "@/lib/utils/reveal";
 
-  document.addEventListener("astro:page-load", initReveals);
+  document.addEventListener("astro:page-load", () => {
+    initReveals();
+    initCountUps();
+  });
 </script>

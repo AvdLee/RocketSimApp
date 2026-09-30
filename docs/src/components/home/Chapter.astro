@@ -32,11 +32,12 @@ if (aside && presentation !== "tabs") {
   class="mx-auto max-w-[1120px] px-5 pt-section pb-4 md:pb-8"
   style={`--chapter: var(--color-chapter-${color})`}
 >
+  <!-- Each part rises into place as it scrolls in; the intro follows the
+       title (src/styles/animations.css). -->
   <div
-    data-reveal
     class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
   >
-    <div>
+    <div data-reveal>
       <p class="mb-3 text-intro font-semibold text-(--chapter)">{name}</p>
       <h2 class="max-w-[14em] text-title-1 text-balance">
         {title}
@@ -44,6 +45,8 @@ if (aside && presentation !== "tabs") {
     </div>
     <div
       class="max-w-[32em] text-muted [&_p]:text-intro [&_strong]:text-text-dark"
+      data-reveal
+      style="--reveal-order: 1"
     >
       <Content />
     </div>
@@ -69,7 +72,7 @@ if (aside && presentation !== "tabs") {
 
   {
     links.length > 0 && (
-      <div class="mt-12 flex flex-wrap gap-[22px]">
+      <div class="mt-12 flex flex-wrap gap-[22px]" data-reveal>
         {links.map((link) => (
           <a
             href={link.href}
@@ -82,5 +85,11 @@ if (aside && presentation !== "tabs") {
     )
   }
 
-  <slot />
+  {
+    Astro.slots.has("default") && (
+      <div data-reveal>
+        <slot />
+      </div>
+    )
+  }
 </section>

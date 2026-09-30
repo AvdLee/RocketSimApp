@@ -421,6 +421,52 @@ test("homepage reveals never hide content before their script runs", () => {
   assert.doesNotMatch(html, /data-reveal="pending"/);
 });
 
+// The at-rules around a position in a stylesheet, outermost first.
+function enclosingAtRules(css, index) {
+  const stack = [];
+  let prelude = "";
+  for (let i = 0; i < index; i++) {
+    const char = css[i];
+    if (char === "{") {
+      stack.push(prelude.trim());
+      prelude = "";
+    } else if (char === "}") {
+      stack.pop();
+      prelude = "";
+    } else if (char === ";") {
+      prelude = "";
+    } else {
+      prelude += char;
+    }
+  }
+  return stack.filter((rule) => rule.startsWith("@"));
+}
+
+test("homepage motion stops for reduced motion", () => {
+  const css = readdirSync(join(DIST, "_astro"))
+    .filter((file) => file.endsWith(".css"))
+    .map((file) => readDist(`_astro/${file}`))
+    .join("\n");
+  // Scroll-linked effects and the hero's entrance only run for visitors who
+  // haven't asked for less motion.
+  const animations = [
+    // Declarations only, not the `@supports` test for the feature.
+    ...css.matchAll(
+      /(?<=[{;])(?:animation-timeline:|animation:[^;}]*hero-in)/g,
+    ),
+  ];
+  assert.ok(animations.length > 0, "expected homepage motion in the CSS");
+  for (const { index, 0: match } of animations) {
+    const rules = enclosingAtRules(css, index).map((rule) =>
+      rule.replaceAll(" ", ""),
+    );
+    assert.ok(
+      rules.includes("@media(prefers-reduced-motion:no-preference)"),
+      `${match} runs outside a no-preference block`,
+    );
+  }
+});
+
 test("homepage Teams chapter keeps its Plausible events", () => {
   // See ANALYTICS.md: the names are part of the historical reporting contract.
   const teams = homepageChapter("teams");

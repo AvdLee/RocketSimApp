@@ -29,39 +29,44 @@ const { id, chapterName, items, aside } = Astro.props;
 >
   <div
     data-tabs-stage
+    data-stage
     class:list={[
       "relative aspect-video overflow-hidden rounded-lg bg-surface",
       aside && "lg:aspect-auto",
     ]}
   >
-    {
-      items.map((item, index) => (
-        <div
-          id={`${id}-panel-${index}`}
-          role="tabpanel"
-          aria-labelledby={`${id}-tab-${index}`}
-          tabindex="0"
-          class="absolute inset-0 rounded-lg transition-[opacity,visibility] duration-500 ease-smooth focus-visible:-outline-offset-2 inert:invisible inert:opacity-0 motion-reduce:transition-none"
-          inert={index !== 0}
-        >
-          <Media
-            media={item.media}
-            sizes={
-              aside
-                ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
-                : "(min-width: 1120px) 1080px, 100vw"
-            }
-            class:list={[
-              "size-full",
-              item.media.type === "image"
-                ? "object-contain p-6"
-                : "object-cover",
-            ]}
-          />
-        </div>
-      ))
-    }
+    {/* The media settles from slightly zoomed in as the stage scrolls in. */}
+    <div class="absolute inset-0" data-settle>
+      {
+        items.map((item, index) => (
+          <div
+            id={`${id}-panel-${index}`}
+            role="tabpanel"
+            aria-labelledby={`${id}-tab-${index}`}
+            tabindex="0"
+            class="absolute inset-0 rounded-lg transition-[opacity,visibility,scale] duration-500 ease-smooth focus-visible:-outline-offset-2 inert:invisible inert:scale-[1.03] inert:opacity-0 motion-reduce:transition-none"
+            inert={index !== 0}
+          >
+            <Media
+              media={item.media}
+              sizes={
+                aside
+                  ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
+                  : "(min-width: 1120px) 1080px, 100vw"
+              }
+              class:list={[
+                "size-full",
+                item.media.type === "image"
+                  ? "object-contain p-6"
+                  : "object-cover",
+              ]}
+            />
+          </div>
+        ))
+      }
+    </div>
     <div
+      data-glow
       class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-[radial-gradient(60%_100%_at_50%_100%,color-mix(in_srgb,var(--chapter)_22%,transparent),transparent)]"
     >
     </div>
@@ -70,7 +75,11 @@ const { id, chapterName, items, aside } = Astro.props;
   <div class:list={["mt-5", aside && "lg:col-span-2"]}>
     <!-- On phones the row scrolls sideways from the screen edge to the
          autoplay control, so the cut-off tab shows there is more. -->
-    <div class="flex items-start gap-2.5 md:gap-5">
+    <div
+      class="flex items-start gap-2.5 md:gap-5"
+      data-draw-row
+      style={`--draw-count: ${items.length}`}
+    >
       <div
         role="tablist"
         aria-label={`${chapterName} features`}
@@ -90,7 +99,11 @@ const { id, chapterName, items, aside } = Astro.props;
               class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
             >
               {/* One line runs under the tabs and fills up as autoplay moves on. */}
-              <span class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted md:-mr-6">
+              <span
+                class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted md:-mr-6"
+                data-draw
+                style={`--draw-index: ${index}`}
+              >
                 <span
                   data-autoplay-fill
                   class="absolute inset-0 origin-left scale-x-0 bg-primary"

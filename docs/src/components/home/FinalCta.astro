@@ -13,7 +13,8 @@ const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
 >
   <h2 id="final-cta-title" class="text-title-1 text-balance" data-reveal>
     Spend less time operating the Simulator.<br />
-    <span class="text-muted">Spend more time building your app.</span>
+    <!-- Lights up in reading order as it scrolls in (animations.css). -->
+    <span data-light-up>Spend more time building your app.</span>
   </h2>
   <div
     class="mt-9 flex flex-wrap justify-center gap-3.5"
@@ -35,5 +36,7 @@ const microcopy = "No signup. Works with Xcode 16+ and Xcode 27's Device Hub.";
       View pricing
     </a>
   </div>
-  <p class="mt-5 text-caption text-muted">{microcopy}</p>
+  <p class="mt-5 text-caption text-muted" data-reveal style="--reveal-order: 1">
+    {microcopy}
+  </p>
 </section>

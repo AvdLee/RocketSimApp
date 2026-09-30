@@ -34,7 +34,7 @@ const currentClass =
 ---
 
 <header
-  class="home-header sticky top-0 z-30 border-b border-border bg-body/30 backdrop-blur-lg"
+  class="home-header sticky top-0 z-30 border-b border-transparent transition-[background-color,border-color] duration-300 data-scrolled:border-border data-scrolled:bg-body/30 data-scrolled:backdrop-blur-lg motion-reduce:transition-none has-[[aria-expanded=true]]:bg-body"
   data-home-header
 >
   <a
@@ -298,6 +298,9 @@ const currentClass =
     let frame = 0;
     const update = () => {
       frame = 0;
+      // Clear over the hero at the top of the page; a glass bar once the
+      // page scrolls under it.
+      header.toggleAttribute("data-scrolled", window.scrollY > 1);
       const state = chapterMenuState({
         headerBottom: header.getBoundingClientRect().bottom,
         glanceBottom: glance.getBoundingClientRect().bottom,

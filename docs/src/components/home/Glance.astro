@@ -28,7 +28,7 @@ const chapters = await Promise.all(
           <a
             href={`#${id}`}
             data-glance-tile
-            class="relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            class="group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             style={`--chapter: var(--color-chapter-${color})`}
           >
             <span class="text-caption font-semibold text-(--chapter)">
@@ -47,7 +47,7 @@ const chapters = await Promise.all(
                   alt=""
                   widths={[360, 720]}
                   sizes="(min-width: 1024px) 340px, (min-width: 540px) 50vw, 100vw"
-                  class="size-full rounded-t-[10px] object-cover object-top"
+                  class="size-full rounded-t-[10px] object-cover object-top transition-[scale] duration-700 group-hover:scale-[1.04] motion-reduce:transition-none"
                 />
               ) : (
                 <img
@@ -55,7 +55,7 @@ const chapters = await Promise.all(
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  class="size-full rounded-t-[10px] object-cover object-top"
+                  class="size-full rounded-t-[10px] object-cover object-top transition-[scale] duration-700 group-hover:scale-[1.04] motion-reduce:transition-none"
                 />
               )}
             </div>
