@@ -20,12 +20,15 @@
 
 **Fixed:**
 
+- Network Monitor and RocketSim Connect no longer stay disconnected on Xcode 27 and macOS 27. The Xcode debugger hook now loads from RocketSim.app instead of RocketSim's protected app container, and existing installs are repaired automatically when RocketSim launches. If you installed the hook through Terminal, run the copied setup command again from Settings > Connect. (Thanks, L. Hurtado!)
 - CLI: installing the `rocketsim` command into `~/.local/bin` no longer fails with "The selected folder doesn't appear to be on your PATH", including on machines where the user isn't your main account (for example a CI user). (Thanks, G. Ambrozio!)
 - Starting a Browser Preview no longer freezes RocketSim's interface for up to a second.
 - CLI: `rocketsim video record` no longer fails for recordings larger than 10 MB (about 20 seconds at 60 fps). Large results are now handed over through a temporary file.
 - Browser Preview sessions now stop when their Simulator is deleted.
+- Fixed Simulator Camera (webcam) crashing on iOS 27.1 with an unrecognized `_isBravoVariant` selector on the mock capture device, and added matching compatibility shims for related private device queries. (Thanks, V. Pradeilles!)
 - CLI: `rocketsim` no longer exits silently with signal 133/134 when invoked from Codex's default sandboxed shell. The installed launcher now returns an actionable `sandbox_unavailable` response, while the agent skill requests the required escalation up front. Existing CLI symlinks installed through RocketSim migrate automatically. (Thanks, U. Di Profio!)
 - Fixed individual rulers that could no longer be removed by dragging them outside the horizontal or vertical ruler strip. (Thanks, A. Hershberger!)
+- Fixed the Comparing reference image disappearing while interacting with the Simulator when "Always show windows" was enabled. (Thanks, M. Jahantark!)
 
 # 16.5.0 (335)
 
