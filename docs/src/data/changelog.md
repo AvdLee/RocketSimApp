@@ -1,4 +1,4 @@
-# 16.6.0
+# 16.6.0 (336)
 
 **New:**
 
@@ -17,6 +17,7 @@
 - Browser Preview skips accessibility refreshes while the screen is unchanged or the Simulator is recording.
 - Recordings no longer contain bursts of repeated frames after a brief system stall.
 - iPhone Duo touches, the grid, and the rulers now line up with the device in Device Hub when the Duo is closed or fully unfolded, instead of reporting that Device Hub is in expanded mode. The grid and rulers follow the orientation Device Hub draws, including after unfolding the Duo with the hinge control.
+- iPhone Duo capture editor previews open faster, scrub more responsively during trim and playback, and offload more fold rendering from the main thread.
 
 **Fixed:**
 
@@ -29,6 +30,7 @@
 - CLI: `rocketsim` no longer exits silently with signal 133/134 when invoked from Codex's default sandboxed shell. The installed launcher now returns an actionable `sandbox_unavailable` response, while the agent skill requests the required escalation up front. Existing CLI symlinks installed through RocketSim migrate automatically. (Thanks, U. Di Profio!)
 - Fixed individual rulers that could no longer be removed by dragging them outside the horizontal or vertical ruler strip. (Thanks, A. Hershberger!)
 - Fixed the Comparing reference image disappearing while interacting with the Simulator when "Always show windows" was enabled. (Thanks, M. Jahantark!)
+- Physical device screenshots no longer time out when the live preview is already showing frames; RocketSim reuses the latest preview frame and surfaces clearer guidance when streaming stalls.
 
 # 16.5.0 (335)
 
