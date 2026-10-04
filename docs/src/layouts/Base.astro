@@ -15,9 +15,11 @@ import Intercom from "@/components/Intercom.astro";
 export interface Props {
   seo: SEOProps;
   structuredData?: StructuredDataProps;
+  // "home" replaces the site header with the page's own "header" slot.
+  header?: "site" | "home";
 }
 
-const { seo, structuredData } = Astro.props;
+const { seo, structuredData, header = "site" } = Astro.props;
 ---
 
 <!doctype html>
@@ -139,7 +141,7 @@ const { seo, structuredData } = Astro.props;
     >
     <!-- End Google Tag Manager (noscript) -->
     <TwSizeIndicator />
-    <Header />
+    {header === "home" ? <slot name="header" /> : <Header />}
     <main id="main-content">
       <slot />
     </main>

@@ -12,10 +12,13 @@ RocketSim does not build, install, or launch your app from source. Start the app
 With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your agent can:
 
 - Read visible accessibility elements, including common navigation and tab bar items
-- Tap, swipe, type, and navigate through your app reliably
+- Tap, activate, swipe, scroll, type, use multitouch, and press hardware buttons
+- Answer Face ID prompts and test offline or poor-network states
+- Batch known steps while refreshing screen state between interactions
 - Stay in a tight interaction loop without rebuilding context between steps
-- Use compact screen summaries to spend fewer tokens per UI read
+- Use compact screen summaries to spend less context per UI read
 - Fall back to screenshots when accessibility data is not enough
+- Open a live Browser Preview for hands-on testing and visual feedback
 
 ## What you can do with it
 
@@ -61,7 +64,11 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 ### Stateful by design
 
-RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot. In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster, avoided wrong taps entirely**, and used about **63% fewer estimated tokens** than a popular alternative.
+RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot.
+
+Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
+
+Read [how we test and improve the RocketSim CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, limitations, and improvement findings.
 
 ### Compact screen summaries
 
@@ -75,7 +82,7 @@ Agents can target elements by label, type, or value instead of guessing coordina
 
 ### Agent-optimized protocol
 
-The CLI uses RocketSim's `rs/1` protocol for agent workflows. You do not need to learn the protocol details; the important part is that it is designed for compact, reliable interaction through the running RocketSim app.
+The CLI uses RocketSim's [`rs/1` protocol](/docs/features/agentic-development/rs1-protocol) for agent workflows. You do not need to learn the protocol details; the important part is that it is designed for compact, reliable interaction through the running RocketSim app.
 
 ### Version-matched automation
 
@@ -96,5 +103,7 @@ For most AI coding tools, install the [RocketSim Agent Skill](/docs/features/age
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — how agents inspect and interact with the Simulator
+- [Browser Preview](/docs/features/agentic-development/browser-preview) — stream, control, and visually review a Simulator from your browser
 - [Agent Skill](/docs/features/agentic-development/agent-skill) — how to install the recommended agent workflow
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — how to install the CLI and skill from RocketSim
+- [How we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) — repeatable scenarios, benchmark methodology, and results

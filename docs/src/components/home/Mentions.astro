@@ -1,0 +1,81 @@
+---
+import SenjaWidget from "./SenjaWidget.astro";
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-section"
+  aria-labelledby="mentions-title"
+>
+  <h2
+    data-reveal
+    id="mentions-title"
+    class="max-w-[16em] text-title-2 text-balance"
+  >
+    Join thousands of productive developers.
+  </h2>
+  <p class="mt-3 max-w-[34em] text-intro text-muted">
+    See what others say about RocketSim on social media.
+  </p>
+  <!-- The wall runs 2,200px tall on desktop and 6,500px on phones, so it
+       starts collapsed. The collapsed height is fixed, which also reserves
+       the wall's space before Senja renders it. -->
+  <div
+    id="mentions-wall"
+    data-mentions-wall
+    data-collapsed
+    class="mt-stack data-collapsed:h-[1100px] data-collapsed:overflow-hidden data-collapsed:[mask-image:linear-gradient(to_bottom,#000_75%,transparent)] md:data-collapsed:h-[900px]"
+  >
+    <SenjaWidget widget="mentions" />
+  </div>
+  <div class="mt-6 flex justify-center">
+    <button
+      type="button"
+      data-mentions-toggle
+      aria-controls="mentions-wall"
+      aria-expanded="false"
+      class="inline-flex cursor-pointer rounded-full px-5 py-2.5 font-medium text-primary inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+      hidden
+    >
+      Show more
+    </button>
+  </div>
+</section>
+
+<script>
+  // The button shows once the wall is taller than its collapsed height, and
+  // toggles it. Tabbing into a post that is cut off expands the wall, so
+  // keyboard focus never lands out of sight.
+  function initMentions() {
+    const wall = document.querySelector<HTMLElement>("[data-mentions-wall]");
+    const toggle = document.querySelector<HTMLButtonElement>(
+      "[data-mentions-toggle]",
+    );
+    const embed = wall?.firstElementChild;
+    if (!wall || !toggle || !embed) return;
+
+    const collapsed = () => wall.hasAttribute("data-collapsed");
+    const setCollapsed = (collapse: boolean) => {
+      wall.toggleAttribute("data-collapsed", collapse);
+      toggle.setAttribute("aria-expanded", String(!collapse));
+      toggle.textContent = collapse ? "Show more" : "Show less";
+    };
+
+    new ResizeObserver(() => {
+      if (collapsed()) {
+        toggle.hidden =
+          embed.getBoundingClientRect().height <= wall.clientHeight;
+      }
+    }).observe(embed);
+
+    toggle.addEventListener("click", () => {
+      setCollapsed(!collapsed());
+      // Collapsing moves the button up by the height of the wall.
+      if (collapsed()) toggle.scrollIntoView({ block: "center" });
+    });
+    wall.addEventListener("focusin", () => {
+      if (collapsed()) setCollapsed(false);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMentions);
+</script>

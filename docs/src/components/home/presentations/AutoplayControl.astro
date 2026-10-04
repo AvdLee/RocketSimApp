@@ -1,0 +1,56 @@
+---
+interface Props {
+  // What the button plays, for its label: "Pause Network features".
+  name: string;
+  // Round, borderless and grey, to sit beside the gallery's dot pill.
+  round?: boolean;
+  class?: string;
+}
+
+const { name, round = false, class: className } = Astro.props;
+---
+
+<!-- Pauses, plays and replays the presentation's autoplay
+     (src/lib/utils/autoplay.ts), which keeps its status and label current. -->
+<button
+  type="button"
+  data-autoplay-control
+  data-draw-control
+  data-autoplay-name={name}
+  data-autoplay-status="playing"
+  aria-label={`Pause ${name}`}
+  class:list={[
+    "group grid size-9 flex-none cursor-pointer place-items-center text-text-dark transition-colors",
+    round
+      ? "rounded-full bg-surface hover:bg-surface-hover"
+      : "rounded-lg border border-border bg-card hover:border-primary hover:bg-primary/8",
+    className,
+  ]}
+>
+  <svg
+    viewBox="0 0 16 16"
+    class="size-3 fill-current group-not-data-[autoplay-status=playing]:hidden"
+    aria-hidden="true"
+  >
+    <path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"></path>
+  </svg>
+  <svg
+    viewBox="0 0 16 16"
+    class="size-3 fill-current group-not-data-[autoplay-status=paused]:hidden"
+    aria-hidden="true"
+  >
+    <path
+      d="M4 2.2v11.6a.6.6 0 0 0 .9.5l9.4-5.8a.6.6 0 0 0 0-1L4.9 1.7a.6.6 0 0 0-.9.5z"
+    ></path>
+  </svg>
+  <svg
+    viewBox="0 0 24 24"
+    class="size-4 fill-none stroke-current stroke-[2.4] group-not-data-[autoplay-status=done]:hidden"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+    <path d="M3 3v5h5"></path>
+  </svg>
+</button>

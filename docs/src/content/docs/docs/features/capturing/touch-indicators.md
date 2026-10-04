@@ -13,6 +13,12 @@ You can configure touch indicators in the **Captures** tab of the side window or
 
 ![RocketSim Side Window Captures tab with touch options](./recordings/rocketsim_side_window_screenshot.png)
 
+### Adjust the touch pointer size
+
+Use **Touch pointer size** under **RocketSim → Settings → Captures** to make every touch indicator smaller or larger. A smaller pointer keeps compact controls visible, while a larger pointer makes taps easier to follow in demos and presentations.
+
+The size applies to regular touch indicators, Touch Attention Mode, and recorded multi-touch gestures.
+
 ## Touch attention mode
 
 This is the standout feature. When enabled, a constant touch indicator follows your mouse pointer throughout the entire recording. Apple uses this same technique in their demo videos — it helps viewers keep track of where the action is happening.

@@ -32,6 +32,105 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-3xl-sm: 19.6px;
+
+  /* Homepage palette. `body`, `border`, `light` and `primary` come from
+     `src/config/theme.json`. */
+  --color-surface: #111113;
+  --color-surface-hover: #161618;
+  --color-card: #0a0a0b;
+  --color-line: #2a2a2d;
+  --color-muted: #8e8e93;
+  --color-primary-hover: #3aa9ff;
+  /* Terminal text, the tools window's controls, and its tool labels. */
+  --color-code: #c9c9cf;
+  --color-window-control: #3a3a3d;
+  --color-text-soft: #d8d8dc;
+
+  /* Homepage rhythm. `section` is the space above each chapter and the
+     sections between them; `stack` separates a section's heading and intro
+     from what it presents. Both grow with the window, like the type scale,
+     instead of jumping at `md`. */
+  --spacing-section: clamp(120px, 16vw, 184px);
+  --spacing-stack: clamp(40px, 6vw, 64px);
+
+  /* Homepage motion. `smooth` eases changes in place, such as crossfades and
+     the header's layer swap; `enter` eases things arriving, such as the
+     scroll-in reveals (src/styles/animations.css). Every animation on the
+     homepage stops for `prefers-reduced-motion`. */
+  --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  /* A closer-look tool's description as it opens; the keyframes are in
+     animations.css. */
+  --animate-disclose: disclose 0.3s var(--ease-enter);
+
+  /* Type scale, set in the site's system font (`src/config/theme.json`).
+     Each step brings its own line height, tracking and weight, so a single
+     `text-*` class sets the whole style. Tracking tightens as the size grows,
+     and headings are semibold: SF's display cut is already tight, and bold
+     with heavy negative tracking at every size is what made the prototype
+     read as generic. Sizes are in px, because the root font size shrinks to
+     13.6px below `md` (`src/styles/base.css`).
+     Headings elsewhere on the site keep theme.json's `text-h*` scale for now:
+     moving them over restyles headings on every other page, which is
+     beyond the homepage rebuild. A new step also needs adding to the heading
+     list in base.css; a test checks the two match. */
+  --text-display: clamp(44px, 8vw, 88px);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.025em;
+  --text-display--font-weight: 600;
+  /* A standalone figure, such as a benchmark result; one line, so no
+     leading. */
+  --text-figure: clamp(56px, 7vw, 80px);
+  --text-figure--line-height: 1;
+  --text-figure--letter-spacing: -0.025em;
+  --text-figure--font-weight: 600;
+  --text-title-1: clamp(36px, 6vw, 64px);
+  --text-title-1--line-height: 1.06;
+  --text-title-1--letter-spacing: -0.02em;
+  --text-title-1--font-weight: 600;
+  --text-title-2: clamp(30px, 4.5vw, 48px);
+  --text-title-2--line-height: 1.1;
+  --text-title-2--letter-spacing: -0.015em;
+  --text-title-2--font-weight: 600;
+  --text-title-3: clamp(24px, 3vw, 32px);
+  --text-title-3--line-height: 1.15;
+  --text-title-3--letter-spacing: -0.01em;
+  --text-title-3--font-weight: 600;
+  --text-title-4: 22px;
+  --text-title-4--line-height: 1.25;
+  --text-title-4--letter-spacing: -0.008em;
+  --text-title-4--font-weight: 600;
+  /* Running text, from the hero's lead paragraph down to captions. */
+  --text-lead: clamp(19px, 2.2vw, 24px);
+  --text-lead--line-height: 1.4;
+  --text-lead--letter-spacing: -0.01em;
+  --text-intro: 19px;
+  --text-intro--line-height: 1.45;
+  --text-intro--letter-spacing: -0.014em;
+  /* The site's body text; `body` in base.css uses it too. Its size is
+     `font_size.base` in theme.json, which the theme plugin sets as
+     `--text-base`. */
+  --text-copy: var(--text-base);
+  --text-copy--line-height: 1.5;
+  --text-copy--letter-spacing: -0.022em;
+  --text-small: 15px;
+  --text-small--line-height: 1.45;
+  --text-small--letter-spacing: -0.012em;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: -0.004em;
+}
+
+/* One hue per homepage chapter, picked by the chapter's `color` field.
+   `static` keeps them in the output: the names are built at runtime
+   (`var(--color-chapter-${color})`), so Tailwind cannot see them in use. */
+@theme static {
+  --color-chapter-agents: #bf8bff;
+  --color-chapter-captures: #ff5c8a;
+  --color-chapter-network: #36c3ff;
+  --color-chapter-testing: #56c590;
+  --color-chapter-design: #ff8a5c;
+  --color-chapter-teams: #ffd25c;
 }
 
 :root {

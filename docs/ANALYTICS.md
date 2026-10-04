@@ -1,0 +1,130 @@
+# Teams funnel analytics
+
+Plausible event names are part of the site's historical reporting contract. Do
+not rename an existing event when its destination or copy changes. Add a new
+event only when tracking a genuinely new action.
+
+## Existing Teams events
+
+- `CTA: Homepage Hero - For Teams` opens `/for-teams/` from the homepage
+  hero. This historical event was restored after the Teams link returned.
+- `CTA: Homepage Insights - Learn More` opens `/for-teams`.
+- `CTA: Homepage Mid 2 - Trial` opens `/for-teams`. The historical name says
+  "Trial," but the action only opens Teams information. Keep the event name and
+  describe it as a Teams information click in Plausible. On the rebuilt
+  homepage it is the "Explore Build Insights" link, which lands on the page's
+  Build Insights showcase (`/for-teams/#insight-showcase-title`).
+- `CTA: Homepage Insights - Trial` opens the Teams trial form from the
+  homepage's Teams chapter (`utm_content=homepage_insights`). It is new with the
+  homepage rebuild and only on the `/home-next/` preview until launch. Add it as
+  a Plausible goal before the launch.
+- `CTA: Homepage Split - Trial` opens the Teams trial form from the "For your
+  team" card in the homepage's split call-to-action
+  (`utm_content=homepage_split`). The live homepage's CTA banner had no event
+  for this button. It is new with the homepage rebuild and only on the
+  `/home-next/` preview until launch. Add it as a Plausible goal before the
+  launch.
+- `CTA: Team Page - See Pricing` opens `/pricing/`.
+- `CTA: Team Page - Start Trial` opens the Teams trial form from the hero or
+  bottom call-to-action.
+- `CTA: Team Page - Proof Start Trial` opens the Teams trial form from the proof
+  section.
+- `CTA: Pricing Teams - Trial` opens the Teams trial form from the pricing
+  comparison.
+- `CTA: Pricing Teams - Buy Now` opens the direct Teams checkout.
+- `CTA: Pricing Bottom - Trial` opens the Teams trial form from the pricing
+  page's bottom call-to-action.
+- `CTA: Blog Bottom - Trial` opens the Teams trial form from a blog post's
+  bottom call-to-action.
+
+## Homepage rebuild events
+
+The rebuilt homepage (`/home-next/` until launch, see
+[the rebuild plan](./docs/plans/homepage-rebuild.md)) keeps the live event
+names. The preview shares the live Plausible script, so filter on `page = /`
+when comparing before and after.
+
+`App Store Install` placements (`surface=landing`):
+
+- `landing-topbar` (`format=button`): the header's Download button, in both
+  the main and the chapter menu.
+- `landing-hero` (`format=button`): the hero's Free download button. Its `ct=`
+  is rewritten to the stored first-touch referer (`Stored Referer`).
+- `landing-app-store-reviews` and `landing-app-store-featured`
+  (`format=badge`): the App Store badges under the hero.
+- `landing-cta-banner` (`format=button`): the Free download button in the
+  split call-to-action, which replaces the CTA banner.
+- `landing-footer` (`format=button`): the closing call-to-action's Free
+  download button. A new placement value, not a new event.
+
+Other homepage events: `CTA: Homepage Hero - For Teams`, and the Teams events
+above (`CTA: Homepage Split - Trial`, `CTA: Homepage Insights - Trial`,
+`CTA: Homepage Insights - Learn More`, `CTA: Homepage Mid 2 - Trial`). The
+`Mobile Download …` events, `Newsletter Form Conversion` and `Stored Referer`
+come from the same components as on the live homepage.
+
+`CTA: Homepage Hero - Features` is retired with the rebuild: the glance grid
+replaces the hero's "Explore features" link. It keeps firing on the live
+homepage until launch.
+
+## Inline trial form events
+
+- `Teams Trial Form Started` fires once when a visitor first interacts with the
+  inline form on `/for-teams/`.
+- `Teams Trial Form Validation Failed` fires when native validation blocks
+  submit. Properties: `field` (`email`, `full_name`, `team_size`) and `reason`
+  (`required`, `email_format`, `range`).
+- `Teams Trial Signup Submitted` is a submit attempt, not a completed trial.
+- `Teams Trial Signup Succeeded` fires only after a thank-you redirect, before
+  navigation.
+- `Teams Trial Signup Failed` fires when the API returns an error or the
+  response cannot be read. Properties: `error_type`
+  (`business_email`, `validation`, `origin`, `upstream`, `unknown`) and
+  `http_status`.
+- `Teams Trial Signup Redirected` fires when the API sends the visitor
+  somewhere other than the thank-you page, including existing-license login
+  recovery. Property: `reason` (`existing_license`, `other`).
+
+`CTA: Team Page - Start Trial` stays on hosted trial links. It no longer fires
+for an inline submit.
+
+These events include `surface`, `placement`, `format`, `source`, and
+`signup_surface=inline_hero` on attempt and outcome events. Submission and
+outcome events include a coarse `team_size` bucket. Never send names, email
+addresses, or exact team sizes to Plausible. Add the new event names as
+Plausible goals before treating zero counts as real.
+
+## Trial completion
+
+Configure `/signup/trial/thank-you/` as a Plausible pageview goal. The page is
+the successful trial-creation destination, so using its existing pageviews
+preserves historical data without introducing another custom event.
+
+The goal is directional until `www.rocketsim.app` and `teams.rocketsim.app`
+have been verified to use the same Plausible site ID and script.
+
+## Paid conversion
+
+`Teams Trial Converted` fires once per browser session when a successful Stripe
+trial upgrade lands on the LicenseKit trial-upgrade success page. Configure it
+as a Plausible custom-event goal and use unique visitors rather than raw events
+for reporting.
+
+## Four-week recovery measurement
+
+Use the 30 completed days ending July 23, 2026 as the pre-change baseline:
+
+- `/for-teams/`: 128 unique visitors.
+- `Teams Trial Signup Completed`: 5 unique visitors.
+- Homepage `App Store Install`: 14.23% conversion during the equal 32-day
+  post-May-27 comparison period.
+
+After four complete weeks, compare unique visitors and conversion rates against
+an equal-length period:
+
+1. Target at least 200 monthly-equivalent visitors to `/for-teams/`.
+2. Target 12–18 monthly-equivalent unique completed trials.
+3. Separate inline hero submissions from pricing CTA visitors using placement.
+4. Report `Teams Trial Converted` as the final business outcome.
+5. Treat homepage App Store install conversion as a guardrail. Investigate if
+   it declines by more than 5% relative to the 14.23% baseline.

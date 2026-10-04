@@ -1,6 +1,8 @@
 ---
-title: "VoiceOver Navigator"
+title: "Test VoiceOver on the iOS Simulator"
 description: "Visualize VoiceOver element order on the iOS Simulator with numbered overlays. Navigate elements with keyboard shortcuts and verify reading order without a device."
+sidebar:
+  label: "VoiceOver Navigator"
 ---
 
 ::::tip[Check accessibility faster]

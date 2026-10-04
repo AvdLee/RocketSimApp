@@ -31,7 +31,7 @@
     }
   ],
   "metadata": {
-    "meta_description": "RocketSim is the iOS Simulator companion for developers and AI coding agents: monitor network requests, capture media, test accessibility, and automate app workflows.",
+    "meta_description": "RocketSim helps iOS developers and AI agents test Simulator and physical-device apps with captures, network tools, app actions, accessibility, and automation.",
     "meta_image": "/og-banner-rocketsim.jpg"
   }
 }

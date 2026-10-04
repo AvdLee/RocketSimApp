@@ -3,6 +3,7 @@ title: "AI Agents for the iOS Simulator"
 pageTitle: "AI Agents for the iOS Simulator: Navigate Apps with RocketSim"
 description: "Let AI agents inspect, navigate, and verify iOS Simulator apps with RocketSim's CLI, Agent Skill, screenshots, and semantic interactions."
 publishedTime: 2026-06-18T18:50:00.000Z
+modifiedTime: 2026-07-29T10:02:43.000Z
 image: ./cli-agent-settings-hero.png
 imageAlt: "RocketSim CLI and Agent settings showing the Agent Skill installed for General Agents and available for Xcode, Cursor, Claude, and Codex."
 ---
@@ -27,7 +28,7 @@ I do not want an agent to guess whether those changes worked. I want it to open 
   <video
     controls
     playsinline
-    poster="/features/posters/agentic-demo.jpg"
+    poster="/features/posters/agentic-demo.webp"
     class="w-full rounded-2xl"
   >
     <source src="/features/agentic-demo.mp4" type="video/mp4" />
@@ -54,9 +55,9 @@ Agent workflows are sensitive to small amounts of friction. Every screen read co
 
 That is why RocketSim's CLI talks to the running Mac app instead of starting from scratch for every command. RocketSim already knows which Simulator is focused, can keep useful state warm, and can return compact `rs/1` output that is designed for agents.
 
-In our internal research, RocketSim's CLI completed the same agent workflows about **19% faster**, avoided wrong taps entirely, and used about **63% fewer estimated tokens** than a popular alternative. Looking at the lower-level protocol output, the `rs/1` agent format produced **2.7x lower estimated token usage**, **9.7x fewer output bytes**, and **4x fewer wrong taps** overall.
+Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
 
-Those numbers matter because they show up directly in your day-to-day agent loop. A smaller screen summary gives the model more room to reason about the task, faster commands reduce waiting, and fewer wrong taps mean fewer recovery steps.
+Those numbers matter because they show up directly in your day-to-day agent loop. A smaller screen summary gives the model more room to reason about the task, while lower total command time reduces waiting across a longer flow. You can read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, limitations, and improvement findings.
 
 ## Accessibility elements beat screenshots
 

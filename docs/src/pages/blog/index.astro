@@ -61,7 +61,8 @@ const items = posts
     slug: post.id,
     title: post.data.title,
     description: post.data.description,
-    date: post.data.modifiedTime ?? post.data.publishedTime,
+    date: post.data.publishedTime,
+    modifiedTime: post.data.modifiedTime ?? post.data.publishedTime,
     image: post.data.image ?? firstBodyImage(post.id, post.body ?? ""),
     imageAlt: post.data.imageAlt ?? post.data.title,
   }))
@@ -98,7 +99,7 @@ const structuredData = {
       name: post.title,
       description: post.description,
       url: `${base_url}/blog/${post.slug}`,
-      dateModified: post.date.toISOString(),
+      dateModified: post.modifiedTime.toISOString(),
     })),
   },
 };

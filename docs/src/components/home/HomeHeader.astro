@@ -1,0 +1,340 @@
+---
+import { Image } from "astro:assets";
+
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+import logo from "@/assets/rocketsim-logo.svg";
+import { getHomepageChapter } from "@/lib/homepage";
+
+interface Props {
+  // Chapter menu order; the same array orders the glance tiles.
+  chapters: string[];
+}
+
+const chapters = (
+  await Promise.all(Astro.props.chapters.map((id) => getHomepageChapter(id)))
+).map(({ id, name, menuLabel }) => ({ id, label: menuLabel ?? name }));
+
+const [download] = config.navigation_buttons;
+const downloadClass = [
+  "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-small leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0",
+  download.class,
+];
+const barLinkClass =
+  "block py-3 whitespace-nowrap text-white no-underline opacity-80 transition-opacity hover:opacity-100";
+const panelLinkClass =
+  "block rounded-lg px-5 py-3 text-copy text-white no-underline hover:bg-primary/5";
+// The layers stack in one bar; the one not in use slides out of it and turns
+// inert.
+const layerClass =
+  "absolute inset-0 flex items-center gap-[30px] transition-[opacity,translate] duration-[350ms] ease-smooth inert:pointer-events-none inert:opacity-0 motion-reduce:transition-none";
+// The chapter being read, set by the script below.
+const currentClass =
+  "aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
+---
+
+<header
+  class="home-header sticky top-0 z-30 border-b border-transparent transition-[background-color,border-color] duration-300 data-scrolled:border-border data-scrolled:bg-body/30 data-scrolled:backdrop-blur-lg motion-reduce:transition-none has-[[aria-expanded=true]]:bg-body"
+  data-home-header
+>
+  <a
+    href="#main-content"
+    class="sr-only rounded-full bg-light px-4 py-2 text-small text-white no-underline focus:not-sr-only focus:absolute focus:top-2.5 focus:left-5 focus:z-40"
+  >
+    Skip to content
+  </a>
+  <div class="mx-auto max-w-[1320px] px-5 md:px-[25px]">
+    <!-- Clips the sliding layers top and bottom only, so the focus rings of
+         the logo and the button at either end still show. -->
+    <div
+      class="relative h-[52px] [clip-path:inset(0_-8px)] md:h-16 lg:h-[82px]"
+    >
+      <!-- Main layer, until the visitor scrolls past the glance grid. -->
+      <div
+        class:list={[layerClass, "inert:-translate-y-full"]}
+        data-header-layer="main"
+      >
+        <a
+          href="/"
+          class="inline-flex no-underline"
+          aria-label="RocketSim home"
+        >
+          <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
+        </a>
+        <nav aria-label="Main" class="ml-auto hidden lg:block">
+          <ul class="flex items-center gap-[34px] text-small">
+            {
+              menu.main.map((link) => (
+                <li>
+                  <a href={link.url} class={barLinkClass}>
+                    {link.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <a
+          href={download.link}
+          class:list={downloadClass}
+          target="_blank"
+          rel="noopener"
+        >
+          {download.label}
+        </a>
+        <button
+          type="button"
+          class="group ml-auto p-1.5 text-white md:ml-4 lg:hidden"
+          aria-expanded="false"
+          aria-controls="home-nav-panel"
+          aria-label="Menu"
+          data-header-toggle="main"
+        >
+          <svg
+            viewBox="0 0 20 20"
+            class="size-5 fill-current group-aria-expanded:hidden"
+            aria-hidden="true"
+          >
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+          </svg>
+          <svg
+            viewBox="0 0 20 20"
+            class="hidden size-5 fill-current group-aria-expanded:block"
+            aria-hidden="true"
+          >
+            <polygon
+              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+              transform="rotate(45 10 10)"></polygon>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Chapter layer, once the glance grid has scrolled under the header. -->
+      <div
+        class:list={[layerClass, "inert:translate-y-full"]}
+        data-header-layer="chapters"
+        inert
+      >
+        <a
+          href="/"
+          class="inline-flex no-underline"
+          aria-label="RocketSim home"
+        >
+          <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
+        </a>
+        <span
+          class="-mx-3 hidden h-5 w-px bg-border lg:block"
+          aria-hidden="true"></span>
+        <a
+          href="#glance"
+          class="hidden text-copy font-semibold whitespace-nowrap text-white no-underline lg:block"
+        >
+          Features
+        </a>
+        <button
+          type="button"
+          class="group inline-flex items-center gap-1 py-1.5 text-copy font-semibold text-white lg:hidden"
+          aria-expanded="false"
+          aria-controls="home-chapters-panel"
+          aria-label="Features, show chapters"
+          data-header-toggle="chapters"
+        >
+          Features
+          <svg
+            viewBox="0 0 20 20"
+            class="size-[18px] fill-current transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none"
+            aria-hidden="true"
+          >
+            <path
+              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+            ></path>
+          </svg>
+        </button>
+        <nav aria-label="Chapters" class="ml-auto hidden lg:block">
+          <ul class="flex items-center gap-[30px] text-small">
+            {
+              chapters.map(({ id, label }) => (
+                <li>
+                  <a
+                    href={`#${id}`}
+                    class:list={[barLinkClass, currentClass]}
+                    data-chapter-link
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <a
+          href={download.link}
+          class:list={downloadClass}
+          target="_blank"
+          rel="noopener"
+        >
+          {download.label}
+        </a>
+      </div>
+    </div>
+
+    <div id="home-nav-panel" class="pb-5 lg:hidden" hidden>
+      <ul class="rounded-lg bg-light p-3">
+        {
+          menu.main.map((link) => (
+            <li>
+              <a href={link.url} class={panelLinkClass}>
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+        <li class="md:hidden">
+          <a
+            href={download.link}
+            class:list={[
+              "mx-5 mt-2 mb-1 inline-flex rounded-full bg-primary px-9 py-3.5 text-copy text-white no-underline",
+              download.class,
+            ]}
+            target="_blank"
+            rel="noopener"
+          >
+            {download.label}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="home-chapters-panel" class="pb-5 lg:hidden" hidden>
+      <ul class="rounded-lg bg-light p-3">
+        <li>
+          <a href="#glance" class={panelLinkClass}>All features</a>
+        </li>
+        {
+          chapters.map(({ id, label }) => (
+            <li>
+              <a
+                href={`#${id}`}
+                class:list={[panelLinkClass, currentClass]}
+                data-chapter-link
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { chapterMenuState } from "@/lib/utils/chapterMenu";
+
+  // Removes the previous page's window listeners on client-side navigation.
+  let listeners: AbortController | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    listeners?.abort();
+    const header = document.querySelector<HTMLElement>("[data-home-header]");
+    if (!header) return;
+    listeners = new AbortController();
+
+    const toggles = [
+      ...header.querySelectorAll<HTMLButtonElement>("[data-header-toggle]"),
+    ];
+    const panelOf = (toggle: HTMLElement) =>
+      document.getElementById(toggle.getAttribute("aria-controls") ?? "");
+
+    // Each layer has its own toggle and panel; at most one panel is open.
+    const setOpen = (toggle: HTMLElement, open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      const panel = panelOf(toggle);
+      if (panel) panel.hidden = !open;
+    };
+    const openToggle = () =>
+      toggles.find((toggle) => toggle.getAttribute("aria-expanded") === "true");
+    const closeAll = () => toggles.forEach((toggle) => setOpen(toggle, false));
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const open = toggle.getAttribute("aria-expanded") !== "true";
+        closeAll();
+        setOpen(toggle, open);
+      });
+      // Following a link in a panel closes it.
+      panelOf(toggle)?.addEventListener("click", (event) => {
+        if (event.target instanceof Element && event.target.closest("a")) {
+          setOpen(toggle, false);
+        }
+      });
+    });
+    // Escape closes the open panel and hands focus back to its toggle.
+    header.addEventListener("keydown", (event) => {
+      const toggle = openToggle();
+      if (event.key !== "Escape" || !toggle) return;
+      closeAll();
+      toggle.focus();
+    });
+
+    // Past the glance grid the chapter layer replaces the main layer, and
+    // the chapter being read is highlighted in its menus.
+    const glance = document.getElementById("glance");
+    const links = [
+      ...header.querySelectorAll<HTMLAnchorElement>("[data-chapter-link]"),
+    ];
+    const sections = [...new Set(links.map((link) => link.hash.slice(1)))]
+      .map((id) => document.getElementById(id))
+      .filter((section) => section !== null);
+    const mainLayer = header.querySelector<HTMLElement>(
+      '[data-header-layer="main"]',
+    );
+    const chapterLayer = header.querySelector<HTMLElement>(
+      '[data-header-layer="chapters"]',
+    );
+    if (!glance || !mainLayer || !chapterLayer) return;
+
+    let showsChapterMenu = false;
+    let current: string | undefined;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      // Clear over the hero at the top of the page; a glass bar once the
+      // page scrolls under it.
+      header.toggleAttribute("data-scrolled", window.scrollY > 1);
+      const state = chapterMenuState({
+        headerBottom: header.getBoundingClientRect().bottom,
+        glanceBottom: glance.getBoundingClientRect().bottom,
+        viewportHeight: window.innerHeight,
+        chapters: sections.map((section) => ({
+          id: section.id,
+          top: section.getBoundingClientRect().top,
+        })),
+      });
+
+      if (state.showChapterMenu !== showsChapterMenu) {
+        showsChapterMenu = state.showChapterMenu;
+        closeAll();
+        mainLayer.inert = showsChapterMenu;
+        chapterLayer.inert = !showsChapterMenu;
+      }
+      if (state.current !== current) {
+        current = state.current;
+        links.forEach((link) => {
+          if (link.hash === `#${current}`) {
+            link.setAttribute("aria-current", "true");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      }
+    };
+    const schedule = () => {
+      frame ||= requestAnimationFrame(update);
+    };
+
+    const { signal } = listeners;
+    window.addEventListener("scroll", schedule, { passive: true, signal });
+    window.addEventListener("resize", schedule, { signal });
+    update();
+  });
+</script>

@@ -1,0 +1,18 @@
+# Astro and Node build output
+**/node_modules/
+docs/dist/
+docs/.astro/
+docs/.cache/
+docs/.wp-env/
+docs/coverage/
+
+# Xcode and Swift build output
+DerivedData/
+.build/
+**/xcuserdata/
+**/*.xcuserstate
+**/*.xcresult
+
+# Logs and operating-system metadata
+**/*.log
+**/.DS_Store

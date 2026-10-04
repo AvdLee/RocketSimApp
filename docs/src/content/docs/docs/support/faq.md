@@ -3,25 +3,33 @@ title: "FAQ"
 description: "Frequently asked questions about RocketSim — licensing, App Store Connect issues, transparent captures, network speed control troubleshooting, and more."
 ---
 
+## How can I get my manager to approve RocketSim?
+
+Use the [RocketSim manager approval guide](/docs/support/how-to-get-rocketsim-approved-at-work/) for a copyable request, a simple payback summary, and answers to common procurement questions.
+
 ## Do you offer out-of-the App Store distribution?
 
 Yes, we do. Get in touch via [support@rocketsim.app](mailto:support@rocketsim.app)
 
 ## Are there non-recurring subscriptions as well?
 
-Yes, you can consider buying [Team Licenses](https://www.rocketsim.app/team-insights/).
+Yes, you can consider buying [Team Licenses](https://www.rocketsim.app/for-teams/).
 
 ## I can’t reimburse App Store subscriptions, is there an alternative?
 
-Yes, we offer [Team Licenses](https://www.rocketsim.app/team-insights/).
+Yes, we offer [Team Licenses](https://www.rocketsim.app/for-teams/). The [manager approval guide](/docs/support/how-to-get-rocketsim-approved-at-work/) gives you a copyable request for centralized billing.
 
 ## Do you provide the option for commercial or team licenses?
 
-Yes, check out [Team Licenses](https://www.rocketsim.app/team-insights/).
+Yes, check out [Team Licenses](https://www.rocketsim.app/for-teams/).
+
+## How do I renew my team license or update payment details?
+
+Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and go to **Settings → Subscription**. From there, you can re-subscribe after your license expired or was canceled, update a payment method that failed, add seats, and download invoices. The [team subscription guide](/docs/support/managing-your-team-subscription/) walks you through each step.
 
 ## Can I buy a lifetime license?
 
-No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://www.avanderlee.com/swiftlee-weekly-subscribe/) and follow the instructions in the email.
+No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://swiftlee-weekly.com/?utm_source=rocketsim&utm_medium=referral&utm_campaign=swiftlee_weekly&utm_content=faq_lifetime_license) and follow the instructions in the email.
 
 ## Why is my video not accepted by App Store Connect?
 
@@ -46,10 +54,6 @@ Issues and feature requests are managed on [GitHub](https://github.com/AvdLee/R
 ## I only get JPEG images, how can I get PNG images again?
 
 You've likely enabled App Store Connect (ASC) Optimization. ASC requires JPEG images without alpha layer. Disable the option and you should get PNGs again.
-
-## Why are my iPad captures upside-down?
-
-RocketSim cannot detect landscape-left or landscape-right and defaults to one landscape rotation. The fix is simple: rotate your Simulator twice and restart the recording.
 
 ## Can I create transparent captures?
 

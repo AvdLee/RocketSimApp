@@ -29,6 +29,8 @@ Use Team Build Insights when you need evidence for hardware upgrades, Xcode roll
 
 Team insights are available at [teams.rocketsim.app](https://teams.rocketsim.app). You get a web-based overview of your team's build performance, so you can compare machines and spot trends without opening RocketSim.
 
+The same dashboard handles your subscription, seats, and invoices. Read [how to renew or manage your team subscription](/docs/support/managing-your-team-subscription/).
+
 ## Team Projects overview
 
 The dashboard starts with a Team Projects overview. You can add multiple Xcode projects; each project can have multiple schemes. Everything is in one place — pick a project and a scheme, and you can analyze build performance across your whole team for that target.
@@ -67,4 +69,4 @@ No. RocketSim tracks build data in the background and syncs at most once per hou
 
 **How do we try this with a team?**
 
-[Start a 14-day Teams trial](https://teams.rocketsim.app/signup/trial) and connect developers with the same team license key. No credit card is required.
+[Start a 14-day Teams trial](https://teams.rocketsim.app/signup/trial?utm_source=website&utm_medium=website&utm_content=team_build_insights_docs) and connect developers with the same team license key. No credit card is required.

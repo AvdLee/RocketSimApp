@@ -71,12 +71,48 @@ compare_plans:
       description: |
         Test camera functionality without a physical device by streaming your macOS camera. Scan QR codes or capture assets. All plug & play, you can just use the same AVCapture APIs as normal.
       list:
-        - item: Simulator Camera Captures
-          free: false
+        - item: Simulator Camera side window
+          free: true
           individual: true
           teams: true
+        - item: Simulator Camera streaming days
+          free: "5 days"
+          individual: Unlimited
+          teams: Unlimited
         - item: Barcode & QR Code Scanning
-          free: false
+          free: "5 days"
+          individual: Unlimited
+          teams: Unlimited
+    - title: Physical Device Testing
+      description: |
+        Connect a physical iPhone or iPad over USB for live previews, captures, design comparison, and app testing. With RocketSim 16.4 and Xcode 27, Recent Builds also supports lifecycle actions, deep links, location simulation, and location-driven system time-zone testing.
+      list:
+        - item: Physical iPhone and iPad live preview
+          free: true
+          individual: true
+          teams: true
+        - item: Screenshots, GIFs, and recordings from a physical device
+          free: true
+          individual: true
+          teams: true
+        - item: Design comparison, grids, and rulers
+          free: true
+          individual: true
+          teams: true
+        - item: Launch, relaunch, terminate, uninstall, and relaunch with locale
+          free: true
+          individual: true
+          teams: true
+        - item: Open deep links and Universal Links on a physical device
+          free: true
+          individual: true
+          teams: true
+        - item: Physical-device location and route simulation (Xcode 27)
+          free: true
+          individual: true
+          teams: true
+        - item: Test automatic system time-zone changes from location
+          free: true
           individual: true
           teams: true
     - title: Recordings
@@ -225,7 +261,7 @@ compare_plans:
           teams: true
     - title: Quick Actions
       description: |
-        Perform bundle identifier-based quick actions on your most recent build. Simulate locations, open deeplinks, send push notifications, or reset the Simulator keychain without an external server.
+        Perform bundle identifier-based actions on recent Simulator or physical-device builds. Simulate locations, open deep links, control app lifecycle, send Simulator push notifications, or reset the Simulator keychain.
       list:
         - item: Single Location Simulation
           free: true

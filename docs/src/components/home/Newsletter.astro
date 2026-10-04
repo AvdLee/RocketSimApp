@@ -1,0 +1,22 @@
+---
+import KitNewsletterForm from "./KitNewsletterForm.astro";
+---
+
+<section class="mx-auto max-w-[1120px] px-5" aria-labelledby="news-title">
+  <div
+    class="grid items-center gap-x-12 gap-y-5 border-t border-line py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
+  >
+    <div>
+      <h2 id="news-title" class="text-title-4">
+        Stay ahead of what's new in RocketSim.
+      </h2>
+      <p class="mt-1.5 text-small text-muted">
+        New releases, beta invites, workflow improvements, and early-access
+        announcements in your inbox.
+      </p>
+    </div>
+    <div>
+      <KitNewsletterForm />
+    </div>
+  </div>
+</section>

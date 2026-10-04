@@ -53,6 +53,10 @@
       "url": "/blog/"
     },
     {
+      "name": "Changelog",
+      "url": "/changelog/"
+    },
+    {
       "name": "Students",
       "url": "/student/"
     }

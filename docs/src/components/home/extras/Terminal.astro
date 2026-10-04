@@ -1,0 +1,19 @@
+---
+interface Props {
+  // What the commands show, for screen readers.
+  label: string;
+  commands: string[];
+}
+
+const { label, commands } = Astro.props;
+---
+
+<figure class="m-0">
+  <figcaption class="sr-only">{label}</figcaption>
+  <pre
+    class="m-0 overflow-hidden rounded-lg bg-surface px-[18px] py-4 font-mono text-caption leading-relaxed tracking-normal whitespace-pre-wrap text-code"><code>{
+    commands.map((command) => (
+      <span class="block pl-[2ch] -indent-[2ch]"><span class="text-(--chapter)" aria-hidden="true">$</span> {command}</span>
+    ))
+  }</code></pre>
+</figure>

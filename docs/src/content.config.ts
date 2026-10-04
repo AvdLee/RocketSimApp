@@ -1,5 +1,5 @@
 import { glob } from "astro/loaders";
-import { z, defineCollection } from "astro:content";
+import { z, defineCollection, reference } from "astro:content";
 import { docsLoader } from "@astrojs/starlight/loaders";
 import { docsSchema } from "@astrojs/starlight/schema";
 
@@ -43,6 +43,7 @@ const feature = defineCollection({
           "build-insights",
           "design-comparison",
           "networking",
+          "physical-devices",
           "screenshots-recordings",
           "simulator-camera",
           "status-bar",
@@ -70,9 +71,83 @@ const feature = defineCollection({
     }),
 });
 
+// One file per homepage chapter; the filename is the chapter ID and anchor.
+// See docs/docs/plans/homepage-rebuild.md.
+const homepageChapter = defineCollection({
+  loader: glob({
+    pattern: "**/[^_]*.md",
+    base: "./src/collections/homepage-chapter",
+  }),
+  schema: ({ image }) => {
+    const media = z.discriminatedUnion("type", [
+      z.object({ type: z.literal("image"), path: image(), alt: z.string() }),
+      z.object({ type: z.literal("video"), path: z.string(), alt: z.string() }),
+    ]);
+
+    return z.object({
+      // Eyebrow and glance tile label.
+      name: z.string(),
+      // The header's chapter menu label, when `name` is too long for it.
+      menuLabel: z.string().optional(),
+      title: z.string(),
+      // Picks the `--color-chapter-*` theme token.
+      color: z.enum([
+        "agents",
+        "captures",
+        "network",
+        "testing",
+        "design",
+        "teams",
+      ]),
+      tile: z
+        .object({
+          title: z.string(),
+          image: image().optional(),
+          // A public path, such as `/features/posters/<video>.webp`.
+          poster: z.string().startsWith("/").optional(),
+        })
+        .refine((tile) => !tile.image !== !tile.poster, {
+          message: "Set either tile.image or tile.poster.",
+        }),
+      presentation: z.enum(["tabs", "gallery", "closer-look"]),
+      // Display order. Overrides win; the rest falls back to the feature.
+      items: z
+        .array(
+          z.object({
+            feature: reference("feature").optional(),
+            title: z.string().optional(),
+            description: z.string().optional(),
+            media: media.optional(),
+          }),
+        )
+        .min(1),
+      links: z
+        .array(z.object({ label: z.string(), href: z.string() }))
+        .default([]),
+    });
+  },
+});
+
 const docs = defineCollection({
   loader: docsLoader(),
-  schema: docsSchema(),
+  schema: docsSchema({
+    extend: z.object({
+      seoParent: z
+        .object({
+          name: z.string(),
+          path: z.string(),
+        })
+        .optional(),
+      faq: z
+        .array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          }),
+        )
+        .optional(),
+    }),
+  }),
 });
 
 const blog = defineCollection({
@@ -115,6 +190,7 @@ const featurePage = defineCollection({
 export const collections = {
   feature,
   "feature-page": featurePage,
+  "homepage-chapter": homepageChapter,
   features: featuresPageCollection,
   pricing: pricingCollection,
   privacy: privacyCollection,

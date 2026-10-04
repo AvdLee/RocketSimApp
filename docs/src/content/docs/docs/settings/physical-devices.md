@@ -5,7 +5,7 @@ description: "Configure how RocketSim discovers, shows, and ignores connected ph
 
 Use **RocketSim → Settings → Physical Devices** to control how RocketSim monitors connected iOS devices.
 
-Physical device support lets RocketSim show a live preview window for a USB-connected iPhone, attach the side window to that preview, and use capture or comparison workflows on real hardware.
+Physical device support lets RocketSim show a live preview window for a USB-connected iPhone or iPad, attach the side window to that preview, and use capture or comparison workflows on real hardware.
 
 ![Physical Devices settings page](./physical-devices/physical-devices-settings.png)
 
@@ -40,6 +40,6 @@ This is useful when multiple devices are connected but you only want RocketSim t
 
 ## Related docs
 
-- [Physical Device Support](/docs/features/capturing/physical-device-support)
+- [Physical Device Testing](/docs/features/physical-devices/)
 - [Taking Screenshots](/docs/features/capturing/screenshots)
 - [Creating Recordings](/docs/features/capturing/recordings)

@@ -1,0 +1,18 @@
+---
+import { parseFigure } from "@/lib/utils/figure";
+
+// A stat value, such as "~95%". Screen readers read "~" as "tilde", so an
+// approximate figure gets a spoken version. The shown copy counts up as it
+// comes into view (src/lib/utils/countUp.ts) when it has a number worth
+// counting; the spoken copy never changes.
+interface Props {
+  value: string;
+}
+
+const { value } = Astro.props;
+const spoken = value.replace(/^~/, "About ");
+const countUp = (parseFigure(value)?.value ?? 0) >= 10;
+---
+
+<span aria-hidden="true" data-count-up={countUp ? "" : undefined}>{value}</span
+><span class="sr-only">{spoken}</span>

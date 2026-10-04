@@ -1,0 +1,148 @@
+---
+import { getHomepageChapter } from "@/lib/homepage";
+
+import CloserLook from "./presentations/CloserLook.astro";
+import Gallery from "./presentations/Gallery.astro";
+import Tabs from "./presentations/Tabs.astro";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const { name, title, color, presentation, items, links, Content } =
+  await getHomepageChapter(id);
+
+// Extras come in as children from the page template: the `aside` slot sits
+// beside the tabs stage, and the default slot follows the links.
+const aside = Astro.slots.has("aside")
+  ? await Astro.slots.render("aside")
+  : undefined;
+if (aside && presentation !== "tabs") {
+  throw new Error(
+    `Homepage chapter "${id}": only the tabs presentation has room for the aside slot. Move the extras or switch the chapter back to tabs.`,
+  );
+}
+---
+
+<section
+  id={id}
+  data-chapter
+  data-presentation={presentation}
+  class="mx-auto max-w-[1120px] px-5 pt-section pb-4 md:pb-8"
+  style={`--chapter: var(--color-chapter-${color})`}
+>
+  <!-- Each part rises into place as it scrolls in; the intro follows the
+       title (src/styles/animations.css). Beside the intro, the title sizes
+       to the intro's height (the script below). -->
+  <div
+    data-chapter-heading
+    class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
+  >
+    <div data-reveal>
+      <p class="mb-3 text-intro font-semibold text-(--chapter)">{name}</p>
+      <h2 class="max-w-[14em] text-title-1 text-balance" data-chapter-title>
+        {title}
+      </h2>
+    </div>
+    <div
+      class="max-w-[32em] text-muted [&_p]:text-intro [&_strong]:text-text-dark"
+      data-chapter-intro
+      data-reveal
+      style="--reveal-order: 1"
+    >
+      <Content />
+    </div>
+  </div>
+
+  <div data-reveal>
+    {
+      presentation === "tabs" && (
+        <Tabs id={id} chapterName={name} items={items} aside={aside} />
+      )
+    }
+    {
+      presentation === "gallery" && (
+        <Gallery id={id} chapterName={name} items={items} />
+      )
+    }
+    {
+      presentation === "closer-look" && (
+        <CloserLook id={id} chapterName={name} items={items} />
+      )
+    }
+  </div>
+
+  {
+    links.length > 0 && (
+      <div class="mt-12 flex flex-wrap gap-[22px]" data-reveal>
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-copy text-primary no-underline hover:underline"
+          >
+            {link.label} <span aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    Astro.slots.has("default") && (
+      <div data-reveal>
+        <slot />
+      </div>
+    )
+  }
+</section>
+
+<script>
+  import { fitFontSize } from "@/lib/utils/fitFontSize";
+
+  // Between the phone layout's stacked title and the type scale's largest
+  // title-1 (src/styles/main.css).
+  const bounds = { min: 32, max: 64 };
+
+  // Side by side, each title takes the size that sets it closest to the
+  // height of its intro, so the two start and end level. Stacked, the title
+  // keeps the type scale's size.
+  function fitTitle(heading: HTMLElement) {
+    const title = heading.querySelector<HTMLElement>("[data-chapter-title]");
+    const intro = heading.querySelector<HTMLElement>("[data-chapter-intro]");
+    if (!title || !intro) return;
+
+    title.style.fontSize = "";
+    const columns = getComputedStyle(heading).gridTemplateColumns.split(" ");
+    if (columns.length < 2) return;
+
+    const size = fitFontSize(
+      (size) => {
+        title.style.fontSize = `${size}px`;
+        return title.offsetHeight;
+      },
+      intro.offsetHeight,
+      bounds,
+    );
+    title.style.fontSize = `${size}px`;
+  }
+
+  let observer: ResizeObserver | undefined;
+
+  // The intro's height follows the column width, so a resize that rewraps
+  // it refits the title. The title's size never feeds back into the intro.
+  function initTitleFit() {
+    observer?.disconnect();
+    observer = new ResizeObserver((entries) => {
+      entries.forEach(({ target }) => {
+        const heading = target.closest<HTMLElement>("[data-chapter-heading]");
+        if (heading) fitTitle(heading);
+      });
+    });
+    document
+      .querySelectorAll<HTMLElement>("[data-chapter-intro]")
+      .forEach((intro) => observer?.observe(intro));
+  }
+
+  document.addEventListener("astro:page-load", initTitleFit);
+</script>

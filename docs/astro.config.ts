@@ -19,11 +19,10 @@ import config from "./src/config/config.json";
 // Heading anchors are generated at build time for blog posts only. Starlight
 // already manages slugs/anchors for the docs collection, so we scope these
 // plugins to files under `src/content/blog` to avoid double-processing docs.
-const scopeToBlog =
-  <S extends unknown[]>(
-    plugin: Plugin<S, Root>,
-    ...settings: S
-  ): Plugin<[], Root> =>
+const scopeToBlog = <S extends unknown[]>(
+  plugin: Plugin<S, Root>,
+  ...settings: S
+): Plugin<[], Root> =>
   function () {
     const transformer = plugin.call(this, ...settings) as Transformer<
       Root,
@@ -105,6 +104,12 @@ export default defineConfig({
       "/docs/features/build-insights/build-insights",
     "/docs/docs/features/app-actions/network-speed-control-and-simulator-airplane-mode":
       "/docs/features/networking/network-speed-control",
+    "/docs/features/capturing/physical-device-support":
+      "/docs/features/physical-devices",
+    "/docs/docs/features/capturing/physical-device-support":
+      "/docs/features/physical-devices",
+    "/blog/debug-urlsession-requests-without-proxy":
+      "/blog/monitor-urlsession-network-requests-without-the-pain-of-custom-certificates",
   },
   image: {
     service: {
@@ -129,14 +134,23 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) =>
-        page !== "https://www.rocketsim.app/terms" &&
-        page !== "https://www.rocketsim.app/privacy" &&
-        page !== "https://www.rocketsim.app/thank-you" &&
-        page !== "https://www.rocketsim.app/claim-offer" &&
-        page !== "https://www.rocketsim.app/signup/trial/thank-you" &&
-        page !== "https://www.rocketsim.app/404" &&
-        page !== "https://www.rocketsim.app/docs/404",
+      // Compare without the trailing slash: the site is configured with
+      // `trailingSlash: "always"`, so sitemap entries end in `/`.
+      filter: (page) => {
+        const normalized = page.replace(/\/$/, "");
+        return ![
+          "https://www.rocketsim.app/terms",
+          "https://www.rocketsim.app/privacy",
+          "https://www.rocketsim.app/thank-you",
+          "https://www.rocketsim.app/claim-offer",
+          "https://www.rocketsim.app/emails-notify",
+          "https://www.rocketsim.app/signup/trial/thank-you",
+          "https://www.rocketsim.app/404",
+          "https://www.rocketsim.app/docs/404",
+          // Homepage rebuild preview, until it replaces `/` at launch.
+          "https://www.rocketsim.app/home-next",
+        ].includes(normalized);
+      },
     }),
     AutoImport({
       imports: [
@@ -150,7 +164,7 @@ export default defineConfig({
         starlightLlmsTxt({
           projectName: "RocketSim",
           description:
-            "RocketSim enhances iOS Simulator and physical-device development with screenshots and recordings, design comparison, agentic development through the RocketSim CLI and Agent Skill, push notification testing, deep links, location simulation, network tools, accessibility workflows, and more.",
+            "RocketSim enhances iOS Simulator and physical-device development with captures, design comparison, AI agent automation, deep-link and location testing on connected iPhones and iPads, time-zone testing, network tools, accessibility workflows, and more.",
           rawContent: true,
         }),
       ],
@@ -235,7 +249,8 @@ export default defineConfig({
         },
         {
           label: "Physical Devices",
-          link: "/docs/features/capturing/physical-device-support",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/physical-devices" },
         },
         {
           label: "Device Hub",

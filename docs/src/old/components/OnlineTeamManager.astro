@@ -1,103 +1,228 @@
 ---
-import Feature from "@/components/Feature.astro";
+import { Image } from "astro:assets";
 
-import userSettingsImage from "../../assets/features/user-settings.png";
-import subscriptionSettingsImage from "../../assets/features/subscription-settings.png";
+import licenseManagementImage from "../../assets/features/team-manager-license-management.png";
+import usersSeatsImage from "../../assets/features/team-manager-users-seats.png";
 ---
 
+<section class="team-manager" aria-labelledby="team-manager-title">
+  <div class="container">
+    <div class="team-manager__intro">
+      <p>Online Team Manager</p>
+      <h2 id="team-manager-title">Insights, seats, and billing in one place</h2>
+      <span>
+        Browse build evidence, choose the workspaces and schemes that matter,
+        and handle access without maintaining another internal dashboard.
+      </span>
+    </div>
+
+    <div class="team-manager__dashboard">
+      <video
+        class="js-lazy-video"
+        poster="/features/posters/team-insights-dashboard.webp"
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        preload="none"
+        aria-label="RocketSim for Teams dashboard showing build insights"
+      >
+        <source
+          data-src="/features/team-insights-dashboard.mp4"
+          type="video/mp4"
+        />
+        <a href="https://www.youtube.com/watch?v=1Ie_ia8hZPI">
+          Watch the RocketSim Team Build Insights dashboard tour
+        </a>
+      </video>
+      <div class="team-manager__dashboard-copy">
+        <p>Build Insights dashboard</p>
+        <h3>Keep the decision and its supporting data together</h3>
+        <span>
+          Filter by workspace and scheme, compare build durations, and review
+          recommendations generated from reported local builds.
+        </span>
+        <a
+          href="https://www.youtube.com/watch?v=1Ie_ia8hZPI"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Watch the dashboard tour &rarr;
+        </a>
+      </div>
+    </div>
+
+    <div class="team-manager__settings">
+      <article>
+        <div>
+          <p>Access</p>
+          <h3>User and seat management</h3>
+          <span>
+            Invite developers, assign roles, and see how many seats are in use.
+          </span>
+        </div>
+        <Image
+          src={usersSeatsImage}
+          alt="RocketSim for Teams user settings showing active users, invited users, roles, and seat management"
+          widths={[480, 720, 960, 1200]}
+          sizes="(max-width: 799px) 100vw, 50vw"
+          quality={95}
+        />
+      </article>
+      <article>
+        <div>
+          <p>Subscription</p>
+          <h3>License management</h3>
+          <span>
+            Find the shared license key, review renewal details, and manage
+            billing from the same portal.
+          </span>
+        </div>
+        <Image
+          src={licenseManagementImage}
+          alt="RocketSim for Teams subscription settings showing the license key, expiry date, and used seats"
+          widths={[480, 720, 960, 1200]}
+          sizes="(max-width: 799px) 100vw, 50vw"
+          quality={95}
+        />
+      </article>
+    </div>
+  </div>
+</section>
+
 <style>
-  section {
-    padding: 4rem 0;
-
-    background-color: #101010;
-
-    @media (min-width: 800px) {
-      padding-top: 8rem;
-      padding-bottom: 8rem;
-    }
+  .team-manager {
+    padding: 7rem 0;
+    background: #09090a;
   }
 
-  .feature-wrapper {
-    &:not(:first-child) {
-      margin-top: 4rem;
+  .team-manager__intro {
+    max-width: 48rem;
+    margin: 0 auto 3.5rem;
+    text-align: center;
+  }
 
-      @media (min-width: 800px) {
-        margin-top: 8rem;
-      }
+  .team-manager__intro > p,
+  article p,
+  .team-manager__dashboard-copy > p {
+    margin: 0 0 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .team-manager__intro h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 650;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .team-manager__intro span {
+    display: block;
+    max-width: 40rem;
+    margin: 1.2rem auto 0;
+    color: var(--text-color);
+    line-height: 1.65;
+  }
+
+  .team-manager__dashboard {
+    display: grid;
+    overflow: hidden;
+    background: #151517;
+    border: 1px solid rgb(255 255 255 / 9%);
+    border-radius: 1.5rem;
+    box-shadow: 0 2rem 5rem rgb(0 0 0 / 25%);
+  }
+
+  video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 72 / 55;
+    object-fit: cover;
+    background: #111;
+  }
+
+  .team-manager__dashboard-copy {
+    align-self: center;
+    padding: 2.5rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .team-manager__dashboard-copy span,
+  article span {
+    display: block;
+    margin-top: 0.8rem;
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  .team-manager__dashboard-copy a {
+    display: inline-block;
+    margin-top: 1.3rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .team-manager__settings {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  article {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    overflow: hidden;
+    background: #131315;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 1.4rem;
+  }
+
+  article :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 0.8rem;
+    box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 22%);
+  }
+
+  @media (min-width: 800px) {
+    .team-manager {
+      padding-block: 9rem;
     }
 
-    &:not(:last-child) {
-      margin-bottom: 4rem;
+    .team-manager__dashboard {
+      grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.65fr);
+    }
 
-      @media (min-width: 800px) {
-        margin-bottom: 8rem;
-      }
+    .team-manager__settings {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    article {
+      padding: 2rem;
     }
   }
 </style>
 
-<section>
-  <div class="feature-wrapper">
-    <Feature
-      data={{
-        name: "Online Team Manager",
-        showOnHomepage: false,
-        tagLine: "Browse insights and manage seats",
-        youtubeLink: "https://www.youtube.com/watch?v=1Ie_ia8hZPI",
-        asset: {
-          type: "video",
-          path: "/features/team-insights-dashboard.mp4",
-          alt: "RocketSim for Teams dashboard. Showing the build insights page. It is showing build times, build count and breakdown charts for the an Xcode project.",
-          alignment: "full-width",
-          columnSpan: 12,
-        },
-      }}
-    >
-      <p>
-        Configure workspaces, select specific schemes, browse build durations
-        and benchmarks. RocketSim's Team Manager puts you in full control of
-        your team's productivity.
-      </p>
-    </Feature>
-  </div>
-  <div class="feature-wrapper">
-    <Feature
-      data={{
-        name: "User & seat management",
-        showOnHomepage: false,
-        asset: {
-          type: "image",
-          path: userSettingsImage,
-          alt: "RocketSim for Teams dashboard. Showing the user setting page. It is showing a license with two active users and one user that is invited. The user can add or remove users from the license and give them roles.",
-          alignment: "right",
-          columnSpan: 8,
-        },
-      }}
-    >
-      <p>
-        Manage your team and their access to RocketSim. Invite users, assign
-        roles, and manage seats.
-      </p>
-    </Feature>
-  </div>
-  <div class="feature-wrapper">
-    <Feature
-      data={{
-        name: "License management",
-        showOnHomepage: false,
-        asset: {
-          type: "image",
-          path: subscriptionSettingsImage,
-          alt: "RocketSim for Teams dashboard. Showing the subscription setting page. It is showing a license key, expiry date, and  the number of used seats. The user can also manage its subscription.",
-          alignment: "left",
-          columnSpan: 8,
-        },
-      }}
-    >
-      <p>
-        Find your license key, expiry date, and the number of (used) seats.
-        Manage your billing and subscription data.
-      </p>
-    </Feature>
-  </div>
-</section>
+<script>
+  import { initLazyVideos } from "@/lib/utils/lazyVideo";
+
+  document.addEventListener("astro:page-load", initLazyVideos);
+</script>

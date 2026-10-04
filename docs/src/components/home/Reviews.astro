@@ -1,0 +1,25 @@
+---
+import SenjaWidget from "./SenjaWidget.astro";
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-section pb-2"
+  aria-labelledby="reviews-title"
+>
+  <div
+    class="flex flex-wrap items-end justify-between gap-x-8 gap-y-3"
+    data-reveal
+  >
+    <h2 id="reviews-title" class="max-w-[16em] text-title-2 text-balance">
+      Developers can't stop talking about it.
+    </h2>
+    <p class="text-copy text-muted">
+      <b class="mr-1 text-title-3 text-text-dark tabular-nums">4.8</b>
+      <span aria-hidden="true">★</span><span class="sr-only">stars</span> on the App
+      Store
+    </p>
+  </div>
+  <div class="mt-stack">
+    <SenjaWidget widget="reviews" />
+  </div>
+</section>

@@ -10,6 +10,8 @@ interface Props {
 }
 
 const { title, logo, logoAlt } = Astro.props;
+const hasAside = Astro.slots.has("aside");
+const hasBelowCopy = Astro.slots.has("below-copy");
 ---
 
 <style>
@@ -67,13 +69,23 @@ const { title, logo, logoAlt } = Astro.props;
     margin: 0 0 1rem;
   }
 
-  .hero__logo {
+  .hero__below-copy {
+    margin-top: 1.5rem;
+  }
+
+  .hero__aside {
     display: flex;
     justify-content: center;
     align-items: center;
 
     @media (min-width: 800px) {
       grid-column: span 5 / -1;
+    }
+  }
+
+  .hero__aside--after-copy {
+    @media (max-width: 799px) {
+      margin-top: 1.5rem;
     }
   }
 
@@ -107,15 +119,30 @@ const { title, logo, logoAlt } = Astro.props;
       <p>
         <slot />
       </p>
+      {
+        hasBelowCopy && (
+          <div class="hero__below-copy">
+            <slot name="below-copy" />
+          </div>
+        )
+      }
     </div>
-    <div class="hero__logo">
-      <Image
-        src={appIcon}
-        widths={[128, 512]}
-        sizes="(max-width: 767px) 4rem, 16rem"
-        alt="RocketSim app icon"
-        class="logo-image"
-      />
+    <div
+      class:list={["hero__aside", { "hero__aside--after-copy": hasBelowCopy }]}
+    >
+      {
+        hasAside ? (
+          <slot name="aside" />
+        ) : (
+          <Image
+            src={appIcon}
+            widths={[128, 512]}
+            sizes="(max-width: 767px) 4rem, 16rem"
+            alt="RocketSim app icon"
+            class="logo-image"
+          />
+        )
+      }
     </div>
   </div>
 </header>

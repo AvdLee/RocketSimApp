@@ -1,6 +1,7 @@
 ---
 title: "Networking"
-description: "Monitor URLSession requests without proxy certificates, export AI-ready debugging prompts, control network speed, and simulate airplane mode."
+meta_title: "iOS Simulator Network Debugging & Speed Control - RocketSim"
+description: "Monitor URLSession requests without proxy certificates, throttle network speed, and simulate airplane mode on the iOS Simulator."
 hero:
   title: "Networking"
   subtitle: "Inspect requests, export AI-ready debugging context, and control Simulator network conditions"

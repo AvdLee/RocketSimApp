@@ -1,0 +1,83 @@
+---
+// The small tools that don't get a chapter.
+const items = [
+  {
+    key: "Locale · Time\u00a0zone",
+    title: "Quick Actions",
+    text: "Your most-used actions, one click away.",
+  },
+  {
+    key: "Standard · Group",
+    title: "User Defaults Editor",
+    text: "Change app state while it runs.",
+  },
+  {
+    key: "Launch · Reset",
+    title: "Recent builds",
+    text: "Relaunch, reset, or open app folders.",
+  },
+  {
+    key: "Drag & drop",
+    title: "Floating captures",
+    text: "Drop screenshots anywhere, instantly.",
+  },
+  {
+    key: "Menu bar",
+    title: "Right from the menu bar",
+    text: "Deep links, recent builds, and captures without opening a window.",
+  },
+  {
+    key: "Side window",
+    title: "Always at hand",
+    text: "Tools docked next to the Simulator.",
+  },
+  {
+    key: "Global shortcuts",
+    title: "Keyboard first",
+    text: "Shake, slow animations, and memory warnings.",
+  },
+  {
+    key: "Xcode 27",
+    title: "Device Hub ready",
+    text: "Works with Xcode's newest devices view.",
+  },
+];
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-section pb-10"
+  aria-labelledby="everyday-title"
+>
+  <div data-reveal>
+    <h2 id="everyday-title" class="text-title-2 text-balance">
+      And the small things you'll use every day.
+    </h2>
+    <p class="mt-3 max-w-[34em] text-intro text-muted">
+      Details that save a few seconds each time, and hours every month.
+    </p>
+  </div>
+  <ul
+    data-reveal
+    class="mt-stack grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border lg:grid-cols-4"
+  >
+    {
+      items.map(({ key, title, text }) => (
+        <li class="bg-body p-[22px]">
+          <span class="mb-2.5 block font-mono text-caption tracking-normal text-muted">
+            {key}
+          </span>
+          <h3 class="text-copy font-semibold">{title}</h3>
+          <p class="mt-1 text-small text-muted">{text}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="mt-12">
+    <a
+      href="/features/"
+      class="text-copy text-primary no-underline hover:underline"
+    >
+      See all features <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
