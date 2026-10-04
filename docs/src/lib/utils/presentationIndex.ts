@@ -22,22 +22,19 @@ export function indexForKey(
   return step === undefined ? undefined : (current + step + count) % count;
 }
 
-// The slide whose start is closest to `position`, the track's scroll offset.
-// A track scrolled to `end` (its largest offset) settles on the last slide,
-// which on wide screens cannot scroll all the way to its start.
-export function nearestIndex(
-  starts: readonly number[],
-  position: number,
-  end = Infinity,
-) {
-  if (position >= end - 1) return starts.length - 1;
-  let nearest = 0;
-  starts.forEach((start, index) => {
-    if (Math.abs(start - position) < Math.abs(starts[nearest] - position)) {
-      nearest = index;
-    }
-  });
-  return nearest;
+// How many slides along a track is at `position`, its scroll offset: 2 when
+// it rests on the third slide, 2.5 halfway to the fourth. `rests` are the
+// offsets the track rests at for each slide, in order; on wide screens the
+// last slides rest at the track's end, short of their start. Round it for the
+// nearest slide.
+export function slidePosition(rests: readonly number[], position: number) {
+  if (position <= rests[0]) return 0;
+  for (let index = 0; index < rests.length - 1; index++) {
+    const from = rests[index];
+    const to = rests[index + 1];
+    if (position < to) return index + (position - from) / (to - from);
+  }
+  return rests.length - 1;
 }
 
 interface ScrollRow {

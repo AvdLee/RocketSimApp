@@ -14,8 +14,6 @@ interface Props {
 }
 
 const { id, chapterName, items } = Astro.props;
-const arrowButtonClass =
-  "grid size-9 flex-none cursor-pointer place-items-center rounded-lg border border-border bg-card text-caption text-text-dark transition-colors hover:border-primary hover:bg-primary/8 disabled:cursor-default disabled:border-border disabled:bg-card disabled:opacity-35";
 ---
 
 <!-- Full-bleed track; `--edge` lines the first slide up with the chapter text. -->
@@ -40,41 +38,55 @@ const arrowButtonClass =
           aria-roledescription="slide"
           aria-label={`${index + 1} of ${items.length}`}
           data-current={index === 0 ? "" : undefined}
-          class="group flex max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors duration-500 ease-smooth motion-reduce:transition-none data-current:border-[color-mix(in_srgb,var(--chapter)_45%,var(--color-border))]"
+          style={`--slide-offset: ${Math.min(index, 1)}; --slide-distance: ${Math.min(index, 1)}`}
+          class="group relative flex aspect-square max-w-full shrink-0 basis-[min(880px,84vw)] snap-start flex-col overflow-hidden rounded-lg bg-surface sm:aspect-[3/2]"
         >
-          {/* The frame has a fixed shape so every slide lines up, and the
-              media letterboxes inside it rather than cropping. 4:3 on phones
-              splits the difference between the landscape and square media;
-              16:9 from sm fits most of it exactly. Neighbouring slides dim
-              their media only, so their captions stay readable. */}
-          <div class="relative aspect-[4/3] overflow-hidden border-b border-border bg-surface opacity-50 transition-opacity duration-500 ease-smooth group-data-current:opacity-100 motion-reduce:transition-none sm:aspect-video">
-            <MediaBackdrop media={item.media} />
-            <Media
-              media={item.media}
-              sizes="(min-width: 1048px) 880px, 84vw"
-              class="absolute inset-0 size-full object-contain"
-            />
+          {/* The card has a fixed shape so every slide lines up. A blurred
+              copy of the media fills it, so the caption sits on the media's
+              own colours, and the media letterboxes under the caption rather
+              than cropping. As a slide scrolls away from its resting place
+              (`--slide-offset`, set by the script below), its media dims,
+              shrinks and lags behind, and the backdrop swells and drifts
+              further; the captions stay readable. */}
+          <div class="absolute inset-0 opacity-[calc(1_-_var(--slide-distance)*0.5)] motion-safe:translate-x-[calc(var(--slide-offset)*-10%)] motion-safe:scale-[calc(1_+_var(--slide-distance)*0.2)]">
+            <MediaBackdrop media={item.media} cover />
           </div>
-          <p class="px-4 pt-3.5 pb-4 text-small text-muted sm:px-[22px] sm:pt-[18px] sm:pb-5">
-            <b class="mb-0.5 block text-copy text-muted transition-colors duration-500 ease-smooth group-data-current:text-text-dark motion-reduce:transition-none">
-              {item.title}
-            </b>
+          <p class="relative max-w-[34ch] p-6 text-intro font-semibold text-muted sm:p-9 sm:text-title-4 md:text-title-3">
+            <span
+              data-gallery-title
+              class="text-muted transition-colors duration-300 ease-smooth group-data-current:text-text-dark motion-reduce:transition-none"
+            >
+              {item.title}.
+            </span>{" "}
             {item.description}
           </p>
+          {/* The media shrinks to fit rather than filling the space, so its
+              rounded corners sit on its own edges. A video has no size until
+              its poster loads, so it holds 16:9 until then. */}
+          <div class="relative min-h-0 flex-1 opacity-[calc(1_-_var(--slide-distance)*0.5)]">
+            <div class="absolute inset-0 flex items-center justify-center px-6 pb-6 sm:px-9 sm:pb-9">
+              <Media
+                media={item.media}
+                sizes="(min-width: 1048px) 880px, 84vw"
+                class="aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg motion-safe:translate-x-[calc(var(--slide-offset)*-10%)] motion-safe:scale-[calc(1_-_var(--slide-distance)*0.1)]"
+              />
+            </div>
+          </div>
         </div>
       ))
     }
   </div>
 
-  <!-- The picker line draws itself and the buttons slide in as the controls
-       scroll in (src/styles/animations.css). -->
+  <!-- The picker dots draw themselves and the autoplay button slides in as
+       the controls scroll in (src/styles/animations.css). -->
   <div
     class="mt-[22px] flex items-center gap-2.5 px-(--edge)"
     data-draw-row
     style={`--draw-count: ${items.length}`}
   >
     <p class="sr-only" aria-live="polite" data-gallery-status></p>
-    <div class="mr-auto flex max-w-[420px] flex-1 items-center gap-1.5">
+    <!-- A pill of dots; the current slide's dot stretches into a bar. -->
+    <div class="flex h-9 items-center gap-3 rounded-full bg-surface px-4">
       {
         items.map((item, index) => (
           <button
@@ -85,62 +97,39 @@ const arrowButtonClass =
             aria-label={`Show highlight ${index + 1}: ${item.title}`}
             data-draw
             style={`--draw-index: ${index}`}
-            class="relative h-[3px] flex-1 cursor-pointer rounded-sm bg-border after:absolute after:inset-x-0 after:-inset-y-2.5 aria-[current=true]:bg-muted"
+            class="group/dot relative h-[8px] w-[8px] flex-none cursor-pointer rounded-full bg-muted transition-[width,background-color] duration-500 ease-smooth after:absolute after:-inset-x-1.5 after:-inset-y-3.5 hover:bg-text-soft aria-[current=true]:w-[48px] aria-[current=true]:cursor-default aria-[current=true]:bg-muted motion-reduce:transition-none"
           >
-            {/* Fills up while autoplay shows the slide. */}
-            <span
-              data-autoplay-fill
-              class="absolute inset-0 origin-left scale-x-0 rounded-[inherit] bg-primary"
-            />
+            {/* Fills up while autoplay shows the slide; it slides in rather
+                than stretching, so its leading edge stays round. */}
+            <span class="absolute inset-0 overflow-hidden rounded-[inherit]">
+              <span
+                data-autoplay-fill
+                class="absolute inset-0 translate-x-[calc(var(--autoplay-fill,0)*100%_-_100%)] rounded-[inherit] bg-text-dark opacity-0 group-aria-[current=true]/dot:opacity-100"
+              />
+            </span>
           </button>
         ))
       }
     </div>
-    <button
-      type="button"
-      data-gallery-prev
-      aria-controls={`${id}-track`}
-      aria-label="Previous highlight"
-      class={arrowButtonClass}
-      data-draw-control
-      disabled
-    >
-      ←
-    </button>
-    <AutoplayControl name={`${chapterName} highlights`} />
-    <button
-      type="button"
-      data-gallery-next
-      aria-controls={`${id}-track`}
-      aria-label="Next highlight"
-      class={arrowButtonClass}
-      data-draw-control
-    >
-      →
-    </button>
+    <AutoplayControl name={`${chapterName} highlights`} round />
   </div>
 </div>
 
 <script>
   import { createAutoplay } from "@/lib/utils/autoplay";
-  import { nearestIndex } from "@/lib/utils/presentationIndex";
+  import { slidePosition } from "@/lib/utils/presentationIndex";
 
-  // The pickers and arrows scroll the track to a slide. Swipes, trackpad
-  // scrolls and arrow keys on the focused track scroll it natively, and the
-  // current slide follows once the track settles. Autoplay moves through the
-  // slides and plays the current slide's video; neighbouring slides are on
-  // screen too, but their videos stay on their posters.
+  // The pickers scroll the track to a slide. Swipes, trackpad scrolls and
+  // arrow keys on the focused track scroll it natively, and the current slide
+  // follows as soon as the track passes halfway to the next one. Autoplay
+  // moves through the slides and plays the current slide's video;
+  // neighbouring slides are on screen too, but their videos stay on their
+  // posters.
   function initGalleries() {
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="gallery"]')
       .forEach((root) => {
         const track = root.querySelector<HTMLElement>("[data-gallery-track]");
-        const prev = root.querySelector<HTMLButtonElement>(
-          "[data-gallery-prev]",
-        );
-        const next = root.querySelector<HTMLButtonElement>(
-          "[data-gallery-next]",
-        );
         const control = root.querySelector<HTMLButtonElement>(
           "[data-autoplay-control]",
         );
@@ -153,18 +142,39 @@ const arrowButtonClass =
         const pickers = [
           ...root.querySelectorAll<HTMLButtonElement>("[data-gallery-picker]"),
         ];
-        if (!track || !prev || !next || !control || slides.length === 0) {
-          return;
-        }
+        if (!track || !control || slides.length === 0) return;
 
         let current = 0;
-        // Set while the track scrolls to a picked slide, so the scroll it
-        // causes doesn't pick another one.
+        // Set while the track scrolls to a picked slide, so the slides it
+        // passes on the way don't become current.
         let picked: number | undefined;
         let settle: number | undefined;
 
-        const starts = () =>
-          slides.map((slide) => slide.offsetLeft - slides[0].offsetLeft);
+        // Where the track rests for each slide; the last slides may stop
+        // short of their start.
+        const rests = () => {
+          const end = track.scrollWidth - track.clientWidth;
+          return slides.map((slide) =>
+            Math.min(slide.offsetLeft - slides[0].offsetLeft, end),
+          );
+        };
+        const position = () => slidePosition(rests(), track.scrollLeft);
+
+        // Tells each slide how far it is from its resting place, from -1
+        // (a slide to the left) to 1 (a slide to the right), for its scroll
+        // effects.
+        const follow = () => {
+          const at = position();
+          slides.forEach((slide, i) => {
+            const offset = Math.max(-1, Math.min(1, i - at));
+            slide.style.setProperty("--slide-offset", String(offset));
+            slide.style.setProperty(
+              "--slide-distance",
+              String(Math.abs(offset)),
+            );
+          });
+          return at;
+        };
 
         // Marks a slide current. Autoplay's own moves aren't announced, so a
         // screen reader isn't interrupted every few seconds.
@@ -177,21 +187,14 @@ const arrowButtonClass =
             picker.setAttribute("aria-current", String(i === index)),
           );
           if (status && announce) {
-            status.textContent = `Highlight ${index + 1} of ${slides.length}: ${slides[index].querySelector("b")?.textContent?.trim() ?? ""}`;
+            status.textContent = `Highlight ${index + 1} of ${slides.length}: ${slides[index].querySelector("[data-gallery-title]")?.textContent?.trim() ?? ""}`;
           }
-          prev.disabled = index === 0;
-          next.disabled = index === slides.length - 1;
         };
-
-        // Where the track scrolls to for a slide; the last slides may stop
-        // short of their start.
-        const scrollTarget = (index: number) =>
-          Math.min(starts()[index], track.scrollWidth - track.clientWidth);
 
         // Marks a slide current and scrolls the track to it.
         const goTo = (index: number, announce = true) => {
           mark(index, announce);
-          const left = scrollTarget(index);
+          const left = rests()[index];
           // Already there: no scroll follows to clear `picked`.
           if (Math.abs(track.scrollLeft - left) < 1) return;
           picked = index;
@@ -209,51 +212,42 @@ const arrowButtonClass =
           control,
           show: (index) => goTo(index, false),
         });
-        // The visitor picked a slide with a picker or an arrow.
-        const pickSlide = (index: number) => {
-          goTo(index);
+
+        // The visitor brought another slide in by scrolling.
+        const scrolledTo = (index: number) => {
+          if (index === current) return;
+          mark(index);
           autoplay.pick(index);
         };
 
         pickers.forEach((picker, index) =>
-          picker.addEventListener("click", () => pickSlide(index)),
-        );
-        prev.addEventListener("click", () =>
-          pickSlide(Math.max(0, current - 1)),
-        );
-        next.addEventListener("click", () =>
-          pickSlide(Math.min(slides.length - 1, current + 1)),
+          picker.addEventListener("click", () => {
+            goTo(index);
+            autoplay.pick(index);
+          }),
         );
 
         track.addEventListener(
           "scroll",
           () => {
+            // Scroll events come at most once a frame, so the effects can
+            // follow every one.
+            const at = follow();
+            if (picked === undefined) scrolledTo(Math.round(at));
+            // A swipe that interrupted the scroll to a picked slide picks by
+            // position once the track settles.
             window.clearTimeout(settle);
             settle = window.setTimeout(() => {
-              // A picked slide the track reached stays current, even if
-              // another slide's start is nearer. A swipe that interrupted the
-              // scroll to it picks by position instead.
-              const target =
-                picked === undefined ? undefined : scrollTarget(picked);
+              if (picked === undefined) return;
+              const reached = Math.abs(track.scrollLeft - rests()[picked]) < 2;
               picked = undefined;
-              if (
-                target !== undefined &&
-                Math.abs(track.scrollLeft - target) < 2
-              )
-                return;
-              const index = nearestIndex(
-                starts(),
-                track.scrollLeft,
-                track.scrollWidth - track.clientWidth,
-              );
-              if (index !== current) {
-                mark(index);
-                autoplay.pick(index);
-              }
+              if (!reached) scrolledTo(Math.round(position()));
             }, 120);
           },
           { passive: true },
         );
+
+        follow();
       });
   }
 
