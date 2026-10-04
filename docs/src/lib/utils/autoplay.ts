@@ -17,7 +17,8 @@ const IMAGE_MS = 5000;
 const MAX_FRAME_MS = 100;
 
 interface AutoplayItem {
-  // The fill of the item's progress bar.
+  // The fill of the item's progress bar. Autoplay sets its `--autoplay-fill`,
+  // from 0 to 1, and the presentation draws the fill from that.
   fill: HTMLElement | null;
   video: HTMLVideoElement | null;
 }
@@ -69,7 +70,7 @@ export function createAutoplay({
   const render = () => {
     progressFills(state, progress()).forEach((fill, index) => {
       const bar = items[index].fill;
-      if (bar) bar.style.scale = `${fill} 1`;
+      bar?.style.setProperty("--autoplay-fill", String(fill));
     });
   };
 

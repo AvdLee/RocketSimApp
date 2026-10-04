@@ -5,9 +5,12 @@ import type { HomepageMedia } from "@/lib/homepageItems";
 
 interface Props {
   media: HomepageMedia;
+  // Fills the whole frame instead of matching the media's own shape, for
+  // frames that hold more than the media, such as a caption.
+  cover?: boolean;
 }
 
-const { media } = Astro.props;
+const { media, cover = false } = Astro.props;
 
 // A small copy is enough once it's blurred. Videos use their poster, which
 // the page loads anyway.
@@ -27,5 +30,8 @@ const src =
   aria-hidden="true"
   loading="lazy"
   decoding="async"
-  class="pointer-events-none absolute inset-0 size-full scale-110 object-contain opacity-40 blur-3xl"
+  class:list={[
+    "pointer-events-none absolute inset-0 size-full scale-110 opacity-40 blur-3xl",
+    cover ? "object-cover" : "object-contain",
+  ]}
 />

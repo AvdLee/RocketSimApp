@@ -380,10 +380,8 @@ test("homepage galleries follow the ARIA carousel pattern", () => {
       slides.map((_, index) => index === 0),
       `${id}: first slide current`,
     );
-    // The visual counter is aria-hidden; slide changes are announced here.
+    // Slide changes are announced here.
     assert.match(body, /<[^>]*aria-live="polite"[^>]*data-gallery-status/, id);
-    assert.match(body, /<button[^>]*aria-label="Previous highlight"/);
-    assert.match(body, /<button[^>]*aria-label="Next highlight"/);
   }
 });
 

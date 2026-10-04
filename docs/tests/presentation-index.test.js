@@ -3,8 +3,8 @@ import assert from "node:assert/strict";
 
 import {
   indexForKey,
-  nearestIndex,
   scrollToReveal,
+  slidePosition,
 } from "../src/lib/utils/presentationIndex.ts";
 
 test("arrow keys along the orientation move to the neighbouring item", () => {
@@ -31,22 +31,36 @@ test("keys across the orientation, and other keys, do nothing", () => {
   assert.equal(indexForKey("Enter", 1, 4, "horizontal"), undefined);
 });
 
-test("a swipe settles on the slide whose start is closest to the scroll position", () => {
-  // Slide starts of a track with 900px slides and a 20px gap.
-  const starts = [0, 920, 1840, 2760];
-  assert.equal(nearestIndex(starts, 0), 0);
-  assert.equal(nearestIndex(starts, 400), 0);
-  assert.equal(nearestIndex(starts, 500), 1);
-  assert.equal(nearestIndex(starts, 1900), 2);
-  // Scrolled past the last start, as the end of a track can be.
-  assert.equal(nearestIndex(starts, 3200), 3);
+test("the track's position counts slides, with fractions between them", () => {
+  // Where the track rests for each slide: 900px slides and a 20px gap.
+  const rests = [0, 920, 1840, 2760];
+  assert.equal(slidePosition(rests, 0), 0);
+  assert.equal(slidePosition(rests, 460), 0.5);
+  assert.equal(slidePosition(rests, 920), 1);
+  assert.equal(slidePosition(rests, 2070), 2.25);
+  assert.equal(slidePosition(rests, 2760), 3);
 });
 
-test("a track scrolled all the way to its end settles on the last slide", () => {
-  // On wide screens the last slides cannot scroll to their start.
-  const starts = [0, 920, 1840, 2760];
-  assert.equal(nearestIndex(starts, 2300, 2300), 3);
-  assert.equal(nearestIndex(starts, 1900, 2300), 2);
+test("the position stays within the first and last slide", () => {
+  // Overscroll past either end, as a trackpad bounce can report.
+  const rests = [0, 920, 1840, 2760];
+  assert.equal(slidePosition(rests, -40), 0);
+  assert.equal(slidePosition(rests, 3200), 3);
+});
+
+test("slides that rest short of their start still count as whole slides", () => {
+  // On wide screens the last slide cannot scroll to its start, so it rests at
+  // the end of the track, 2300 instead of 2760.
+  const rests = [0, 920, 1840, 2300];
+  assert.equal(slidePosition(rests, 2070), 2.5);
+  assert.equal(slidePosition(rests, 2300), 3);
+});
+
+test("a swipe settles on the nearest slide", () => {
+  const rests = [0, 920, 1840, 2760];
+  assert.equal(Math.round(slidePosition(rests, 400)), 0);
+  assert.equal(Math.round(slidePosition(rests, 500)), 1);
+  assert.equal(Math.round(slidePosition(rests, 1900)), 2);
 });
 
 test("a tab already inside the scrolling row needs no scroll", () => {
