@@ -170,6 +170,12 @@ rocketsim video record --fps 60 --duration 5 --udid <udid> > recording.mp4
 rocketsim video record --bezel device --touches --show-floating-thumbnail
 ```
 
+To review or edit the recording right away, add `--open-editor`. It sends the recording to the floating thumbnail and opens RocketSim's video editor, so it implies `--show-floating-thumbnail`:
+
+```bash
+rocketsim video record --touches --open-editor
+```
+
 ### Network conditions
 
 Agents can test offline and poor-network handling without disconnecting the Mac:
