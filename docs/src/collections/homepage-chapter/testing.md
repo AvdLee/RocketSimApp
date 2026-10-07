@@ -14,9 +14,11 @@ items:
   - feature: 12-location-simulation
     title: "Locations & routes"
     description: "Single places or full walking and driving routes."
+    focus: { x: 0.3, y: 0.48, zoom: 1.5 }
   - feature: 22-push-notifications
     title: "Push notifications"
     description: "Saved payloads, sent in one click."
+    focus: { x: 0.45, y: 0.26, zoom: 1.6 }
   - feature: 23-deeplinks-universal-links
     title: "Deep links"
     description: "Parameterized links and Universal Links."
@@ -24,9 +26,11 @@ items:
       type: image
       path: ../../content/docs/docs/features/app-actions/deeplinks-universal-links/deeplinks_with_argument_side_window.png
       alt: "Stock Detail deep link asking for a Symbol argument, with recent values AAPL, NET, and FTNT"
+    focus: { x: 0.78, y: 0.7, zoom: 1.4 }
   - feature: 24-privacy-permissions
     title: "Permissions"
     description: "Grant, revoke, or reset without reinstalling."
+    focus: { x: 0.68, y: 0.6, zoom: 1.5 }
   - feature: 04-simulator-camera
     title: "Simulator camera"
     description: "Stream your Mac's camera into the Simulator."

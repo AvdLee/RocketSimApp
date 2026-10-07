@@ -3,6 +3,7 @@ interface Props {
   // What the button plays, for its label: "Pause Network features".
   name: string;
   // Round, borderless and grey, to sit beside the gallery's dot pill.
+  // Otherwise a bordered square that lights up in the chapter's colour.
   round?: boolean;
   class?: string;
 }
@@ -23,7 +24,7 @@ const { name, round = false, class: className } = Astro.props;
     "group grid size-9 flex-none cursor-pointer place-items-center text-text-dark transition-colors",
     round
       ? "rounded-full bg-surface hover:bg-surface-hover"
-      : "rounded-lg border border-border bg-card hover:border-primary hover:bg-primary/8",
+      : "rounded-lg border border-border bg-card hover:border-(--chapter) hover:bg-(--chapter)/8",
     className,
   ]}
 >

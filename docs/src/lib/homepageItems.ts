@@ -11,11 +11,20 @@ interface FeatureSource {
   asset: MediaInput;
 }
 
+// The detail an image zooms in on while it shows: `x` and `y` place it, from
+// 0 to 1 across and down the image, and `zoom` is how far it grows.
+interface MediaFocus {
+  x: number;
+  y: number;
+  zoom: number;
+}
+
 interface ChapterItemInput {
   feature?: string;
   title?: string;
   description?: string;
   media?: MediaInput;
+  focus?: MediaFocus;
 }
 
 export type HomepageMedia =
@@ -26,6 +35,8 @@ export interface HomepageItem {
   title: string;
   description: string;
   media: HomepageMedia;
+  // Only on images.
+  focus?: MediaFocus;
 }
 
 // Posters sit next to the videos, in `posters/<name>.webp` (see
@@ -52,7 +63,8 @@ function toMedia(input: MediaInput): HomepageMedia {
 
 // An override wins; anything not overridden falls back to the referenced
 // feature (`name`, `tagLine`, `asset`). Throws, and so fails the build, when a
-// feature is missing or a field has nothing to fall back on.
+// feature is missing, a field has nothing to fall back on, or a video has a
+// focus.
 export function resolveChapterItems(
   chapterId: string,
   items: ChapterItemInput[],
@@ -79,6 +91,15 @@ export function resolveChapterItems(
       );
     }
 
-    return { title, description, media: toMedia(media) };
+    if (item.focus && media.type !== "image") {
+      throw new Error(`${where}: only an image can have a focus.`);
+    }
+
+    return {
+      title,
+      description,
+      media: toMedia(media),
+      ...(item.focus && { focus: item.focus }),
+    };
   });
 }
