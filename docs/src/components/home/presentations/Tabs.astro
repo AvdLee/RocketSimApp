@@ -55,10 +55,12 @@ const label = chapterName + " features";
             class="absolute inset-0 rounded-lg focus-visible:-outline-offset-2 inert:invisible inert:opacity-0"
             inert={index !== 0}
           >
-            <MediaBackdrop media={item.media} />
+            {/* A blurred copy of the media fills the stage, and the media sits
+                inset on its own colours. */}
+            <MediaBackdrop media={item.media} cover />
             {/* Moves and blurs as the panels change (the script below). An
-                image with a focus zooms in on it while it shows
-                (src/styles/animations.css). */}
+                image with a focus zooms in on it while it shows, inside its
+                own rounded frame (src/styles/animations.css). */}
             <div
               class="absolute inset-0"
               data-panel-media
@@ -67,21 +69,24 @@ const label = chapterName + " features";
               data-focus-y={item.focus?.y}
               data-focus-zoom={item.focus?.zoom}
             >
-              <Media
-                media={item.media}
-                sizes={
-                  aside
-                    ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
-                    : "(min-width: 1120px) 1080px, 100vw"
-                }
-                class:list={[
-                  // Contain, never crop: the stage is 16:9 (or as tall as
-                  // the aside), and media of any other shape letterboxes.
-                  // 16:9 videos still fill the stage edge to edge.
-                  "relative size-full object-contain",
-                  item.media.type === "image" && "p-6",
-                ]}
-              />
+              <div
+                class="absolute inset-0 flex items-center justify-center p-4 md:p-6"
+                data-media-frame
+              >
+                {/* The media shrinks to fit rather than filling the stage,
+                    so its rounded corners sit on its own edges; it is never
+                    cropped. A video has no size until its poster loads, so
+                    it holds 16:9 until then. */}
+                <Media
+                  media={item.media}
+                  sizes={
+                    aside
+                      ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
+                      : "(min-width: 1120px) 1080px, 100vw"
+                  }
+                  class="aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg"
+                />
+              </div>
             </div>
           </div>
         ))
@@ -175,7 +180,7 @@ const label = chapterName + " features";
 
 <script>
   import { createAutoplay } from "@/lib/utils/autoplay";
-  import { containedRect, focusTransform } from "@/lib/utils/focusZoom";
+  import { focusTransform } from "@/lib/utils/focusZoom";
   import { prefersReducedMotion } from "@/lib/utils/motion";
   import { scrollToReveal, swipeTarget } from "@/lib/utils/presentationIndex";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
@@ -448,44 +453,49 @@ const label = chapterName + " features";
         stage.addEventListener("pointerup", endSwipe);
         stage.addEventListener("pointercancel", endSwipe);
 
-        // Each image with a focus zooms in on it as its panel shows; the
-        // size of the stage sets how far it moves.
+        // Each image with a focus zooms in on it as its panel shows, within
+        // the rounded rectangle it rests in; the size of the image sets how
+        // far it moves.
         const fitFocus = () => {
           root
             .querySelectorAll<HTMLElement>("[data-focus]")
             .forEach((frame) => {
               const image = frame.querySelector("img");
-              if (!image) return;
-              const style = getComputedStyle(image);
-              const padding = (side: string) =>
-                parseFloat(style.getPropertyValue(`padding-${side}`)) || 0;
-              const width = frame.clientWidth;
-              const height = frame.clientHeight;
-              const aspect =
-                (image.naturalWidth || Number(image.getAttribute("width"))) /
-                (image.naturalHeight || Number(image.getAttribute("height")));
-              if (!width || !height || !aspect) return;
+              const box = image?.offsetParent;
+              if (!image || !(box instanceof HTMLElement)) return;
+              const width = image.offsetWidth;
+              const height = image.offsetHeight;
+              if (!width || !height) return;
 
-              const media = containedRect(
+              const { x, y, scale } = focusTransform(
+                { width, height },
+                { left: 0, top: 0, width, height },
                 {
-                  left: padding("left"),
-                  top: padding("top"),
-                  width: width - padding("left") - padding("right"),
-                  height: height - padding("top") - padding("bottom"),
+                  x: Number(frame.dataset.focusX),
+                  y: Number(frame.dataset.focusY),
+                  zoom: Number(frame.dataset.focusZoom),
                 },
-                aspect,
               );
-              const { x, y, scale } = focusTransform({ width, height }, media, {
-                x: Number(frame.dataset.focusX),
-                y: Number(frame.dataset.focusY),
-                zoom: Number(frame.dataset.focusZoom),
-              });
+              const top = image.offsetTop;
+              const left = image.offsetLeft;
+              const right = box.clientWidth - left - width;
+              const bottom = box.clientHeight - top - height;
+              const radius = getComputedStyle(image).borderRadius;
               frame.style.setProperty("--focus-x", `${x}px`);
               frame.style.setProperty("--focus-y", `${y}px`);
               frame.style.setProperty("--focus-scale", String(scale));
+              frame.style.setProperty(
+                "--focus-clip",
+                `inset(${top}px ${right}px ${bottom}px ${left}px round ${radius})`,
+              );
             });
         };
-        new ResizeObserver(fitFocus).observe(stage);
+        // The stage's size, or an image that changes size as it loads.
+        const resized = new ResizeObserver(fitFocus);
+        resized.observe(stage);
+        root
+          .querySelectorAll("[data-focus] img")
+          .forEach((image) => resized.observe(image));
       });
   }
 

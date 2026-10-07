@@ -18,7 +18,7 @@ items:
   - feature: 22-push-notifications
     title: "Push notifications"
     description: "Saved payloads, sent in one click."
-    focus: { x: 0.45, y: 0.26, zoom: 1.6 }
+    focus: { x: 0.52, y: 0.28, zoom: 1.4 }
   - feature: 23-deeplinks-universal-links
     title: "Deep links"
     description: "Parameterized links and Universal Links."

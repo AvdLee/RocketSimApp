@@ -251,16 +251,21 @@ main:has([data-chapter]) {
 }
 
 /* A tabs presentation's image zooms slowly in on its focus while its panel
-   shows, pointing at what the tab describes. The script in Tabs.astro sets
-   how far it moves for the stage's size. It lands about a second before
-   autoplay moves on (`IMAGE_MS` in src/lib/utils/autoplay.ts). Once the
-   panel has faded out, the image jumps back for its next turn. */
-[data-focus] {
+   shows, pointing at what the tab describes. It zooms within the rounded
+   rectangle it rests in, which clips it. The script in Tabs.astro sets how
+   far it moves and the clip for the image's size. It lands about a second
+   before autoplay moves on (`IMAGE_MS` in src/lib/utils/autoplay.ts). Once
+   the panel has faded out, the image jumps back for its next turn. */
+[data-focus] [data-media-frame] {
+  clip-path: var(--focus-clip, none);
+}
+
+[data-focus] img {
   transition: transform 0s 0.5s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  [role="tabpanel"]:not([inert]) > [data-focus] {
+  [role="tabpanel"]:not([inert]) > [data-focus] img {
     transform: translate(var(--focus-x, 0), var(--focus-y, 0))
       scale(var(--focus-scale, 1));
     transition: transform 3.6s cubic-bezier(0.45, 0, 0.2, 1) 0.4s;
