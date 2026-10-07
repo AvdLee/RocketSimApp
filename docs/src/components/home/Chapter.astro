@@ -14,7 +14,7 @@ const { name, title, color, presentation, items, links, Content } =
   await getHomepageChapter(id);
 
 // Extras come in as children from the page template: the `aside` slot sits
-// beside the tabs stage, and the default slot follows the links.
+// with the tabs stage, and the default slot follows the links.
 const aside = Astro.slots.has("aside")
   ? await Astro.slots.render("aside")
   : undefined;
