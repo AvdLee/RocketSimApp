@@ -2,12 +2,14 @@
 
 **New:**
 
-- Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in.
+- Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in, listens only on the address it shows, and stops after 30 minutes without a connected browser. It is served over plain HTTP, so use it on networks you trust or over Tailscale.
 - CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
 - Added real-device bezels for iPhone 18 Pro, iPhone 18 Pro Max, and folded and unfolded iPhone Duo.
 - Added iPhone Duo capture support: screenshots and recordings capture both displays and the live hinge angle, and render the fold pose through Apple's 3D folding model in the app, editor, previews, and thumbnails. Renders follow the Simulator orientation with upright interface content, support transparent or custom backgrounds, and use an automatic ratio that stays compact while folded and expands when the device unfolds.
 - CLI: iPhone Duo support. `screenshot` and `video record` render the fold pose for every styled bezel, including the Duo-only `--bezel device3d`. `duo pose` controls the simulator hinge directly (without Device Hub or macOS Accessibility permission), and `duo hinge` reports the hinge state and angle. Plain Duo screenshots capture the display that shows the interface (outer while closed, inner while open) in that display's orientation.
 - Rotating an iPhone, iPad, or iPhone Duo Simulator while recording is now preserved and smoothly animated in editor previews, thumbnails, and exported videos.
+- CLI: `rocketsim video record --open-editor` shows the floating thumbnail and opens the recording in the capture editor when it stops.
+- Simulator Camera is now a metered Pro feature: free users can stream the Simulator Camera on 5 distinct days, after which streaming requires RocketSim Pro. Pro users stream without limits.
 
 **Improved:**
 
@@ -17,11 +19,13 @@
 - Browser Preview skips accessibility refreshes while the screen is unchanged or the Simulator is recording.
 - Recordings no longer contain bursts of repeated frames after a brief system stall.
 - iPhone Duo touches, the grid, and the rulers now line up with the device in Device Hub when the Duo is closed or fully unfolded, instead of reporting that Device Hub is in expanded mode. The grid and rulers follow the orientation Device Hub draws, including after unfolding the Duo with the hinge control.
-- iPhone Duo capture editor previews open faster, scrub more responsively during trim and playback, and offload more fold rendering from the main thread.
+- Video exports with touches, bezels, or a watermark render frames in parallel and export faster, especially for landscape and rotating recordings.
+- 120 fps recordings no longer drop frames while encoding.
 
 **Fixed:**
 
 - Network Monitor and RocketSim Connect no longer stay disconnected on Xcode 27 and macOS 27. The Xcode debugger hook now loads from RocketSim.app instead of RocketSim's protected app container, and existing installs are repaired automatically when RocketSim launches. If you installed the hook through Terminal, run the copied setup command again from Settings > Connect. (Thanks, L. Hurtado!)
+- RocketSim Connect no longer crashes Xcode's debugger when you stop or re-run an app shortly after launch, and no longer skips your breakpoint on `UIApplicationMain`.
 - CLI: installing the `rocketsim` command into `~/.local/bin` no longer fails with "The selected folder doesn't appear to be on your PATH", including on machines where the user isn't your main account (for example a CI user). (Thanks, G. Ambrozio!)
 - Starting a Browser Preview no longer freezes RocketSim's interface for up to a second.
 - CLI: `rocketsim video record` no longer fails for recordings larger than 10 MB (about 20 seconds at 60 fps). Large results are now handed over through a temporary file.
@@ -31,6 +35,12 @@
 - Fixed individual rulers that could no longer be removed by dragging them outside the horizontal or vertical ruler strip. (Thanks, A. Hershberger!)
 - Fixed the Comparing reference image disappearing while interacting with the Simulator when "Always show windows" was enabled. (Thanks, M. Jahantark!)
 - Physical device screenshots no longer time out when the live preview is already showing frames; RocketSim reuses the latest preview frame and surfaces clearer guidance when streaming stalls.
+- Landscape and upside-down captures are now upright everywhere: thumbnails, screenshots, the capture editor preview, and exported videos, with touches drawn where you tapped.
+- The grid overlay mask no longer rotates twice in landscape.
+- RocketSim's Dock icon no longer appears while recording with touches, and recordings no longer leave an invisible full-screen window behind.
+- CLI: `rocketsim video record` reports a clear error when the Simulator delivers no frames, instead of failing with "Cannot Open".
+- RocketSim no longer crashes when a Simulator recording's simctl process exits before recording starts.
+- Bezels, screenshots, and recordings work again for older Simulator devices such as iPad (6th generation), iPhone 7, and Apple TV, which previously failed with missing screen dimensions.
 
 # 16.5.0 (335)
 
