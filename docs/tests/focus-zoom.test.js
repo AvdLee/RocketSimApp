@@ -1,27 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { containedRect, focusTransform } from "../src/lib/utils/focusZoom.ts";
+import { focusTransform } from "../src/lib/utils/focusZoom.ts";
 
 const frame = { width: 1600, height: 900 };
-
-test("contained media letterboxes in the middle of its box", () => {
-  const box = { left: 0, top: 0, ...frame };
-  // Square media in a 16:9 box: bars left and right.
-  assert.deepEqual(containedRect(box, 1), {
-    left: 350,
-    top: 0,
-    width: 900,
-    height: 900,
-  });
-  // Wider than the box: bars above and below.
-  assert.deepEqual(containedRect(box, 4), {
-    left: 0,
-    top: 250,
-    width: 1600,
-    height: 400,
-  });
-});
 
 test("the focus moves to the middle of the frame", () => {
   const media = { left: 0, top: 0, ...frame };
@@ -46,8 +28,8 @@ test("media that covers the frame never shows its edge", () => {
 });
 
 test("media smaller than the frame stays inside it", () => {
-  // A portrait image, letterboxed and small.
-  const media = containedRect({ left: 0, top: 0, ...frame }, 0.5);
+  // A portrait image, inset in the middle of the frame.
+  const media = { left: 575, top: 0, width: 450, height: 900 };
   // Zoomed 2.5 it is 1125px wide, still narrower than the frame. Its left
   // edge can't reach the middle: the right edge would leave the frame.
   const { x } = focusTransform(frame, media, { x: 0, y: 0.5, zoom: 2.5 });
@@ -56,10 +38,7 @@ test("media smaller than the frame stays inside it", () => {
 });
 
 test("no zoom on media centred on its focus leaves it in place", () => {
-  const media = containedRect(
-    { left: 24, top: 24, width: 1552, height: 852 },
-    1.5,
-  );
+  const media = { left: 161, top: 24, width: 1278, height: 852 };
   assert.deepEqual(focusTransform(frame, media, { x: 0.5, y: 0.5, zoom: 1 }), {
     x: 0,
     y: 0,

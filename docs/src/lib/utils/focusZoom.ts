@@ -18,19 +18,6 @@ interface Focus {
   zoom: number;
 }
 
-// Where media of `aspect` (width / height) shows when it is contained in
-// `box` and centered, as `object-fit: contain` places it.
-export function containedRect(box: Rect, aspect: number): Rect {
-  const width = Math.min(box.width, box.height * aspect);
-  const height = width / aspect;
-  return {
-    left: box.left + (box.width - width) / 2,
-    top: box.top + (box.height - height) / 2,
-    width,
-    height,
-  };
-}
-
 // The shift along one axis that brings the focus to the frame's middle once
 // the media scales by `scale` around the frame's middle. It stops short where
 // the media's edge would come into the frame: a media larger than the frame
@@ -53,7 +40,8 @@ function shift(
 
 // The translate, in px, and scale that zoom `media` (its place in `frame`)
 // in on `focus`. Apply them as `translate(x, y) scale(scale)` on an element
-// the size of the frame, scaling around its middle.
+// the size of the frame, scaling around its middle. With the media as its
+// own frame, it zooms within the space it takes up.
 export function focusTransform(
   frame: Size,
   media: Rect,
