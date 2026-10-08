@@ -1,3 +1,9 @@
+# 16.6.1 (337)
+
+**Fixed:**
+
+- iPad Pro and iPad mini in Device Hub no longer report that Device Hub is in expanded mode, so Comparing, Touches, and VoiceOver Navigator work again.
+
 # 16.6.0 (336)
 
 **New:**
