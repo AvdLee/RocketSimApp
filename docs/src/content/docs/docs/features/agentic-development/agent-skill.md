@@ -64,6 +64,8 @@ The current skill teaches agents to start with a compact `nav` or `act` screen r
 
 Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the command's `context.preview_url`, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
 
+For accessibility work, the skill points agents to a dedicated reference for fixing audit findings without changing your layout. The agent saves the element frames before the fix, rebuilds, and compares them afterwards so only the intended elements change. It then runs `rocketsim accessibility-audit` again to confirm the findings are gone.
+
 The agent should run `rocketsim doctor` only when setup appears broken: the CLI cannot connect, no Simulator can be found, or perception and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or `rocketsim elements --agent`.
 
 ## What the agent can do after setup
@@ -78,6 +80,8 @@ Once the skill is installed and RocketSim is running, your agent can:
 - Follow the live Simulator and review its final state in an IDE browser
 - Capture a screenshot when visual context is needed
 - Start a live [Browser Preview](/docs/features/agentic-development/browser-preview) for hands-on review and agent-ready visual feedback
+- Audit the visible screen for accessibility problems, fix them, and validate the result with `rocketsim accessibility-audit` (see [Accessibility Audit](/docs/features/accessibility/accessibility-audit/))
+- Capture and control iPhone Duo Simulators, including the hinge pose
 
 ## How to verify it works
 

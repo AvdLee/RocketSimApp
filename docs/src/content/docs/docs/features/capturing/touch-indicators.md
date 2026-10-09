@@ -23,7 +23,7 @@ The size applies to regular touch indicators, Touch Attention Mode, and recorded
 
 This is the standout feature. When enabled, a constant touch indicator follows your mouse pointer throughout the entire recording. Apple uses this same technique in their demo videos — it helps viewers keep track of where the action is happening.
 
-Touch indicators work in both GIF and MP4 recordings. For the full set of capture options (bezels, ratio, background, and more), see [Creating Recordings](/docs/features/capturing/recordings).
+Touch indicators work in both GIF and MP4 recordings, including recordings of landscape and iPhone Duo Simulators. For the full set of capture options (bezels, ratio, background, and more), see [Creating Recordings](/docs/features/capturing/recordings).
 
 ## Pinch and rotate gestures
 

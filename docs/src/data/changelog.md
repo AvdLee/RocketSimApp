@@ -4,16 +4,21 @@
 
 - Accessibility: added a Color Filter control with grayscale and red-green, green-red, and blue-yellow color blindness filters and an adjustable intensity, plus a new Liquid Glass section with the Tinted toggle and an Opacity slider, including a reset button. The color filters and the opacity slider require Xcode 27 or later.
 - Accessibility: added a StandBy toggle to show or hide StandBy on iPhone Simulators. Requires Xcode 27 or later.
+- Accessibility side window: added a PRO Audit tab that scores the current screen, groups findings by rule, highlights affected elements, and copies a focused fix prompt for your agent. The score reflects how many rules pass, with Great, Good, and Needs work bands, and highlighted elements follow the Simulator screen as they move. The copied prompt tells agents to keep the layout unchanged, fix findings in one batch, and compare element frames before and after. Grouped tiles under a heading, text covered by a floating control, and controls that only overlap at the current scroll position are no longer reported as heading, contrast, or overlap problems, and content below the fold or beyond the edge of a SwiftUI scroll view or carousel isn't reported as stale. Offscreen findings are no longer reported for nodes VoiceOver can't reach, such as the children of a grouped control. A new heuristic rule, `non_descriptive_label`, flags labels that look like filenames or identifiers.
 
 **Improved:**
 
+- Renamed the Accessibility side window tabs to the more compact Toggles and VoiceOver labels.
+- The VoiceOver tab now lists only what VoiceOver users can reach. Controls inside a combined row are no longer listed or highlighted, and a new Actions rotor shows rows with custom actions. The Landmarks rotor is replaced by Containers.
+- Accessibility audit: `parent_child_conflict` accepts controls exposed as custom actions and reports controls that a combined row hides from VoiceOver. New heuristic rules `heading_trait_missing` and `selected_state_missing` flag section titles without the heading trait and tab or segmented controls without a selected state. Rules about VoiceOver output now skip controls VoiceOver can't reach, while touch target and contrast rules still check them.
+- CLI: `elements --agent` output adds `!actions|id|...` rows for elements that have custom actions. Every element, including the controls inside a combined row, stays tappable by id.
 - The Accessibility side window now follows changes you make in the Simulator itself, such as switching Dark Mode or Increase Contrast, without polling. Requires Xcode 27 or later.
 - Improved reliability of the Accessibility side window: Dark Mode, Dynamic Type, and the accessibility toggles now apply consistently, including on the iOS 27 Simulator. Bold Text, On/Off Labels, Inverted Colors, and Differentiate w/o Color are hidden on iOS 27 Simulators for now, and Button Shapes is now called Show Borders to match iOS.
 
-# 16.6.1 (337)
-
 **Fixed:**
 
+- CLI: commands that take `--udid` (such as `screen`, `elements`, `interact`, `screenshot`, and `duo`) now find a Simulator that was cloned and booted with `xcrun simctl`, without opening it in Simulator.app. RocketSim refreshes its device list from CoreSimulator when it doesn't know the UDID as booted, instead of waiting for a Simulator window. The `simulator_not_found` error now also explains how to check the UDID with `xcrun simctl list devices` and when to retry.
+- Fixed a rare crash when several CLI commands or overlays read accessibility information from multiple Simulators at the same time, for example while running parallel `rocketsim elements` or `rocketsim wait` commands.
 - iPad Pro and iPad mini in Device Hub no longer report that Device Hub is in expanded mode, so Comparing, Touches, and VoiceOver Navigator work again.
 
 # 16.6.0 (336)

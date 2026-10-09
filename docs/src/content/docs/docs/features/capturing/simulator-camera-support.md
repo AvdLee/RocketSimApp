@@ -26,6 +26,10 @@ Check out these demos:
 - [Vision object detection demo video](https://x.com/twannl/status/1926715711277203563)
 - [Continuity camera demo video](https://x.com/twannl/status/1928014373210972202)
 
+## Is Simulator Camera free?
+
+Simulator Camera is free to try on 5 distinct days of streaming. After that, streaming requires RocketSim Pro, which has no limits.
+
 ## How do I access this feature?
 
 Camera simulation is available from the Capture side window tab:
