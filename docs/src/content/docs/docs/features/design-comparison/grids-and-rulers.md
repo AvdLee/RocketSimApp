@@ -7,6 +7,8 @@ Aligning elements based on grids and rulers allows you to create a balanced desi
 
 RocketSim 16 supports grids and rulers on both Simulator windows and connected physical-device preview windows, so you can inspect spacing on real hardware as well.
 
+Grids and rulers also line up with an iPhone Duo Simulator when it is closed or fully unfolded, and they follow the orientation the Simulator draws, including after you unfold the Duo.
+
 ## Showing the Grid
 
 1. Open the Simulator or connect a supported physical iOS device

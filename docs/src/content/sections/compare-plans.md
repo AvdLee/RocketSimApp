@@ -33,6 +33,14 @@ compare_plans:
           free: true
           individual: true
           teams: true
+        - item: Accessibility audit from the CLI
+          free: true
+          individual: true
+          teams: true
+        - item: Browser Preview from other Macs on your network (--lan)
+          free: false
+          individual: true
+          teams: true
         - item: Version-matched CLI and skill updates
           free: true
           individual: true
@@ -70,6 +78,8 @@ compare_plans:
     - title: Simulator Camera
       description: |
         Test camera functionality without a physical device by streaming your macOS camera. Scan QR codes or capture assets. All plug & play, you can just use the same AVCapture APIs as normal.
+
+        Free users can try the Simulator Camera on 5 distinct days of streaming. After that, streaming requires RocketSim Pro.
       list:
         - item: Simulator Camera side window
           free: true
@@ -340,6 +350,10 @@ compare_plans:
           individual: true
           teams: true
         - item: VoiceOver Navigator
+          free: false
+          individual: true
+          teams: true
+        - item: Accessibility Audit
           free: false
           individual: true
           teams: true
