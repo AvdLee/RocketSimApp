@@ -1,3 +1,15 @@
+# 16.7.0
+
+**New:**
+
+- Accessibility: added a Color Filter control with grayscale and red-green, green-red, and blue-yellow color blindness filters and an adjustable intensity, plus a new Liquid Glass section with the Tinted toggle and an Opacity slider, including a reset button. The color filters and the opacity slider require Xcode 27 or later.
+- Accessibility: added a StandBy toggle to show or hide StandBy on iPhone Simulators. Requires Xcode 27 or later.
+
+**Improved:**
+
+- The Accessibility side window now follows changes you make in the Simulator itself, such as switching Dark Mode or Increase Contrast, without polling. Requires Xcode 27 or later.
+- Improved reliability of the Accessibility side window: Dark Mode, Dynamic Type, and the accessibility toggles now apply consistently, including on the iOS 27 Simulator. Bold Text, On/Off Labels, Inverted Colors, and Differentiate w/o Color are hidden on iOS 27 Simulators for now, and Button Shapes is now called Show Borders to match iOS.
+
 # 16.6.1 (337)
 
 **Fixed:**
