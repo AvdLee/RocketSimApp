@@ -38,7 +38,8 @@ interface AutoplayOptions {
 // Plays a homepage tabs or gallery presentation: each item's bar fills as it
 // plays, then the next item shows. It stops after two laps, only runs while
 // the stage is in view, and starts paused for reduced motion, where the
-// current video gets controls to play it by hand.
+// current video gets controls to play it by hand. It winds down by itself
+// when a client-side navigation leaves the page.
 export function createAutoplay({
   stage,
   items,
@@ -179,13 +180,27 @@ export function createAutoplay({
     refresh();
   });
 
-  new IntersectionObserver(
+  const visibility = new IntersectionObserver(
     ([entry]) => {
       inView = entry.isIntersecting;
       refresh();
     },
     { threshold: 0.5 },
-  ).observe(stage);
+  );
+  visibility.observe(stage);
+
+  // A client-side navigation is about to replace the page: stop watching the
+  // stage and playing, so nothing keeps the old page's presentation alive.
+  document.addEventListener(
+    "astro:before-swap",
+    () => {
+      visibility.disconnect();
+      cancelAnimationFrame(frame);
+      frame = 0;
+      videos.forEach((video) => video?.pause());
+    },
+    { once: true },
+  );
 
   syncControl();
   render();

@@ -195,17 +195,10 @@ const label = chapterName + " features";
     getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
     fallback;
 
-  // What the last page load set up beyond the tabs' own elements. The
-  // ClientRouter keeps this script running from page to page, so it is
-  // undone before the tabs set up again.
-  let teardown: (() => void)[] = [];
-
   // Click or arrow keys select a tab; the selected tab's panel (and, on
   // phones, its caption) shows. Autoplay selects the tabs in turn and plays
   // the videos; videos in other panels never load.
   function initTabs() {
-    teardown.forEach((undo) => undo());
-    teardown = [];
     const reducedMotion = prefersReducedMotion();
     const listLayout = matchMedia(LIST_LAYOUT);
     const ease = {
@@ -384,9 +377,6 @@ const label = chapterName + " features";
           tablist.setAttribute("aria-orientation", orientation());
         syncOrientation();
         listLayout.addEventListener("change", syncOrientation);
-        teardown.push(() =>
-          listLayout.removeEventListener("change", syncOrientation),
-        );
         bindRovingKeys(tabs, orientation, pickTab);
 
         // Swipes on the stage. The media follows the finger once the swipe
@@ -507,11 +497,22 @@ const label = chapterName + " features";
         };
         // The stage's size, or an image that changes size as it loads.
         const resized = new ResizeObserver(fitFocus);
-        teardown.push(() => resized.disconnect());
         resized.observe(stage);
         root
           .querySelectorAll("[data-focus] img")
           .forEach((image) => resized.observe(image));
+
+        // A client-side navigation is about to replace the page: let go of
+        // what outlives the tabs' own elements. Autoplay winds down by
+        // itself.
+        document.addEventListener(
+          "astro:before-swap",
+          () => {
+            listLayout.removeEventListener("change", syncOrientation);
+            resized.disconnect();
+          },
+          { once: true },
+        );
       });
   }
 
