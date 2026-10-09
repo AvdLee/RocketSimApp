@@ -11,7 +11,7 @@ interface Props {
   // For the tab list's accessible name.
   chapterName: string;
   items: HomepageItem[];
-  // Rendered extras shown beside the stage, such as the agents terminal.
+  // Rendered extras shown with the stage, such as the agents terminal.
   aside?: string;
 }
 
@@ -23,25 +23,20 @@ const { id, chapterName, items, aside } = Astro.props;
 const label = chapterName + " features";
 ---
 
-<!-- The aside sits beside the stage from lg, and after the tabs below it,
-     so the DOM reads stage, tabs, extras at every width. Autoplay moves
-     through the tabs (src/lib/utils/autoplay.ts). -->
+<!-- Below lg the tabs run in a row under the stage; from lg they form a
+     list beside it, and the aside's extras sit side by side underneath. The
+     DOM reads stage, tabs, extras at every width. Autoplay moves through
+     the tabs (src/lib/utils/autoplay.ts). -->
 <div
   data-presentation-root="tabs"
-  class:list={[
-    "mt-stack grid grid-cols-[minmax(0,1fr)] gap-5",
-    aside && "lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]",
-  ]}
+  class="mt-stack grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-x-10"
 >
   <!-- Swiping the stage sideways on a touch screen changes tabs; vertical
        swipes still scroll the page. -->
   <div
     data-tabs-stage
     data-stage
-    class:list={[
-      "relative aspect-video touch-pan-y overflow-hidden rounded-lg bg-surface",
-      aside && "lg:aspect-auto",
-    ]}
+    class="relative aspect-video touch-pan-y overflow-hidden rounded-lg bg-surface lg:col-start-2 lg:row-start-1"
   >
     {/* The media settles from slightly zoomed in as the stage scrolls in. */}
     <div class="absolute inset-0" data-settle>
@@ -71,11 +66,7 @@ const label = chapterName + " features";
             >
               <InsetMedia
                 media={item.media}
-                sizes={
-                  aside
-                    ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
-                    : "(min-width: 1120px) 1080px, 100vw"
-                }
+                sizes="(min-width: 1120px) 770px, (min-width: 1024px) 70vw, 100vw"
                 inset="p-4 md:p-6"
               />
             </div>
@@ -85,18 +76,20 @@ const label = chapterName + " features";
     </div>
   </div>
 
-  <div class:list={["mt-5", aside && "lg:col-span-2"]}>
+  <div class="mt-5 lg:col-start-1 lg:row-start-1 lg:mt-0">
     <!-- On phones the row scrolls sideways from the screen edge to the
-         autoplay control, so the cut-off tab shows there is more. -->
+         autoplay control, so the cut-off tab shows there is more. From lg the
+         list runs down the stage's height, with the control at its foot. -->
     <div
-      class="flex items-start gap-2.5 md:gap-5"
+      class="flex items-start gap-2.5 md:gap-5 lg:h-full lg:flex-col lg:justify-between"
       data-draw-row
+      data-tabs-list
       style={`--draw-count: ${items.length}`}
     >
       <div
         role="tablist"
         aria-label={label}
-        class="-ml-5 grid min-w-0 flex-1 scroll-px-5 auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto scroll-smooth pl-5 [scrollbar-width:none] motion-reduce:scroll-auto md:ml-0 md:auto-cols-fr md:overflow-visible md:pl-0"
+        class="-ml-5 grid min-w-0 flex-1 scroll-px-5 auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto scroll-smooth pl-5 [scrollbar-width:none] motion-reduce:scroll-auto md:ml-0 md:auto-cols-fr md:overflow-visible md:pl-0 lg:w-full lg:flex-none lg:grid-flow-row"
       >
         {
           items.map((item, index) => (
@@ -109,39 +102,43 @@ const label = chapterName + " features";
               aria-labelledby={`${id}-tab-title-${index}`}
               aria-describedby={`${id}-tab-description-${index}`}
               tabindex={index === 0 ? 0 : -1}
-              class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
+              class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6 lg:gap-0 lg:py-3 lg:pr-0 lg:pl-5"
             >
-              {/* One line runs under the tabs and fills up, in the colour of
-                  the chapter, as autoplay moves on. */}
+              {/* One line runs under the tabs, or down beside them from lg,
+                  and fills up in the colour of the chapter as autoplay moves
+                  on. */}
               <span
-                class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted md:-mr-6"
+                class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted md:-mr-6 lg:absolute lg:inset-y-0 lg:left-0 lg:m-0 lg:h-auto lg:w-0.5"
                 data-draw
                 style={`--draw-index: ${index}`}
               >
                 <span
                   data-autoplay-fill
-                  class="absolute inset-0 origin-left scale-x-[var(--autoplay-fill,0)] bg-(--chapter)"
+                  class="absolute inset-0 origin-left scale-x-[var(--autoplay-fill,0)] bg-(--chapter) lg:origin-top lg:scale-x-100 lg:scale-y-[var(--autoplay-fill,0)]"
                 />
               </span>
               <span
                 id={`${id}-tab-title-${index}`}
-                class="text-small font-semibold transition-colors duration-300 group-hover:text-text-soft group-aria-selected:text-text-dark md:text-copy"
+                class="text-small font-semibold transition-colors duration-300 group-hover:text-text-soft group-aria-selected:text-text-dark md:text-copy lg:text-intro lg:font-semibold"
               >
                 {item.title}
               </span>
               {/* The descriptions of the other tabs step back, so the
-                  selected tab stands out. */}
-              <span
-                id={`${id}-tab-description-${index}`}
-                class="text-small opacity-50 transition-opacity duration-300 group-hover:opacity-100 group-aria-selected:opacity-100 max-md:sr-only"
-              >
-                {item.description}
+                  selected tab stands out. In the list from lg, only the
+                  selected tab opens to show its description. */}
+              <span class="grid transition-[grid-template-rows] duration-500 ease-smooth max-md:sr-only lg:grid-rows-[0fr] lg:group-aria-selected:grid-rows-[1fr] motion-reduce:transition-none">
+                <span
+                  id={`${id}-tab-description-${index}`}
+                  class="overflow-hidden text-small opacity-50 transition-opacity duration-300 group-hover:opacity-100 group-aria-selected:opacity-100 lg:pt-1"
+                >
+                  {item.description}
+                </span>
               </span>
             </button>
           ))
         }
       </div>
-      <AutoplayControl name={label} class="-mt-[17px]" />
+      <AutoplayControl name={label} class="-mt-[17px] lg:mt-0" />
     </div>
     {
       items.map((item, index) => (
@@ -161,7 +158,7 @@ const label = chapterName + " features";
     aside && (
       <div
         data-tabs-aside
-        class="flex flex-col gap-5 lg:col-start-2 lg:row-start-1"
+        class="flex flex-col gap-5 lg:col-span-2 lg:grid lg:grid-cols-2"
       >
         <Fragment set:html={aside} />
       </div>
@@ -178,7 +175,8 @@ const label = chapterName + " features";
 
   // How the panels change: the old media slides away and blurs as it fades,
   // and the new media comes into focus from the other side. Going forward,
-  // the media moves left, the way the tabs read.
+  // the media moves the way the tabs read: left along the row, and up along
+  // the list from lg.
   const SWAP = {
     // How far the media moves, in px.
     distance: 48,
@@ -189,6 +187,9 @@ const label = chapterName + " features";
   // How far the media follows a finger swiping the stage; it resists past
   // the first and last tab.
   const DRAG = { follow: 0.5, resist: 0.15 };
+
+  // Where the tabs turn from a row under the stage into a list beside it.
+  const LIST_LAYOUT = "(min-width: 1024px)";
 
   const cssEasing = (name: string, fallback: string) =>
     getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
@@ -206,6 +207,7 @@ const label = chapterName + " features";
     teardown.forEach((undo) => undo());
     teardown = [];
     const reducedMotion = prefersReducedMotion();
+    const listLayout = matchMedia(LIST_LAYOUT);
     const ease = {
       smooth: cssEasing("--ease-smooth", "ease-in-out"),
       enter: cssEasing("--ease-enter", "ease-out"),
@@ -269,7 +271,7 @@ const label = chapterName + " features";
 
         // Plays the change from one panel to the next. `direction` is 1
         // going forward and -1 going back; `offset` is where a swipe left
-        // the old media.
+        // the old media, which then moves on sideways.
         const swap = (
           from: number,
           to: number,
@@ -282,6 +284,8 @@ const label = chapterName + " features";
           if (reducedMotion) return;
 
           const shift = SWAP.distance * direction;
+          const down = listLayout.matches && offset === 0;
+          const at = (px: number) => (down ? `0 ${px}px` : `${px}px 0`);
           const blur = `blur(${SWAP.blur}px)`;
           // The old panel is already inert, and so hidden; it stays visible
           // while it fades.
@@ -297,8 +301,8 @@ const label = chapterName + " features";
           animate(
             media[from],
             [
-              { translate: `${offset}px 0`, filter: "blur(0)" },
-              { translate: `${offset - shift}px 0`, filter: blur },
+              { translate: at(offset), filter: "blur(0)" },
+              { translate: at(offset - shift), filter: blur },
             ],
             SWAP.outMs,
             ease.smooth,
@@ -312,7 +316,7 @@ const label = chapterName + " features";
           animate(
             media[to],
             [
-              { translate: `${shift}px 0`, filter: blur },
+              { translate: at(shift), filter: blur },
               { translate: "0 0", filter: "blur(0)" },
             ],
             SWAP.inMs,
@@ -372,7 +376,18 @@ const label = chapterName + " features";
         tabs.forEach((tab, index) =>
           tab.addEventListener("click", () => pickTab(index)),
         );
-        bindRovingKeys(tabs, "horizontal", pickTab);
+        // Arrow keys follow the layout: left and right along the row, up and
+        // down the list.
+        const orientation = () =>
+          listLayout.matches ? "vertical" : "horizontal";
+        const syncOrientation = () =>
+          tablist.setAttribute("aria-orientation", orientation());
+        syncOrientation();
+        listLayout.addEventListener("change", syncOrientation);
+        teardown.push(() =>
+          listLayout.removeEventListener("change", syncOrientation),
+        );
+        bindRovingKeys(tabs, orientation, pickTab);
 
         // Swipes on the stage. The media follows the finger once the swipe
         // is clearly sideways; a vertical one is left to scroll the page.

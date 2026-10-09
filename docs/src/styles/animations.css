@@ -228,6 +228,13 @@ main:has([data-chapter]) {
   }
 }
 
+/* Or from the top, where it runs down a list. */
+@keyframes draw-down {
+  from {
+    scale: 1 0;
+  }
+}
+
 @keyframes slide-in {
   from {
     opacity: 0;
@@ -321,6 +328,14 @@ main:has([data-chapter]) {
           var(--draw-start) + (var(--draw-index) + 1) / var(--draw-count) *
             var(--draw-span)
         );
+    }
+
+    /* From lg the tabs line runs down beside the list (Tabs.astro). */
+    @media (width >= 64rem) {
+      [data-tabs-list] [data-draw] {
+        transform-origin: top;
+        animation-name: draw-down;
+      }
     }
 
     /* The controls slide in alongside the line, and land with it. */
