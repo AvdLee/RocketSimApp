@@ -6,7 +6,8 @@ import type { HomepageMedia } from "@/lib/homepageItems";
 interface Props {
   media: HomepageMedia;
   // Fills the whole frame instead of matching the media's own shape, for
-  // frames that hold more than the media, such as a caption.
+  // frames the media sits inset in (InsetMedia.astro) or that hold more than
+  // the media, such as a caption.
   cover?: boolean;
 }
 

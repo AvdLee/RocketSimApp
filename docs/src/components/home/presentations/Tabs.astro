@@ -1,7 +1,7 @@
 ---
 import type { HomepageItem } from "@/lib/homepageItems";
 
-import Media from "../Media.astro";
+import InsetMedia from "../InsetMedia.astro";
 import MediaBackdrop from "../MediaBackdrop.astro";
 import AutoplayControl from "./AutoplayControl.astro";
 
@@ -64,20 +64,11 @@ const label = chapterName + " features";
               data-focus-y={item.focus?.y}
               data-focus-zoom={item.focus?.zoom}
             >
-              <div
-                class="absolute inset-0 flex items-center justify-center p-4 md:p-6"
-                data-media-frame
-              >
-                {/* The media shrinks to fit rather than filling the stage,
-                    so its rounded corners sit on its own edges; it is never
-                    cropped. A video has no size until its poster loads, so
-                    it holds 16:9 until then. */}
-                <Media
-                  media={item.media}
-                  sizes="(min-width: 1120px) 770px, (min-width: 1024px) 70vw, 100vw"
-                  class="aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg"
-                />
-              </div>
+              <InsetMedia
+                media={item.media}
+                sizes="(min-width: 1120px) 770px, (min-width: 1024px) 70vw, 100vw"
+                inset="p-4 md:p-6"
+              />
             </div>
           </div>
         ))
@@ -196,9 +187,6 @@ const label = chapterName + " features";
   // How far the media follows a finger swiping the stage; it resists past
   // the first and last tab.
   const DRAG = { follow: 0.5, resist: 0.15 };
-  // The ID of the panel-change animations, so cancelling them leaves the
-  // focus zoom (a CSS transition) alone.
-  const SWAP_ID = "tabs-swap";
 
   // Where the tabs turn from a row under the stage into a list beside it.
   const LIST_LAYOUT = "(min-width: 1024px)";
@@ -207,10 +195,17 @@ const label = chapterName + " features";
     getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
     fallback;
 
+  // What the last page load set up beyond the tabs' own elements. The
+  // ClientRouter keeps this script running from page to page, so it is
+  // undone before the tabs set up again.
+  let teardown: (() => void)[] = [];
+
   // Click or arrow keys select a tab; the selected tab's panel (and, on
   // phones, its caption) shows. Autoplay selects the tabs in turn and plays
   // the videos; videos in other panels never load.
   function initTabs() {
+    teardown.forEach((undo) => undo());
+    teardown = [];
     const reducedMotion = prefersReducedMotion();
     const listLayout = matchMedia(LIST_LAYOUT);
     const ease = {
@@ -237,10 +232,12 @@ const label = chapterName + " features";
         );
         if (!stage || !tablist || !control) return;
 
+        // What moves and blurs as the panels change.
+        const media = panels.map(
+          (panel) =>
+            panel?.querySelector<HTMLElement>("[data-panel-media]") ?? null,
+        );
         let current = 0;
-        const mediaOf = (index: number) =>
-          panels[index]?.querySelector<HTMLElement>("[data-panel-media]") ??
-          null;
 
         // On phones the tab row scrolls sideways; bring the tab into it
         // without scrolling the page.
@@ -265,18 +262,12 @@ const label = chapterName + " features";
           keyframes: Keyframe[],
           duration: number,
           easing: string,
-        ) =>
-          element?.animate(keyframes, {
-            id: SWAP_ID,
-            duration,
-            easing,
-          });
+        ) => element?.animate(keyframes, { duration, easing });
 
-        const cancelSwaps = (element: Element | null | undefined) =>
-          element
-            ?.getAnimations()
-            .filter((animation) => animation.id === SWAP_ID)
-            .forEach((animation) => animation.cancel());
+        // Only these animations run on the panels and their media; the
+        // focus zoom is a transition on the image inside.
+        const cancelAnimations = (element: Element | null | undefined) =>
+          element?.getAnimations().forEach((animation) => animation.cancel());
 
         // Plays the change from one panel to the next. `direction` is 1
         // going forward and -1 going back; `offset` is where a swipe left
@@ -287,9 +278,9 @@ const label = chapterName + " features";
           direction: number,
           offset: number,
         ) => {
-          const panelsMoving = [panels[from], panels[to]];
-          const mediaMoving = [mediaOf(from), mediaOf(to)];
-          [...panelsMoving, ...mediaMoving].forEach(cancelSwaps);
+          [panels[from], panels[to], media[from], media[to]].forEach(
+            cancelAnimations,
+          );
           if (reducedMotion) return;
 
           const shift = SWAP.distance * direction;
@@ -308,7 +299,7 @@ const label = chapterName + " features";
             ease.smooth,
           );
           animate(
-            mediaOf(from),
+            media[from],
             [
               { translate: at(offset), filter: "blur(0)" },
               { translate: at(offset - shift), filter: blur },
@@ -323,7 +314,7 @@ const label = chapterName + " features";
             ease.enter,
           );
           animate(
-            mediaOf(to),
+            media[to],
             [
               { translate: at(shift), filter: blur },
               { translate: "0 0", filter: "blur(0)" },
@@ -393,21 +384,38 @@ const label = chapterName + " features";
           tablist.setAttribute("aria-orientation", orientation());
         syncOrientation();
         listLayout.addEventListener("change", syncOrientation);
+        teardown.push(() =>
+          listLayout.removeEventListener("change", syncOrientation),
+        );
         bindRovingKeys(tabs, orientation, pickTab);
 
         // Swipes on the stage. The media follows the finger once the swipe
         // is clearly sideways; a vertical one is left to scroll the page.
+        // `dx` is how far the finger went; `moved`, how far the media
+        // followed it.
         let swipe:
-          | { id: number; x: number; y: number; axis?: "x" | "y"; dx: number }
+          | {
+              id: number;
+              x: number;
+              y: number;
+              axis?: "x" | "y";
+              dx: number;
+              moved: number;
+            }
           | undefined;
 
+        // The media follows the finger, or rests where it was.
+        const follow = (moved: number) => {
+          const frame = media[current];
+          if (frame) frame.style.translate = moved ? `${moved}px 0` : "";
+        };
+
+        // A swipe that fell short: the media springs back.
         const settleSwipe = (moved: number) => {
-          const media = mediaOf(current);
-          if (!media) return;
-          media.style.translate = "";
+          follow(0);
           if (reducedMotion || moved === 0) return;
           animate(
-            media,
+            media[current],
             [{ translate: `${moved}px 0` }, { translate: "0 0" }],
             SWAP.outMs,
             ease.enter,
@@ -421,6 +429,7 @@ const label = chapterName + " features";
             x: event.clientX,
             y: event.clientY,
             dx: 0,
+            moved: 0,
           };
         });
 
@@ -434,23 +443,17 @@ const label = chapterName + " features";
           }
           if (swipe.axis !== "x") return;
           swipe.dx = dx;
-          const pastEnd =
-            swipeTarget(dx < 0 ? -Infinity : Infinity, current, tabs.length) ===
-            undefined;
-          const media = mediaOf(current);
-          if (media && !reducedMotion) {
-            const follow = pastEnd ? DRAG.resist : DRAG.follow;
-            media.style.translate = `${dx * follow}px 0`;
-          }
+          if (reducedMotion) return;
+          const pastEnd = dx < 0 ? current === tabs.length - 1 : current === 0;
+          swipe.moved = dx * (pastEnd ? DRAG.resist : DRAG.follow);
+          follow(swipe.moved);
         });
 
         const endSwipe = (event: PointerEvent) => {
           if (!swipe || event.pointerId !== swipe.id) return;
-          const { axis, dx } = swipe;
+          const { axis, dx, moved } = swipe;
           swipe = undefined;
           if (axis !== "x") return;
-          const media = mediaOf(current);
-          const moved = parseFloat(media?.style.translate || "0") || 0;
           const target =
             event.type === "pointerup"
               ? swipeTarget(dx, current, tabs.length)
@@ -459,7 +462,7 @@ const label = chapterName + " features";
             settleSwipe(moved);
             return;
           }
-          if (media) media.style.translate = "";
+          follow(0);
           pickTab(target, moved);
         };
         stage.addEventListener("pointerup", endSwipe);
@@ -504,6 +507,7 @@ const label = chapterName + " features";
         };
         // The stage's size, or an image that changes size as it loads.
         const resized = new ResizeObserver(fitFocus);
+        teardown.push(() => resized.disconnect());
         resized.observe(stage);
         root
           .querySelectorAll("[data-focus] img")
