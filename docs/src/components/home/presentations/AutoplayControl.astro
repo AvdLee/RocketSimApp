@@ -2,16 +2,15 @@
 interface Props {
   // What the button plays, for its label: "Pause Network features".
   name: string;
-  // Round, borderless and grey, to sit beside the gallery's dot pill.
-  round?: boolean;
   class?: string;
 }
 
-const { name, round = false, class: className } = Astro.props;
+const { name, class: className } = Astro.props;
 ---
 
 <!-- Pauses, plays and replays the presentation's autoplay
-     (src/lib/utils/autoplay.ts), which keeps its status and label current. -->
+     (src/lib/utils/autoplay.ts), which keeps its status and label current.
+     Round, borderless and grey, the same in the gallery and the tabs. -->
 <button
   type="button"
   data-autoplay-control
@@ -20,10 +19,7 @@ const { name, round = false, class: className } = Astro.props;
   data-autoplay-status="playing"
   aria-label={`Pause ${name}`}
   class:list={[
-    "group grid size-9 flex-none cursor-pointer place-items-center text-text-dark transition-colors",
-    round
-      ? "rounded-full bg-surface hover:bg-surface-hover"
-      : "rounded-lg border border-border bg-card hover:border-primary hover:bg-primary/8",
+    "group grid size-9 flex-none cursor-pointer place-items-center rounded-full bg-surface text-text-dark transition-colors hover:bg-surface-hover",
     className,
   ]}
 >

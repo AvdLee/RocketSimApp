@@ -1,7 +1,7 @@
 ---
 import type { HomepageItem } from "@/lib/homepageItems";
 
-import Media from "../Media.astro";
+import InsetMedia from "../InsetMedia.astro";
 import MediaBackdrop from "../MediaBackdrop.astro";
 import AutoplayControl from "./AutoplayControl.astro";
 
@@ -16,6 +16,11 @@ interface Props {
 }
 
 const { id, chapterName, items, aside } = Astro.props;
+
+// No word runs straight into a closing backtick in this template: knip reads
+// that as a tagged template and skips everything up to the next backtick,
+// which can hide the script's imports from it.
+const label = chapterName + " features";
 ---
 
 <!-- The aside sits beside the stage from lg, and after the tabs below it,
@@ -28,11 +33,13 @@ const { id, chapterName, items, aside } = Astro.props;
     aside && "lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]",
   ]}
 >
+  <!-- Swiping the stage sideways on a touch screen changes tabs; vertical
+       swipes still scroll the page. -->
   <div
     data-tabs-stage
     data-stage
     class:list={[
-      "relative aspect-video overflow-hidden rounded-lg bg-surface",
+      "relative aspect-video touch-pan-y overflow-hidden rounded-lg bg-surface",
       aside && "lg:aspect-auto",
     ]}
   >
@@ -45,25 +52,33 @@ const { id, chapterName, items, aside } = Astro.props;
             role="tabpanel"
             aria-labelledby={`${id}-tab-${index}`}
             tabindex="0"
-            class="absolute inset-0 rounded-lg transition-[opacity,visibility,scale] duration-500 ease-smooth focus-visible:-outline-offset-2 inert:invisible inert:scale-[1.03] inert:opacity-0 motion-reduce:transition-none"
+            class="absolute inset-0 rounded-lg focus-visible:-outline-offset-2 inert:invisible inert:opacity-0"
             inert={index !== 0}
           >
-            <MediaBackdrop media={item.media} />
-            <Media
-              media={item.media}
-              sizes={
-                aside
-                  ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
-                  : "(min-width: 1120px) 1080px, 100vw"
-              }
-              class:list={[
-                // Contain, never crop: the stage is 16:9 (or as tall as the
-                // aside), and media of any other shape letterboxes. 16:9
-                // videos still fill the stage edge to edge.
-                "relative size-full object-contain",
-                item.media.type === "image" && "p-6",
-              ]}
-            />
+            {/* A blurred copy of the media fills the stage, and the media sits
+                inset on its own colours. */}
+            <MediaBackdrop media={item.media} cover />
+            {/* Moves and blurs as the panels change (the script below). An
+                image with a focus zooms in on it while it shows, inside its
+                own rounded frame (src/styles/animations.css). */}
+            <div
+              class="absolute inset-0"
+              data-panel-media
+              data-focus={item.focus ? "" : undefined}
+              data-focus-x={item.focus?.x}
+              data-focus-y={item.focus?.y}
+              data-focus-zoom={item.focus?.zoom}
+            >
+              <InsetMedia
+                media={item.media}
+                sizes={
+                  aside
+                    ? "(min-width: 1120px) 660px, (min-width: 1024px) 60vw, 100vw"
+                    : "(min-width: 1120px) 1080px, 100vw"
+                }
+                inset="p-4 md:p-6"
+              />
+            </div>
           </div>
         ))
       }
@@ -80,7 +95,7 @@ const { id, chapterName, items, aside } = Astro.props;
     >
       <div
         role="tablist"
-        aria-label={`${chapterName} features`}
+        aria-label={label}
         class="-ml-5 grid min-w-0 flex-1 scroll-px-5 auto-cols-[minmax(104px,1fr)] grid-flow-col overflow-x-auto scroll-smooth pl-5 [scrollbar-width:none] motion-reduce:scroll-auto md:ml-0 md:auto-cols-fr md:overflow-visible md:pl-0"
       >
         {
@@ -91,12 +106,13 @@ const { id, chapterName, items, aside } = Astro.props;
               id={`${id}-tab-${index}`}
               aria-controls={`${id}-panel-${index}`}
               aria-selected={index === 0 ? "true" : "false"}
-              aria-labelledby={`${id}-tab-${index}-title`}
-              aria-describedby={`${id}-tab-${index}-description`}
+              aria-labelledby={`${id}-tab-title-${index}`}
+              aria-describedby={`${id}-tab-description-${index}`}
               tabindex={index === 0 ? 0 : -1}
               class="group relative flex cursor-pointer flex-col gap-1 pr-2.5 text-left text-muted last:pr-0 md:pr-6"
             >
-              {/* One line runs under the tabs and fills up as autoplay moves on. */}
+              {/* One line runs under the tabs and fills up, in the colour of
+                  the chapter, as autoplay moves on. */}
               <span
                 class="relative -mr-2.5 mb-3.5 block h-0.5 bg-border group-last:mr-0 group-aria-selected:bg-muted md:-mr-6"
                 data-draw
@@ -104,18 +120,20 @@ const { id, chapterName, items, aside } = Astro.props;
               >
                 <span
                   data-autoplay-fill
-                  class="absolute inset-0 origin-left scale-x-[var(--autoplay-fill,0)] bg-primary"
+                  class="absolute inset-0 origin-left scale-x-[var(--autoplay-fill,0)] bg-(--chapter)"
                 />
               </span>
               <span
-                id={`${id}-tab-${index}-title`}
-                class="text-small font-semibold transition-colors group-hover:text-text-dark group-aria-selected:text-text-dark md:text-copy"
+                id={`${id}-tab-title-${index}`}
+                class="text-small font-semibold transition-colors duration-300 group-hover:text-text-soft group-aria-selected:text-text-dark md:text-copy"
               >
                 {item.title}
               </span>
+              {/* The descriptions of the other tabs step back, so the
+                  selected tab stands out. */}
               <span
-                id={`${id}-tab-${index}-description`}
-                class="text-small max-md:sr-only"
+                id={`${id}-tab-description-${index}`}
+                class="text-small opacity-50 transition-opacity duration-300 group-hover:opacity-100 group-aria-selected:opacity-100 max-md:sr-only"
               >
                 {item.description}
               </span>
@@ -123,7 +141,7 @@ const { id, chapterName, items, aside } = Astro.props;
           ))
         }
       </div>
-      <AutoplayControl name={`${chapterName} features`} class="-mt-[17px]" />
+      <AutoplayControl name={label} class="-mt-[17px]" />
     </div>
     {
       items.map((item, index) => (
@@ -153,13 +171,46 @@ const { id, chapterName, items, aside } = Astro.props;
 
 <script>
   import { createAutoplay } from "@/lib/utils/autoplay";
-  import { scrollToReveal } from "@/lib/utils/presentationIndex";
+  import { focusTransform } from "@/lib/utils/focusZoom";
+  import { prefersReducedMotion } from "@/lib/utils/motion";
+  import { scrollToReveal, swipeTarget } from "@/lib/utils/presentationIndex";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
+
+  // How the panels change: the old media slides away and blurs as it fades,
+  // and the new media comes into focus from the other side. Going forward,
+  // the media moves left, the way the tabs read.
+  const SWAP = {
+    // How far the media moves, in px.
+    distance: 48,
+    blur: 12,
+    outMs: 450,
+    inMs: 750,
+  };
+  // How far the media follows a finger swiping the stage; it resists past
+  // the first and last tab.
+  const DRAG = { follow: 0.5, resist: 0.15 };
+
+  const cssEasing = (name: string, fallback: string) =>
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
+    fallback;
+
+  // What the last page load set up beyond the tabs' own elements. The
+  // ClientRouter keeps this script running from page to page, so it is
+  // undone before the tabs set up again.
+  let teardown: (() => void)[] = [];
 
   // Click or arrow keys select a tab; the selected tab's panel (and, on
   // phones, its caption) shows. Autoplay selects the tabs in turn and plays
   // the videos; videos in other panels never load.
   function initTabs() {
+    teardown.forEach((undo) => undo());
+    teardown = [];
+    const reducedMotion = prefersReducedMotion();
+    const ease = {
+      smooth: cssEasing("--ease-smooth", "ease-in-out"),
+      enter: cssEasing("--ease-enter", "ease-out"),
+    };
+
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="tabs"]')
       .forEach((root) => {
@@ -179,6 +230,13 @@ const { id, chapterName, items, aside } = Astro.props;
         );
         if (!stage || !tablist || !control) return;
 
+        // What moves and blurs as the panels change.
+        const media = panels.map(
+          (panel) =>
+            panel?.querySelector<HTMLElement>("[data-panel-media]") ?? null,
+        );
+        let current = 0;
+
         // On phones the tab row scrolls sideways; bring the tab into it
         // without scrolling the page.
         const reveal = (tab: HTMLElement) => {
@@ -197,15 +255,100 @@ const { id, chapterName, items, aside } = Astro.props;
           if (left !== undefined) tablist.scrollTo({ left });
         };
 
-        const select = (index: number) => {
+        const animate = (
+          element: Element | null | undefined,
+          keyframes: Keyframe[],
+          duration: number,
+          easing: string,
+        ) => element?.animate(keyframes, { duration, easing });
+
+        // Only these animations run on the panels and their media; the
+        // focus zoom is a transition on the image inside.
+        const cancelAnimations = (element: Element | null | undefined) =>
+          element?.getAnimations().forEach((animation) => animation.cancel());
+
+        // Plays the change from one panel to the next. `direction` is 1
+        // going forward and -1 going back; `offset` is where a swipe left
+        // the old media.
+        const swap = (
+          from: number,
+          to: number,
+          direction: number,
+          offset: number,
+        ) => {
+          [panels[from], panels[to], media[from], media[to]].forEach(
+            cancelAnimations,
+          );
+          if (reducedMotion) return;
+
+          const shift = SWAP.distance * direction;
+          const blur = `blur(${SWAP.blur}px)`;
+          // The old panel is already inert, and so hidden; it stays visible
+          // while it fades.
+          animate(
+            panels[from],
+            [
+              { opacity: 1, visibility: "visible" },
+              { opacity: 0, visibility: "visible" },
+            ],
+            SWAP.outMs,
+            ease.smooth,
+          );
+          animate(
+            media[from],
+            [
+              { translate: `${offset}px 0`, filter: "blur(0)" },
+              { translate: `${offset - shift}px 0`, filter: blur },
+            ],
+            SWAP.outMs,
+            ease.smooth,
+          );
+          animate(
+            panels[to],
+            [{ opacity: 0 }, { opacity: 1 }],
+            SWAP.inMs,
+            ease.enter,
+          );
+          animate(
+            media[to],
+            [
+              { translate: `${shift}px 0`, filter: blur },
+              { translate: "0 0", filter: "blur(0)" },
+            ],
+            SWAP.inMs,
+            ease.enter,
+          );
+        };
+
+        // The caption under the tabs on phones swaps in from the side the
+        // media comes from.
+        const showCaption = (index: number, direction: number) => {
+          captions.forEach((caption, i) => (caption.hidden = i !== index));
+          if (reducedMotion) return;
+          animate(
+            captions[index],
+            [
+              { opacity: 0, translate: `${12 * direction}px 0` },
+              { opacity: 1, translate: "0 0" },
+            ],
+            SWAP.inMs,
+            ease.enter,
+          );
+        };
+
+        const select = (index: number, direction = 1, offset = 0) => {
+          if (index === current) return;
+          const previous = current;
+          current = index;
           tabs.forEach((tab, i) => {
             const selected = i === index;
             tab.setAttribute("aria-selected", String(selected));
             tab.tabIndex = selected ? 0 : -1;
             const panel = panels[i];
             if (panel) panel.inert = !selected;
-            if (captions[i]) captions[i].hidden = !selected;
           });
+          swap(previous, index, direction, offset);
+          showCaption(index, direction);
           reveal(tabs[index]);
         };
 
@@ -216,11 +359,13 @@ const { id, chapterName, items, aside } = Astro.props;
             video: panels[i]?.querySelector("video") ?? null,
           })),
           control,
-          show: select,
+          // Autoplay always moves forward, also from the last tab back to
+          // the first.
+          show: (index) => select(index, 1),
         });
-        // The visitor picked a tab by click or key.
-        const pickTab = (index: number) => {
-          select(index);
+        // The visitor picked a tab by click, key or swipe.
+        const pickTab = (index: number, offset = 0) => {
+          select(index, Math.sign(index - current) || 1, offset);
           autoplay.pick(index);
         };
 
@@ -228,6 +373,130 @@ const { id, chapterName, items, aside } = Astro.props;
           tab.addEventListener("click", () => pickTab(index)),
         );
         bindRovingKeys(tabs, "horizontal", pickTab);
+
+        // Swipes on the stage. The media follows the finger once the swipe
+        // is clearly sideways; a vertical one is left to scroll the page.
+        // `dx` is how far the finger went; `moved`, how far the media
+        // followed it.
+        let swipe:
+          | {
+              id: number;
+              x: number;
+              y: number;
+              axis?: "x" | "y";
+              dx: number;
+              moved: number;
+            }
+          | undefined;
+
+        // The media follows the finger, or rests where it was.
+        const follow = (moved: number) => {
+          const frame = media[current];
+          if (frame) frame.style.translate = moved ? `${moved}px 0` : "";
+        };
+
+        // A swipe that fell short: the media springs back.
+        const settleSwipe = (moved: number) => {
+          follow(0);
+          if (reducedMotion || moved === 0) return;
+          animate(
+            media[current],
+            [{ translate: `${moved}px 0` }, { translate: "0 0" }],
+            SWAP.outMs,
+            ease.enter,
+          );
+        };
+
+        stage.addEventListener("pointerdown", (event) => {
+          if (event.pointerType === "mouse" || !event.isPrimary) return;
+          swipe = {
+            id: event.pointerId,
+            x: event.clientX,
+            y: event.clientY,
+            dx: 0,
+            moved: 0,
+          };
+        });
+
+        stage.addEventListener("pointermove", (event) => {
+          if (!swipe || event.pointerId !== swipe.id) return;
+          const dx = event.clientX - swipe.x;
+          const dy = event.clientY - swipe.y;
+          if (!swipe.axis) {
+            if (Math.hypot(dx, dy) < 10) return;
+            swipe.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+          }
+          if (swipe.axis !== "x") return;
+          swipe.dx = dx;
+          if (reducedMotion) return;
+          const pastEnd = dx < 0 ? current === tabs.length - 1 : current === 0;
+          swipe.moved = dx * (pastEnd ? DRAG.resist : DRAG.follow);
+          follow(swipe.moved);
+        });
+
+        const endSwipe = (event: PointerEvent) => {
+          if (!swipe || event.pointerId !== swipe.id) return;
+          const { axis, dx, moved } = swipe;
+          swipe = undefined;
+          if (axis !== "x") return;
+          const target =
+            event.type === "pointerup"
+              ? swipeTarget(dx, current, tabs.length)
+              : undefined;
+          if (target === undefined) {
+            settleSwipe(moved);
+            return;
+          }
+          follow(0);
+          pickTab(target, moved);
+        };
+        stage.addEventListener("pointerup", endSwipe);
+        stage.addEventListener("pointercancel", endSwipe);
+
+        // Each image with a focus zooms in on it as its panel shows, within
+        // the rounded rectangle it rests in; the size of the image sets how
+        // far it moves.
+        const fitFocus = () => {
+          root
+            .querySelectorAll<HTMLElement>("[data-focus]")
+            .forEach((frame) => {
+              const image = frame.querySelector("img");
+              const box = image?.offsetParent;
+              if (!image || !(box instanceof HTMLElement)) return;
+              const width = image.offsetWidth;
+              const height = image.offsetHeight;
+              if (!width || !height) return;
+
+              const { x, y, scale } = focusTransform(
+                { width, height },
+                { left: 0, top: 0, width, height },
+                {
+                  x: Number(frame.dataset.focusX),
+                  y: Number(frame.dataset.focusY),
+                  zoom: Number(frame.dataset.focusZoom),
+                },
+              );
+              const top = image.offsetTop;
+              const left = image.offsetLeft;
+              const right = box.clientWidth - left - width;
+              const bottom = box.clientHeight - top - height;
+              const radius = getComputedStyle(image).borderRadius;
+              frame.style.setProperty("--focus-x", `${x}px`);
+              frame.style.setProperty("--focus-y", `${y}px`);
+              frame.style.setProperty("--focus-scale", String(scale));
+              frame.style.setProperty(
+                "--focus-clip",
+                `inset(${top}px ${right}px ${bottom}px ${left}px round ${radius})`,
+              );
+            });
+        };
+        // The stage's size, or an image that changes size as it loads.
+        const resized = new ResizeObserver(fitFocus);
+        teardown.push(() => resized.disconnect());
+        resized.observe(stage);
+        root
+          .querySelectorAll("[data-focus] img")
+          .forEach((image) => resized.observe(image));
       });
   }
 

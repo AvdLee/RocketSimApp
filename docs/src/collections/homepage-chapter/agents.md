@@ -13,6 +13,7 @@ items:
   - feature: 00-agentic-development
     title: "Browser preview"
     description: "Follow along live and point at what to change."
+    focus: { x: 0.66, y: 0.3, zoom: 1.5 }
   - feature: 00-agentic-video
     title: "Real-world states"
     description: "Face ID prompts, offline, and poor networks."
@@ -20,12 +21,14 @@ items:
       type: image
       path: ../../content/blog/testing-ai-agents-ios-simulator/agent-scenarios-testing-face-id.png
       alt: "Agent benchmark app answering a Face ID prompt in the Simulator"
+    focus: { x: 0.42, y: 0.45, zoom: 1.6 }
   - title: "Always in sync"
     description: "One-click install for Cursor, Claude, Codex, and Xcode, always up to date."
     media:
       type: image
       path: ../../content/blog/ai-agents-ios-simulator/cli-agent-settings-hero.png
       alt: "RocketSim CLI and Agent settings with install buttons for Cursor, Claude, Codex, and Xcode"
+    focus: { x: 0.6, y: 0.72, zoom: 1.4 }
 links:
   - label: "Explore Agentic Coding"
     href: /features/agentic-development/

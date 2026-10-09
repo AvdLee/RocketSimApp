@@ -134,3 +134,32 @@ test("an item with nothing to fall back on fails instead of rendering blanks", (
     /teams.*item 1.*media/,
   );
 });
+
+test("an image keeps its focus, from the item or over the feature's image", () => {
+  const focus = { x: 0.7, y: 0.2, zoom: 1.6 };
+  const [item] = resolveChapterItems(
+    "design",
+    [{ feature: "06-grids", focus }],
+    features,
+  );
+
+  assert.deepEqual(item.focus, focus);
+});
+
+test("a video with a focus fails, since only images zoom in", () => {
+  assert.throws(
+    () =>
+      resolveChapterItems(
+        "design",
+        [
+          {
+            feature: "08-slow-animations",
+            description: "Catch every frame.",
+            focus: { x: 0.5, y: 0.5, zoom: 1.5 },
+          },
+        ],
+        features,
+      ),
+    /design.*item 1.*focus/,
+  );
+});

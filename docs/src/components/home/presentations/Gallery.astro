@@ -1,7 +1,7 @@
 ---
 import type { HomepageItem } from "@/lib/homepageItems";
 
-import Media from "../Media.astro";
+import InsetMedia from "../InsetMedia.astro";
 import MediaBackdrop from "../MediaBackdrop.astro";
 import AutoplayControl from "./AutoplayControl.astro";
 
@@ -60,17 +60,14 @@ const { id, chapterName, items } = Astro.props;
             </span>{" "}
             {item.description}
           </p>
-          {/* The media shrinks to fit rather than filling the space, so its
-              rounded corners sit on its own edges. A video has no size until
-              its poster loads, so it holds 16:9 until then. */}
+          {/* The media fills the space under the caption. */}
           <div class="relative min-h-0 flex-1 opacity-[calc(1_-_var(--slide-distance)*0.5)]">
-            <div class="absolute inset-0 flex items-center justify-center px-6 pb-6 sm:px-9 sm:pb-9">
-              <Media
-                media={item.media}
-                sizes="(min-width: 1048px) 880px, 84vw"
-                class="aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg motion-safe:translate-x-[calc(var(--slide-offset)*-10%)] motion-safe:scale-[calc(1_-_var(--slide-distance)*0.1)]"
-              />
-            </div>
+            <InsetMedia
+              media={item.media}
+              sizes="(min-width: 1048px) 880px, 84vw"
+              inset="px-6 pb-6 sm:px-9 sm:pb-9"
+              class="motion-safe:translate-x-[calc(var(--slide-offset)*-10%)] motion-safe:scale-[calc(1_-_var(--slide-distance)*0.1)]"
+            />
           </div>
         </div>
       ))
@@ -111,7 +108,7 @@ const { id, chapterName, items } = Astro.props;
         ))
       }
     </div>
-    <AutoplayControl name={`${chapterName} highlights`} round />
+    <AutoplayControl name={`${chapterName} highlights`} />
   </div>
 </div>
 

@@ -18,6 +18,7 @@ items:
       type: image
       path: ../../content/docs/docs/features/networking/network-traffic-monitoring/network-request-detail.png
       alt: "Request detail view with Summary, Request, Response, Headers, Metrics, and cURL tabs"
+    focus: { x: 0.3, y: 0.3, zoom: 1.7 }
   - feature: 02-network-speed-control
     title: "Speed control"
     description: "3G, Edge, 100% loss, or airplane mode."
@@ -25,9 +26,11 @@ items:
       type: image
       path: ../../content/docs/docs/features/networking/network-speed-control/side_window_network_speed_control_modes_picker_visible.png
       alt: "Network Speed Control picker listing Airplane Mode, 100% Loss, 3G, DSL, Edge, LTE, Very Bad Network, and Wi-Fi"
+    focus: { x: 0.43, y: 0.67, zoom: 1.5 }
   - feature: 31-network-ai-prompts
     title: "AI-ready prompts"
     description: "Redacted request context for any assistant."
+    focus: { x: 0.66, y: 0.2, zoom: 1.8 }
 links:
   - label: "Explore Network Monitoring"
     href: /features/networking/

@@ -118,6 +118,15 @@ const homepageChapter = defineCollection({
             title: z.string().optional(),
             description: z.string().optional(),
             media: media.optional(),
+            // The detail a tabs presentation zooms in on while the image
+            // shows; `x` and `y` run from 0 to 1 across and down the image.
+            focus: z
+              .object({
+                x: z.number().min(0).max(1),
+                y: z.number().min(0).max(1),
+                zoom: z.number().min(1).max(3).default(1.5),
+              })
+              .optional(),
           }),
         )
         .min(1),

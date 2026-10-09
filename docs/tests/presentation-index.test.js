@@ -5,6 +5,7 @@ import {
   indexForKey,
   scrollToReveal,
   slidePosition,
+  swipeTarget,
 } from "../src/lib/utils/presentationIndex.ts";
 
 test("arrow keys along the orientation move to the neighbouring item", () => {
@@ -77,4 +78,15 @@ test("a tab cut off at the end scrolls in up to the row's padding", () => {
 test("a tab cut off at the start scrolls back to the row's padding", () => {
   const row = { scrollLeft: 180, start: 0, end: 375, padding: 20 };
   assert.equal(scrollToReveal(row, { start: -76, end: 28 }), 84);
+});
+
+test("a swipe to the left brings in the next item, to the right the previous", () => {
+  assert.equal(swipeTarget(-80, 1, 4), 2);
+  assert.equal(swipeTarget(80, 1, 4), 0);
+});
+
+test("a short swipe, or one past either end, stays put", () => {
+  assert.equal(swipeTarget(-20, 1, 4), undefined);
+  assert.equal(swipeTarget(80, 0, 4), undefined);
+  assert.equal(swipeTarget(-80, 3, 4), undefined);
 });

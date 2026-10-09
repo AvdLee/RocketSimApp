@@ -61,3 +61,20 @@ export function scrollToReveal(
   }
   return undefined;
 }
+
+// How far a swipe must travel to change items, in px.
+const SWIPE_DISTANCE = 48;
+
+// The item a sideways swipe of `distance` px (negative to the left) on the
+// current item's stage moves to, or `undefined` when it falls short or runs
+// past either end. A swipe to the left brings in the next item, as if the
+// stage were a strip of items.
+export function swipeTarget(
+  distance: number,
+  current: number,
+  count: number,
+): number | undefined {
+  if (Math.abs(distance) < SWIPE_DISTANCE) return undefined;
+  const next = current + (distance < 0 ? 1 : -1);
+  return next >= 0 && next < count ? next : undefined;
+}
