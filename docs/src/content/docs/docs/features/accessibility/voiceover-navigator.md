@@ -3,6 +3,7 @@ title: "Test VoiceOver on the iOS Simulator"
 description: "Visualize VoiceOver element order on the iOS Simulator with numbered overlays. Navigate elements with keyboard shortcuts and verify reading order without a device."
 sidebar:
   label: "VoiceOver Navigator"
+  order: 2
 ---
 
 ::::tip[Check accessibility faster]
@@ -13,9 +14,11 @@ Testing VoiceOver used to mean grabbing a physical device, enabling VoiceOver, a
 
 ## Introduction to the VoiceOver Overlay
 
-When you open the **Voice Over** tab in RocketSim’s side window, you can turn on **Elements Overlay**. Numbered labels appear on each accessibility element in the same order VoiceOver would use on a real device, so you can see at a glance whether your reading order makes sense. The panel lists every element with its role, such as **Button**, **Heading**, or **StaticText**, plus the total count. Use the **Rotor** dropdown to filter by category or leave it on **All Elements**. **Refresh** updates the list after the app’s UI changes.
+When you open the **VoiceOver** tab in the Accessibility window of RocketSim’s side window, you can turn on **Elements Overlay**. Numbered labels appear on each accessibility element in the same order VoiceOver would use on a real device, so you can see at a glance whether your reading order makes sense. The panel lists every element with its role, such as **Button**, **Heading**, or **StaticText**, plus the total count. Use the **Rotor** dropdown to filter by category or leave it on **All Elements**.
 
-![VoiceOver overlay showing numbered elements on the Simulator and the Elements Overlay panel with Rotor and Voice Over Elements list.](./voiceover-navigator/voiceover-overlay.png)
+The list only contains what VoiceOver users can reach. Controls inside a combined row aren’t listed or highlighted, because VoiceOver treats the row as a single element. The **Actions** rotor shows rows that expose custom actions, and the **Containers** rotor lists the containers on screen (it replaces the earlier Landmarks rotor). **Refresh** updates the list after the app’s UI changes.
+
+![VoiceOver overlay showing numbered elements on the Simulator and the Elements Overlay panel with Rotor and VoiceOver Elements list.](./voiceover-navigator/voiceover-overlay.png)
 
 This view is read-only: you’re inspecting the tree and the overlay. When you’re ready to step through the experience the way VoiceOver would, use **Start Navigating**.
 
@@ -33,3 +36,7 @@ You can search for elements, change the rotor category from the dropdown, and tu
 ![VoiceOver navigation mode with keyboard shortcuts (↑↓ ←→ ⏎ Esc), focused element highlighted in the list, and numbered overlay on the Simulator.](./voiceover-navigator/voiceover-navigation.png)
 
 No device, no gestures, no context switch. You get a much quicker loop for checking reading order, rotor groupings, and activation flow while you develop.
+
+## Find issues automatically
+
+The navigator helps you check the experience by hand. To scan the current screen for missing labels, small tap targets, low contrast, and VoiceOver problems automatically, use the **Audit** tab. Read [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) to learn how it works in the UI and from the CLI.

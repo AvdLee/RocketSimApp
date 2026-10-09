@@ -22,6 +22,7 @@ This is especially useful if you want an agent to:
 - Navigate and test iOS Simulator apps
 - Read visible accessibility elements before interacting
 - Tap, type, swipe, and trigger flows more reliably
+- Audit the visible screen for accessibility issues, fix them, and validate the result
 - Use the RocketSim version already installed on your machine
 
 The RocketSim Agent Skill now lives in its own repository with full installation instructions, packaging metadata, and release workflow:
