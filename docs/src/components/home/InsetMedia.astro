@@ -1,0 +1,36 @@
+---
+import type { HomepageMedia } from "@/lib/homepageItems";
+
+import Media from "./Media.astro";
+
+interface Props {
+  media: HomepageMedia;
+  sizes: string;
+  // The frame's padding: how far the media sits in from its edges.
+  inset: string;
+  // Extra classes for the media itself, such as scroll effects.
+  class?: string;
+}
+
+const { media, sizes, inset, class: className } = Astro.props;
+---
+
+<!-- Media centred in a frame that fills its positioned parent, used by the
+     gallery and the tabs over a full-frame MediaBackdrop. The media shrinks
+     to fit rather than filling the frame, so its rounded corners sit on its
+     own edges, and it is never cropped. A video has no size until its poster
+     loads, so it holds 16:9 until then. The tabs clip a zooming image to the
+     frame (`data-media-frame`, src/styles/animations.css). -->
+<div
+  class:list={["absolute inset-0 flex items-center justify-center", inset]}
+  data-media-frame
+>
+  <Media
+    media={media}
+    sizes={sizes}
+    class:list={[
+      "aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg",
+      className,
+    ]}
+  />
+</div>
