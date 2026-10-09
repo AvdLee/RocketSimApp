@@ -13,6 +13,6 @@ asset:
 
 **Audit the current screen** for missing labels, small tap targets, low contrast, and VoiceOver problems. You get a score, findings grouped by rule, highlights on the Simulator, and a prompt you can hand to your AI agent.
 
-- Run the audit from the **Audit** tab in the side window
+- Run the audit from the **Audit** tab in the Accessibility window
 - Automate audits, fixes, and validation with `rocketsim accessibility-audit`
 - Let your agent fix the findings and run the audit again to validate

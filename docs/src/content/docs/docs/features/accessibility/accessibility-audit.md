@@ -1,6 +1,6 @@
 ---
 title: "Accessibility Audit for the iOS Simulator"
-description: "Audit the iOS Simulator screen for missing labels, small tap targets, low contrast, and VoiceOver issues in RocketSim's UI, or automate audits, fixes, and validation with the CLI."
+description: "Audit the iOS Simulator for missing labels, small tap targets, low contrast, and VoiceOver issues in the UI, or automate audits, fixes, and validation via the CLI."
 sidebar:
   label: "Accessibility Audit"
   order: 3
@@ -30,7 +30,7 @@ The Audit tab requires **RocketSim Pro**. The `rocketsim accessibility-audit` CL
 ## Running an audit in the side window
 
 1. Open the Simulator with your app on the screen you want to check
-2. Open the **Accessibility** window from the side window
+2. In RocketSim's side window, open the **Accessibility** tab
 3. Select the **Audit** tab
 4. Click **Run Audit**
 

@@ -73,7 +73,7 @@ Starts a live, interactive Simulator preview and prints its local URL:
 rocketsim preview
 ```
 
-Pass `--port <port>` to choose a port or `--udid <udid>` to target a specific booted Simulator. Add `--lan` (RocketSim Pro) to open the preview from another Mac on the same network or a Tailscale tailnet; without it, the preview stays on localhost. See [Browser Preview](/docs/features/agentic-development/browser-preview) for the interactive controls and visual feedback workflow.
+Pass `--port <port>` to choose a port or `--udid <udid>` to target a specific booted Simulator. Add `--lan` (RocketSim Pro) to open the preview from another Mac on the same network or a Tailscale tailnet; without it, the preview stays on localhost. See [Browser Preview](/docs/features/agentic-development/browser-preview/) for the interactive controls and visual feedback workflow.
 
 ### Visible elements
 

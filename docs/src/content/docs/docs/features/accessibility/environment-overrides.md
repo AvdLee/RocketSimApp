@@ -5,17 +5,19 @@ sidebar:
   order: 4
 ---
 
+Environment Overrides are the toggles in the **Accessibility** window of RocketSim's side window, on the **Toggles** tab. This page is a short overview; [Toggles & Dynamic Text](/docs/features/accessibility/toggles-and-dynamic-text/) covers every toggle in detail.
+
 Testing accessibility settings usually means navigating deep into Simulator Settings. RocketSim's Environment Overrides put all the important toggles right in the side window, so you can switch settings while looking at your app.
 
 ![Side window with accessibility toggles, Dark Mode, and Dynamic Type](./environment-overrides/environment-overrides-panel.png)
 
 ## Accessibility toggles
 
-You get direct access to Increase Contrast, Reduce Transparency, Reduce Motion, Show Borders, and a Color Filter with grayscale and color blindness options. Simulators that run iOS 26 or earlier also offer Bold Text, On/Off Labels, Inverted Colors, and Differentiate without Color. Toggle any of them and see the effect immediately in your running app.
+You get direct access to Increase Contrast, Reduce Transparency, Reduce Motion, Show Borders, and a Color Filter with grayscale and color blindness options (Xcode 27 or later). Simulators that run iOS 26 or earlier also offer Bold Text, On/Off Labels, Inverted Colors, and Differentiate without Color. Toggle any of them and see the effect immediately in your running app.
 
 ## Liquid Glass
 
-Enable Tinted Liquid Glass and adjust the Liquid Glass opacity to check legibility of your glass surfaces.
+Enable Tinted Liquid Glass and adjust the Liquid Glass opacity (Xcode 27 or later) to check legibility of your glass surfaces.
 
 ## Dark Mode and StandBy
 

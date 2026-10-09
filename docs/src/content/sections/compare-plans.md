@@ -37,6 +37,10 @@ compare_plans:
           free: true
           individual: true
           teams: true
+        - item: Browser Preview from other Macs on your network (--lan)
+          free: false
+          individual: true
+          teams: true
         - item: Version-matched CLI and skill updates
           free: true
           individual: true

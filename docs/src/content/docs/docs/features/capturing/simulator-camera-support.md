@@ -28,7 +28,7 @@ Check out these demos:
 
 ## Is Simulator Camera free?
 
-Simulator Camera is a metered Pro feature. Free users can stream the Simulator Camera on 5 distinct days, after which streaming requires RocketSim Pro. Pro users stream without limits.
+Simulator Camera is free to try on 5 distinct days of streaming. After that, streaming requires RocketSim Pro, which has no limits.
 
 ## How do I access this feature?
 

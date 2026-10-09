@@ -7,7 +7,7 @@ sidebar:
 
 During app development, it's important to test your app's accessibility support to ensure it's usable by everyone. Xcode provides so-called Environment Toggles, but they're not easily accessible when you're focused on the Simulator.
 
-RocketSim's side window provides similar functionality and keeps accessibility toggles available whenever you need them. Open the **Accessibility** tab and select **Toggles**:
+RocketSim's side window provides similar functionality and keeps accessibility toggles available whenever you need them. Open the **Accessibility** tab, then select **Toggles**:
 
 <!-- prettier-ignore -->
 <video src="/features/accessibility-toggles.mp4" aria-label="Switching accessibility toggles, color filters, Liquid Glass options, Dark Mode, StandBy, and Dynamic Type from RocketSim's Accessibility side window while an app runs in the Simulator." controls autoplay muted loop playsinline preload="metadata" poster="/features/posters/accessibility-toggles.webp" style="width: 100%; border-radius: 0.75rem;"></video>
@@ -57,4 +57,4 @@ A slider lets you test every Dynamic Type size. RocketSim also shows the SwiftUI
 
 ## Stays in sync with the Simulator
 
-With Xcode 27 or later, the side window follows changes you make in the Simulator itself, such as switching Dark Mode or Increase Contrast, without polling. The toggles, Dark Mode, and Dynamic Type apply consistently, including on the iOS 27 Simulator.
+With Xcode 27 or later, the Accessibility window follows changes you make in the Simulator itself, such as switching Dark Mode or Increase Contrast, without polling. The toggles, Dark Mode, and Dynamic Type apply consistently, including on the iOS 27 Simulator.
