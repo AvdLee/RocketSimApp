@@ -73,7 +73,7 @@ Starts a live, interactive Simulator preview and prints its local URL:
 rocketsim preview
 ```
 
-Pass `--port <port>` to choose a localhost port or `--udid <udid>` to target a specific booted Simulator. See [Browser Preview](/docs/features/agentic-development/browser-preview) for the interactive controls and visual feedback workflow.
+Pass `--port <port>` to choose a port or `--udid <udid>` to target a specific booted Simulator. Add `--lan` (RocketSim Pro) to open the preview from another Mac on the same network or a Tailscale tailnet; without it, the preview stays on localhost. See [Browser Preview](/docs/features/agentic-development/browser-preview/) for the interactive controls and visual feedback workflow.
 
 ### Visible elements
 
@@ -88,6 +88,8 @@ The `--agent` flag is the recommended default for agent workflows. It returns co
 - `nav` focuses on headings, tabs, navigation bars, and top-level controls while omitting plain static text, images, and nested duplicate text composites
 - `act` includes interactive element identifiers, labels, roles, values, and state
 - `debug` returns the full hierarchy when an action fails or an element looks wrong
+
+Elements that expose custom accessibility actions get an extra `!actions|id|...` row. Every element, including the controls inside a combined row, stays tappable by id.
 
 Both compact modes omit individual software-keyboard keys because keyboard visibility is already reported in the response header. They also omit elements whose frames are fully outside the device canvas. Debug and plain JSON output remain unchanged when you need the complete hierarchy.
 
@@ -132,7 +134,7 @@ rocketsim screenshot \
 | Option                  | Description                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------------- |
 | `--background <value>`  | Background color: `transparent`, a preset color, or `#RRGGBB`.                              |
-| `--bezel <style>`       | Device frame style: `none`, `simulator`, or `device`.                                       |
+| `--bezel <style>`       | Device frame style: `none`, `simulator`, `device`, or `device3d` (iPhone Duo only).         |
 | `--frame-color <value>` | Device frame tint as a preset color or `#RRGGBB`.                                           |
 | `--device-shadow`       | Render a shadow behind the device frame.                                                    |
 | `--ratio <ratio>`       | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`.                                |
@@ -149,6 +151,8 @@ To preview the capture in RocketSim's [floating thumbnail](/docs/features/captur
 ```bash
 rocketsim screenshot --show-floating-thumbnail
 ```
+
+When you capture an iPhone Duo with a styled bezel, RocketSim renders the fold pose for every bezel style. Plain Duo screenshots capture only the display that shows the interface: the outer display while the Duo is closed and the inner display while it is open. See [iPhone Duo](#iphone-duo) for the Duo-specific commands.
 
 ### Video recordings
 
@@ -169,6 +173,47 @@ rocketsim video record --fps 60 --duration 5 --udid <udid> > recording.mp4
 ```bash
 rocketsim video record --bezel device --touches --show-floating-thumbnail
 ```
+
+To review or edit the recording right away, add `--open-editor`. It sends the recording to the floating thumbnail and opens RocketSim's video editor, so it implies `--show-floating-thumbnail`:
+
+```bash
+rocketsim video record --touches --open-editor
+```
+
+If the Simulator is rotated while a recording is running, the rotation is preserved and animated in the exported video.
+
+### iPhone Duo
+
+RocketSim supports the iPhone Duo Simulator from the command line. `screenshot` and `video record` render the fold pose for every styled bezel, including the Duo-only `--bezel device3d`, which uses Apple's 3D folding model. Passing `--bezel device3d` for another device returns an error.
+
+Two commands control and inspect the hinge:
+
+```bash
+rocketsim duo pose closed|book|open [--udid <udid>]
+rocketsim duo hinge [--udid <udid>]
+```
+
+- `duo pose` moves the Simulator hinge to the `closed`, `book`, or `open` pose. It does not need Device Hub or the macOS Accessibility permission.
+- `duo hinge` reports `hinge_state` (`closed`, `openFlat`, or `partiallyOpen`) and `hinge_angle_degrees`, where `0` is closed and `180` is fully flat.
+
+A typical agent flow poses the Duo, then captures it:
+
+```bash
+rocketsim duo pose open
+rocketsim screenshot --bezel device3d > duo-open.png
+```
+
+### Accessibility audit
+
+Audit the visible Simulator screen for accessibility problems, then validate your fixes with the same command:
+
+```bash
+rocketsim accessibility-audit [--udid <udid>] [--format compact|full] [--no-contrast]
+```
+
+The response contains a score from 0 to 100, error and warning counts, and findings grouped by rule with the affected element ids, frames, and a suggested fix. Narrow the run with `--rules`, `--exclude-rules`, or `--severity error|warning`. Pass `--screen latest`, or an explicit screen hash from `rocketsim screen`, to guard against auditing a different screen than expected.
+
+Unlike the Audit tab in the side window, the CLI command doesn't require RocketSim Pro. Read [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the rules, the score, and the audit, fix, and validate loop for agents.
 
 ### Network conditions
 
@@ -312,6 +357,10 @@ These prompts work well with the CLI interaction loop:
 > Use RocketSim to type a search query into the search field and select the first result
 
 > Use RocketSim to press the home button, then inspect the Simulator after the app is open again
+
+## Targeting cloned Simulators
+
+Commands that take `--udid` (such as `screen`, `elements`, `interact`, `screenshot`, and `duo`) also find a Simulator that was cloned and booted with `xcrun simctl`, without opening it in Simulator.app. If RocketSim doesn't know the UDID as booted yet, it refreshes its device list from CoreSimulator. When a UDID still can't be found, the `simulator_not_found` error explains how to check it with `xcrun simctl list devices` and when to retry.
 
 ## Requirements
 

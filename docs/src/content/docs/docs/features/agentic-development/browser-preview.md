@@ -45,6 +45,25 @@ rocketsim preview --udid <udid>
 
 You can also switch between booted Simulators from the device menu above the preview.
 
+## Open the preview from another Mac
+
+Browser Preview stays on localhost by default. With **RocketSim Pro**, opt in to sharing it with another Mac on the same network or on your Tailscale tailnet:
+
+```bash
+rocketsim preview --lan
+```
+
+RocketSim listens only on the address it shows, and stops the preview after 30 minutes without a connected browser. The preview is served over plain HTTP, so use it on networks you trust or over Tailscale.
+
+## Performance while streaming
+
+RocketSim hardware-encodes the Simulator as JPEG frames capped at 30 fps, which uses about 75% less CPU per streamed Simulator and sends about 80% less data to each browser. A few rules keep your Mac responsive:
+
+- The preview lowers its frame rate to 15 fps while any Simulator is recording, and recordings get priority when your Mac is busy
+- Previews that no browser is watching, including the ones CLI agent commands start automatically, don't stream or encode frames
+- Accessibility refreshes are skipped while the screen is unchanged or the Simulator is recording
+- A preview stops automatically when its Simulator is deleted
+
 ## Interact from the browser
 
 The live screen behaves like the Simulator:

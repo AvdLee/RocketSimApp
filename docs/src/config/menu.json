@@ -60,5 +60,19 @@
       "name": "Students",
       "url": "/student/"
     }
+  ],
+  "myApps": [
+    {
+      "name": "RocketTrace",
+      "url": "https://rockettrace.app/?utm_source=rocketsim&utm_medium=referral&utm_campaign=rockettrace&utm_content=footer"
+    },
+    {
+      "name": "MCP Beast",
+      "url": "https://mcp-beast.ai/mac-app-ios-developers?utm_source=rocketsim&utm_medium=referral&utm_campaign=mcp_beast&utm_content=footer"
+    },
+    {
+      "name": "Video Compressor",
+      "url": "https://videocompression.app/?utm_source=rocketsim&utm_medium=referral&utm_campaign=video_compressor&utm_content=footer"
+    }
   ]
 }

@@ -44,6 +44,12 @@ Side-window features continue to work with Device Hub, including:
 
 ![RocketSim's design comparison tools overlaying a device inside Xcode 27's Device Hub](./device-hub-support/design-comparison.png)
 
+## iPhone Duo in Device Hub
+
+Touches, the grid, and the rulers line up with an iPhone Duo in Device Hub when the Duo is closed or fully unfolded. The grid and rulers follow the orientation Device Hub draws, including after you unfold the Duo with the hinge control. To capture a Duo with its fold pose, see [Taking Screenshots](/docs/features/capturing/screenshots/#screenshots-of-iphone-duo) and [Creating Recordings](/docs/features/capturing/recordings/#iphone-duo-recordings).
+
+iPad Pro and iPad mini Simulators no longer report that Device Hub is in expanded mode, so Comparing, Touches, and VoiceOver Navigator keep working for them.
+
 Recent Builds also follows Simulator apps run through Device Hub. For connected iPhones and iPads, RocketSim provides a dedicated USB preview and physical-device actions; see [Physical Device Testing](/docs/features/physical-devices/).
 
 ## Restore missing Simulator actions
