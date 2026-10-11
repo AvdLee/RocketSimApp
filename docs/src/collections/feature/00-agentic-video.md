@@ -21,4 +21,4 @@ RocketSim ships a version-matched `rocketsim` CLI and Agent Skill so Cursor, Xco
 - Validate setup with `rocketsim doctor`
 - Keep the CLI and Agent Skill in sync through app updates
 
-Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
+Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark.
