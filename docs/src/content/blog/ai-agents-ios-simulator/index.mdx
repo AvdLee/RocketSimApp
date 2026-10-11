@@ -55,7 +55,7 @@ Agent workflows are sensitive to small amounts of friction. Every screen read co
 
 That is why RocketSim's CLI talks to the running Mac app instead of starting from scratch for every command. RocketSim already knows which Simulator is focused, can keep useful state warm, and can return compact `rs/1` output that is designed for agents.
 
-Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
+Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark.
 
 Those numbers matter because they show up directly in your day-to-day agent loop. A smaller screen summary gives the model more room to reason about the task, while lower total command time reduces waiting across a longer flow. You can read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, limitations, and improvement findings.
 

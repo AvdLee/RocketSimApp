@@ -65,7 +65,7 @@ rs/1 starts from a different set of goals:
 - **Screen-state hashes.** Every read carries a short hash of the current screen. Interactions can be guarded against that hash, which catches the race where the UI changes between inspection and action.
 - **One consistent envelope.** Every command returns the same JSON shape, so an agent parses one format across screen reads, interactions, waits, batches, and diagnostics.
 
-In our July 2026 three-round benchmark, this design produced **over 99% less command output** and an **about 95% lower byte-based context estimate** than the raw accessibility output of AXe 1.8.0, a deliberately low-level primitive layer. Against XcodeBuildMCP 2.7.0, which adopted a similar compact-output approach, RocketSim still produced **3.0x fewer tool-response bytes** with an 8.2x lower byte-based context estimate across the scenarios both tools could run. Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
+In our July 2026 three-round benchmark, this design used **99% fewer tokens** and took up **95% less agent context** (estimated) than the raw accessibility output of AXe 1.8.0, a deliberately low-level primitive layer. Against XcodeBuildMCP 2.7.0, which adopted a similar compact-output approach, RocketSim still produced **3.0x fewer tool-response bytes** with an 8.2x lower byte-based context estimate across the scenarios both tools could run. Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
 
 ## How rs/1 works
 
