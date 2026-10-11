@@ -104,6 +104,10 @@ if (asset.alignment === "full-width") {
   }
 
   .feature-content__content--big {
+    & :global(strong) {
+      font-weight: inherit;
+    }
+
     & :global(p) {
       margin-top: 2rem;
 
