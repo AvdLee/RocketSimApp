@@ -213,7 +213,7 @@ rocketsim accessibility-audit [--udid <udid>] [--format compact|full] [--no-cont
 
 The response contains a score from 0 to 100, error and warning counts, and findings grouped by rule with the affected element ids, frames, and a suggested fix. Narrow the run with `--rules`, `--exclude-rules`, or `--severity error|warning`. Pass `--screen latest`, or an explicit screen hash from `rocketsim screen`, to guard against auditing a different screen than expected.
 
-Unlike the Audit tab in the side window, the CLI command doesn't require RocketSim Pro. Read [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the rules, the score, and the audit, fix, and validate loop for agents.
+Read [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the rules, the score, and the audit, fix, and validate loop for agents.
 
 ### Network conditions
 
