@@ -8,7 +8,7 @@ faq:
   - question: "How do I run an accessibility audit on the iOS Simulator?"
     answer: "Open RocketSim's Accessibility window, select the Audit tab, and click Run Audit. You get a score, findings grouped by rule, highlights on the Simulator, and a prompt you can copy to your AI agent. You can also run `rocketsim accessibility-audit` from the command line."
   - question: "Does the accessibility audit require RocketSim Pro?"
-    answer: "The Audit tab in the side window requires RocketSim Pro. The `rocketsim accessibility-audit` CLI command does not."
+    answer: "The Audit tab in the side window requires RocketSim Pro."
   - question: "Can an AI agent fix accessibility issues automatically?"
     answer: "Yes. Copy the prompt from the Audit tab, or let your agent run `rocketsim accessibility-audit` itself. The agent fixes the findings, rebuilds, and runs the audit again to validate the result."
 ---
@@ -24,7 +24,7 @@ You can run an audit in two ways:
 <video src="/features/accessibility-audit.mp4" aria-label="Running an accessibility audit from RocketSim's Accessibility window, reviewing the score and findings, and highlighting affected elements on the Simulator." controls autoplay muted loop playsinline preload="metadata" poster="/features/posters/accessibility-audit.webp" style="width: 100%; border-radius: 0.75rem;"></video>
 
 :::note
-The Audit tab requires **RocketSim Pro**. The `rocketsim accessibility-audit` CLI command does not.
+The Audit tab requires **RocketSim Pro**.
 :::
 
 ## Running an audit in the side window

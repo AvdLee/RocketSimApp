@@ -34,7 +34,7 @@ compare_plans:
           individual: true
           teams: true
         - item: Accessibility audit from the CLI
-          free: true
+          free: false
           individual: true
           teams: true
         - item: Browser Preview from other Macs on your network (--lan)
