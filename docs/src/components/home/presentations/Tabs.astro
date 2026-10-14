@@ -170,20 +170,10 @@ const label = chapterName + " features";
   import { createAutoplay } from "@/lib/utils/autoplay";
   import { focusTransform } from "@/lib/utils/focusZoom";
   import { prefersReducedMotion } from "@/lib/utils/motion";
+  import { cssEasing, SWAP, swapPanels } from "@/lib/utils/panelSwap";
   import { scrollToReveal, swipeTarget } from "@/lib/utils/presentationIndex";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
 
-  // How the panels change: the old media slides away and blurs as it fades,
-  // and the new media comes into focus from the other side. Going forward,
-  // the media moves the way the tabs read: left along the row, and up along
-  // the list from lg.
-  const SWAP = {
-    // How far the media moves, in px.
-    distance: 48,
-    blur: 12,
-    outMs: 450,
-    inMs: 750,
-  };
   // How far the media follows a finger swiping the stage; it resists past
   // the first and last tab.
   const DRAG = { follow: 0.5, resist: 0.15 };
@@ -191,20 +181,13 @@ const label = chapterName + " features";
   // Where the tabs turn from a row under the stage into a list beside it.
   const LIST_LAYOUT = "(min-width: 1024px)";
 
-  const cssEasing = (name: string, fallback: string) =>
-    getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
-    fallback;
-
   // Click or arrow keys select a tab; the selected tab's panel (and, on
   // phones, its caption) shows. Autoplay selects the tabs in turn and plays
   // the videos; videos in other panels never load.
   function initTabs() {
     const reducedMotion = prefersReducedMotion();
     const listLayout = matchMedia(LIST_LAYOUT);
-    const ease = {
-      smooth: cssEasing("--ease-smooth", "ease-in-out"),
-      enter: cssEasing("--ease-enter", "ease-out"),
-    };
+    const enter = cssEasing("--ease-enter", "ease-out");
 
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="tabs"]')
@@ -257,63 +240,24 @@ const label = chapterName + " features";
           easing: string,
         ) => element?.animate(keyframes, { duration, easing });
 
-        // Only these animations run on the panels and their media; the
-        // focus zoom is a transition on the image inside.
-        const cancelAnimations = (element: Element | null | undefined) =>
-          element?.getAnimations().forEach((animation) => animation.cancel());
-
-        // Plays the change from one panel to the next. `direction` is 1
-        // going forward and -1 going back; `offset` is where a swipe left
-        // the old media, which then moves on sideways.
+        // Going forward, the media moves the way the tabs read: left along
+        // the row, and up along the list from lg. A swipe moves it sideways
+        // from where the finger left it.
         const swap = (
           from: number,
           to: number,
           direction: number,
           offset: number,
         ) => {
-          [panels[from], panels[to], media[from], media[to]].forEach(
-            cancelAnimations,
-          );
           if (reducedMotion) return;
-
-          const shift = SWAP.distance * direction;
-          const down = listLayout.matches && offset === 0;
-          const at = (px: number) => (down ? `0 ${px}px` : `${px}px 0`);
-          const blur = `blur(${SWAP.blur}px)`;
-          // The old panel is already inert, and so hidden; it stays visible
-          // while it fades.
-          animate(
-            panels[from],
-            [
-              { opacity: 1, visibility: "visible" },
-              { opacity: 0, visibility: "visible" },
-            ],
-            SWAP.outMs,
-            ease.smooth,
-          );
-          animate(
-            media[from],
-            [
-              { translate: at(offset), filter: "blur(0)" },
-              { translate: at(offset - shift), filter: blur },
-            ],
-            SWAP.outMs,
-            ease.smooth,
-          );
-          animate(
-            panels[to],
-            [{ opacity: 0 }, { opacity: 1 }],
-            SWAP.inMs,
-            ease.enter,
-          );
-          animate(
-            media[to],
-            [
-              { translate: at(shift), filter: blur },
-              { translate: "0 0", filter: "blur(0)" },
-            ],
-            SWAP.inMs,
-            ease.enter,
+          swapPanels(
+            { panel: panels[from], media: media[from] },
+            { panel: panels[to], media: media[to] },
+            {
+              axis: listLayout.matches && offset === 0 ? "y" : "x",
+              direction,
+              offset,
+            },
           );
         };
 
@@ -329,7 +273,7 @@ const label = chapterName + " features";
               { opacity: 1, translate: "0 0" },
             ],
             SWAP.inMs,
-            ease.enter,
+            enter,
           );
         };
 
@@ -408,7 +352,7 @@ const label = chapterName + " features";
             media[current],
             [{ translate: `${moved}px 0` }, { translate: "0 0" }],
             SWAP.outMs,
-            ease.enter,
+            enter,
           );
         };
 
