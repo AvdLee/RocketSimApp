@@ -9,16 +9,20 @@ const easeOut = (t: number) => 1 - (1 - t) ** 4;
 // Figures marked `data-count-up` count up from zero the first time they
 // come into view. The markup keeps the real figure, so without the script,
 // or with reduced motion, it simply shows. Returns what stops it when the
-// page is left.
+// page is left: figures still waiting stay as they are, and those mid-count
+// settle on their figure.
 export function initCountUps(): () => void {
   if (prefersReducedMotion()) return () => {};
+
+  // What ends each count-up still running.
+  const active = new Set<() => void>();
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(({ isIntersecting, target }) => {
         if (!isIntersecting || !(target instanceof HTMLElement)) return;
         observer.unobserve(target);
-        countUp(target);
+        countUp(target, active);
       });
     },
     { threshold: 1 },
@@ -32,10 +36,15 @@ export function initCountUps(): () => void {
       observer.observe(element);
     });
 
-  return () => observer.disconnect();
+  return () => {
+    observer.disconnect();
+    active.forEach((finish) => finish());
+  };
 }
 
-function countUp(element: HTMLElement) {
+// Counts `element` up to its figure. While it counts, `active` holds what
+// ends it early, landing it on the figure at once.
+function countUp(element: HTMLElement, active: Set<() => void>) {
   const text = element.textContent ?? "";
   const figure = parseFigure(text.trim());
   if (!figure) return;
@@ -46,15 +55,27 @@ function countUp(element: HTMLElement) {
   element.style.minWidth = `${element.getBoundingClientRect().width}px`;
 
   const start = performance.now();
+  let frame = 0;
+  const land = () => {
+    frame = 0;
+    element.textContent = text;
+    active.delete(finish);
+  };
+  const finish = () => {
+    if (!frame) return;
+    cancelAnimationFrame(frame);
+    land();
+  };
   const step = (now: number) => {
     const progress = Math.min(1, (now - start) / DURATION_MS);
-    element.textContent = figureAt(figure, easeOut(progress));
     if (progress < 1) {
-      requestAnimationFrame(step);
+      element.textContent = figureAt(figure, easeOut(progress));
+      frame = requestAnimationFrame(step);
     } else {
-      element.textContent = text;
+      land();
     }
   };
   element.textContent = figureAt(figure, 0);
-  requestAnimationFrame(step);
+  frame = requestAnimationFrame(step);
+  active.add(finish);
 }
