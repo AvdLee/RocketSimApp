@@ -33,6 +33,14 @@ const currentClass =
   "aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
 ---
 
+<!-- Marks the top of the page: once it scrolls out of view, the header
+     turns into a glass bar (the script below). -->
+<div
+  class="pointer-events-none absolute top-0 size-px"
+  aria-hidden="true"
+  data-page-top
+>
+</div>
 <header
   class="home-header sticky top-0 z-30 border-b border-transparent transition-[background-color,border-color] duration-300 data-scrolled:border-border data-scrolled:bg-body/30 data-scrolled:backdrop-blur-lg motion-reduce:transition-none has-[[aria-expanded=true]]:bg-body"
   data-home-header
@@ -228,16 +236,20 @@ const currentClass =
 </header>
 
 <script>
-  import { chapterMenuState } from "@/lib/utils/chapterMenu";
+  import { chapterMenuState, READING_LINE } from "@/lib/utils/chapterMenu";
 
-  // Removes the previous page's window listeners on client-side navigation.
+  // Lets go of the previous page's observers and listeners on client-side
+  // navigation.
+  let observers: { disconnect(): void }[] = [];
   let listeners: AbortController | undefined;
 
   document.addEventListener("astro:page-load", () => {
+    observers.forEach((observer) => observer.disconnect());
+    observers = [];
     listeners?.abort();
+    listeners = new AbortController();
     const header = document.querySelector<HTMLElement>("[data-home-header]");
     if (!header) return;
-    listeners = new AbortController();
 
     const toggles = [
       ...header.querySelectorAll<HTMLButtonElement>("[data-header-toggle]"),
@@ -276,6 +288,40 @@ const currentClass =
       toggle.focus();
     });
 
+    // Everything below follows the scroll through IntersectionObservers,
+    // which only report when something crosses a line. A scroll handler
+    // measuring the page on every frame kept the main thread busy
+    // throughout the scroll, and the page runs at 120Hz.
+    //
+    // Each observer watches a region that reaches from far above the page
+    // down to its line, so whether a section is in the region says on its
+    // own whether it has come up to the line, and a jump that skips the line
+    // (an anchor with reduced motion, or back to the top) can't leave a
+    // stale answer behind: the section is in the region or it isn't.
+    const FAR_ABOVE = "10000%";
+    const observe = (
+      targets: Element[],
+      options: IntersectionObserverInit,
+      onEntry: (entry: IntersectionObserverEntry) => void,
+    ) => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(onEntry);
+        apply();
+      }, options);
+      targets.forEach((target) => observer.observe(target));
+      observers.push(observer);
+      return observer;
+    };
+
+    // Clear over the hero at the top of the page; a glass bar once the
+    // page scrolls under it.
+    const top = document.querySelector("[data-page-top]");
+    if (top) {
+      observe([top], {}, ({ isIntersecting }) => {
+        header.toggleAttribute("data-scrolled", !isIntersecting);
+      });
+    }
+
     // Past the glance grid the chapter layer replaces the main layer, and
     // the chapter being read is highlighted in its menus.
     const glance = document.getElementById("glance");
@@ -293,21 +339,16 @@ const currentClass =
     );
     if (!glance || !mainLayer || !chapterLayer) return;
 
+    let pastGlance = false;
+    const reached = new Map<string, boolean>();
     let showsChapterMenu = false;
     let current: string | undefined;
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      // Clear over the hero at the top of the page; a glass bar once the
-      // page scrolls under it.
-      header.toggleAttribute("data-scrolled", window.scrollY > 1);
+    const apply = () => {
       const state = chapterMenuState({
-        headerBottom: header.getBoundingClientRect().bottom,
-        glanceBottom: glance.getBoundingClientRect().bottom,
-        viewportHeight: window.innerHeight,
+        pastGlance,
         chapters: sections.map((section) => ({
           id: section.id,
-          top: section.getBoundingClientRect().top,
+          reached: reached.get(section.id) ?? false,
         })),
       });
 
@@ -328,13 +369,36 @@ const currentClass =
         });
       }
     };
-    const schedule = () => {
-      frame ||= requestAnimationFrame(update);
-    };
 
-    const { signal } = listeners;
-    window.addEventListener("scroll", schedule, { passive: true, signal });
-    window.addEventListener("resize", schedule, { signal });
-    update();
+    // A chapter has reached the reading line once its top is above it.
+    observe(
+      sections,
+      { rootMargin: `${FAR_ABOVE} 0px -${(1 - READING_LINE) * 100}% 0px` },
+      ({ target, isIntersecting }) => reached.set(target.id, isIntersecting),
+    );
+
+    // The glance grid has scrolled under the header once all of it is above
+    // the header's bottom edge. That edge moves with the window's height
+    // and the header's breakpoints, so the observer follows both.
+    let glanceObserver: IntersectionObserver | undefined;
+    const watchGlance = () => {
+      glanceObserver?.disconnect();
+      glanceObserver = observe(
+        [glance],
+        {
+          rootMargin: `${FAR_ABOVE} 0px -${window.innerHeight - header.offsetHeight}px 0px`,
+          threshold: 1,
+        },
+        ({ intersectionRatio }) => {
+          pastGlance = intersectionRatio >= 1;
+        },
+      );
+    };
+    const resized = new ResizeObserver(watchGlance);
+    resized.observe(header);
+    observers.push(resized);
+    window.addEventListener("resize", watchGlance, {
+      signal: listeners.signal,
+    });
   });
 </script>
