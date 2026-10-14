@@ -488,7 +488,7 @@ test("homepage scroll-linked effects stay off the main thread", () => {
   assert.deepEqual(keyframes("reveal"), ["translate"]);
   assert.deepEqual(keyframes("light-up"), ["translate"]);
   assert.deepEqual(keyframes("light-up-text"), ["translate"]);
-  for (const name of ["settle", "recede", "draw", "slide-in"]) {
+  for (const name of ["settle", "recede", "draw", "draw-down", "slide-in"]) {
     for (const property of keyframes(name)) {
       assert.match(
         property,
