@@ -218,19 +218,25 @@ const { seo, structuredData, header = "site" } = Astro.props;
       import AOS from "aos";
       import "aos/dist/aos.css";
 
-      let scrollRef = 0;
-
-      // Fix `not animating although in viewport` issue
-      window.addEventListener("scroll", function () {
-        scrollRef <= 10 ? scrollRef++ : AOS.refresh();
-      });
-
       function aosInit() {
         AOS.init({
           duration: 600,
           offset: 100,
           once: true,
         });
+      }
+
+      // AOS measures where each element sits once, at init. Content that
+      // lands later, such as lazy embeds and images without reserved space,
+      // moves everything below it, and elements already in view would never
+      // animate. Measuring again whenever the page's height changes keeps
+      // the positions current; doing it on every scroll event, as before,
+      // forced a layout of the whole page mid-scroll.
+      let pageHeightObserver: ResizeObserver | undefined;
+      function refreshAosOnPageGrowth() {
+        pageHeightObserver?.disconnect();
+        pageHeightObserver = new ResizeObserver(() => AOS.refresh());
+        pageHeightObserver.observe(document.body);
       }
 
       // The ClientRouter parses the next page inside a detached document and
@@ -261,6 +267,7 @@ const { seo, structuredData, header = "site" } = Astro.props;
         stickyNavInit();
         shyNavLogoInit();
         aosInit();
+        refreshAosOnPageGrowth();
       });
 
       document.addEventListener("astro:after-swap", () => {
