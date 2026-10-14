@@ -1,6 +1,7 @@
 ---
 import { getHomepageChapter } from "@/lib/homepage";
 
+import ArrowLink from "./ArrowLink.astro";
 import CloserLook from "./presentations/CloserLook.astro";
 import Gallery from "./presentations/Gallery.astro";
 import Tabs from "./presentations/Tabs.astro";
@@ -77,12 +78,7 @@ if (aside && presentation !== "tabs") {
     links.length > 0 && (
       <div class="mt-12 flex flex-wrap gap-[22px]" data-reveal>
         {links.map((link) => (
-          <a
-            href={link.href}
-            class="text-copy text-primary no-underline hover:underline"
-          >
-            {link.label} <span aria-hidden="true">→</span>
-          </a>
+          <ArrowLink href={link.href}>{link.label}</ArrowLink>
         ))}
       </div>
     )
@@ -99,6 +95,7 @@ if (aside && presentation !== "tabs") {
 
 <script>
   import { fitFontSize } from "@/lib/utils/fitFontSize";
+  import { onPage } from "@/lib/utils/pageLifecycle";
 
   // Between the phone layout's stacked title and the type scale's largest
   // title-1 (src/styles/main.css).
@@ -127,13 +124,10 @@ if (aside && presentation !== "tabs") {
     title.style.fontSize = `${size}px`;
   }
 
-  let observer: ResizeObserver | undefined;
-
   // The intro's height follows the column width, so a resize that rewraps
   // it refits the title. The title's size never feeds back into the intro.
-  function initTitleFit() {
-    observer?.disconnect();
-    observer = new ResizeObserver((entries) => {
+  onPage(() => {
+    const observer = new ResizeObserver((entries) => {
       entries.forEach(({ target }) => {
         const heading = target.closest<HTMLElement>("[data-chapter-heading]");
         if (heading) fitTitle(heading);
@@ -141,8 +135,7 @@ if (aside && presentation !== "tabs") {
     });
     document
       .querySelectorAll<HTMLElement>("[data-chapter-intro]")
-      .forEach((intro) => observer?.observe(intro));
-  }
-
-  document.addEventListener("astro:page-load", initTitleFit);
+      .forEach((intro) => observer.observe(intro));
+    return () => observer.disconnect();
+  });
 </script>

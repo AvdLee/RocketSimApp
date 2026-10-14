@@ -160,13 +160,6 @@ main:has([data-chapter]) {
   --default-transition-timing-function: var(--ease-smooth);
 }
 
-@keyframes disclose {
-  from {
-    opacity: 0;
-    translate: 0 -4px;
-  }
-}
-
 /* The hero's entrance as the page loads: each `data-hero-item` rises out of
    a soft blur, one after another by `--hero-order`. */
 @keyframes hero-in {

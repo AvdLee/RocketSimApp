@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-import { getHomepageChapter } from "@/lib/homepage";
+import { getHomepageChapterSummary } from "@/lib/homepage";
 
 interface Props {
   // Tile order; matches the order of the `<Chapter>` lines on the page.
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const chapters = await Promise.all(
-  Astro.props.chapters.map((id) => getHomepageChapter(id)),
+  Astro.props.chapters.map((id) => getHomepageChapterSummary(id)),
 );
 ---
 

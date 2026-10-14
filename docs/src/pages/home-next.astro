@@ -104,10 +104,11 @@ const seo = {
 
 <script>
   import { initCountUps } from "@/lib/utils/countUp";
+  import { onPage } from "@/lib/utils/pageLifecycle";
   import { initReveals } from "@/lib/utils/reveal";
 
-  document.addEventListener("astro:page-load", () => {
-    initReveals();
-    initCountUps();
+  onPage(() => {
+    const stops = [initReveals(), initCountUps()];
+    return () => stops.forEach((stop) => stop());
   });
 </script>

@@ -8,9 +8,10 @@ const easeOut = (t: number) => 1 - (1 - t) ** 4;
 
 // Figures marked `data-count-up` count up from zero the first time they
 // come into view. The markup keeps the real figure, so without the script,
-// or with reduced motion, it simply shows.
-export function initCountUps(): void {
-  if (prefersReducedMotion()) return;
+// or with reduced motion, it simply shows. Returns what stops it when the
+// page is left.
+export function initCountUps(): () => void {
+  if (prefersReducedMotion()) return () => {};
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -30,6 +31,8 @@ export function initCountUps(): void {
       if (element.getBoundingClientRect().top < window.innerHeight) return;
       observer.observe(element);
     });
+
+  return () => observer.disconnect();
 }
 
 function countUp(element: HTMLElement) {
