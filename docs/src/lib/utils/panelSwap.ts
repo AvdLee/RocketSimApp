@@ -24,6 +24,10 @@ interface SwapOptions {
   direction: number;
   // Where a swipe left the old media, which then moves on from there.
   offset?: number;
+  // One duration and easing for the whole change, to keep it in step with
+  // other motion. Without it, the old media leaves faster than the new
+  // media comes in.
+  timing?: { duration: number; easing: string };
 }
 
 export function cssEasing(name: string, fallback: string): string {
@@ -44,12 +48,18 @@ function cancelAnimations(element: Element | null | undefined) {
 export function swapPanels(
   from: SwapPanel,
   to: SwapPanel,
-  { axis, direction, offset = 0 }: SwapOptions,
+  { axis, direction, offset = 0, timing }: SwapOptions,
 ): void {
   [from.panel, to.panel, from.media, to.media].forEach(cancelAnimations);
 
-  const smooth = cssEasing("--ease-smooth", "ease-in-out");
-  const enter = cssEasing("--ease-enter", "ease-out");
+  const out = timing ?? {
+    duration: SWAP.outMs,
+    easing: cssEasing("--ease-smooth", "ease-in-out"),
+  };
+  const enter = timing ?? {
+    duration: SWAP.inMs,
+    easing: cssEasing("--ease-enter", "ease-out"),
+  };
   const shift = SWAP.distance * direction;
   const at = (px: number) => (axis === "y" ? `0 ${px}px` : `${px}px 0`);
   const blur = `blur(${SWAP.blur}px)`;
@@ -60,24 +70,21 @@ export function swapPanels(
       { opacity: 1, visibility: "visible" },
       { opacity: 0, visibility: "visible" },
     ],
-    { duration: SWAP.outMs, easing: smooth },
+    out,
   );
   from.media?.animate(
     [
       { translate: at(offset), filter: "blur(0)" },
       { translate: at(offset - shift), filter: blur },
     ],
-    { duration: SWAP.outMs, easing: smooth },
+    out,
   );
-  to.panel?.animate([{ opacity: 0 }, { opacity: 1 }], {
-    duration: SWAP.inMs,
-    easing: enter,
-  });
+  to.panel?.animate([{ opacity: 0 }, { opacity: 1 }], enter);
   to.media?.animate(
     [
       { translate: at(shift), filter: blur },
       { translate: "0 0", filter: "blur(0)" },
     ],
-    { duration: SWAP.inMs, easing: enter },
+    enter,
   );
 }

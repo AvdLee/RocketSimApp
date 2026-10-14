@@ -49,7 +49,7 @@ const { id, chapterName, items } = Astro.props;
                 aria-hidden="true"
               />
               <span
-                class="relative w-4 flex-none text-center text-intro leading-none text-muted transition-transform duration-500 ease-smooth group-aria-expanded:rotate-90 group-aria-expanded:text-white motion-reduce:transition-none"
+                class="relative w-4 flex-none text-center text-intro leading-none text-muted transition-transform duration-750 ease-enter group-aria-expanded:rotate-90 group-aria-expanded:text-white motion-reduce:transition-none"
                 aria-hidden="true"
               >
                 ›
@@ -107,12 +107,8 @@ const { id, chapterName, items } = Astro.props;
 <script>
   import { loadVideo } from "@/lib/utils/lazyVideo";
   import { prefersReducedMotion } from "@/lib/utils/motion";
-  import { cssEasing, swapPanels } from "@/lib/utils/panelSwap";
+  import { cssEasing, SWAP, swapPanels } from "@/lib/utils/panelSwap";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
-
-  // How long a description takes to open or close, and the selection to
-  // slide over to its tool.
-  const DISCLOSE_MS = 500;
 
   // One tool is open at a time: its description opens under its button and
   // its media comes in on the stage. Up and down arrows move between tools.
@@ -121,7 +117,13 @@ const { id, chapterName, items } = Astro.props;
   // with controls to start it.
   function initCloserLooks() {
     const reducedMotion = prefersReducedMotion();
-    const smooth = cssEasing("--ease-smooth", "ease-in-out");
+    // The whole change moves as one: the descriptions, the selection and
+    // the media take as long as the new media takes to come in. The
+    // chevron's transition matches (duration-750 ease-enter above).
+    const timing = {
+      duration: SWAP.inMs,
+      easing: cssEasing("--ease-enter", "ease-out"),
+    };
 
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="closer-look"]')
@@ -190,11 +192,7 @@ const { id, chapterName, items } = Astro.props;
               { height: `${to}px`, opacity: open ? 1 : 0 },
             ],
             // A closed description holds shut until it hides.
-            {
-              duration: DISCLOSE_MS,
-              easing: smooth,
-              fill: open ? "none" : "forwards",
-            },
+            { ...timing, fill: open ? "none" : "forwards" },
           );
           if (open) return;
           animation.onfinish = () => {
@@ -228,13 +226,13 @@ const { id, chapterName, items } = Astro.props;
           highlights[previous]?.getAnimations().forEach((a) => a.cancel());
           highlights[index]?.animate(
             [{ translate: `0 ${from - to}px` }, { translate: "0 0" }],
-            { duration: DISCLOSE_MS, easing: smooth },
+            timing,
           );
           // Going down the list, the media moves up.
           swapPanels(
             { panel: frames[previous], media: media[previous] },
             { panel: frames[index], media: media[index] },
-            { axis: "y", direction: Math.sign(index - previous) },
+            { axis: "y", direction: Math.sign(index - previous), timing },
           );
         };
 
