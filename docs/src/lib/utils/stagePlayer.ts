@@ -54,7 +54,9 @@ export function createStagePlayer({
 
   const visibility = new IntersectionObserver(
     ([entry]) => {
-      inView = entry.isIntersecting;
+      // `isIntersecting` holds from the first pixel; only the ratio tells
+      // whether enough of the stage shows.
+      inView = entry.isIntersecting && entry.intersectionRatio >= threshold;
       sync();
       onView?.(inView);
     },
@@ -70,8 +72,12 @@ export function createStagePlayer({
       playing = play;
       sync();
     },
-    // The page is being left: stop watching the stage and playing.
+    // The page is being left: stop watching the stage and playing. The stage
+    // counts as out of view from here, so a video's late failure cannot
+    // start anything up again.
     stop() {
+      inView = false;
+      playing = false;
       visibility.disconnect();
       videos.forEach((video) => video?.pause());
     },
