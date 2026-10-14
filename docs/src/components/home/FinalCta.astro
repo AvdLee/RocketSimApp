@@ -7,6 +7,9 @@ import Button from "./Button.astro";
 // The closing call to action. Its download button is a new `landing-footer`
 // placement of the existing App Store Install event (ANALYTICS.md).
 const downloadHref = appStoreUrl("website-footer");
+// The second line lights up as it scrolls in (animations.css): a copy in
+// the text colour slides in over the muted line, so the line is set twice.
+const lightUp = "Spend more time building your app.";
 ---
 
 <section
@@ -15,8 +18,11 @@ const downloadHref = appStoreUrl("website-footer");
 >
   <h2 id="final-cta-title" class="text-title-1 text-balance" data-reveal>
     Spend less time operating the Simulator.<br />
-    <!-- Lights up in reading order as it scrolls in (animations.css). -->
-    <span data-light-up>Spend more time building your app.</span>
+    <span data-light-up
+      >{lightUp}<span aria-hidden="true" data-light-up-lit
+        ><span><span>{lightUp}</span></span></span
+      ></span
+    >
   </h2>
   <div
     class="mt-9 flex flex-wrap justify-center gap-3.5"
