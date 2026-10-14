@@ -25,7 +25,7 @@ export function chapterMenuState({ pastGlance, chapters }: ChapterMenuInput): {
   }
 
   // The last chapter to reach the reading line stays current through the
-  // sections after it, such as the reviews or the everyday grid.
+  // sections after it, such as the reviews or the mentions.
   const current = chapters.findLast(({ reached }) => reached)?.id;
   return { showChapterMenu: true, current };
 }
