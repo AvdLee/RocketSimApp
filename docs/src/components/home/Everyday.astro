@@ -1,4 +1,6 @@
 ---
+import ArrowLink from "./ArrowLink.astro";
+
 // The small tools that don't get a chapter.
 const items = [
   {
@@ -73,11 +75,6 @@ const items = [
     }
   </ul>
   <div class="mt-12">
-    <a
-      href="/features/"
-      class="text-copy text-primary no-underline hover:underline"
-    >
-      See all features <span aria-hidden="true">→</span>
-    </a>
+    <ArrowLink href="/features/">See all features</ArrowLink>
   </div>
 </section>

@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+// The homepage's pill buttons: filled in the primary colour, or outlined in
+// it. A link with `href`; a button without one. Analytics classes, IDs and
+// `target` pass straight through.
+interface Props extends HTMLAttributes<"a"> {
+  variant?: "primary" | "secondary";
+}
+
+const { variant = "primary", href, class: className, ...rest } = Astro.props;
+
+const variants = {
+  primary: "bg-primary text-white hover:bg-primary-hover",
+  secondary: "text-primary inset-ring inset-ring-primary hover:bg-primary/12",
+};
+const classes = [
+  "inline-flex cursor-pointer rounded-full px-5 py-2.5 font-medium no-underline transition-colors",
+  variants[variant],
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button
+      type="button"
+      class:list={classes}
+      {...(rest as HTMLAttributes<"button">)}
+    >
+      <slot />
+    </button>
+  )
+}

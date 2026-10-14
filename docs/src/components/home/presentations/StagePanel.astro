@@ -1,0 +1,41 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import type { HomepageItem } from "@/lib/homepageItems";
+
+import InsetMedia from "../InsetMedia.astro";
+import MediaBackdrop from "../MediaBackdrop.astro";
+
+// One item on a presentation's stage, in the tabs and the closer look. A
+// blurred copy of the media fills the panel, and the media sits inset on its
+// own colours. The panel hides while it is `inert`; the media (`data-panel-
+// media`) moves and blurs as the panels change (src/lib/utils/panelSwap.ts).
+// An image with a focus zooms in on it while the panel shows, inside its own
+// rounded frame (src/styles/animations.css).
+interface Props extends HTMLAttributes<"div"> {
+  item: HomepageItem;
+  sizes: string;
+  // The media frame's padding (InsetMedia.astro).
+  inset: string;
+}
+
+const { item, sizes, inset, class: className, ...rest } = Astro.props;
+---
+
+<div
+  data-panel
+  class:list={["absolute inset-0 inert:invisible inert:opacity-0", className]}
+  {...rest}
+>
+  <MediaBackdrop media={item.media} cover />
+  <div
+    class="absolute inset-0"
+    data-panel-media
+    data-focus={item.focus ? "" : undefined}
+    data-focus-x={item.focus?.x}
+    data-focus-y={item.focus?.y}
+    data-focus-zoom={item.focus?.zoom}
+  >
+    <InsetMedia media={item.media} sizes={sizes} inset={inset} />
+  </div>
+</div>

@@ -1,10 +1,9 @@
 ---
-import { Image } from "astro:assets";
-
-import config from "@/config/config.json";
 import menu from "@/config/menu.json";
-import logo from "@/assets/rocketsim-logo.svg";
-import { getHomepageChapter } from "@/lib/homepage";
+import { getHomepageChapterSummary } from "@/lib/homepage";
+
+import HeaderDownload from "./HeaderDownload.astro";
+import HeaderLogo from "./HeaderLogo.astro";
 
 interface Props {
   // Chapter menu order; the same array orders the glance tiles.
@@ -12,14 +11,13 @@ interface Props {
 }
 
 const chapters = (
-  await Promise.all(Astro.props.chapters.map((id) => getHomepageChapter(id)))
+  await Promise.all(
+    Astro.props.chapters.map((id) => getHomepageChapterSummary(id)),
+  )
 ).map(({ id, name, menuLabel }) => ({ id, label: menuLabel ?? name }));
 
-const [download] = config.navigation_buttons;
-const downloadClass = [
-  "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-small leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0",
-  download.class,
-];
+const downloadClass =
+  "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-small leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0";
 const barLinkClass =
   "block py-3 whitespace-nowrap text-white no-underline opacity-80 transition-opacity hover:opacity-100";
 const panelLinkClass =
@@ -54,13 +52,7 @@ const currentClass =
         class:list={[layerClass, "inert:-translate-y-full"]}
         data-header-layer="main"
       >
-        <a
-          href="/"
-          class="inline-flex no-underline"
-          aria-label="RocketSim home"
-        >
-          <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
-        </a>
+        <HeaderLogo />
         <nav aria-label="Main" class="ml-auto hidden lg:block">
           <ul class="flex items-center gap-[34px] text-small">
             {
@@ -74,14 +66,7 @@ const currentClass =
             }
           </ul>
         </nav>
-        <a
-          href={download.link}
-          class:list={downloadClass}
-          target="_blank"
-          rel="noopener"
-        >
-          {download.label}
-        </a>
+        <HeaderDownload class={downloadClass} />
         <button
           type="button"
           class="group ml-auto p-1.5 text-white md:ml-4 lg:hidden"
@@ -115,13 +100,7 @@ const currentClass =
         data-header-layer="chapters"
         inert
       >
-        <a
-          href="/"
-          class="inline-flex no-underline"
-          aria-label="RocketSim home"
-        >
-          <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
-        </a>
+        <HeaderLogo />
         <span
           class="-mx-3 hidden h-5 w-px bg-border lg:block"
           aria-hidden="true"></span>
@@ -167,14 +146,7 @@ const currentClass =
             }
           </ul>
         </nav>
-        <a
-          href={download.link}
-          class:list={downloadClass}
-          target="_blank"
-          rel="noopener"
-        >
-          {download.label}
-        </a>
+        <HeaderDownload class={downloadClass} />
       </div>
     </div>
 
@@ -190,17 +162,9 @@ const currentClass =
           ))
         }
         <li class="md:hidden">
-          <a
-            href={download.link}
-            class:list={[
-              "mx-5 mt-2 mb-1 inline-flex rounded-full bg-primary px-9 py-3.5 text-copy text-white no-underline",
-              download.class,
-            ]}
-            target="_blank"
-            rel="noopener"
-          >
-            {download.label}
-          </a>
+          <HeaderDownload
+            class="mx-5 mt-2 mb-1 inline-flex rounded-full bg-primary px-9 py-3.5 text-copy text-white no-underline"
+          />
         </li>
       </ul>
     </div>
@@ -229,15 +193,13 @@ const currentClass =
 
 <script>
   import { chapterMenuState } from "@/lib/utils/chapterMenu";
+  import { onPage } from "@/lib/utils/pageLifecycle";
 
-  // Removes the previous page's window listeners on client-side navigation.
-  let listeners: AbortController | undefined;
-
-  document.addEventListener("astro:page-load", () => {
-    listeners?.abort();
+  onPage(() => {
     const header = document.querySelector<HTMLElement>("[data-home-header]");
     if (!header) return;
-    listeners = new AbortController();
+    // The window listeners below, let go of when the page is left.
+    const listeners = new AbortController();
 
     const toggles = [
       ...header.querySelectorAll<HTMLButtonElement>("[data-header-toggle]"),
@@ -336,5 +298,10 @@ const currentClass =
     window.addEventListener("scroll", schedule, { passive: true, signal });
     window.addEventListener("resize", schedule, { signal });
     update();
+
+    return () => {
+      listeners.abort();
+      cancelAnimationFrame(frame);
+    };
   });
 </script>

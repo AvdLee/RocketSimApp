@@ -6,8 +6,8 @@ import {
   toggle,
   type AutoplayState,
 } from "./autoplayState";
-import { loadVideo } from "./lazyVideo";
 import { prefersReducedMotion } from "./motion";
+import { createStagePlayer } from "./stagePlayer";
 
 // How long an image shows before autoplay moves on. A video shows until it
 // ends.
@@ -38,18 +38,18 @@ interface AutoplayOptions {
 // Plays a homepage tabs or gallery presentation: each item's bar fills as it
 // plays, then the next item shows. It stops after two laps, only runs while
 // the stage is in view, and starts paused for reduced motion, where the
-// current video gets controls to play it by hand. It winds down by itself
-// when a client-side navigation leaves the page.
+// current video gets controls to play it by hand. `stop` winds it down when
+// the page is left.
 export function createAutoplay({
   stage,
   items,
   control,
   show,
-}: AutoplayOptions): { pick: (index: number) => void } {
-  const reducedMotion = prefersReducedMotion();
-  let state: AutoplayState = startAutoplay(items.length, { reducedMotion });
+}: AutoplayOptions): { pick: (index: number) => void; stop: () => void } {
+  let state: AutoplayState = startAutoplay(items.length, {
+    reducedMotion: prefersReducedMotion(),
+  });
   const videos = items.map(({ video }) => video);
-  let inView = false;
   // How long the current image has shown.
   let elapsed = 0;
   let frame = 0;
@@ -60,7 +60,7 @@ export function createAutoplay({
   const name = control.dataset.autoplayName ?? "";
 
   const videoAt = (index: number) => (timed.has(index) ? null : videos[index]);
-  const running = () => state.status === "playing" && inView;
+  const running = () => state.status === "playing" && player.inView();
 
   const progress = () => {
     const video = videoAt(state.index);
@@ -83,33 +83,13 @@ export function createAutoplay({
     control.setAttribute("aria-label", `${verb} ${name}`);
   };
 
-  const syncVideos = () => {
-    videos.forEach((video, index) => {
-      if (!video) return;
-      const current = index === state.index && inView;
-      if (!current || !running() || timed.has(index)) {
-        video.pause();
-        if (current && reducedMotion) {
-          loadVideo(video);
-          video.controls = true;
-        }
-        return;
-      }
-      loadVideo(video);
-      video.play().catch((error: unknown) => {
-        // A pause interrupted the start; nothing went wrong.
-        if (error instanceof DOMException && error.name === "AbortError") {
-          return;
-        }
-        runOnClock(index);
-      });
-    });
-  };
+  // The current item's video plays while autoplay runs.
+  const syncVideos = () =>
+    player.show(state.index, running() && !timed.has(state.index));
 
   const tick = (now: number) => {
     frame = 0;
-    // A client-side navigation removed the presentation.
-    if (!running() || !stage.isConnected) return;
+    if (!running()) return;
     // A video's own playback sets its progress; only images run the clock.
     if (!videoAt(state.index)) {
       elapsed += Math.min(now - last, MAX_FRAME_MS);
@@ -157,6 +137,14 @@ export function createAutoplay({
     refresh();
   }
 
+  const player = createStagePlayer({
+    stage,
+    videos,
+    threshold: 0.5,
+    onView: refresh,
+    onFail: runOnClock,
+  });
+
   videos.forEach((video, index) => {
     if (!video) return;
     // The video's end moves autoplay on, so it must not loop.
@@ -180,28 +168,6 @@ export function createAutoplay({
     refresh();
   });
 
-  const visibility = new IntersectionObserver(
-    ([entry]) => {
-      inView = entry.isIntersecting;
-      refresh();
-    },
-    { threshold: 0.5 },
-  );
-  visibility.observe(stage);
-
-  // A client-side navigation is about to replace the page: stop watching the
-  // stage and playing, so nothing keeps the old page's presentation alive.
-  document.addEventListener(
-    "astro:before-swap",
-    () => {
-      visibility.disconnect();
-      cancelAnimationFrame(frame);
-      frame = 0;
-      videos.forEach((video) => video?.pause());
-    },
-    { once: true },
-  );
-
   syncControl();
   render();
 
@@ -210,6 +176,11 @@ export function createAutoplay({
       state = pick(state, index);
       restartItem();
       refresh();
+    },
+    stop() {
+      player.stop();
+      cancelAnimationFrame(frame);
+      frame = 0;
     },
   };
 }
