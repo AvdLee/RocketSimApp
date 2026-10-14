@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+// A text link that points on with an arrow, such as a chapter's "Explore"
+// links.
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<a
+  class:list={[
+    "text-copy text-primary no-underline hover:underline",
+    className,
+  ]}
+  {...rest}
+>
+  <slot />{" "}
+  <span aria-hidden="true">→</span>
+</a>
