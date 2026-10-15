@@ -211,7 +211,11 @@ Audit the visible Simulator screen for accessibility problems, then validate you
 rocketsim accessibility-audit [--udid <udid>] [--format compact|full] [--no-contrast]
 ```
 
-The response contains a score from 0 to 100, error and warning counts, and findings grouped by rule with the affected element ids, frames, and a suggested fix. Narrow the run with `--rules`, `--exclude-rules`, or `--severity error|warning`. Pass `--screen latest`, or an explicit screen hash from `rocketsim screen`, to guard against auditing a different screen than expected.
+The response contains a score from 0 to 100, error and warning counts, and findings grouped by rule with the affected element ids, frames, and a suggested fix. Narrow the run with `--rules`, `--exclude-rules`, or `--severity error|warning`; an unknown rule ID returns an `invalid_argument` error that lists the valid IDs. Pass `--screen latest`, or an explicit screen hash from `rocketsim screen`, to guard against auditing a different screen than expected. The command waits for the screen to settle (about 2 seconds at most) before auditing.
+
+`data.not_covered` lists checks that were skipped or couldn't be verified, such as `contrast_unverifiable`, `native_control_skipped`, `system_chrome_skipped`, `overlap_scroll_dependent`, and `unsettled_screen`. An entry means the check wasn't judged, not that it passed. With `--format full`, `data.label_review` adds each labeled control, image, and group with its neighboring labels, so your agent can review whether the labels make sense without sight.
+
+The audit can't detect modals such as sheets, covers, popovers, alerts, or SwiftUI `.isModal`. It also audits the content behind them. Treat findings behind a visible modal as out of scope, or dismiss the modal and audit again.
 
 Read [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the rules, the score, and the audit, fix, and validate loop for agents.
 
