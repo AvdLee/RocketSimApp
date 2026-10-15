@@ -64,7 +64,7 @@ The current skill teaches agents to start with a compact `nav` or `act` screen r
 
 Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the command's `context.preview_url`, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
 
-For accessibility work, the skill points agents to a dedicated reference for fixing audit findings without changing your layout. The agent saves the element frames before the fix, rebuilds, and compares them afterwards so only the intended elements change. It then runs `rocketsim accessibility-audit` again to confirm the findings are gone.
+For accessibility work, the skill points agents to a dedicated reference for fixing audit findings without changing your layout. The agent saves the element frames before the fix, rebuilds, and compares them afterwards so only the intended elements change. It then runs `rocketsim accessibility-audit` again to confirm the findings are gone. The skill also tells the agent to read `data.not_covered` as unchecked areas rather than passes, to review `data.label_review` for label meaning and localization, and to treat findings behind a visible modal as out of scope or dismiss the modal and audit again.
 
 The agent should run `rocketsim doctor` only when setup appears broken: the CLI cannot connect, no Simulator can be found, or perception and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or `rocketsim elements --agent`.
 
