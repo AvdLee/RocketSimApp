@@ -1,3 +1,14 @@
+# 16.7.1
+
+**Fixed:**
+
+- Exported recordings at 85 FPS or higher, such as 120 FPS iPhone Duo recordings, no longer open as slow motion in QuickTime Player and Photos. These exports are now saved as QuickTime movies, still named `.mp4`, that are marked to play at full speed. Trimming a recording and adding an end card keep this marking.
+- Fixed a crash when the Become Pro screen reacted to an email subscription finishing in the background.
+- Fixed RocketSim reporting a port conflict over and over when another process, such as a second RocketSim, already uses the Connect port.
+- Fixed repeated errors when RocketSim kept looking for a Simulator that no longer exists, for example after it was deleted or Xcode was updated.
+- Fixed errors reported when Xcode or its CoreSimulator was updated while RocketSim stayed open. Restart RocketSim to pick up the new Xcode.
+- iPhone Duo: a missing 3D model in the selected Xcode is no longer reported as an error, and a failed Duo conversion now shows why it failed and suggests recording again.
+
 # 16.7.0 (337)
 
 **New:**
