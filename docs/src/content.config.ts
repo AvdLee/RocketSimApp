@@ -127,6 +127,10 @@ const homepageChapter = defineCollection({
                 zoom: z.number().min(1).max(3).default(1.5),
               })
               .optional(),
+            // Fills the stage edge to edge instead of insetting the media
+            // on its own backdrop. For a 16:9 capture that already has its
+            // own backdrop, such as a Simulator screenshot on a wallpaper.
+            bleed: z.boolean().optional(),
           }),
         )
         .min(1),

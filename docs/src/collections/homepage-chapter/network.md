@@ -11,6 +11,11 @@ items:
   - feature: 01-network-monitoring
     title: "Live inspector"
     description: "JSON, headers, metrics, and app logs in one place."
+    media:
+      type: image
+      path: ../../assets/homepage/side-window-networking.png
+      alt: "The Networking tab listing live Stock Analyzer requests next to the Simulator in Device Hub"
+    bleed: true
   - feature: 01-network-monitoring
     title: "Copy as cURL"
     description: "Replay any request from your terminal."

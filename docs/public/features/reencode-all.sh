@@ -11,6 +11,10 @@
 #   - moves the moov atom to the front (+faststart) for progressive streaming
 #   - exports the first frame to ./posters/<name>.webp as a lightweight poster
 #
+# Files named *-60fps keep their frame rate: a pointer sweep or scroll captured
+# at 60fps looks stuttery at 30fps. The Simulator marketing capture script
+# (Scripts/marketing-assets in the RocketSim repo) produces them.
+#
 # .mov sources are converted to .mp4 and the original .mov is removed.
 # Re-encoding is idempotent enough to re-run; outputs replace the originals.
 
@@ -41,9 +45,15 @@ for file in "$INPUT_DIR"/*.mp4 "$INPUT_DIR"/*.mov; do
 
   echo "Optimizing $filename → $(basename "$output")"
 
+  # Cap at 30fps, except for files that are named to keep their frame rate.
+  frame_rate_args=(-r 30)
+  if [[ "$name" == *-60fps ]]; then
+    frame_rate_args=()
+  fi
+
   ffmpeg -y -i "$file" \
     -vf "$SCALE_FILTER" \
-    -r 30 \
+    ${frame_rate_args[@]+"${frame_rate_args[@]}"} \
     -c:v libx264 -profile:v high -pix_fmt yuv420p -crf "$CRF" \
     -movflags +faststart \
     -an \

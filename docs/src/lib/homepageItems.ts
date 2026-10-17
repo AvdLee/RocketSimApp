@@ -25,6 +25,7 @@ interface ChapterItemInput {
   description?: string;
   media?: MediaInput;
   focus?: MediaFocus;
+  bleed?: boolean;
 }
 
 export type HomepageMedia =
@@ -37,6 +38,8 @@ export interface HomepageItem {
   media: HomepageMedia;
   // Only on images.
   focus?: MediaFocus;
+  // The media fills the stage edge to edge instead of sitting inset on a backdrop.
+  bleed?: boolean;
 }
 
 // Posters sit next to the videos, in `posters/<name>.webp` (see
@@ -100,6 +103,7 @@ export function resolveChapterItems(
       description,
       media: toMedia(media),
       ...(item.focus && { focus: item.focus }),
+      ...(item.bleed && { bleed: true }),
     };
   });
 }

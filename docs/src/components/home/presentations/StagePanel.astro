@@ -15,7 +15,7 @@ import MediaBackdrop from "../MediaBackdrop.astro";
 interface Props extends HTMLAttributes<"div"> {
   item: HomepageItem;
   sizes: string;
-  // The media frame's padding (InsetMedia.astro).
+  // The media frame's padding (InsetMedia.astro). An item that bleeds has none.
   inset: string;
 }
 
@@ -36,6 +36,10 @@ const { item, sizes, inset, class: className, ...rest } = Astro.props;
     data-focus-y={item.focus?.y}
     data-focus-zoom={item.focus?.zoom}
   >
-    <InsetMedia media={item.media} sizes={sizes} inset={inset} />
+    <InsetMedia
+      media={item.media}
+      sizes={sizes}
+      inset={item.bleed ? "" : inset}
+    />
   </div>
 </div>
