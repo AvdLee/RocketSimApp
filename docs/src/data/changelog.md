@@ -1,7 +1,13 @@
 # 16.7.1
 
+**Improved:**
+
+- When RocketSim cannot find the selected Simulator for accessibility features, the Accessibility tabs now say so and suggest restarting the Simulator and RocketSim, instead of showing "SimulatorControl error 4". Diagnostics reports now also record what RocketSim's Simulator list contained at that moment, so we can find out why a Simulator is missing. (Thanks, C. Jacobsson!)
+
 **Fixed:**
 
+- The "disabled while Device Hub is in expanded mode" message on the Comparing and VoiceOver Navigator panels is white again in light mode instead of unreadable black.
+- CLI: `rocketsim screenshot --bezel device` and `rocketsim video record --bezel device` now always apply a real-device bezel, including for iPhone 18 Pro, iPhone 18 Pro Max, and iPad Pro 13-inch (M5). Before, they silently returned a bare screen unless you had picked a bezel for that device in RocketSim first, and `--frame-color` had no effect. An explicit `--bezel device` now uses your saved bezel color or the first bundled one, and fails with an `unsupported_target` error for devices without a bundled bezel. (Thanks, P. van den Hamer!)
 - Exported recordings at 85 FPS or higher, such as 120 FPS iPhone Duo recordings, no longer open as slow motion in QuickTime Player and Photos. These exports are now saved as QuickTime movies, still named `.mp4`, that are marked to play at full speed. Trimming a recording and adding an end card keep this marking.
 - Fixed a crash when the Become Pro screen reacted to an email subscription finishing in the background.
 - Fixed RocketSim reporting a port conflict over and over when another process, such as a second RocketSim, already uses the Connect port.
@@ -36,6 +42,12 @@
 - CLI: commands that take `--udid` (such as `screen`, `elements`, `interact`, `screenshot`, and `duo`) now find a Simulator that was cloned and booted with `xcrun simctl`, without opening it in Simulator.app. RocketSim refreshes its device list from CoreSimulator when it doesn't know the UDID as booted, instead of waiting for a Simulator window. The `simulator_not_found` error now also explains how to check the UDID with `xcrun simctl list devices` and when to retry.
 - Fixed a rare crash when several CLI commands or overlays read accessibility information from multiple Simulators at the same time, for example while running parallel `rocketsim elements` or `rocketsim wait` commands.
 - iPad Pro and iPad mini in Device Hub no longer report that Device Hub is in expanded mode, so Comparing, Touches, and VoiceOver Navigator work again.
+
+# 16.7.1 (338)
+
+**Fixed:**
+
+- Fixed iPhone Duo screenshots failing with "Capturing screenshot failed" after CoreSimulator restarted while RocketSim was running. RocketSim now reconnects to the Simulator and retries once.
 
 # 16.6.0 (336)
 
