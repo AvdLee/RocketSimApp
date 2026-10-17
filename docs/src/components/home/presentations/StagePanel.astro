@@ -15,11 +15,23 @@ import MediaBackdrop from "../MediaBackdrop.astro";
 interface Props extends HTMLAttributes<"div"> {
   item: HomepageItem;
   sizes: string;
-  // The media frame's padding (InsetMedia.astro). An item that bleeds has none.
+  // The media frame's padding (InsetMedia.astro). An item that bleeds has none,
+  // and its media fills the panel.
   inset: string;
+  // Where an item that bleeds fills the whole panel: always, or only from
+  // the md breakpoint up (InsetMedia.astro).
+  bleedFrom?: "always" | "md";
 }
 
-const { item, sizes, inset, class: className, ...rest } = Astro.props;
+const {
+  item,
+  sizes,
+  inset,
+  bleedFrom = "always",
+  class: className,
+  ...rest
+} = Astro.props;
+const bleedInset = bleedFrom === "md" ? "p-4 md:p-0" : "";
 ---
 
 <div
@@ -39,7 +51,8 @@ const { item, sizes, inset, class: className, ...rest } = Astro.props;
     <InsetMedia
       media={item.media}
       sizes={sizes}
-      inset={item.bleed ? "" : inset}
+      inset={item.bleed ? bleedInset : inset}
+      fill={item.bleed ? bleedFrom : undefined}
     />
   </div>
 </div>
