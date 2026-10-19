@@ -42,6 +42,8 @@ A **Payment failed** banner means we couldn't charge your payment method — usu
 
 Update your details before the expiry date to keep RocketSim for Teams active without interruption.
 
+Seeing an **Invoice overdue** banner instead, or a payment due message in RocketSim? Read [what to do when your payment is due](/docs/support/what-to-do-when-your-payment-is-due/).
+
 ## Add seats, update billing details, or download invoices
 
 The **Manage subscription** card on the Subscription page has two buttons:

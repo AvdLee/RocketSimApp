@@ -27,6 +27,10 @@ Yes, check out [Team Licenses](https://www.rocketsim.app/for-teams/).
 
 Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and go to **Settings → Subscription**. From there, you can re-subscribe after your license expired or was canceled, update a payment method that failed, add seats, and download invoices. The [team subscription guide](/docs/support/managing-your-team-subscription/) walks you through each step.
 
+## RocketSim says my payment is due. What should I do?
+
+If you're a developer, let your team manager know — they're the only ones who can pay. If you're the manager, sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and pay the open invoice. RocketSim keeps working while the message shows, and nothing is deleted if the license is deactivated. The [payment due guide](/docs/support/what-to-do-when-your-payment-is-due/) has a copyable message for your manager and the steps to pay.
+
 ## Can I buy a lifetime license?
 
 No, but you can join SwiftLee Weekly’s referral program to get a lifetime RocketSim license. Just join the newsletter [here](https://swiftlee-weekly.com/?utm_source=rocketsim&utm_medium=referral&utm_campaign=swiftlee_weekly&utm_content=faq_lifetime_license) and follow the instructions in the email.
