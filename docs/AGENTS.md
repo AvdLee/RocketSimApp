@@ -2,6 +2,10 @@
 
 The RocketSim marketing and documentation site is built with Astro and Starlight. Run commands from this `docs/` directory.
 
+## Before you start
+
+Always base your work on the latest default branch. Before editing anything, run `git fetch origin` and update your branch to the latest `origin/master` (for a fresh branch, `git checkout -b <branch> origin/master`; for an existing worktree, `git merge --ff-only origin/master`). Skipping this opens PRs that are already behind master and need a branch update before CI and review can proceed.
+
 ## Task routing
 
 - For site-specific terms such as Post, Title, Page title, and Featured post, read [CONTEXT.md](./CONTEXT.md).
