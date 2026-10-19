@@ -1,6 +1,6 @@
 ---
 title: "What to Do When Your RocketSim Payment Is Due"
-description: "Seeing a payment due message in RocketSim? Learn what it means, what to tell your team manager, and how managers pay an open invoice to keep RocketSim PRO active."
+description: "Seeing a payment due message in RocketSim? Learn what it means, what to tell your team manager, and how managers pay an open invoice to keep RocketSim Pro active."
 sidebar:
   order: 3
   label: "Payment Due"
@@ -36,7 +36,7 @@ Hi,
 RocketSim is showing a "payment due" message. It means our team's RocketSim for
 Teams invoice hasn't been paid yet.
 
-RocketSim still works for now, but if the invoice stays unpaid, RocketSim PRO
+RocketSim still works for now, but if the invoice stays unpaid, RocketSim Pro
 will be switched off for the whole team after the date shown in the app.
 
 Could you (or whoever handles billing) pay the open invoice? The steps are here:
@@ -59,7 +59,7 @@ The deactivation date is close. RocketSim shows the **date the license will be d
 
 ### Deactivated
 
-The payment wasn't received within 30 days, so **RocketSim PRO is switched off for the team**. This is not a cancellation:
+The payment wasn't received within 30 days, so **RocketSim Pro is switched off for the team**. This is not a cancellation:
 
 - Your subscription is **not canceled**.
 - **Nothing is deleted.**
@@ -72,7 +72,7 @@ Developers don't need to enter the license key again or activate their seat agai
 
 ## For team managers: pay the open invoice
 
-Pay the invoice as soon as you can to keep RocketSim PRO active for your team.
+Pay the invoice as soon as you can to keep RocketSim Pro active for your team.
 
 ### Find the unpaid invoice
 
