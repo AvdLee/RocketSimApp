@@ -11,6 +11,11 @@ interface Props {
 
 // Videos stay on their poster until the presentation's script loads and
 // plays them (src/lib/utils/autoplay.ts, CloserLook.astro).
+// `sizes` is the width the media can take inside its frame, inset and all,
+// not the frame's, so a 2x screen picks the variant that fits the media
+// rather than its frame. 1600 covers the widest gallery media (808px) and
+// 1440 the stage media (720px); nothing larger is decoded as the page
+// scrolls.
 const { media, sizes, class: className } = Astro.props;
 ---
 
@@ -19,7 +24,7 @@ const { media, sizes, class: className } = Astro.props;
     <Image
       src={media.src}
       alt={media.alt}
-      widths={[360, 640, 800, 1200, 1600]}
+      widths={[360, 640, 800, 1200, 1440, 1600]}
       sizes={sizes}
       class={className}
     />

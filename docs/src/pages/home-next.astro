@@ -13,7 +13,6 @@ import Brands from "../components/home/Brands.astro";
 import Chapter from "../components/home/Chapter.astro";
 import Reviews from "../components/home/Reviews.astro";
 import SplitCta from "../components/home/SplitCta.astro";
-import Everyday from "../components/home/Everyday.astro";
 import Mentions from "../components/home/Mentions.astro";
 import FinalCta from "../components/home/FinalCta.astro";
 import Newsletter from "../components/home/Newsletter.astro";
@@ -95,7 +94,6 @@ const seo = {
     />
     <TeamCta />
   </Chapter>
-  <Everyday />
   <Mentions />
   <FinalCta />
   <Newsletter />
@@ -104,10 +102,11 @@ const seo = {
 
 <script>
   import { initCountUps } from "@/lib/utils/countUp";
+  import { onPage } from "@/lib/utils/pageLifecycle";
   import { initReveals } from "@/lib/utils/reveal";
 
-  document.addEventListener("astro:page-load", () => {
-    initReveals();
-    initCountUps();
+  onPage(() => {
+    const stops = [initReveals(), initCountUps()];
+    return () => stops.forEach((stop) => stop());
   });
 </script>

@@ -38,7 +38,7 @@ After making a code change, launch the app from Xcode or ask your agent to use y
 
 ### Audit and fix accessibility
 
-Run `rocketsim accessibility-audit` to find missing labels, small tap targets, low contrast, and VoiceOver problems on the current screen. Your agent fixes the findings, rebuilds, and runs the audit again to validate the result. See [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the full workflow.
+Run `rocketsim accessibility-audit` to find missing labels, small tap targets, low contrast, and VoiceOver problems on the current screen. Your agent fixes the findings, rebuilds, and runs the audit again to validate the result. The report lists what it skipped or couldn't verify in `not_covered`, which means that part was not judged. The audit can't detect modals, so findings behind a visible modal are out of scope for the current UI until the modal is dismissed and the screen is audited again. See [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the full workflow.
 
 ### Reproduce bugs in context
 

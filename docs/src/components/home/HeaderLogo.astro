@@ -1,0 +1,11 @@
+---
+import { Image } from "astro:assets";
+
+import logo from "@/assets/rocketsim-logo.svg";
+
+// The wordmark at the start of each of the header's layers, linking home.
+---
+
+<a href="/" class="inline-flex no-underline" aria-label="RocketSim home">
+  <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
+</a>

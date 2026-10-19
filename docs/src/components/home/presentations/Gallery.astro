@@ -14,6 +14,8 @@ interface Props {
 }
 
 const { id, chapterName, items } = Astro.props;
+// The carousel's accessible name, and what the autoplay control plays.
+const label = `${chapterName} highlights`;
 ---
 
 <!-- Full-bleed track; `--edge` lines the first slide up with the chapter text. -->
@@ -21,7 +23,7 @@ const { id, chapterName, items } = Astro.props;
   data-presentation-root="gallery"
   role="region"
   aria-roledescription="carousel"
-  aria-label={`${chapterName} highlights`}
+  aria-label={label}
   class="mx-[calc(50%-50vw)] mt-stack [--edge:max(20px,calc((100vw-1080px)/2))]"
 >
   <div
@@ -64,7 +66,7 @@ const { id, chapterName, items } = Astro.props;
           <div class="relative min-h-0 flex-1 opacity-[calc(1_-_var(--slide-distance)*0.5)]">
             <InsetMedia
               media={item.media}
-              sizes="(min-width: 1048px) 880px, 84vw"
+              sizes="(min-width: 1048px) 808px, (min-width: 540px) calc(84vw - 72px), calc(84vw - 48px)"
               inset="px-6 pb-6 sm:px-9 sm:pb-9"
               class="motion-safe:translate-x-[calc(var(--slide-offset)*-10%)] motion-safe:scale-[calc(1_-_var(--slide-distance)*0.1)]"
             />
@@ -108,12 +110,13 @@ const { id, chapterName, items } = Astro.props;
         ))
       }
     </div>
-    <AutoplayControl name={`${chapterName} highlights`} />
+    <AutoplayControl name={label} />
   </div>
 </div>
 
 <script>
   import { createAutoplay } from "@/lib/utils/autoplay";
+  import { onPage } from "@/lib/utils/pageLifecycle";
   import { slidePosition } from "@/lib/utils/presentationIndex";
 
   // The pickers scroll the track to a slide. Swipes, trackpad scrolls and
@@ -122,7 +125,9 @@ const { id, chapterName, items } = Astro.props;
   // moves through the slides and plays the current slide's video;
   // neighbouring slides are on screen too, but their videos stay on their
   // posters.
-  function initGalleries() {
+  onPage(() => {
+    const stops: (() => void)[] = [];
+
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="gallery"]')
       .forEach((root) => {
@@ -245,8 +250,13 @@ const { id, chapterName, items } = Astro.props;
         );
 
         follow();
-      });
-  }
 
-  document.addEventListener("astro:page-load", initGalleries);
+        stops.push(() => {
+          autoplay.stop();
+          window.clearTimeout(settle);
+        });
+      });
+
+    return () => stops.forEach((stop) => stop());
+  });
 </script>

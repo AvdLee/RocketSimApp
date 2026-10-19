@@ -1,0 +1,20 @@
+---
+import config from "@/config/config.json";
+
+// The header's App Store button, from the site's navigation config: in each
+// of the bar's layers, and in the phone menu panel. `class` sizes it.
+interface Props {
+  class: string;
+}
+
+const [download] = config.navigation_buttons;
+---
+
+<a
+  href={download.link}
+  class:list={[Astro.props.class, download.class]}
+  target="_blank"
+  rel="noopener"
+>
+  {download.label}
+</a>

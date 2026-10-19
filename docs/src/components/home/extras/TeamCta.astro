@@ -1,33 +1,32 @@
 ---
 import { teamsTrialUrl } from "@/lib/utils/teamsUrl";
 
+import ArrowLink from "../ArrowLink.astro";
+import Button from "../Button.astro";
+
 // The Teams chapter's call to action. Event names follow ANALYTICS.md: the
 // second /for-teams/ link keeps the historical `Mid 2 - Trial` name, and
 // lands on that page's Build Insights showcase.
 const trialHref = teamsTrialUrl("homepage_insights");
-const linkClass = "text-copy text-primary no-underline hover:underline";
 ---
 
 <div class="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4">
-  <a
+  <Button
     href={trialHref}
-    class="plausible-event-name=CTA:+Homepage+Insights+-+Trial inline-flex rounded-full bg-primary px-5 py-2.5 font-medium text-white no-underline transition-colors hover:bg-primary-hover"
+    class="plausible-event-name=CTA:+Homepage+Insights+-+Trial"
   >
     Start a 14-day Teams Trial
-  </a>
-  <a
+  </Button>
+  <ArrowLink
     href="/for-teams/"
-    class:list={[
-      "plausible-event-name=CTA:+Homepage+Insights+-+Learn+More",
-      linkClass,
-    ]}
+    class="plausible-event-name=CTA:+Homepage+Insights+-+Learn+More"
   >
-    Learn more about RocketSim for Teams <span aria-hidden="true">→</span>
-  </a>
-  <a
+    Learn more about RocketSim for Teams
+  </ArrowLink>
+  <ArrowLink
     href="/for-teams/#insight-showcase-title"
-    class:list={["plausible-event-name=CTA:+Homepage+Mid+2+-+Trial", linkClass]}
+    class="plausible-event-name=CTA:+Homepage+Mid+2+-+Trial"
   >
-    Explore Build Insights <span aria-hidden="true">→</span>
-  </a>
+    Explore Build Insights
+  </ArrowLink>
 </div>

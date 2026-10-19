@@ -1,8 +1,7 @@
 ---
 import type { HomepageItem } from "@/lib/homepageItems";
 
-import Media from "../Media.astro";
-import MediaBackdrop from "../MediaBackdrop.astro";
+import StagePanel from "./StagePanel.astro";
 
 interface Props {
   // Chapter ID, used to keep the description IDs unique on the page.
@@ -39,23 +38,33 @@ const { id, chapterName, items } = Astro.props;
               type="button"
               aria-expanded={index === 0 ? "true" : "false"}
               aria-controls={`${id}-tool-${index}`}
-              class="group flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-small font-medium text-text-soft transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:bg-primary aria-expanded:text-white"
+              class="group relative flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-[9px] text-left text-small font-medium text-text-soft transition-colors hover:bg-white/5 hover:text-text-dark aria-expanded:text-white"
             >
+              {/* The selection. It slides over from the tool that was open
+                  (the script below). */}
               <span
-                class="w-4 flex-none text-center text-intro leading-none text-muted transition-transform duration-200 ease-smooth group-aria-expanded:rotate-90 group-aria-expanded:text-white motion-reduce:transition-none"
+                data-closer-look-highlight
+                class="absolute inset-0 rounded-[inherit] bg-primary opacity-0 group-aria-expanded:opacity-100"
+                aria-hidden="true"
+              />
+              <span
+                class="relative w-4 flex-none text-center text-intro leading-none text-muted transition-transform duration-750 ease-enter group-aria-expanded:rotate-90 group-aria-expanded:text-white motion-reduce:transition-none"
                 aria-hidden="true"
               >
                 ›
               </span>
-              {item.title}
+              <span class="relative">{item.title}</span>
             </button>
-            <p
+            {/* Opens and closes with the selection (the script below). */}
+            <div
               id={`${id}-tool-${index}`}
-              class="animate-disclose pt-2 pr-3 pb-3 pl-[38px] text-small text-muted motion-reduce:animate-none"
+              class="overflow-hidden"
               hidden={index !== 0}
             >
-              {item.description}
-            </p>
+              <p class="pt-2 pr-3 pb-3 pl-[38px] text-small text-muted">
+                {item.description}
+              </p>
+            </div>
           </li>
         ))
       }
@@ -63,7 +72,6 @@ const { id, chapterName, items } = Astro.props;
   </div>
 
   <div
-    data-closer-look-stage
     data-stage
     class="relative overflow-hidden bg-surface max-md:order-1 max-md:aspect-square max-md:border-b max-md:border-border md:min-h-[360px]"
   >
@@ -71,18 +79,12 @@ const { id, chapterName, items } = Astro.props;
     <div class="absolute inset-0" data-settle>
       {
         items.map((item, index) => (
-          <div
-            data-closer-look-frame
-            class="absolute inset-0 p-4 transition-[opacity,visibility,scale] duration-500 ease-smooth inert:invisible inert:scale-[1.03] inert:opacity-0 motion-reduce:transition-none md:p-7"
+          <StagePanel
+            item={item}
+            sizes="(min-width: 1120px) 704px, (min-width: 768px) calc(100vw - 356px), calc(100vw - 72px)"
+            inset="p-4 md:p-7"
             inert={index !== 0}
-          >
-            <MediaBackdrop media={item.media} />
-            <Media
-              media={item.media}
-              sizes="(min-width: 1120px) 760px, (min-width: 768px) 70vw, 100vw"
-              class="relative size-full rounded-lg object-contain"
-            />
-          </div>
+          />
         ))
       }
     </div>
@@ -90,16 +92,27 @@ const { id, chapterName, items } = Astro.props;
 </div>
 
 <script>
-  import { loadVideo } from "@/lib/utils/lazyVideo";
   import { prefersReducedMotion } from "@/lib/utils/motion";
+  import { onPage } from "@/lib/utils/pageLifecycle";
+  import { cssEasing, SWAP, swapPanels } from "@/lib/utils/panelSwap";
   import { bindRovingKeys } from "@/lib/utils/rovingFocus";
+  import { createStagePlayer } from "@/lib/utils/stagePlayer";
 
-  // One tool is open at a time: its description shows under its button and
-  // its media fades in on the stage. Up and down arrows move between tools.
-  // The open tool's video loops while the stage is in view. With reduced
-  // motion it waits on its poster, with controls to start it.
-  function initCloserLooks() {
+  // One tool is open at a time: its description opens under its button and
+  // its media comes in on the stage. Up and down arrows move between tools.
+  // The open tool's video loops while the stage is in view
+  // (src/lib/utils/stagePlayer.ts). With reduced motion everything changes at
+  // once, and the video waits on its poster, with controls to start it.
+  onPage(() => {
     const reducedMotion = prefersReducedMotion();
+    const stops: (() => void)[] = [];
+    // The whole change moves as one: the descriptions, the selection and
+    // the media take as long as the new media takes to come in. The
+    // chevron's transition matches (duration-750 ease-enter above).
+    const timing = {
+      duration: SWAP.inMs,
+      easing: cssEasing("--ease-enter", "ease-out"),
+    };
 
     document
       .querySelectorAll<HTMLElement>('[data-presentation-root="closer-look"]')
@@ -107,75 +120,104 @@ const { id, chapterName, items } = Astro.props;
         const buttons = [
           ...root.querySelectorAll<HTMLButtonElement>("[aria-expanded]"),
         ];
-        const frames = [
-          ...root.querySelectorAll<HTMLElement>("[data-closer-look-frame]"),
-        ];
-        const videos = frames.map((frame) => frame.querySelector("video"));
-        const stage = root.querySelector<HTMLElement>(
-          "[data-closer-look-stage]",
+        const highlights = buttons.map((button) =>
+          button.querySelector<HTMLElement>("[data-closer-look-highlight]"),
         );
+        const descriptions = buttons.map((button) =>
+          document.getElementById(button.getAttribute("aria-controls") ?? ""),
+        );
+        const panels = [...root.querySelectorAll<HTMLElement>("[data-panel]")];
+        const media = panels.map((panel) =>
+          panel.querySelector<HTMLElement>("[data-panel-media]"),
+        );
+        const stage = root.querySelector<HTMLElement>("[data-stage]");
+        if (!stage) return;
         let current = 0;
-        let inView = false;
 
-        const syncVideos = () => {
-          videos.forEach((video, i) => {
-            if (!video) return;
-            if (i !== current || !inView) {
-              video.pause();
-              return;
-            }
-            loadVideo(video);
-            if (reducedMotion) {
-              video.controls = true;
-              return;
-            }
-            void video.play().catch(() => {
-              // The poster stays when playback cannot start.
-            });
-          });
+        const player = createStagePlayer({
+          stage,
+          videos: panels.map((panel) => panel.querySelector("video")),
+          threshold: 0.25,
+        });
+        const syncVideos = () => player.show(current, !reducedMotion);
+
+        // A description grows open from where it is, or shrinks closed and
+        // hides once it has. Opening and closing take as long, so the list
+        // only grows or shrinks by the difference.
+        const disclose = (description: HTMLElement | null, open: boolean) => {
+          if (!description) return;
+          const from = description.hidden
+            ? { height: 0, opacity: 0 }
+            : {
+                height: description.getBoundingClientRect().height,
+                opacity: Number(getComputedStyle(description).opacity),
+              };
+          description.getAnimations().forEach((a) => a.cancel());
+          description.hidden = false;
+          if (reducedMotion || (!open && from.height === 0)) {
+            description.hidden = !open;
+            return;
+          }
+          const to = open ? description.scrollHeight : 0;
+          const animation = description.animate(
+            [
+              { height: `${from.height}px`, opacity: from.opacity },
+              { height: `${to}px`, opacity: open ? 1 : 0 },
+            ],
+            // A closed description holds shut until it hides.
+            { ...timing, fill: open ? "none" : "forwards" },
+          );
+          if (open) return;
+          animation.onfinish = () => {
+            description.hidden = true;
+            animation.cancel();
+          };
         };
 
         const open = (index: number) => {
+          if (index === current) return;
+          const previous = current;
           current = index;
+
+          // Where the selection shows now, before the descriptions move.
+          // Their heights change together, so the new tool's button starts
+          // from where it is.
+          const from = highlights[previous]?.getBoundingClientRect().top ?? 0;
+          const to = buttons[index].getBoundingClientRect().top;
+
           buttons.forEach((button, i) => {
-            const expanded = i === index;
-            button.setAttribute("aria-expanded", String(expanded));
-            const description = document.getElementById(
-              button.getAttribute("aria-controls") ?? "",
-            );
-            if (description) description.hidden = !expanded;
-            if (frames[i]) frames[i].inert = !expanded;
+            button.setAttribute("aria-expanded", String(i === index));
+            if (panels[i]) panels[i].inert = i !== index;
           });
+          disclose(descriptions[previous], false);
+          disclose(descriptions[index], true);
           syncVideos();
+          if (reducedMotion) return;
+
+          // The selection slides over to the new tool and rides along as
+          // the descriptions open and close.
+          highlights[previous]?.getAnimations().forEach((a) => a.cancel());
+          highlights[index]?.animate(
+            [{ translate: `0 ${from - to}px` }, { translate: "0 0" }],
+            timing,
+          );
+          // Going down the list, the media moves up.
+          swapPanels(
+            { panel: panels[previous], media: media[previous] },
+            { panel: panels[index], media: media[index] },
+            { axis: "y", direction: Math.sign(index - previous), timing },
+          );
         };
 
         buttons.forEach((button, index) =>
           button.addEventListener("click", () => open(index)),
         );
         bindRovingKeys(buttons, "vertical", open);
+        syncVideos();
 
-        if (stage) {
-          const visibility = new IntersectionObserver(
-            ([entry]) => {
-              inView = entry.isIntersecting;
-              syncVideos();
-            },
-            { threshold: 0.25 },
-          );
-          visibility.observe(stage);
-          // A client-side navigation is about to replace the page: stop
-          // watching the stage and playing.
-          document.addEventListener(
-            "astro:before-swap",
-            () => {
-              visibility.disconnect();
-              videos.forEach((video) => video?.pause());
-            },
-            { once: true },
-          );
-        }
+        stops.push(player.stop);
       });
-  }
 
-  document.addEventListener("astro:page-load", initCloserLooks);
+    return () => stops.forEach((stop) => stop());
+  });
 </script>

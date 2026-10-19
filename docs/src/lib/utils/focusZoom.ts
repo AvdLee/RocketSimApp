@@ -7,50 +7,33 @@ interface Size {
   height: number;
 }
 
-interface Rect extends Size {
-  left: number;
-  top: number;
-}
-
 interface Focus {
   x: number;
   y: number;
   zoom: number;
 }
 
-// The shift along one axis that brings the focus to the frame's middle once
-// the media scales by `scale` around the frame's middle. It stops short where
-// the media's edge would come into the frame: a media larger than the frame
-// keeps covering it, and a smaller one stays inside it.
-function shift(
-  frame: number,
-  start: number,
-  length: number,
-  focus: number,
-  scale: number,
-): number {
-  const middle = frame / 2;
-  const ideal = scale * (middle - (start + focus * length));
-  const startAtEdge = scale * (middle - start) - middle;
-  const endAtEdge = frame - middle + scale * (middle - (start + length));
-  const low = Math.min(startAtEdge, endAtEdge);
-  const high = Math.max(startAtEdge, endAtEdge);
-  return Math.min(high, Math.max(low, ideal));
+// The shift along one axis that brings the focus to the middle once the image
+// scales by `scale` around its middle. It stops short where the image's edge
+// would come into view.
+function shift(length: number, focus: number, scale: number): number {
+  const middle = length / 2;
+  const ideal = scale * (middle - focus * length);
+  const limit = middle * (scale - 1);
+  return Math.min(limit, Math.max(-limit, ideal));
 }
 
-// The translate, in px, and scale that zoom `media` (its place in `frame`)
-// in on `focus`. Apply them as `translate(x, y) scale(scale)` on an element
-// the size of the frame, scaling around its middle. With the media as its
-// own frame, it zooms within the space it takes up.
+// The translate, in px, and scale that zoom an image of `size` in on
+// `focus`. Apply them as `translate(x, y) scale(scale)` on the image, scaling
+// around its middle: it zooms within the space it takes up.
 export function focusTransform(
-  frame: Size,
-  media: Rect,
+  size: Size,
   focus: Focus,
 ): { x: number; y: number; scale: number } {
   const scale = focus.zoom;
   return {
-    x: shift(frame.width, media.left, media.width, focus.x, scale),
-    y: shift(frame.height, media.top, media.height, focus.y, scale),
+    x: shift(size.width, focus.x, scale),
+    y: shift(size.height, focus.y, scale),
     scale,
   };
 }

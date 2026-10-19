@@ -465,6 +465,40 @@ test("homepage motion stops for reduced motion", () => {
   }
 });
 
+// The homepage's scroll-linked effects run on the compositor, so a scroll
+// never waits on the main thread for them. Browsers refuse to composite
+// some properties outright, such as a gradient moving behind
+// `background-clip: text`, and a reveal that moves two properties at once
+// drops frames as its element first scrolls in, even though each property
+// composites on its own. See the comments by the keyframes in animations.css.
+test("homepage scroll-linked effects stay off the main thread", () => {
+  const css = readdirSync(join(DIST, "_astro"))
+    .filter((file) => file.endsWith(".css"))
+    .map((file) => readDist(`_astro/${file}`))
+    .join("\n");
+  const keyframes = (name) => {
+    const block = css.match(
+      new RegExp(`@keyframes ${name}\\{([^}]*\\}[^}]*)\\}`),
+    );
+    assert.ok(block, `expected @keyframes ${name}`);
+    return [...block[1].matchAll(/([a-z-]+):/g)].map(
+      ([, property]) => property,
+    );
+  };
+  assert.deepEqual(keyframes("reveal"), ["translate"]);
+  assert.deepEqual(keyframes("light-up"), ["translate"]);
+  assert.deepEqual(keyframes("light-up-text"), ["translate"]);
+  for (const name of ["settle", "recede", "draw", "draw-down", "slide-in"]) {
+    for (const property of keyframes(name)) {
+      assert.match(
+        property,
+        /^(opacity|translate|scale)$/,
+        `${name} animates ${property}`,
+      );
+    }
+  }
+});
+
 test("homepage Teams chapter keeps its Plausible events", () => {
   // See ANALYTICS.md: the names are part of the historical reporting contract.
   const teams = homepageChapter("teams");
@@ -624,9 +658,8 @@ test("homepage preview sections share one spacing rhythm", () => {
   const rhythm = sections.filter((tag) =>
     /class="[^"]*\bp[ty]-section\b/.test(tag),
   );
-  // Every chapter, plus reviews, split CTA, everyday, mentions and the final
-  // CTA.
-  assert.equal(rhythm.length, homepageChapters().length + 5);
+  // Every chapter, plus reviews, split CTA, mentions and the final CTA.
+  assert.equal(rhythm.length, homepageChapters().length + 4);
   assert.doesNotMatch(html, /\bp[ty]-\[(?:120|184)px\]/);
 });
 
