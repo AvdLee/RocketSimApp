@@ -9,8 +9,6 @@ import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
 import { ClientRouter } from "astro:transitions";
 import PlausibleAnalytics from "@/components/PlausibleAnalytics.astro";
-import Intercom from "@/components/Intercom.astro";
-
 // types for frontmatters
 export interface Props {
   seo: SEOProps;
@@ -125,10 +123,6 @@ const { seo, structuredData, header = "site" } = Astro.props;
       })();
     </script>
     <!-- SegMetrics END -->
-
-    <!-- Intercom -->
-    <Intercom />
-    <!-- Intercom END -->
   </head>
   <body class="antialiased">
     <!-- Google Tag Manager (noscript) -->
