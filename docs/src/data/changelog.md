@@ -1,18 +1,27 @@
-# 16.7.1
+# 16.7.1 (338)
+
+**New:**
+
+- iPhone Duo: choose the Star White or Night Sky finish in the Device Bezel picker for screenshots and recordings. Screenshots can switch finish in the editor, and a recording keeps the finish it was captured in. CLI: `--device-color <star-white|night-sky>` with `--bezel`.
 
 **Improved:**
 
 - When RocketSim cannot find the selected Simulator for accessibility features, the Accessibility tabs now say so and suggest restarting the Simulator and RocketSim, instead of showing "SimulatorControl error 4". Diagnostics reports now also record what RocketSim's Simulator list contained at that moment, so we can find out why a Simulator is missing. (Thanks, C. Jacobsson!)
+- iPhone Duo: the 3D device in screenshots and recordings is now seen from a slight angle so the polished frame and side buttons show, with crisp metal highlights, a graphite Night Sky frame, and a dark glass bezel, instead of the flat head-on gray look.
 
 **Fixed:**
 
+- iPhone Duo: the hinge angle is tracked again after updating to Xcode 27.2 beta 3, so Device Hub folds, screenshots, and recordings follow the real fold angle instead of a flat device. RocketSim now reads the angle from the Simulator directly instead of through a `devicectl` command that newer CoreDevice versions removed.
 - The "disabled while Device Hub is in expanded mode" message on the Comparing and VoiceOver Navigator panels is white again in light mode instead of unreadable black.
+- The Magnifier in the Comparing window works for Simulators shown in Device Hub: it captures the simulator screen again, and its controls are enabled while Device Hub is in front. The coordinate label is also correct on secondary displays.
 - CLI: `rocketsim screenshot --bezel device` and `rocketsim video record --bezel device` now always apply a real-device bezel, including for iPhone 18 Pro, iPhone 18 Pro Max, and iPad Pro 13-inch (M5). Before, they silently returned a bare screen unless you had picked a bezel for that device in RocketSim first, and `--frame-color` had no effect. An explicit `--bezel device` now uses your saved bezel color or the first bundled one, and fails with an `unsupported_target` error for devices without a bundled bezel. (Thanks, P. van den Hamer!)
 - Exported recordings at 85 FPS or higher, such as 120 FPS iPhone Duo recordings, no longer open as slow motion in QuickTime Player and Photos. These exports are now saved as QuickTime movies, still named `.mp4`, that are marked to play at full speed. Trimming a recording and adding an end card keep this marking.
 - Fixed a crash when the Become Pro screen reacted to an email subscription finishing in the background.
 - Fixed RocketSim reporting a port conflict over and over when another process, such as a second RocketSim, already uses the Connect port.
 - Fixed repeated errors when RocketSim kept looking for a Simulator that no longer exists, for example after it was deleted or Xcode was updated.
 - Fixed errors reported when Xcode or its CoreSimulator was updated while RocketSim stayed open. Restart RocketSim to pick up the new Xcode.
+- Fixed a rare crash when RocketSim looked up a Simulator from two places at once, for example while changing the iPhone Duo fold pose during a recording.
+- iPhone Duo: screenshots and videos with a device bezel could come out much darker than the Simulator on macOS 27 beta. RocketSim now checks how the system renders the device and corrects the colors when needed.
 - iPhone Duo: a missing 3D model in the selected Xcode is no longer reported as an error, and a failed Duo conversion now shows why it failed and suggests recording again.
 
 # 16.7.0 (337)
