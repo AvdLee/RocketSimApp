@@ -2,7 +2,7 @@
 title: "What to Do When Your RocketSim Payment Is Due"
 description: "Seeing a payment due message in RocketSim? Learn what it means, what to tell your team manager, and how managers pay an open invoice to keep RocketSim Pro active."
 sidebar:
-  order: 3
+  order: 6
   label: "Payment Due"
 ---
 
@@ -40,7 +40,7 @@ RocketSim still works for now, but if the invoice stays unpaid, RocketSim Pro
 will be switched off for the whole team after the date shown in the app.
 
 Could you (or whoever handles billing) pay the open invoice? The steps are here:
-https://rocketsim.app/docs/support/what-to-do-when-your-payment-is-due/
+https://rocketsim.app/docs/teams/what-to-do-when-your-payment-is-due/
 
 Thanks!
 ```
@@ -82,11 +82,11 @@ Pay the invoice as soon as you can to keep RocketSim Pro active for your team.
 What the banner says depends on how your team pays:
 
 - **Invoice overdue** — your latest invoice is past its due date. Click **View invoice** to open it. If there's no invoice link, click **View billing details** instead and open the invoice from your invoice history.
-- **Payment failed** — we couldn't charge your card. Click **Update payment method**, as described in [Fix a failed payment](/docs/support/managing-your-team-subscription/#fix-a-failed-payment).
+- **Payment failed** — we couldn't charge your card. Click **Update payment method**, as described in [Fix a failed payment](/docs/teams/managing-your-team-subscription/#fix-a-failed-payment).
 
 The dashboard can show these banners before RocketSim shows its own message, because RocketSim only warns developers once the payment is 7 days overdue.
 
-You can also open **Settings → Subscription** and click **Manage subscription** to see all your invoices in the billing portal. The [team subscription guide](/docs/support/managing-your-team-subscription/#add-seats-update-billing-details-or-download-invoices) explains what you can do there.
+You can also open **Settings → Subscription** and click **Manage subscription** to see all your invoices in the billing portal. The [team subscription guide](/docs/teams/managing-your-team-subscription/#add-seats-update-billing-details-or-download-invoices) explains what you can do there.
 
 ### Pay the invoice
 
@@ -132,4 +132,4 @@ Please share the details before paying when you can, so the invoice is right the
 
 If the banner or invoice looks different from what's described here, or your team shows as deactivated, email [support@rocketsim.app](mailto:support@rocketsim.app) with your team's email address and a short description of what you see. We'll sort it out together.
 
-For everything else about renewing, seats, and billing details, read [Renew or Manage Your Team Subscription](/docs/support/managing-your-team-subscription/).
+For everything else about renewing, seats, and billing details, read [Renew or Manage Your Team Subscription](/docs/teams/managing-your-team-subscription/).
