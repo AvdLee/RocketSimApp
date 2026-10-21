@@ -19,15 +19,30 @@ items:
   - feature: 06-grids
     title: "Grids"
     description: "Overlay a grid to align elements across the screen. Change its color and spacing to match your design system."
+    media:
+      type: image
+      path: ../../assets/homepage/side-window-grids.png
+      alt: "A 20 point grid laid over the Stock Analyzer watchlist next to the Comparing tab"
+    bleed: true
   - feature: 07-rulers
     title: "Rulers"
     description: "Horizontal and vertical rulers show exact positions in points. Hold ⇧ Shift to see the distance between them."
+    media:
+      type: image
+      path: ../../assets/homepage/side-window-rulers.png
+      alt: "Rulers measuring the gap between the chart and the Analysis Summary on the Apple detail page"
+    bleed: true
   - feature: 09-magnify
     title: "Magnifier and color picker"
     description: "Hold ⇧ Shift to magnify any pixel, then copy its color as SwiftUI, UIColor, or NSColor code."
   - feature: 08-slow-animations
     title: "Slow animations"
     description: "Slow every animation down to catch the frame where a transition goes wrong."
+    media:
+      type: video
+      path: /features/side-window-slow-animations-60fps.mp4
+      alt: "Slow Animations switched on, then a stock sheet sliding up in slow motion"
+    bleed: true
   - title: "Accessibility audit"
     description: "Find missing labels, small touch targets, and low contrast on the screen you are looking at. Select a finding to see it highlighted in the Simulator."
     media:

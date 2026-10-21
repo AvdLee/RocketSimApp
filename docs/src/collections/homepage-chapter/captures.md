@@ -26,6 +26,11 @@ items:
   - feature: 17-status-bar-editing
     title: "09:41 in one click"
     description: "The keynote-ready status bar, full bars included."
+    media:
+      type: image
+      path: ../../assets/homepage/reference.png
+      alt: "The Capturing tab next to the Apple detail page in the Simulator"
+    bleed: true
   - feature: 15-professional-captures
     title: "Bezels, backgrounds, ratios"
     description: "Marketing-ready screenshots without opening a design tool."

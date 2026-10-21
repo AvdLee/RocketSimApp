@@ -12,30 +12,34 @@ items:
     title: "Live inspector"
     description: "JSON, headers, metrics, and app logs in one place."
     media:
-      type: image
-      path: ../../assets/homepage/side-window-networking.png
-      alt: "The Networking tab listing live Stock Analyzer requests next to the Simulator in Device Hub"
+      type: video
+      path: /features/network-monitoring-demo-60fps.mp4
+      alt: "The Networking tab filling up live while Stock Analyzer loads stocks"
     bleed: true
   - feature: 01-network-monitoring
-    title: "Copy as cURL"
-    description: "Replay any request from your terminal."
+    title: "Headers and JSON"
+    description: "Read any response or header, then replay it as cURL."
     media:
-      type: image
-      path: ../../content/docs/docs/features/networking/network-traffic-monitoring/network-request-detail.png
-      alt: "Request detail view with Summary, Request, Response, Headers, Metrics, and cURL tabs"
-    focus: { x: 0.3, y: 0.3, zoom: 1.7 }
+      type: video
+      path: /features/network-headers-json-60fps.mp4
+      alt: "The Network Monitor window switching between the Response and Headers of a request"
+    bleed: true
   - feature: 02-network-speed-control
     title: "Speed control"
     description: "3G, Edge, 100% loss, or airplane mode."
     media:
-      type: image
-      path: ../../content/docs/docs/features/networking/network-speed-control/side_window_network_speed_control_modes_picker_visible.png
-      alt: "Network Speed Control picker listing Airplane Mode, 100% Loss, 3G, DSL, Edge, LTE, Very Bad Network, and Wi-Fi"
-    focus: { x: 0.43, y: 0.67, zoom: 1.5 }
+      type: video
+      path: /features/network-speed-control-60fps.mp4
+      alt: "Choosing Airplane Mode in Network Speed Control and opening its info popover"
+    bleed: true
   - feature: 31-network-ai-prompts
     title: "AI-ready prompts"
     description: "Redacted request context for any assistant."
-    focus: { x: 0.66, y: 0.2, zoom: 1.8 }
+    media:
+      type: video
+      path: /features/network-ai-prompts-60fps.mp4
+      alt: "Copying the Redundant calls and caching prompt from the Network Monitor"
+    bleed: true
 links:
   - label: "Explore Network Monitoring"
     href: /features/networking/
