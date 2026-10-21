@@ -2,7 +2,7 @@
 title: "Team Build Insights"
 description: "Compare Xcode build performance across your entire team. Measure the impact of different machines, Xcode versions, and SDK changes on build duration."
 sidebar:
-  order: 2
+  order: 4
 ---
 
 Individual Build Insights show you how your project builds on your machine. Team Build Insights take it further — you get visibility into how the same project builds across your entire team.
@@ -29,7 +29,7 @@ Use Team Build Insights when you need evidence for hardware upgrades, Xcode roll
 
 Team insights are available at [teams.rocketsim.app](https://teams.rocketsim.app). You get a web-based overview of your team's build performance, so you can compare machines and spot trends without opening RocketSim.
 
-The same dashboard handles your subscription, seats, and invoices. Read [how to renew or manage your team subscription](/docs/support/managing-your-team-subscription/).
+The same dashboard handles your subscription, seats, and invoices. Read [how to renew or manage your team subscription](/docs/teams/managing-your-team-subscription/).
 
 ## Team Projects overview
 

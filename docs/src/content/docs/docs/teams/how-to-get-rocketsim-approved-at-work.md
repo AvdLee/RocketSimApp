@@ -2,7 +2,7 @@
 title: "How to Get RocketSim Approved at Work"
 description: "Copy a manager-ready RocketSim license request and find clear answers about productivity, payback, privacy, and team rollout."
 sidebar:
-  order: 1
+  order: 2
   label: "Manager Approval"
 ---
 
@@ -95,5 +95,5 @@ Use the 14-day Teams trial to test the exact workflows you want to include in yo
 
 - [Compare RocketSim plans](https://www.rocketsim.app/pricing/?utm_source=docs&utm_medium=referral&utm_content=manager_approval_docs)
 - [Start a 14-day Teams trial](https://teams.rocketsim.app/signup/trial?utm_source=docs&utm_medium=referral&utm_content=manager_approval_docs)
-- [See how large teams use RocketSim](/docs/getting-started/how-large-teams-use-rocketsim/)
+- [See how large teams use RocketSim](/docs/teams/how-large-teams-use-rocketsim/)
 - [Contact sales for 20+ seats](mailto:ralphduin@rocketsim.app)

@@ -2,7 +2,7 @@
 title: "How Large Teams Use RocketSim"
 description: "Discover how development teams use RocketSim for shared deep links, design validation, accessibility testing, feature flag workflows, and team build insights."
 sidebar:
-  order: 6
+  order: 1
 ---
 
 Many large teams make use of RocketSim to improve their development workflow. Developers, but also QA engineers and designers make use of RocketSim to validate designs, accessibility implementations, or execute deeplinks to enable certain feature flags.
@@ -52,4 +52,4 @@ Besides developers, it’s also QA engineers and designers that benefit from Roc
 
 You can [order team licenses via our website](https://www.rocketsim.app/for-teams/). Batch discounts apply automatically if you order multiple seats.
 
-Renewing an expired license, re-subscribing, fixing a failed payment, or adding seats is self-serve from the Teams dashboard. Follow the [team subscription guide](/docs/support/managing-your-team-subscription/) for step-by-step instructions.
+Renewing an expired license, re-subscribing, fixing a failed payment, or adding seats is self-serve from the Teams dashboard. Follow the [team subscription guide](/docs/teams/managing-your-team-subscription/) for step-by-step instructions.

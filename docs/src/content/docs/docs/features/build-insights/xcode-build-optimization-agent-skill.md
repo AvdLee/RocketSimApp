@@ -41,7 +41,7 @@ RocketSim tells you:
 - Which schemes are affected
 - How performance changes across Xcode versions, macOS versions, and machines
 
-See [Build Insights](/docs/features/build-insights/build-insights) and [Team Build Insights](/docs/features/build-insights/team-build-insights).
+See [Build Insights](/docs/features/build-insights/build-insights) and [Team Build Insights](/docs/teams/team-build-insights).
 
 ### Xcode Build Optimization Agent Skill
 
@@ -100,7 +100,7 @@ Use both when you want a complete workflow from **detecting a build problem** to
 
 - [Xcode Build Optimization Agent Skill on GitHub](https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill)
 - [Build Insights](/docs/features/build-insights/build-insights)
-- [Team Build Insights](/docs/features/build-insights/team-build-insights)
+- [Team Build Insights](/docs/teams/team-build-insights)
 
 ## See Also My Other Skills
 
