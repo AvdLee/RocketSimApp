@@ -8,11 +8,23 @@ interface Props {
   sizes: string;
   // The frame's padding: how far the media sits in from its edges.
   inset: string;
+  // The media fills the frame, cropped to it, instead of shrinking to fit:
+  // always, or from the md breakpoint up (below it the frame is too tall for
+  // a wide image, which keeps its fit and its inset).
+  fill?: "always" | "md";
   // Extra classes for the media itself, such as scroll effects.
   class?: string;
 }
 
-const { media, sizes, inset, class: className } = Astro.props;
+const { media, sizes, inset, fill, class: className } = Astro.props;
+
+const fit = "aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg";
+const mediaClass =
+  fill === "always"
+    ? "size-full object-cover"
+    : fill === "md"
+      ? `${fit} md:size-full md:rounded-none md:object-cover`
+      : fit;
 ---
 
 <!-- Media centred in a frame that fills its positioned parent, used by the
@@ -25,12 +37,5 @@ const { media, sizes, inset, class: className } = Astro.props;
   class:list={["absolute inset-0 flex items-center justify-center", inset]}
   data-media-frame
 >
-  <Media
-    media={media}
-    sizes={sizes}
-    class:list={[
-      "aspect-[auto_16/9] h-auto max-h-full w-auto max-w-full rounded-lg",
-      className,
-    ]}
-  />
+  <Media media={media} sizes={sizes} class:list={[mediaClass, className]} />
 </div>

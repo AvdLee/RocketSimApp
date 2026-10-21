@@ -1,5 +1,4 @@
-import { loadVideo } from "./lazyVideo";
-import { prefersReducedMotion } from "./motion";
+import { loadVideo } from "./lazyVideo.ts";
 
 // The videos on a presentation's stage: one item shows at a time, and only
 // its video plays, only while the stage is in view. Videos in other items
@@ -24,7 +23,6 @@ export function createStagePlayer({
   onView,
   onFail,
 }: StagePlayerOptions) {
-  const reducedMotion = prefersReducedMotion();
   let inView = false;
   let current: number | undefined;
   let playing = false;
@@ -33,14 +31,19 @@ export function createStagePlayer({
     videos.forEach((video, index) => {
       if (!video) return;
       const showing = index === current && inView;
-      if (!showing || !playing) {
+      if (!showing) {
         video.pause();
-        if (showing && reducedMotion) {
-          loadVideo(video);
-          video.controls = true;
-        }
+        video.controls = false;
         return;
       }
+      if (!playing) {
+        video.pause();
+        // Paused visitors scrub with native controls; load the source first.
+        loadVideo(video);
+        video.controls = true;
+        return;
+      }
+      video.controls = false;
       loadVideo(video);
       video.play().catch((error: unknown) => {
         // A pause interrupted the start; nothing went wrong.

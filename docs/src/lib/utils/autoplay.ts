@@ -152,6 +152,10 @@ export function createAutoplay({
     video.addEventListener("ended", () => {
       if (index === state.index && state.status === "playing") moveOn();
     });
+    // Native controls can scrub while autoplay is paused; keep the bar in step.
+    video.addEventListener("timeupdate", () => {
+      if (index === state.index && state.status !== "playing") render();
+    });
     // A source that fails to load never ends.
     video
       .querySelector("source")

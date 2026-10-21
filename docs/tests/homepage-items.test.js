@@ -146,6 +146,17 @@ test("an image keeps its focus, from the item or over the feature's image", () =
   assert.deepEqual(item.focus, focus);
 });
 
+test("bleed carries over from the item and is left out otherwise", () => {
+  const [bleeding, inset] = resolveChapterItems(
+    "network",
+    [{ feature: "06-grids", bleed: true }, { feature: "06-grids" }],
+    features,
+  );
+
+  assert.equal(bleeding.bleed, true);
+  assert.equal("bleed" in inset, false);
+});
+
 test("a video with a focus fails, since only images zoom in", () => {
   assert.throws(
     () =>

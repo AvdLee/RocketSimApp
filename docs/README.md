@@ -18,6 +18,10 @@ cd docs
 npm install
 ```
 
+Media under `public/` and `src/assets/` is stored with Git LFS. Run
+`brew install git-lfs && git lfs install` before cloning or pulling changes
+that touch those files.
+
 3. Run dev server
 
 ```sh
