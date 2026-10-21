@@ -1,3 +1,9 @@
+# 16.8.0
+
+**Fixed:**
+
+- CLI: on iPhone Duo, taps, swipes, scrolls, and `interact activate` now reach the screen that is showing the app in the open and book poses, instead of silently doing nothing. Element positions and `canvasSize` match that screen's orientation, so toolbar items on the right are no longer hidden, and coordinates outside the screen now return a clear error.
+
 # 16.7.1 (338)
 
 **New:**
