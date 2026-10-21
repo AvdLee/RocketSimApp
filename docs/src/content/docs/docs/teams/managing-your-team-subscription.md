@@ -2,7 +2,7 @@
 title: "Renew or Manage Your Team Subscription"
 description: "Renew an expired RocketSim for Teams license, re-subscribe after canceling, fix a failed payment, add seats, and download invoices from the Teams dashboard."
 sidebar:
-  order: 2
+  order: 5
 ---
 
 Your RocketSim for Teams subscription is fully self-serve. Renewing an expired license, re-subscribing after canceling, updating a card that failed, adding seats, or grabbing an invoice — you can do all of it yourself from the Teams dashboard in a few clicks.
@@ -42,7 +42,7 @@ A **Payment failed** banner means we couldn't charge your payment method — usu
 
 Update your details before the expiry date to keep RocketSim for Teams active without interruption.
 
-Seeing an **Invoice overdue** banner instead, or a payment due message in RocketSim? Read [what to do when your payment is due](/docs/support/what-to-do-when-your-payment-is-due/).
+Seeing an **Invoice overdue** banner instead, or a payment due message in RocketSim? Read [what to do when your payment is due](/docs/teams/what-to-do-when-your-payment-is-due/).
 
 ## Add seats, update billing details, or download invoices
 

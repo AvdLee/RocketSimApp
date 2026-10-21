@@ -33,4 +33,4 @@ The RocketSim Welcome view shows your build activity for the last 12 months in a
 
 ![Welcome view with Build Activity graph for the last 12 months](./build-insights/build-activity-welcome-view.png)
 
-For team-wide visibility, check out [Team Build Insights](/docs/features/build-insights/team-build-insights). If you want help improving slow builds after spotting a regression, see the [Agent Skill](/docs/features/build-insights/xcode-build-optimization-agent-skill).
+For team-wide visibility, check out [Team Build Insights](/docs/teams/team-build-insights). If you want help improving slow builds after spotting a regression, see the [Agent Skill](/docs/features/build-insights/xcode-build-optimization-agent-skill).
