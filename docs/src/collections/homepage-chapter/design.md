@@ -35,6 +35,11 @@ items:
   - feature: 09-magnify
     title: "Magnifier and color picker"
     description: "Hold ⇧ Shift to magnify any pixel, then copy its color as SwiftUI, UIColor, or NSColor code."
+    media:
+      type: video
+      path: /features/side-window-magnifier-60fps.mp4
+      alt: "The Magnifier zooming in on a red change figure and showing its color code"
+    bleed: true
   - feature: 08-slow-animations
     title: "Slow animations"
     description: "Slow every animation down to catch the frame where a transition goes wrong."
@@ -55,11 +60,17 @@ items:
     description: "See the VoiceOver reading order as numbered labels, and walk through it with your arrow keys. No device needed."
     media:
       type: image
-      path: ../../content/docs/docs/features/accessibility/voiceover-navigator/voiceover-navigation.png
-      alt: "VoiceOver Navigator in navigation mode, with numbered elements on the Simulator, the Watchlist button focused, and arrow-key shortcuts"
+      path: ../../assets/homepage/side-window-voiceover.png
+      alt: "VoiceOver Navigator showing the numbered reading order over the Stock Analyzer watchlist"
+    bleed: true
   - feature: 14-environment-overrides
     title: "Environment overrides"
     description: "Switch Dynamic Type sizes, bold text, inverted colors, and reduce motion without digging through Settings."
+    media:
+      type: video
+      path: /features/side-window-environment-60fps.mp4
+      alt: "Toggling Increase Contrast, Dark Mode, and Dynamic Type in the Accessibility tab while Stock Analyzer updates"
+    bleed: true
 links:
   - label: "Explore design tools"
     href: /features/design-comparison/
