@@ -99,7 +99,7 @@ The physical workflow requires an app run from Xcode and selected under the devi
 
 Saved location App Actions are included when you sync App Actions to JSON, including their route option, Follow roads setting, speed, interval, distance, and waypoints. This lets a team keep common test locations and routes in Git next to deeplinks and push notifications.
 
-See [How Large Teams Use RocketSim](/docs/getting-started/how-large-teams-use-rocketsim) for more on sharing App Actions using Git.
+See [How Large Teams Use RocketSim](/docs/teams/how-large-teams-use-rocketsim) for more on sharing App Actions using Git.
 
 ## Related testing
 

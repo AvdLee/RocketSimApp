@@ -151,7 +151,7 @@ test("Teams page preserves its conversion funnel contract", () => {
   assert.match(html, /CTA:\+Team\+Page\+-\+Start\+Trial/);
   assert.match(
     html,
-    /\/docs\/support\/how-to-get-rocketsim-approved-at-work\//,
+    /\/docs\/teams\/how-to-get-rocketsim-approved-at-work\//,
   );
   assert.match(html, /€10 per seat\/month, billed annually/);
 });
@@ -211,6 +211,17 @@ test("Teams page keeps its SEO metadata and legacy redirect", () => {
 
   const redirect = readDist("team-insights/index.html");
   assert.match(redirect, /\/for-teams/);
+});
+
+test("Teams docs live under /docs/teams with redirects from the old URLs", () => {
+  const guide = readDist("docs/teams/activating-your-team-seat/index.html");
+  assert.match(guide, /Activate Your RocketSim for Teams Seat/);
+  assert.match(guide, /redirectTo=%2Factivate-seat/);
+
+  const redirect = readDist(
+    "docs/support/managing-your-team-subscription/index.html",
+  );
+  assert.match(redirect, /\/docs\/teams\/managing-your-team-subscription/);
 });
 
 test("camera doc emits FAQPage structured data", () => {
