@@ -27,7 +27,11 @@ items:
   - feature: 22-push-notifications
     title: "Push notifications"
     description: "Saved payloads, sent in one click."
-    focus: { x: 0.52, y: 0.28, zoom: 1.4 }
+    media:
+      type: video
+      path: /features/side-window-push-60fps.mp4
+      alt: "Sending a saved push notification from the side window and the banner appearing on the Simulator"
+    bleed: true
   - feature: 23-deeplinks-universal-links
     title: "Deep links"
     description: "Parameterized links and Universal Links."
@@ -39,7 +43,11 @@ items:
   - feature: 24-privacy-permissions
     title: "Permissions"
     description: "Grant, revoke, or reset without reinstalling."
-    focus: { x: 0.68, y: 0.6, zoom: 1.5 }
+    media:
+      type: video
+      path: /features/side-window-permissions-60fps.mp4
+      alt: "Choosing a privacy permission in the Recent Builds tab and resetting it without reinstalling Stock Analyzer"
+    bleed: true
   - feature: 04-simulator-camera
     title: "Simulator camera"
     description: "Stream your Mac's camera into the Simulator."
