@@ -1,5 +1,11 @@
 # 16.8.0
 
+**New:**
+
+- CLI: `rocketsim screenshot` and `rocketsim video record` accept the mesh gradients from the background picker, for example `--background aurora-drift`, `pastel-foam`, `lava-bloom`, or `indigo-nightfall`. An unknown name lists the valid ones.
+- CLI: `--metadata` now renders the app icon, title, and subtitle badge, like the Post Editor does, from the most recent build on the Simulator. Use `--metadata-title`, `--metadata-subtitle` (an empty value hides the subtitle), and `--metadata-app <bundle-id>` to override the text or pick another installed app. The badge needs `--ratio` other than `auto`; RocketSim now says so, or that no app could be found, instead of leaving the badge out.
+- Captures: customize screenshot and recording file names with pills for capture type, device, app name, inches, and date, in Settings > Captures. (Thanks, K. Strasser!)
+
 **Fixed:**
 
 - CLI: on iPhone Duo, taps, swipes, scrolls, and `interact activate` now reach the screen that is showing the app in the open and book poses, instead of silently doing nothing. Element positions and `canvasSize` match that screen's orientation, so toolbar items on the right are no longer hidden, and coordinates outside the screen now return a clear error.
