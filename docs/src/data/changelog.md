@@ -6,8 +6,13 @@
 - CLI: `--metadata` now renders the app icon, title, and subtitle badge, like the Post Editor does, from the most recent build on the Simulator. Use `--metadata-title`, `--metadata-subtitle` (an empty value hides the subtitle), and `--metadata-app <bundle-id>` to override the text or pick another installed app. The badge needs `--ratio` other than `auto`; RocketSim now says so, or that no app could be found, instead of leaving the badge out.
 - Captures: customize screenshot and recording file names with pills for capture type, device, app name, inches, and date, in Settings > Captures. (Thanks, K. Strasser!)
 
+**Improved:**
+
+- iPhone Duo: screenshots and recordings now show the device from straight on, like the Simulator and Device Hub, instead of from a slight angle. The fold still follows the hinge angle, from closed through book to open.
+
 **Fixed:**
 
+- Improved reliability of Developer folder access: Macs that can't remember the permission no longer show the permission screen at every launch (you can still grant it from Recent Builds), and diagnostics reports now explain why the permission couldn't be saved. (This is for you, J. Sabater!)
 - CLI: on iPhone Duo, taps, swipes, scrolls, and `interact activate` now reach the screen that is showing the app in the open and book poses, instead of silently doing nothing. Element positions and `canvasSize` match that screen's orientation, so toolbar items on the right are no longer hidden, and coordinates outside the screen now return a clear error.
 
 # 16.7.1 (338)
