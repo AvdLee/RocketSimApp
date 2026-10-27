@@ -8,6 +8,7 @@
 
 **Improved:**
 
+- Onboarding: a refreshed first-run flow with an optional email step on Welcome, a short demo of the RocketSim CLI and Agent Skill, and a guided CLI and Agent Skill install step that only continues once an Agent Skill is installed. Onboarding no longer ends on an empty window after a permission or install step.
 - iPhone Duo: screenshots and recordings now show the device from straight on, like the Simulator and Device Hub, instead of from a slight angle. The fold still follows the hinge angle, from closed through book to open.
 
 **Fixed:**
