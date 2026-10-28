@@ -3,6 +3,7 @@ title: "Device Hub: Restore Missing Simulator Features"
 pageTitle: "How to Restore Missing Simulator Features in Xcode 27 Device Hub"
 description: "Restore missing Xcode Device Hub Simulator features like Shake, Slow Animations, shortcuts, appearance switching, and drag-and-drop imports."
 publishedTime: 2026-09-22T09:00:00.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ./device-hub-simulator-actions.jpg
 imageAlt: "Xcode 27 Device Hub beside RocketSim Settings with shortcuts for Slow Animations, Shake, appearance, memory warnings, and Simulator shutdown."
 imageCaption: "RocketSim 16.5 restores Simulator actions and shortcuts that are missing from Xcode 27 Device Hub."
@@ -10,7 +11,7 @@ imageCaption: "RocketSim 16.5 restores Simulator actions and shortcuts that are 
 
 **Xcode Device Hub** replaces the standalone Simulator window in Xcode 27, but several Simulator features are missing. Shake, Slow Animations, familiar shortcuts, and drag-and-drop imports are workflows many iOS developers use every day.
 
-I noticed how much these features matter after replying to developers in a [Reddit discussion about Device Hub](https://www.reddit.com/r/iOSProgramming/comments/1wgxeck/the_new_device_hub_is_awful_compared_to_the_old/). Their comments directly shaped RocketSim 16.5, which restores several missing Simulator workflows without requiring you to switch back to Xcode 26.
+I noticed how much these features matter after replying to developers in a [Reddit discussion about Device Hub](https://www.reddit.com/r/iOSProgramming/comments/1wgxeck/the_new_device_hub_is_awful_compared_to_the_old/). Their comments directly shaped RocketSim 16.5, which restores several missing Simulator workflows without requiring you to switch back to Xcode 26. If you want to know what else changed from the Simulator and how to fix Device Hub when it does not launch, read [Xcode 27 Device Hub vs Simulator](/blog/fixing-devicehub-xcode-simulator/).
 
 ## Shake a Simulator in Device Hub
 
@@ -156,6 +157,20 @@ Some Device Hub workflows are different rather than missing. Switch to **Compact
 You can also open multiple Device Hub windows using **File → New Window** or <strong>⇧⌘N</strong>. This is useful when testing layouts side by side, even though the workflow is less discoverable than it was in Simulator.app.
 
 The [Device Hub support guide](/docs/features/capturing/device-hub-support/) explains window modes, AI agent support, and the complete RocketSim integration. Apple also provides a broader overview in [Get the most out of Device Hub](https://developer.apple.com/videos/play/wwdc2026/260/).
+
+## Frequently asked questions
+
+### Does Device Hub have a Shake option?
+
+Device Hub has no obvious replacement for **Device → Shake** from Simulator.app. RocketSim 16.5 adds **Shake** to the Simulator menu in the menu bar and to the Comparing tab in the side window, and you can assign a global shortcut under **RocketSim → Settings → Shortcuts → Simulator**.
+
+### Can I use Slow Animations in Device Hub?
+
+Device Hub does not include this toggle, but it remains available in RocketSim's Comparing tab. You can also assign a global shortcut for it under **Settings → Shortcuts → Simulator**.
+
+### Can I drag files into Device Hub?
+
+Device Hub no longer provides the same general drop target as Simulator.app. RocketSim 16.5 turns its visible side window into a drop target for push payloads, root certificates, photos and videos, `.app` bundles, and links.
 
 ## Conclusion
 
