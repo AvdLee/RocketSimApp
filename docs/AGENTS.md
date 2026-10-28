@@ -9,9 +9,9 @@ Always base your work on the latest default branch. Before editing anything, run
 ## Task routing
 
 - For site-specific terms such as Post, Title, Page title, and Featured post, read [CONTEXT.md](./CONTEXT.md).
-- Before creating or editing feature cards, feature pages, product documentation, or blog posts, read [CONTENT-AUTHORING.md](./CONTENT-AUTHORING.md). It contains the authoritative task-scoped guidance for frontmatter, assets, local serving, website voice, SEO, links, attribution, and install CTAs.
+- Before creating or editing feature cards, feature pages, homepage chapters, product documentation, or blog posts, read [CONTENT-AUTHORING.md](./CONTENT-AUTHORING.md). It contains the authoritative task-scoped guidance for frontmatter, assets, local serving, website voice, SEO, links, attribution, and install CTAs.
 - For the local MDX blog migration and its constraints, read [ADR 0001](./docs/adr/0001-blog-content-local-mdx.md).
-- Before editing homepage chapters (`src/collections/homepage-chapter/`) or `src/components/home/`, read the [homepage rebuild plan](./docs/plans/homepage-rebuild.md).
+- Before editing homepage chapters (`src/collections/homepage-chapter/`) or `src/components/home/`, read [Homepage chapters](./CONTENT-AUTHORING.md#homepage-chapters).
 
 ## Commands
 

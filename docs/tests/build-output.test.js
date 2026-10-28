@@ -149,10 +149,7 @@ test("Teams page preserves its conversion funnel contract", () => {
   assert.match(html, /utm_content=for_teams_bottom/);
   assert.match(html, /CTA:\+Team\+Page\+-\+Proof\+Start\+Trial/);
   assert.match(html, /CTA:\+Team\+Page\+-\+Start\+Trial/);
-  assert.match(
-    html,
-    /\/docs\/teams\/how-to-get-rocketsim-approved-at-work\//,
-  );
+  assert.match(html, /\/docs\/teams\/how-to-get-rocketsim-approved-at-work\//);
   assert.match(html, /€10 per seat\/month, billed annually/);
 });
 
@@ -584,8 +581,8 @@ test("homepage header's chapter menu follows the chapters on the page", () => {
   assert.doesNotMatch(header, /aria-current/);
 });
 
-test("homepage preview carries every Plausible event from the rebuild plan", () => {
-  // The analytics mapping in docs/docs/plans/homepage-rebuild.md and ANALYTICS.md.
+test("homepage preview carries every Plausible event in ANALYTICS.md", () => {
+  // The "Homepage rebuild events" in ANALYTICS.md.
   const html = readDist("home-next/index.html");
   const links = html.match(/<a\b[^>]*plausible-event-name=[^>]*>/g) || [];
   const withEvent = (event) =>

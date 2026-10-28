@@ -72,7 +72,7 @@ const feature = defineCollection({
 });
 
 // One file per homepage chapter; the filename is the chapter ID and anchor.
-// See docs/docs/plans/homepage-rebuild.md.
+// See "Homepage chapters" in CONTENT-AUTHORING.md.
 const homepageChapter = defineCollection({
   loader: glob({
     pattern: "**/[^_]*.md",

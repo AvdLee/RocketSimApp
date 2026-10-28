@@ -40,8 +40,8 @@ event only when tracking a genuinely new action.
 ## Homepage rebuild events
 
 The rebuilt homepage (`/home-next/` until launch, see
-[the rebuild plan](./docs/plans/homepage-rebuild.md)) keeps the live event
-names. The preview shares the live Plausible script, so filter on `page = /`
+[Homepage chapters](./CONTENT-AUTHORING.md#homepage-chapters)) keeps the live
+event names. The preview shares the live Plausible script, so filter on `page = /`
 when comparing before and after.
 
 `App Store Install` placements (`surface=landing`):
