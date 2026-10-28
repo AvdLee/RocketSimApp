@@ -156,10 +156,13 @@ export function createAutoplay({
     video.addEventListener("timeupdate", () => {
       if (index === state.index && state.status !== "playing") render();
     });
-    // A source that fails to load never ends.
-    video
-      .querySelector("source")
-      ?.addEventListener("error", () => runOnClock(index));
+    // A source that fails to load never ends. Until `loadVideo` swaps in its
+    // `data-src`, the source has no `src` and browsers report that as an
+    // error too (WebKit after this script has run), which is no failure.
+    const source = video.querySelector("source");
+    source?.addEventListener("error", () => {
+      if (source.hasAttribute("src")) runOnClock(index);
+    });
   });
 
   control.addEventListener("click", () => {
