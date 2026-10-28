@@ -78,6 +78,8 @@ export default defineConfig({
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   redirects: {
     "/team-insights": "/for-teams",
+    // The rebuilt homepage was previewed here before it replaced `/`.
+    "/home-next": "/",
     "/docs/features/rocketsim-connect/introduction-and-setup":
       "/docs/getting-started/setting-up-rocketsim-connect",
     "/docs/features/rocketsim-connect/network-traffic-monitoring":
@@ -157,7 +159,7 @@ export default defineConfig({
           "https://www.rocketsim.app/signup/trial/thank-you",
           "https://www.rocketsim.app/404",
           "https://www.rocketsim.app/docs/404",
-          // Homepage rebuild preview, until it replaces `/` at launch.
+          // Redirects to `/`, where the homepage it previewed now lives.
           "https://www.rocketsim.app/home-next",
         ].includes(normalized);
       },

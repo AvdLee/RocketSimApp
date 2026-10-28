@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Grids"
 featurePage: "design-comparison"
 asset:

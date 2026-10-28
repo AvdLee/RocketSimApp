@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Network Monitor"
 youtubeLink: "https://www.youtube.com/watch?v=ihVwU9usxgQ"
 tagLine: "Inspect, summarize, and debug network traffic in realtime"

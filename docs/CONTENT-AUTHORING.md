@@ -6,7 +6,7 @@ The schemas in `src/content.config.ts` and `src/types/pages.collection.ts` are a
 
 ## Features
 
-Every Markdown file in `src/collections/feature/` is a feature card. Features with `showOnHomepage: true` appear on the landing page. The optional `featurePage` field groups a feature under `/features/[slug]`.
+Every Markdown file in `src/collections/feature/` is a feature card. The optional `featurePage` field groups a feature under `/features/[slug]`. To show a feature on the homepage, reference it from a homepage chapter (see [Homepage chapters](#homepage-chapters)).
 
 Feature files contain YAML frontmatter followed by Markdown content. Their frontmatter has this shape:
 
@@ -37,7 +37,6 @@ type Video = {
 
 type Feature = {
   name: string;
-  showOnHomepage: boolean; // Defaults to false.
   tagLine?: string;
   docPath?: string;
   /** Slug of a post in src/content/blog/. */
@@ -65,7 +64,6 @@ Example:
 
 ```md
 ---
-showOnHomepage: true
 name: "Quick Actions"
 featurePage: "app-actions"
 asset:
@@ -89,7 +87,7 @@ The authoritative feature-page schema is `featurePageSchema` in `src/types/pages
 
 ## Homepage chapters
 
-The rebuilt homepage (`src/pages/home-next.astro`, at `/home-next/` until it replaces `/`) tells the product story in chapters. Each chapter is a Markdown file in `src/collections/homepage-chapter/`. The filename is the chapter ID and its anchor (`agents.md` → `#agents`), and the Markdown body is the chapter's intro paragraph. Keep IDs stable: they are the anchors, and per-chapter analytics may key on them later.
+The homepage (`src/pages/index.astro`) tells the product story in chapters. Each chapter is a Markdown file in `src/collections/homepage-chapter/`. The filename is the chapter ID and its anchor (`agents.md` → `#agents`), and the Markdown body is the chapter's intro paragraph. Keep IDs stable: they are the anchors, and per-chapter analytics may key on them later.
 
 Chapter frontmatter has this shape:
 

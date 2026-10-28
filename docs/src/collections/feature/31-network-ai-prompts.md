@@ -1,5 +1,4 @@
 ---
-showOnHomepage: false
 name: "Network AI Prompts"
 blogSlug: "introducing-ai-prompts-and-recording-metadata"
 blogFragment: "exporting-network-requests-ai-prompts"

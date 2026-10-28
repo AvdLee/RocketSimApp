@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Location Simulation"
 featurePage: "app-actions"
 docPath: "/docs/features/app-actions/location-simulation"

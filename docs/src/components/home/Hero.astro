@@ -12,7 +12,7 @@ import Button from "./Button.astro";
 // `ct=` is rewritten client-side to the stored first-touch referer, see
 // src/lib/utils/storedReferer.ts.
 const appStoreHref = appStoreUrl("website-header");
-// The badges keep the campaign they have on the live homepage.
+// The badges keep the campaign they had on the old homepage.
 const badgeHref = appStoreUrl("Landing Page or Form - 8653523");
 
 const badges = [
@@ -145,7 +145,13 @@ const badges = [
 </section>
 
 <script>
+  import { onPage } from "@/lib/utils/pageLifecycle";
   import { initStoredReferer } from "@/lib/utils/storedReferer";
 
-  document.addEventListener("DOMContentLoaded", initStoredReferer);
+  // Also when a visitor reaches the homepage from another page of the site,
+  // which a client-side navigation does without a DOMContentLoaded.
+  onPage(() => {
+    initStoredReferer();
+    return undefined;
+  });
 </script>

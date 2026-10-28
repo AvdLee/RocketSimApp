@@ -1,33 +1,43 @@
 ---
+// The homepage, told in chapters (see "Homepage chapters" in
+// CONTENT-AUTHORING.md).
 import Base from "@/layouts/Base.astro";
 import config from "@/config/config.json";
 
-import Header from "../old/components/Header.astro";
-import Navigation from "../old/components/Navigation.astro";
-import NavigationLink from "../old/components/NavigationLink.astro";
-
 import Notification from "../old/components/Notification.astro";
-import AppStore from "../old/components/AppStore.astro";
-import Reviews from "../old/components/Reviews.astro";
-import Features from "../old/components/Features.astro";
-import StatusBar from "../old/components/StatusBar.astro";
-import TeamInsights from "../old/components/TeamInsights.astro";
-import SocialMediaMentions from "../old/components/SocialMediaMentions.astro";
-import SubscribeToNewsletter from "../old/components/SubscribeToNewsletter.astro";
-import SupportAndFeedback from "../old/components/SupportAndFeedback.astro";
 import MobileDownloadLinkForm from "../old/components/MobileDownloadLinkForm.astro";
-
-import TrustedBrands from "@/partials/TrustedBrands.astro";
-import CallToAction from "@/partials/CallToAction.astro";
-
-import logoImage from "../assets/rocketsim-logo.svg";
+import HomeHeader from "../components/home/HomeHeader.astro";
+import Hero from "../components/home/Hero.astro";
+import Glance from "../components/home/Glance.astro";
+import Brands from "../components/home/Brands.astro";
+import Chapter from "../components/home/Chapter.astro";
+import Reviews from "../components/home/Reviews.astro";
+import SplitCta from "../components/home/SplitCta.astro";
+import Mentions from "../components/home/Mentions.astro";
+import FinalCta from "../components/home/FinalCta.astro";
+import Newsletter from "../components/home/Newsletter.astro";
+import Credit from "../components/home/extras/Credit.astro";
+import Quote from "../components/home/extras/Quote.astro";
+import Stat from "../components/home/extras/Stat.astro";
+import TeamCta from "../components/home/extras/TeamCta.astro";
+import Terminal from "../components/home/extras/Terminal.astro";
 
 const {
   site: { base_url, title: siteTitle },
   metadata: { meta_description },
 } = config;
 
-// Build SEO object for homepage
+// Order of the glance tiles and the header's chapter menu. Keep it in
+// step with the `<Chapter>` lines below; a build test checks they match.
+const chapters = [
+  "agents",
+  "captures",
+  "network",
+  "testing",
+  "design",
+  "teams",
+];
+
 const seo = {
   title: siteTitle,
   description: meta_description,
@@ -58,59 +68,81 @@ const structuredData = {
 };
 ---
 
-<Base seo={seo} structuredData={structuredData}>
+<Base seo={seo} structuredData={structuredData} header="home">
+  <HomeHeader slot="header" chapters={chapters} />
   <Notification />
-  <Header
-    title="The iOS Simulator companion for developers and AI coding agents."
-    logo={logoImage}
-    logoAlt='Written logo spelling: "RocketSim"'
-  >
-    RocketSim lets you <strong>inspect, test, and debug</strong> your app in the Simulator
-    — without breaking your flow in Xcode, Codex, or Cursor.
-  </Header>
-  <Navigation
-    microcopy="Get started for free, no signup. Works with Xcode 16+ and compatible with Xcode 27's Device Hub."
-  >
-    <NavigationLink
-      href="https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=website-header&mt=8"
-      className="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-hero plausible-event-format=button"
-      id="js-header-app-store-button"
-      asButton
-      target="_blank"
-      rel="noopener"
-    >
-      Free download
-    </NavigationLink>
-    <NavigationLink
-      href="/for-teams/"
-      className="plausible-event-name=CTA:+Homepage+Hero+-+For+Teams"
-      asSecondaryButton
-    >
-      For Teams
-    </NavigationLink>
-    <NavigationLink
-      href="/features/"
-      className="plausible-event-name=CTA:+Homepage+Hero+-+Features"
-      >Explore features &rarr;</NavigationLink
-    >
-  </Navigation>
-  <AppStore />
-  <TrustedBrands title="Used by iOS developers at" />
-  <Features take={3} />
+  <Hero />
+  <Glance chapters={chapters} />
+  <Brands />
+  <Chapter id="agents">
+    <Terminal
+      slot="aside"
+      label="RocketSim CLI commands an agent can run"
+      commands={[
+        { note: "Check RocketSim is ready", command: "rocketsim doctor" },
+        {
+          note: "Read the screen as text, not pixels",
+          command: "rocketsim elements --agent",
+        },
+        {
+          note: "Tap the Continue button",
+          command: 'rocketsim interact tap --label "Continue"',
+        },
+        {
+          note: "Wait until the screen changes",
+          command: "rocketsim wait screen-changed",
+        },
+        { note: "Test on a slow network", command: "rocketsim network set 3g" },
+        {
+          note: "Record proof for the PR",
+          command: "rocketsim video record --touches > demo.mp4",
+        },
+      ]}
+    />
+    <Stat
+      slot="aside"
+      value="~95%"
+      label="less of your agent's context than other Simulator-control tools."
+      details={[
+        { value: "99%+", label: "fewer tokens" },
+        { value: "~24%", label: "faster" },
+      ]}
+      source="Head-to-head benchmark, July 2026. Tokens and context estimated from output size."
+    />
+  </Chapter>
+  <Chapter id="captures" />
   <Reviews />
-  <CallToAction />
-  <Features skip={3} />
-  <TeamInsights />
-  <StatusBar />
-  <SubscribeToNewsletter />
-  <SocialMediaMentions />
-  <SupportAndFeedback />
+  <Chapter id="network">
+    <Credit>
+      Made possible by <a href="https://github.com/kean/Pulse">Pulse</a>, an
+      open-source project created by Alex Grebenyuk.
+    </Credit>
+  </Chapter>
+  <SplitCta />
+  <Chapter id="testing" />
+  <Chapter id="design" />
+  <Chapter id="teams">
+    <Quote
+      quote="RocketSim Team Insights finally gives us visibility into our build times beyond just gut feeling."
+      name="Max Godfrey"
+      role="iOS Developer at Tilt"
+    />
+    <TeamCta />
+  </Chapter>
+  <Mentions />
+  <FinalCta />
+  <Newsletter />
   <MobileDownloadLinkForm />
 </Base>
 
-<!-- Script to set the button URL using the UTM Campaign -->
 <script>
-  import { initStoredReferer } from "@/lib/utils/storedReferer";
+  import { initCountUps } from "@/lib/utils/countUp";
+  import { initLazyPosters } from "@/lib/utils/lazyVideo";
+  import { onPage } from "@/lib/utils/pageLifecycle";
+  import { initReveals } from "@/lib/utils/reveal";
 
-  document.addEventListener("DOMContentLoaded", initStoredReferer);
+  onPage(() => {
+    const stops = [initReveals(), initCountUps(), initLazyPosters()];
+    return () => stops.forEach((stop) => stop());
+  });
 </script>
