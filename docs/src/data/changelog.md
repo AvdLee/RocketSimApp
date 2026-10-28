@@ -1,4 +1,10 @@
-# 16.8.0
+# 16.8.1
+
+**Fixed:**
+
+- Developer folder access: Macs set up from a migration, which kept an outdated Developer folder permission, no longer ask for the permission at every launch. RocketSim now renews the outdated permission automatically, or asks for it once more when it can't. (Thanks again, J. Sabater!)
+
+# 16.8.0 (339)
 
 **New:**
 
