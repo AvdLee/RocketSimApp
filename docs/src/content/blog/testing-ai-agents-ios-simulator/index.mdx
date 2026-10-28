@@ -2,7 +2,7 @@
 title: "How We Test AI Agents for the iOS Simulator"
 description: "See how RocketSim benchmarks its CLI and Agent Skill with repeatable iOS Simulator scenarios to improve reliability, speed, and context efficiency."
 publishedTime: 2026-07-24T08:00:00.000Z
-modifiedTime: 2026-08-05T09:37:00.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ./agent-scenarios-testing-face-id.png
 imageAlt: "RocketSim Agent Benchmark app showing a Face ID test scenario next to the RocketSim side window."
 ---
@@ -122,7 +122,7 @@ Reliability matters more as those flows become longer. One wrong tap near the st
 
 RocketSim's [agentic iOS Simulator development tools](/features/agentic-development) are built around these constraints. The running Mac app keeps Simulator state warm, the CLI exposes a compact interaction layer, and the Agent Skill teaches coding tools how to use that layer consistently.
 
-Testing all three parts against repeatable scenarios gives us confidence that an improvement works beyond a single demo. It also keeps the product honest: if a richer response costs too many tokens or a faster interaction causes more wrong taps, the benchmark makes that trade-off visible.
+Testing all three parts against repeatable scenarios gives us confidence that an improvement works beyond a single demo. It also keeps the product honest: if a richer response costs too many tokens or a faster interaction causes more wrong taps, the benchmark makes that trade-off visible. If you want a practical introduction first, read [AI agents for the iOS Simulator](/blog/ai-agents-ios-simulator/), or see how you can [follow an agent live in Browser Preview](/blog/ios-simulator-browser-preview/).
 
 ## Conclusion
 
