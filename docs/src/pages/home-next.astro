@@ -114,11 +114,12 @@ const seo = {
 
 <script>
   import { initCountUps } from "@/lib/utils/countUp";
+  import { initLazyPosters } from "@/lib/utils/lazyVideo";
   import { onPage } from "@/lib/utils/pageLifecycle";
   import { initReveals } from "@/lib/utils/reveal";
 
   onPage(() => {
-    const stops = [initReveals(), initCountUps()];
+    const stops = [initReveals(), initCountUps(), initLazyPosters()];
     return () => stops.forEach((stop) => stop());
   });
 </script>

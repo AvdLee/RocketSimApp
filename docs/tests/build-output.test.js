@@ -79,6 +79,31 @@ test("homepage videos stay deferred", () => {
   }
 });
 
+test("homepage preview defers its video posters", () => {
+  // `preload="none"` doesn't hold a poster back: posters in the markup would
+  // all download with the page (initLazyPosters in lazyVideo.ts).
+  const videoTags =
+    readDist("home-next/index.html").match(/<video\b[^>]*>/g) || [];
+  assert.ok(videoTags.length > 0, "expected videos on the page");
+  const eager = videoTags.filter((tag) => /\sposter=/.test(tag));
+  assert.deepEqual(eager, [], "videos must set data-poster, not poster");
+  const posterless = videoTags.filter((tag) => !/\sdata-poster="/.test(tag));
+  assert.deepEqual(posterless, [], "every video needs a data-poster");
+});
+
+test("homepage preview loads its first screen eagerly", () => {
+  // The header and hero fill the first screen; lazy loading only delays them,
+  // and on phones the logo or a badge is the largest contentful paint.
+  const html = readDist("home-next/index.html");
+  const hero = html.match(/<section\b[^>]*data-recede[\s\S]*?<\/section>/)?.[0];
+  assert.ok(hero, "expected the hero");
+  const firstScreen = [homepageHeader(), hero].join("");
+  const images = firstScreen.match(/<img\b[^>]*>/g) || [];
+  assert.ok(images.length > 0, "expected images in the header and hero");
+  const lazy = images.filter((tag) => tag.includes('loading="lazy"'));
+  assert.deepEqual(lazy, []);
+});
+
 test("homepage preview stays out of search until launch", () => {
   const html = readDist("home-next/index.html");
   assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
@@ -117,7 +142,9 @@ test("homepage preview keeps the live App Store campaign attribution", () => {
 test("homepage preview only references media that ships", () => {
   // Tile posters are plain public paths, so a typo would not fail the build.
   const html = readDist("home-next/index.html");
-  const paths = [...html.matchAll(/(?:src|poster|data-src)="(\/[^"]+)"/g)]
+  const paths = [
+    ...html.matchAll(/(?:src|poster|data-src|data-poster)="(\/[^"]+)"/g),
+  ]
     .map(([, path]) => path)
     .filter((path) => !path.startsWith("//"));
   assert.ok(paths.length > 0, "expected local media on the page");
