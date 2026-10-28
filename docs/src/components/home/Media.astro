@@ -10,7 +10,10 @@ interface Props {
 }
 
 // Videos stay on their poster until the presentation's script loads and
-// plays them (src/lib/utils/autoplay.ts, CloserLook.astro).
+// plays them (src/lib/utils/autoplay.ts, CloserLook.astro). The poster is
+// deferred too, as `data-poster`, until the video is about a screen away
+// (`initLazyPosters` in src/lib/utils/lazyVideo.ts): set up front, every
+// poster on the page would download with it.
 // `sizes` is the width the media can take inside its frame, inset and all,
 // not the frame's, so a 2x screen picks the variant that fits the media
 // rather than its frame. 2400 covers the widest gallery media (808px at 3x)
@@ -33,7 +36,7 @@ const { media, sizes, class: className } = Astro.props;
     <video
       class={className}
       aria-label={media.alt}
-      poster={media.poster}
+      data-poster={media.poster}
       preload="none"
       muted
       playsinline

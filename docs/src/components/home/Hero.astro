@@ -47,6 +47,7 @@ const badges = [
       width={96}
       height={96}
       densities={[1, 2]}
+      loading="eager"
       class="mx-auto mb-10 size-24 [@media(max-height:940px)]:hidden"
       data-hero-item
       style="--hero-order: 0"
@@ -118,12 +119,14 @@ const badges = [
           >
             {/* From `md`, the badges grow into the room a taller window
               leaves: from 72px at 940px, where the app icon comes back and
-              the hero is full, up to 136px. `width` matches that cap. */}
+              the hero is full, up to 136px. `width` matches that cap.
+              Eager, like everything in the hero: it fills the first screen. */}
             <Image
               src={image}
               alt={alt}
               width={188}
               densities={[1, 2]}
+              loading="eager"
               class="h-16 w-auto md:h-[clamp(72px,calc(72px+(100svh-940px)*0.4),136px)]"
             />
           </a>

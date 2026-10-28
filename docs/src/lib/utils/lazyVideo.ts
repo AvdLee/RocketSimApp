@@ -8,9 +8,40 @@ interface LazyVideoState {
 const videoStates = new WeakMap<HTMLVideoElement, LazyVideoState>();
 let observer: IntersectionObserver | undefined;
 
-// Swaps in the deferred `data-src` source. Also used by presentations that
-// control playback themselves.
+// Swaps in the deferred `data-poster`, for videos that defer their poster
+// (src/components/home/Media.astro).
+function setPoster(video: HTMLVideoElement): void {
+  const poster = video.dataset.poster;
+  if (poster && !video.hasAttribute("poster")) video.poster = poster;
+}
+
+// Gives each homepage video its poster once it is about a screen away. A
+// poster downloads as soon as the video has one, `preload="none"` or not, so
+// posters in the markup would all load with the page. Returns what stops it
+// when the page is left.
+export function initLazyPosters(): () => void {
+  const observer = new IntersectionObserver(
+    (entries, self) => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting || !(target instanceof HTMLVideoElement)) return;
+        setPoster(target);
+        self.unobserve(target);
+      });
+    },
+    { rootMargin: "100% 0px" },
+  );
+
+  document
+    .querySelectorAll<HTMLVideoElement>("video[data-poster]")
+    .forEach((video) => observer.observe(video));
+
+  return () => observer.disconnect();
+}
+
+// Swaps in the deferred `data-src` source, and the poster if it is still
+// deferred. Also used by presentations that control playback themselves.
 export function loadVideo(video: HTMLVideoElement): void {
+  setPoster(video);
   if (video.dataset.loaded === "true") return;
   const source = video.querySelector<HTMLSourceElement>("source[data-src]");
   const src = source?.dataset.src;

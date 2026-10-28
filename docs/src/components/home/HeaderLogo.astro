@@ -4,8 +4,16 @@ import { Image } from "astro:assets";
 import logo from "@/assets/rocketsim-logo.svg";
 
 // The wordmark at the start of each of the header's layers, linking home.
+// Eager: it is on screen from the first paint, often as the largest
+// contentful paint on phones.
 ---
 
 <a href="/" class="inline-flex no-underline" aria-label="RocketSim home">
-  <Image src={logo} alt="RocketSim" height={24} class="h-6 w-auto" />
+  <Image
+    src={logo}
+    alt="RocketSim"
+    height={24}
+    loading="eager"
+    class="h-6 w-auto"
+  />
 </a>
