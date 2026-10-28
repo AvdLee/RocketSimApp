@@ -1,6 +1,6 @@
 # Content Authoring Guide
 
-Use this guide when creating or editing feature cards, feature pages, product documentation, or blog posts. For site-specific terms such as Post, Title, Page title, and Featured post, also read [CONTEXT.md](./CONTEXT.md).
+Use this guide when creating or editing feature cards, feature pages, homepage chapters, product documentation, or blog posts. For site-specific terms such as Post, Title, Page title, and Featured post, also read [CONTEXT.md](./CONTEXT.md).
 
 The schemas in `src/content.config.ts` and `src/types/pages.collection.ts` are authoritative. Update this guide when those schemas change.
 
@@ -86,6 +86,83 @@ Put videos in `public/` and optimize their file size, quality, and resolution be
 Feature category pages live in `src/collections/feature-page/` and render at `/features/[slug]`. Each has a hero section and an optional bento grid. The current slugs are the `featurePage` values listed above.
 
 The authoritative feature-page schema is `featurePageSchema` in `src/types/pages.collection.ts`. Follow a neighboring feature-page file when authoring frontmatter and verify it against that schema.
+
+## Homepage chapters
+
+The rebuilt homepage (`src/pages/home-next.astro`, at `/home-next/` until it replaces `/`) tells the product story in chapters. Each chapter is a Markdown file in `src/collections/homepage-chapter/`. The filename is the chapter ID and its anchor (`agents.md` → `#agents`), and the Markdown body is the chapter's intro paragraph. Keep IDs stable: they are the anchors, and per-chapter analytics may key on them later.
+
+Chapter frontmatter has this shape:
+
+```typescript
+type Media =
+  | {
+      type: "image";
+      /** Path to an image inside src/, relative to the chapter file. */
+      path: string;
+      alt: string;
+    }
+  | {
+      type: "video";
+      /** Path to a video inside public/. */
+      path: string;
+      alt: string;
+    };
+
+type ChapterItem = {
+  /** ID of a file in src/collections/feature/. */
+  feature?: string;
+  /** Overrides; anything left out falls back to the feature. */
+  title?: string; // Falls back to the feature's name.
+  description?: string; // Falls back to its tagLine.
+  media?: Media; // Falls back to its asset.
+  /** Images only: the detail the stage zooms in on while the item shows. x and y run from 0 to 1. */
+  focus?: { x: number; y: number; zoom?: number }; // zoom: 1–3, defaults to 1.5.
+  /** Fill the stage edge to edge, for a capture that already has its own backdrop. */
+  bleed?: boolean;
+};
+
+type HomepageChapter = {
+  /** Eyebrow, glance tile label and chapter menu label. */
+  name: string;
+  /** Chapter menu label when name is too long for it. */
+  menuLabel?: string;
+  title: string;
+  /** Picks the --color-chapter-* token in src/styles/main.css. */
+  color: "agents" | "captures" | "network" | "testing" | "design" | "teams";
+  /** The chapter's tile in the glance grid. Set exactly one of image and poster. */
+  tile: {
+    title: string;
+    image?: string; // An image inside src/.
+    poster?: string; // A public path, such as /features/posters/<video>.webp.
+  };
+  presentation: "tabs" | "gallery" | "closer-look";
+  /** At least one, in display order. */
+  items: ChapterItem[];
+  links?: { label: string; href: string }[];
+};
+```
+
+Follow a neighboring chapter file for a full example.
+
+- **Items** reference features so the homepage and `/features/*` stay in step. Override only what the homepage says differently. An item without a `feature` is an inline item and must set `title`, `description` and `media` itself.
+- **Media** points at the original file where it already lives, in a docs, blog or `src/assets/homepage/` folder, instead of a copy. A video's poster is `posters/<name>.webp` next to it, the same convention feature cards use. Every homepage video stays `preload="none"`, so the poster is its first frame.
+- **Presentations** take the same items, so a chapter switches between `tabs`, `gallery` and `closer-look` by changing one field. `focus` and `bleed` apply to `tabs` and `closer-look`; the gallery ignores them.
+- **Colors:** a new hue needs a `--color-chapter-*` token and a new `color` value in the schema. A new chapter can also reuse an existing hue.
+
+### Page order and extras
+
+The page template sets the order of everything. It places each chapter with a `<Chapter id="…" />` line, and its `chapters` array orders the glance tiles and the header's chapter menu. There is no order field.
+
+- **Add a chapter:** add its file, a `<Chapter>` line where it belongs, and its ID in the `chapters` array.
+- **Reorder chapters:** move the `<Chapter>` lines and the array entries together.
+- **Remove a chapter:** delete its line and its array entry.
+- **Change a chapter's features:** edit its `items`.
+
+Extras such as the terminal, stat, quote, credit and Teams call-to-action are components in `src/components/home/extras/`, not content. The template passes them to a chapter as children: `slot="aside"` places one next to the stage, which only the `tabs` presentation has room for, and the default slot places it after the links. Extras keep their markup and Plausible events in code, so content never carries free-form HTML. The homepage's events are listed in [ANALYTICS.md](./ANALYTICS.md#homepage-rebuild-events).
+
+In `src/components/home/`, import with relative paths or `@/` → `src/`. Avoid `@/components/*`: `tsconfig.json` maps it to `src/layouts/components/` and knip to `src/components/`.
+
+The build fails on an unknown chapter or feature, an item with nothing to fall back on, a focus on a video, a tile with both or neither of `image` and `poster`, or an `aside` extra on a chapter that isn't `tabs`. A build test also fails when the `chapters` array and the `<Chapter>` lines disagree.
 
 ## Product documentation
 
