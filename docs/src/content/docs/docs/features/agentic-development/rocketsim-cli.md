@@ -45,6 +45,8 @@ RocketSim is not just a standalone command that starts from scratch every time. 
 
 The CLI uses RocketSim's [`rs/1` protocol](/docs/features/agentic-development/rs1-protocol) for agent workflows. You do not need to learn the protocol details; it is the compact, agent-optimized layer that lets RocketSim provide reliable screen reads, interaction feedback, and recovery paths while keeping output small.
 
+RocketSim does not ship an MCP server. Read [iOS Simulator MCP vs CLI and Agent Skill](/blog/ios-simulator-mcp/) to see how the two approaches compare and how to choose.
+
 Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
 
 ## Key commands
