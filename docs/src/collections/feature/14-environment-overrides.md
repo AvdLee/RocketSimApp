@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Environment Overrides"
 youtubeLink: "https://www.youtube.com/watch?v=RQ7tXHyY5Ic"
 featurePage: "accessibility"

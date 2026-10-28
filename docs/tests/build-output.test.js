@@ -65,25 +65,16 @@ test("no rendered page references a .jpg poster", () => {
 });
 
 test("homepage videos stay deferred", () => {
-  // Covers the homepage rebuild preview until it replaces `/` at launch.
-  for (const page of ["index.html", "home-next/index.html"]) {
-    const html = readDist(page);
-    const videoTags = html.match(/<video\b[^>]*>/g) || [];
-    assert.ok(videoTags.length > 0, `expected videos on ${page}`);
-    const eager = videoTags.filter((tag) => !tag.includes('preload="none"'));
-    assert.deepEqual(
-      eager,
-      [],
-      `every video on ${page} must keep preload=none`,
-    );
-  }
+  const videoTags = readDist("index.html").match(/<video\b[^>]*>/g) || [];
+  assert.ok(videoTags.length > 0, "expected videos on the homepage");
+  const eager = videoTags.filter((tag) => !tag.includes('preload="none"'));
+  assert.deepEqual(eager, [], "every homepage video must keep preload=none");
 });
 
-test("homepage preview defers its video posters", () => {
+test("homepage defers its video posters", () => {
   // `preload="none"` doesn't hold a poster back: posters in the markup would
   // all download with the page (initLazyPosters in lazyVideo.ts).
-  const videoTags =
-    readDist("home-next/index.html").match(/<video\b[^>]*>/g) || [];
+  const videoTags = readDist("index.html").match(/<video\b[^>]*>/g) || [];
   assert.ok(videoTags.length > 0, "expected videos on the page");
   const eager = videoTags.filter((tag) => /\sposter=/.test(tag));
   assert.deepEqual(eager, [], "videos must set data-poster, not poster");
@@ -91,10 +82,10 @@ test("homepage preview defers its video posters", () => {
   assert.deepEqual(posterless, [], "every video needs a data-poster");
 });
 
-test("homepage preview loads its first screen eagerly", () => {
+test("homepage loads its first screen eagerly", () => {
   // The header and hero fill the first screen; lazy loading only delays them,
   // and on phones the logo or a badge is the largest contentful paint.
-  const html = readDist("home-next/index.html");
+  const html = readDist("index.html");
   const hero = html.match(/<section\b[^>]*data-recede[\s\S]*?<\/section>/)?.[0];
   assert.ok(hero, "expected the hero");
   const firstScreen = [homepageHeader(), hero].join("");
@@ -104,17 +95,27 @@ test("homepage preview loads its first screen eagerly", () => {
   assert.deepEqual(lazy, []);
 });
 
-test("homepage preview stays out of search until launch", () => {
-  const html = readDist("home-next/index.html");
-  assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+test("homepage is indexed, and its old preview path redirects to it", () => {
+  const html = readDist("index.html");
+  assert.doesNotMatch(html, /<meta name="robots"[^>]*noindex/);
+  assert.match(
+    html,
+    /<link rel="canonical" href="https:\/\/www\.rocketsim\.app\/?"/,
+  );
+  assert.match(html, /"@type":\s*"SoftwareApplication"/);
 
   const sitemap = readDist("sitemap-0.xml");
+  assert.match(sitemap, /<loc>https:\/\/www\.rocketsim\.app\/<\/loc>/);
   assert.doesNotMatch(sitemap, /home-next/);
+
+  const preview = readDist("home-next/index.html");
+  assert.match(preview, /<meta http-equiv="refresh" content="0;url=\/"/);
 });
 
-test("homepage preview keeps the live App Store campaign attribution", () => {
-  // The `ct=` campaign feeds App Store Connect, so each placement must keep
-  // the value it has on the live homepage.
+test("homepage keeps the App Store campaign attribution", () => {
+  // The `ct=` campaign feeds App Store Connect, so each placement keeps the
+  // value it had on the old homepage. The hero's is the default that
+  // storedReferer.ts rewrites to the first-touch referer.
   const campaigns = (html, placement) =>
     [
       ...html.matchAll(
@@ -125,23 +126,21 @@ test("homepage preview keeps the live App Store campaign attribution", () => {
       ),
     ].map(([tag]) => tag.match(/[?&]ct=([^&"]+)/)?.[1]);
 
-  const live = readDist("index.html");
-  const preview = readDist("home-next/index.html");
-  for (const placement of [
-    "landing-hero",
-    "landing-app-store-reviews",
-    "landing-app-store-featured",
-    "landing-cta-banner",
+  const html = readDist("index.html");
+  const badges = "Landing%20Page%20or%20Form%20-%208653523";
+  for (const [placement, expected] of [
+    ["landing-hero", ["website-header"]],
+    ["landing-app-store-reviews", [badges]],
+    ["landing-app-store-featured", [badges]],
+    ["landing-cta-banner", ["website-cta-banner"]],
   ]) {
-    const expected = campaigns(live, placement);
-    assert.ok(expected.length > 0, `expected ${placement} on the homepage`);
-    assert.deepEqual(campaigns(preview, placement), expected, placement);
+    assert.deepEqual(campaigns(html, placement), expected, placement);
   }
 });
 
-test("homepage preview only references media that ships", () => {
+test("homepage only references media that ships", () => {
   // Tile posters are plain public paths, so a typo would not fail the build.
-  const html = readDist("home-next/index.html");
+  const html = readDist("index.html");
   const paths = [
     ...html.matchAll(/(?:src|poster|data-src|data-poster)="(\/[^"]+)"/g),
   ]
@@ -150,12 +149,25 @@ test("homepage preview only references media that ships", () => {
   assert.ok(paths.length > 0, "expected local media on the page");
   const missing = paths.filter((path) => !existsSync(join(DIST, path)));
   assert.deepEqual(missing, []);
+  // A checkout without `git lfs pull` ships the pointer file instead, a few
+  // lines of text in place of the image or video.
+  const pointers = [...new Set(paths)].filter((path) =>
+    readFileSync(join(DIST, path))
+      .subarray(0, 40)
+      .toString()
+      .startsWith("version https://git-lfs"),
+  );
+  assert.deepEqual(
+    pointers,
+    [],
+    "media is a Git LFS pointer; run git lfs pull",
+  );
 });
 
 test("homepage glance tiles follow the chapters placed on the page", () => {
   // The `chapters` array in the page orders the tiles; the `<Chapter>` lines
   // order the sections. They must list the same chapters in the same order.
-  const html = readDist("home-next/index.html");
+  const html = readDist("index.html");
   const tiles = [...html.matchAll(/<a[^>]*data-glance-tile[^>]*>/g)].map(
     ([tag]) => tag.match(/href="#([^"]+)"/)?.[1],
   );
@@ -268,11 +280,11 @@ test("camera doc emits FAQPage structured data", () => {
   );
 });
 
-// The chapter sections on the homepage preview, with their inner markup.
+// The chapter sections on the homepage, with their inner markup.
 // Scripts are left out: Astro renders a component's script inline, next to
 // the first instance, and its selectors would read as markup.
 function homepageChapters() {
-  const html = readDist("home-next/index.html").replace(
+  const html = readDist("index.html").replace(
     /<script\b[\s\S]*?<\/script>/g,
     "",
   );
@@ -300,12 +312,9 @@ const isHidden = (tag) => /\shidden\b/.test(tag);
 // Crossfading panels and header layers stay rendered, and go inert instead.
 const isInert = (tag) => /\sinert(?=[\s>])/.test(tag);
 
-// The homepage preview's markup, without its scripts.
+// The homepage's markup, without its scripts.
 function homepageMarkup() {
-  return readDist("home-next/index.html").replace(
-    /<script\b[\s\S]*?<\/script>/g,
-    "",
-  );
+  return readDist("index.html").replace(/<script\b[\s\S]*?<\/script>/g, "");
 }
 
 // One homepage chapter by ID, from homepageChapters().
@@ -559,7 +568,7 @@ test("homepage Teams chapter keeps its Plausible events", () => {
   assert.match(readDist("for-teams/index.html"), new RegExp(`id="${anchor}"`));
 });
 
-// The homepage preview's header, without its scripts.
+// The homepage's header, without its scripts.
 function homepageHeader() {
   const header = homepageMarkup().match(
     /<header\b[^>]*data-home-header[\s\S]*?<\/header>/,
@@ -608,9 +617,9 @@ test("homepage header's chapter menu follows the chapters on the page", () => {
   assert.doesNotMatch(header, /aria-current/);
 });
 
-test("homepage preview carries every Plausible event in ANALYTICS.md", () => {
+test("homepage carries every Plausible event in ANALYTICS.md", () => {
   // The "Homepage rebuild events" in ANALYTICS.md.
-  const html = readDist("home-next/index.html");
+  const html = readDist("index.html");
   const links = html.match(/<a\b[^>]*plausible-event-name=[^>]*>/g) || [];
   const withEvent = (event) =>
     links.filter((tag) =>
@@ -651,28 +660,30 @@ test("homepage preview carries every Plausible event in ANALYTICS.md", () => {
   assert.doesNotMatch(html, /CTA:\+Homepage\+Hero\+-\+Features/);
 });
 
-test("homepage preview shows the live Senja widgets, loaded lazily", () => {
+test("homepage shows the live Senja widgets, loaded lazily", () => {
   const embeds = (html) => html.match(/<div[^>]*\bsenja-embed\b[^>]*>/g) || [];
   const widgetIds = (html) =>
     embeds(html).map((tag) => tag.match(/data-id="([^"]+)"/)?.[1]);
 
-  const preview = readDist("home-next/index.html");
-  const live = widgetIds(readDist("index.html"));
-  assert.equal(live.length, 2, "reviews and mentions on the homepage");
-  assert.deepEqual(widgetIds(preview), live);
+  const html = readDist("index.html");
+  // Reviews, then mentions: the widgets the old homepage showed.
+  assert.deepEqual(widgetIds(html), [
+    "3e26a85b-fd07-45d2-88b6-a69564850353",
+    "7b8ef1aa-201a-401a-a9d3-99fdf5325311",
+  ]);
 
-  for (const tag of embeds(preview)) {
+  for (const tag of embeds(html)) {
     // LazySenja injects the loader near the viewport, and the reserved
     // height keeps the widget from shifting the page when it renders.
     assert.match(tag, /\bjs-lazy-senja\b/);
     assert.match(tag, /data-senja-src="https:\/\/[^"]+"/);
     assert.match(tag, /\bmin-h-/);
   }
-  assert.doesNotMatch(preview, /<script[^>]*src="[^"]*senja/);
+  assert.doesNotMatch(html, /<script[^>]*src="[^"]*senja/);
 });
 
-test("homepage preview keeps the newsletter, download card and subscribe notice", () => {
-  const html = readDist("home-next/index.html");
+test("homepage keeps the newsletter, download card and subscribe notice", () => {
+  const html = readDist("index.html");
   // The Kit form; Base.astro sends `Newsletter Form Conversion` on submit.
   assert.match(
     html,
@@ -684,11 +695,11 @@ test("homepage preview keeps the newsletter, download card and subscribe notice"
   assert.match(html, /You're now subscribed/);
 });
 
-test("homepage preview sections share one spacing rhythm", () => {
+test("homepage sections share one spacing rhythm", () => {
   // `--spacing-section` in src/styles/main.css sets the space above every
   // chapter and the sections between them, instead of a hand-picked
   // `pt-[120px] md:pt-[184px]` on each.
-  const html = readDist("home-next/index.html");
+  const html = readDist("index.html");
   const sections = html.match(/<section\b[^>]*>/g) || [];
   const rhythm = sections.filter((tag) =>
     /class="[^"]*\bp[ty]-section\b/.test(tag),
@@ -698,8 +709,8 @@ test("homepage preview sections share one spacing rhythm", () => {
   assert.doesNotMatch(html, /\bp[ty]-\[(?:120|184)px\]/);
 });
 
-test("homepage preview lets keyboard users skip the header", () => {
-  const html = readDist("home-next/index.html");
+test("homepage lets keyboard users skip the header", () => {
+  const html = readDist("index.html");
   const header = homepageHeader();
   const firstLink = header.match(/<a\b[^>]*>[\s\S]*?<\/a>/)?.[0] ?? "";
   assert.match(firstLink, /href="#main-content"/);
@@ -707,7 +718,7 @@ test("homepage preview lets keyboard users skip the header", () => {
   assert.match(html, /<main\b[^>]*id="main-content"/);
 });
 
-test("homepage preview hides decorative arrows from screen readers", () => {
+test("homepage hides decorative arrows from screen readers", () => {
   // VoiceOver reads "→" as "right arrow"; the link text says enough.
   const html = homepageMarkup();
   const spoken = (markup) =>
@@ -721,12 +732,10 @@ test("homepage preview hides decorative arrows from screen readers", () => {
   assert.deepEqual(noisy, []);
 });
 
-test("homepage preview gives every image its dimensions", () => {
+test("homepage gives every image its dimensions", () => {
   // Without a size the browser can't reserve the image's space. An image
   // sized by CSS in a fixed frame, such as a glance tile poster, is fine.
-  const main = readDist("home-next/index.html").match(
-    /<main\b[\s\S]*<\/main>/,
-  )?.[0];
+  const main = readDist("index.html").match(/<main\b[\s\S]*<\/main>/)?.[0];
   assert.ok(main, "expected the main element");
   const unsized = (main.match(/<img\b[^>]*>/g) || []).filter(
     (tag) =>

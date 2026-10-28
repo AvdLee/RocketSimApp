@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "iOS Simulator Browser Preview"
 tagLine: "Review your app and guide AI agents from your browser"
 featurePage: "agentic-development"

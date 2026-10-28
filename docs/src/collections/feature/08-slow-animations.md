@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Slow Animations"
 featurePage: "design-comparison"
 asset:

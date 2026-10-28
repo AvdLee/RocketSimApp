@@ -16,14 +16,11 @@ event only when tracking a genuinely new action.
   Build Insights showcase (`/for-teams/#insight-showcase-title`).
 - `CTA: Homepage Insights - Trial` opens the Teams trial form from the
   homepage's Teams chapter (`utm_content=homepage_insights`). It is new with the
-  homepage rebuild and only on the `/home-next/` preview until launch. Add it as
-  a Plausible goal before the launch.
+  homepage rebuild.
 - `CTA: Homepage Split - Trial` opens the Teams trial form from the "For your
   team" card in the homepage's split call-to-action
-  (`utm_content=homepage_split`). The live homepage's CTA banner had no event
-  for this button. It is new with the homepage rebuild and only on the
-  `/home-next/` preview until launch. Add it as a Plausible goal before the
-  launch.
+  (`utm_content=homepage_split`). The old homepage's CTA banner had no event
+  for this button. It is new with the homepage rebuild.
 - `CTA: Team Page - See Pricing` opens `/pricing/`.
 - `CTA: Team Page - Start Trial` opens the Teams trial form from the hero or
   bottom call-to-action.
@@ -39,9 +36,11 @@ event only when tracking a genuinely new action.
 
 ## Homepage rebuild events
 
-The rebuilt homepage (`/home-next/` until launch, see
-[Homepage chapters](./CONTENT-AUTHORING.md#homepage-chapters)) keeps the live
-event names. The preview shares the live Plausible script, so filter on `page = /`
+The rebuilt homepage (see
+[Homepage chapters](./CONTENT-AUTHORING.md#homepage-chapters)) replaced `/` on
+**2026-10-28**, the before/after boundary for homepage reports. It kept the old
+homepage's event names. Before launch it was previewed at `/home-next/`, which
+now redirects to `/`, with the same Plausible script, so filter on `page = /`
 when comparing before and after.
 
 `App Store Install` placements (`surface=landing`):
@@ -61,11 +60,12 @@ Other homepage events: `CTA: Homepage Hero - For Teams`, and the Teams events
 above (`CTA: Homepage Split - Trial`, `CTA: Homepage Insights - Trial`,
 `CTA: Homepage Insights - Learn More`, `CTA: Homepage Mid 2 - Trial`). The
 `Mobile Download …` events, `Newsletter Form Conversion` and `Stored Referer`
-come from the same components as on the live homepage.
+come from the same components as on the old homepage. `Stored Referer` now also
+fires when a visitor reaches `/` from another page of the site, which the old
+homepage missed, so expect slightly more of it after launch.
 
 `CTA: Homepage Hero - Features` is retired with the rebuild: the glance grid
-replaces the hero's "Explore features" link. It keeps firing on the live
-homepage until launch.
+replaces the hero's "Explore features" link. It stops at launch.
 
 ## Inline trial form events
 
