@@ -5,6 +5,8 @@ sidebar:
   order: 4
 ---
 
+RocketSim toggles accessibility settings, Dark Mode, color filters, and Dynamic Type on the iOS Simulator from the Accessibility side window **Toggles** tab without opening Simulator Settings. Change Increase Contrast, Reduce Motion, Liquid Glass options, or text sizes and see the effect in your running app immediately.
+
 Environment Overrides are the toggles in the **Accessibility** window of RocketSim's side window, on the **Toggles** tab. This page is a short overview; [Toggles & Dynamic Text](/docs/features/accessibility/toggles-and-dynamic-text/) covers every toggle in detail.
 
 Testing accessibility settings usually means navigating deep into Simulator Settings. RocketSim's Environment Overrides put all the important toggles right in the side window, so you can switch settings while looking at your app.

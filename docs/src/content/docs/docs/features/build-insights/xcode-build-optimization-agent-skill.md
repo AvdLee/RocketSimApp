@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+RocketSim tracks how long your Xcode builds take in Build Insights while the open-source Xcode Build Optimization Agent Skill gives an AI assistant a structured workflow to investigate slow builds and draft fixes. After you apply changes, use Build Insights again to see whether clean or incremental times improved.
+
 RocketSim helps you understand how your builds behave over time. The [Xcode Build Optimization Agent Skill](https://github.com/AvdLee/Xcode-Build-Optimization-Agent-Skill) helps you improve them.
 
 Together, they make a strong workflow:

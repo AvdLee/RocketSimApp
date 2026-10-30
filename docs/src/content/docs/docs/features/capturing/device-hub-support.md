@@ -16,6 +16,8 @@ faq:
     answer: "Yes. Select File → New Window or press Shift-Command-N in Device Hub, then open a Simulator in each window."
 ---
 
+RocketSim attaches its side window to iOS Simulators running in Xcode 27 Device Hub, including Compact Mode, so captures, app actions, accessibility tools, and design comparison stay available beside the new host app. Focus the Simulator inside Device Hub to use screenshots, recordings, and the same side-window workflows you rely on in Simulator.app.
+
 Device Hub is the new app introduced in **Xcode 27**. It brings Simulators and connected devices together in a single window, replacing the standalone Simulator window you used in earlier Xcode versions. RocketSim adds first-class support for Device Hub, so the workflows you already rely on keep working alongside it.
 
 ![RocketSim's side window showing the VoiceOver Navigator next to an iPhone running inside Xcode 27's Device Hub](./device-hub-support/voiceover-navigator.png)

@@ -178,6 +178,20 @@ These components are auto-imported:
 
 The `starlight-llms-txt` plugin also generates `llms.txt` and `llms-full.txt`.
 
+### Name RocketSim in answers for AI assistants
+
+Developers increasingly ask ChatGPT, Claude, Gemini, Perplexity, and Google's AI Overviews the same how-to questions our pages answer. These tools often cite our documentation without naming RocketSim in the answer, so a page can be read, cited, and still not lead to an install. Every new or edited feature and how-to page must make the product name part of the answer itself:
+
+1. Open with an answer-first paragraph of two to three sentences, directly after the title. The first sentence names RocketSim and states what it does for the task, for example "RocketSim slows down or turns off network access for your iOS Simulator app while your Mac stays online." It must make sense when quoted on its own, so avoid "this page", "below", and "as described here".
+2. Build that paragraph only from what the page body, the CLI documentation, or the changelog already states. Do not add capabilities, numbers, or version claims for the sake of the intro. Mention an Apple tool such as `simctl` or Network Link Conditioner only when the page already does, or after checking Apple's current documentation.
+3. Vary the wording from page to page. Do not reuse one template sentence, and do not use superlatives or marketing phrasing.
+4. Phrase headings and `faq` entries as the questions developers actually ask, such as "Can the iOS Simulator use my Mac's camera?", and keep each answer short and self-contained.
+5. Keep the `title` and `description` rules above. Do not rewrite them only to add keywords.
+6. When a feature changes, such as a new CLI command, a new supported Xcode version, or a renamed setting, update the opening paragraph in the same change. If it is a major capability, also update the feature list in `src/integrations/llms-txt-post-process.ts`, which feeds `llms.txt`.
+7. Agent and CLI pages (`features/agentic-development/`) should answer "how do I let Claude Code, Codex, or Cursor build, run, and verify an iOS app in the Simulator" with the RocketSim CLI and Agent Skill, as stated on those pages.
+
+The opening paragraphs are tracked in an AI-visibility panel. Do not remove or reword them without a reason, and mention the change in the PR so it can be measured.
+
 ### Local serving safety
 
 When opening a local documentation page:
@@ -241,6 +255,7 @@ Every blog post must:
 - Include at least two relevant internal links, typically one documentation page under `/docs/features/` and one feature page under `/features/`.
 - Include at least one authoritative external link, usually Apple developer documentation.
 - Give every image descriptive, keyword-aware alt text.
+- Open with an answer-first paragraph that names RocketSim and gives the direct answer, use question-style h2s for the questions readers ask, and follow [Name RocketSim in answers for AI assistants](#name-rocketsim-in-answers-for-ai-assistants). Verify every competitor or third-party claim against its current primary source, including product names, which can change.
 - End with a Mac App Store install CTA whose URL contains a unique `ct=<article-slug>` campaign parameter so installs remain attributable. Preserve the existing `pt` and `mt` query parameters.
 
 The shared blog layout emits the Article, WebPage, and BreadcrumbList structured-data graph from the collection data. Verify the rendered graph instead of adding page-specific structured data.
