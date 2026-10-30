@@ -10,6 +10,8 @@ sidebar:
 VoiceOver Navigator helps you verify reading order and activation flow without leaving the Simulator.
 ::::
 
+RocketSim's VoiceOver Navigator shows numbered overlays on the iOS Simulator for VoiceOver reading order and lets you step through elements with keyboard shortcuts from the side window Accessibility tab. You can check rotors, activation, and focus without enabling VoiceOver on a physical iPhone.
+
 Testing VoiceOver used to mean grabbing a physical device, enabling VoiceOver, and swiping through your app. VoiceOver Navigator lets you stay in the Simulator: you get a visual overlay of the accessibility element order and keyboard-driven navigation, so you can verify reading order and rotor behavior without leaving your flow.
 
 For a walkthrough that starts with the Xcode options and the physical-device workflow, read [how to test VoiceOver on the Xcode Simulator](/blog/how-to-test-voiceover-on-the-xcode-simulator/).

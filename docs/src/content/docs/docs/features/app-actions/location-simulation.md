@@ -5,6 +5,8 @@ sidebar:
   label: "Location Simulation"
 ---
 
+RocketSim simulates GPS on the iOS Simulator from the Locations side window: built-in scenarios, custom map pins, saved App Actions, and car or walking routes with custom coordinates. The Simulator exposes similar built-in scenarios on its own; RocketSim adds repeatable App Actions, route editing, map coordinate picking, and optional physical-device support in recent releases.
+
 Testing location-aware apps should not require driving around with a MacBook. RocketSim lets you simulate GPS updates on the iOS Simulator and, starting with RocketSim 16.4 and Xcode 27, on a connected physical iPhone or iPad.
 
 ## Quick location controls
