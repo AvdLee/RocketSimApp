@@ -59,6 +59,8 @@ Checks whether the CLI install, RocketSim app, IPC connection, Simulator state, 
 rocketsim doctor
 ```
 
+`doctor` also warns when the Simulator's accessibility is switched off, which makes `elements` come back empty. The warning includes the `xcrun simctl spawn <udid> defaults write com.apple.Accessibility ...` commands that switch it back on.
+
 ### Focused simulator
 
 Returns the currently focused simulator as JSON, including name, runtime, and UDID.
@@ -94,6 +96,10 @@ The `--agent` flag is the recommended default for agent workflows. It returns co
 Elements that expose custom accessibility actions get an extra `!actions|id|...` row. Every element, including the controls inside a combined row, stays tappable by id.
 
 Both compact modes omit individual software-keyboard keys because keyboard visibility is already reported in the response header. They also omit elements whose frames are fully outside the device canvas. Debug and plain JSON output remain unchanged when you need the complete hierarchy.
+
+When the Simulator returns no accessibility elements at all, `elements` adds an `accessibility_tree_empty` issue with the recovery commands instead of an unexplained empty list. Enable `AccessibilityEnabled` and `ApplicationAccessibilityEnabled` for the Simulator, relaunch the app, and read the screen again. The issue can also appear for a moment while an app is still launching.
+
+RocketSim reports the software keyboard as visible on iOS 26 and 27, so `elements` and `wait keyboard` agree with what is on screen.
 
 RocketSim's element pipeline is designed for real app navigation. It can include visible controls from top bars, navigation bars, tab bars, and other chrome that agents often need to move through a flow. When web content or other complex views expose limited accessibility data, RocketSim can add recovery hints so the agent knows when to use visual context.
 
@@ -196,6 +202,7 @@ rocketsim duo hinge [--udid <udid>]
 ```
 
 - `duo pose` moves the Simulator hinge to the `closed`, `book`, or `open` pose. It does not need Device Hub or the macOS Accessibility permission.
+- `duo pose` waits for the hinge animation to finish and polls the angle for up to about six seconds before it gives up with `wait_timeout`, so a slow hinge no longer fails a pose that is still moving.
 - `duo hinge` reports `hinge_state` (`closed`, `openFlat`, or `partiallyOpen`) and `hinge_angle_degrees`, where `0` is closed and `180` is fully flat.
 
 A typical agent flow poses the Duo, then captures it:
@@ -246,6 +253,7 @@ Agents can wait for screen changes or elements before continuing:
 ```bash
 rocketsim wait screen-changed
 rocketsim wait element --label "Continue"
+rocketsim wait element --identifier "login.submit"
 rocketsim wait keyboard --state shown
 rocketsim wait keyboard --state hidden --timeout 1
 rocketsim wait time --ms 800
@@ -271,12 +279,15 @@ rocketsim interact swipe --from 200,650 --to 200,150
 rocketsim interact scroll --label "Results" --direction up --pages 1 --screen latest
 rocketsim interact focus --label "Email" --screen latest
 rocketsim interact type "hello@example.com"
+rocketsim interact type "Zoey_yz? café" --identifier "search.field" --screen latest
 rocketsim interact button home
 rocketsim interact biometric match
 rocketsim interact biometric nomatch
 ```
 
 `interact` is designed to work with fresh screen state. After dispatching an interaction, RocketSim actively refreshes snapshots during a bounded settlement window before computing the result delta. The returned `screen_changed` value therefore reflects the post-interaction screen instead of a stale cached snapshot. Large `appeared` and `disappeared` detail arrays are capped while `appeared_count` and `disappeared_count` retain the complete totals.
+
+`interact type` presses the keys that produce each character on the keyboard layout of the Simulator, so text such as `Zoey_yz? café` comes out exactly as written on a German, French, British, Spanish, Italian, or another common layout. Pass `--identifier` or another selector together with `--screen` to focus a field first. When RocketSim can't type the text, the command fails with `invalid_argument` instead of reporting success. `context.reason` is `untypeable_characters` (with the characters the layout can't produce, for example emoji) or `unsupported_keyboard_layout` (a keyboard RocketSim has no verified mapping for). Switch the Simulator to a common layout in Settings, or enter the text another way and read the field back to verify.
 
 Use `interact activate` for an accessibility element that does not respond to coordinate taps, such as a hidden debug control. It performs an accessibility press on the resolved element instead of sending a HID tap.
 
@@ -331,7 +342,10 @@ When possible, agents should prefer targeting elements by label, type, or value 
 rocketsim interact tap --label "Submit" --screen latest
 rocketsim interact tap --type Button --label "OK" --screen latest
 rocketsim interact long-press --label "Reorder" --duration 1.5 --screen latest
+rocketsim interact tap --identifier "login.submit" --screen latest
 ```
+
+`--identifier` matches the element's accessibility identifier exactly, including case. It is the most stable selector when labels are localized or change at runtime, because identifiers don't. It works with `tap`, `activate`, `focus`, `long-press`, `type`, `wait element`, and `snapshot`, and you can combine it with the other selectors.
 
 Selector-based taps first try semantic accessibility activation, which is more reliable than a coordinate tap when the visual affordance does not align perfectly with the accessibility frame — think toggles, list rows, and buttons with asymmetric tappable areas. When semantic activation is unavailable, RocketSim falls back to a precise HID tap at the element's center. Coordinate taps and multi-touch taps always use HID directly. Use `interact activate` when you explicitly need an accessibility press without any HID fallback, such as for a hidden debug control that ignores coordinate hit-testing.
 
