@@ -1,11 +1,11 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
 
 import Base from "@/layouts/Base.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
+import { getPublishedPosts } from "@/lib/blog";
 import { dateFormat } from "@/lib/utils/dateFormat";
 
 const {
@@ -54,7 +54,7 @@ const firstBodyImage = (
   return blogImages[resolved]?.default;
 };
 
-const posts = await getCollection("blog");
+const posts = await getPublishedPosts();
 
 const items = posts
   .map((post) => ({
