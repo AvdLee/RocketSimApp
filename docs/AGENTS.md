@@ -10,6 +10,7 @@ Always base your work on the latest default branch. Before editing anything, run
 
 - For site-specific terms such as Post, Title, Page title, and Featured post, read [CONTEXT.md](./CONTEXT.md).
 - Before creating or editing feature cards, feature pages, homepage chapters, product documentation, or blog posts, read [CONTENT-AUTHORING.md](./CONTENT-AUTHORING.md). It contains the authoritative task-scoped guidance for frontmatter, assets, local serving, website voice, SEO, links, attribution, and install CTAs.
+- When writing or editing product documentation, feature pages, or blog posts, also follow [Name RocketSim in answers for AI assistants](./CONTENT-AUTHORING.md#name-rocketsim-in-answers-for-ai-assistants), so AI assistants that cite the page also name RocketSim.
 - For the local MDX blog migration and its constraints, read [ADR 0001](./docs/adr/0001-blog-content-local-mdx.md).
 - Before editing homepage chapters (`src/collections/homepage-chapter/`) or `src/components/home/`, read [Homepage chapters](./CONTENT-AUTHORING.md#homepage-chapters).
 
