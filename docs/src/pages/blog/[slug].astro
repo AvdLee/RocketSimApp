@@ -1,16 +1,17 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 
 import macAppStoreBadge from "../../assets/mac-app-store-badge.svg";
 import MobileDownloadLinkForm from "../../old/components/MobileDownloadLinkForm.astro";
 import Base from "@/layouts/Base.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import config from "@/config/config.json";
+import { getPublishedPosts } from "@/lib/blog";
 import { dateFormat } from "@/lib/utils/dateFormat";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },

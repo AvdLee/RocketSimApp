@@ -225,6 +225,8 @@ type BlogPost = {
 };
 ```
 
+A post whose `publishedTime` is in the future is left out of the build, the blog index, and the RSS feed, so you can merge it ahead of time. The daily scheduled run of `.github/workflows/deploy.yml` (09:15 UTC) rebuilds and deploys the site when a post became due in the last 25 hours; `.github/scripts/blog-due.mjs` makes that decision. Use a `publishedTime` at or after 09:00 UTC when you want the post live that day. The development server shows every post so you can review drafts locally.
+
 Use `src/content.config.ts` as the authoritative schema and follow current posts for MDX structure. For architectural context, see [ADR 0001](./docs/adr/0001-blog-content-local-mdx.md).
 
 ### Typography
