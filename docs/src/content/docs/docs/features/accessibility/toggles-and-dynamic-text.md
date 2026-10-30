@@ -5,6 +5,8 @@ sidebar:
   order: 1
 ---
 
+RocketSim exposes iOS Simulator accessibility environment toggles from the side window **Accessibility** tab so you can switch Increase Contrast, color filters, Dynamic Type, and related settings while the app stays on screen. Xcode provides similar environment toggles, but RocketSim keeps them one click away in the Toggles tab.
+
 During app development, it's important to test your app's accessibility support to ensure it's usable by everyone. Xcode provides so-called Environment Toggles, but they're not easily accessible when you're focused on the Simulator.
 
 RocketSim's side window provides similar functionality and keeps accessibility toggles available whenever you need them. Open the **Accessibility** tab, then select **Toggles**:

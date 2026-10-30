@@ -5,6 +5,8 @@ sidebar:
   order: 4
 ---
 
+RocketSim converts iOS Simulator screenshots and recordings to App Store Connect requirements when **App Preview Optimized** is enabled under **RocketSim Settings → Captures**, handling JPEG conversion, resolution, H.264 encoding, silent audio, and the other conversion steps described below. Turn the setting on once so each capture is ready to drag into App Store Connect without manual resizing.
+
 App Store Connect rejects assets that don't match its exact specs: wrong resolution, wrong codec, PNG with transparency, or video without a proper audio track. Without RocketSim you end up resizing screenshots per device, converting PNG to JPEG and stripping alpha, re-encoding videos to H.264, adding silent audio so previews don't get rejected, and trimming to the right duration — all while keeping [Apple's resolution table](https://help.apple.com/app-store-connect/?lang=en/#/dev4e413fcb8) open. It's tedious and easy to get wrong.
 
 RocketSim does it for you. Turn on **App Preview Optimized** once, and every screenshot and recording is converted to App Store Connect–ready specs. Capture, then drag into App Store Connect. No manual conversion, no rejections.

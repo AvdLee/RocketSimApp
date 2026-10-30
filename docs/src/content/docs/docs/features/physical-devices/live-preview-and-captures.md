@@ -8,6 +8,8 @@ sidebar:
   order: 2
 ---
 
+RocketSim mirrors a USB-connected iPhone or iPad beside its side window so you can preview live hardware, capture screenshots, GIFs, and video with device audio, and apply design-comparison overlays on real output. Pair the device in Xcode, connect over USB, then open RocketSim to attach the preview window and capture tools.
+
 Connect an iPhone or iPad over USB to open a live physical-device preview beside RocketSim's side window. The preview makes real-device capture and design-review workflows feel similar to working with the Simulator.
 
 ![Physical iPhone preview window with RocketSim's side window attached](../capturing/physical-device-support/live-preview.png)

@@ -5,6 +5,8 @@ sidebar:
   order: 1
 ---
 
+RocketSim records your Xcode builds in Build Insights on the Mac, showing daily counts, durations, incremental versus clean builds, and trends filtered by scheme or time range. It classifies builds by analyzing Derived Data, so you do not add build phase scripts to collect metrics.
+
 Build Insights tracks every Xcode build you make and shows you trends over time. You'll see how many builds you do per day, how long they take, and whether things are getting faster or slower.
 
 ## What gets tracked

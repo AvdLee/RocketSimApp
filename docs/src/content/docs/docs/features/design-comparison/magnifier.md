@@ -3,6 +3,8 @@ title: "Magnifier"
 description: "Zoom into specific areas of the iOS Simulator with a pixel-level magnifier. Inspect UI details, verify alignment, and check colors at the pixel level."
 ---
 
+RocketSim magnifies pixels on the iOS Simulator from the Comparing tab **Magnifier** view so you can inspect alignment, spacing, and colors at zoom level. Hold **⇧ Shift** and move the mouse to reposition the loupe, then copy a sampled color as Swift, UIKit, or AppKit code.
+
 The magnifier lets you zoom in pixel-level and thoroughly validate your UI implementation.
 
 ## Enabling the magnifier
