@@ -1,7 +1,20 @@
 # 16.8.1
 
+**New:**
+
+- CLI: `interact tap`, `focus`, `type`, `long-press`, `activate`, `wait element`, `snapshot`, and `do` steps accept `--identifier <id>` to target an element by its `accessibilityIdentifier`, which stays the same in every language. Read the identifiers with `rocketsim elements --agent-mode debug`. (Thanks, D. West!)
+
+**Improved:**
+
+- CLI: agent responses use fewer tokens. `interact` lists at most 5 `disappeared` entries (`disappeared_count` still reports the total), and `context.preview_url` is attached to the first response, when it changes, and every 10 minutes instead of to every response. The bundled agent skill now recommends ending a `do` batch with an `elements` step to get the resulting screen in the same call.
+
 **Fixed:**
 
+- CLI: `rocketsim duo pose` now waits for the hinge animation to finish instead of returning `wait_timeout` while the hinge is still moving to the requested pose. (Thanks, P. Krassay!)
+- CLI: `rocketsim elements` and `rocketsim wait keyboard` report the software keyboard as visible on iOS 26 and 27, instead of `hidden` while it is on screen. (Thanks, P. Krassay!)
+- CLI: `rocketsim interact type` now enters text correctly on non-US Simulator keyboards, including German, French, British, Spanish, and Italian layouts with accented letters like `é`, and fails with the characters it can't type instead of reporting success with the wrong text. (Thanks, P. Krassay!)
+- CLI: when the Simulator's accessibility is switched off, `rocketsim elements` now says so with the commands to fix it, and `rocketsim doctor` warns about it, instead of returning an empty element list. (Thanks, P. Krassay!)
+- CLI: the tab bar buttons of SwiftUI apps now show up in `rocketsim elements` when the app runs in a language other than English, so `interact tap --label` works for them. (Thanks, P. van den Hamer!)
 - Developer folder access: Macs set up from a migration, which kept an outdated Developer folder permission, no longer ask for the permission at every launch. RocketSim now renews the outdated permission automatically, or asks for it once more when it can't. (Thanks again, J. Sabater!)
 - Opening two Simulators within a few seconds of each other no longer leaves the second one missing from RocketSim until another Simulator window opens or closes.
 
