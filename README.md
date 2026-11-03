@@ -25,10 +25,6 @@ This is especially useful if you want an agent to:
 - Audit the visible screen for accessibility issues, fix them, and validate the result
 - Use the RocketSim version already installed on your machine
 
-The RocketSim Agent Skill now lives in its own repository with full installation instructions, packaging metadata, and release workflow:
-
-- [RocketSim-Agent-Skill](https://github.com/AvdLee/RocketSim-Agent-Skill)
-
 ## Learn More
 
 If you want to learn more about RocketSim itself, use the canonical product resources:
