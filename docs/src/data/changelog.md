@@ -1,4 +1,4 @@
-# 16.8.1
+# 16.9.0
 
 **New:**
 
@@ -7,6 +7,9 @@
 **Improved:**
 
 - CLI: agent responses use fewer tokens. `interact` lists at most 5 `disappeared` entries (`disappeared_count` still reports the total), and `context.preview_url` is attached to the first response, when it changes, and every 10 minutes instead of to every response. The bundled agent skill now recommends ending a `do` batch with an `elements` step to get the resulting screen in the same call.
+- Recordings: stopping a recording begins finalizing right away instead of first waiting for the recording window to update. The recording timer, capture thumbnail, and microphone list also redraw less often, so RocketSim stays more responsive while you record.
+- Recordings: capturing touches no longer asks macOS for the frontmost app on every click and drag, which could stall RocketSim during busy recordings.
+- Physical devices: resizing a physical device window no longer runs redundant layout passes, so resizing feels smoother.
 
 **Fixed:**
 
@@ -205,12 +208,27 @@
 
 # 16.4.5 (331)
 
+**New:**
+
+- Added a Performance Trace side-window tab for starting and stopping eligible Simulator and physical-device RocketTrace recordings directly from RocketSim.
+
 **Improved:**
 
+- The Performance Trace tab now shows the selected build configuration, clearer RocketTrace guidance, and more compact native controls.
+- Performance Trace recordings now show each launch stage in RocketSim, prevent duplicate starts, retain the recording timer through app reinstalls and reconnects, and hand off to RocketTrace for processing after Stop.
 - LLDB RocketSimConnect improved for slow launches that occasionally happen on busy machines.
+- The Performance Trace tab now explains what RocketTrace is when it is not installed, and tells you whether RocketTrace needs to be opened, updated, or restarted instead of showing one generic connection message.
+- The Performance Trace tab now explains how to fix a build that RocketTrace can't record because its dSYM is missing or mismatched, with a Learn More link and a Start Again button.
+- The Performance Trace tab now lists only Release and other optimized builds from Xcode, including ones that aren't installed on the Simulator yet, since Debug builds are too slow for reliable traces. When there are none, it explains how to create one with Product → Profile and links to RocketTrace's documentation.
+- Performance Trace progress steps now use the same rounded black card as the recording state, with a spinner and a Cancel button until recording starts. Cancelling while RocketTrace prepares needs the latest RocketTrace.
+- Diagnostics reports now include a RocketTrace chapter with the installed copies, running state, and recent connection history to help troubleshoot the Performance Trace tab.
 
 **Fixed:**
 
+- Fixed the Performance Trace tab keeping a previous build's failure after selecting another build, and changing the selected build or following newly appearing builds while a trace is running.
+- Fixed the Performance Trace tab repeatedly checking a live RocketTrace connection and offering to start when its Recorder Companion could not be reached.
+- Fixed the Performance Trace tab requiring a RocketSim restart before recognizing an updated RocketTrace Recorder Companion.
+- Fixed selected builds being rejected as unavailable when starting a RocketTrace recording. The tab now falls back to launching the existing installation when its local Xcode build is gone.
 - Fixed RocketSim onboarding windows appearing while app-hosted tests run in the background.
 - Fixed the Screen Recording permission alert repeatedly appearing after opening System Settings or denying access. (Thanks, E. Sanchez!)
 - Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted. (Thanks, H. v.d. Ploeg)
