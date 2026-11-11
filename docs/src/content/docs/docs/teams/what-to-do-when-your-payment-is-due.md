@@ -77,7 +77,7 @@ Pay the invoice as soon as you can to keep RocketSim Pro active for your team.
 ### Find the unpaid invoice
 
 1. Sign in at [teams.rocketsim.app](https://teams.rocketsim.app/login) with your team manager account.
-2. Look for the banner at the top of any **Settings** page.
+2. Look for the banner at the top of the **Billing** page. It also shows on **Members**, **Team settings**, and **App settings**.
 
 What the banner says depends on how your team pays:
 
@@ -86,7 +86,7 @@ What the banner says depends on how your team pays:
 
 The dashboard can show these banners before RocketSim shows its own message, because RocketSim only warns developers once the payment is 7 days overdue.
 
-You can also open **Settings → Subscription** and click **Manage subscription** to see all your invoices in the billing portal. The [team subscription guide](/docs/teams/managing-your-team-subscription/#add-seats-update-billing-details-or-download-invoices) explains what you can do there.
+You can also open **Billing** in the sidebar and click **Manage subscription** to see all your invoices in the billing portal. The [team subscription guide](/docs/teams/managing-your-team-subscription/#add-seats-update-billing-details-or-download-invoices) explains what you can do there.
 
 ### Pay the invoice
 
@@ -100,7 +100,7 @@ The payment methods you see depend on your invoice and your country, so the invo
 
 ### Update the payment method
 
-If your team pays by card, click **Manage subscription** on **Settings → Subscription** and update your payment method in the billing portal. After updating, check that the open invoice is paid. If it's still open, open it from your invoice history and pay it there, or email [support@rocketsim.app](mailto:support@rocketsim.app) and we'll help.
+If your team pays by card, click **Manage subscription** on the **Billing** page and update your payment method in the billing portal. After updating, check that the open invoice is paid. If it's still open, open it from your invoice history and pay it there, or email [support@rocketsim.app](mailto:support@rocketsim.app) and we'll help.
 
 ### Download invoices and receipts for accounting
 
@@ -114,7 +114,7 @@ Stripe emails the invoice to the email address on your subscription. If you can'
 1. Check your spam or junk folder.
 2. Check the inbox of the account email you use for the Teams dashboard. The invoice may have gone to a different address than you expect.
 3. Ask a colleague in finance or procurement who may receive invoices.
-4. Still nothing? Open **Settings → Subscription → Manage subscription** and look in your invoice history, or email [support@rocketsim.app](mailto:support@rocketsim.app).
+4. Still nothing? Open **Billing** in the sidebar, click **Manage subscription**, and look in your invoice history, or email [support@rocketsim.app](mailto:support@rocketsim.app).
 
 ### Need a PO number, a new invoice, or a different billing address?
 

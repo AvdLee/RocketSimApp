@@ -21,23 +21,23 @@ Developers who sign in without an active seat are sent to this page automaticall
 
 If RocketSim doesn't open from the browser, or you're on a different device than your Mac, activate with your license key instead.
 
-1. Copy your **License key** from **Settings → Subscription** in the [Teams dashboard](https://teams.rocketsim.app/login).
+1. Copy your **License key** from the **Billing** page in the [Teams dashboard](https://teams.rocketsim.app/login).
 2. In RocketSim, click **RocketSim Pro…** in the menu bar.
 3. **Right-click** the **Restore Purchase** button and choose **Enter Team License**.
 4. Fill in the **License Key** and the **Email** you use for RocketSim for Teams, then click **Activate**.
 
 ## Find the activation page later
 
-The Teams dashboard doesn't show **Activate seat** in its top navigation. You can find it here instead:
+You can get back to the activation page from two places in the Teams dashboard:
 
-- The **Activate seat** link in the footer of every dashboard page.
-- The **RocketSim Seat** banner at the top of **Settings**, with a **See how** link. Developers see this banner as long as they have no seat activated. Managers don't.
+- **Get started** under **RocketSim** in the sidebar.
+- The **RocketSim Seat** banner at the top of the **Members** and **Billing** pages, with a **See how** link. Developers see this banner as long as they have no seat activated. Managers don't.
 
 ## Move your seat to a new Mac
 
 Every activated Mac uses one seat. If you activate a second Mac without freeing the first, the activation page warns you that it takes up another seat. When you replace a Mac, unlink the old one first:
 
-1. Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and open **Settings → Users**.
+1. Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and open **Members** in the sidebar.
 2. Find your name. Under **Devices connected to a seat**, click **Unlink device** next to the old Mac and confirm with **Continue**.
 3. Activate the new Mac using the steps above.
 
@@ -58,11 +58,11 @@ Wait a few seconds. The page then shows manual steps. Follow [Activate manually 
 
 ### "No active license"
 
-Your account isn't connected to an active team license. Ask your team manager to invite you from **Settings → Users**, or check that the subscription hasn't expired. If the subscription lapsed, the manager can renew it as described in [Renew or Manage Your Team Subscription](/docs/teams/managing-your-team-subscription/).
+Your account isn't connected to an active team license. Ask your team manager to invite you from the **Members** page, or check that the subscription hasn't expired. If the subscription lapsed, the manager can renew it as described in [Renew or Manage Your Team Subscription](/docs/teams/managing-your-team-subscription/).
 
 ### I haven't received an invite
 
-Ask your team manager to share the team's join link from **Settings → Users**, or to invite you with **Invite new user**.
+Ask your team manager to share the team's join link from the **Members** page, or to invite you with **Invite new user**.
 
 ## Still stuck?
 
