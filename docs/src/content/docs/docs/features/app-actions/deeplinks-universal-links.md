@@ -3,6 +3,8 @@ title: "Deep Links & Universal Links"
 description: "Test deep links and universal links on the iOS Simulator or a connected physical iPhone or iPad. Save and trigger URL schemes from RocketSim's side window."
 ---
 
+RocketSim tests deep links and Universal Links on the iOS Simulator by saving each URL as an App Action and triggering it from the side window, including optional runtime placeholders in the path. Keep every supported link in one app group instead of scattered notes or hosted HTML pages.
+
 A deeplink or Universal Link allows you to redirect users to a specific location of your app. A common example is opening a map location in WhatsApp, which will directly open inside Apple Maps.
 
 The same functionality can be built into your apps. I’ve seen developers manage all supported deeplinks in notes, reminders, or hosted HTML pages. With RocketSim, you can now manage all supported deeplinks in a single place, accessible for all Simulators.

@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Test on a physical iPhone or iPad"
 featurePage: "physical-devices"
 docPath: "/docs/features/physical-devices/"

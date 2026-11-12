@@ -78,6 +78,8 @@ export default defineConfig({
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   redirects: {
     "/team-insights": "/for-teams",
+    // The rebuilt homepage was previewed here before it replaced `/`.
+    "/home-next": "/",
     "/docs/features/rocketsim-connect/introduction-and-setup":
       "/docs/getting-started/setting-up-rocketsim-connect",
     "/docs/features/rocketsim-connect/network-traffic-monitoring":
@@ -108,6 +110,16 @@ export default defineConfig({
       "/docs/features/physical-devices",
     "/docs/docs/features/capturing/physical-device-support":
       "/docs/features/physical-devices",
+    "/docs/getting-started/how-large-teams-use-rocketsim":
+      "/docs/teams/how-large-teams-use-rocketsim",
+    "/docs/support/how-to-get-rocketsim-approved-at-work":
+      "/docs/teams/how-to-get-rocketsim-approved-at-work",
+    "/docs/support/managing-your-team-subscription":
+      "/docs/teams/managing-your-team-subscription",
+    "/docs/support/what-to-do-when-your-payment-is-due":
+      "/docs/teams/what-to-do-when-your-payment-is-due",
+    "/docs/features/build-insights/team-build-insights":
+      "/docs/teams/team-build-insights",
     "/blog/debug-urlsession-requests-without-proxy":
       "/blog/monitor-urlsession-network-requests-without-the-pain-of-custom-certificates",
   },
@@ -147,7 +159,7 @@ export default defineConfig({
           "https://www.rocketsim.app/signup/trial/thank-you",
           "https://www.rocketsim.app/404",
           "https://www.rocketsim.app/docs/404",
-          // Homepage rebuild preview, until it replaces `/` at launch.
+          // Redirects to `/`, where the homepage it previewed now lives.
           "https://www.rocketsim.app/home-next",
         ].includes(normalized);
       },
@@ -227,6 +239,11 @@ export default defineConfig({
           autogenerate: { directory: "docs/getting-started" },
         },
         {
+          label: "Agentic Development",
+          collapsed: true,
+          autogenerate: { directory: "docs/features/agentic-development" },
+        },
+        {
           label: "Screenshots & Recordings",
           collapsed: true,
           items: [
@@ -282,13 +299,13 @@ export default defineConfig({
           autogenerate: { directory: "docs/features/accessibility" },
         },
         {
-          label: "Agentic Development",
-          collapsed: true,
-          autogenerate: { directory: "docs/features/agentic-development" },
-        },
-        {
           label: "User Defaults Editor",
           link: "/docs/features/user-defaults-editor",
+        },
+        {
+          label: "RocketSim for Teams",
+          collapsed: true,
+          autogenerate: { directory: "docs/teams" },
         },
         {
           label: "Settings",

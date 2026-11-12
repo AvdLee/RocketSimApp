@@ -1,4 +1,5 @@
 ---
+import Button from "./Button.astro";
 import SenjaWidget from "./SenjaWidget.astro";
 ---
 
@@ -28,24 +29,25 @@ import SenjaWidget from "./SenjaWidget.astro";
     <SenjaWidget widget="mentions" />
   </div>
   <div class="mt-6 flex justify-center">
-    <button
-      type="button"
+    <Button
+      variant="secondary"
       data-mentions-toggle
       aria-controls="mentions-wall"
       aria-expanded="false"
-      class="inline-flex cursor-pointer rounded-full px-5 py-2.5 font-medium text-primary inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
       hidden
     >
       Show more
-    </button>
+    </Button>
   </div>
 </section>
 
 <script>
+  import { onPage } from "@/lib/utils/pageLifecycle";
+
   // The button shows once the wall is taller than its collapsed height, and
   // toggles it. Tabbing into a post that is cut off expands the wall, so
   // keyboard focus never lands out of sight.
-  function initMentions() {
+  onPage(() => {
     const wall = document.querySelector<HTMLElement>("[data-mentions-wall]");
     const toggle = document.querySelector<HTMLButtonElement>(
       "[data-mentions-toggle]",
@@ -60,12 +62,13 @@ import SenjaWidget from "./SenjaWidget.astro";
       toggle.textContent = collapse ? "Show more" : "Show less";
     };
 
-    new ResizeObserver(() => {
+    const resized = new ResizeObserver(() => {
       if (collapsed()) {
         toggle.hidden =
           embed.getBoundingClientRect().height <= wall.clientHeight;
       }
-    }).observe(embed);
+    });
+    resized.observe(embed);
 
     toggle.addEventListener("click", () => {
       setCollapsed(!collapsed());
@@ -75,7 +78,7 @@ import SenjaWidget from "./SenjaWidget.astro";
     wall.addEventListener("focusin", () => {
       if (collapsed()) setCollapsed(false);
     });
-  }
 
-  document.addEventListener("astro:page-load", initMentions);
+    return () => resized.disconnect();
+  });
 </script>

@@ -160,13 +160,6 @@ main:has([data-chapter]) {
   --default-transition-timing-function: var(--ease-smooth);
 }
 
-@keyframes disclose {
-  from {
-    opacity: 0;
-    translate: 0 -4px;
-  }
-}
-
 /* The hero's entrance as the page loads: each `data-hero-item` rises out of
    a soft blur, one after another by `--hero-order`. */
 @keyframes hero-in {
@@ -185,9 +178,14 @@ main:has([data-chapter]) {
 }
 
 /* Muted until it lights up. The colour lives here rather than in a
-   `text-muted` class, which would outrank the light-up below. */
+   `text-muted` class, which would outrank the light-up below. The lit copy
+   of the text only shows where it can slide in. */
 [data-light-up] {
   color: var(--color-muted);
+}
+
+[data-light-up-lit] {
+  display: none;
 }
 
 /* Scroll-in reveals, where scroll-driven animations aren't supported.
@@ -207,9 +205,13 @@ main:has([data-chapter]) {
   translate: 0 32px;
 }
 
+/* Only the rise, no fade. Tied to the scroll, a reveal that moves two
+   properties at once makes the compositor drop frames as its element first
+   scrolls in: some ten times as many as moving one, measured on the whole
+   page, and the stages are large. The timed fallback above fades as well,
+   since it runs on a few elements at a time. */
 @keyframes reveal {
   from {
-    opacity: 0;
     translate: 0 30px;
   }
 }
@@ -228,6 +230,13 @@ main:has([data-chapter]) {
   }
 }
 
+/* Or from the top, where it runs down a list. */
+@keyframes draw-down {
+  from {
+    scale: 1 0;
+  }
+}
+
 @keyframes slide-in {
   from {
     opacity: 0;
@@ -243,10 +252,40 @@ main:has([data-chapter]) {
   }
 }
 
-/* Muted text lights up in reading order. */
+/* Muted text lights up in reading order: a pane with a copy of the text in
+   the text colour slides in from the left, while the copy slides the other
+   way within it, so the text itself stays put. */
 @keyframes light-up {
-  to {
-    background-position: 0 0;
+  from {
+    translate: -100% 0;
+  }
+}
+
+@keyframes light-up-text {
+  from {
+    translate: 100% 0;
+  }
+}
+
+/* A tabs presentation's image zooms slowly in on its focus while its panel
+   shows, pointing at what the tab describes. It zooms within the rounded
+   rectangle it rests in, which clips it. The script in Tabs.astro sets how
+   far it moves and the clip for the image's size. It lands about a second
+   before autoplay moves on (`IMAGE_MS` in src/lib/utils/autoplay.ts). Once
+   the panel has faded out, the image jumps back for its next turn. */
+[data-focus] [data-media-frame] {
+  clip-path: var(--focus-clip, none);
+}
+
+[data-focus] img {
+  transition: transform 0s 0.5s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [role="tabpanel"]:not([inert]) > [data-focus] img {
+    transform: translate(var(--focus-x, 0), var(--focus-y, 0))
+      scale(var(--focus-scale, 1));
+    transition: transform 3.6s cubic-bezier(0.45, 0, 0.2, 1) 0.4s;
   }
 }
 
@@ -301,6 +340,14 @@ main:has([data-chapter]) {
         );
     }
 
+    /* From lg the tabs line runs down beside the list (Tabs.astro). */
+    @media (width >= 64rem) {
+      [data-tabs-list] [data-draw] {
+        transform-origin: top;
+        animation-name: draw-down;
+      }
+    }
+
     /* The controls slide in alongside the line, and land with it. */
     [data-draw-control] {
       animation: slide-in both var(--ease-smooth);
@@ -315,19 +362,40 @@ main:has([data-chapter]) {
       animation-range: exit 0% exit 90%;
     }
 
+    /* The lit copy sits over the muted text in a window the size of the
+       text. The pane and the copy inside it move by translate only, which
+       the compositor runs by itself; the obvious way, a gradient moving
+       behind `background-clip: text`, repaints the text on the main thread
+       on every frame of the scroll. A mask feathers the pane's leading
+       edge. The copy wraps like the text: it is as wide, and inherits its
+       wrapping. */
     [data-light-up] {
-      color: transparent;
-      background-image: linear-gradient(
-        90deg,
-        var(--color-text-dark) 45%,
-        var(--color-muted) 55%
-      );
-      background-size: 220% 100%;
-      background-position: 100% 0;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: light-up both linear;
-      animation-timeline: view();
+      position: relative;
+      display: inline-block;
+      view-timeline: --light-up block;
+    }
+
+    [data-light-up-lit] {
+      display: block;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      color: var(--color-text-dark);
+      pointer-events: none;
+    }
+
+    [data-light-up-lit] > span {
+      display: block;
+      mask-image: linear-gradient(90deg, #000 75%, transparent);
+      animation: light-up backwards linear;
+      animation-timeline: --light-up;
+      animation-range: cover 35% cover 60%;
+    }
+
+    [data-light-up-lit] > span > span {
+      display: block;
+      animation: light-up-text backwards linear;
+      animation-timeline: --light-up;
       animation-range: cover 35% cover 60%;
     }
   }

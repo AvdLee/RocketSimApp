@@ -30,7 +30,15 @@ Configure how your recordings look and what they include. All of the following a
 
 ### Device bezels
 
-You can add a device frame around the Simulator content. Choose **None**, **Simulator Bezel** (the standard Simulator chrome), or a **real device bezel** (device-specific frames for supported iPhone and iPad models). Current iPad coverage includes the iPad (A16) and 11-inch and 13-inch iPad Pro (M5). Use the **Device Bezel** picker in the Captures tab. Your choice is stored per device, so each Simulator type can have its own preference.
+You can add a device frame around the Simulator content. Choose **None**, **Simulator Bezel** (the standard Simulator chrome), or a **real device bezel** (device-specific frames for supported iPhone and iPad models). Current coverage includes iPhone 18 Pro, iPhone 18 Pro Max, the iPad (A16), 11-inch and 13-inch iPad Pro (M5), and the folded and unfolded iPhone Duo. Use the **Device Bezel** picker in the Captures tab. Your choice is stored per device, so each Simulator type can have its own preference.
+
+### iPhone Duo recordings
+
+Recordings of an iPhone Duo Simulator capture both displays and the live hinge angle. RocketSim renders the fold pose through Apple's 3D folding model in the app, the Post Editor, previews, and thumbnails, so folding or unfolding the Duo while you record shows up in the final video. As with other devices, the output supports transparent or custom backgrounds, and the automatic ratio stays compact while the Duo is folded and expands as it unfolds.
+
+### Rotating while recording
+
+Rotating an iPhone, iPad, or iPhone Duo Simulator while you record is preserved and smoothly animated in editor previews, thumbnails, and exported videos. Landscape and upside-down captures stay upright everywhere, with touches drawn where you tapped.
 
 ### Touches and touch attention
 

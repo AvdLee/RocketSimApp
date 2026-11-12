@@ -79,6 +79,12 @@ After a RocketSim update, the setup continues to load the framework from the ins
 - Existing custom commands in `.lldbinit-Xcode` can remain; RocketSim owns only the block between its `BEGIN` and `END` comments.
 - Restart the current Xcode debug session after installing or repairing the hook.
 
+## Check or remove the setup in Settings
+
+RocketSim 16.5 added a **Connect** pane to RocketSim's settings (**RocketSim → Settings → Connect**). It shows the connection status, LLDB setup diagnostics, and manual setup commands, and it lets you remove the Xcode debugger integration when you no longer want RocketSim Connect to load.
+
+If you installed the hook through Terminal earlier, run the copied setup command again from **Settings → Connect** after updating. Xcode 27 and macOS 27 load the hook from RocketSim.app, and RocketSim repairs existing installs automatically when it launches.
+
 ## Alternative: copy the debug code
 
 If your team prefers an explicit integration, use the **Code** tab and press **Copy code** inside RocketSim. The generated snippet is tailored to the current RocketSim install and should be used instead of copying the example below. Add the generated code to your app and call it at launch, for example in your app delegate or `@main` entry point:

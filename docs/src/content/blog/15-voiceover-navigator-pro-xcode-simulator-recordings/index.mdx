@@ -1,7 +1,9 @@
 ---
-title: "RocketSim 15: VoiceOver testing in the Simulator and better Xcode Simulator recordings"
-description: RocketSim 15 adds VoiceOver Navigator, Elements Overlay, Tinted Liquid Glass testing, a new post editor for Xcode Simulator recordings, networking improvements, and the first RocketSim CLI beta.
+title: "RocketSim 15: VoiceOver Testing in the Simulator"
+pageTitle: "RocketSim 15: VoiceOver testing in the Simulator and better Xcode Simulator recordings"
+description: RocketSim 15 adds VoiceOver Navigator, a post editor for Simulator recordings, networking tools, and a CLI beta. Update to test accessibility faster.
 publishedTime: 2026-04-09T09:05:24.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ./voiceover-overlay-hero.png
 imageAlt: RocketSim VoiceOver Navigator showing numbered accessibility elements directly on top of the iOS Simulator.
 ---
@@ -23,6 +25,8 @@ On top of that, this release makes **Xcode Simulator recordings** much more usef
 The headline feature in RocketSim 15 is [VoiceOver Navigator](/docs/features/accessibility/voiceover-navigator). It lets you move through accessibility elements using your keyboard, directly in the Simulator. Arrow keys move through the current VoiceOver order, Enter activates the selected element, and the overlay updates as your app changes state.
 
 What I like most is that this is not just another inspector. You can still click elements and inspect their accessibility metadata, but the real win is speed. You immediately see whether the reading order makes sense, whether a heading lands where you expect it to, and whether activating a control moves focus in a sensible way.
+
+If you want a step-by-step walkthrough, read [how to test VoiceOver on the Xcode Simulator](/blog/how-to-test-voiceover-on-the-xcode-simulator/).
 
 <figure>
   <Image

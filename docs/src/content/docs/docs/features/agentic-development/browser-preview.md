@@ -8,6 +8,8 @@ sidebar:
     variant: caution
 ---
 
+RocketSim serves a live, interactive view of a booted iOS Simulator in your browser through the `rocketsim preview` command, with device bezel, Simulator switching, clicks, scrolls, and keyboard typing. Review flows without keeping Simulator.app in front of you, or turn on-screen feedback into prompts for your coding agent.
+
 Browser Preview is a **Beta** feature that serves a live, interactive view of your iOS Simulator at a local URL. You can review an app without keeping Simulator.app in front of you, interact with the screen from your browser, and turn visual feedback into a prompt for your AI coding agent.
 
 The preview includes the correct device bezel and lets you switch between booted Simulators. Live input supports clicks, drags, scrolling, and keyboard typing, so you can move through a flow while reviewing it.
@@ -44,6 +46,25 @@ rocketsim preview --udid <udid>
 ```
 
 You can also switch between booted Simulators from the device menu above the preview.
+
+## Open the preview from another Mac
+
+Browser Preview stays on localhost by default. With **RocketSim Pro**, opt in to sharing it with another Mac on the same network or on your Tailscale tailnet:
+
+```bash
+rocketsim preview --lan
+```
+
+RocketSim listens only on the address it shows, and stops the preview after 30 minutes without a connected browser. The preview is served over plain HTTP, so use it on networks you trust or over Tailscale.
+
+## Performance while streaming
+
+RocketSim hardware-encodes the Simulator as JPEG frames capped at 30 fps, which uses about 75% less CPU per streamed Simulator and sends about 80% less data to each browser. A few rules keep your Mac responsive:
+
+- The preview lowers its frame rate to 15 fps while any Simulator is recording, and recordings get priority when your Mac is busy
+- Previews that no browser is watching, including the ones CLI agent commands start automatically, don't stream or encode frames
+- Accessibility refreshes are skipped while the screen is unchanged or the Simulator is recording
+- A preview stops automatically when its Simulator is deleted
 
 ## Interact from the browser
 

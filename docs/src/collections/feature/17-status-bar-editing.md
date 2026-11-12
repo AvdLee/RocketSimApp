@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "09:41 - A historical moment in time"
 featurePage: "status-bar"
 asset:

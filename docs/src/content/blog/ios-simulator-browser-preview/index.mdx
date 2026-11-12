@@ -3,6 +3,7 @@ title: "iOS Simulator Browser Preview"
 pageTitle: "Preview and Control the iOS Simulator in Your Browser"
 description: "Follow your AI agent in a live iOS Simulator browser preview, inspect your app, and turn visual feedback into precise implementation context."
 publishedTime: 2026-09-09T15:00:00.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ./browser-preview.webp
 imageAlt: "RocketSim Browser Preview showing an accessibility tree, a live iPhone Simulator, and visual feedback for a selected Watchlist button."
 ---
@@ -26,7 +27,7 @@ This distinction matters. You keep the build, app data, and Simulator on your Ma
 
 ## Follow your coding agent live
 
-The [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill/) uses Browser Preview automatically during Simulator tasks. You do not have to start the preview yourself: commands that target a Simulator make sure a local preview is available and include its URL in the `rs/1` response context.
+The [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill/) uses Browser Preview automatically during Simulator tasks. You do not have to start the preview yourself: commands that target a Simulator make sure a local preview is available and include its URL in the `rs/1` response context. For a broader introduction, read [AI agents for the iOS Simulator](/blog/ai-agents-ios-simulator/). You can also see [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator/).
 
 When your coding tool supports an integrated browser, the skill asks the agent to open that localhost URL at the start of the task. Otherwise, the agent shares the URL so you can open it yourself. This allows you to follow its taps and navigation without bringing Simulator.app to the foreground.
 

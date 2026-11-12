@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-import { getHomepageChapter } from "@/lib/homepage";
+import { getHomepageChapterSummary } from "@/lib/homepage";
 
 interface Props {
   // Tile order; matches the order of the `<Chapter>` lines on the page.
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const chapters = await Promise.all(
-  Astro.props.chapters.map((id) => getHomepageChapter(id)),
+  Astro.props.chapters.map((id) => getHomepageChapterSummary(id)),
 );
 ---
 
@@ -28,19 +28,31 @@ const chapters = await Promise.all(
           <a
             href={`#${id}`}
             data-glance-tile
-            class="group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[22px] bg-surface px-[22px] pt-[22px] no-underline transition-[translate,background-color] duration-300 hover:-translate-y-[3px] hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            class="group relative isolate flex h-full min-h-[340px] flex-col overflow-hidden rounded-[22px] border border-(--chapter)/20 bg-surface px-[22px] pt-[22px] no-underline shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-[translate,background-color,border-color] duration-300 hover:-translate-y-[3px] hover:border-(--chapter)/40 hover:bg-surface-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             style={`--chapter: var(--color-chapter-${color})`}
           >
+            {/* The chapter's colour glows up from behind the image. Hover
+              only fades its opacity, so it stays cheap to animate. */}
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 -z-10 bg-radial-[100%_80%_at_50%_100%] from-(--chapter)/35 to-transparent to-70% opacity-70 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none"
+            />
             <span class="text-caption font-semibold text-(--chapter)">
               {name}
             </span>
             <h3 class="mt-1.5 text-title-4">{tile.title}</h3>
-            <span class="mt-2 text-small text-muted">
-              Jump to chapter <span aria-hidden="true">↓</span>
+            <span class="mt-2 text-small text-muted transition-colors duration-300 group-hover:text-(--chapter) motion-reduce:transition-none">
+              Jump to chapter{" "}
+              <span
+                aria-hidden="true"
+                class="inline-block transition-[translate] duration-300 group-hover:translate-y-[3px] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
+              >
+                ↓
+              </span>
             </span>
             {/* A fixed frame that shows the top of the image; it sizes the
               poster too, which Astro doesn't process. */}
-            <div class="mt-auto h-32 overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
+            <div class="mt-auto h-[200px] overflow-hidden pt-[18px] [mask-image:linear-gradient(to_bottom,#000_80%,transparent)]">
               {tile.image ? (
                 <Image
                   src={tile.image}

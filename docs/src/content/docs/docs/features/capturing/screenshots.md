@@ -25,7 +25,15 @@ RocketSim 16 also supports screenshots from connected physical iOS devices. See 
 
 You can set the background, bezels, and other capture options before taking a screenshot in the **Captures** tab or in **Settings → Captures**. For the full list of options, see [Creating Recordings](/docs/features/capturing/recordings) — the same options apply to screenshots.
 
-Real device bezels are available for supported iPhone and iPad models, including the iPad (A16) and 11-inch and 13-inch iPad Pro (M5).
+Real device bezels are available for supported iPhone and iPad models, including iPhone 18 Pro, iPhone 18 Pro Max, the iPad (A16), 11-inch and 13-inch iPad Pro (M5), and the folded and unfolded iPhone Duo.
+
+## Screenshots of iPhone Duo
+
+RocketSim 16.6 supports capturing the iPhone Duo Simulator. A styled screenshot captures both displays and the live hinge angle, then renders the fold pose through Apple's 3D folding model. The result follows the Simulator's orientation with upright interface content, supports transparent or custom backgrounds, and uses an automatic ratio that stays compact while the Duo is folded and expands as it unfolds.
+
+A plain screenshot (without a styled bezel) captures only the display that shows the interface: the outer display while the Duo is closed and the inner display while it is open, in that display's orientation.
+
+You can also capture Duo screenshots from the command line. See [iPhone Duo commands](/docs/features/agentic-development/rocketsim-cli/#iphone-duo) for `rocketsim duo pose`, `rocketsim duo hinge`, and the Duo-only `--bezel device3d` option.
 
 ## Editing a screenshot after capture
 

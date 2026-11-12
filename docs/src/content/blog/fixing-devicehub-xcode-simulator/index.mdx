@@ -1,42 +1,80 @@
 ---
-title: "Xcode Device Hub and the Future of RocketSim"
-pageTitle: "Hi Device Hub, bye RocketSim? Definitely not!"
-description: Xcode Device Hub replaces the Simulator window in Xcode 27. Here is how to fix it when it won't launch, and why RocketSim is here to stay.
+title: "Xcode 27 Device Hub vs Simulator: What Changed"
+pageTitle: "Xcode 27 Device Hub vs Simulator: What Changed, What Is Missing, and How to Fix It"
+description: "Xcode 27 Device Hub vs Simulator: what changed, what is missing, and how to fix Device Hub not launching. Install RocketSim to restore the gaps."
 publishedTime: 2026-06-09T09:00:00.000Z
-modifiedTime: 2026-09-22T09:00:00.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ./xcode-devicehub-simulator-side-window.jpeg
 imageAlt: The Xcode Device Hub Simulator running an iPhone 17 on iOS 27, with RocketSim's Side Window and capture settings shown right next to it.
 imageCaption: "The Xcode Device Hub Simulator running an iPhone 17, with RocketSim's Side Window right next to it."
 ---
 
-Yes, I was scared when Apple first announced **Xcode's Device Hub** at WWDC. Would I need to look for a job again? Feeling like you might get sherlocked is scary, but it's also a confirmation that we're working on something special.
+**Xcode 27 Device Hub** is the new app that brings Simulators and connected devices together in a single window. It replaces the standalone Simulator window you used in earlier Xcode versions, which changes how you run and test your app every day.
 
-What seemed scary turned out to be something great: RocketSim is here to stay, and we will become an even bigger part of your development workflow.
+When Apple announced Device Hub at WWDC, I wondered if it would be the end of RocketSim. It turned out to be the opposite. Device Hub is a stronger foundation for working with simulated and physical devices, and RocketSim keeps adding the workflows it does not cover. This article explains what changed, what is missing, and how to fix Device Hub when it does not launch.
 
-## Expanding our features to physical devices
+## What is Xcode 27 Device Hub?
 
-We're not sleeping, and we kind of expected things to move in this direction. We didn't know about Device Hub specifically, but we noticed the advantages inside the [`devicectl`](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) command line tool. That made us start implementing [physical device support](/docs/features/physical-devices/), and we already support many features in internal betas.
+Device Hub is an app introduced in Xcode 27 that shows Simulators and connected devices in one place. Apple covers the workflow in [Get the most out of Device Hub](https://developer.apple.com/videos/play/wwdc2026/260/), and it relies on the same CoreDevice tooling as the [`devicectl`](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) command line tool.
 
-You'll soon be able to welcome many of the features you know from the Simulator today, but for physical devices.
+The [Device Hub support guide](/docs/features/capturing/device-hub-support/) lists how RocketSim works with it. Both the expanded window and Compact Mode are supported.
 
-## How about the side window?
+## Does Device Hub replace the Simulator window?
 
-Well, that's an interesting one. The Device Hub window is large, and there might not be room for the side window. However, I'm keen to see how it's actually going to be used. We're actively exploring how to work around this new way of testing apps, and there's no final goodbye (yet) to the side window.
+Yes, in Xcode 27 Device Hub takes the place of the standalone Simulator window. A Simulator, for example an iPhone 17 running iOS 27, now opens inside Device Hub.
 
-## Xcode Device Hub does not seem to work for me?
+RocketSim still resolves booted Simulators whether they run in Simulator.app or in Device Hub. For the most predictable window attachment, run Device Hub on its own instead of showing the same Simulator in Simulator.app at the same time.
 
-We had that at first as well! I'm currently at WWDC, and the great thing is that you can meet engineers at the labs. I spoke with one of the Simulator engineers, and he gave me the command that fixed it all:
+## What is missing in Device Hub compared to the Simulator?
+
+Device Hub does not include several actions you might know from Simulator.app. The ones I missed most are:
+
+- Shake
+- Slow Animations
+- Toggling light and dark appearance with a shortcut
+- Simulating a memory warning
+- Dropping files such as push payloads, certificates, and photos onto the Simulator
+
+RocketSim 16.5 restores all of these. Read [how to restore missing Simulator features in Xcode 27 Device Hub](/blog/xcode-device-hub-simulator-features/) for the details and shortcuts.
+
+Some workflows are different instead of missing. Select **File → New Window** or press <strong>⇧⌘N</strong> to open multiple Simulators, and switch to **Compact Mode** when you want a focused window similar to Simulator.app.
+
+## What if Xcode Device Hub does not launch?
+
+If Device Hub does not launch, restart the `CoreDeviceService` daemon. This force-restarts the service that Device Hub and `devicectl` rely on, which clears up the connection issues you might hit in this first release.
+
+We had that at first as well. I spoke with one of the Simulator engineers in the labs at WWDC, and he gave me the command that fixed it all:
 
 ```bash frame="none"
 killall -9 CoreDeviceService
 ```
 
-This force-restarts the `CoreDeviceService` daemon that Device Hub and `devicectl` rely on, which clears up the connection issues you might hit in this first release. I can also tell you that I lost all my worries about the future of RocketSim after playing around more with all the internals.
+## What does RocketSim support in Device Hub today?
 
-## Restoring missing Simulator features
+RocketSim supports Simulators in Device Hub for captures, design comparison, accessibility, app actions, and AI agent workflows. The side window appears for Simulators in both the expanded window and Compact Mode.
 
-RocketSim now supports Simulators in Device Hub for captures, design comparison, accessibility, app actions, and AI agent workflows. RocketSim 16.5 also restores Shake, Slow Animations, appearance and memory-warning shortcuts, Simulator shutdown actions, and drag-and-drop file imports.
+Screen-relative overlays still require Compact Mode, because RocketSim needs a single device window to align them. This applies to design comparison, grids, rulers, and VoiceOver overlays.
 
-Read [how to restore missing Simulator features in Xcode 27 Device Hub](/blog/xcode-device-hub-simulator-features/) or follow the [Device Hub support guide](/docs/features/capturing/device-hub-support/) to configure your setup.
+Since RocketSim 16.4.2, the [`rocketsim` CLI](/docs/features/agentic-development/rocketsim-cli/) and `rocketsim doctor` resolve Simulators in Device Hub as well, so your AI agent can inspect and interact without opening Simulator.app.
 
-Feel free to reach out on [X/Twitter](https://x.com/twannl) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you run into anything or have ideas for how RocketSim should fit into Device Hub. Thanks!
+## Does RocketSim support physical devices?
+
+Yes. RocketSim 16.0 introduced [physical device testing](/docs/features/physical-devices/) for USB-connected iPhones and iPads. You get a live preview beside Xcode, screenshots, recordings, and design comparison.
+
+With RocketSim 16.4 and Xcode 27, you can also launch, relaunch, and uninstall apps, open deep links, and simulate locations on a connected device. Network Monitor, privacy and Keychain actions, and push notification testing remain Simulator-only today. The [physical devices feature page](/features/physical-devices/) shows what each target supports.
+
+## How about the side window?
+
+The side window is still here. It works with Simulators in both the expanded Device Hub window and Compact Mode, so you can take screenshots, create recordings, and use side-window actions in either layout.
+
+The expanded Device Hub window is large, though, and there might not be much room left for the side window. I'm still keen to see how developers end up using Device Hub. For now, switch to Compact Mode when you want design comparison, grids, rulers, or VoiceOver overlays. If the side window does not appear, focus the Simulator inside Device Hub.
+
+## Conclusion
+
+Xcode 27 Device Hub replaces the Simulator window and brings physical devices into the same place. It leaves out a few Simulator actions, but you can restore them with RocketSim without switching back to an earlier Xcode version.
+
+Install the [latest RocketSim version from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=fixing-devicehub-xcode-simulator&mt=8) and follow the [Device Hub support guide](/docs/features/capturing/device-hub-support/) to configure your setup.
+
+Feel free to reach out on [X/Twitter](https://x.com/twannl) or [open an issue on GitHub](https://github.com/AvdLee/RocketSimApp/issues) if you run into anything or have ideas for how RocketSim should fit into Device Hub.
+
+Thanks!

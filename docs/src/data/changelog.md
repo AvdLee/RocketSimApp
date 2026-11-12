@@ -1,13 +1,116 @@
-# 16.6.0
+# 16.9.0
 
 **New:**
 
-- Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in.
+- CLI: `interact tap`, `focus`, `type`, `long-press`, `activate`, `wait element`, `snapshot`, and `do` steps accept `--identifier <id>` to target an element by its `accessibilityIdentifier`, which stays the same in every language. Read the identifiers with `rocketsim elements --agent-mode debug`. (Thanks, D. West!)
+
+**Improved:**
+
+- CLI: agent responses use fewer tokens. `interact` lists at most 5 `disappeared` entries (`disappeared_count` still reports the total), and `context.preview_url` is attached to the first response, when it changes, and every 10 minutes instead of to every response. The bundled agent skill now recommends ending a `do` batch with an `elements` step to get the resulting screen in the same call.
+- Recordings: stopping a recording begins finalizing right away instead of first waiting for the recording window to update. The recording timer, capture thumbnail, and microphone list also redraw less often, so RocketSim stays more responsive while you record.
+- Recordings: capturing touches no longer asks macOS for the frontmost app on every click and drag, which could stall RocketSim during busy recordings.
+- Physical devices: resizing a physical device window no longer runs redundant layout passes, so resizing feels smoother.
+
+**Fixed:**
+
+- CLI: `rocketsim duo pose` now waits for the hinge animation to finish instead of returning `wait_timeout` while the hinge is still moving to the requested pose. (Thanks, P. Krassay!)
+- CLI: `rocketsim elements` and `rocketsim wait keyboard` report the software keyboard as visible on iOS 26 and 27, instead of `hidden` while it is on screen. (Thanks, P. Krassay!)
+- CLI: `rocketsim interact type` now enters text correctly on non-US Simulator keyboards, including German, French, British, Spanish, and Italian layouts with accented letters like `é`, and fails with the characters it can't type instead of reporting success with the wrong text. (Thanks, P. Krassay!)
+- CLI: when the Simulator's accessibility is switched off, `rocketsim elements` now says so with the commands to fix it, and `rocketsim doctor` warns about it, instead of returning an empty element list. (Thanks, P. Krassay!)
+- CLI: the tab bar buttons of SwiftUI apps now show up in `rocketsim elements` when the app runs in a language other than English, so `interact tap --label` works for them. (Thanks, P. van den Hamer!)
+- Developer folder access: Macs set up from a migration, which kept an outdated Developer folder permission, no longer ask for the permission at every launch. RocketSim now renews the outdated permission automatically, or asks for it once more when it can't. (Thanks again, J. Sabater!)
+- Opening two Simulators within a few seconds of each other no longer leaves the second one missing from RocketSim until another Simulator window opens or closes.
+
+# 16.8.0 (339)
+
+**New:**
+
+- CLI: `rocketsim screenshot` and `rocketsim video record` accept the mesh gradients from the background picker, for example `--background aurora-drift`, `pastel-foam`, `lava-bloom`, or `indigo-nightfall`. An unknown name lists the valid ones.
+- CLI: `--metadata` now renders the app icon, title, and subtitle badge, like the Post Editor does, from the most recent build on the Simulator. Use `--metadata-title`, `--metadata-subtitle` (an empty value hides the subtitle), and `--metadata-app <bundle-id>` to override the text or pick another installed app. The badge needs `--ratio` other than `auto`; RocketSim now says so, or that no app could be found, instead of leaving the badge out.
+- Captures: customize screenshot and recording file names with pills for capture type, device, app name, inches, and date, in Settings > Captures. (Thanks, K. Strasser!)
+
+**Improved:**
+
+- Onboarding: a refreshed first-run flow with an optional email step on Welcome, a short demo of the RocketSim CLI and Agent Skill, and a guided CLI and Agent Skill install step that only continues once an Agent Skill is installed. Onboarding no longer ends on an empty window after a permission or install step.
+- iPhone Duo: screenshots and recordings now show the device from straight on, like the Simulator and Device Hub, instead of from a slight angle. The fold still follows the hinge angle, from closed through book to open.
+
+**Fixed:**
+
+- Improved reliability of Developer folder access: Macs that can't remember the permission no longer show the permission screen at every launch (you can still grant it from Recent Builds), and diagnostics reports now explain why the permission couldn't be saved. (This is for you, J. Sabater!)
+- CLI: on iPhone Duo, taps, swipes, scrolls, and `interact activate` now reach the screen that is showing the app in the open and book poses, instead of silently doing nothing. Element positions and `canvasSize` match that screen's orientation, so toolbar items on the right are no longer hidden, and coordinates outside the screen now return a clear error.
+
+# 16.7.1 (338)
+
+**New:**
+
+- iPhone Duo: choose the Star White or Night Sky finish in the Device Bezel picker for screenshots and recordings. Screenshots can switch finish in the editor, and a recording keeps the finish it was captured in. CLI: `--device-color <star-white|night-sky>` with `--bezel`.
+
+**Improved:**
+
+- When RocketSim cannot find the selected Simulator for accessibility features, the Accessibility tabs now say so and suggest restarting the Simulator and RocketSim, instead of showing "SimulatorControl error 4". Diagnostics reports now also record what RocketSim's Simulator list contained at that moment, so we can find out why a Simulator is missing. (Thanks, C. Jacobsson!)
+- iPhone Duo: the 3D device in screenshots and recordings is now seen from a slight angle so the polished frame and side buttons show, with crisp metal highlights, a graphite Night Sky frame, and a dark glass bezel, instead of the flat head-on gray look.
+
+**Fixed:**
+
+- iPhone Duo: the hinge angle is tracked again after updating to Xcode 27.2 beta 3, so Device Hub folds, screenshots, and recordings follow the real fold angle instead of a flat device. RocketSim now reads the angle from the Simulator directly instead of through a `devicectl` command that newer CoreDevice versions removed.
+- The "disabled while Device Hub is in expanded mode" message on the Comparing and VoiceOver Navigator panels is white again in light mode instead of unreadable black.
+- The Magnifier in the Comparing window works for Simulators shown in Device Hub: it captures the simulator screen again, and its controls are enabled while Device Hub is in front. The coordinate label is also correct on secondary displays.
+- CLI: `rocketsim screenshot --bezel device` and `rocketsim video record --bezel device` now always apply a real-device bezel, including for iPhone 18 Pro, iPhone 18 Pro Max, and iPad Pro 13-inch (M5). Before, they silently returned a bare screen unless you had picked a bezel for that device in RocketSim first, and `--frame-color` had no effect. An explicit `--bezel device` now uses your saved bezel color or the first bundled one, and fails with an `unsupported_target` error for devices without a bundled bezel. (Thanks, P. van den Hamer!)
+- Exported recordings at 85 FPS or higher, such as 120 FPS iPhone Duo recordings, no longer open as slow motion in QuickTime Player and Photos. These exports are now saved as QuickTime movies, still named `.mp4`, that are marked to play at full speed. Trimming a recording and adding an end card keep this marking.
+- Fixed a crash when the Become Pro screen reacted to an email subscription finishing in the background.
+- Fixed RocketSim reporting a port conflict over and over when another process, such as a second RocketSim, already uses the Connect port.
+- Fixed repeated errors when RocketSim kept looking for a Simulator that no longer exists, for example after it was deleted or Xcode was updated.
+- Fixed errors reported when Xcode or its CoreSimulator was updated while RocketSim stayed open. Restart RocketSim to pick up the new Xcode.
+- Fixed a rare crash when RocketSim looked up a Simulator from two places at once, for example while changing the iPhone Duo fold pose during a recording.
+- iPhone Duo: screenshots and videos with a device bezel could come out much darker than the Simulator on macOS 27 beta. RocketSim now checks how the system renders the device and corrects the colors when needed.
+- iPhone Duo: a missing 3D model in the selected Xcode is no longer reported as an error, and a failed Duo conversion now shows why it failed and suggests recording again.
+
+# 16.7.0 (337)
+
+**New:**
+
+- CLI: RocketData ships `rocketdata` (status, doctor, apps, domains, items, item, search, changes), a bundled Agent Skill, and a CLI & Agent Settings sidebar. Storage reads are compact rs/1 rows with content hashes, `--since` unchanged, and secrets redacted by default.
+- Accessibility: added a Color Filter control with grayscale and red-green, green-red, and blue-yellow color blindness filters and an adjustable intensity, plus a new Liquid Glass section with the Tinted toggle and an Opacity slider, including a reset button. The color filters and the opacity slider require Xcode 27 or later.
+- Accessibility: added a StandBy toggle to show or hide StandBy on iPhone Simulators. Requires Xcode 27 or later.
+- Accessibility side window: added a PRO Audit tab that scores the current screen, groups findings by rule, highlights affected elements, and copies a focused fix prompt for your agent. The score reflects how many rules pass, with Great, Good, and Needs work bands, and highlighted elements follow the Simulator screen as they move. The copied prompt tells agents to keep the layout unchanged, fix findings in one batch, and compare element frames before and after. Grouped tiles under a heading, text covered by a floating control, and controls that only overlap at the current scroll position are no longer reported as heading, contrast, or overlap problems, and content below the fold or beyond the edge of a SwiftUI scroll view or carousel isn't reported as stale. Offscreen findings are no longer reported for nodes VoiceOver can't reach, such as the children of a grouped control. A new heuristic rule, `non_descriptive_label`, flags labels that look like filenames or identifiers.
+
+**Improved:**
+
+- Renamed the Accessibility side window tabs to the more compact Toggles and VoiceOver labels.
+- The VoiceOver tab now lists only what VoiceOver users can reach. Controls inside a combined row are no longer listed or highlighted, and a new Actions rotor shows rows with custom actions. The Landmarks rotor is replaced by Containers.
+- Accessibility audit: `parent_child_conflict` accepts controls exposed as custom actions and reports controls that a combined row hides from VoiceOver. New heuristic rules `heading_trait_missing` and `selected_state_missing` flag section titles without the heading trait and tab or segmented controls without a selected state. Rules about VoiceOver output now skip controls VoiceOver can't reach, while touch target and contrast rules still check them.
+- Accessibility audit: rule group headers in the side window now show separate error and warning counts instead of a single combined total.
+- Accessibility audit: fewer false positives. Thumbnail caption strips, native controls (Toggle, Stepper, segmented controls) and system bar buttons, floating-control overlaps, contrast on photos, gradients, and system bars, headings in combined elements, and nested-label suggestions are handled more accurately. The audit also waits for the screen to settle first, and `data.not_covered` lists what it could not judge, such as `contrast_unverifiable`, `native_control_skipped`, `system_chrome_skipped`, `overlap_scroll_dependent`, and `unsettled_screen`.
+- Accessibility audit: new heuristic rules flag label wording and decorative images. `label_style_punctuation`, `label_style_capitalization`, `label_style_too_long`, and `label_style_repetitive` flag sentence punctuation, lowercase or ALL CAPS labels, labels over 6 words or 50 characters, and repeated words or labels that repeat their container or neighbor. `image_possibly_decorative` asks whether a small icon next to matching whole-word text, or a full-screen background image, should be hidden from VoiceOver. Combined row labels are skipped only when child static text appears in the label, not for every comma. `accessibility-audit --format full` also returns `label_review`, a list of labels with their neighbors, so your agent can review whether each label makes sense without sight and is localized.
+- CLI: `elements --agent` output adds `!actions|id|...` rows for elements that have custom actions. Every element, including the controls inside a combined row, stays tappable by id.
+- The Accessibility side window now follows changes you make in the Simulator itself, such as switching Dark Mode or Increase Contrast, without polling. Requires Xcode 27 or later.
+- Improved reliability of the Accessibility side window: Dark Mode, Dynamic Type, and the accessibility toggles now apply consistently, including on the iOS 27 Simulator. Bold Text, On/Off Labels, Inverted Colors, and Differentiate w/o Color are hidden on iOS 27 Simulators for now, and Button Shapes is now called Show Borders to match iOS.
+
+**Fixed:**
+
+- Accessibility audit: combined photo and video thumbnail labels no longer trigger `heading_trait_missing` when the accessibility frame covers the whole tile and the label includes a duration.
+- CLI: commands that take `--udid` (such as `screen`, `elements`, `interact`, `screenshot`, and `duo`) now find a Simulator that was cloned and booted with `xcrun simctl`, without opening it in Simulator.app. RocketSim refreshes its device list from CoreSimulator when it doesn't know the UDID as booted, instead of waiting for a Simulator window. The `simulator_not_found` error now also explains how to check the UDID with `xcrun simctl list devices` and when to retry.
+- Fixed a rare crash when several CLI commands or overlays read accessibility information from multiple Simulators at the same time, for example while running parallel `rocketsim elements` or `rocketsim wait` commands.
+- iPad Pro and iPad mini in Device Hub no longer report that Device Hub is in expanded mode, so Comparing, Touches, and VoiceOver Navigator work again.
+
+# 16.7.1 (338)
+
+**Fixed:**
+
+- Fixed iPhone Duo screenshots failing with "Capturing screenshot failed" after CoreSimulator restarted while RocketSim was running. RocketSim now reconnects to the Simulator and retries once.
+
+# 16.6.0 (336)
+
+**New:**
+
+- Browser Preview can be opened from another Mac on the same network or a Tailscale tailnet with `rocketsim preview --lan`. This requires RocketSim Pro. The preview stays on localhost unless you opt in, listens only on the address it shows, and stops after 30 minutes without a connected browser. It is served over plain HTTP, so use it on networks you trust or over Tailscale.
 - CLI: added `rocketsim accessibility-audit` to return structured accessibility findings for the visible Simulator screen, including labels, traits, hit regions, element structure, and optional heuristic contrast checks.
 - Added real-device bezels for iPhone 18 Pro, iPhone 18 Pro Max, and folded and unfolded iPhone Duo.
 - Added iPhone Duo capture support: screenshots and recordings capture both displays and the live hinge angle, and render the fold pose through Apple's 3D folding model in the app, editor, previews, and thumbnails. Renders follow the Simulator orientation with upright interface content, support transparent or custom backgrounds, and use an automatic ratio that stays compact while folded and expands when the device unfolds.
 - CLI: iPhone Duo support. `screenshot` and `video record` render the fold pose for every styled bezel, including the Duo-only `--bezel device3d`. `duo pose` controls the simulator hinge directly (without Device Hub or macOS Accessibility permission), and `duo hinge` reports the hinge state and angle. Plain Duo screenshots capture the display that shows the interface (outer while closed, inner while open) in that display's orientation.
 - Rotating an iPhone, iPad, or iPhone Duo Simulator while recording is now preserved and smoothly animated in editor previews, thumbnails, and exported videos.
+- CLI: `rocketsim video record --open-editor` shows the floating thumbnail and opens the recording in the capture editor when it stops.
+- Simulator Camera is now a metered Pro feature: free users can stream the Simulator Camera on 5 distinct days, after which streaming requires RocketSim Pro. Pro users stream without limits.
 
 **Improved:**
 
@@ -17,10 +120,13 @@
 - Browser Preview skips accessibility refreshes while the screen is unchanged or the Simulator is recording.
 - Recordings no longer contain bursts of repeated frames after a brief system stall.
 - iPhone Duo touches, the grid, and the rulers now line up with the device in Device Hub when the Duo is closed or fully unfolded, instead of reporting that Device Hub is in expanded mode. The grid and rulers follow the orientation Device Hub draws, including after unfolding the Duo with the hinge control.
+- Video exports with touches, bezels, or a watermark render frames in parallel and export faster, especially for landscape and rotating recordings.
+- 120 fps recordings no longer drop frames while encoding.
 
 **Fixed:**
 
 - Network Monitor and RocketSim Connect no longer stay disconnected on Xcode 27 and macOS 27. The Xcode debugger hook now loads from RocketSim.app instead of RocketSim's protected app container, and existing installs are repaired automatically when RocketSim launches. If you installed the hook through Terminal, run the copied setup command again from Settings > Connect. (Thanks, L. Hurtado!)
+- RocketSim Connect no longer crashes Xcode's debugger when you stop or re-run an app shortly after launch, and no longer skips your breakpoint on `UIApplicationMain`.
 - CLI: installing the `rocketsim` command into `~/.local/bin` no longer fails with "The selected folder doesn't appear to be on your PATH", including on machines where the user isn't your main account (for example a CI user). (Thanks, G. Ambrozio!)
 - Starting a Browser Preview no longer freezes RocketSim's interface for up to a second.
 - CLI: `rocketsim video record` no longer fails for recordings larger than 10 MB (about 20 seconds at 60 fps). Large results are now handed over through a temporary file.
@@ -29,6 +135,13 @@
 - CLI: `rocketsim` no longer exits silently with signal 133/134 when invoked from Codex's default sandboxed shell. The installed launcher now returns an actionable `sandbox_unavailable` response, while the agent skill requests the required escalation up front. Existing CLI symlinks installed through RocketSim migrate automatically. (Thanks, U. Di Profio!)
 - Fixed individual rulers that could no longer be removed by dragging them outside the horizontal or vertical ruler strip. (Thanks, A. Hershberger!)
 - Fixed the Comparing reference image disappearing while interacting with the Simulator when "Always show windows" was enabled. (Thanks, M. Jahantark!)
+- Physical device screenshots no longer time out when the live preview is already showing frames; RocketSim reuses the latest preview frame and surfaces clearer guidance when streaming stalls.
+- Landscape and upside-down captures are now upright everywhere: thumbnails, screenshots, the capture editor preview, and exported videos, with touches drawn where you tapped.
+- The grid overlay mask no longer rotates twice in landscape.
+- RocketSim's Dock icon no longer appears while recording with touches, and recordings no longer leave an invisible full-screen window behind.
+- CLI: `rocketsim video record` reports a clear error when the Simulator delivers no frames, instead of failing with "Cannot Open".
+- RocketSim no longer crashes when a Simulator recording's simctl process exits before recording starts.
+- Bezels, screenshots, and recordings work again for older Simulator devices such as iPad (6th generation), iPhone 7, and Apple TV, which previously failed with missing screen dimensions.
 
 # 16.5.0 (335)
 
@@ -95,12 +208,27 @@
 
 # 16.4.5 (331)
 
+**New:**
+
+- Added a Performance Trace side-window tab for starting and stopping eligible Simulator and physical-device RocketTrace recordings directly from RocketSim.
+
 **Improved:**
 
+- The Performance Trace tab now shows the selected build configuration, clearer RocketTrace guidance, and more compact native controls.
+- Performance Trace recordings now show each launch stage in RocketSim, prevent duplicate starts, retain the recording timer through app reinstalls and reconnects, and hand off to RocketTrace for processing after Stop.
 - LLDB RocketSimConnect improved for slow launches that occasionally happen on busy machines.
+- The Performance Trace tab now explains what RocketTrace is when it is not installed, and tells you whether RocketTrace needs to be opened, updated, or restarted instead of showing one generic connection message.
+- The Performance Trace tab now explains how to fix a build that RocketTrace can't record because its dSYM is missing or mismatched, with a Learn More link and a Start Again button.
+- The Performance Trace tab now lists only Release and other optimized builds from Xcode, including ones that aren't installed on the Simulator yet, since Debug builds are too slow for reliable traces. When there are none, it explains how to create one with Product → Profile and links to RocketTrace's documentation.
+- Performance Trace progress steps now use the same rounded black card as the recording state, with a spinner and a Cancel button until recording starts. Cancelling while RocketTrace prepares needs the latest RocketTrace.
+- Diagnostics reports now include a RocketTrace chapter with the installed copies, running state, and recent connection history to help troubleshoot the Performance Trace tab.
 
 **Fixed:**
 
+- Fixed the Performance Trace tab keeping a previous build's failure after selecting another build, and changing the selected build or following newly appearing builds while a trace is running.
+- Fixed the Performance Trace tab repeatedly checking a live RocketTrace connection and offering to start when its Recorder Companion could not be reached.
+- Fixed the Performance Trace tab requiring a RocketSim restart before recognizing an updated RocketTrace Recorder Companion.
+- Fixed selected builds being rejected as unavailable when starting a RocketTrace recording. The tab now falls back to launching the existing installation when its local Xcode build is gone.
 - Fixed RocketSim onboarding windows appearing while app-hosted tests run in the background.
 - Fixed the Screen Recording permission alert repeatedly appearing after opening System Settings or denying access. (Thanks, E. Sanchez!)
 - Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted. (Thanks, H. v.d. Ploeg)

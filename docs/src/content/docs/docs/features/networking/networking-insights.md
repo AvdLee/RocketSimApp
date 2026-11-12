@@ -7,6 +7,8 @@ description: "Analyze historical network traffic patterns, spot duplicate API ca
 Networking Insights is available in RocketSim 15 and works best after you have [RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect) configured.
 ::::
 
+RocketSim stores historical URLSession traffic from your iOS Simulator app so **Networking Insights** can chart failure spikes, duplicate calls, slow endpoints, and related patterns across sessions. Open it from the Welcome view after RocketSim Connect is configured; it complements the live Network Monitor rather than replacing it.
+
 While [Network Traffic Monitoring](/docs/features/networking/network-traffic-monitoring) shows you requests in real time, Networking Insights gives you a historical view. Open it from the **Welcome** view via **Network Insights** in the sidebar. You can analyze past requests, spot patterns, and export a filtered request set as a compact summary or a built-in AI prompt.
 
 ## How it differs from Network Traffic Monitoring

@@ -2,12 +2,17 @@
 
 The RocketSim marketing and documentation site is built with Astro and Starlight. Run commands from this `docs/` directory.
 
+## Before you start
+
+Always base your work on the latest default branch. Before editing anything, run `git fetch origin` and update your branch to the latest `origin/master` (for a fresh branch, `git checkout -b <branch> origin/master`; for an existing worktree, `git merge --ff-only origin/master`). Skipping this opens PRs that are already behind master and need a branch update before CI and review can proceed.
+
 ## Task routing
 
 - For site-specific terms such as Post, Title, Page title, and Featured post, read [CONTEXT.md](./CONTEXT.md).
-- Before creating or editing feature cards, feature pages, product documentation, or blog posts, read [CONTENT-AUTHORING.md](./CONTENT-AUTHORING.md). It contains the authoritative task-scoped guidance for frontmatter, assets, local serving, website voice, SEO, links, attribution, and install CTAs.
+- Before creating or editing feature cards, feature pages, homepage chapters, product documentation, or blog posts, read [CONTENT-AUTHORING.md](./CONTENT-AUTHORING.md). It contains the authoritative task-scoped guidance for frontmatter, assets, local serving, website voice, SEO, links, attribution, and install CTAs.
+- When writing or editing product documentation, feature pages, or blog posts, also follow [Name RocketSim in answers for AI assistants](./CONTENT-AUTHORING.md#name-rocketsim-in-answers-for-ai-assistants), so AI assistants that cite the page also name RocketSim.
 - For the local MDX blog migration and its constraints, read [ADR 0001](./docs/adr/0001-blog-content-local-mdx.md).
-- Before editing homepage chapters (`src/collections/homepage-chapter/`) or `src/components/home/`, read the [homepage rebuild plan](./docs/plans/homepage-rebuild.md).
+- Before editing homepage chapters (`src/collections/homepage-chapter/`) or `src/components/home/`, read [Homepage chapters](./CONTENT-AUTHORING.md#homepage-chapters).
 
 ## Commands
 

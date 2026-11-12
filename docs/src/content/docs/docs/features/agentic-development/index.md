@@ -5,6 +5,8 @@ sidebar:
   order: 1
 ---
 
+To let Claude Code, Codex, Cursor, or another coding agent verify an iOS app in the Simulator, build and run it with Xcode or your usual tooling first, then install the version-matched `rocketsim` CLI and RocketSim Agent Skill from **Settings → CLI & Agent**. RocketSim stays connected to the Simulator so the agent can read visible elements, interact, capture screenshots, and confirm UI changes without replacing your build step.
+
 RocketSim helps AI coding agents inspect, navigate, and verify your running iOS Simulator app. The RocketSim Mac app stays connected to the Simulator, keeps useful state warm, and exposes a compact CLI that agents can use to read visible elements, tap controls, type text, capture screenshots, and confirm UI changes.
 
 RocketSim does not build, install, or launch your app from source. Start the app with Xcode or your normal build tooling first, then use RocketSim for fast Simulator inspection and interaction.
@@ -19,6 +21,8 @@ With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your
 - Use compact screen summaries to spend less context per UI read
 - Fall back to screenshots when accessibility data is not enough
 - Open a live Browser Preview for hands-on testing and visual feedback
+- Audit accessibility on the visible screen, fix the findings, and validate the fixes
+- Capture and control iPhone Duo Simulators, including the hinge pose
 
 ## What you can do with it
 
@@ -33,6 +37,10 @@ Instead of relying only on screenshots or brittle coordinate taps, the agent can
 ### Validate UI after code changes
 
 After making a code change, launch the app from Xcode or ask your agent to use your normal build tooling. Once the app is running, ask the agent to navigate to the relevant screen with RocketSim and verify that the expected elements are visible. This is faster than switching to the Simulator yourself to check.
+
+### Audit and fix accessibility
+
+Run `rocketsim accessibility-audit` to find missing labels, small tap targets, low contrast, and VoiceOver problems on the current screen. Your agent fixes the findings, rebuilds, and runs the audit again to validate the result. The report lists what it skipped or couldn't verify in `not_covered`, which means that part was not judged. The audit can't detect modals, so findings behind a visible modal are out of scope for the current UI until the modal is dismissed and the screen is audited again. See [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the full workflow.
 
 ### Reproduce bugs in context
 
@@ -66,7 +74,7 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot.
 
-Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark.
+Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark.
 
 Read [how we test and improve the RocketSim CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, limitations, and improvement findings.
 
@@ -93,7 +101,7 @@ RocketSim ships the CLI and Agent Skill inside the app. When RocketSim updates, 
 RocketSim's agentic development support has three layers:
 
 1. **The RocketSim Mac app** keeps the live Simulator connection, caches state, and performs the optimized work.
-2. **The RocketSim CLI** exposes that running app to agents through commands such as `elements`, `interact`, `wait`, `screenshot`, `video record`, and `doctor`.
+2. **The RocketSim CLI** exposes that running app to agents through commands such as `elements`, `interact`, `wait`, `accessibility-audit`, `screenshot`, `video record`, and `doctor`.
 3. **The RocketSim Agent Skill** teaches your AI coding tool how to use the CLI safely and consistently.
 
 Install both the command line tool and Agent Skill from **RocketSim → Settings → CLI & Agent**. RocketSim creates symlinks into your chosen folders, so the CLI and skill keep pointing at the latest installed app.

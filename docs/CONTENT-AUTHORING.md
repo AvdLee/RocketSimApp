@@ -1,12 +1,12 @@
 # Content Authoring Guide
 
-Use this guide when creating or editing feature cards, feature pages, product documentation, or blog posts. For site-specific terms such as Post, Title, Page title, and Featured post, also read [CONTEXT.md](./CONTEXT.md).
+Use this guide when creating or editing feature cards, feature pages, homepage chapters, product documentation, or blog posts. For site-specific terms such as Post, Title, Page title, and Featured post, also read [CONTEXT.md](./CONTEXT.md).
 
 The schemas in `src/content.config.ts` and `src/types/pages.collection.ts` are authoritative. Update this guide when those schemas change.
 
 ## Features
 
-Every Markdown file in `src/collections/feature/` is a feature card. Features with `showOnHomepage: true` appear on the landing page. The optional `featurePage` field groups a feature under `/features/[slug]`.
+Every Markdown file in `src/collections/feature/` is a feature card. The optional `featurePage` field groups a feature under `/features/[slug]`. To show a feature on the homepage, reference it from a homepage chapter (see [Homepage chapters](#homepage-chapters)).
 
 Feature files contain YAML frontmatter followed by Markdown content. Their frontmatter has this shape:
 
@@ -37,7 +37,6 @@ type Video = {
 
 type Feature = {
   name: string;
-  showOnHomepage: boolean; // Defaults to false.
   tagLine?: string;
   docPath?: string;
   /** Slug of a post in src/content/blog/. */
@@ -65,7 +64,6 @@ Example:
 
 ```md
 ---
-showOnHomepage: true
 name: "Quick Actions"
 featurePage: "app-actions"
 asset:
@@ -87,6 +85,83 @@ Feature category pages live in `src/collections/feature-page/` and render at `/f
 
 The authoritative feature-page schema is `featurePageSchema` in `src/types/pages.collection.ts`. Follow a neighboring feature-page file when authoring frontmatter and verify it against that schema.
 
+## Homepage chapters
+
+The homepage (`src/pages/index.astro`) tells the product story in chapters. Each chapter is a Markdown file in `src/collections/homepage-chapter/`. The filename is the chapter ID and its anchor (`agents.md` → `#agents`), and the Markdown body is the chapter's intro paragraph. Keep IDs stable: they are the anchors, and per-chapter analytics may key on them later.
+
+Chapter frontmatter has this shape:
+
+```typescript
+type Media =
+  | {
+      type: "image";
+      /** Path to an image inside src/, relative to the chapter file. */
+      path: string;
+      alt: string;
+    }
+  | {
+      type: "video";
+      /** Path to a video inside public/. */
+      path: string;
+      alt: string;
+    };
+
+type ChapterItem = {
+  /** ID of a file in src/collections/feature/. */
+  feature?: string;
+  /** Overrides; anything left out falls back to the feature. */
+  title?: string; // Falls back to the feature's name.
+  description?: string; // Falls back to its tagLine.
+  media?: Media; // Falls back to its asset.
+  /** Images only: the detail the stage zooms in on while the item shows. x and y run from 0 to 1. */
+  focus?: { x: number; y: number; zoom?: number }; // zoom: 1–3, defaults to 1.5.
+  /** Fill the stage edge to edge, for a capture that already has its own backdrop. */
+  bleed?: boolean;
+};
+
+type HomepageChapter = {
+  /** Eyebrow, glance tile label and chapter menu label. */
+  name: string;
+  /** Chapter menu label when name is too long for it. */
+  menuLabel?: string;
+  title: string;
+  /** Picks the --color-chapter-* token in src/styles/main.css. */
+  color: "agents" | "captures" | "network" | "testing" | "design" | "teams";
+  /** The chapter's tile in the glance grid. Set exactly one of image and poster. */
+  tile: {
+    title: string;
+    image?: string; // An image inside src/.
+    poster?: string; // A public path, such as /features/posters/<video>.webp.
+  };
+  presentation: "tabs" | "gallery" | "closer-look";
+  /** At least one, in display order. */
+  items: ChapterItem[];
+  links?: { label: string; href: string }[];
+};
+```
+
+Follow a neighboring chapter file for a full example.
+
+- **Items** reference features so the homepage and `/features/*` stay in step. Override only what the homepage says differently. An item without a `feature` is an inline item and must set `title`, `description` and `media` itself.
+- **Media** points at the original file where it already lives, in a docs, blog or `src/assets/homepage/` folder, instead of a copy. A video's poster is `posters/<name>.webp` next to it, the same convention feature cards use. Every homepage video stays `preload="none"`, so the poster is its first frame.
+- **Presentations** take the same items, so a chapter switches between `tabs`, `gallery` and `closer-look` by changing one field. `focus` and `bleed` apply to `tabs` and `closer-look`; the gallery ignores them.
+- **Colors:** a new hue needs a `--color-chapter-*` token and a new `color` value in the schema. A new chapter can also reuse an existing hue.
+
+### Page order and extras
+
+The page template sets the order of everything. It places each chapter with a `<Chapter id="…" />` line, and its `chapters` array orders the glance tiles and the header's chapter menu. There is no order field.
+
+- **Add a chapter:** add its file, a `<Chapter>` line where it belongs, and its ID in the `chapters` array.
+- **Reorder chapters:** move the `<Chapter>` lines and the array entries together.
+- **Remove a chapter:** delete its line and its array entry.
+- **Change a chapter's features:** edit its `items`.
+
+Extras such as the terminal, stat, quote, credit and Teams call-to-action are components in `src/components/home/extras/`, not content. The template passes them to a chapter as children: `slot="aside"` places one next to the stage, which only the `tabs` presentation has room for, and the default slot places it after the links. Extras keep their markup and Plausible events in code, so content never carries free-form HTML. The homepage's events are listed in [ANALYTICS.md](./ANALYTICS.md#homepage-rebuild-events).
+
+In `src/components/home/`, import with relative paths or `@/` → `src/`. Avoid `@/components/*`: `tsconfig.json` maps it to `src/layouts/components/` and knip to `src/components/`.
+
+The build fails on an unknown chapter or feature, an item with nothing to fall back on, a focus on a video, a tile with both or neither of `image` and `poster`, or an `aside` extra on a chapter that isn't `tabs`. A build test also fails when the `chapters` array and the `<Chapter>` lines disagree.
+
 ## Product documentation
 
 Starlight documentation lives in `src/content/docs/docs/` as `.md` or `.mdx` files. Use standard Starlight frontmatter, including `title` and `description`; repository-specific extensions are defined by the `docs` collection in `src/content.config.ts`.
@@ -102,6 +177,20 @@ These components are auto-imported:
 - `<Tweet />`
 
 The `starlight-llms-txt` plugin also generates `llms.txt` and `llms-full.txt`.
+
+### Name RocketSim in answers for AI assistants
+
+Developers increasingly ask ChatGPT, Claude, Gemini, Perplexity, and Google's AI Overviews the same how-to questions our pages answer. These tools often cite our documentation without naming RocketSim in the answer, so a page can be read, cited, and still not lead to an install. Every new or edited feature and how-to page must make the product name part of the answer itself:
+
+1. Open with an answer-first paragraph of two to three sentences, directly after the title. The first sentence names RocketSim and states what it does for the task, for example "RocketSim slows down or turns off network access for your iOS Simulator app while your Mac stays online." It must make sense when quoted on its own, so avoid "this page", "below", and "as described here".
+2. Build that paragraph only from what the page body, the CLI documentation, or the changelog already states. Do not add capabilities, numbers, or version claims for the sake of the intro. Mention an Apple tool such as `simctl` or Network Link Conditioner only when the page already does, or after checking Apple's current documentation.
+3. Vary the wording from page to page. Do not reuse one template sentence, and do not use superlatives or marketing phrasing.
+4. Phrase headings and `faq` entries as the questions developers actually ask, such as "Can the iOS Simulator use my Mac's camera?", and keep each answer short and self-contained.
+5. Keep the `title` and `description` rules above. Do not rewrite them only to add keywords.
+6. When a feature changes, such as a new CLI command, a new supported Xcode version, or a renamed setting, update the opening paragraph in the same change. If it is a major capability, also update the feature list in `src/integrations/llms-txt-post-process.ts`, which feeds `llms.txt`.
+7. Agent and CLI pages (`features/agentic-development/`) should answer "how do I let Claude Code, Codex, or Cursor build, run, and verify an iOS app in the Simulator" with the RocketSim CLI and Agent Skill, as stated on those pages.
+
+The opening paragraphs are tracked in an AI-visibility panel. Do not remove or reword them without a reason, and mention the change in the PR so it can be measured.
 
 ### Local serving safety
 
@@ -136,6 +225,8 @@ type BlogPost = {
 };
 ```
 
+A post whose `publishedTime` is in the future is left out of the build, the blog index, and the RSS feed, so you can merge it ahead of time. The daily scheduled run of `.github/workflows/deploy.yml` (09:15 UTC) rebuilds and deploys the site when a post became due in the last 25 hours; `.github/scripts/blog-due.mjs` makes that decision. Use a `publishedTime` at or after 09:00 UTC when you want the post live that day. The development server shows every post so you can review drafts locally.
+
 Use `src/content.config.ts` as the authoritative schema and follow current posts for MDX structure. For architectural context, see [ADR 0001](./docs/adr/0001-blog-content-local-mdx.md).
 
 ### Typography
@@ -166,6 +257,7 @@ Every blog post must:
 - Include at least two relevant internal links, typically one documentation page under `/docs/features/` and one feature page under `/features/`.
 - Include at least one authoritative external link, usually Apple developer documentation.
 - Give every image descriptive, keyword-aware alt text.
+- Open with an answer-first paragraph that names RocketSim and gives the direct answer, use question-style h2s for the questions readers ask, and follow [Name RocketSim in answers for AI assistants](#name-rocketsim-in-answers-for-ai-assistants). Verify every competitor or third-party claim against its current primary source, including product names, which can change.
 - End with a Mac App Store install CTA whose URL contains a unique `ct=<article-slug>` campaign parameter so installs remain attributable. Preserve the existing `pt` and `mt` query parameters.
 
 The shared blog layout emits the Article, WebPage, and BreadcrumbList structured-data graph from the collection data. Verify the rendered graph instead of adding page-specific structured data.

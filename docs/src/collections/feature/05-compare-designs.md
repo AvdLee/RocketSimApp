@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Compare designs"
 featurePage: "design-comparison"
 tagLine: "Use overlays or slide comparisons to spot differences between the implementation and the design."

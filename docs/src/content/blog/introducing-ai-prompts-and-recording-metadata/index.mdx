@@ -1,7 +1,10 @@
 ---
 title: Introducing AI prompts and recording metadata
-description: RocketSim 14.5 introduces AI prompts generated from the Network Monitor and recording metadata overlays for your captures, plus faster, more reliable build monitoring.
+description: RocketSim 14.5 adds AI prompts from the Network Monitor and recording metadata overlays for captures. Update to debug network requests with AI.
 publishedTime: 2026-01-19T11:58:13Z
+modifiedTime: 2026-10-28T09:00:00.000Z
+image: ./network-prompts.png
+imageAlt: RocketSim's Network Monitor with the Copy prompt menu open, listing the Redundant calls and caching, Performance and overfetching, and Failures and error spikes AI prompts next to an iPhone Simulator.
 ---
 
 import { Image } from "astro:assets";
@@ -10,13 +13,13 @@ import showMetadataToggle from "./show-metadata-toggle.png";
 import metadataSettings from "./metadata-settings.png";
 import buildInsights from "./build-insights.png";
 
-The 14.5.0 release is now officially [available in the App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=blog&mt=8) and introduces two significant new features. With AI prompts generated from the Network Monitor you'll have a first way to benefit from data collected inside RocketSim. Recording metadata allows you to promote your apps with a higher chance of success.
+The 14.5.0 release is now officially [available in the App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=introducing-ai-prompts-and-recording-metadata&mt=8) and introduces two significant new features. With AI prompts generated from the [Network Monitor](/docs/features/networking/network-traffic-monitoring/) you'll have a first way to benefit from data collected inside RocketSim. Recording metadata allows you to promote your apps with a higher chance of success.
 
 ## Exporting Network Requests AI Prompts
 
-We're preparing for the future of RocketSim, in which we bring your Agent tooling closer to the Simulator. RocketSim collects data such as build insights and network requests, which can be incredibly valuable when AI has access to them. We imagine using AI to improve networking, build performance, app design, and more.
+We're preparing for the future of RocketSim, in which we bring your Agent tooling closer to the Simulator. RocketSim collects data such as [build insights](/features/build-insights/) and network requests, which can be incredibly valuable when AI has access to them. We imagine using AI to improve networking, build performance, app design, and more.
 
-The first step is a feature available today: Network Request Prompts.
+The first step is a feature available today: [Network Request Prompts](/docs/features/networking/network-request-prompts/). They work with the [URLSession](https://developer.apple.com/documentation/foundation/urlsession) requests RocketSim already shows in the Network Monitor. If you want to know how that works without a proxy, read how to [monitor URLSession network requests](/blog/monitor-urlsession-network-requests-without-the-pain-of-custom-certificates/).
 
 <figure>
   <Image
@@ -88,7 +91,7 @@ We'd love for you to try this out and [let us know on GitHub](https://github.com
 
 ## Showing metadata on top of screenshots and recordings
 
-Another wish I've had for a while is to showcase the app's title and website whenever I share a recording of my app. There's now a new toggle in the side window that allows you to show metadata on top of captures:
+Another wish I've had for a while is to showcase the app's title and website whenever I share a recording of my app. There's now a new toggle in the side window that allows you to show metadata on top of [screenshots and recordings](/features/screenshots-recordings/):
 
 <figure>
   <Image
@@ -142,11 +145,7 @@ Analyzing your builds used to be quite CPU-heavy, even though we only needed to 
 
 It also turned out that Xcode 26.2 changed the build log format, making it harder for us to determine the build type. Therefore, we revisited this logic completely, resulting in a more reliable analysis pipeline that will never reach 100% CPU. It's lightning fast!
 
-## Get started today
-
-[Get the update from the App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=blog&mt=8) and get started with these new changes today.
-
-### Full Changelog
+## Full changelog
 
 **New:**
 
@@ -166,3 +165,11 @@ It also turned out that Xcode 26.2 changed the build log format, making it harde
 - Builds created by Xcode 26.2 are now properly monitored.
 - Optimized the performance of monitoring new builds and prevented duplicate parsing of build logs.
 - Settings sidebar can no longer collapse.
+
+## Conclusion
+
+RocketSim 14.5 brings redacted AI prompts from the Network Monitor, recording metadata on your captures, and a faster build monitoring pipeline. The prompts are only the first step of bringing your agent tooling closer to the Simulator.
+
+[Get the update from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=introducing-ai-prompts-and-recording-metadata&mt=8) and try the Copy prompt menu in the Network Monitor. Feel free to [let us know on GitHub](https://github.com/AvdLee/RocketSimApp/issues) which prompts you would like to see next.
+
+Thanks!

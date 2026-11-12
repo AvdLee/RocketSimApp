@@ -12,6 +12,8 @@ faq:
     answer: "Yes. The camera feed is delivered through RocketSim Connect, which the recommended setup enables automatically for Xcode debug sessions, without any package, framework, or build change."
 ---
 
+RocketSim streams a camera connected to your Mac into the iOS Simulator through RocketSim Connect so you can exercise scan, capture, and preview flows without a physical iPhone. Xcode's Simulator does not expose a camera to apps by default; enable the feed from the Capture side window after camera authorization.
+
 Testing camera flows on the iOS Simulator usually ends with a fallback screen, since the Simulator does not expose a real camera like a physical device. That makes every QR scanner, document scanner, profile photo picker, or video capture flow slower to validate.
 
 ## Does the iOS Simulator have a camera?
@@ -25,6 +27,10 @@ Check out these demos:
 - [Glimpsify open-source project demo video](https://x.com/twannl/status/1935303234714792340)
 - [Vision object detection demo video](https://x.com/twannl/status/1926715711277203563)
 - [Continuity camera demo video](https://x.com/twannl/status/1928014373210972202)
+
+## Is Simulator Camera free?
+
+Simulator Camera is free to try on 5 distinct days of streaming. After that, streaming requires RocketSim Pro, which has no limits.
 
 ## How do I access this feature?
 

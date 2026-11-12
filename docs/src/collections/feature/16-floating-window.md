@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Floating windows for quick access"
 featurePage: "screenshots-recordings"
 asset:

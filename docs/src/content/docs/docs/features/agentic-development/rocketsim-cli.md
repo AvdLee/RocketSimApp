@@ -45,7 +45,9 @@ RocketSim is not just a standalone command that starts from scratch every time. 
 
 The CLI uses RocketSim's [`rs/1` protocol](/docs/features/agentic-development/rs1-protocol) for agent workflows. You do not need to learn the protocol details; it is the compact, agent-optimized layer that lets RocketSim provide reliable screen reads, interaction feedback, and recovery paths while keeping output small.
 
-Compared with other tools available to control the iOS Simulator, RocketSim produced **over 99% less command output**, had an **about 95% lower byte-based context estimate**, and used **about 24% less measured command time** in our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
+RocketSim does not ship an MCP server. Read [iOS Simulator MCP vs CLI and Agent Skill](/blog/ios-simulator-mcp/) to see how the two approaches compare and how to choose.
+
+Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
 
 ## Key commands
 
@@ -56,6 +58,8 @@ Checks whether the CLI install, RocketSim app, IPC connection, Simulator state, 
 ```bash
 rocketsim doctor
 ```
+
+`doctor` also warns when the Simulator's accessibility is switched off, which makes `elements` come back empty. The warning includes the `xcrun simctl spawn <udid> defaults write com.apple.Accessibility ...` commands that switch it back on.
 
 ### Focused simulator
 
@@ -73,7 +77,7 @@ Starts a live, interactive Simulator preview and prints its local URL:
 rocketsim preview
 ```
 
-Pass `--port <port>` to choose a localhost port or `--udid <udid>` to target a specific booted Simulator. See [Browser Preview](/docs/features/agentic-development/browser-preview) for the interactive controls and visual feedback workflow.
+Pass `--port <port>` to choose a port or `--udid <udid>` to target a specific booted Simulator. Add `--lan` (RocketSim Pro) to open the preview from another Mac on the same network or a Tailscale tailnet; without it, the preview stays on localhost. See [Browser Preview](/docs/features/agentic-development/browser-preview/) for the interactive controls and visual feedback workflow.
 
 ### Visible elements
 
@@ -89,7 +93,13 @@ The `--agent` flag is the recommended default for agent workflows. It returns co
 - `act` includes interactive element identifiers, labels, roles, values, and state
 - `debug` returns the full hierarchy when an action fails or an element looks wrong
 
+Elements that expose custom accessibility actions get an extra `!actions|id|...` row. Every element, including the controls inside a combined row, stays tappable by id.
+
 Both compact modes omit individual software-keyboard keys because keyboard visibility is already reported in the response header. They also omit elements whose frames are fully outside the device canvas. Debug and plain JSON output remain unchanged when you need the complete hierarchy.
+
+When the Simulator returns no accessibility elements at all, `elements` adds an `accessibility_tree_empty` issue with the recovery commands instead of an unexplained empty list. Enable `AccessibilityEnabled` and `ApplicationAccessibilityEnabled` for the Simulator, relaunch the app, and read the screen again. The issue can also appear for a moment while an app is still launching.
+
+RocketSim reports the software keyboard as visible on iOS 26 and 27, so `elements` and `wait keyboard` agree with what is on screen.
 
 RocketSim's element pipeline is designed for real app navigation. It can include visible controls from top bars, navigation bars, tab bars, and other chrome that agents often need to move through a flow. When web content or other complex views expose limited accessibility data, RocketSim can add recovery hints so the agent knows when to use visual context.
 
@@ -132,7 +142,7 @@ rocketsim screenshot \
 | Option                  | Description                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------------- |
 | `--background <value>`  | Background color: `transparent`, a preset color, or `#RRGGBB`.                              |
-| `--bezel <style>`       | Device frame style: `none`, `simulator`, or `device`.                                       |
+| `--bezel <style>`       | Device frame style: `none`, `simulator`, `device`, or `device3d` (iPhone Duo only).         |
 | `--frame-color <value>` | Device frame tint as a preset color or `#RRGGBB`.                                           |
 | `--device-shadow`       | Render a shadow behind the device frame.                                                    |
 | `--ratio <ratio>`       | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`.                                |
@@ -149,6 +159,8 @@ To preview the capture in RocketSim's [floating thumbnail](/docs/features/captur
 ```bash
 rocketsim screenshot --show-floating-thumbnail
 ```
+
+When you capture an iPhone Duo with a styled bezel, RocketSim renders the fold pose for every bezel style. Plain Duo screenshots capture only the display that shows the interface: the outer display while the Duo is closed and the inner display while it is open. See [iPhone Duo](#iphone-duo) for the Duo-specific commands.
 
 ### Video recordings
 
@@ -169,6 +181,52 @@ rocketsim video record --fps 60 --duration 5 --udid <udid> > recording.mp4
 ```bash
 rocketsim video record --bezel device --touches --show-floating-thumbnail
 ```
+
+To review or edit the recording right away, add `--open-editor`. It sends the recording to the floating thumbnail and opens RocketSim's video editor, so it implies `--show-floating-thumbnail`:
+
+```bash
+rocketsim video record --touches --open-editor
+```
+
+If the Simulator is rotated while a recording is running, the rotation is preserved and animated in the exported video.
+
+### iPhone Duo
+
+RocketSim supports the iPhone Duo Simulator from the command line. `screenshot` and `video record` render the fold pose for every styled bezel, including the Duo-only `--bezel device3d`, which uses Apple's 3D folding model. Passing `--bezel device3d` for another device returns an error.
+
+Two commands control and inspect the hinge:
+
+```bash
+rocketsim duo pose closed|book|open [--udid <udid>]
+rocketsim duo hinge [--udid <udid>]
+```
+
+- `duo pose` moves the Simulator hinge to the `closed`, `book`, or `open` pose. It does not need Device Hub or the macOS Accessibility permission.
+- `duo pose` waits for the hinge animation to finish and polls the angle for up to about six seconds before it gives up with `wait_timeout`, so a slow hinge no longer fails a pose that is still moving.
+- `duo hinge` reports `hinge_state` (`closed`, `openFlat`, or `partiallyOpen`) and `hinge_angle_degrees`, where `0` is closed and `180` is fully flat.
+
+A typical agent flow poses the Duo, then captures it:
+
+```bash
+rocketsim duo pose open
+rocketsim screenshot --bezel device3d > duo-open.png
+```
+
+### Accessibility audit
+
+Audit the visible Simulator screen for accessibility problems, then validate your fixes with the same command:
+
+```bash
+rocketsim accessibility-audit [--udid <udid>] [--format compact|full] [--no-contrast]
+```
+
+The response contains a score from 0 to 100, error and warning counts, and findings grouped by rule with the affected element ids, frames, and a suggested fix. Narrow the run with `--rules`, `--exclude-rules`, or `--severity error|warning`; an unknown rule ID returns an `invalid_argument` error that lists the valid IDs. Pass `--screen latest`, or an explicit screen hash from `rocketsim screen`, to guard against auditing a different screen than expected. The command waits for the screen to settle (about 2 seconds at most) before auditing.
+
+`data.not_covered` lists checks that were skipped or couldn't be verified, such as `contrast_unverifiable`, `native_control_skipped`, `system_chrome_skipped`, `overlap_scroll_dependent`, and `unsettled_screen`. An entry means the check wasn't judged, not that it passed. With `--format full`, `data.label_review` adds each labeled control, image, and group with its neighboring labels, so your agent can review whether the labels make sense without sight.
+
+The audit can't detect modals such as sheets, covers, popovers, alerts, or SwiftUI `.isModal`. It also audits the content behind them. Treat findings behind a visible modal as out of scope, or dismiss the modal and audit again.
+
+Read [Accessibility Audit](/docs/features/accessibility/accessibility-audit/) for the rules, the score, and the audit, fix, and validate loop for agents.
 
 ### Network conditions
 
@@ -195,6 +253,7 @@ Agents can wait for screen changes or elements before continuing:
 ```bash
 rocketsim wait screen-changed
 rocketsim wait element --label "Continue"
+rocketsim wait element --identifier "login.submit"
 rocketsim wait keyboard --state shown
 rocketsim wait keyboard --state hidden --timeout 1
 rocketsim wait time --ms 800
@@ -220,12 +279,15 @@ rocketsim interact swipe --from 200,650 --to 200,150
 rocketsim interact scroll --label "Results" --direction up --pages 1 --screen latest
 rocketsim interact focus --label "Email" --screen latest
 rocketsim interact type "hello@example.com"
+rocketsim interact type "Zoey_yz? café" --identifier "search.field" --screen latest
 rocketsim interact button home
 rocketsim interact biometric match
 rocketsim interact biometric nomatch
 ```
 
 `interact` is designed to work with fresh screen state. After dispatching an interaction, RocketSim actively refreshes snapshots during a bounded settlement window before computing the result delta. The returned `screen_changed` value therefore reflects the post-interaction screen instead of a stale cached snapshot. Large `appeared` and `disappeared` detail arrays are capped while `appeared_count` and `disappeared_count` retain the complete totals.
+
+`interact type` presses the keys that produce each character on the keyboard layout of the Simulator, so text such as `Zoey_yz? café` comes out exactly as written on a German, French, British, Spanish, Italian, or another common layout. Pass `--identifier` or another selector together with `--screen` to focus a field first. When RocketSim can't type the text, the command fails with `invalid_argument` instead of reporting success. `context.reason` is `untypeable_characters` (with the characters the layout can't produce, for example emoji) or `unsupported_keyboard_layout` (a keyboard RocketSim has no verified mapping for). Switch the Simulator to a common layout in Settings, or enter the text another way and read the field back to verify.
 
 Use `interact activate` for an accessibility element that does not respond to coordinate taps, such as a hidden debug control. It performs an accessibility press on the resolved element instead of sending a HID tap.
 
@@ -280,7 +342,10 @@ When possible, agents should prefer targeting elements by label, type, or value 
 rocketsim interact tap --label "Submit" --screen latest
 rocketsim interact tap --type Button --label "OK" --screen latest
 rocketsim interact long-press --label "Reorder" --duration 1.5 --screen latest
+rocketsim interact tap --identifier "login.submit" --screen latest
 ```
+
+`--identifier` matches the element's accessibility identifier exactly, including case. It is the most stable selector when labels are localized or change at runtime, because identifiers don't. It works with `tap`, `activate`, `focus`, `long-press`, `type`, `wait element`, and `snapshot`, and you can combine it with the other selectors.
 
 Selector-based taps first try semantic accessibility activation, which is more reliable than a coordinate tap when the visual affordance does not align perfectly with the accessibility frame — think toggles, list rows, and buttons with asymmetric tappable areas. When semantic activation is unavailable, RocketSim falls back to a precise HID tap at the element's center. Coordinate taps and multi-touch taps always use HID directly. Use `interact activate` when you explicitly need an accessibility press without any HID fallback, such as for a hidden debug control that ignores coordinate hit-testing.
 
@@ -312,6 +377,10 @@ These prompts work well with the CLI interaction loop:
 > Use RocketSim to type a search query into the search field and select the first result
 
 > Use RocketSim to press the home button, then inspect the Simulator after the app is open again
+
+## Targeting cloned Simulators
+
+Commands that take `--udid` (such as `screen`, `elements`, `interact`, `screenshot`, and `duo`) also find a Simulator that was cloned and booted with `xcrun simctl`, without opening it in Simulator.app. If RocketSim doesn't know the UDID as booted yet, it refreshes its device list from CoreSimulator. When a UDID still can't be found, the `simulator_not_found` error explains how to check it with `xcrun simctl list devices` and when to retry.
 
 ## Requirements
 

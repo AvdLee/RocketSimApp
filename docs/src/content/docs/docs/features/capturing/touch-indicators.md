@@ -5,6 +5,8 @@ sidebar:
   order: 5
 ---
 
+RocketSim draws touch indicators on iOS Simulator screenshots and recordings when you enable them from the **Captures** side window tab or **Settings → Captures**, with optional stroke styling, color, pointer size, and touch attention mode that follows your mouse. Recorded pinch and rotate gestures show both touch points in the exported video.
+
 Touch indicators make your recordings more engaging by showing exactly where you're interacting with the app. This is especially useful for demo videos and presentations where viewers need to follow your actions.
 
 ## Enabling touch indicators
@@ -23,7 +25,7 @@ The size applies to regular touch indicators, Touch Attention Mode, and recorded
 
 This is the standout feature. When enabled, a constant touch indicator follows your mouse pointer throughout the entire recording. Apple uses this same technique in their demo videos — it helps viewers keep track of where the action is happening.
 
-Touch indicators work in both GIF and MP4 recordings. For the full set of capture options (bezels, ratio, background, and more), see [Creating Recordings](/docs/features/capturing/recordings).
+Touch indicators work in both GIF and MP4 recordings, including recordings of landscape and iPhone Duo Simulators. For the full set of capture options (bezels, ratio, background, and more), see [Creating Recordings](/docs/features/capturing/recordings).
 
 ## Pinch and rotate gestures
 

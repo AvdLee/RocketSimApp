@@ -29,7 +29,6 @@ const feature = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
-      showOnHomepage: z.boolean().default(false),
       tagLine: z.string().optional(),
       docPath: z.string().optional(),
       blogSlug: z.string().optional(),
@@ -72,7 +71,7 @@ const feature = defineCollection({
 });
 
 // One file per homepage chapter; the filename is the chapter ID and anchor.
-// See docs/docs/plans/homepage-rebuild.md.
+// See "Homepage chapters" in CONTENT-AUTHORING.md.
 const homepageChapter = defineCollection({
   loader: glob({
     pattern: "**/[^_]*.md",
@@ -118,6 +117,19 @@ const homepageChapter = defineCollection({
             title: z.string().optional(),
             description: z.string().optional(),
             media: media.optional(),
+            // The detail a tabs presentation zooms in on while the image
+            // shows; `x` and `y` run from 0 to 1 across and down the image.
+            focus: z
+              .object({
+                x: z.number().min(0).max(1),
+                y: z.number().min(0).max(1),
+                zoom: z.number().min(1).max(3).default(1.5),
+              })
+              .optional(),
+            // Fills the stage edge to edge instead of insetting the media
+            // on its own backdrop. For a 16:9 capture that already has its
+            // own backdrop, such as a Simulator screenshot on a wallpaper.
+            bleed: z.boolean().optional(),
           }),
         )
         .min(1),

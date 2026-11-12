@@ -1,0 +1,55 @@
+---
+title: "How Large Teams Use RocketSim"
+description: "Discover how development teams use RocketSim for shared deep links, design validation, accessibility testing, feature flag workflows, and team build insights."
+sidebar:
+  order: 1
+---
+
+Many large teams make use of RocketSim to improve their development workflow. Developers, but also QA engineers and designers make use of RocketSim to validate designs, accessibility implementations, or execute deeplinks to enable certain feature flags.
+
+This article provides an overview of features that work best for specific cases, allowing you to explore what RocketSim has to offer.
+
+## RocketSim for Teams
+
+Brand new since 2025 is our RocketSim for Teams dashboard.
+
+![RocketSim Teams dashboard showing team build insights](./how-large-teams-use-rocketsim/cleanshot_2025-01-21_at_13.42.472x.png)
+
+You can find more info about this [on our website](https://www.rocketsim.app/for-teams/).
+
+## Sharing App Actions using Git
+
+RocketSim allows you to save app actions per bundle identifier. App actions include deeplinks, push notifications, and locations that you commonly use to build and test your app.
+
+By storing your configuration in Git, you allow all your team members to benefit from the same set of app actions related to your bundle identifier.
+
+![Deep links shared across the team for testing specific app flows](./how-large-teams-use-rocketsim/cleanshot_2024-01-19_at_11.01.382x.png)
+
+## Enabling feature flags
+
+Many teams develop new features behind so-called feature flags. It’s common to have an in-app debug view that shows up after a hidden gesture like shaking the device.
+
+RocketSim introduces an alternative to these debug views by allowing you to switch flags using the realtime User Defaults Editor.
+
+![Using deep links as feature flag toggles for development](./how-large-teams-use-rocketsim/eb98450e-c239-4f7a-859c-ac69465fd1dc.png)
+
+## Preparing for European Accessibility Act (2025)
+
+Your team should prepare for the [European Accessibility Act](https://ec.europa.eu/social/main.jsp?catId=1202&intPageId=5581&langId=en) and RocketSim is here to help. The environment toggles allow you to validate all kinds of accessibility related implementations, including dark mode and dynamic type.
+
+![Design comparison overlay being used for QA review](./how-large-teams-use-rocketsim/cleanshot_2025-01-21_at_13.43.572x.png)
+
+## How designers and QA engineers validate implementations on the Simulator
+
+Besides developers, it’s also QA engineers and designers that benefit from RocketSim. Large teams deliver Simulator builds automatically via CI, attached to every PR. Both designers and QA engineers will run the build on the Simulator and use RocketSim to validate.
+
+- The design comparison feature ensures pixel-perfect views.
+- Recordings with touches help QA engineers to better explain bugs.
+- Relaunch apps in specific locale or timezone without resetting the Simulator greatly improves the QA testing cycle.
+- Accessibility toggles in RocketSim’s side window takes away the need to teach your testers how they can switch common accessibility modes.
+
+## Purchasing and renewing Team Licenses
+
+You can [order team licenses via our website](https://www.rocketsim.app/for-teams/). Batch discounts apply automatically if you order multiple seats.
+
+Renewing an expired license, re-subscribing, fixing a failed payment, or adding seats is self-serve from the Teams dashboard. Follow the [team subscription guide](/docs/teams/managing-your-team-subscription/) for step-by-step instructions.

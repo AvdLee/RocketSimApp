@@ -3,6 +3,8 @@ title: "Quick Actions"
 description: "Relaunch your app with a different locale, manage app lifecycle, terminate, uninstall, and perform common testing actions with a single click from RocketSim."
 ---
 
+RocketSim runs common iOS Simulator testing actions from the side window Quick Actions pane, including relaunch with locale or time zone, launch and terminate, clipboard transfer, and keychain reset. Use one click instead of switching to Xcode or Simulator menus for the same chores.
+
 Quick Actions speed up your testing workflow by giving you one-click access to common operations. Instead of navigating through Xcode or Simulator menus, you can perform everything from RocketSim's side window.
 
 ![General app actions window pane](./quick-actions/cleanshot_2025-01-21_at_14.05.052x.png)

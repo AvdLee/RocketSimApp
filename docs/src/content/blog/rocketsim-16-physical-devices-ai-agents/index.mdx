@@ -72,7 +72,7 @@ The goal is simple: your coding agent should be able to verify the app it is cha
 
 We care a lot about keeping these workflows efficient. A large accessibility tree might contain everything, but it also fills the agent's context with details it does not need. RocketSim keeps the Mac app running, maintains useful state, and returns compact `rs/1` responses designed for agents.
 
-Our latest benchmark showed [over 99% less command output, about a 95% lower byte-based context estimate, and about 24% less measured command time](/blog/testing-ai-agents-ios-simulator/) compared with other tools available to control the iOS Simulator. These numbers are based on repeatable command workflows rather than model reasoning, but they validate the direction: give an agent enough context to act reliably without overwhelming it.
+Our latest benchmark showed [99% fewer tokens, 95% less agent context, and 24% faster](/blog/testing-ai-agents-ios-simulator/) than other tools for controlling the iOS Simulator (estimated). These numbers are based on repeatable command workflows rather than model reasoning, but they validate the direction: give an agent enough context to act reliably without overwhelming it.
 
 The [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill/) teaches Cursor, Claude, Codex, Xcode, and other coding tools how to use the CLI. Both the skill and CLI update alongside the app, so their instructions and commands do not slowly drift apart. If you want a practical introduction first, read [AI Agents for the iOS Simulator](/blog/ai-agents-ios-simulator/).
 
