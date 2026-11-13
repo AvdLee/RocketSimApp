@@ -4,11 +4,19 @@ import Accordion from "@/shortcodes/Accordion";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
+type FaqItem = { question: string; answer: string };
+
+// Pages bring their own questions; without any, the shared pricing FAQ shows.
+const { items, heading } = Astro.props as {
+  items?: FaqItem[];
+  heading?: string;
+};
 const sectionData = (await getEntry(
   "faqSectionCollection",
   "faq",
 )) as CollectionEntry<"faqSectionCollection">;
-const { title, list } = sectionData.data;
+const title = heading ?? sectionData.data.title;
+const list = items ?? sectionData.data.list;
 ---
 
 <section class="section" id="faq_section">

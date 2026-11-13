@@ -3,6 +3,7 @@
 // CONTENT-AUTHORING.md).
 import Base from "@/layouts/Base.astro";
 import config from "@/config/config.json";
+import { homepageFaq } from "@/lib/homepageFaq";
 
 import Notification from "../old/components/Notification.astro";
 import MobileDownloadLinkForm from "../old/components/MobileDownloadLinkForm.astro";
@@ -14,6 +15,7 @@ import Chapter from "../components/home/Chapter.astro";
 import Reviews from "../components/home/Reviews.astro";
 import SplitCta from "../components/home/SplitCta.astro";
 import Mentions from "../components/home/Mentions.astro";
+import Faq from "../components/home/Faq.astro";
 import FinalCta from "../components/home/FinalCta.astro";
 import Newsletter from "../components/home/Newsletter.astro";
 import Credit from "../components/home/extras/Credit.astro";
@@ -46,6 +48,7 @@ const seo = {
 
 const structuredData = {
   type: "static" as const,
+  faq: homepageFaq,
   software: {
     description:
       "RocketSim helps iOS developers and AI coding agents test Simulator and physical-device apps with network monitoring, captures, app actions, accessibility tools, and automation.",
@@ -130,6 +133,7 @@ const structuredData = {
     <TeamCta />
   </Chapter>
   <Mentions />
+  <Faq />
   <FinalCta />
   <Newsletter />
   <MobileDownloadLinkForm />

@@ -85,6 +85,8 @@ Feature category pages live in `src/collections/feature-page/` and render at `/f
 
 The authoritative feature-page schema is `featurePageSchema` in `src/types/pages.collection.ts`. Follow a neighboring feature-page file when authoring frontmatter and verify it against that schema.
 
+A feature page can carry an optional `faq` list in its frontmatter (`question` and `answer`, plain text). It renders below the features and is emitted as `FAQPage` structured data, so phrase each question the way developers ask it and make each answer name RocketSim and stand on its own.
+
 ## Homepage chapters
 
 The homepage (`src/pages/index.astro`) tells the product story in chapters. Each chapter is a Markdown file in `src/collections/homepage-chapter/`. The filename is the chapter ID and its anchor (`agents.md` → `#agents`), and the Markdown body is the chapter's intro paragraph. Keep IDs stable: they are the anchors, and per-chapter analytics may key on them later.
@@ -189,6 +191,10 @@ Developers increasingly ask ChatGPT, Claude, Gemini, Perplexity, and Google's AI
 5. Keep the `title` and `description` rules above. Do not rewrite them only to add keywords.
 6. When a feature changes, such as a new CLI command, a new supported Xcode version, or a renamed setting, update the opening paragraph in the same change. If it is a major capability, also update the feature list in `src/integrations/llms-txt-post-process.ts`, which feeds `llms.txt`.
 7. Agent and CLI pages (`features/agentic-development/`) should answer "how do I let Claude Code, Codex, or Cursor build, run, and verify an iOS app in the Simulator" with the RocketSim CLI and Agent Skill, as stated on those pages.
+
+Pages also publish for AI assistants without extra work: every docs page, blog post and feature page has a plain Markdown twin at its URL with `.md` instead of the trailing slash (`/pricing.md`, `/blog/<slug>.md`, `/features/<slug>.md`, `/docs/<path>.md`), advertised with `<link rel="alternate" type="text/markdown">`, and `llms.txt` lists the pricing page, feature overviews and blog posts from the built pages. Do not hand-write Markdown versions or list posts in `llms.txt`.
+
+App Store prices differ per country, so the site states only the US price of Personal Pro. It lives in `src/lib/pricing.ts` and is used by the pricing page, the structured data, `pricing.md` and `llms.txt`; the sentences in `src/content/sections/faq.md` and `src/content/sections/pricing.md` repeat it as text, so update all three when the US price changes. Read it from App Store Connect, for example with `helm-asc`.
 
 The opening paragraphs are tracked in an AI-visibility panel. Do not remove or reword them without a reason, and mention the change in the PR so it can be measured.
 

@@ -3,6 +3,7 @@ import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 import { teamsUrl } from "@/lib/utils/teamsUrl";
+import { personalProUsPriceCopy } from "@/lib/pricing";
 
 const { isPageHeader } = Astro.props;
 const sectionData = (await getEntry(
@@ -35,8 +36,10 @@ const stripePaymentLink =
           Building on your own? Start with{" "}
           <a href="#plan-free" class="text-primary hover:underline"
             >Free or Personal</a
-          >. Personal Pro is purchased in-app at your local App Store price.
-          Buying for a company?{" "}
+          >. Personal Pro is purchased in-app at your local App Store price. In
+          the US that is {personalProUsPriceCopy.monthly} or{" "}
+          {personalProUsPriceCopy.yearly}; other countries differ. Buying for a
+          company?{" "}
           <a href="#plan-teams" class="text-primary hover:underline">Teams</a>{
             " "
           }
@@ -81,7 +84,7 @@ const stripePaymentLink =
                               </span>
                             </div>
                           </div>
-                          <div class="mb-6 h-4">
+                          <div class="mb-6 min-h-4">
                             {plan.price.yearly.note ? (
                               <p
                                 class="text-text text-sm"
