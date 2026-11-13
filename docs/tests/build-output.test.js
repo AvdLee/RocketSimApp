@@ -704,8 +704,8 @@ test("homepage sections share one spacing rhythm", () => {
   const rhythm = sections.filter((tag) =>
     /class="[^"]*\bp[ty]-section\b/.test(tag),
   );
-  // Every chapter, plus reviews, split CTA, mentions and the final CTA.
-  assert.equal(rhythm.length, homepageChapters().length + 4);
+  // Every chapter, plus reviews, split CTA, mentions, FAQ and the final CTA.
+  assert.equal(rhythm.length, homepageChapters().length + 5);
   assert.doesNotMatch(html, /\bp[ty]-\[(?:120|184)px\]/);
 });
 

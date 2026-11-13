@@ -1,0 +1,42 @@
+---
+import { homepageFaq } from "@/lib/homepageFaq";
+import { markdownify } from "@/lib/utils/textConverter";
+---
+
+<section
+  class="mx-auto max-w-[1120px] px-5 pt-section"
+  aria-labelledby="faq-title"
+>
+  <h2 data-reveal id="faq-title" class="max-w-[16em] text-title-2 text-balance">
+    Questions developers ask.
+  </h2>
+  <p class="mt-3 max-w-[34em] text-intro text-muted">
+    The short answers about RocketSim, AI coding agents, and pricing.
+  </p>
+  <div class="mt-stack border-t border-line" data-reveal>
+    {
+      homepageFaq.map((item) => (
+        <details class="group border-b border-line">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-title-4 text-text-dark marker:hidden [&::-webkit-details-marker]:hidden">
+            <span>{item.question}</span>
+            <svg
+              class="size-5 shrink-0 text-muted transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M10 4v12M4 10h12" />
+            </svg>
+          </summary>
+          <p
+            class="max-w-[46em] pb-6 text-copy text-muted [&_a]:text-text-dark [&_a]:underline [&_a]:underline-offset-4"
+            set:html={markdownify(item.answer)}
+          />
+        </details>
+      ))
+    }
+  </div>
+</section>

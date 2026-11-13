@@ -94,7 +94,7 @@ export function collapseBlankLines(text: string): string {
  * content-level transforms used for the full `llms` export (full variant:
  * shortcodes → links, JSX artifacts stripped, directives → blockquotes).
  */
-function transformPageBody(body: string): string {
+export function transformPageBody(body: string): string {
   let result = convertShortcodesToLinks(body);
   result = stripJsxArtifacts(result);
   result = convertDirectivesToBlockquotes(result);
