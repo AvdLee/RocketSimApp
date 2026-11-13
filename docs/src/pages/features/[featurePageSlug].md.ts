@@ -1,3 +1,4 @@
+import { faqWithAbsoluteLinks } from "@/lib/faqText";
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
@@ -48,7 +49,10 @@ export const GET: APIRoute = async ({ props }) => {
 
   const faq = page.data.faq ?? [];
   if (faq.length > 0) {
-    const items = faq.map((item) => `### ${item.question}\n\n${item.answer}`);
+    const items = faq.map(
+      (item) =>
+        `### ${item.question}\n\n${faqWithAbsoluteLinks(item.answer, baseUrl)}`,
+    );
     segments.push(`## Frequently asked questions\n\n${items.join("\n\n")}`);
   }
 

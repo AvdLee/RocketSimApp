@@ -99,3 +99,41 @@ test("every Markdown alternate link points at a file that exists", () => {
     assert.ok(existsSync(join(DIST, href)), `${href} is not in dist`);
   }
 });
+
+test("FAQ answers link to pages that exist, with plain text in structured data", () => {
+  for (const page of [
+    "index.html",
+    "features/agentic-development/index.html",
+  ]) {
+    const html = read(page);
+    const faq = jsonLdNodes(html).find((node) => node["@type"] === "FAQPage");
+    for (const { acceptedAnswer } of faq.mainEntity) {
+      assert.doesNotMatch(
+        acceptedAnswer.text,
+        /\]\(/,
+        "no Markdown in JSON-LD",
+      );
+    }
+
+    const links = [...html.matchAll(/href="(\/[^"#?]*)"/g)].map(
+      ([, href]) => href,
+    );
+    assert.ok(links.length > 0);
+    for (const href of new Set(links)) {
+      const target = href.endsWith("/") ? `${href}index.html` : href;
+      assert.ok(
+        existsSync(join(DIST, target)),
+        `${page} links to missing ${href}`,
+      );
+    }
+  }
+
+  const homepage = read("index.html");
+  assert.match(homepage, /href="\/blog\/testing-ai-agents-ios-simulator\/"/);
+
+  const twin = read("features/agentic-development.md");
+  assert.match(
+    twin,
+    /\]\(https:\/\/www\.rocketsim\.app\/blog\/testing-ai-agents-ios-simulator\/\)/,
+  );
+});

@@ -1,5 +1,6 @@
 ---
 import { homepageFaq } from "@/lib/homepageFaq";
+import { markdownify } from "@/lib/utils/textConverter";
 ---
 
 <section
@@ -30,7 +31,10 @@ import { homepageFaq } from "@/lib/homepageFaq";
               <path d="M10 4v12M4 10h12" />
             </svg>
           </summary>
-          <p class="max-w-[46em] pb-6 text-copy text-muted">{item.answer}</p>
+          <p
+            class="max-w-[46em] pb-6 text-copy text-muted [&_a]:text-text-dark [&_a]:underline [&_a]:underline-offset-4"
+            set:html={markdownify(item.answer)}
+          />
         </details>
       ))
     }

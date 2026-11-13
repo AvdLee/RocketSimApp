@@ -1,4 +1,5 @@
 ---
+import { faqPlainText } from "@/lib/faqText";
 import config from "@/config/config.json";
 import { personalProUsPrices } from "@/lib/pricing";
 import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
@@ -679,7 +680,7 @@ if (faqItems?.length) {
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: faqPlainText(item.answer),
       },
     })),
   };
