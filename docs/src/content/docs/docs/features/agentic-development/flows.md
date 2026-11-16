@@ -8,6 +8,10 @@ sidebar:
     variant: note
 ---
 
+::::note[Coming soon to RocketSim 17]
+Navigation flows ship with RocketSim 17. The commands and the flow page on this page are not available in the current release.
+::::
+
 Navigation **flows** ship with **RocketSim 17.0.0**. They save repeatable navigation paths for an app in the Simulator so agents (and you) do not rediscover the same taps on every task or relaunch. Each flow is a small `.rsflow` text file on your Mac, scoped to the app's bundle id.
 
 Flows run with the same reliability as `rocketsim do`, including checkpoints that catch wrong turns early. After a successful run, RocketSim can open a **flow review page** with real screenshots, arrows from tapped elements, and tools for visual feedback.
