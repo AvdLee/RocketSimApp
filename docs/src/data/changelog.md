@@ -1,3 +1,9 @@
+# 16.9.1
+
+**Fixed:**
+
+- Physical devices: the side window now stays next to a physical device window, and screenshots keep working, while the iPhone screen isn't changing. Before, both stopped working a few seconds after the screen went still. (Thanks, A. Singer!)
+
 # 16.9.0
 
 **New:**
