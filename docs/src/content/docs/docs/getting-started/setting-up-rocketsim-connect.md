@@ -78,6 +78,27 @@ After a RocketSim update, the setup continues to load the framework from the ins
 - If RocketSim.app moved, use the setup screen to repair the generated helper script.
 - Existing custom commands in `.lldbinit-Xcode` can remain; RocketSim owns only the block between its `BEGIN` and `END` comments.
 - Restart the current Xcode debug session after installing or repairing the hook.
+- If Connect never loads for one scheme but works for others, check whether that scheme sets a custom LLDB Init File. See the next section.
+
+### My scheme uses a custom LLDB Init File
+
+Xcode lets a scheme point to its own LLDB init file (**Edit Scheme → Run → Info → LLDB Init File**). Generated projects can set this too, for example Tuist's `customLLDBInitFile` on `RunAction`. When a scheme sets one, Xcode uses that file instead of `~/.lldbinit-Xcode`, so RocketSim's hook never loads for that scheme.
+
+To fix it, add this line to the file the scheme points to:
+
+```text
+command source ~/.lldbinit-Xcode
+```
+
+Then stop the current run and run your app again from Xcode. You don't need to restart Xcode. On Xcode 27 and later, use `~/.lldbinit-lldb-rpc-server` instead.
+
+To confirm the hook loaded, run this in the Xcode debug console. It prints `True` when RocketSim's loader is active:
+
+```text
+script print('RocketSimConnectLLDB' in __import__('sys').modules)
+```
+
+If a teammate doesn't have RocketSim installed, Xcode prints an error for the missing file in their console. The debug session still starts normally.
 
 ## Check or remove the setup in Settings
 
