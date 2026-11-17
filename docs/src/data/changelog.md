@@ -1,4 +1,28 @@
+# 17.0.0
+
+**New:**
+
+- Flows: AI agents can now save the steps they take through your app as a named flow and replay it later with `rocketsim flow <name>`. Flows are reusable, can build on each other, and accept parameters. Passwords and other secrets are never stored in a saved flow.
+- Flows: when a saved flow stops working, RocketSim tells the agent why, fixes what is safe to fix automatically, and repairs the rest with a single command.
+- Flows: share a flow as a page on your Mac, protected by a private link. It shows real screenshots with an arrow from the tapped element, tab bar handling, an app card, Annotated and Clean views, a device bezel toggle, accessibility overlays you can hover and select, a Screens sidebar with the element tree, and pan and zoom.
+- Flows: leave comments on a screen with pins, then use Copy prompt to hand them straight to your agent.
+
+**Improved:**
+
+- CLI: password fields are now reported to agents as secure text fields, so they are recognized as sensitive. `--type textField` still matches them.
+- CLI: improved reliability when agents replay and repair flows.
+
 # 16.9.1
+
+**New:**
+
+- Environment Toggles: preview how people with color blindness see your app. Pick Protanopia, Deuteranopia, Tritanopia, their milder variants, or Achromatopsia under Color Blindness Simulation, and RocketSim shows a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
+
+**Improved:**
+
+- Status bar: the custom status bar controls and the 9:41 button now apply to the simulator you're using in Device Hub. The reset button uses a counter-clockwise icon and shows a tooltip. (Thanks again, E. Sanchez!)
+- Location and Stage Manager: both now apply to the simulator you're using in Device Hub. (Thanks again, E. Sanchez!)
+- Developer folder permission: "Set up permissions" brings the folder picker to the front, no longer freezes the app when pressed repeatedly, and explains what to do when macOS can't restore the saved folder access. (Thanks again, E. Sanchez!)
 
 **Fixed:**
 
