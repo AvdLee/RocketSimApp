@@ -100,11 +100,11 @@ Run `rocketsim flow open-settings`; the `flow login` block runs only when you ar
 
 Declare parameters in the flow header:
 
-| Declaration | Meaning |
-| --- | --- |
-| `param: user` | Required |
-| `param: user = default` | Literal default |
-| `param: user = $ENV_VAR` | Default from the environment |
+| Declaration                               | Meaning                       |
+| ----------------------------------------- | ----------------------------- |
+| `param: user`                             | Required                      |
+| `param: user = default`                   | Literal default               |
+| `param: user = $ENV_VAR`                  | Default from the environment  |
 | `param: password secret = $TEST_PASSWORD` | Secret; value never persisted |
 
 Use `{name}` in step text. Values resolve in order: `--param name=value` (or inline `flow login user=alice`) → environment variable → literal default.
@@ -159,15 +159,15 @@ Pan and zoom the canvas with the mouse, trackpad, or keyboard. Comment mode (**C
 
 On the flow canvas (when focus is not in a text field):
 
-| Key | Action |
-| --- | --- |
-| `C` | Toggle comment mode |
-| `+` / `=` | Zoom in |
-| `-` / `_` | Zoom out |
-| `0` | Actual size (100%) |
-| `F` or `1` | Fit the board |
+| Key        | Action                                 |
+| ---------- | -------------------------------------- |
+| `C`        | Toggle comment mode                    |
+| `+` / `=`  | Zoom in                                |
+| `-` / `_`  | Zoom out                               |
+| `0`        | Actual size (100%)                     |
+| `F` or `1` | Fit the board                          |
 | Arrow keys | Pan (hold **Shift** for a larger step) |
-| `Esc` | Clear selection |
+| `Esc`      | Clear selection                        |
 
 Double-click the canvas to fit the board. In comment mode, **Cmd/Ctrl+Enter** submits a new comment.
 
