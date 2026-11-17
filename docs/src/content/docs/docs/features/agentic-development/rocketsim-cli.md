@@ -131,21 +131,21 @@ rocketsim screenshot \
   --ratio 16:9 > styled.png
 ```
 
-| Option                  | Description                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------- |
-| `--background <value>`  | Background color: `transparent`, a preset color, or `#RRGGBB`.                              |
-| `--bezel <style>`       | Device frame style: `none`, `simulator`, `device`, or `device3d` (iPhone Duo only).         |
-| `--frame-color <value>` | Device frame tint as a preset color or `#RRGGBB`.                                           |
-| `--device-angle <value>` | iPhone Duo camera angle for `screenshot`: `studio`, `front`, or `<yaw>,<pitch>` in degrees (yaw `-35`…`35`, pitch `-15`…`25`; default `front`). Requires a bezel other than `none`. Ignored by `video record`. |
-| `--device-shadow`       | Render a shadow behind the device frame.                                                    |
-| `--ratio <ratio>`       | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`.                                |
-| `--asc`                 | Optimize output dimensions for App Store Connect.                                           |
-| `--watermark`           | Render the RocketSim watermark.                                                             |
-| `--metadata`            | Render app metadata when available and supported by the selected ratio.                     |
-| `--touches`             | Render captured touches.                                                                    |
-| `--touch-color <value>` | Touch color as a preset color or `#RRGGBB`.                                                 |
-| `--touch-stroke`        | Render a stroke around touches.                                                             |
-| `--orientation <value>` | Output orientation: `portrait`, `portraitUpsideDown`, `landscapeLeft`, or `landscapeRight`. |
+| Option                   | Description                                                                                                                                                                                                      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--background <value>`   | Background color: `transparent`, a preset color, or `#RRGGBB`.                                                                                                                                                   |
+| `--bezel <style>`        | Device frame style: `none`, `simulator`, `device`, or `device3d` (iPhone Duo only).                                                                                                                              |
+| `--frame-color <value>`  | Device frame tint as a preset color or `#RRGGBB`.                                                                                                                                                                |
+| `--device-angle <value>` | iPhone Duo camera angle for `screenshot`: `studio`, `front`, or `<yaw>,<pitch>` in degrees (yaw `-180`…`180`, pitch `-90`…`90`; default `front`). Requires a bezel other than `none`. Ignored by `video record`. |
+| `--device-shadow`        | Render a shadow behind the device frame.                                                                                                                                                                         |
+| `--ratio <ratio>`        | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`.                                                                                                                                                     |
+| `--asc`                  | Optimize output dimensions for App Store Connect.                                                                                                                                                                |
+| `--watermark`            | Render the RocketSim watermark.                                                                                                                                                                                  |
+| `--metadata`             | Render app metadata when available and supported by the selected ratio.                                                                                                                                          |
+| `--touches`              | Render captured touches.                                                                                                                                                                                         |
+| `--touch-color <value>`  | Touch color as a preset color or `#RRGGBB`.                                                                                                                                                                      |
+| `--touch-stroke`         | Render a stroke around touches.                                                                                                                                                                                  |
+| `--orientation <value>`  | Output orientation: `portrait`, `portraitUpsideDown`, `landscapeLeft`, or `landscapeRight`.                                                                                                                      |
 
 To preview the capture in RocketSim's [floating thumbnail](/docs/features/capturing/floating-thumbnail) instead of writing bytes to stdout, add `--show-floating-thumbnail`:
 
@@ -204,15 +204,15 @@ rocketsim duo pose open
 rocketsim screenshot --bezel device3d > duo-open.png
 ```
 
-`--device-angle <studio|front|<yaw>,<pitch>>` sets the camera angle of an iPhone Duo `screenshot` in degrees. Positive yaw views the device from its right, and positive pitch views it from above. `studio` is `18,10`, the angled studio view; `front` is `0,0`, a head-on view and the default when you omit the flag. RocketSim does not carry the last angle you picked in the capture editor into the next CLI capture—only an explicit `--device-angle` or the angle stored on that capture applies. The option needs a bezel other than `none`.
+`--device-angle <studio|front|<yaw>,<pitch>>` sets the camera angle of an iPhone Duo `screenshot` in degrees. Positive yaw views the device from its right, and positive pitch views it from above. Yaw `-180`…`180` turns the camera all the way around the device; pitch `-90`…`90` goes from straight below to straight above. `studio` is `18,10`, the angled studio view; `front` is `0,0`, a head-on view and the default when you omit the flag. RocketSim does not carry the last angle you picked in the capture editor into the next CLI capture—only an explicit `--device-angle` or the angle stored on that capture applies. The option needs a bezel other than `none`.
 
 Pass the value as one argument. Negative yaw such as `-20,5` works without quoting or `=`; a bare `--device-angle` followed by another option fails with "Missing value for '--device-angle'". Fractional degrees use `.` and the comma separates yaw and pitch (`12.5,-3`). RocketSim versions released before this flag ignore it and render at the default angle. A malformed or out-of-range value fails with `invalid_argument` before RocketSim captures the screen. Out-of-range angles are rejected, not clamped.
 
-| `context.reason` | When |
-| --- | --- |
-| `unsupported_target` | The target simulator is not an iPhone Duo. |
-| `device_angle_requires_bezel` | `--bezel none` (the default) is used. |
-| `invalid_device_angle` | The value is not `studio`, `front`, or two comma-separated numbers within the yaw and pitch ranges. |
+| `context.reason`              | When                                                                                                |
+| ----------------------------- | --------------------------------------------------------------------------------------------------- |
+| `unsupported_target`          | The target simulator is not an iPhone Duo.                                                          |
+| `device_angle_requires_bezel` | `--bezel none` (the default) is used.                                                               |
+| `invalid_device_angle`        | The value is not `studio`, `front`, or two comma-separated numbers within the yaw and pitch ranges. |
 
 ```bash
 # Studio framing: viewed slightly from the right and above
