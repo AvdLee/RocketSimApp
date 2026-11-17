@@ -111,6 +111,7 @@ For most AI coding tools, install the [RocketSim Agent Skill](/docs/features/age
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — how agents inspect and interact with the Simulator
+- [Navigation Flows](/docs/features/agentic-development/flows) — save and replay multi-step navigation paths (RocketSim 17.0.0)
 - [Browser Preview](/docs/features/agentic-development/browser-preview) — stream, control, and visually review a Simulator from your browser
 - [Agent Skill](/docs/features/agentic-development/agent-skill) — how to install the recommended agent workflow
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — how to install the CLI and skill from RocketSim
