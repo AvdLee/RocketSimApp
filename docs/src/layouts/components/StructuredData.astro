@@ -1,5 +1,7 @@
 ---
+import { faqPlainText } from "@/lib/faqText";
 import config from "@/config/config.json";
+import { personalProUsPrices } from "@/lib/pricing";
 import { normalizeCanonicalUrl, toAbsoluteSecureUrl } from "@/lib/utils/seo";
 
 // Canonical root URL respecting the site's `trailing_slash` policy. Used as
@@ -203,21 +205,26 @@ interface SoftwareApplicationSchema extends SchemaBase {
   releaseNotes?: string;
 }
 
+interface UnitPriceSpecificationSchema {
+  "@type": "UnitPriceSpecification";
+  price: string;
+  priceCurrency: string;
+  referenceQuantity?: {
+    "@type": "QuantitativeValue";
+    value: string;
+    unitText: string;
+  };
+}
+
 interface OfferSchema extends SchemaBase {
   "@type": "Offer";
   name: string;
   price?: string;
   priceCurrency?: string;
-  priceSpecification?: {
-    "@type": "UnitPriceSpecification";
-    price: string;
-    priceCurrency: string;
-    referenceQuantity?: {
-      "@type": "QuantitativeValue";
-      value: string;
-      unitText: string;
-    };
-  };
+  priceSpecification?:
+    | UnitPriceSpecificationSchema
+    | UnitPriceSpecificationSchema[];
+  eligibleRegion?: { "@type": "Country"; name: string };
   description?: string;
 }
 
@@ -302,11 +309,78 @@ const organizationData: OrganizationSchema = {
   ],
 };
 
+// The plans on /pricing. App Store prices differ per country, so Personal
+// states the US price and says that other countries differ. Keep it in step
+// with `src/content/sections/pricing.md`.
+const pricingOffers: OfferSchema[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    name: "Free",
+    price: "0",
+    priceCurrency: "USD",
+    description:
+      "Free forever, no account needed. Pro features need a Personal or Teams plan.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    name: "Personal",
+    priceSpecification: [
+      {
+        "@type": "UnitPriceSpecification",
+        price: personalProUsPrices.monthly,
+        priceCurrency: personalProUsPrices.currency,
+        referenceQuantity: {
+          "@type": "QuantitativeValue",
+          value: "1",
+          unitText: "MONTH",
+        },
+      },
+      {
+        "@type": "UnitPriceSpecification",
+        price: personalProUsPrices.yearly,
+        priceCurrency: personalProUsPrices.currency,
+        referenceQuantity: {
+          "@type": "QuantitativeValue",
+          value: "1",
+          unitText: "YEAR",
+        },
+      },
+    ],
+    eligibleRegion: { "@type": "Country", name: "US" },
+    description:
+      "Personal Pro license for individual developers, bought in-app at the local App Store price. The prices listed are for the US App Store and differ per country.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    name: "Teams",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: "10",
+      priceCurrency: "EUR",
+      referenceQuantity: {
+        "@type": "QuantitativeValue",
+        value: "1",
+        unitText: "MONTH",
+      },
+    },
+    description: "Team license billed annually at €10/seat/month",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    name: "Enterprise",
+    description: "Custom enterprise pricing",
+  },
+];
+
 function createSoftwareApplicationSchema({
   description,
   image,
   featureList,
-  offers,
+  offers = pricingOffers,
   softwareVersion,
   dateModified,
   releaseNotes,
@@ -344,7 +418,7 @@ function createSoftwareApplicationSchema({
       "https://x.com/rocketsim_app",
       "https://www.youtube.com/@rocketsimapp",
     ],
-    ...(offers && { offers }),
+    offers,
   };
 }
 
@@ -575,41 +649,8 @@ if (type === "offer") {
   const { offers } = Astro.props;
   const offerUrl = normalizeCanonicalUrl(offers.url);
   // 1. SoftwareApplication with individual Offer schemas for each tier
-  const pricingOffers: OfferSchema[] = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Offer",
-      name: "Personal",
-      description:
-        "Personal Pro license for individual developers, billed at the local App Store price",
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Offer",
-      name: "Teams",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "10",
-        priceCurrency: "EUR",
-        referenceQuantity: {
-          "@type": "QuantitativeValue",
-          value: "1",
-          unitText: "MONTH",
-        },
-      },
-      description: "Team license billed annually at €10/seat/month",
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Offer",
-      name: "Enterprise",
-      description: "Custom enterprise pricing",
-    },
-  ];
-
   const softwareWithOffersSchema = createSoftwareApplicationSchema({
     description: offers.description,
-    offers: pricingOffers,
   });
   schemas.push(softwareWithOffersSchema);
 
@@ -639,7 +680,7 @@ if (faqItems?.length) {
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: faqPlainText(item.answer),
       },
     })),
   };

@@ -60,7 +60,7 @@ For you as a developer, this means you only have to keep RocketSim updated to th
 
 ## The skill-guided interaction loop
 
-The current skill teaches agents to start with a compact `nav` or `act` screen read, prefer labels over coordinates, guard interactions with `--screen latest`, and combine known sequential actions with `rocketsim do`. It uses interaction deltas and concrete waits to avoid unnecessary screen reads. Debug snapshots and screenshots are fallbacks when normal accessibility output is insufficient.
+The current skill teaches agents to start with a compact `nav` or `act` screen read, prefer labels or accessibility identifiers over coordinates, guard interactions with `--screen latest`, and combine known sequential actions with `rocketsim do`. It uses interaction deltas and concrete waits to avoid unnecessary screen reads. Debug snapshots and screenshots are fallbacks when normal accessibility output is insufficient.
 
 Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the command's `context.preview_url`, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
 

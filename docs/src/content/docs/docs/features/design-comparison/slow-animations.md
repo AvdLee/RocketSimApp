@@ -8,6 +8,8 @@ faq:
     answer: "No. RocketSim's Slow Animations action controls an iOS Simulator and is unavailable when a physical device is focused."
 ---
 
+RocketSim slows iOS Simulator UI transitions from the Comparing tab **Slow Animations** control so you can inspect timing, movement, and visual details while animations play. The toggle works in Simulator.app and Xcode 27 Device Hub because it does not rely on a screen-relative overlay.
+
 **Slow Animations** makes an iOS Simulator transition slowly enough to inspect timing, movement, and visual details. It is particularly useful for finding unexpected jumps or comparing an implementation with a design.
 
 ![Slow animations toggle in the side window with speed multiplier](./slow-animations/cleanshot_2025-01-21_at_14.02.372x.png)

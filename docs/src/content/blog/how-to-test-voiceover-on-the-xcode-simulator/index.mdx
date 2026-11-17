@@ -3,6 +3,7 @@ title: How to Test VoiceOver on the Xcode Simulator
 pageTitle: How to Test VoiceOver on the Xcode Simulator (Without a Physical Device)
 description: Test VoiceOver on the Xcode Simulator without a physical device. Use a numbered overlay, keyboard shortcuts, and the rotor to verify iOS accessibility fast.
 publishedTime: 2026-05-28T09:00:00.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ./voiceover-overlay-hero.png
 imageAlt: VoiceOver testing on the Xcode Simulator with RocketSim, showing numbered accessibility elements overlaid on the iPhone Simulator and the Voice Over Elements list.
 ---
@@ -40,7 +41,9 @@ You will still want to validate critical flows on a real device before shipping.
 
 ## Testing VoiceOver on the Xcode Simulator with RocketSim
 
-[RocketSim's VoiceOver Navigator](/docs/features/accessibility/voiceover-navigator) closes that gap. It runs alongside the Xcode Simulator and shows a numbered overlay on every accessibility element in the exact order VoiceOver would announce them. You see the reading order without listening to the reading order — which is usually what you actually need while you are coding.
+[RocketSim's VoiceOver Navigator](/docs/features/accessibility/voiceover-navigator) closes that gap. It runs alongside the Xcode Simulator and shows a numbered overlay on every accessibility element in the exact order VoiceOver would announce them. You see the reading order without listening to the reading order — which is usually what you actually need while you are coding. VoiceOver Navigator launched with [RocketSim 15](/blog/15-voiceover-navigator-pro-xcode-simulator-recordings/).
+
+If you want to follow along on your own app, [install RocketSim from the Mac App Store](https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=voiceover-article-top&mt=8) and open the **Voice Over** tab in the side window.
 
 <figure>
   <Image
@@ -101,7 +104,21 @@ From the same side window, RocketSim's [Environment Overrides](/docs/features/ac
   </figcaption>
 </figure>
 
-If you treat VoiceOver as one stop in a short accessibility checklist — VoiceOver order, headings, Dynamic Type, contrast — you will catch most of the regressions that normally slip through until App Review or a user report. The full set of [RocketSim accessibility features](/features/accessibility) is built around exactly this kind of fast iteration loop on the Xcode Simulator.
+If you treat VoiceOver as one stop in a short accessibility checklist — VoiceOver order, headings, Dynamic Type, contrast — you will catch most of the regressions that normally slip through until App Review or a user report. The full set of [RocketSim accessibility features](/features/accessibility) is built around exactly this kind of fast iteration loop on the Xcode Simulator. If you also want a score for labels and contrast, read how to [run an accessibility audit on the iOS Simulator](/blog/accessibility-audit-ios-simulator/).
+
+## Frequently asked questions
+
+### Can you test VoiceOver on the Xcode Simulator?
+
+The Xcode Simulator does not run real VoiceOver, and there is no Settings toggle that turns it on. You can use Xcode's Accessibility Inspector to inspect elements, or RocketSim's [VoiceOver Navigator](/docs/features/accessibility/voiceover-navigator) to see a numbered overlay in VoiceOver order and step through it with your keyboard.
+
+### How do you navigate VoiceOver elements with the keyboard in the Simulator?
+
+Click **Start Navigating** in RocketSim's Voice Over panel. Use **↑ / ↓** to move to the previous or next element, **← / →** to switch rotor category, **⏎ Enter** to activate the focused element, and **Esc** to exit navigation mode.
+
+### Do you still need a physical device for VoiceOver testing?
+
+Yes, for a final pass. A physical device is still the most accurate way to experience your app like a VoiceOver user, and you should validate critical flows on one before shipping. For the many small fixes you make while building, testing in the Simulator is much faster.
 
 ## Conclusion
 

@@ -13,6 +13,8 @@ faq:
     answer: "Yes. Copy the prompt from the Audit tab, or let your agent run `rocketsim accessibility-audit` itself. The agent fixes the findings, rebuilds, and runs the audit again to validate the result."
 ---
 
+RocketSim runs an accessibility audit on the current iOS Simulator screen from the Accessibility window **Audit** tab or the `rocketsim accessibility-audit` CLI, reporting missing labels, small tap targets, low contrast, and VoiceOver issues with a score and fix prompts. Use the side window for a manual pass or automate audits, fixes, and re-validation in an agent loop.
+
 Reviewing accessibility by hand takes time, and it's easy to miss a missing label or a tap target that's just a few points too small. The **Audit** tab in RocketSim's Accessibility window checks the current Simulator screen for you.
 
 You can run an audit in two ways:

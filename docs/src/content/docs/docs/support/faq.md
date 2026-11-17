@@ -37,11 +37,11 @@ Installing the app doesn't unlock RocketSim Pro for team members. Sign in throug
 
 ### I got a new Mac. How do I move my team seat?
 
-Each Mac uses one seat, so unlink your old Mac first. A team manager can do this in the [Teams dashboard](https://teams.rocketsim.app/login) under **Settings → Users** with **Unlink device**. Then [activate your new Mac](/docs/teams/activating-your-team-seat/#move-your-seat-to-a-new-mac).
+Each Mac uses one seat, so unlink your old Mac first. A team manager can do this in the [Teams dashboard](https://teams.rocketsim.app/login) on the **Members** page with **Unlink device**. Then [activate your new Mac](/docs/teams/activating-your-team-seat/#move-your-seat-to-a-new-mac).
 
 ### How do I renew my team license or update payment details?
 
-Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and go to **Settings → Subscription**. From there, you can re-subscribe after your license expired or was canceled, update a payment method that failed, add seats, and download invoices. The [team subscription guide](/docs/teams/managing-your-team-subscription/) walks you through each step.
+Sign in to the [Teams dashboard](https://teams.rocketsim.app/login) and open **Billing** in the sidebar. From there, you can re-subscribe after your license expired or was canceled, update a payment method that failed, add seats, and download invoices. The [team subscription guide](/docs/teams/managing-your-team-subscription/) walks you through each step.
 
 ### RocketSim says my payment is due. What should I do?
 

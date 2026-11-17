@@ -5,6 +5,8 @@ sidebar:
   order: 6
 ---
 
+RocketSim shows a floating thumbnail after each iOS Simulator screenshot or recording so you can copy, save, trim, drag into Slack or App Store Connect, or open the post editor without opening Finder first. Hover and press Spacebar for a quick preview, or swipe the thumbnail away when you are done.
+
 After every screenshot or recording, a floating thumbnail appears in the bottom-right corner of your screen. It's the fastest way to share, save, preview, or continue editing your captures.
 
 ## Available actions

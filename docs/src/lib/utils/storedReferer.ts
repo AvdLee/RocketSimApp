@@ -2,8 +2,13 @@ import { appStoreUrl } from "./appStoreUrl";
 
 // Remembers the first-touch referer (cookie, 7 days), points the hero App Store
 // button (`#js-header-app-store-button`) at it as the `ct=` campaign, and sends
-// the `Stored Referer` Plausible event. Shared by the homepage and its preview.
+// the `Stored Referer` Plausible event. Does nothing on a page without that
+// button, since the hero's script keeps running across client-side
+// navigations to other pages.
 export function initStoredReferer(): void {
+  const a = document.getElementById("js-header-app-store-button");
+  if (!(a instanceof HTMLAnchorElement)) return;
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -43,10 +48,7 @@ export function initStoredReferer(): void {
   // Use the referer as the campaign or fallback to 'website-header'
   const campaign = referer || "website-header";
 
-  const a = document.getElementById("js-header-app-store-button");
-  if (a instanceof HTMLAnchorElement) {
-    a.href = appStoreUrl(campaign);
-  }
+  a.href = appStoreUrl(campaign);
 
   plausible("Stored Referer", { props: { stored_referer: campaign } });
 }

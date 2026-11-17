@@ -51,7 +51,7 @@ plans:
       yearly:
         amount: "In-app"
         period: ""
-        note: "App Store price per country"
+        note: "US: $9.99/mo or $69.99/yr"
     microcopy: "Upgrade in-app when Pro saves you time"
     cta:
       enable: true

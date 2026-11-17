@@ -5,6 +5,8 @@ sidebar:
   order: 1
 ---
 
+To let Claude Code, Codex, Cursor, or another coding agent verify an iOS app in the Simulator, build and run it with Xcode or your usual tooling first, then install the version-matched `rocketsim` CLI and RocketSim Agent Skill from **Settings → CLI & Agent**. RocketSim stays connected to the Simulator so the agent can read visible elements, interact, capture screenshots, and confirm UI changes without replacing your build step.
+
 RocketSim helps AI coding agents inspect, navigate, and verify your running iOS Simulator app. The RocketSim Mac app stays connected to the Simulator, keeps useful state warm, and exposes a compact CLI that agents can use to read visible elements, tap controls, type text, capture screenshots, and confirm UI changes.
 
 RocketSim does not build, install, or launch your app from source. Start the app with Xcode or your normal build tooling first, then use RocketSim for fast Simulator inspection and interaction.
@@ -109,6 +111,7 @@ For most AI coding tools, install the [RocketSim Agent Skill](/docs/features/age
 ## Learn more
 
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — how agents inspect and interact with the Simulator
+- [Navigation Flows](/docs/features/agentic-development/flows) — save and replay multi-step navigation paths (RocketSim 17.0.0)
 - [Browser Preview](/docs/features/agentic-development/browser-preview) — stream, control, and visually review a Simulator from your browser
 - [Agent Skill](/docs/features/agentic-development/agent-skill) — how to install the recommended agent workflow
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — how to install the CLI and skill from RocketSim

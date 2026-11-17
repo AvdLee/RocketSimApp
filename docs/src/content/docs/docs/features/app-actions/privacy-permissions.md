@@ -3,6 +3,8 @@ title: "Privacy & Permissions"
 description: "Grant, revoke, and reset app permissions on the iOS Simulator. Test camera, location, contacts, photos, and 15 other permission states without reinstalling."
 ---
 
+RocketSim grants, revokes, and resets iOS Simulator permission states for camera, location, photos, push notifications, and the other supported types from the side window permissions picker or the status bar menu. Reset push notification permission to walk through your onboarding prompt again without reinstalling the app.
+
 Testing permission flows is one of those things that's surprisingly tedious. You need to verify that your app handles denied permissions gracefully, that the permission dialog shows up at the right time, and that your onboarding flow works after a fresh permission state. RocketSim makes this fast.
 
 ## Supported Permissions

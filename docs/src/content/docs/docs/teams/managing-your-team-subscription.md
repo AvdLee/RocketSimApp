@@ -10,9 +10,9 @@ Your RocketSim for Teams subscription is fully self-serve. Renewing an expired l
 ## Open your subscription settings
 
 1. Sign in at [teams.rocketsim.app](https://teams.rocketsim.app/login) with your team manager account.
-2. Go to **Settings → Subscription**.
+2. Open **Billing** in the sidebar.
 
-The **Information** card shows your **License key**, the date your subscription **Expires on**, and how many **Used seats** your team occupies. When something needs your attention, the dashboard shows a banner at the top of every Settings page.
+The **Information** card shows your **License key**, the date your subscription **Expires on**, and how many **Used seats** your team occupies. When something needs your attention, the dashboard shows a banner at the top of the **Members**, **Billing**, **Team settings**, and **App settings** pages.
 
 ## Renew an expired subscription
 
@@ -30,13 +30,13 @@ After paying, you're sent back to the dashboard. A **Subscription activated** co
 
 ## Re-subscribe after canceling
 
-If you canceled your subscription, the Subscription page shows a **Subscription canceled** card instead of the regular management options. Your team keeps access until the date shown under **Expires on**. Click **Re-subscribe** to continue, and you'll go through the same checkout as above.
+If you canceled your subscription, the Billing page shows a **Subscription canceled** card instead of the regular management options. Your team keeps access until the date shown under **Expires on**. Click **Re-subscribe** to continue, and you'll go through the same checkout as above.
 
 ![Subscription canceled card in the Teams dashboard with the Re-subscribe button highlighted](./managing-your-team-subscription/subscription-canceled-resubscribe-button.webp)
 
 ## Fix a failed payment
 
-A **Payment failed** banner means we couldn't charge your payment method — usually because a card expired or was replaced. Click **Update payment method** in the banner, or **Manage subscription** on the Subscription page, to open the billing portal and enter new payment details.
+A **Payment failed** banner means we couldn't charge your payment method — usually because a card expired or was replaced. Click **Update payment method** in the banner, or **Manage subscription** on the Billing page, to open the billing portal and enter new payment details.
 
 ![Payment failed banner with the Update payment method link and the Manage subscription button highlighted](./managing-your-team-subscription/subscription-payment-failed-update-payment-method.webp)
 
@@ -46,7 +46,7 @@ Seeing an **Invoice overdue** banner instead, or a payment due message in Rocket
 
 ## Add seats, update billing details, or download invoices
 
-The **Manage subscription** card on the Subscription page has two buttons:
+The **Manage subscription** card on the Billing page has two buttons:
 
 - **Buy more seats** — add seats when your team grows.
 - **Manage subscription** — update your company or billing details, change your payment method, and view or download invoices.

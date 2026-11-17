@@ -3,6 +3,8 @@ title: "Grids & Rulers"
 description: "Add grid overlays and rulers to the iOS Simulator or a connected physical device for precise layout alignment."
 ---
 
+RocketSim overlays alignment grids and draggable rulers on the iOS Simulator or a connected physical-device preview from the Comparing tab so you can check spacing against your layout. Grids and rulers follow the orientation the Simulator draws, including iPhone Duo when it is closed or fully unfolded.
+
 Aligning elements based on grids and rulers allows you to create a balanced design.
 
 RocketSim 16 supports grids and rulers on both Simulator windows and connected physical-device preview windows, so you can inspect spacing on real hardware as well.

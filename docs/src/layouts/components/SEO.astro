@@ -27,6 +27,8 @@ export interface Props {
     title: string;
     href: string;
   }>;
+  /** Path of the page's Markdown twin, such as `/pricing.md`. */
+  markdownHref?: string;
   twitterCreator?: string;
   twitterSite?: string;
 }
@@ -43,6 +45,7 @@ const {
   canonical,
   robots,
   alternateFeeds = [],
+  markdownHref,
   twitterCreator = "@twannl",
   twitterSite = "@rocketsim_app",
 } = Astro.props;
@@ -137,6 +140,16 @@ const ogType = article ? "article" : "website";
       href={feed.href}
     />
   ))
+}
+{
+  markdownHref && (
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="Markdown version"
+      href={markdownHref}
+    />
+  )
 }
 <link rel="alternate" type="text/plain" title="LLMs" href="/llms.txt" />
 <link

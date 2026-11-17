@@ -3,6 +3,8 @@ title: "Push Notifications"
 description: "Test push notifications on the iOS Simulator without a physical device. Create JSON payloads, send test notifications, and debug notification handling from RocketSim."
 ---
 
+RocketSim lets you test push notifications on the iOS Simulator by saving the notification JSON as an App Action and sending it from App Group settings or the side window. You can resend the same payload while you iterate on notification handling without a physical device.
+
 Many developers think you can only test Push Notifications on a real device. The opposite is true and once you know, you’ll be much faster in building support for notifications into your app.
 
 ## Create a Push Notification

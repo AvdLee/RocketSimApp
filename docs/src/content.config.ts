@@ -29,7 +29,6 @@ const feature = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
-      showOnHomepage: z.boolean().default(false),
       tagLine: z.string().optional(),
       docPath: z.string().optional(),
       blogSlug: z.string().optional(),
@@ -72,7 +71,7 @@ const feature = defineCollection({
 });
 
 // One file per homepage chapter; the filename is the chapter ID and anchor.
-// See docs/docs/plans/homepage-rebuild.md.
+// See "Homepage chapters" in CONTENT-AUTHORING.md.
 const homepageChapter = defineCollection({
   loader: glob({
     pattern: "**/[^_]*.md",

@@ -7,6 +7,7 @@ import PageHeader from "@/partials/PageHeader.astro";
 import CallToAction from "@/partials/CallToAction.astro";
 import FeatureBento from "@/partials/FeatureBento.astro";
 import FeatureItems from "@/partials/FeatureItems.astro";
+import FaqSection from "@/partials/FaqSection.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("feature-page");
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { title, description, hero, bento } = page.data;
+const { title, description, hero, bento, faq } = page.data;
 const {
   site: { base_url },
 } = config;
@@ -33,6 +34,7 @@ const seo = {
   title: page.data.meta_title || `${title} - RocketSim`,
   description,
   canonical: canonicalUrl,
+  markdownHref: `/features/${page.id}.md`,
 };
 const pageAbout =
   page.id === "physical-devices"
@@ -41,6 +43,7 @@ const pageAbout =
 
 const structuredData = {
   type: "static" as const,
+  faq,
   page: {
     name: title,
     description,
@@ -65,6 +68,8 @@ const structuredData = {
     featurePage={page.id}
     title={bento?.enable ? `Explore all ${title} features` : undefined}
   />
+
+  {faq && faq.length > 0 && <FaqSection items={faq} />}
 
   <CallToAction />
 </Base>

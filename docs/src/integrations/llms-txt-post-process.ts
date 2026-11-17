@@ -1,5 +1,5 @@
 import type { AstroIntegration } from "astro";
-import { readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import {
@@ -10,6 +10,89 @@ import {
   stripDirectives,
   stripJsxArtifacts,
 } from "../lib/llms/page-markdown";
+import { personalProUsPriceCopy } from "../lib/pricing";
+
+const SITE_URL = "https://www.rocketsim.app";
+
+type BuiltPage = {
+  slug: string;
+  title: string;
+  description: string;
+  published: string;
+};
+
+const HTML_ENTITIES: Record<string, string> = {
+  "&amp;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&#39;": "'",
+  "&#x27;": "'",
+};
+
+function decodeEntities(text: string): string {
+  return text.replace(
+    /&(?:amp|lt|gt|quot|#39|#x27);/g,
+    (m) => HTML_ENTITIES[m],
+  );
+}
+
+/**
+ * Reads the title, description and publish date of every page built under
+ * `<outputDir>/<section>/<slug>/index.html`. Going through the built pages
+ * keeps scheduled blog posts that are not live yet out of `llms.txt`.
+ */
+async function readBuiltPages(
+  outputDir: string,
+  section: string,
+): Promise<BuiltPage[]> {
+  const sectionDir = path.join(outputDir, section);
+  let slugs: string[];
+  try {
+    slugs = (await readdir(sectionDir, { withFileTypes: true }))
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
+  } catch {
+    return [];
+  }
+
+  const pages: BuiltPage[] = [];
+  for (const slug of slugs) {
+    try {
+      const html = await readFile(
+        path.join(sectionDir, slug, "index.html"),
+        "utf-8",
+      );
+      const title = html.match(/<title>([^<]*)<\/title>/)?.[1];
+      const description = html.match(
+        /<meta name="description" content="([^"]*)"/,
+      )?.[1];
+      const published =
+        html.match(
+          /<meta property="article:published_time" content="([^"]*)"/,
+        )?.[1] ?? "";
+      if (!title || !description) continue;
+      pages.push({
+        slug,
+        title: decodeEntities(title).replace(/ - RocketSim$/, ""),
+        description: decodeEntities(description),
+        published,
+      });
+    } catch {
+      // Not a page directory, skip.
+    }
+  }
+  return pages;
+}
+
+function pageList(section: string, pages: BuiltPage[]): string {
+  return pages
+    .map(
+      (page) =>
+        `- [${page.title}](${SITE_URL}/${section}/${page.slug}/): ${page.description}`,
+    )
+    .join("\n");
+}
 
 /**
  * Post-processes the generated llms-full.txt and llms-small.txt files to:
@@ -50,6 +133,12 @@ export function llmsTxtPostProcess(): AstroIntegration {
         const llmsTxtPath = path.join(outputDir, "llms.txt");
         try {
           const buildDate = new Date().toISOString().split("T")[0];
+          const guides = (await readBuiltPages(outputDir, "blog")).sort(
+            (a, b) => b.published.localeCompare(a.published),
+          );
+          const overviews = (await readBuiltPages(outputDir, "features")).sort(
+            (a, b) => a.slug.localeCompare(b.slug),
+          );
           const enhancedLlmsTxt = `# RocketSim
 
 > RocketSim is a macOS developer tool for testing Simulator and physical-device apps. It adds professional captures, URLSession network monitoring, app actions, physical iPhone and iPad location and deep-link testing, accessibility workflows, and a version-matched CLI plus Agent Skill for tools like Cursor, Claude, Codex, and Xcode.
@@ -86,6 +175,22 @@ Support: support@rocketsim.app
 - [Physical Device Testing](https://www.rocketsim.app/docs/features/physical-devices/): mirror and test a connected iPhone or iPad with captures, Recent Builds, lifecycle actions, deep links, and locations
 - [Physical-Device Location and Time-Zone Simulation](https://www.rocketsim.app/docs/features/physical-devices/location-and-time-zone-simulation/): test Core Location and automatic iOS time-zone changes on real hardware with Xcode 27
 - [Deep-Link Testing on a Physical Device](https://www.rocketsim.app/docs/features/physical-devices/deep-link-testing/): run saved URL schemes and Universal Links on a connected iPhone or iPad
+
+## Pricing
+
+- [Pricing](https://www.rocketsim.app/pricing/): RocketSim is free to download. Personal Pro is bought in-app at the local App Store price, which differs per country; in the US it costs ${personalProUsPriceCopy.monthly} or ${personalProUsPriceCopy.yearly}. Teams costs €10 per seat per month, billed annually, with a 14-day trial. Enterprise pricing is custom. Plain Markdown version: https://www.rocketsim.app/pricing.md
+
+## Feature Overviews
+
+${pageList("features", overviews)}
+
+## Guides, Comparisons, and Benchmarks
+
+${pageList("blog", guides)}
+
+## Markdown Versions
+
+Every documentation page, blog post, feature overview, and the pricing page has a plain Markdown version. Replace the trailing slash of the page URL with \`.md\`, for example https://www.rocketsim.app/docs/features/agentic-development.md or https://www.rocketsim.app/blog/ios-simulator-mcp.md.
 
 ## Documentation Sets
 

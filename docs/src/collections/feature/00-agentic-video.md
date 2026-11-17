@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "Agentic iOS development"
 tagLine: "Let your AI coding agent see and control the Simulator"
 featurePage: "agentic-development"

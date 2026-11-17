@@ -16,7 +16,7 @@ function astroFiles(dir) {
 
 const HOMEPAGE_SOURCES = [
   ...astroFiles(join(SRC, "components/home")),
-  join(SRC, "pages/home-next.astro"),
+  join(SRC, "pages/index.astro"),
 ];
 
 // Type picked per element instead of from the type scale in

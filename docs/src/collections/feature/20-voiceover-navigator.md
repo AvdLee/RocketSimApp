@@ -1,5 +1,4 @@
 ---
-showOnHomepage: true
 name: "VoiceOver Navigator"
 featurePage: "accessibility"
 tagLine: "Visualize VoiceOver element order right on the Simulator"

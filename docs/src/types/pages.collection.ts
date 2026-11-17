@@ -85,6 +85,11 @@ export const featurePageSchema = z.object({
     title: z.string(),
     subtitle: z.string().optional(),
   }),
+  // Questions developers ask, answered in plain text. Rendered below the
+  // features and emitted as FAQPage structured data.
+  faq: z
+    .array(z.object({ question: z.string(), answer: z.string() }))
+    .optional(),
   bento: z
     .object({
       enable: z.boolean(),

@@ -8,6 +8,8 @@ sidebar:
     variant: caution
 ---
 
+RocketSim serves a live, interactive view of a booted iOS Simulator in your browser through the `rocketsim preview` command, with device bezel, Simulator switching, clicks, scrolls, and keyboard typing. Review flows without keeping Simulator.app in front of you, or turn on-screen feedback into prompts for your coding agent.
+
 Browser Preview is a **Beta** feature that serves a live, interactive view of your iOS Simulator at a local URL. You can review an app without keeping Simulator.app in front of you, interact with the screen from your browser, and turn visual feedback into a prompt for your AI coding agent.
 
 The preview includes the correct device bezel and lets you switch between booted Simulators. Live input supports clicks, drags, scrolling, and keyboard typing, so you can move through a flow while reviewing it.

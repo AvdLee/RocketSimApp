@@ -52,6 +52,12 @@ const entryData = Astro.locals.starlightRoute?.entry?.data;
 const currentPageTitle =
   entryData?.title ?? (currentSegment ? slugToTitle(currentSegment) : "Docs");
 const seoParent = entryData?.seoParent;
+// The Markdown twin of the page (`/docs/x/` → `/docs/x.md`), served by
+// `src/pages/docs/[...slug].md.ts` for every docs page except the docs home.
+const markdownHref =
+  rawPathSegments.length > 1
+    ? `${Astro.url.pathname.replace(/\/+$/, "")}.md`
+    : undefined;
 const faqItems = entryData?.faq?.filter(
   (item) => item.question.trim() && item.answer.trim(),
 );
@@ -146,6 +152,17 @@ const serializeJsonLd = (value: unknown) =>
 <!-- Theme color matching RocketSim dark theme -->
 <meta name="theme-color" content="#000000" />
 <meta name="color-scheme" content="dark light" />
+
+{
+  markdownHref && (
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="Markdown version"
+      href={markdownHref}
+    />
+  )
+}
 
 <!-- Additional meta for better SEO -->
 <meta name="author" content="RocketSim" />

@@ -7,6 +7,10 @@ on:
     branches: [ master ]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+  # Publishes blog posts that were merged ahead of their `publishedTime`. The
+  # `check` job skips the build unless a post became due in the last 25 hours.
+  schedule:
+    - cron: "15 9 * * *"
 
 concurrency:
   group: github-pages-deploy
@@ -19,7 +23,24 @@ permissions:
   id-token: write
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.due.outputs.due }}
+    steps:
+      - name: Checkout blog sources only
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/scripts
+            docs/src/content/blog
+      - name: Check for blog posts that became due
+        id: due
+        run: node .github/scripts/blog-due.mjs
+
   build:
+    needs: check
+    if: github.event_name != 'schedule' || needs.check.outputs.due == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git

@@ -1,8 +1,9 @@
 ---
-title: "iOS Simulator Camera: Test Camera Flows"
-pageTitle: "iOS Simulator Camera: Test Camera Flows Without a Device"
-description: "Use the iOS Simulator camera with RocketSim to test QR scanners, photo pickers, and video flows without repeatedly deploying to a device."
+title: "iPhone Camera Simulator: Test QR Scanners"
+pageTitle: "iPhone Camera Simulator: Scan a QR Code in the iOS Simulator"
+description: "Use RocketSim as an iPhone camera simulator in Xcode: scan a QR code in the iOS Simulator, test photo pickers and video flows, and check no-camera fallbacks."
 publishedTime: 2026-06-18T18:45:00.000Z
+modifiedTime: 2026-10-28T09:00:00.000Z
 image: ../../docs/docs/features/capturing/simulator-camera-support/simulator_camera.png
 imageAlt: "RocketSim side window showing Simulator Camera support with camera authorization enabled for an iOS Simulator."
 imageCaption: "RocketSim Camera Simulation lets your Simulator app receive your Mac's camera feed while you keep working from the Mac."
@@ -10,7 +11,7 @@ imageCaption: "RocketSim Camera Simulation lets your Simulator app receive your 
 
 The **iOS Simulator camera** is one of those things you expect to just work until you build a feature that depends on it. A QR scanner, document scanner, profile photo picker, or video onboarding flow quickly reminds you that the Simulator does not expose a real camera like an iPhone does.
 
-That usually means you switch to a physical device, grant camera permissions, reproduce the flow, and then go back to Xcode for the next change. It works, but it is slow. RocketSim Camera Simulation closes that gap by streaming your Mac's camera into the Simulator through [RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect).
+That usually means you switch to a physical device, grant camera permissions, reproduce the flow, and then go back to Xcode for the next change. It works, but it is slow. RocketSim Camera Simulation closes that gap by streaming your Mac's camera into the Simulator through [RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect). In other words, it works as an iPhone camera simulator that keeps you in Xcode.
 
 ## Why camera testing is slow
 
@@ -20,9 +21,9 @@ The problem is that the Xcode Simulator does not behave like a device with a phy
 
 I have made this mistake myself while building camera-related flows: I postponed device testing until the end, only to find out that the happy path worked while the permission or fallback state did not. That is exactly the kind of issue you want to catch while you are still in the Simulator.
 
-## Use RocketSim as the camera
+## Use RocketSim as an iPhone camera simulator
 
-[RocketSim's Simulator Camera Support](/docs/features/capturing/simulator-camera-support) lets your app receive a camera stream while running in the iOS Simulator. You keep your normal Simulator workflow, but RocketSim provides the media input.
+[RocketSim's Simulator Camera Support](/docs/features/capturing/simulator-camera-support) and the [Simulator Camera feature overview](/features/simulator-camera/) explain how it works. It lets your app receive a camera stream while running in the iOS Simulator. You keep your normal Simulator workflow, but RocketSim provides the media input.
 
 <figure>
   <video
@@ -39,15 +40,19 @@ I have made this mistake myself while building camera-related flows: I postponed
   </figcaption>
 </figure>
 
-The setup has two parts. First, enable Camera Simulation from the Capture side window tab. Second, integrate RocketSim Connect using the in-app instructions so your debug build can receive the stream.
+Follow the [setup guide in the documentation](/docs/features/capturing/simulator-camera-support) for the full steps. The setup has two parts. First, enable Camera Simulation from the Capture side window tab. Second, integrate RocketSim Connect using the in-app instructions so your debug build can receive the stream.
 
 Once connected, your app can go through the same camera-dependent flow in the Simulator. That means you can test the UI, permission copy, scanner state, loading indicators, and fallback screens without leaving your Mac.
 
-## Test real camera scenarios
+## Scan a QR code in the iOS Simulator
+
+To scan a QR code in the iOS Simulator, your app needs a camera stream to read from. With Camera Simulation enabled, your app's scanner receives the stream from RocketSim, so you can test the scanning UI, permission copy, and loading states without deploying to a device. `DataScannerViewController` does not currently work with RocketSim Camera Simulation.
+
+## Test photo picker and video flows
 
 The biggest win is not that you can avoid a device forever. You still want a final pass on real hardware before shipping. The win is that the daily development loop becomes much faster.
 
-You can use the iOS Simulator camera workflow for scenarios like:
+You can use the iOS Simulator camera workflow for photo picker, video, and scanning scenarios like:
 
 - Testing QR code or barcode scanning
 - Validating profile photo and avatar flows
@@ -84,7 +89,7 @@ The goal is not to pretend the Simulator has become a physical iPhone. The goal 
 
 There are still a few hardware-specific edges to validate on a device before shipping. The macOS camera resolution is used for returned sample buffers, video streams do not contain audio, and front/back camera switching maps to the same simulated stream. `DataScannerViewController` also does not currently work with RocketSim Camera Simulation.
 
-That makes RocketSim a practical daily tool rather than a final hardware certification step. Use it to iterate on scanning UI, permission copy, fallback states, and repeatable media input quickly, then keep the final device pass for the smaller set of things only real hardware can prove.
+That makes RocketSim a practical daily tool rather than a final hardware certification step. Use it to iterate on scanning UI, permission copy, fallback states, and repeatable media input quickly, then keep the final device pass for the smaller set of things only real hardware can prove. RocketSim 16 can also mirror a connected iPhone for that final pass, which the [RocketSim 16 release article](/blog/rocketsim-16-physical-devices-ai-agents/) covers.
 
 ## Conclusion
 

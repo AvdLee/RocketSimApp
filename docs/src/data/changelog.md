@@ -1,4 +1,57 @@
-# 16.8.0
+# 17.0.0
+
+**New:**
+
+- Flows: AI agents can now save the steps they take through your app as a named flow and replay it later with `rocketsim flow <name>`. Flows are reusable, can build on each other, and accept parameters. Passwords and other secrets are never stored in a saved flow.
+- Flows: when a saved flow stops working, RocketSim tells the agent why, fixes what is safe to fix automatically, and repairs the rest with a single command.
+- Flows: share a flow as a page on your Mac, protected by a private link. It shows real screenshots with an arrow from the tapped element, tab bar handling, an app card, Annotated and Clean views, a device bezel toggle, accessibility overlays you can hover and select, a Screens sidebar with the element tree, and pan and zoom.
+- Flows: leave comments on a screen with pins, then use Copy prompt to hand them straight to your agent.
+
+**Improved:**
+
+- CLI: password fields are now reported to agents as secure text fields, so they are recognized as sensitive. `--type textField` still matches them.
+- CLI: improved reliability when agents replay and repair flows.
+
+# 16.9.1
+
+**New:**
+
+- Environment Toggles: preview how people with color blindness see your app. Pick Protanopia, Deuteranopia, Tritanopia, their milder variants, or Achromatopsia under Color Blindness Simulation, and RocketSim shows a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
+
+**Improved:**
+
+- Status bar: the custom status bar controls and the 9:41 button now apply to the simulator you're using in Device Hub. The reset button uses a counter-clockwise icon and shows a tooltip. (Thanks again, E. Sanchez!)
+- Location and Stage Manager: both now apply to the simulator you're using in Device Hub. (Thanks again, E. Sanchez!)
+- Developer folder permission: "Set up permissions" brings the folder picker to the front, no longer freezes the app when pressed repeatedly, and explains what to do when macOS can't restore the saved folder access. (Thanks again, E. Sanchez!)
+
+**Fixed:**
+
+- Physical devices: the side window now stays next to a physical device window, and screenshots keep working, while the iPhone screen isn't changing. Before, both stopped working a few seconds after the screen went still. (Thanks, A. Singer!)
+
+# 16.9.0
+
+**New:**
+
+- CLI: `interact tap`, `focus`, `type`, `long-press`, `activate`, `wait element`, `snapshot`, and `do` steps accept `--identifier <id>` to target an element by its `accessibilityIdentifier`, which stays the same in every language. Read the identifiers with `rocketsim elements --agent-mode debug`. (Thanks, D. West!)
+
+**Improved:**
+
+- CLI: agent responses use fewer tokens. `interact` lists at most 5 `disappeared` entries (`disappeared_count` still reports the total), and `context.preview_url` is attached to the first response, when it changes, and every 10 minutes instead of to every response. The bundled agent skill now recommends ending a `do` batch with an `elements` step to get the resulting screen in the same call.
+- Recordings: stopping a recording begins finalizing right away instead of first waiting for the recording window to update. The recording timer, capture thumbnail, and microphone list also redraw less often, so RocketSim stays more responsive while you record.
+- Recordings: capturing touches no longer asks macOS for the frontmost app on every click and drag, which could stall RocketSim during busy recordings.
+- Physical devices: resizing a physical device window no longer runs redundant layout passes, so resizing feels smoother.
+
+**Fixed:**
+
+- CLI: `rocketsim duo pose` now waits for the hinge animation to finish instead of returning `wait_timeout` while the hinge is still moving to the requested pose. (Thanks, P. Krassay!)
+- CLI: `rocketsim elements` and `rocketsim wait keyboard` report the software keyboard as visible on iOS 26 and 27, instead of `hidden` while it is on screen. (Thanks, P. Krassay!)
+- CLI: `rocketsim interact type` now enters text correctly on non-US Simulator keyboards, including German, French, British, Spanish, and Italian layouts with accented letters like `é`, and fails with the characters it can't type instead of reporting success with the wrong text. (Thanks, P. Krassay!)
+- CLI: when the Simulator's accessibility is switched off, `rocketsim elements` now says so with the commands to fix it, and `rocketsim doctor` warns about it, instead of returning an empty element list. (Thanks, P. Krassay!)
+- CLI: the tab bar buttons of SwiftUI apps now show up in `rocketsim elements` when the app runs in a language other than English, so `interact tap --label` works for them. (Thanks, P. van den Hamer!)
+- Developer folder access: Macs set up from a migration, which kept an outdated Developer folder permission, no longer ask for the permission at every launch. RocketSim now renews the outdated permission automatically, or asks for it once more when it can't. (Thanks again, J. Sabater!)
+- Opening two Simulators within a few seconds of each other no longer leaves the second one missing from RocketSim until another Simulator window opens or closes.
+
+# 16.8.0 (339)
 
 **New:**
 
@@ -185,12 +238,27 @@
 
 # 16.4.5 (331)
 
+**New:**
+
+- Added a Performance Trace side-window tab for starting and stopping eligible Simulator and physical-device RocketTrace recordings directly from RocketSim.
+
 **Improved:**
 
+- The Performance Trace tab now shows the selected build configuration, clearer RocketTrace guidance, and more compact native controls.
+- Performance Trace recordings now show each launch stage in RocketSim, prevent duplicate starts, retain the recording timer through app reinstalls and reconnects, and hand off to RocketTrace for processing after Stop.
 - LLDB RocketSimConnect improved for slow launches that occasionally happen on busy machines.
+- The Performance Trace tab now explains what RocketTrace is when it is not installed, and tells you whether RocketTrace needs to be opened, updated, or restarted instead of showing one generic connection message.
+- The Performance Trace tab now explains how to fix a build that RocketTrace can't record because its dSYM is missing or mismatched, with a Learn More link and a Start Again button.
+- The Performance Trace tab now lists only Release and other optimized builds from Xcode, including ones that aren't installed on the Simulator yet, since Debug builds are too slow for reliable traces. When there are none, it explains how to create one with Product → Profile and links to RocketTrace's documentation.
+- Performance Trace progress steps now use the same rounded black card as the recording state, with a spinner and a Cancel button until recording starts. Cancelling while RocketTrace prepares needs the latest RocketTrace.
+- Diagnostics reports now include a RocketTrace chapter with the installed copies, running state, and recent connection history to help troubleshoot the Performance Trace tab.
 
 **Fixed:**
 
+- Fixed the Performance Trace tab keeping a previous build's failure after selecting another build, and changing the selected build or following newly appearing builds while a trace is running.
+- Fixed the Performance Trace tab repeatedly checking a live RocketTrace connection and offering to start when its Recorder Companion could not be reached.
+- Fixed the Performance Trace tab requiring a RocketSim restart before recognizing an updated RocketTrace Recorder Companion.
+- Fixed selected builds being rejected as unavailable when starting a RocketTrace recording. The tab now falls back to launching the existing installation when its local Xcode build is gone.
 - Fixed RocketSim onboarding windows appearing while app-hosted tests run in the background.
 - Fixed the Screen Recording permission alert repeatedly appearing after opening System Settings or denying access. (Thanks, E. Sanchez!)
 - Fixed RocketSim occasionally asking you to select Xcode again after access had already been granted. (Thanks, H. v.d. Ploeg)
