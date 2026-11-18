@@ -6,11 +6,29 @@
 - Flows: when a saved flow stops working, RocketSim tells the agent why, fixes what is safe to fix automatically, and repairs the rest with a single command.
 - Flows: share a flow as a page on your Mac, protected by a private link. It shows real screenshots with an arrow from the tapped element, tab bar handling, an app card, Annotated and Clean views, a device bezel toggle, accessibility overlays you can hover and select, a Screens sidebar with the element tree, and pan and zoom.
 - Flows: leave comments on a screen with pins, then use Copy prompt to hand them straight to your agent.
+- Environment Toggles: preview how people with color blindness see your app. Pick Protanopia, Deuteranopia, Tritanopia, their milder variants, or Achromatopsia under Color Blindness Simulation, and RocketSim shows a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
 
 **Improved:**
 
 - CLI: password fields are now reported to agents as secure text fields, so they are recognized as sensitive. `--type textField` still matches them.
 - CLI: improved reliability when agents replay and repair flows.
+- CLI: actions return faster once the screen has settled.
+- CLI: `rocketsim do --refresh-policy smart` finishes batches of coordinate taps and swipes about 35% faster, and typing text is faster as well.
+- CLI: new `--settle quick|none` option on interact commands for agents that prefer speed over waiting for the screen to settle. Selectors now wait up to 1.5 seconds for their element by default.
+- CLI: the bundled agent skill no longer asks agents to save the accessibility snapshot to a file first, which saves a step per screen read.
+- CLI: taps by label and `rocketsim do` batches are faster. Screen orientation is read directly instead of through a helper process, `do` skips screen reads it does not need, and repeated coordinate taps no longer wait for a fixed delay each time.
+- Improved reliability when previewing web pages, recording iPhone Duo, and completing purchases.
+
+**Fixed:**
+
+- Developer folder access: Macs that can't remember the permission no longer ask for it again at every launch, even when an older saved permission is left over. (Thanks, A. Singer!)
+- Simulator Camera: apps that check `UIImagePickerController.isSourceTypeAvailable(.camera)` before showing their camera button now see the Simulator Camera as available, so camera flows are no longer hidden in the Simulator. This also covers the available media types and front and rear camera checks. Choosing `None` as the camera keeps reporting no camera. (Thanks, R. Aurbach!)
+- Network Monitoring: the Diagnostics Report now includes how many requests and responses RocketSim Connect received per connection, and Connect reports in its debug log when it can't capture responses on a new iOS version, which makes missing responses easier to track down. (Thanks, R. Aurbach!)
+- Connect: hover over the Connect status to see what it means.
+
+**Fixed:**
+
+- CLI: controls without an accessibility label, like the back button in the iPhone Duo side rail, now show up in `rocketsim elements` instead of disappearing. Unlabeled controls with an accessibility identifier are listed on a `!identifier|id|identifier` row, so you can tap them with `--identifier`. (Thanks, D. Munoz!)
 
 # 16.9.1
 
@@ -23,10 +41,13 @@
 - Status bar: the custom status bar controls and the 9:41 button now apply to the simulator you're using in Device Hub. The reset button uses a counter-clockwise icon and shows a tooltip. (Thanks again, E. Sanchez!)
 - Location and Stage Manager: both now apply to the simulator you're using in Device Hub. (Thanks again, E. Sanchez!)
 - Developer folder permission: "Set up permissions" brings the folder picker to the front, no longer freezes the app when pressed repeatedly, and explains what to do when macOS can't restore the saved folder access. (Thanks again, E. Sanchez!)
+- Connect: Settings → Connect now shows when the last debug launch happened, so an old launch is no longer mistaken for a recent one.
 
 **Fixed:**
 
 - Physical devices: the side window now stays next to a physical device window, and screenshots keep working, while the iPhone screen isn't changing. Before, both stopped working a few seconds after the screen went still. (Thanks, A. Singer!)
+- Physical devices: an iPad connected over USB now shows up as a connected device in RocketSim, like an iPhone does. (Thanks, D. Messing!)
+- Recordings: Apple Vision Pro recordings are exported in landscape again instead of a portrait video with the footage squeezed into the top and black bars below.
 
 # 16.9.0
 
