@@ -1,0 +1,191 @@
+---
+// Two flow files, line by line, with the parts that matter pointed out. The
+// files follow the Navigation Flows docs.
+type Token = [kind: "key" | "cmd" | "text" | "flag", text: string];
+interface Line {
+  tokens: Token[];
+  note?: number;
+}
+
+const login: Line[] = [
+  {
+    tokens: [
+      ["key", "name: "],
+      ["text", "login"],
+    ],
+  },
+  {
+    tokens: [
+      ["key", "about: "],
+      ["text", "Sign in with the test account"],
+    ],
+  },
+  {
+    tokens: [
+      ["key", "param: "],
+      ["text", "user = $TEST_USER"],
+    ],
+  },
+  {
+    tokens: [
+      ["key", "param: "],
+      ["text", "password secret = $TEST_PASSWORD"],
+    ],
+    note: 1,
+  },
+  {
+    tokens: [
+      ["cmd", "tap "],
+      ["flag", "--identifier "],
+      ["text", "login.email"],
+    ],
+    note: 2,
+  },
+  {
+    tokens: [
+      ["cmd", "type "],
+      ["text", "'{user}'"],
+    ],
+  },
+  {
+    tokens: [
+      ["cmd", "tap "],
+      ["flag", "--identifier "],
+      ["text", "login.password"],
+    ],
+  },
+  {
+    tokens: [
+      ["cmd", "type "],
+      ["text", "'{password}'"],
+    ],
+  },
+  {
+    tokens: [
+      ["cmd", "tap "],
+      ["flag", "--label "],
+      ["text", "'Sign In'"],
+    ],
+  },
+  {
+    tokens: [
+      ["cmd", "expect "],
+      ["flag", "--label "],
+      ["text", "'Home'"],
+    ],
+    note: 3,
+  },
+];
+
+const openSettings: Line[] = [
+  {
+    tokens: [
+      ["key", "name: "],
+      ["text", "open-settings"],
+    ],
+  },
+  {
+    tokens: [
+      ["key", "about: "],
+      ["text", "Open the settings screen from home"],
+    ],
+  },
+  {
+    tokens: [
+      ["cmd", "flow "],
+      ["text", "login"],
+    ],
+    note: 4,
+  },
+  {
+    tokens: [
+      ["cmd", "tap "],
+      ["flag", "--label "],
+      ["text", "'Settings'"],
+    ],
+  },
+  {
+    tokens: [
+      ["cmd", "expect "],
+      ["flag", "--identifier "],
+      ["text", "settings.title"],
+    ],
+  },
+];
+
+const files = [
+  { name: "login.rsflow", lines: login },
+  { name: "open-settings.rsflow", lines: openSettings },
+];
+
+const tokenClass = {
+  key: "text-muted",
+  cmd: "text-(--chapter)",
+  flag: "text-muted",
+  text: "text-text-soft",
+};
+
+const notes = [
+  {
+    title: "Secrets stay out",
+    text: "A secret parameter is never written to the file, a session log, or a failure reply. The flow only stores the placeholder.",
+  },
+  {
+    title: "Minimal selectors",
+    text: "Saving picks the shortest selector that finds the element: an identifier when there is one, a label when not.",
+  },
+  {
+    title: "Checkpoints",
+    text: "An expect between screen changes catches a wrong turn at the step that caused it, not ten taps later.",
+  },
+  {
+    title: "Prerequisites",
+    text: "A flow line before the first step runs another flow first, and is skipped when its final expect already holds.",
+  },
+];
+---
+
+<div class="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+  <div class="flex flex-col gap-4">
+    {
+      files.map(({ name, lines }) => (
+        <figure class="m-0 overflow-hidden rounded-lg bg-surface">
+          <figcaption class="border-b border-line px-5 py-3 font-mono text-caption tracking-normal text-muted">
+            {name}
+          </figcaption>
+          <div class="overflow-x-auto px-5 py-4 font-mono text-caption leading-loose tracking-normal">
+            {lines.map(({ tokens, note }) => (
+              <div class="flex items-center gap-3 whitespace-pre">
+                <span class="min-w-0 flex-1">
+                  {tokens.map(([kind, text]) => (
+                    <span class={tokenClass[kind]}>{text}</span>
+                  ))}
+                </span>
+                {note && (
+                  <span class="grid size-5 shrink-0 place-items-center rounded-full bg-(--chapter) text-caption font-semibold text-card">
+                    {note}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </figure>
+      ))
+    }
+  </div>
+  <ol class="m-0 flex list-none flex-col gap-4 p-0">
+    {
+      notes.map(({ title, text }, index) => (
+        <li class="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 rounded-lg bg-surface p-5">
+          <span class="grid size-6 place-items-center rounded-full bg-(--chapter) text-caption font-semibold text-card tabular-nums">
+            {index + 1}
+          </span>
+          <div>
+            <h3 class="text-title-4">{title}</h3>
+            <p class="mt-1.5 text-copy text-muted">{text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>

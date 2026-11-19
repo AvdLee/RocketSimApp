@@ -1,0 +1,101 @@
+---
+// RocketSim drives the app and RocketTrace measures it. The commands are the
+// documented loop from RocketTrace's agent skill: start recording, drive the
+// Simulator, stop, then read the ranked findings.
+const rocketTraceUrl =
+  "https://rockettrace.app/rocketsim/?utm_source=rocketsim&utm_medium=referral&utm_campaign=agentic-development";
+
+const steps = [
+  {
+    tool: "RocketTrace",
+    note: "Start recording a trace of the build",
+    command: 'rockettrace record start <build-id> --label "Checkout"',
+  },
+  {
+    tool: "RocketSim",
+    note: "Replay the saved path, the same way every time",
+    command: "rocketsim flow checkout",
+  },
+  {
+    tool: "RocketTrace",
+    note: "Stop, and wait for the analysis",
+    command: "rockettrace record stop --wait",
+  },
+  {
+    tool: "RocketTrace",
+    note: "Read the ranked findings in a few lines",
+    command: "rockettrace results get <result-id> --brief --format compact",
+  },
+];
+---
+
+<div
+  class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-start"
+>
+  <div>
+    <p class="m-0 text-intro text-muted">
+      <strong class="text-text-dark">RocketTrace</strong> records and analyzes Instruments
+      traces and ranks what to investigate first. Its CLI returns a brief of the findings
+      with evidence, so an agent can fix what the trace proves.
+    </p>
+    <p class="mt-5 text-intro text-muted">
+      A saved flow makes the recording repeatable. Replay it after the fix, and
+      compare the new trace with the old one on the same path.
+    </p>
+    <div class="mt-8">
+      <a
+        href={rocketTraceUrl}
+        class="plausible-event-name=CTA:+Agentic+-+RocketTrace text-copy text-primary no-underline hover:underline"
+        target="_blank"
+        rel="noopener"
+      >
+        Meet RocketTrace <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+
+  <figure class="m-0 rounded-lg bg-surface p-6">
+    <figcaption class="sr-only">
+      A RocketTrace and RocketSim command sequence for an agent
+    </figcaption>
+    <ol class="m-0 flex list-none flex-col gap-5 p-0">
+      {
+        steps.map(({ tool, note, command }, index) => (
+          <li class="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4">
+            <span
+              class:list={[
+                "mt-0.5 grid size-6 place-items-center rounded-full text-caption font-semibold tabular-nums",
+                tool === "RocketSim"
+                  ? "bg-(--chapter) text-card"
+                  : "bg-line text-text-soft",
+              ]}
+            >
+              {index + 1}
+            </span>
+            <div class="min-w-0">
+              <p class="m-0 text-small text-muted">
+                <span
+                  class:list={[
+                    "font-semibold",
+                    tool === "RocketSim"
+                      ? "text-(--chapter)"
+                      : "text-text-soft",
+                  ]}
+                >
+                  {tool}
+                </span>{" "}
+                · {note}
+              </p>
+              <code class="mt-2 block rounded-lg bg-card px-3.5 py-2.5 font-mono text-caption tracking-normal break-words text-code">
+                <span class="text-(--chapter)" aria-hidden="true">
+                  $
+                </span>{" "}
+                {command}
+              </code>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </figure>
+</div>

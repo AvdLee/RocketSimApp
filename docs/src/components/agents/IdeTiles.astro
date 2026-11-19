@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+
+import settingsAgent from "@/assets/homepage/settings-agent.png";
+
+// How RocketSim works with the IDE agents: one click installs the skill, and
+// the live preview opens in the IDE's own browser.
+const points = [
+  {
+    title: "One click to install",
+    text: "RocketSim → Settings → CLI & Agent installs the Agent Skill for Cursor, Claude, Codex, and Xcode, and keeps it up to date.",
+  },
+  {
+    title: "Your IDE's own browser",
+    text: "The agent hands you a local preview link. It opens in the browser built into Cursor, Claude Code, or Codex, so you never leave your editor.",
+  },
+  {
+    title: "Any agent that runs shell commands",
+    text: "RocketSim is a CLI, so tools without a one-click install can call the rocketsim command directly.",
+  },
+];
+---
+
+<div
+  class="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+>
+  <ul class="m-0 flex list-none flex-col gap-7 p-0">
+    {
+      points.map(({ title, text }) => (
+        <li>
+          <h3 class="text-title-4">{title}</h3>
+          <p class="mt-2 text-copy text-muted">{text}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <figure class="m-0 overflow-hidden rounded-xl bg-surface">
+    <Image
+      src={settingsAgent}
+      alt="RocketSim's CLI and Agent settings with one-click install buttons for Cursor, Claude, Codex, and Xcode"
+      widths={[640, 960, 1280]}
+      sizes="(min-width: 1024px) 600px, 100vw"
+      class="h-auto w-full"
+    />
+  </figure>
+</div>

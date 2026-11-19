@@ -1,0 +1,757 @@
+---
+import { CARD, VIEWPORT, layoutBoard } from "@/lib/agents/flowLayout";
+import { formatBytes, isOnAt } from "@/lib/agents/beats";
+import {
+  beatCount,
+  outputBytesThrough,
+  scenarios,
+  type ScenarioId,
+} from "@/lib/agents/scenarios";
+
+import PhoneScreen from "./PhoneScreen.astro";
+
+// The centerpiece of the agentic pages: a scripted agent session on the left,
+// and the flow page it builds on the right, with an arrow drawn from each
+// element the agent taps. The server renders the finished state; the script in
+// src/lib/agents/flowStage.ts rewinds it and steps through the beats.
+interface Props {
+  scenario: ScenarioId;
+  // The flow page's address, shown in the browser bar.
+  address?: string;
+  // Play by itself once in view, instead of following the scroll. For stages
+  // that sit beside other content.
+  autoplay?: boolean;
+  // An id for the stage, for links and the page's menu.
+  id?: string;
+  // Autoplay that starts over after a pause, for as long as the stage is in
+  // view. Implies `autoplay`.
+  loop?: boolean;
+  class?: string;
+}
+
+const {
+  scenario: scenarioId,
+  address,
+  id,
+  autoplay = false,
+  loop = false,
+  class: className,
+} = Astro.props;
+const scenario = scenarios[scenarioId];
+const layout = layoutBoard(scenario);
+const beats = beatCount(scenario);
+const bytes = Array.from({ length: beats }, (_, beat) =>
+  outputBytesThrough(scenario, beat),
+);
+const finalBytes = bytes[bytes.length - 1];
+const finalCamera = layout.cameras[layout.cameras.length - 1];
+const urlText = address ?? `127.0.0.1:4995/flow/${scenario.flowName}`;
+
+const u = (value: number) => `calc(var(--u) * ${value})`;
+const tonedAt = (at: number, until?: number) => ({
+  "data-at": at,
+  "data-until": until,
+  "data-on": isOnAt(0, at, until) ? "" : undefined,
+});
+
+const commands = scenario.transcript.filter((item) => item.kind === "cmd");
+// Content in the `lead` slot, such as a page's hero, sits above the stage and
+// scrolls and pins with it, so the whole hero stays in view while it plays.
+const hasLead = Astro.slots.has("lead");
+---
+
+<div
+  id={id}
+  data-flow-stage
+  data-beats={beats}
+  data-replay-at={scenario.replayAt}
+  data-autoplay={autoplay || loop ? "" : undefined}
+  data-loop={loop ? "" : undefined}
+  data-cams={JSON.stringify(layout.cameras)}
+  data-bytes={JSON.stringify(bytes)}
+  data-labels={JSON.stringify(scenario.beatLabels)}
+  class:list={["flow-stage", className]}
+  style={`--steps:${beats - 1};--chapter:var(--color-chapter-agents);`}
+>
+  <div data-stage-inner class="stage-inner">
+    <slot name="lead" />
+    <p class="sr-only">
+      {scenario.summary}
+      Commands the agent runs:
+      {
+        commands
+          .map((item) => ("command" in item ? item.command : ""))
+          .join("; ")
+      }.
+    </p>
+    <div data-stage-body class:list={[hasLead && "px-5"]}>
+      <div
+        class="stage-window mx-auto overflow-hidden rounded-xl border border-line bg-card shadow-4xl"
+        aria-hidden="true"
+      >
+        <div
+          class="stage-grid grid lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)]"
+        >
+          <!-- The agent, as an IDE would show it. -->
+          <section
+            class="stage-agent relative flex min-h-[360px] flex-col border-b border-line lg:min-h-0 lg:border-r lg:border-b-0"
+          >
+            <header
+              class="flex items-center gap-3 border-b border-line px-4 py-3"
+            >
+              <span class="flex gap-1.5" aria-hidden="true">
+                <span class="size-2.5 rounded-full bg-window-control"></span>
+                <span class="size-2.5 rounded-full bg-window-control"></span>
+                <span class="size-2.5 rounded-full bg-window-control"></span>
+              </span>
+              <span class="text-caption font-medium text-text-soft">Agent</span>
+              <span class="ml-auto flex gap-1.5 text-caption text-muted">
+                <span class="rounded-full bg-surface px-2 py-0.5 text-text-soft"
+                  >Cursor</span
+                >
+                <span class="rounded-full bg-surface px-2 py-0.5">Codex</span>
+                <span class="rounded-full bg-surface px-2 py-0.5">Claude</span>
+              </span>
+            </header>
+            <div class="relative min-h-0 flex-1">
+              <ol
+                class="stage-transcript absolute inset-0 m-0 flex list-none flex-col justify-end gap-2.5 overflow-hidden p-4"
+              >
+                {
+                  scenario.transcript.map((item) => (
+                    <li
+                      class="t-item"
+                      data-kind={item.kind}
+                      {...tonedAt(item.at)}
+                    >
+                      {item.kind === "user" && (
+                        <p class="m-0 rounded-lg bg-surface px-3 py-2 text-small text-text-dark">
+                          {item.text}
+                        </p>
+                      )}
+                      {item.kind === "note" && (
+                        <p class="m-0 flex items-start gap-2 text-caption text-muted">
+                          <span
+                            class="mt-1.5 size-1.5 shrink-0 rounded-full bg-(--chapter)"
+                            aria-hidden="true"
+                          />
+                          {item.text}
+                        </p>
+                      )}
+                      {item.kind === "cmd" && (
+                        <div class="rounded-lg border border-line bg-surface px-3 py-2 font-mono text-caption tracking-normal text-code">
+                          <div class="flex items-start gap-2">
+                            <span class="min-w-0 flex-1 break-words">
+                              <span class="text-(--chapter)">$</span>{" "}
+                              {item.command}
+                            </span>
+                            {item.bytes > 0 && (
+                              <span class="shrink-0 rounded-full bg-card px-1.5 py-px text-muted tabular-nums">
+                                {formatBytes(item.bytes)}
+                              </span>
+                            )}
+                          </div>
+                          {item.output && (
+                            <pre
+                              class="m-0 mt-1.5 font-mono text-caption leading-snug tracking-normal whitespace-pre-wrap text-muted"
+                              set:text={item.output}
+                            />
+                          )}
+                        </div>
+                      )}
+                      {item.kind === "step" && (
+                        <p class="m-0 pl-3 font-mono text-caption tracking-normal text-muted">
+                          {item.text}
+                        </p>
+                      )}
+                      {item.kind === "result" && (
+                        <div class="flex items-start gap-2 rounded-lg bg-surface px-3 py-2 font-mono text-caption tracking-normal text-code">
+                          <span class="min-w-0 flex-1 break-all whitespace-pre-wrap">
+                            {item.text}
+                          </span>
+                          <span class="shrink-0 rounded-full bg-card px-1.5 py-px text-muted tabular-nums">
+                            {formatBytes(item.bytes)}
+                          </span>
+                        </div>
+                      )}
+                      {item.kind === "reply" && (
+                        <p class="m-0 border-l-2 border-(--chapter) pl-3 text-small text-text-dark">
+                          {item.text}
+                        </p>
+                      )}
+                    </li>
+                  ))
+                }
+              </ol>
+              <div
+                class="stage-fade pointer-events-none absolute inset-x-0 top-0 h-16"
+              >
+              </div>
+            </div>
+            <footer
+              class="flex items-center justify-between gap-3 border-t border-line px-4 py-2.5 text-caption text-muted"
+            >
+              <span>Tool output read</span>
+              <span
+                class="font-mono tracking-normal text-text-dark tabular-nums"
+                data-meter
+              >
+                {formatBytes(finalBytes)}
+              </span>
+            </footer>
+          </section>
+
+          <!-- The flow page, in the IDE's browser. -->
+          <section class="stage-browser flex min-w-0 flex-col">
+            <header
+              class="flex items-center gap-3 border-b border-line px-4 py-3"
+            >
+              <span class="flex gap-1.5" aria-hidden="true">
+                <span class="size-2.5 rounded-full bg-window-control"></span>
+                <span class="size-2.5 rounded-full bg-window-control"></span>
+                <span class="size-2.5 rounded-full bg-window-control"></span>
+              </span>
+              <span
+                class="min-w-0 flex-1 truncate rounded-full bg-surface px-3 py-1 text-center font-mono text-caption tracking-normal text-muted"
+              >
+                {urlText}
+              </span>
+            </header>
+            <div
+              class="board-viewport"
+              style={`--vw:${VIEWPORT.w};aspect-ratio:${VIEWPORT.w}/${VIEWPORT.h};`}
+            >
+              <div
+                class="board"
+                data-board
+                style={`--cam-scale:${finalCamera.scale};--cam-x:${finalCamera.x};--cam-y:${finalCamera.y};width:${u(layout.width)};height:${u(layout.height)};`}
+              >
+                <svg
+                  class="board-lines"
+                  viewBox={`0 0 ${layout.width} ${layout.height}`}
+                  aria-hidden="true"
+                >
+                  <!-- The flow's name over its screens. -->
+                  <g
+                    class="bracket"
+                    {...scenario.bracketAt === undefined
+                      ? {}
+                      : tonedAt(scenario.bracketAt)}
+                  >
+                    <path
+                      d={`M${layout.bracket.x1} ${layout.bracket.y + 8}V${layout.bracket.y}H${layout.bracket.x2}V${layout.bracket.y + 8}`}
+                    ></path>
+                  </g>
+                  <g class="start-line" data-at="0" data-on>
+                    <path
+                      d={`M${layout.start.x + 14} ${layout.start.y}H${layout.screens[0].x - 2}`}
+                    ></path>
+                  </g>
+                  {
+                    layout.edges.map((edge) => (
+                      <g
+                        class="edge"
+                        data-edge
+                        data-tone={edge.tone}
+                        data-state={edge.state}
+                        data-prerequisite={edge.prerequisite ? "" : undefined}
+                        style={`--i:${edge.index}`}
+                        {...tonedAt(edge.at, edge.until)}
+                      >
+                        <path class="edge-path" d={edge.d} pathLength="1" />
+                        <polygon class="edge-arrow" points={edge.arrow} />
+                        <circle
+                          class="edge-anchor"
+                          cx={edge.anchor.x}
+                          cy={edge.anchor.y}
+                          r="4"
+                        />
+                      </g>
+                    ))
+                  }
+                </svg>
+
+                <span
+                  class="board-label start-label"
+                  data-at="0"
+                  data-on
+                  style={`left:${u(layout.start.x)};top:${u(layout.start.y)};`}
+                >
+                  <span class="start-icon"></span>
+                  <span>START</span>
+                </span>
+                {
+                  scenario.bracketAt !== undefined && (
+                    <span
+                      class="board-label flow-label"
+                      style={`left:${u((layout.bracket.x1 + layout.bracket.x2) / 2)};top:${u(layout.bracket.y)};`}
+                      {...tonedAt(scenario.bracketAt)}
+                    >
+                      FLOW <b>{scenario.flowName}</b>
+                    </span>
+                  )
+                }
+
+                {
+                  layout.screens.map((screen, index) => (
+                    <div
+                      class="board-screen"
+                      style={`left:${u(screen.x)};top:${u(screen.y)};width:${u(screen.width)};height:${u(screen.height)};--k:${u(CARD.scale)};`}
+                      {...tonedAt(screen.at)}
+                    >
+                      <span
+                        class="board-label screen-title"
+                        style={`top:${u(-22)};`}
+                      >
+                        {screen.title}
+                      </span>
+                      <div class="phone" style={`border-radius:${u(34)};`}>
+                        <div
+                          class="phone-screen"
+                          style={`inset:${u(CARD.bezel)};border-radius:${u(30)};`}
+                        >
+                          <PhoneScreen screen={scenario.screens[index]} />
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+
+                {
+                  layout.edges.map((edge) => (
+                    <span
+                      class="ring"
+                      data-tone={edge.tone}
+                      data-state={edge.state}
+                      style={`left:${u(edge.ring.x - 3)};top:${u(edge.ring.y - 3)};width:${u(edge.ring.w + 6)};height:${u(edge.ring.h + 6)};`}
+                      {...tonedAt(edge.at, edge.until)}
+                    />
+                  ))
+                }
+                {
+                  layout.edges.map((edge) => (
+                    <span
+                      class="pill"
+                      data-tone={edge.tone}
+                      data-state={edge.state}
+                      data-prerequisite={edge.prerequisite ? "" : undefined}
+                      style={`left:${u(edge.pill.x)};top:${u(edge.pill.y)};`}
+                      {...tonedAt(edge.at, edge.until)}
+                    >
+                      <span class="pill-number">{edge.index + 1}</span>
+                      {edge.label}
+                    </span>
+                  ))
+                }
+              </div>
+              <div class="board-toolbar" aria-hidden="true">
+                <span class="is-active">Annotated</span>
+                <span>Clean</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div
+        class="stage-controls mx-auto flex items-center gap-4 px-1 pt-4 text-caption text-muted"
+      >
+        <span class="tabular-nums" data-beat-count>{beats} / {beats}</span>
+        <span class="flex gap-1" aria-hidden="true">
+          {
+            Array.from({ length: beats }, () => (
+              <span class="tick" data-tick data-active />
+            ))
+          }
+        </span>
+        <span class="min-w-0 flex-1 truncate text-text-soft" data-beat-label>
+          {scenario.beatLabels[beats - 1]}
+        </span>
+        <span class="scroll-hint" data-hint>
+          Scroll to follow the agent <span aria-hidden="true">↓</span>
+        </span>
+        <button
+          type="button"
+          class="replay cursor-pointer rounded-full px-3 py-1 text-small text-primary inset-ring inset-ring-primary transition-colors hover:bg-primary/12"
+          data-replay-button
+        >
+          Replay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arms the stage before the first paint, so the finished session never
+       flashes before the rewind. Reduced motion keeps the finished session. -->
+  <script is:inline>
+    (function () {
+      var root = document.currentScript.parentElement;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      root.setAttribute("data-js", "");
+      var camera = JSON.parse(root.getAttribute("data-cams"))[0];
+      var board = root.querySelector("[data-board]");
+      board.style.setProperty("--cam-scale", camera.scale);
+      board.style.setProperty("--cam-x", camera.x);
+      board.style.setProperty("--cam-y", camera.y);
+    })();
+  </script>
+</div>
+
+<style is:global>
+  .flow-stage .stage-window {
+    max-width: 1240px;
+  }
+  .flow-stage .stage-controls {
+    max-width: 1240px;
+  }
+  .flow-stage .stage-agent {
+    background: #0a0a0b;
+  }
+  .flow-stage .stage-fade {
+    background: linear-gradient(#0a0a0b, rgba(10, 10, 11, 0));
+  }
+  .flow-stage .board-viewport {
+    position: relative;
+    container-type: inline-size;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 50% 40%,
+        rgba(191, 139, 255, 0.07),
+        transparent 60%
+      ),
+      radial-gradient(circle, #1c1c20 1px, transparent 1.4px) 0 0 / 22px 22px,
+      #070708;
+  }
+  .flow-stage .board {
+    --u: calc(100cqw / var(--vw));
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+    transform: translate(
+        calc(var(--u) * var(--cam-x)),
+        calc(var(--u) * var(--cam-y))
+      )
+      scale(var(--cam-scale));
+    transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .flow-stage .board-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .flow-stage .board-label {
+    position: absolute;
+    translate: -50% -50%;
+    font-size: calc(var(--u) * 13);
+    letter-spacing: 0.02em;
+    color: #8e8e93;
+    white-space: nowrap;
+  }
+  .flow-stage .screen-title {
+    left: 50%;
+    translate: -50% 0;
+    color: #c9c9cf;
+    font-size: calc(var(--u) * 14);
+  }
+  .flow-stage .start-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--u) * 6);
+    font-size: calc(var(--u) * 11);
+    letter-spacing: 0.12em;
+  }
+  .flow-stage .start-icon {
+    width: calc(var(--u) * 24);
+    height: calc(var(--u) * 24);
+    border-radius: 999px;
+    border: 1.5px solid #5c5c61;
+    background: linear-gradient(135deg, transparent 0 0), #101012;
+    position: relative;
+  }
+  .flow-stage .start-icon::after {
+    content: "";
+    position: absolute;
+    left: 38%;
+    top: 28%;
+    border-left: calc(var(--u) * 8) solid #8e8e93;
+    border-top: calc(var(--u) * 5) solid transparent;
+    border-bottom: calc(var(--u) * 5) solid transparent;
+  }
+  .flow-stage .flow-label {
+    padding: 0 calc(var(--u) * 10);
+    background: #070708;
+    color: #8e8e93;
+    font-size: calc(var(--u) * 12);
+    letter-spacing: 0.12em;
+  }
+  .flow-stage .flow-label b {
+    margin-left: calc(var(--u) * 6);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #d8d8dc;
+  }
+  .flow-stage .bracket path,
+  .flow-stage .start-line path {
+    fill: none;
+    stroke: #3a3a40;
+    stroke-width: 1.5;
+  }
+  .flow-stage .board-screen {
+    position: absolute;
+  }
+  .flow-stage .phone {
+    position: absolute;
+    inset: 0;
+    background: #0b0b0c;
+    box-shadow:
+      0 0 0 1.5px #3a3a3d,
+      0 0 0 3px #121214,
+      0 24px 60px rgba(0, 0, 0, 0.6);
+  }
+  .flow-stage .phone-screen {
+    position: absolute;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* Colors of an arrow, its pill and the ring on the tapped element. */
+  .flow-stage [data-tone="0"] {
+    --edge: #7aa2ff;
+  }
+  .flow-stage [data-tone="1"] {
+    --edge: #56c590;
+  }
+  .flow-stage [data-tone="2"] {
+    --edge: #bf8bff;
+  }
+  .flow-stage [data-state="stale"] {
+    --edge: #ffb340;
+  }
+  .flow-stage .edge-path {
+    fill: none;
+    stroke: var(--edge);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .flow-stage .edge[data-state="stale"] .edge-path {
+    stroke-dasharray: 0.02 0.018;
+  }
+  .flow-stage .edge-arrow,
+  .flow-stage .edge-anchor {
+    fill: var(--edge);
+  }
+  .flow-stage .ring {
+    position: absolute;
+    border-radius: calc(var(--u) * 10);
+    border: 2px solid var(--edge);
+    background: color-mix(in srgb, var(--edge) 14%, transparent);
+    box-shadow: 0 0 0 calc(var(--u) * 6)
+      color-mix(in srgb, var(--edge) 12%, transparent);
+  }
+  .flow-stage .pill {
+    position: absolute;
+    translate: -50% -50%;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--u) * 7);
+    padding: calc(var(--u) * 4) calc(var(--u) * 12) calc(var(--u) * 4)
+      calc(var(--u) * 5);
+    border-radius: 999px;
+    border: 1.5px solid var(--edge);
+    background: #0d0d10;
+    color: #f5f5f7;
+    font-size: calc(var(--u) * 13);
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  }
+  .flow-stage .pill-number {
+    display: inline-grid;
+    place-items: center;
+    width: calc(var(--u) * 19);
+    height: calc(var(--u) * 19);
+    border-radius: 999px;
+    background: var(--edge);
+    color: #0a0a0b;
+    font-size: calc(var(--u) * 11);
+    font-weight: 700;
+  }
+  .flow-stage .board-toolbar {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 999px;
+    border: 1px solid #2a2a2d;
+    background: rgba(17, 17, 19, 0.85);
+    backdrop-filter: blur(8px);
+    font-size: 12px;
+    color: #8e8e93;
+  }
+  .flow-stage .board-toolbar span {
+    padding: 3px 12px;
+    border-radius: 999px;
+  }
+  .flow-stage .board-toolbar .is-active {
+    background: #2a2a2d;
+    color: #f5f5f7;
+  }
+  .flow-stage .tick {
+    width: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: #2a2a2d;
+    transition: background-color 300ms;
+  }
+  .flow-stage .tick[data-active] {
+    background: var(--chapter);
+  }
+  .flow-stage .replay {
+    display: none;
+  }
+  .flow-stage[data-js][data-finished] .replay {
+    display: inline-flex;
+  }
+  .flow-stage[data-loop][data-js][data-finished] .replay {
+    display: none;
+  }
+  .flow-stage .scroll-hint {
+    display: none;
+  }
+  .flow-stage:not([data-js]) .stage-controls {
+    display: none;
+  }
+
+  /* Before the first beat, and between beats, only what has appeared shows. */
+  .flow-stage[data-js] [data-at]:not([data-on]) {
+    visibility: hidden;
+  }
+  .flow-stage[data-js] .t-item:not([data-on]) {
+    display: none;
+  }
+  .flow-stage[data-js] .board-screen,
+  .flow-stage[data-js] .ring,
+  .flow-stage[data-js] .pill,
+  .flow-stage[data-js] .board-label[data-at],
+  .flow-stage[data-js] .bracket {
+    transition:
+      opacity 500ms ease,
+      scale 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 500ms;
+  }
+  .flow-stage[data-js] .board-screen:not([data-on]) {
+    opacity: 0;
+    scale: 0.94;
+  }
+  .flow-stage[data-js] .ring:not([data-on]),
+  .flow-stage[data-js] .bracket:not([data-on]),
+  .flow-stage[data-js] .board-label[data-at]:not([data-on]) {
+    opacity: 0;
+  }
+  .flow-stage[data-js] .pill:not([data-on]) {
+    opacity: 0;
+    scale: 0.9;
+  }
+  .flow-stage[data-js] [data-on] {
+    transition-delay: 0s;
+  }
+  .flow-stage[data-js] .pill[data-on] {
+    transition-delay: 650ms;
+  }
+  .flow-stage[data-js] .edge .edge-path {
+    transition: stroke-dashoffset 800ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .flow-stage[data-js] .edge:not([data-on]) {
+    visibility: hidden;
+  }
+  .flow-stage[data-js] .edge:not([data-on]) .edge-path {
+    stroke-dashoffset: 1;
+  }
+  .flow-stage[data-js] .edge .edge-arrow,
+  .flow-stage[data-js] .edge .edge-anchor {
+    transition: opacity 300ms ease;
+  }
+  .flow-stage[data-js] .edge:not([data-on]) .edge-arrow,
+  .flow-stage[data-js] .edge:not([data-on]) .edge-anchor {
+    opacity: 0;
+  }
+  .flow-stage[data-js] .edge[data-on] .edge-arrow {
+    transition-delay: 700ms;
+  }
+  .flow-stage[data-js] .t-item[data-on] {
+    animation: stage-rise 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .flow-stage[data-js] .ring[data-on] {
+    animation: stage-ring 1100ms ease-out;
+  }
+
+  /* The replay: arrows light up in order, and a skipped prerequisite dims. */
+  .flow-stage[data-js][data-replaying] [data-prerequisite] {
+    opacity: 0.3;
+  }
+  .flow-stage[data-js][data-replaying]
+    .edge:not([data-prerequisite])
+    .edge-path {
+    animation: stage-pulse 900ms ease-in-out calc(var(--i) * 350ms + 300ms) 2;
+  }
+
+  @keyframes stage-rise {
+    from {
+      opacity: 0;
+      translate: 0 10px;
+    }
+  }
+  @keyframes stage-ring {
+    from {
+      scale: 1.12;
+      opacity: 0;
+    }
+  }
+  @keyframes stage-pulse {
+    50% {
+      stroke-width: 5;
+      filter: drop-shadow(0 0 6px var(--edge));
+    }
+  }
+
+  @media (min-width: 1024px) and (min-height: 760px) {
+    .flow-stage[data-js]:not([data-autoplay]) {
+      height: calc(var(--inner-h, 100svh) + var(--steps) * 38svh);
+    }
+    .flow-stage[data-js]:not([data-autoplay]) .stage-inner {
+      position: sticky;
+      top: var(--stage-top, 96px);
+    }
+    .flow-stage[data-js]:not([data-autoplay]) .stage-window,
+    .flow-stage[data-js]:not([data-autoplay]) .stage-controls {
+      max-width: min(1240px, calc((100svh - 200px) * 2.2));
+    }
+    .flow-stage[data-js]:not([data-autoplay]) .scroll-hint {
+      display: inline;
+    }
+    .flow-stage[data-js]:not([data-autoplay]):not([data-beat="0"])
+      .scroll-hint {
+      display: none;
+    }
+    .flow-stage[data-js]:not([data-autoplay]) .replay {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-stage .board {
+      transition: none;
+    }
+  }
+</style>

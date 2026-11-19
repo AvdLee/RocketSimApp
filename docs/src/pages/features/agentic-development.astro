@@ -1,0 +1,199 @@
+---
+// The agentic development story. It replaces the generic feature-page
+// template for this slug: the dynamic feature route skips it, and the
+// collection entry still supplies the SEO fields, the FAQ, and the Markdown
+// twin.
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import flowsImage from "@/content/docs/docs/features/agentic-development/flows/flows-tour-annotated.webp";
+
+import Notification from "../../old/components/Notification.astro";
+import MobileDownloadLinkForm from "../../old/components/MobileDownloadLinkForm.astro";
+import HomeHeader from "../../components/home/HomeHeader.astro";
+import ArrowLink from "../../components/home/ArrowLink.astro";
+import Faq from "../../components/home/Faq.astro";
+import FinalCta from "../../components/home/FinalCta.astro";
+import Stat from "../../components/home/extras/Stat.astro";
+import {
+  benchmarkSummary,
+  formatRatio,
+  tokenRatioAgainst,
+} from "@/lib/agents/benchmark";
+import AgentFlowStage from "../../components/agents/AgentFlowStage.astro";
+import AgentSection from "../../components/agents/AgentSection.astro";
+import AgentsHero from "../../components/agents/AgentsHero.astro";
+import BytesCompare from "../../components/agents/BytesCompare.astro";
+import ComingSoon from "../../components/agents/ComingSoon.astro";
+import ElementsRead from "../../components/agents/ElementsRead.astro";
+import IdeTiles from "../../components/agents/IdeTiles.astro";
+import ReadActVerify from "../../components/agents/ReadActVerify.astro";
+import TraceIcon from "../../components/agents/TraceIcon.astro";
+import TraceSequence from "../../components/agents/TraceSequence.astro";
+
+const page = await getEntry("feature-page", "agentic-development");
+if (!page) throw new Error("Missing feature-page entry: agentic-development");
+const { title, meta_title, description, faq = [] } = page.data;
+const {
+  site: { base_url },
+} = config;
+const canonical = `${base_url}/features/agentic-development`;
+
+const seo = {
+  title: meta_title ?? `${title} - RocketSim`,
+  description,
+  canonical,
+  markdownHref: "/features/agentic-development.md",
+};
+
+const structuredData = {
+  type: "static" as const,
+  faq,
+  page: {
+    name: title,
+    description,
+    url: canonical,
+    breadcrumbName: title,
+    about: [title, "RocketSim", "iOS Simulator", "AI coding agents"],
+  },
+};
+
+const sections = [
+  { id: "watch", label: "Watch" },
+  { id: "how", label: "How" },
+  { id: "tokens", label: "Tokens" },
+  { id: "flows", label: "Flows" },
+  { id: "ide", label: "IDE" },
+  { id: "trace", label: "Trace" },
+  { id: "faq", label: "FAQ" },
+];
+---
+
+<Base seo={seo} structuredData={structuredData} header="home">
+  <HomeHeader slot="header" title="Agents" anchor="hero" sections={sections} />
+  <Notification />
+  <AgentFlowStage id="watch" scenario="tour">
+    <AgentsHero
+      slot="lead"
+      headline={["Your agent drives.", "You watch it build the flow."]}
+      campaign="agentic-page-hero"
+      placement="agents-hero"
+      secondary={{
+        label: "See the Agent Skill",
+        href: "/docs/features/agentic-development/agent-skill/",
+      }}
+    >
+      RocketSim gives Cursor, Codex, and Claude Code eyes and hands in the iOS
+      Simulator, with output small enough to keep your context for the code.
+    </AgentsHero>
+  </AgentFlowStage>
+
+  <AgentSection id="how" eyebrow="How it works" title="Read. Act. Verify.">
+    <Fragment slot="intro">
+      RocketSim stays connected to the Simulator, so each step of the loop is
+      one short command. The agent never starts from a full screenshot or a full
+      accessibility tree.
+    </Fragment>
+    <ReadActVerify />
+    <div class="mt-4">
+      <ElementsRead />
+    </div>
+  </AgentSection>
+
+  <AgentSection
+    id="tokens"
+    eyebrow="Token efficient"
+    title="Less to read. More room to think."
+  >
+    <Fragment slot="intro">{benchmarkSummary}</Fragment>
+    <div class="grid gap-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+      <BytesCompare />
+      <div class="flex flex-col gap-4">
+        <Stat
+          value={formatRatio(tokenRatioAgainst("Xcode MCP"))}
+          label="fewer tokens read than Xcode MCP"
+        />
+        <Stat
+          value={formatRatio(tokenRatioAgainst("MobileBuildMCP"))}
+          label="fewer tokens read than MobileBuildMCP, formerly XcodeBuildMCP"
+        />
+      </div>
+    </div>
+  </AgentSection>
+
+  <AgentSection
+    id="flows"
+    eyebrow="Coming soon in RocketSim 17"
+    title="Walk it once. Replay it forever."
+  >
+    <Fragment slot="intro">
+      Flows save the path your agent just walked as a few lines of text. Next
+      time, one command replays it, and failures come back as one short reply.
+      <div class="mt-5">
+        <ArrowLink href="/flows/">Explore Flows</ArrowLink>
+      </div>
+    </Fragment>
+    <a
+      href="/flows/"
+      class="block overflow-hidden rounded-xl bg-surface"
+      aria-label="Explore Flows"
+    >
+      <Image
+        src={flowsImage}
+        alt="A RocketSim flow on its review page, with arrows from each tapped element to the next screen"
+        widths={[800, 1200, 1600]}
+        sizes="(min-width: 1120px) 1080px, 100vw"
+        class="h-auto w-full"
+      />
+    </a>
+  </AgentSection>
+
+  <ComingSoon />
+
+  <AgentSection
+    id="ide"
+    eyebrow="Your IDE"
+    title="Works where you already work."
+  >
+    <Fragment slot="intro">
+      One click installs the skill for Cursor, Claude, Codex, and Xcode. The
+      live preview opens in your IDE's own browser, so there is nothing else to
+      run.
+    </Fragment>
+    <IdeTiles />
+  </AgentSection>
+
+  <AgentSection
+    id="trace"
+    eyebrow="With RocketTrace"
+    title="Drive it. Then measure it."
+  >
+    <TraceIcon slot="icon" />
+    <TraceSequence />
+  </AgentSection>
+
+  <Faq
+    items={faq}
+    title="Questions about agents."
+    intro="Short answers about RocketSim, AI coding agents, and the iOS Simulator."
+  />
+  <FinalCta
+    heading={["Give your agent", "eyes and hands."]}
+    placement="agents-footer"
+    campaign="agentic-page-footer"
+  />
+  <MobileDownloadLinkForm />
+</Base>
+
+<script>
+  import { initFlowStages } from "@/lib/agents/flowStage";
+  import { onPage } from "@/lib/utils/pageLifecycle";
+  import { initReveals } from "@/lib/utils/reveal";
+
+  onPage(() => {
+    const stops = [initReveals(), initFlowStages()];
+    return () => stops.forEach((stop) => stop());
+  });
+</script>

@@ -1,0 +1,43 @@
+---
+// A section of an agentic page, set like a homepage chapter: the section's
+// label in the page's color, a title, and an intro beside it.
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+}
+
+const { id, eyebrow, title } = Astro.props;
+---
+
+<section
+  id={id}
+  class="mx-auto max-w-[1120px] px-5 pt-section scroll-mt-24"
+  style="--chapter: var(--color-chapter-agents)"
+  aria-labelledby={`${id}-title`}
+>
+  <div
+    class="grid items-end gap-x-14 gap-y-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
+  >
+    <div data-reveal>
+      <slot name="icon" />
+      <p class="mb-3 text-intro font-semibold text-(--chapter)">{eyebrow}</p>
+      <h2
+        id={`${id}-title`}
+        class="max-w-[14em] text-title-2 text-balance md:text-title-1"
+      >
+        {title}
+      </h2>
+    </div>
+    <div
+      class="max-w-[32em] text-intro text-muted [&_a]:text-text-dark [&_a]:underline [&_a]:underline-offset-4 [&_strong]:text-text-dark"
+      data-reveal
+      style="--reveal-order: 1"
+    >
+      <slot name="intro" />
+    </div>
+  </div>
+  <div class="mt-stack" data-reveal>
+    <slot />
+  </div>
+</section>

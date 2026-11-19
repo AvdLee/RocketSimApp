@@ -1,21 +1,37 @@
 ---
 import { homepageFaq } from "@/lib/homepageFaq";
 import { markdownify } from "@/lib/utils/textConverter";
+
+// The homepage's questions, unless a page brings its own. Answers are
+// Markdown.
+interface Props {
+  items?: { question: string; answer: string }[];
+  title?: string;
+  intro?: string;
+  // The section's id, for pages with a menu of sections.
+  id?: string;
+}
+
+const {
+  items = homepageFaq,
+  title = "Questions developers ask.",
+  intro = "The short answers about RocketSim, AI coding agents, and pricing.",
+  id = "faq",
+} = Astro.props;
 ---
 
 <section
+  id={id}
   class="mx-auto max-w-[1120px] px-5 pt-section"
   aria-labelledby="faq-title"
 >
   <h2 data-reveal id="faq-title" class="max-w-[16em] text-title-2 text-balance">
-    Questions developers ask.
+    {title}
   </h2>
-  <p class="mt-3 max-w-[34em] text-intro text-muted">
-    The short answers about RocketSim, AI coding agents, and pricing.
-  </p>
+  <p class="mt-3 max-w-[34em] text-intro text-muted">{intro}</p>
   <div class="mt-stack border-t border-line" data-reveal>
     {
-      homepageFaq.map((item) => (
+      items.map((item) => (
         <details class="group border-b border-line">
           <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-title-4 text-text-dark marker:hidden [&::-webkit-details-marker]:hidden">
             <span>{item.question}</span>

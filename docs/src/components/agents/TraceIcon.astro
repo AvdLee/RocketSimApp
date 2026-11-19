@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+
+import rocketTraceIcon from "@/assets/agents/rockettrace-icon.png";
+
+// RocketTrace's app icon, for the top of a section about it.
+---
+
+<Image
+  src={rocketTraceIcon}
+  alt="RocketTrace app icon"
+  width={64}
+  height={64}
+  densities={[1, 2]}
+  class="mb-5 size-16"
+/>

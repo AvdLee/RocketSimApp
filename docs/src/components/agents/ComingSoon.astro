@@ -1,0 +1,39 @@
+---
+import KitNewsletterForm from "../home/KitNewsletterForm.astro";
+
+// A band for what ships with RocketSim 17, with the site's newsletter form,
+// for visitors who want to hear when it is out. One per page: the form's
+// script renders where it sits.
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = "Be first to know when it ships.",
+  text = "Sign up below to get a first heads up when RocketSim 17 is available.",
+} = Astro.props;
+---
+
+<section
+  id="coming-soon"
+  class="mx-auto max-w-[1120px] scroll-mt-24 px-5 pt-section"
+  style="--chapter: var(--color-chapter-agents)"
+  aria-labelledby="coming-soon-title"
+>
+  <div
+    data-reveal
+    class="grid items-center gap-x-12 gap-y-6 rounded-xl bg-surface p-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:p-10"
+  >
+    <div>
+      <p class="mb-3 text-intro font-semibold text-(--chapter)">
+        Coming soon in RocketSim 17
+      </p>
+      <h2 id="coming-soon-title" class="text-title-2 text-balance">{title}</h2>
+      <p class="mt-3 text-copy text-muted">{text}</p>
+    </div>
+    <div>
+      <KitNewsletterForm />
+    </div>
+  </div>
+</section>

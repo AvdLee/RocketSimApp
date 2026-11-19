@@ -1,0 +1,81 @@
+---
+import {
+  OWN_TOOL,
+  benchmarkRows,
+  benchmarkSource,
+  tokenRank,
+} from "@/lib/agents/benchmark";
+
+// Tokens an agent reads over a whole sign-in, per tool. All figures come from
+// `lib/agents/benchmark.ts`.
+const widest = Math.max(...benchmarkRows.map(({ tokens }) => tokens));
+---
+
+<figure class="m-0 flex flex-col rounded-lg bg-surface p-6">
+  <figcaption class="text-small text-muted">
+    Tokens read to sign in. Shorter is better. RocketSim ranks {tokenRank} of {
+      benchmarkRows.length
+    }.
+  </figcaption>
+  <ul class="m-0 mt-6 flex list-none flex-col gap-4 p-0">
+    {
+      benchmarkRows.map(({ tool, detail, tokens }) => {
+        const accent = tool === OWN_TOOL;
+        return (
+          <li>
+            <div class="mb-1.5 flex items-baseline justify-between gap-4">
+              <span class="min-w-0 text-copy text-text-dark">
+                {tool} <span class="text-small text-muted">{detail}</span>
+              </span>
+              <span
+                class:list={[
+                  "text-copy tabular-nums",
+                  accent ? "text-(--chapter)" : "text-text-dark",
+                ]}
+              >
+                {tokens.toLocaleString("en-US")}
+              </span>
+            </div>
+            <div class="h-2 overflow-hidden rounded-full bg-card">
+              <div
+                class:list={[
+                  "bar-fill h-full rounded-full",
+                  accent ? "bg-(--chapter)" : "bg-line",
+                ]}
+                style={`width:${Math.max((tokens / widest) * 100, 2)}%`}
+              />
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <p class="mt-6 text-caption text-muted">
+    Token counts are the benchmark author's estimates (characters divided by 4),
+    run on {benchmarkSource.ranDate}. RocketSim's row comes from RocketSim's own
+    runs. <a
+      href={benchmarkSource.articleHref}
+      class="text-text-soft underline underline-offset-4">Read the method</a
+    >.
+  </p>
+</figure>
+
+<style>
+  .bar-fill {
+    transform-origin: left;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .bar-fill {
+        animation: bar-grow linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 35%;
+      }
+    }
+  }
+  @keyframes bar-grow {
+    from {
+      transform: scaleX(0);
+    }
+  }
+</style>
