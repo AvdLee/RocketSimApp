@@ -7,6 +7,9 @@
 - Flows: share a flow as a page on your Mac, protected by a private link. It shows real screenshots with an arrow from the tapped element, tab bar handling, an app card, Annotated and Clean views, a device bezel toggle, accessibility overlays you can hover and select, a Screens sidebar with the element tree, and pan and zoom.
 - Flows: leave comments on a screen with pins, then use Copy prompt to hand them straight to your agent.
 - Environment Toggles: preview how people with color blindness see your app. Pick Protanopia, Deuteranopia, Tritanopia, their milder variants, or Achromatopsia under Color Blindness Simulation, and RocketSim shows a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
+- CLI: `rocketsim location` lets agents list the locations you saved under App Actions (`location list`), apply one by name or identifier or set coordinates (`location set`), stop simulating (`location clear`), and check the last location RocketSim applied (`location current`). (Thanks, M. Lin!)
+- CLI: `rocketsim interact rotate --orientation <portrait|portraitUpsideDown|landscapeLeft|landscapeRight>` rotates an iPhone or iPad Simulator and returns once the rotation is applied, so scripts can capture the landscape screen right away. It also works as a step in `rocketsim do`. (Thanks, P. van den Hamer!)
+- CLI: `rocketsim elements` can filter its output with `--match`, `--role`, `--fields`, `--max-label`, `--exclude-chrome`, and `--merge-twins`, so agents only receive the rows they need and use fewer tokens. (Thanks, P. Krassay!)
 
 **Improved:**
 
@@ -45,6 +48,8 @@
 
 **Fixed:**
 
+- Drag & drop imports: dropping photos, videos, and other files on RocketSim's side window for Device Hub now imports them into the Simulator instead of silently doing nothing. (Thanks, F. G. Hernandez!)
+- CLI: with a page sheet open, `rocketsim screen` now reports `modal: sheet`, and `rocketsim elements` hides the rows behind the sheet in the default modes (`--agent-mode debug` still lists them), so agents no longer tap rows the sheet covers. (Thanks, P. Krassay!)
 - Physical devices: the side window now stays next to a physical device window, and screenshots keep working, while the iPhone screen isn't changing. Before, both stopped working a few seconds after the screen went still. (Thanks, A. Singer!)
 - Physical devices: an iPad connected over USB now shows up as a connected device in RocketSim, like an iPhone does. (Thanks, D. Messing!)
 - Recordings: Apple Vision Pro recordings are exported in landscape again instead of a portrait video with the footage squeezed into the top and black bars below.
