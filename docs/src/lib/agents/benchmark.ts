@@ -4,7 +4,8 @@
  * on /features/agentic-development/ are all computed from it.
  *
  * Current figures: the public leaderboard at simulator-use.dev/benchmarks
- * (run on 6 Nov 2026), with RocketSim's own "round three" row. The benchmark's
+ * (run on 6 Nov 2026), with RocketSim's own row (17.0 pre-release, measured
+ * on 19 Nov 2026 through the same open-source harness on a different Mac). The benchmark's
  * author estimates tokens as characters divided by 4.
  */
 interface BenchmarkRow {
@@ -31,7 +32,12 @@ export const OWN_TOOL = "RocketSim";
 /** Ranked by tokens read, as the benchmark ranks them. */
 export const benchmarkRows: BenchmarkRow[] = [
   { tool: "simulator-use", detail: "0.15.1", tokens: 194, signInSeconds: 4.28 },
-  { tool: "RocketSim", detail: "round three", tokens: 451, signInSeconds: 3.1 },
+  {
+    tool: "RocketSim",
+    detail: "17.0 pre-release",
+    tokens: 451,
+    signInSeconds: 3.1,
+  },
   { tool: "agent-device", detail: "0.21.36", tokens: 664, signInSeconds: 7.62 },
   { tool: "mobile-mcp", detail: "1.0.16", tokens: 980, signInSeconds: 6.32 },
   {
@@ -73,6 +79,9 @@ export function formatRatio(ratio: number): string {
   return `${ratio >= 10 ? Math.round(ratio) : ratio.toFixed(1)}×`;
 }
 
+/** Seconds for RocketSim's tap on the same benchmark. The only other taps that report the result take 0.72 s or more. */
+const ownTapSeconds = 0.37;
+
 export const tokenRank = rankBy("tokens");
 const signInRank = rankBy("signInSeconds");
 
@@ -81,4 +90,5 @@ export const benchmarkSummary =
   `On the public simulator-use.dev benchmark, RocketSim reads ` +
   `${ownRow.tokens} tokens to sign in, the ${ordinal(tokenRank)} lowest of ` +
   `${benchmarkRows.length} tools, and finishes the sign-in in ` +
-  `${ownRow.signInSeconds.toFixed(1)} s, ${ordinal(signInRank)} fastest.`;
+  `${ownRow.signInSeconds.toFixed(1)} s, ${ordinal(signInRank)} fastest. ` +
+  `Its tap takes ${ownTapSeconds.toFixed(2)} s, the quickest of the tools whose tap reports the result.`;

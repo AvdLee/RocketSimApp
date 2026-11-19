@@ -20,4 +20,4 @@ RocketSim ships a version-matched `rocketsim` CLI and Agent Skill so Cursor, Xco
 - Validate setup with `rocketsim doctor`
 - Keep the CLI and Agent Skill in sync through app updates
 
-Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark.
+Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark. In November 2026, after we made the CLI faster, we ran RocketSim through the public [simulator-use benchmark](https://simulator-use.dev/benchmarks): a sign-in took **3.1 seconds on 451 tokens**, the second fastest and second lowest of ten tools, and its **0.37 second tap** is the quickest among the tools that report what the tap did.
