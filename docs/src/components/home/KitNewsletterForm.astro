@@ -3,8 +3,41 @@
 // `Newsletter Form Conversion` to Plausible when it is submitted.
 ---
 
-<script
-  is:inline
-  async
-  data-uid="2152b53c8b"
-  src="https://rocketsim.kit.com/2152b53c8b/index.js"></script>
+<div data-kit-form>
+  <script
+    is:inline
+    async
+    data-uid="2152b53c8b"
+    src="https://rocketsim.kit.com/2152b53c8b/index.js"></script>
+</div>
+
+<script>
+  // Kit's script runs again when the ClientRouter swaps in a page that has
+  // the form, but now and then it renders nothing the second time. When no
+  // form is there a moment after a client-side navigation, load a fresh copy
+  // of the script. A direct page load never needs this.
+  const RETRY_DELAY_MS = 2500;
+  let firstLoad = true;
+
+  document.addEventListener("astro:page-load", () => {
+    if (firstLoad) {
+      firstLoad = false;
+      return;
+    }
+    document
+      .querySelectorAll<HTMLElement>("[data-kit-form]")
+      .forEach((container) => {
+        window.setTimeout(() => {
+          if (!container.isConnected || container.querySelector("form")) return;
+          const stale =
+            container.querySelector<HTMLScriptElement>("script[data-uid]");
+          if (!stale) return;
+          const fresh = document.createElement("script");
+          fresh.async = true;
+          fresh.dataset.uid = stale.dataset.uid;
+          fresh.src = `${stale.src}?retry=${Date.now()}`;
+          stale.replaceWith(fresh);
+        }, RETRY_DELAY_MS);
+      });
+  });
+</script>
