@@ -161,6 +161,9 @@ export default defineConfig({
           "https://www.rocketsim.app/docs/404",
           // Redirects to `/`, where the homepage it previewed now lives.
           "https://www.rocketsim.app/home-next",
+          // Flows ship with RocketSim 17. Remove at launch, together with the
+          // noindex in `src/pages/flows.astro`.
+          "https://www.rocketsim.app/flows",
         ].includes(normalized);
       },
     }),

@@ -1,0 +1,27 @@
+---
+// What one read of the screen returns, next to its size. The rows follow the
+// rs/1 compact format; the size is typical for a screen like this.
+const rows = [
+  "All Symbols",
+  "1|row|DDOG",
+  "2|row|AMZN",
+  "3|row|AAPL",
+  "4|row|TSLA",
+  "5|row|NVDA",
+  "6|tab|Watchlist",
+  "7|tab|Stats",
+  "8|tab|Explore",
+  "9|tab|Account",
+];
+---
+
+<figure class="m-0 flex flex-col rounded-lg bg-surface p-6">
+  <figcaption class="text-small text-muted">One read of the screen</figcaption>
+  <pre
+    class="m-0 mt-4 flex-1 overflow-hidden rounded-lg bg-card px-4 py-3.5 font-mono text-caption leading-relaxed tracking-normal text-code"><code><span class="block"><span class="text-(--chapter)" aria-hidden="true">$</span> rocketsim elements --agent</span>{rows.map((row) => <span class="block text-muted">{row}</span>)}</code></pre>
+  <p class="mt-5 text-title-3 text-text-dark tabular-nums">
+    About 400 bytes <span class="text-small font-normal text-muted"
+      >instead of a full tree</span
+    >
+  </p>
+</figure>

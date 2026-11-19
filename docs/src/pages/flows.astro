@@ -1,0 +1,247 @@
+---
+// The Flows deep-dive. The shorter agentic story lives at
+// /features/agentic-development/ and links here.
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import { flowsFaq } from "@/lib/agents/flowsFaq";
+
+import Notification from "../old/components/Notification.astro";
+import MobileDownloadLinkForm from "../old/components/MobileDownloadLinkForm.astro";
+import HomeHeader from "../components/home/HomeHeader.astro";
+import Faq from "../components/home/Faq.astro";
+import FinalCta from "../components/home/FinalCta.astro";
+import Terminal from "../components/home/extras/Terminal.astro";
+import ComingSoon from "../components/agents/ComingSoon.astro";
+import AgentFlowStage from "../components/agents/AgentFlowStage.astro";
+import AgentSection from "../components/agents/AgentSection.astro";
+import AgentsHero from "../components/agents/AgentsHero.astro";
+import ReviewTour from "../components/agents/ReviewTour.astro";
+import RsflowAnatomy from "../components/agents/RsflowAnatomy.astro";
+import TraceIcon from "../components/agents/TraceIcon.astro";
+import TraceSequence from "../components/agents/TraceSequence.astro";
+
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: "Navigation Flows for iOS Simulator Agents - RocketSim",
+  description:
+    "Save repeatable iOS Simulator navigation paths as flows, replay them with one command, and review every run on a live flow page.",
+  canonical: `${base_url}/flows/`,
+  // Flows ship with RocketSim 17. Remove this and the sitemap exclusion in
+  // astro.config.ts at launch.
+  robots: { index: false, follow: true },
+};
+
+const structuredData = {
+  type: "static" as const,
+  faq: flowsFaq,
+  page: {
+    name: "RocketSim Flows",
+    description: seo.description,
+    url: `${base_url}/flows/`,
+    breadcrumbName: "Flows",
+    about: [
+      "iOS Simulator",
+      "AI coding agents",
+      "iOS app testing",
+      "Navigation flows",
+    ],
+  },
+};
+
+const sections = [
+  { id: "watch", label: "Watch" },
+  { id: "save", label: "Save" },
+  { id: "replay", label: "Replay" },
+  { id: "heal", label: "Heal" },
+  { id: "review", label: "Review" },
+  { id: "trace", label: "Trace" },
+  { id: "local", label: "Local" },
+  { id: "faq", label: "FAQ" },
+];
+
+const local = [
+  {
+    title: "Stays on your Mac",
+    text: "Flows are text files in RocketSim's Application Support folder. Nothing is uploaded.",
+  },
+  {
+    title: "Secrets never saved",
+    text: "A secret parameter reads from an environment variable at run time, and never lands in a file, log, or reply.",
+  },
+  {
+    title: "Kept small on purpose",
+    text: "About 15 steps per flow works best. Chain flows with prerequisites instead of writing one long path.",
+  },
+];
+---
+
+<Base seo={seo} structuredData={structuredData} header="home">
+  <HomeHeader slot="header" title="Flows" anchor="hero" sections={sections} />
+  <Notification />
+  <AgentFlowStage id="watch" scenario="flows">
+    <AgentsHero
+      slot="lead"
+      badge="RocketSim 17"
+      headline={[
+        "Your agent walks the app once.",
+        "Then it never has to again.",
+      ]}
+      campaign="flows-page-hero"
+      placement="flows-hero"
+      secondary={{
+        label: "Read the docs",
+        href: "/docs/features/agentic-development/flows/",
+      }}
+    >
+      RocketSim Flows save a Simulator path as a few lines of text. Your agent
+      replays it with one command, and you review every run on a live page.
+    </AgentsHero>
+  </AgentFlowStage>
+
+  <ComingSoon />
+
+  <AgentSection
+    id="save"
+    eyebrow="Save"
+    title="A path becomes a few lines of text."
+  >
+    <Fragment slot="intro">
+      After a successful run, <code>rocketsim flow save</code> writes the last steps
+      to a <code>.rsflow</code> file. It picks the shortest selector for each tap
+      and adds a checkpoint after every screen change.
+    </Fragment>
+    <div class="mb-6">
+      <Terminal
+        label="Saving a flow after a successful run"
+        commands={[
+          {
+            note: "Save the last three steps",
+            command:
+              'rocketsim flow save --name login --about "Sign in with the test account" --last 3',
+          },
+        ]}
+      />
+    </div>
+    <RsflowAnatomy />
+  </AgentSection>
+
+  <AgentSection
+    id="replay"
+    eyebrow="Replay"
+    title="One command. Checkpoints on the way."
+  >
+    <Fragment slot="intro">
+      The agent runs the flow by name. Each checkpoint confirms the screen it
+      expects, so a wrong turn shows up at the step that caused it.
+    </Fragment>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <Terminal
+        label="Listing and replaying flows"
+        commands={[
+          {
+            note: "What is saved for this app?",
+            command: "rocketsim flow list",
+          },
+          {
+            note: "Replay with a secret from the environment",
+            command: "rocketsim flow login --param password=$TEST_PASSWORD",
+          },
+          {
+            note: "Login is skipped when already signed in",
+            command: "rocketsim flow open-settings",
+          },
+        ]}
+      />
+      <div class="flex flex-col justify-center gap-5">
+        <div>
+          <h3 class="text-title-4">Prerequisites skip themselves</h3>
+          <p class="mt-1.5 text-copy text-muted">
+            A flow can start with another flow. When that flow's final check
+            already holds, RocketSim skips it, so the agent never signs in
+            twice.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-title-4">One short reply</h3>
+          <p class="mt-1.5 text-copy text-muted">
+            A run returns a status and a step count. A failure returns the step,
+            the reason, the nearest element, and how to resume.
+          </p>
+        </div>
+      </div>
+    </div>
+  </AgentSection>
+
+  <AgentSection
+    id="heal"
+    eyebrow="Heal"
+    title="When the UI changes, the flow heals."
+  >
+    <Fragment slot="intro">
+      Rename a tab, and the flow stops at that tap and says why. The agent
+      finishes the step, <code>flow fix</code> rewrites it, and the next run passes.
+    </Fragment>
+    <AgentFlowStage scenario="drift" loop />
+  </AgentSection>
+
+  <AgentSection
+    id="review"
+    eyebrow="Review"
+    title="Every flow, on a page you can point at."
+  >
+    <Fragment slot="intro">
+      <code>rocketsim flow open</code> serves the flow as a board: each screen once,
+      arrows from the tapped element to the next. Open it in your IDE's browser, and
+      comment on what you see.
+    </Fragment>
+    <ReviewTour />
+  </AgentSection>
+
+  <AgentSection
+    id="trace"
+    eyebrow="With RocketTrace"
+    title="Same path. Before and after."
+  >
+    <TraceIcon slot="icon" />
+    <TraceSequence />
+  </AgentSection>
+
+  <AgentSection id="local" eyebrow="Local" title="Yours, on your Mac.">
+    <ul class="m-0 grid list-none gap-4 p-0 md:grid-cols-3">
+      {
+        local.map(({ title, text }) => (
+          <li class="rounded-lg bg-surface p-6">
+            <h3 class="text-title-4">{title}</h3>
+            <p class="mt-2 text-copy text-muted">{text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </AgentSection>
+
+  <Faq
+    items={flowsFaq}
+    title="Questions about flows."
+    intro="Short answers about saving, replaying, and healing Simulator paths."
+  />
+  <FinalCta
+    heading={["Walk it once.", "Replay it forever."]}
+    placement="flows-footer"
+    campaign="flows-page-footer"
+  />
+  <MobileDownloadLinkForm />
+</Base>
+
+<script>
+  import { initFlowStages } from "@/lib/agents/flowStage";
+  import { onPage } from "@/lib/utils/pageLifecycle";
+  import { initReveals } from "@/lib/utils/reveal";
+
+  onPage(() => {
+    const stops = [initReveals(), initFlowStages()];
+    return () => stops.forEach((stop) => stop());
+  });
+</script>

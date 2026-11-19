@@ -1,0 +1,93 @@
+---
+import { downloadMicrocopy } from "@/lib/homepage";
+import { appStoreUrl } from "@/lib/utils/appStoreUrl";
+
+import Button from "../home/Button.astro";
+
+// The top of an agentic page: a headline and one download button, with the
+// stage coming up right below the fold. Both agentic pages share it.
+interface Props {
+  // A small label above the headline, such as "RocketSim 17".
+  badge?: string;
+  // The page's h1, in two lines.
+  headline: [string, string];
+  // The `ct=` campaign and the analytics placement of the download button.
+  campaign: string;
+  placement: string;
+  secondary: { label: string; href: string };
+}
+
+const { badge, headline, campaign, placement, secondary } = Astro.props;
+
+const works = ["Cursor", "Codex", "Claude Code", "Xcode"];
+---
+
+<section
+  id="hero"
+  class="mx-auto max-w-[1120px] px-5 pt-16 pb-10 text-center md:pt-24"
+  style="--chapter: var(--color-chapter-agents)"
+>
+  {
+    badge && (
+      <p
+        class="mx-auto mb-6 inline-flex rounded-full px-3 py-1 text-small font-semibold text-(--chapter) inset-ring inset-ring-(--chapter)/40"
+        data-hero-item
+        style="--hero-order: 0"
+      >
+        {badge}
+      </p>
+    )
+  }
+  <h1
+    class="text-display text-balance text-text-dark"
+    data-hero-item
+    style="--hero-order: 1"
+  >
+    {headline[0]}<br />{headline[1]}
+  </h1>
+  <p
+    class="mx-auto mt-8 max-w-[36em] text-lead text-balance text-muted"
+    data-hero-item
+    style="--hero-order: 2"
+  >
+    <slot />
+  </p>
+  <div
+    class="mt-10 flex flex-wrap justify-center gap-3.5"
+    data-hero-item
+    style="--hero-order: 3"
+  >
+    <Button
+      href={appStoreUrl(campaign)}
+      class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=button`}
+      target="_blank"
+      rel="noopener"
+    >
+      Free download
+    </Button>
+    <Button variant="secondary" href={secondary.href}>
+      {secondary.label}
+    </Button>
+  </div>
+  <p
+    class="mt-5 text-caption text-muted"
+    data-hero-item
+    style="--hero-order: 3"
+  >
+    {downloadMicrocopy}
+  </p>
+  <div
+    class="mt-8 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-small text-muted"
+    data-hero-item
+    style="--hero-order: 4"
+  >
+    <span>Works out of the box with</span>
+    {
+      works.map((name) => (
+        <span class="rounded-full bg-surface px-3 py-1 text-text-soft">
+          {name}
+        </span>
+      ))
+    }
+  </div>
+</section>

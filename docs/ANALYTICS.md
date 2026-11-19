@@ -55,6 +55,10 @@ when comparing before and after.
   split call-to-action, which replaces the CTA banner.
 - `landing-footer` (`format=button`): the closing call-to-action's Free
   download button. A new placement value, not a new event.
+- `agents-hero` and `agents-footer` (`format=button`): the Free download
+  buttons on `/features/agentic-development/`.
+- `flows-hero` and `flows-footer` (`format=button`): the Free download buttons
+  on `/flows/`.
 
 Other homepage events: `CTA: Homepage Hero - For Teams`, and the Teams events
 above (`CTA: Homepage Split - Trial`, `CTA: Homepage Insights - Trial`,

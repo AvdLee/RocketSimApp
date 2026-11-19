@@ -7,14 +7,25 @@ import HeaderLogo from "./HeaderLogo.astro";
 
 interface Props {
   // Chapter menu order; the same array orders the glance tiles.
-  chapters: string[];
+  chapters?: string[];
+  // Sections of another page, for its own menu: the same menu with ids and
+  // labels given directly.
+  sections?: { id: string; label: string }[];
+  // The menu's name, and the id of the block whose scrolling past swaps the
+  // main menu for it. The homepage's are "Features" and its glance grid.
+  title?: string;
+  anchor?: string;
 }
 
-const chapters = (
-  await Promise.all(
-    Astro.props.chapters.map((id) => getHomepageChapterSummary(id)),
-  )
-).map(({ id, name, menuLabel }) => ({ id, label: menuLabel ?? name }));
+const { sections = [], title = "Features", anchor = "glance" } = Astro.props;
+const chapters = [
+  ...(
+    await Promise.all(
+      (Astro.props.chapters ?? []).map((id) => getHomepageChapterSummary(id)),
+    )
+  ).map(({ id, name, menuLabel }) => ({ id, label: menuLabel ?? name })),
+  ...sections,
+];
 
 const downloadClass =
   "ml-auto hidden rounded-full bg-primary px-[17px] py-1 text-small leading-tight whitespace-nowrap text-white no-underline transition-colors hover:bg-primary-accent md:inline-flex lg:ml-0";
@@ -42,6 +53,7 @@ const currentClass =
 <header
   class="home-header sticky top-0 z-30 border-b border-transparent transition-[background-color,border-color] duration-300 data-scrolled:border-border data-scrolled:bg-body/30 data-scrolled:backdrop-blur-lg motion-reduce:transition-none has-[[aria-expanded=true]]:bg-body"
   data-home-header
+  data-anchor={anchor}
 >
   <a
     href="#main-content"
@@ -113,20 +125,20 @@ const currentClass =
           class="-mx-3 hidden h-5 w-px bg-border lg:block"
           aria-hidden="true"></span>
         <a
-          href="#glance"
+          href={`#${anchor}`}
           class="hidden text-copy font-semibold whitespace-nowrap text-white no-underline lg:block"
         >
-          Features
+          {title}
         </a>
         <button
           type="button"
           class="group inline-flex items-center gap-1 py-1.5 text-copy font-semibold text-white lg:hidden"
           aria-expanded="false"
           aria-controls="home-chapters-panel"
-          aria-label="Features, show chapters"
+          aria-label={`${title}, show chapters`}
           data-header-toggle="chapters"
         >
-          Features
+          {title}
           <svg
             viewBox="0 0 20 20"
             class="size-[18px] fill-current transition-transform duration-300 group-aria-expanded:rotate-180 motion-reduce:transition-none"
@@ -179,7 +191,9 @@ const currentClass =
     <div id="home-chapters-panel" class="pb-5 lg:hidden" hidden>
       <ul class="rounded-lg bg-light p-3">
         <li>
-          <a href="#glance" class={panelLinkClass}>All features</a>
+          <a href={`#${anchor}`} class={panelLinkClass}>
+            {title === "Features" ? "All features" : `Overview`}
+          </a>
         </li>
         {
           chapters.map(({ id, label }) => (
@@ -279,7 +293,7 @@ const currentClass =
 
     // Past the glance grid the chapter layer replaces the main layer, and
     // the chapter being read is highlighted in its menus.
-    const glance = document.getElementById("glance");
+    const glance = document.getElementById(header.dataset.anchor ?? "glance");
     const links = [
       ...header.querySelectorAll<HTMLAnchorElement>("[data-chapter-link]"),
     ];

@@ -1,0 +1,40 @@
+---
+// The three moves of an agent loop, each with the command that does it.
+const steps = [
+  {
+    name: "Read",
+    text: "The screen comes back as a short list of elements, not a screenshot.",
+    command: "rocketsim elements --agent",
+  },
+  {
+    name: "Act",
+    text: "Tap, type, swipe, or press a hardware button on a labeled element.",
+    command: 'rocketsim interact tap --label "Continue"',
+  },
+  {
+    name: "Verify",
+    text: "Wait for the screen to change, then read again or capture proof.",
+    command: "rocketsim wait screen-changed",
+  },
+];
+---
+
+<ol class="m-0 grid list-none gap-4 p-0 md:grid-cols-3">
+  {
+    steps.map(({ name, text, command }, index) => (
+      <li class="flex flex-col rounded-lg bg-surface p-6">
+        <p class="m-0 text-small font-semibold text-(--chapter) tabular-nums">
+          {String(index + 1).padStart(2, "0")}
+        </p>
+        <h3 class="mt-2 text-title-3">{name}</h3>
+        <p class="mt-3 flex-1 text-copy text-muted">{text}</p>
+        <code class="mt-6 block rounded-lg bg-card px-3.5 py-3 font-mono text-caption tracking-normal break-words text-code">
+          <span class="text-(--chapter)" aria-hidden="true">
+            $
+          </span>{" "}
+          {command}
+        </code>
+      </li>
+    ))
+  }
+</ol>

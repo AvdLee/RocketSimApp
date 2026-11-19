@@ -1,0 +1,370 @@
+---
+import type { MockElement, Screen } from "@/lib/agents/types";
+import { SCREEN_HEIGHT } from "@/lib/agents/types";
+
+// One screen of the sample app, drawn from its accessibility elements. Sizes
+// are in screen points times `--k`, which the stage sets from the card width,
+// so the screen scales with the board.
+interface Props {
+  screen: Screen;
+}
+
+const { screen } = Astro.props;
+
+const place = ({ frame }: MockElement) =>
+  `left:calc(var(--k) * ${frame.x});top:calc(var(--k) * ${frame.y});width:calc(var(--k) * ${frame.w});height:calc(var(--k) * ${frame.h});`;
+
+const hasTabs = screen.elements.some(({ kind }) => kind === "tab");
+const tabBarTop = SCREEN_HEIGHT - 74;
+
+// A fixed price curve, so every build draws the same chart.
+const chartPoints = [
+  [0, 180],
+  [18, 168],
+  [34, 176],
+  [52, 150],
+  [70, 158],
+  [88, 128],
+  [106, 138],
+  [124, 104],
+  [146, 116],
+  [168, 86],
+  [190, 98],
+  [214, 70],
+  [238, 82],
+  [262, 52],
+  [288, 66],
+  [314, 34],
+  [336, 44],
+  [358, 22],
+];
+const chartLine = chartPoints.map(([x, y]) => `${x},${y}`).join(" ");
+const chartArea = `0,230 ${chartLine} 358,230`;
+
+const bars: [string, number, "up" | "down"][] = [
+  ["AAPL", 0.62, "up"],
+  ["NVDA", 0.44, "up"],
+  ["AMZN", 0.3, "down"],
+  ["TSLA", 0.7, "down"],
+];
+---
+
+<div class="screen" data-screen={screen.id}>
+  <div class="status" aria-hidden="true">
+    <span class="time">9:41</span>
+    <span class="island"></span>
+    <span class="battery"></span>
+  </div>
+  {
+    hasTabs && (
+      <div
+        class="tabbar"
+        style={`top:calc(var(--k) * ${tabBarTop});height:calc(var(--k) * 74);`}
+      />
+    )
+  }
+  {
+    screen.elements.map((element) => (
+      <div
+        class={`el el-${element.kind}`}
+        data-tone={element.tone}
+        data-active={element.active ? "" : undefined}
+        data-element={element.id}
+        style={place(element)}
+      >
+        {element.kind === "row" && (
+          <>
+            <span class="row-text">
+              <span class="row-label">{element.label}</span>
+              {element.detail && (
+                <span class="row-detail">{element.detail}</span>
+              )}
+            </span>
+            {element.value ? (
+              <span class="row-value">{element.value}</span>
+            ) : (
+              <span class="row-chevron">›</span>
+            )}
+          </>
+        )}
+        {(element.kind === "title" ||
+          element.kind === "text" ||
+          element.kind === "button" ||
+          element.kind === "chip") && <span>{element.label}</span>}
+        {element.kind === "field" && (
+          <>
+            <span class="field-label">{element.label}</span>
+            <span class="field-value">{element.value}</span>
+          </>
+        )}
+        {element.kind === "tab" && (
+          <>
+            <span class="tab-icon" />
+            <span class="tab-label">{element.label}</span>
+          </>
+        )}
+        {element.kind === "card" && (
+          <>
+            <span class="card-label">{element.label}</span>
+            {element.value && <span class="card-value">{element.value}</span>}
+            {element.detail && (
+              <span class="card-detail">{element.detail}</span>
+            )}
+          </>
+        )}
+        {element.kind === "chart" && (
+          <svg
+            viewBox="0 0 358 230"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <polygon points={chartArea} fill="rgba(86, 197, 144, 0.16)" />
+            <polyline
+              points={chartLine}
+              fill="none"
+              stroke="#56c590"
+              stroke-width="2.4"
+              stroke-linejoin="round"
+            />
+          </svg>
+        )}
+        {element.kind === "bars" &&
+          bars.map(([label, size, tone]) => (
+            <span class="bar-row">
+              <span class="bar-label">{label}</span>
+              <span class="bar-track">
+                <span
+                  class="bar"
+                  data-tone={tone}
+                  style={`width:${size * 100}%`}
+                />
+              </span>
+            </span>
+          ))}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .screen {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #000;
+    color: #f5f5f7;
+    font-family:
+      -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .status {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: calc(var(--k) * 54);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 calc(var(--k) * 34);
+    font-size: calc(var(--k) * 16);
+    font-weight: 600;
+  }
+  .island {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--k) * 12);
+    width: calc(var(--k) * 112);
+    height: calc(var(--k) * 32);
+    translate: -50% 0;
+    border-radius: 999px;
+    background: #0b0b0c;
+    box-shadow: 0 0 0 1px #1a1a1c;
+  }
+  .battery {
+    width: calc(var(--k) * 26);
+    height: calc(var(--k) * 12);
+    border-radius: calc(var(--k) * 4);
+    background: #f5f5f7;
+  }
+  .tabbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: #0d0d0f;
+    border-top: 1px solid #1f1f22;
+  }
+  .el {
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+  }
+  .el-title {
+    align-items: center;
+    font-size: calc(var(--k) * 34);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .el-title[data-tone="up"] {
+    color: #56c590;
+  }
+  .el-text {
+    align-items: center;
+    font-size: calc(var(--k) * 15);
+    color: #8e8e93;
+    white-space: nowrap;
+  }
+  .el-row {
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 calc(var(--k) * 16);
+    border-radius: calc(var(--k) * 12);
+    background: #101012;
+    border: 1px solid #1c1c1f;
+  }
+  .row-text {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--k) * 3);
+    min-width: 0;
+  }
+  .row-label {
+    font-size: calc(var(--k) * 19);
+    font-weight: 600;
+  }
+  .row-detail {
+    font-size: calc(var(--k) * 13);
+    color: #8e8e93;
+    white-space: nowrap;
+  }
+  .row-value {
+    font-size: calc(var(--k) * 19);
+    font-weight: 600;
+    color: #56c590;
+  }
+  .el-row[data-tone="down"] .row-value {
+    color: #ff5c6c;
+  }
+  .row-chevron {
+    font-size: calc(var(--k) * 24);
+    color: #5c5c61;
+  }
+  .el-button {
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--k) * 14);
+    background: #0a84ff;
+    font-size: calc(var(--k) * 18);
+    font-weight: 600;
+  }
+  .el-field {
+    flex-direction: column;
+    justify-content: center;
+    gap: calc(var(--k) * 4);
+    padding: 0 calc(var(--k) * 16);
+    border-radius: calc(var(--k) * 14);
+    background: #151517;
+    border: 1px solid #232326;
+  }
+  .field-label {
+    font-size: calc(var(--k) * 12);
+    color: #8e8e93;
+  }
+  .field-value {
+    font-size: calc(var(--k) * 18);
+  }
+  .el-tab {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--k) * 6);
+    color: #8e8e93;
+    font-size: calc(var(--k) * 12);
+  }
+  .tab-icon {
+    width: calc(var(--k) * 24);
+    height: calc(var(--k) * 24);
+    border-radius: calc(var(--k) * 7);
+    background: currentColor;
+    opacity: 0.55;
+  }
+  .el-tab[data-active] {
+    color: #0a84ff;
+  }
+  .el-tab[data-active] .tab-icon {
+    opacity: 1;
+  }
+  .el-card {
+    flex-direction: column;
+    gap: calc(var(--k) * 6);
+    padding: calc(var(--k) * 16);
+    border-radius: calc(var(--k) * 16);
+    background: #111113;
+    border: 1px solid #1f1f22;
+  }
+  .el-card[data-tone="accent"] {
+    background: linear-gradient(135deg, #1a1630, #131a33);
+    border-color: #2b2650;
+  }
+  .card-label {
+    font-size: calc(var(--k) * 15);
+    font-weight: 600;
+  }
+  .card-value {
+    font-size: calc(var(--k) * 24);
+    font-weight: 700;
+  }
+  .card-detail {
+    font-size: calc(var(--k) * 13);
+    color: #8e8e93;
+    line-height: 1.35;
+  }
+  .el-card[data-tone="up"] .card-detail {
+    color: #56c590;
+  }
+  .el-card[data-tone="down"] .card-detail {
+    color: #ff5c6c;
+  }
+  .el-chip {
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid #0a84ff;
+    color: #0a84ff;
+    font-size: calc(var(--k) * 15);
+    font-weight: 600;
+  }
+  .el-chip[data-tone="accent"] {
+    background: #0a84ff;
+    color: #fff;
+  }
+  .el-chart svg {
+    width: 100%;
+    height: 100%;
+  }
+  .el-bars {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--k) * 12);
+    font-size: calc(var(--k) * 13);
+    color: #8e8e93;
+  }
+  .bar-label {
+    width: calc(var(--k) * 48);
+  }
+  .bar-track {
+    flex: 1;
+    height: calc(var(--k) * 16);
+  }
+  .bar {
+    display: block;
+    height: 100%;
+    border-radius: calc(var(--k) * 4);
+    background: #56c590;
+  }
+  .bar[data-tone="down"] {
+    background: #ff5c6c;
+  }
+</style>

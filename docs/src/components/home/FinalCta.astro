@@ -4,12 +4,28 @@ import { appStoreUrl } from "@/lib/utils/appStoreUrl";
 
 import Button from "./Button.astro";
 
-// The closing call to action. Its download button is a new `landing-footer`
-// placement of the existing App Store Install event (ANALYTICS.md).
-const downloadHref = appStoreUrl("website-footer");
+// The closing call to action. Its download button is a `landing-footer`
+// placement of the existing App Store Install event (ANALYTICS.md); other
+// pages pass their own placement and campaign.
+interface Props {
+  // The heading's two lines.
+  heading?: [string, string];
+  placement?: string;
+  campaign?: string;
+}
+
+const {
+  heading = [
+    "Spend less time operating the Simulator.",
+    "Spend more time building your app.",
+  ],
+  placement = "landing-footer",
+  campaign = "website-footer",
+} = Astro.props;
+const downloadHref = appStoreUrl(campaign);
 // The second line lights up as it scrolls in (animations.css): a copy in
 // the text colour slides in over the muted line, so the line is set twice.
-const lightUp = "Spend more time building your app.";
+const [firstLine, lightUp] = heading;
 ---
 
 <section
@@ -17,7 +33,7 @@ const lightUp = "Spend more time building your app.";
   aria-labelledby="final-cta-title"
 >
   <h2 id="final-cta-title" class="text-title-1 text-balance" data-reveal>
-    Spend less time operating the Simulator.<br />
+    {firstLine}<br />
     <span data-light-up
       >{lightUp}<span aria-hidden="true" data-light-up-lit
         ><span><span>{lightUp}</span></span></span
@@ -31,7 +47,7 @@ const lightUp = "Spend more time building your app.";
   >
     <Button
       href={downloadHref}
-      class="plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=landing-footer plausible-event-format=button"
+      class={`plausible-event-name=App+Store+Install plausible-event-surface=landing plausible-event-placement=${placement} plausible-event-format=button`}
       target="_blank"
       rel="noopener"
     >

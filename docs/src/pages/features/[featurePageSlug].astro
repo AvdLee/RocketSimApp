@@ -11,12 +11,15 @@ import FaqSection from "@/partials/FaqSection.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("feature-page");
-  return pages
-    .filter((page) => !page.data.draft)
-    .map((page) => ({
-      params: { featurePageSlug: page.id },
-      props: { page },
-    }));
+  return (
+    pages
+      // `agentic-development.astro` is a page of its own.
+      .filter((page) => !page.data.draft && page.id !== "agentic-development")
+      .map((page) => ({
+        params: { featurePageSlug: page.id },
+        props: { page },
+      }))
+  );
 }
 
 const { page } = Astro.props;
