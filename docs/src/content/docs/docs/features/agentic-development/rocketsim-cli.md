@@ -47,7 +47,7 @@ The CLI uses RocketSim's [`rs/1` protocol](/docs/features/agentic-development/rs
 
 RocketSim does not ship an MCP server. Read [iOS Simulator MCP vs CLI and Agent Skill](/blog/ios-simulator-mcp/) to see how the two approaches compare and how to choose.
 
-Compared with other tools for controlling the iOS Simulator, RocketSim used **99% fewer tokens**, took up **95% less of your agent's context** (leaving more room for your actual code), and ran **24% faster**. Estimated from our July 2026 head-to-head benchmark. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
+On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **3 seconds on 164 tokens**, the lowest token count and the second fastest of ten tools: **9.5× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **78× fewer** than Xcode MCP. Its **0.49 second tap** is the quickest among the tools that report what the tap did. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
 
 ## Key commands
 
@@ -115,7 +115,7 @@ rocketsim snapshot --label "Photo" --scale 2 --screen latest > photo.png
 
 `screen` returns a compact description and screen hash. `snapshot` writes an annotated PNG whose numbered badges connect visible elements to their identifiers. Filter snapshots by label, type, identifiers, or a crop rectangle when the complete screen would add unnecessary visual context.
 
-The JSON snapshot also includes `data.canvasSize` (`[width, height]` in device points), which describes the full screen the elements were laid out in. This is the union of every raw accessibility frame, including the full-screen application root, so it spans the true device bounds rather than just the box around the visible content. Use it to scale element frames onto a rendered screenshot or overlay without re-deriving the device size, which is especially important on scrollable screens where the visible content does not fill the screen.
+The JSON snapshot also includes `canvasSize` (`[width, height]` in device points), which describes the full screen the elements were laid out in. This is the union of every raw accessibility frame, including the full-screen application root, so it spans the true device bounds rather than just the box around the visible content. Use it to scale element frames onto a rendered screenshot or overlay without re-deriving the device size, which is especially important on scrollable screens where the visible content does not fill the screen.
 
 Use `--screen latest` for the next action or annotated snapshot. RocketSim resolves it against the current stored screen, which avoids copying hashes between commands while still protecting the interaction from a stale snapshot.
 
@@ -253,7 +253,7 @@ rocketsim accessibility-audit [--udid <udid>] [--format compact|full] [--no-cont
 
 The response contains a score from 0 to 100, error and warning counts, and findings grouped by rule with the affected element ids, frames, and a suggested fix. Narrow the run with `--rules`, `--exclude-rules`, or `--severity error|warning`; an unknown rule ID returns an `invalid_argument` error that lists the valid IDs. Pass `--screen latest`, or an explicit screen hash from `rocketsim screen`, to guard against auditing a different screen than expected. The command waits for the screen to settle (about 2 seconds at most) before auditing.
 
-`data.not_covered` lists checks that were skipped or couldn't be verified, such as `contrast_unverifiable`, `native_control_skipped`, `system_chrome_skipped`, `overlap_scroll_dependent`, and `unsettled_screen`. An entry means the check wasn't judged, not that it passed. With `--format full`, `data.label_review` adds each labeled control, image, and group with its neighboring labels, so your agent can review whether the labels make sense without sight.
+`not_covered` lists checks that were skipped or couldn't be verified, such as `contrast_unverifiable`, `native_control_skipped`, `system_chrome_skipped`, `overlap_scroll_dependent`, and `unsettled_screen`. An entry means the check wasn't judged, not that it passed. With `--format full`, `label_review` adds each labeled control, image, and group with its neighboring labels, so your agent can review whether the labels make sense without sight.
 
 The audit can't detect modals such as sheets, covers, popovers, alerts, or SwiftUI `.isModal`. It also audits the content behind them. Treat findings behind a visible modal as out of scope, or dismiss the modal and audit again.
 
@@ -345,21 +345,17 @@ Each step normally starts with `interact`, `wait`, `elements`, or `screen`. Inte
 
 ## Why `--agent` matters
 
-The `--agent` flag replaces the full accessibility hierarchy with compact pipe-delimited rows inside the `rs/1` response. That means less context per screen read and easier recovery after each interaction.
+The `--agent` flag replaces the full accessibility hierarchy with compact pipe-delimited rows. That means less context per screen read and easier recovery after each interaction.
 
 An `act` response looks like this:
 
-```json
-{
-  "rs": "1",
-  "ok": true,
-  "data": {
-    "mode": "act",
-    "screen": "a3f291bc",
-    "rows": ["7|button|Continue||enabled", "8|textField|Email||enabled"]
-  }
-}
+```text
+@a3f291bc #4
+7|button|Continue||enabled
+8|textField|Email||enabled
 ```
+
+The first line is the screen hash and the sequence number; each row is an element id, role, label, value and state.
 
 The identifiers are ephemeral and belong to that screen. Prefer a label selector, use 1-based `--index` for repeated labels, or use an identifier with `--screen latest` when duplicate labels make the selector ambiguous. Use `debug` mode or omit `--agent` when you need parent relationships, raw frames, scrollable-container metadata, or the complete hierarchy.
 

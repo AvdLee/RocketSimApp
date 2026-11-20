@@ -1,7 +1,7 @@
 ---
 title: "iOS Simulator MCP vs CLI for AI Agents"
 pageTitle: "iOS Simulator MCP vs CLI and Agent Skill: How to Choose"
-description: "Compare an iOS Simulator MCP server with RocketSim's CLI and Agent Skill, see the July 2026 benchmark, and set up your AI agent in Xcode, Cursor, or Codex."
+description: "Compare an iOS Simulator MCP server with RocketSim's CLI and Agent Skill, see the November 2026 benchmark, and set up your AI agent in Xcode, Cursor, or Codex."
 publishedTime: 2026-10-29T09:00:00.000Z
 image: ./cli-agent-settings.jpg
 imageAlt: "RocketSim CLI and Agent settings showing the Agent Skill installed for General Agents and available for Xcode, Cursor, Claude, and Codex."
@@ -29,14 +29,14 @@ An iOS Simulator MCP server can offer that loop as tools. A CLI can offer the sa
 
 An MCP server fits when your agent setup is already built around MCP. You configure the server once in a client that supports it, and its tools show up next to the others. The tool schemas are also part of the protocol, so the agent knows which arguments each tool accepts.
 
-That route makes sense when your tooling only talks to MCP servers, or when you already run other MCP servers and want to manage them in one place. Before you choose one, check what that specific server supports. Capabilities differ per tool: in the benchmark below, XcodeBuildMCP 2.7.0 sat out several scenarios.
+That route makes sense when your tooling only talks to MCP servers, or when you already run other MCP servers and want to manage them in one place. Before you choose one, check what that specific server supports. Capabilities differ per tool: the benchmark below lists how many tokens each server needs before the first action.
 
 ## Why does RocketSim ship a CLI and Agent Skill?
 
 RocketSim does not ship an MCP server. Agents use the [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli/) and the [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill/). Our documentation describes these properties of that design:
 
 - **The CLI talks to the running Mac app.** RocketSim stays connected to the Simulator and keeps state warm, so there is no reconnection overhead between steps.
-- **Output is compact and consistent.** Every agent-facing command returns one JSON envelope in the [rs/1 protocol](/docs/features/agentic-development/rs1-protocol/), with typed errors, screen hashes, and compact element rows instead of a full accessibility tree.
+- **Output is compact and consistent.** Every agent-facing command answers in the compact [rs/1 protocol](/docs/features/agentic-development/rs1-protocol/) format: plain lines for reads, taps and batches, and JSON without a wrapper for the rest, with typed errors, screen hashes, and compact element rows instead of a full accessibility tree.
 - **The skill carries the workflow.** It teaches the agent when to read elements, when to wait, when to interact semantically, and when to fall back to a screenshot.
 - **Both are version-matched.** The CLI and the skill ship inside the app, and the installed files are symlinks. After an App Store update, your agent uses the guidance that matches the RocketSim version it controls.
 - **One command for agents and scripts.** The `rocketsim` command is available from Terminal, agents, and CI scripts, and always matches the RocketSim version you installed.
@@ -48,7 +48,7 @@ We have not published a comparison that isolates MCP as a protocol against a CLI
 | Topic                       | MCP server                               | RocketSim CLI and Agent Skill                  |
 | --------------------------- | ---------------------------------------- | ---------------------------------------------- |
 | How the agent calls it      | Tools described by schemas in the server | Shell commands guided by the skill             |
-| Output format               | Defined by each server                   | Always the rs/1 JSON envelope                  |
+| Output format               | Defined by each server                   | Always the compact rs/1 format                 |
 | Workflow guidance           | Depends on the server                    | Agent Skill with a documented interaction loop |
 | Install                     | Configure the server in an MCP client    | **RocketSim → Settings → CLI & Agent**         |
 | Updates                     | Depends on the server                    | Symlinks into the app, updated with RocketSim  |
@@ -56,21 +56,16 @@ We have not published a comparison that isolates MCP as a protocol against a CLI
 
 The right column only describes RocketSim. For any MCP server, read its own documentation.
 
-## What did the July 2026 benchmark show?
+## What did the public benchmark show?
 
-We benchmarked RocketSim against two tools in July 2026, using the same scenarios and three rounds per scenario. The pinned versions were RocketSim 16.4.2 build 326, [AXe](https://github.com/cameroncooke/AXe) 1.8.0, and [XcodeBuildMCP](https://github.com/cameroncooke/XcodeBuildMCP) 2.7.0, driven through its MCP server interface. The scenarios and method are described in [How We Test AI Agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator/).
+The simulator-use project publishes a public, open-source [benchmark](https://simulator-use.dev/benchmarks) that signs in to the same demo app with nine iOS Simulator tools, MCP servers and command line tools alike. In November 2026 we ran RocketSim through the project's own harness, next to those nine tools. How we ran it is described in [How We Test AI Agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator/).
 
-These tools sit at different layers, and credit goes to Cameron Cooke, the author of both AXe and XcodeBuildMCP, for this nuance. AXe is deliberately a raw, non-agentic primitive layer. Returning the full accessibility tree is a design choice, not a flaw. XcodeBuildMCP builds on AXe and adds state management and compact output. That compact output follows the approach of rs/1, and Cameron mentioned to me that he found it a good direction and incorporated it into XcodeBuildMCP.
+- **Tokens read over a whole sign-in:** RocketSim 164, simulator-use 194, MobileBuildMCP (formerly XcodeBuildMCP) 2.7.1 1,560, Maestro MCP 2,987, ios-simulator-mcp 5,248, Argent 7,061, and Xcode MCP 12,732. RocketSim reads the fewest of the ten tools.
+- **Tool catalogs:** an MCP server puts its tool list into the agent's context before the first action: 2,443 tokens for simulator-use, 2,655 for ios-simulator-mcp, 6,193 for MobileBuildMCP, and 19,620 for Xcode MCP. RocketSim's command line adds none.
+- **Sign-in time:** RocketSim finishes the step-by-step sign-in in 3.0 seconds, the second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there and never shows what a tap did.
+- **Where RocketSim is slower:** on the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim.
 
-The results, as published in that post:
-
-- **Against AXe 1.8.0**, RocketSim showed 119.3× fewer output bytes, a 21.0× lower byte-based context estimate, and 66.5 seconds less total command time. This compares against a primitive layer that returns the full accessibility tree on purpose.
-- **Against XcodeBuildMCP 2.7.0**, over the fourteen scenarios both tools ran head-to-head, XcodeBuildMCP produced 3.0× RocketSim's tool-response bytes, an 8.2× higher byte-based context estimate, and finished 171.5 seconds slower in total. The estimate charges its MCP tool catalog once per scenario, like the skill files for the CLI tools.
-- **Command turns went the other way.** RocketSim used more of them: XcodeBuildMCP needed 0.79× as many turns, and AXe 0.70×.
-- **Capability coverage differed.** Face ID and two-finger input were RocketSim-only, and XcodeBuildMCP 2.7.0 sat out six of the twenty scenarios.
-- **No tool had a perfect run, including RocketSim.** RocketSim recorded seven wrong interactions and one unexpected failure, AXe fifteen wrong interactions, and XcodeBuildMCP nine. Almost all of them, across all three tools, came from the frozen Settings scripts hitting iOS 26 UI drift.
-
-Two caveats matter. The context figure is a byte-based estimate, not actual model tokens or billing. And this is a benchmark of tools and their recommended workflows, not a ranking of AI models. It also compares one MCP server with one CLI, so it does not say anything about every iOS Simulator MCP server.
+Two caveats matter. The token counts are the benchmark author's estimate (characters divided by four), not actual model tokens or billing, and times depend on the Mac they were measured on. And this is a benchmark of tools and their recommended workflows, not a ranking of AI models.
 
 ## How do you set up RocketSim's Agent Skill?
 

@@ -9,7 +9,7 @@ imageAlt: "Diagram of an AI agent workflow where XcodeBuildMCP or Xcode MCP buil
 
 **XcodeBuildMCP** and Apple's **Xcode MCP** bridge give an AI agent the build side of iOS development, such as building your app and running tests. RocketSim covers what comes after: it lets the agent read, navigate, and verify the running app in the iOS Simulator through a CLI and an Agent Skill. In practice, you use one of the build tools to get the app running and RocketSim to check what it does.
 
-I make RocketSim, so keep that in mind. XcodeBuildMCP also has Simulator UI tools, and our benchmark compared them, so I will tell you where the tools overlap. One naming note first: since version 2.7.1, XcodeBuildMCP is called MobileBuildMCP. I keep using the old name because the benchmark in this article tested XcodeBuildMCP 2.7.0.
+I make RocketSim, so keep that in mind. XcodeBuildMCP also has Simulator UI tools, and the public benchmark compared them, so I will tell you where the tools overlap. One naming note first: since version 2.7.1, XcodeBuildMCP is called MobileBuildMCP. I keep using the old name because that is what most people know it as.
 
 ## What do XcodeBuildMCP, Xcode MCP, and RocketSim each do?
 
@@ -80,15 +80,13 @@ Build and run <your_app_name> in the Simulator. Then use RocketSim to open the s
 
 If you use XcodeBuildMCP's `ui-automation` workflow as well, the agent has two ways to tap through the app. I suggest telling your agent in `AGENTS.md` or `CLAUDE.md` which tool to use for building and which one to use for Simulator interaction. Apple suggests adding hints to those files for the Xcode bridge as well.
 
-## What did our benchmark show against XcodeBuildMCP?
+## What did the benchmark show against XcodeBuildMCP?
 
-We benchmarked RocketSim 16.4.2 build 326 against [AXe](https://github.com/cameroncooke/AXe) 1.8.0 and XcodeBuildMCP 2.7.0, driven through its MCP server interface, in July 2026. The scenarios and method are in [How We Test AI Agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator/).
+The simulator-use project publishes a public, open-source [benchmark](https://simulator-use.dev/benchmarks) that signs in to the same demo app with nine iOS Simulator tools. In November 2026 we ran RocketSim through the project's own harness next to them. How we ran it is described in [How We Test AI Agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator/).
 
-Over the fourteen scenarios both tools ran head-to-head, XcodeBuildMCP produced 3.0× RocketSim's tool-response bytes, an 8.2× higher byte-based context estimate, and finished 171.5 seconds slower in total. That means RocketSim took a smaller share of your agent's context in these scenarios. RocketSim used more command turns: XcodeBuildMCP needed 0.79× as many turns.
+MobileBuildMCP (formerly XcodeBuildMCP) 2.7.1 is listed at 1,560 tokens and 17.6 seconds to sign in. RocketSim's command line signs in on 164 tokens in 3.0 seconds, which is 9.5× fewer tokens and 5.9× faster. Xcode MCP is listed at 12,732 tokens and 4.18 seconds. The token counts are the benchmark author's estimate (characters divided by four), not actual model tokens or billing, and the times depend on the Mac they were measured on, so treat the time comparison as indicative. The benchmark covers the versions it lists and nothing later.
 
-Capability coverage differed too. Face ID and two-finger input were RocketSim-only, and XcodeBuildMCP 2.7.0 sat out six of the twenty scenarios. No tool had a perfect run, including RocketSim. The context figure is a byte-based estimate, not actual model tokens, and the benchmark covers version 2.7.0 only. I have not measured later versions.
-
-XcodeBuildMCP builds on AXe and adds state management and compact output, and credit goes to its author for that design. The comparison above is about Simulator interaction. It says nothing about building, testing, or debugging, which RocketSim does not do.
+XcodeBuildMCP adds state management and compact output, and credit goes to its author for that design. The comparison above is about Simulator interaction. It says nothing about building, testing, or debugging, which RocketSim does not do.
 
 ## Frequently asked questions
 
