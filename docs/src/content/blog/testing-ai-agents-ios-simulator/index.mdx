@@ -120,7 +120,7 @@ After the July run, we spent our time on speed. An agent waits on every call, so
 
 - Actions now settle by watching the Simulator's pixels, so RocketSim reads the screen again as soon as it stands still instead of after a fixed wait.
 - Focusing a field and typing into it is one call, and the text goes out over the connection that taps already use.
-- Answers carry less: rows drop columns that never change, scroll indicators stay out of compact snapshots, and the envelope no longer repeats what the caller already knows.
+- Answers carry less: rows drop columns that never change, scroll indicators and keyboard keys stay out of compact snapshots, and the JSON envelope is gone: reading the screen, tapping and batching now answer in a few plain lines.
 - RocketSim skips redundant accessibility reads when the top of the screen has not changed.
 
 ### On the public simulator-use benchmark
@@ -129,21 +129,21 @@ After the July run, we spent our time on speed. An agent waits on every call, so
 
 | Measure                          | RocketSim | Where it lands among the ten tools                                                                                                                       |
 | -------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tokens read over a whole sign-in | 451       | Second lowest. Only simulator-use reads fewer (194).                                                                                                     |
-| Whole sign-in, step by step      | 3.10 s    | Second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.                                                      |
-| Tap Sign In                      | 0.37 s    | The quickest of the tools whose answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed. |
-| Type into a field                | 1.27 s    | Fifth of ten (the field runs from 0.41 s to 4.06 s).                                                                                                     |
+| Tokens read over a whole sign-in | 164       | The lowest of the ten tools. The next lowest, simulator-use, reads 194.                                                                                  |
+| Whole sign-in, step by step      | 3.00 s    | Second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.                                                      |
+| Tap Sign In                      | 0.49 s    | Faster than simulator-use on the same Mac (0.53 s), and the answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed. |
+| Type into a field                | 1.37 s    | In the middle of the field (it runs from 0.41 s to 4.06 s).                                                                                              |
 | Read the screen                  | 0.26 s    | Seventh of ten (the field runs from 0.08 s to 1.52 s).                                                                                                   |
 
 Every step worked in every run. The earlier run on 18 November took 1.17 seconds for a tap and 5.7 seconds for the sign-in.
 
-Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.18.1 on the same Mac in the same session, twice. RocketSim's tap was faster in both passes (368 and 378 ms against 467 and 524 ms). simulator-use was faster at typing, and once the Mac was quiet at reading and at the whole sign-in, and its 194 tokens are well below our 451. Tokens are the benchmark author's estimate (characters divided by four).
+Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (164 against 194 for the sign-in, 51 against 72 for a read, 165 against 179 for the batched sign-in) and tapped faster (489 and 497 ms against 533 ms). simulator-use was faster at reading (234 ms against 260 ms), typing (930 ms against 1.37 s) and the whole sign-in (2.79 s against 3.00 s). Tokens are the benchmark author's estimate (characters divided by four).
 
 ### In our own scenarios
 
 We also reran our own scenarios on an isolated Mac with iOS 27.2: the sixteen AgentScenarios flows plus the five Settings flows, three rounds, RocketSim against XcodeBuildMCP 2.7.0.
 
-- RocketSim completed **all 48 runs of the sixteen fixture flows without a wrong tap or a failure**. XcodeBuildMCP, which can run nine of them, finished 23 of its 27 runs, with wrong taps in the stateful text-entry and press-Home flows in two of three rounds each.
+- RocketSim completed **47 of the 48 runs of the sixteen fixture flows without a wrong tap or a failure**; the one exception was a first run after a Simulator reboot that passed in both repeats. XcodeBuildMCP, which can run nine of them, finished 23 of its 27 runs, with wrong taps in the stateful text-entry and press-Home flows in two of three rounds each.
 - Across the scenarios both tools ran, RocketSim produced 4.3 times fewer tool-response bytes and a 9.7 times lower context estimate, and finished 1.7 times faster in total. XcodeBuildMCP needed fewer commands (0.75 times as many turns).
 - The Settings flows still fail for both tools, because our frozen scripts meet the iOS 27.2 Settings app: RocketSim passed 10 of 15 runs and XcodeBuildMCP 7 of 15. We keep those failures in the record.
 
