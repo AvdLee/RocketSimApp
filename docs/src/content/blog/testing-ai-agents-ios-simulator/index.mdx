@@ -2,7 +2,7 @@
 title: "How We Test AI Agents for the iOS Simulator"
 description: "See how RocketSim benchmarks its CLI and Agent Skill with repeatable iOS Simulator scenarios to improve reliability, speed, and context efficiency."
 publishedTime: 2026-07-24T08:00:00.000Z
-modifiedTime: 2026-10-28T09:00:00.000Z
+modifiedTime: 2026-11-19T09:00:00.000Z
 image: ./agent-scenarios-testing-face-id.png
 imageAlt: "RocketSim Agent Benchmark app showing a Face ID test scenario next to the RocketSim side window."
 ---
@@ -113,6 +113,41 @@ We consider that result valuable. A benchmark should reveal what to improve, not
 - Refresh failures remain correctly wrapped in the agent protocol response
 
 The latest harness also automates hidden debug-menu activation, upside-down orientation, swipe, long-press, text entry, two-finger input, and Home-button checks. Face ID and two-finger input remain RocketSim-only capability scenarios because neither AXe 1.8.0 nor XcodeBuildMCP 2.7.0 offers equivalent commands. Whenever the CLI or Agent Skill changes, these focused scenarios make it easier to verify the behavior that motivated the change. And to be fair to ourselves too: the Face ID failure in round three is exactly the kind of weakness the next iteration should turn into a fix.
+
+## November 2026 update: a faster CLI
+
+After the July run, we spent our time on speed. An agent waits on every call, so a faster tap and a smaller answer add up over a long flow. Four changes did most of the work:
+
+- Actions now settle by watching the Simulator's pixels, so RocketSim reads the screen again as soon as it stands still instead of after a fixed wait.
+- Focusing a field and typing into it is one call, and the text goes out over the connection that taps already use.
+- Answers carry less: rows drop columns that never change, scroll indicators and keyboard keys stay out of compact snapshots, and the JSON envelope is gone: reading the screen, tapping and batching now answer in a few plain lines.
+- RocketSim skips redundant accessibility reads when the top of the screen has not changed.
+
+### On the public simulator-use benchmark
+
+[simulator-use](https://simulator-use.dev/benchmarks) publishes an open-source harness and a leaderboard that signs in to the same app with nine tools, each driven the way its README describes. We ran RocketSim through the same harness. These are the numbers for the RocketSim 17.0 pre-release, next to the nine tools on the page:
+
+| Measure                          | RocketSim | Where it lands among the ten tools                                                                                                                                                   |
+| -------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Tokens read over a whole sign-in | 164       | The lowest of the ten tools. The next lowest, simulator-use, reads 194.                                                                                                              |
+| Whole sign-in, step by step      | 3.00 s    | Second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.                                                                                  |
+| Tap Sign In                      | 0.49 s    | Faster than simulator-use on the same Mac (0.53 s), and the answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed. |
+| Type into a field                | 1.37 s    | In the middle of the field (it runs from 0.41 s to 4.06 s).                                                                                                                          |
+| Read the screen                  | 0.26 s    | Seventh of ten (the field runs from 0.08 s to 1.52 s).                                                                                                                               |
+
+Every step worked in every run. The earlier run on 18 November took 1.17 seconds for a tap and 5.7 seconds for the sign-in.
+
+Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (164 against 194 for the sign-in, 51 against 72 for a read, 165 against 179 for the batched sign-in) and tapped faster (489 and 497 ms against 533 ms). simulator-use was faster at reading (234 ms against 260 ms), typing (930 ms against 1.37 s) and the whole sign-in (2.79 s against 3.00 s). Tokens are the benchmark author's estimate (characters divided by four).
+
+### In our own scenarios
+
+We also reran our own scenarios on an isolated Mac with iOS 27.2: the sixteen AgentScenarios flows plus the five Settings flows, three rounds, RocketSim against XcodeBuildMCP 2.7.0.
+
+- RocketSim completed **47 of the 48 runs of the sixteen fixture flows without a wrong tap or a failure**; the one exception was a first run after a Simulator reboot that passed in both repeats. XcodeBuildMCP, which can run nine of them, finished 23 of its 27 runs, with wrong taps in the stateful text-entry and press-Home flows in two of three rounds each.
+- Across the scenarios both tools ran, RocketSim produced 4.3 times fewer tool-response bytes and a 9.7 times lower context estimate, and finished 1.7 times faster in total. XcodeBuildMCP needed fewer commands (0.75 times as many turns).
+- The Settings flows still fail for both tools, because our frozen scripts meet the iOS 27.2 Settings app: RocketSim passed 10 of 15 runs and XcodeBuildMCP 7 of 15. We keep those failures in the record.
+
+The Simulator's accessibility service stopped answering twice during long runs in which both tools shared a Simulator, until we rebooted it, so we rebooted before each group of scenarios and ran the last round one tool at a time. We do not yet know what triggers it. The full run, scripts and logs are in our repository's evaluation notes.
 
 ## Why this matters for agentic iOS development
 

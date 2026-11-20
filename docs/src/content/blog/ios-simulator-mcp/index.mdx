@@ -36,7 +36,7 @@ That route makes sense when your tooling only talks to MCP servers, or when you 
 RocketSim does not ship an MCP server. Agents use the [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli/) and the [RocketSim Agent Skill](/docs/features/agentic-development/agent-skill/). Our documentation describes these properties of that design:
 
 - **The CLI talks to the running Mac app.** RocketSim stays connected to the Simulator and keeps state warm, so there is no reconnection overhead between steps.
-- **Output is compact and consistent.** Every agent-facing command returns one JSON envelope in the [rs/1 protocol](/docs/features/agentic-development/rs1-protocol/), with typed errors, screen hashes, and compact element rows instead of a full accessibility tree.
+- **Output is compact and consistent.** Every agent-facing command answers in the compact [rs/1 protocol](/docs/features/agentic-development/rs1-protocol/) format: plain lines for reads, taps and batches, and JSON without a wrapper for the rest, with typed errors, screen hashes, and compact element rows instead of a full accessibility tree.
 - **The skill carries the workflow.** It teaches the agent when to read elements, when to wait, when to interact semantically, and when to fall back to a screenshot.
 - **Both are version-matched.** The CLI and the skill ship inside the app, and the installed files are symlinks. After an App Store update, your agent uses the guidance that matches the RocketSim version it controls.
 - **One command for agents and scripts.** The `rocketsim` command is available from Terminal, agents, and CI scripts, and always matches the RocketSim version you installed.
@@ -48,7 +48,7 @@ We have not published a comparison that isolates MCP as a protocol against a CLI
 | Topic                       | MCP server                               | RocketSim CLI and Agent Skill                  |
 | --------------------------- | ---------------------------------------- | ---------------------------------------------- |
 | How the agent calls it      | Tools described by schemas in the server | Shell commands guided by the skill             |
-| Output format               | Defined by each server                   | Always the rs/1 JSON envelope                  |
+| Output format               | Defined by each server                   | Always the compact rs/1 format                 |
 | Workflow guidance           | Depends on the server                    | Agent Skill with a documented interaction loop |
 | Install                     | Configure the server in an MCP client    | **RocketSim → Settings → CLI & Agent**         |
 | Updates                     | Depends on the server                    | Symlinks into the app, updated with RocketSim  |
@@ -70,7 +70,7 @@ The results, as published in that post:
 - **Capability coverage differed.** Face ID and two-finger input were RocketSim-only, and XcodeBuildMCP 2.7.0 sat out six of the twenty scenarios.
 - **No tool had a perfect run, including RocketSim.** RocketSim recorded seven wrong interactions and one unexpected failure, AXe fifteen wrong interactions, and XcodeBuildMCP nine. Almost all of them, across all three tools, came from the frozen Settings scripts hitting iOS 26 UI drift.
 
-Two caveats matter. The context figure is a byte-based estimate, not actual model tokens or billing. And this is a benchmark of tools and their recommended workflows, not a ranking of AI models. It also compares one MCP server with one CLI, so it does not say anything about every iOS Simulator MCP server.
+Two caveats matter. The context figure is a byte-based estimate, not actual model tokens or billing. And this is a benchmark of tools and their recommended workflows, not a ranking of AI models. It also compares one MCP server with one CLI, so it does not say anything about every iOS Simulator MCP server. For a wider field, the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) lists nine tools run on one Mac. Added next to them in November 2026, RocketSim's CLI reads 164 tokens for a whole sign-in, the lowest of ten, in 3 seconds, the second fastest. Those tokens are estimated as characters divided by four.
 
 ## How do you set up RocketSim's Agent Skill?
 

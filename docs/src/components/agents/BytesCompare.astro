@@ -2,6 +2,7 @@
 import {
   OWN_TOOL,
   benchmarkRows,
+  benchmarkToolCount,
   benchmarkSource,
   tokenRank,
 } from "@/lib/agents/benchmark";
@@ -14,8 +15,8 @@ const widest = Math.max(...benchmarkRows.map(({ tokens }) => tokens));
 <figure class="m-0 flex flex-col rounded-lg bg-surface p-6">
   <figcaption class="text-small text-muted">
     Tokens read to sign in. Shorter is better. RocketSim ranks {tokenRank} of {
-      benchmarkRows.length
-    }.
+      benchmarkToolCount
+    } (AXe, at 130,766 tokens, is left off the chart).
   </figcaption>
   <ul class="m-0 mt-6 flex list-none flex-col gap-4 p-0">
     {
