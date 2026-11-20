@@ -68,7 +68,7 @@ This setup also keeps RocketSim's CLI and Agent Skill version-matched. Both ship
 
 ## How we benchmark agent workflows
 
-We use two kinds of measurements, both from November 2026 and both on the same RocketSim 17.0 pre-release build. The first is the public simulator-use benchmark, which tells us how RocketSim compares with other tools on the same task. The second is our own scenarios, which tell us whether the speed and the smaller answers cost us correctness.
+We use two kinds of measurements, both from November 2026 and both on the same RocketSim 17.0 pre-release build. The first is the public simulator-use benchmark, which tells us how RocketSim compares with other tools on the same task. The second is our own scenarios, which measure whether RocketSim handles harder interactions correctly.
 
 ### The public simulator-use benchmark (November 2026)
 
@@ -109,9 +109,9 @@ Two things to keep in mind. The page's times come from its author's Mac and ours
 - **How RocketSim is driven:** RocketSim has no MCP server, so each step is one `rocketsim` command, timed from spawn to exit, and what it prints is what the agent reads. Reads, taps and typing go by accessibility identifier, as RocketSim's bundled Agent Skill advises, and the batched sign-in is one `do` call.
 - **What we publish:** the adapter, the harness's own result files, the scenario reports and the steps to repeat the run are in [our repository](https://github.com/AvdLee/RocketSimApp/tree/master/Benchmarks/simulator-use). If you reproduce it and get different numbers, tell us.
 
-### Our own scenarios: does it still work?
+### Our own scenarios: AgentScenarios
 
-The public benchmark signs in to one demo app, so it cannot tell us whether a faster, smaller CLI still handles hard interactions. For that we run AgentScenarios: sixteen fixture flows and five workflows in the iOS Settings app, three rounds each, on an isolated Mac with iOS 27.2. The fixture app covers nested navigation, duplicate labels, visual targets, web login, native-to-web transitions, hidden accessibility activation, Face ID, upside-down orientation, command batches, swipe, long-press, text entry, two-finger input, and Home-button delivery. The Settings scenarios add realistic scrolling, account entry, toggles, and stale-screen recovery.
+The public benchmark signs in to one demo app, so it says little about harder interactions. To measure how reliably RocketSim handles those, we run AgentScenarios: sixteen fixture flows and five workflows in the iOS Settings app, three rounds each, on an isolated Mac with iOS 27.2. The fixture app covers nested navigation, duplicate labels, visual targets, web login, native-to-web transitions, hidden accessibility activation, Face ID, upside-down orientation, command batches, swipe, long-press, text entry, two-finger input, and Home-button delivery. The Settings scenarios add realistic scrolling, account entry, toggles, and stale-screen recovery.
 
 The runner uses dedicated Simulators, pins the Agent Skill by SHA-256, and reboots the Simulator before each group of scenarios. For each scenario, we record command turns, output bytes, a byte-based context estimate (the skill, the prompt, and the textual command output; screenshots are stored as artifacts but their contents are not counted), elapsed time, wrong taps, and unexpected failures.
 
