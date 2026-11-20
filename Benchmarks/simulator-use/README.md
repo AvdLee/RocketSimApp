@@ -20,9 +20,9 @@ We did not submit this to the leaderboard. It is our own run with the author's h
 | | |
 | --- | --- |
 | Harness | `NoMac-app/simulator-use` at commit `d75ef5e` (`bench/run.mjs`, `bench/summarize.mjs`), unmodified except for the added adapter |
-| Mac | One fresh [NoMac](https://nomac.app) cloud Mac (virtual Mac, macOS 26.6.2, Xcode 27.2), nothing else running |
+| Mac | One [NoMac](https://nomac.app) cloud Mac (virtual Mac, macOS 26.6.2, Xcode 27.2) that had been running for about 70 minutes, nothing else running |
 | Simulator | iPhone 17 Pro, iOS 27.2, created fresh; the harness's demo app `dev.simtap.demo` (`examples/swiftui-demo`) |
-| RocketSim | 16.8.0 (339), a Developer ID signed pre-release build of what ships as RocketSim 17.0 (`ROCKETSIM_BUILD_LABEL` records "17.0.0 pre-release"); Pro licence; started headless |
+| RocketSim | 17.0.0 (341), a Developer ID signed pre-release build of what ships as RocketSim 17.0 (`ROCKETSIM_BUILD_LABEL` records "17.0.0 pre-release"); Pro licence; started headless |
 | simulator-use | 0.15.3, the version preinstalled on that Mac, run on the same Mac in the same session |
 | Order | `rocketsim`, `rocketsim.last` (a second RocketSim run), then `simulator-use`. simulator-use runs last because the Simulator's accessibility service sometimes stops answering after it, which broke the run after it |
 | Samples | Medians of 20 reads, 20 taps, 10 typings, 10 step-by-step sign-ins and 10 batched sign-ins |
@@ -42,15 +42,17 @@ skill advises.
 | Tokens, sign in (batched) | 179 | 165 | 165 |
 | Tokens, read the screen | 72 | 51 | 51 |
 | Tool list tokens | 2,443 | 0 | 0 |
-| Tap Sign In | 533 ms | 489 ms | 497 ms |
-| Read the screen | 234 ms | 260 ms | 261 ms |
-| Type into Email | 930 ms | 1.37 s | 1.45 s |
-| Sign in, step by step | 2.79 s | 3.00 s | 3.05 s |
-| Sign in, batched | 1.90 s | 2.74 s | 2.75 s |
+| Tap Sign In | 623 ms | 397 ms | 403 ms |
+| Read the screen | 222 ms | 36 ms | 33 ms |
+| Type into Email | 1.09 s | 1.43 s | 1.46 s |
+| Sign in, step by step | 3.37 s | 3.22 s | 3.23 s |
+| Sign in, batched | 2.47 s | 3.17 s | 3.19 s |
 | Steps that worked | 10/10 flows, 20/20 taps | 10/10, 20/20 | 10/10, 20/20 |
 
-RocketSim reads fewer tokens in every measure and taps faster. simulator-use is faster at reading, typing and the whole
-sign-in on this Mac. Times are only comparable inside this run; the leaderboard's times come from another Mac.
+RocketSim reads fewer tokens in every measure, reads and taps faster, and signs in a little faster on this Mac.
+simulator-use is faster at typing and at the batched sign-in. In our earlier run on another Mac simulator-use signed in
+faster (2.79 s against 3.00 s), so the whole sign-in is level. Times are only comparable inside a run; the leaderboard's
+times come from another Mac.
 
 ## Repeat it
 

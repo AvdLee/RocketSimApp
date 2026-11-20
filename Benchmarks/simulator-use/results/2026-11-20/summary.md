@@ -2,17 +2,17 @@ Tokens: characters / 4 (no ANTHROPIC_API_KEY was set). Images: width * height / 
 
 | Tool | Mac | Sign-in flow (median) | Flow tokens | Flow ok | Read median | Read p90 | Read tokens | Tap median | Tap p90 | Tap reports change | Type median | Tool list tokens |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| simulator-use 0.15.3 |  | 2.79 s | 194 | 10/10 | 234 ms | 319 ms | 72 | 533 ms | 556 ms | 20/20 | 930 ms | 2,443 |
-| RocketSim 16.8.0 (339) 17.0.0 pre-release |  | 3.00 s | 164 | 10/10 | 260 ms | 417 ms | 51 | 489 ms | 513 ms | 20/20 | 1.37 s | 0 |
-| RocketSim 16.8.0 (339) 17.0.0 pre-release |  | 3.05 s | 164 | 10/10 | 261 ms | 440 ms | 51 | 497 ms | 518 ms | 20/20 | 1.45 s | 0 |
+| RocketSim 17.0.0 (341) 17.0.0 pre-release |  | 3.22 s | 164 | 10/10 | 36 ms | 44 ms | 51 | 397 ms | 421 ms | 20/20 | 1.43 s | 0 |
+| RocketSim 17.0.0 (341) 17.0.0 pre-release |  | 3.23 s | 164 | 10/10 | 33 ms | 53 ms | 51 | 403 ms | 432 ms | 20/20 | 1.46 s | 0 |
+| simulator-use 0.15.3 |  | 3.37 s | 194 | 10/10 | 222 ms | 250 ms | 72 | 623 ms | 646 ms | 20/20 | 1.09 s | 2,443 |
 
 Batched flow (where the tool has a batch or sequence call):
 
 | Tool | Batched flow (median) | Tokens | ok |
 |---|---|---|---|
-| simulator-use (Mac null) | 1.90 s | 179 | 10/10 |
-| RocketSim (Mac null) | 2.74 s | 165 | 10/10 |
-| RocketSim (Mac null) | 2.75 s | 165 | 10/10 |
+| RocketSim (Mac null) | 3.17 s | 165 | 10/10 |
+| RocketSim (Mac null) | 3.19 s | 165 | 10/10 |
+| simulator-use (Mac null) | 2.47 s | 179 | 10/10 |
 
 Failures:
 

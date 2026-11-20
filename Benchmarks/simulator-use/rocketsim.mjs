@@ -1,6 +1,6 @@
 // RocketSim: the `rocketsim` command line (rs/1), used the way its bundled agent skill says. Copy to bench/tools/rocketsim.mjs
 // in a checkout of NoMac-app/simulator-use. One process per call, timed from spawn to exit, and what it prints is what the
-// agent reads. RocketSim.app must be running (the server behind the command line); see README.md.
+// agent reads. RocketSim.app must be running (the server behind the command line); see RUNBOOK.md.
 //   read : `elements --agent --agent-mode nav`, the compact screen the skill tells agents to start with. The skill says to
 //          use `act` for values and state, so the read right after typing (to see the field's text) and the final read
 //          (to see the status text, which `nav` hides) use `act`.
@@ -8,8 +8,11 @@
 //          fields have no label (only the ids `email` and `password`, which `elements` lists as `!identifier` rows), so
 //          every target is chosen by its exact accessibility identifier, as the skill describes.
 //   type : one fused `interact type '...' --identifier <field> --screen latest` call (no `do` wrapper for a single step),
-//          which focuses the field and types (one answer, no separate focus read).
-//   batch: one `do --refresh-policy smart` call with every step of the sign-in (the skill's batch form).
+//          which focuses the field, waits for the focus to show, and types (one answer, no separate focus read).
+//          `--settle quick` on the typing is faster still but made the next relaunch-and-focus fail with
+//          element_not_found in about 1 of 5 tries on the Mac (November 18, 2026), so it is not used here.
+//   batch: one `do --refresh-policy smart` call with every step of the sign-in (the skill's batch form); `interact` settles by itself, so there
+//          is no extra wait or read between the steps.
 //   reset: after the harness relaunches the app, `wait element` until the screen is readable, as the skill advises after
 //          a launch. Untimed, like the harness's own reset.
 import { execFileSync } from "node:child_process";
