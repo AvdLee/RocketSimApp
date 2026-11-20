@@ -72,15 +72,29 @@ We use two kinds of measurements, both from November 2026 and both on the same R
 
 ### The public simulator-use benchmark (November 2026)
 
-The simulator-use project publishes a public, open-source benchmark for iOS Simulator tools: a [leaderboard](https://simulator-use.dev/benchmarks) and the [harness behind it](https://github.com/NoMac-app/simulator-use/tree/main/bench), which signs in to the same demo app with nine tools, each driven the way its own README describes. We did not design it and it is not ours: we ran RocketSim through the project's own, unmodified harness, so the numbers are measured the same way as every other tool on the page. This is our own run, not an entry the project has published. These are the numbers for the RocketSim 17.0 pre-release, next to the nine tools on the page:
+The simulator-use project publishes a public, open-source benchmark for iOS Simulator tools: a [leaderboard](https://simulator-use.dev/benchmarks) and the [harness behind it](https://github.com/NoMac-app/simulator-use/tree/main/bench), which signs in to the same demo app with nine tools, each driven the way its own README describes. We did not design it and it is not ours: we ran RocketSim through the project's own, unmodified harness, so the numbers are measured the same way as every other tool on the page. This is our own run, not an entry the project has published. The table follows the leaderboard's own layout, with RocketSim's row from our run (the RocketSim 17.0 pre-release) next to the other tools' rows from the page, ranked by the tokens a whole sign-in reads:
 
-| Measure                          | RocketSim | Where it lands among the ten tools                                                                                                                                                   |
-| -------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Tokens read over a whole sign-in | 164       | The lowest of the ten tools. The next lowest, simulator-use, reads 194.                                                                                                              |
-| Whole sign-in, step by step      | 3.00 s    | Second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.                                                                                  |
-| Tap Sign In                      | 0.49 s    | Faster than simulator-use on the same Mac (0.53 s), and the answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed. |
-| Type into a field                | 1.37 s    | In the middle of the field (it runs from 0.41 s to 4.06 s).                                                                                                                          |
-| Read the screen                  | 0.26 s    | Seventh of ten (the field runs from 0.08 s to 1.52 s).                                                                                                                               |
+| Tool                    | Tokens | Sign-in (s) | Read (s) | Tap (s) | Type (s) | Tool list |
+| ----------------------- | -----: | ----------: | -------: | ------: | -------: | --------: |
+| **RocketSim**           |    164 |        3.00 |     0.26 |    0.49 |     1.37 |         0 |
+| simulator-use 0.15.1    |    194 |        4.28 |     0.30 |    0.72 |     1.21 |     2,443 |
+| agent-device 0.21.36    |    664 |        7.62 |     0.08 |    1.31 |     2.59 |    47,544 |
+| mobile-mcp 1.0.16       |    980 |        6.32 |     0.19 |    0.55 |     2.31 |     7,169 |
+| MobileBuildMCP 2.7.1    |  1,560 |       17.58 |     1.52 |    3.30 |     4.06 |     6,193 |
+| Maestro MCP 2.12.1      |  2,987 |       10.21 |     0.16 |    1.70 |     4.00 |     3,063 |
+| ios-simulator-mcp 2.2.0 |  5,248 |        2.08 |     0.23 |    0.20 |     0.41 |     2,655 |
+| Argent 0.32.0           |  7,061 |        6.98 |     0.20 |    0.94 |     3.83 |    44,045 |
+| Xcode MCP 27.0          | 12,732 |        4.18 |     0.14 |    0.72 |     1.14 |    19,620 |
+
+_Tokens: everything the agent reads over a whole sign-in. Sign-in: the step-by-step sign-in. Read, Tap and Type: medians. Tool list: the tokens an MCP server's tool catalog puts into the agent's context before the first action; RocketSim has none. MobileBuildMCP was called XcodeBuildMCP until version 2.7.1. The tenth tool on the page, a raw accessibility tree dump that reads 130,766 tokens to sign in, is left out of the table._
+
+Here is where RocketSim lands:
+
+- **Tokens:** the lowest of the ten tools. The next lowest, simulator-use, reads 194.
+- **Whole sign-in:** second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.
+- **Tap:** 0.49 s, faster than simulator-use on the same Mac (0.53 s), and the answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed.
+- **Type:** in the middle of the field, which runs from 0.41 s to 4.06 s.
+- **Read:** seventh of ten, in a field that runs from 0.08 s to 1.52 s.
 
 Every step worked in every run.
 
