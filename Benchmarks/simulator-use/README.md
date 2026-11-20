@@ -14,7 +14,6 @@ We did not submit this to the leaderboard. It is our own run with the author's h
 | --- | --- |
 | `rocketsim.mjs` | The adapter: goes to `bench/tools/rocketsim.mjs` in a checkout of the harness. Its comments say why each step is driven the way it is. |
 | `results/2026-11-20/` | The harness's own output for the run below: `summary.md`, `summary.json` and one JSON per run (`rocketsim.json`, `rocketsim.last.json`, `simulator-use.json`). |
-| `scenarios/2026-11-20/` | Our own agent scenarios on the same build (3 rounds of 16 fixture flows and 5 Settings flows): per round `report.md` and `results.jsonl`, plus `status.txt`. |
 
 ## The run (November 20, 2026)
 

@@ -1,8 +1,0 @@
-r1 A try 1 failed
-r1 A ok
-r1 S ok
-r2 A ok
-r2 S ok
-r3 A ok
-r3 S ok
-done

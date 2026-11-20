@@ -107,7 +107,7 @@ Two things to keep in mind. The page's times come from its author's Mac and ours
 - **Tools:** the RocketSim 17.0 pre-release build (Pro licence, started headless) and simulator-use 0.15.3, the version preinstalled on that Mac, both on the same Mac in the same session. RocketSim ran twice and simulator-use once, and simulator-use ran last because the Simulator's accessibility service sometimes stops answering after it.
 - **Samples:** medians of 20 reads, 20 taps, 10 typings, 10 step-by-step sign-ins and 10 batched sign-ins.
 - **How RocketSim is driven:** RocketSim has no MCP server, so each step is one `rocketsim` command, timed from spawn to exit, and what it prints is what the agent reads. Reads, taps and typing go by accessibility identifier, as RocketSim's bundled Agent Skill advises, and the batched sign-in is one `do` call.
-- **What we publish:** the adapter, the harness's own result files, the scenario reports and the steps to repeat the run are in [our repository](https://github.com/AvdLee/RocketSimApp/tree/master/Benchmarks/simulator-use). If you reproduce it and get different numbers, tell us.
+- **What we publish:** the adapter, the harness's own result files and the steps to repeat the run are in [our repository](https://github.com/AvdLee/RocketSimApp/tree/master/Benchmarks/simulator-use). If you reproduce it and get different numbers, tell us.
 
 ### Our own scenarios: AgentScenarios
 
@@ -124,16 +124,9 @@ The scenario scripts are frozen, and so are the results. Freezing them makes the
 
 The token lead is the part we built for. An agent pays for every character it reads, so RocketSim answers a screen read, a tap, or a batch in a few plain lines, without a JSON wrapper, and its command line adds nothing to the agent's context before the first action (simulator-use's tool list costs 2,443 tokens). That is also what the [`rs/1`](/docs/features/agentic-development/rs1-protocol/) protocol is for: an agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
 
-The time gap is just as clear in the numbers. On the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim. Reading the Simulator's accessibility tree takes about a quarter of a second, and every action that reads after itself pays for it.
+The time gap is just as clear in the numbers. On the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim, so speed is where this benchmark shows us the most room.
 
-A benchmark should reveal what to improve, not just produce a marketing number. Four changes did most of the work to get here:
-
-- Actions now settle by watching the Simulator's pixels, so RocketSim reads the screen again as soon as it stands still instead of after a fixed wait.
-- Focusing a field and typing into it is one call, and the text goes out as a touch followed by the keys. An accessibility press could report success without focusing the field, so keys were lost after a relaunch; the touch fixed that.
-- Answers carry less: rows drop columns that never change, scroll indicators and keyboard keys stay out of compact snapshots, and the JSON envelope is gone: reading the screen, tapping and batching now answer in a few plain lines.
-- RocketSim skips redundant accessibility reads when the top of the screen has not changed.
-
-The Simulator's accessibility service stopped answering in some long runs, until we rebooted it, so we reboot before each group of scenarios. We do not yet know what triggers it.
+A benchmark should reveal what to improve, not just produce a marketing number. This one shaped how we made reading, tapping and typing faster and smaller, and we re-ran our own scenarios after every change to check that nothing broke. The Simulator's accessibility service stopped answering in some long runs until we rebooted it, so we reboot before each group of scenarios.
 
 ## Why this matters for agentic iOS development
 
