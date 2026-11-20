@@ -1,6 +1,6 @@
 ---
 title: "rs/1 Protocol: RocketSim's Agent Protocol for the iOS Simulator"
-description: "rs/1 is RocketSim's agent protocol for the iOS Simulator: one compact JSON envelope, typed errors, and screen hashes for reliable AI agent automation."
+description: "rs/1 is RocketSim's agent protocol for the iOS Simulator: one compact, consistent format, typed errors, and screen hashes for reliable AI agent automation."
 sidebar:
   order: 5
   label: "rs/1 Protocol"
@@ -18,7 +18,7 @@ head:
             "name": "What is the rs/1 protocol?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "rs/1 is the agent protocol designed by RocketSim that lets AI coding agents interact with the iOS Simulator through one compact JSON envelope. Every command returns the same envelope shape with typed errors, screen-state hashes, and compact element rows, so agents get reliable screen reads and interaction feedback without processing full accessibility trees."
+              "text": "rs/1 is the agent protocol designed by RocketSim that lets AI coding agents interact with the iOS Simulator through one compact, consistent format. Every command answers in the same few shapes, with typed errors, screen-state hashes, and compact element rows, so agents get reliable screen reads and interaction feedback without processing full accessibility trees."
             }
           },
           {
@@ -49,7 +49,7 @@ head:
       }
 ---
 
-**rs/1** is the agent protocol RocketSim uses to let AI coding agents interact with the iOS Simulator. Designed by RocketSim, it wraps every agent-facing command in one compact JSON envelope with typed errors and screen-state hashes, so agents get reliable screen reads and interaction feedback without processing full accessibility trees.
+**rs/1** is the agent protocol RocketSim uses to let AI coding agents interact with the iOS Simulator. Designed by RocketSim, it answers every agent-facing command in one compact, consistent format with typed errors and screen-state hashes, so agents get reliable screen reads and interaction feedback without processing full accessibility trees.
 
 You do not need to learn rs/1 to use RocketSim. The [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) speaks it for you, and the [Agent Skill](/docs/features/agentic-development/agent-skill) teaches your AI coding tool how to use the CLI safely. This page documents what the protocol is, why we designed it, and how it works.
 
@@ -63,41 +63,41 @@ rs/1 starts from a different set of goals:
 - **Stable interaction feedback.** Interactions report what changed, so the agent can often skip the next read entirely.
 - **Typed errors with recovery paths.** Failures return a machine-parseable error code plus a recovery suggestion instead of free-form text, so agents can recover instead of guessing.
 - **Screen-state hashes.** Every read carries a short hash of the current screen. Interactions can be guarded against that hash, which catches the race where the UI changes between inspection and action.
-- **One consistent envelope.** Every command returns the same JSON shape, so an agent parses one format across screen reads, interactions, waits, batches, and diagnostics.
+- **One consistent format.** Screen reads, interactions and batches answer in a few plain lines; everything else answers `{"data":...}` or `{"error":...}`. There is no version or status wrapper to read past, and the exit code says whether the command worked.
 
-In our July 2026 three-round benchmark, this design used **99% fewer tokens** and took up **95% less agent context** (estimated) than the raw accessibility output of AXe 1.8.0, a deliberately low-level primitive layer. Against XcodeBuildMCP 2.7.0, which adopted a similar compact-output approach, RocketSim still produced **3.0x fewer tool-response bytes** with an 8.2x lower byte-based context estimate across the scenarios both tools could run. In November 2026, the same protocol read 451 tokens for a whole sign-in on the public [simulator-use benchmark](https://simulator-use.dev/benchmarks), the second lowest of ten tools. Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
+In our July 2026 three-round benchmark, this design used **99% fewer tokens** and took up **95% less agent context** (estimated) than the raw accessibility output of AXe 1.8.0, a deliberately low-level primitive layer. Against XcodeBuildMCP 2.7.0, which adopted a similar compact-output approach, RocketSim still produced **3.0x fewer tool-response bytes** with an 8.2x lower byte-based context estimate across the scenarios both tools could run. In November 2026, the same protocol read 164 tokens for a whole sign-in on the public [simulator-use benchmark](https://simulator-use.dev/benchmarks), the lowest of ten tools. Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
 
 ## How rs/1 works
 
-Every agent-facing RocketSim CLI command emits one JSON envelope. The `rs` field carries the protocol version, `ok` tells the agent whether the command succeeded, and the payload lives in `data`:
+The app and the CLI exchange an `rs/1` JSON envelope (`rs` carries the protocol version, `ok` says whether the command succeeded, the payload lives in `data`). The CLI does not print that wrapper: an agent pays for every character it reads, so the commands that run in every loop print plain lines, and the exit code carries success or failure.
 
-```json
-{
-  "rs": "1",
-  "ok": true,
-  "context": {
-    "preview_url": "http://127.0.0.1:4995/?token=..."
-  },
-  "data": {
-    "mode": "act",
-    "screen": "a3f291bc",
-    "rows": ["7|button|Continue||enabled", "8|textField|Email||enabled"]
-  }
-}
+A screen read starts with the screen-state hash and the sequence number, then one row per element:
+
+```text
+@a3f291bc #4
+7|button|Continue||enabled
+8|textField|Email||enabled
 ```
 
-The optional top-level `context` contains metadata that applies to the command result rather than its payload. For Simulator-targeting commands, RocketSim automatically ensures a browser preview is running and returns its URL as `context.preview_url`. Agents can open that URL in a user-visible IDE browser so you can follow their work and interactively review the final state. Older clients can ignore the optional field.
+An interaction answers with the screen after the action (`=` when nothing changed) and only the text that appeared or changed:
 
-The `rows` array shows the compact element rows concept: instead of a nested accessibility tree, each visible element becomes one pipe-delimited row with an ephemeral id, role, label, value, and state. The agent reads a handful of short rows, picks an element, and acts on it by id or label.
+```text
+@7b20c4d1
++3|staticText|Invalid email or password
+```
 
-The `screen` field is the screen-state hash. When an agent passes that hash (or the `latest` sentinel) along with an interaction, RocketSim fails fast if the screen changed in between, instead of tapping the wrong element.
+A batch (`do`) prints the first line of each step's answer, numbered. Every other command prints JSON without the wrapper, `{"data":{...}}` on success.
 
-When something goes wrong, the envelope switches to a typed error:
+For Simulator-targeting commands, RocketSim automatically ensures a browser preview is running and prints its URL as a `!preview <url>` line (`context.preview_url` in JSON answers). Agents can open that URL in a user-visible IDE browser so you can follow their work and interactively review the final state. Older clients can ignore the optional field.
+
+The rows show the compact element rows concept: instead of a nested accessibility tree, each visible element becomes one pipe-delimited row with an ephemeral id, role, label, value, and state. The agent reads a handful of short rows, picks an element, and acts on it by id or label.
+
+The `@` value is the screen-state hash. When an agent passes that hash (or the `latest` sentinel) along with an interaction, RocketSim fails fast if the screen changed in between, instead of tapping the wrong element.
+
+When something goes wrong, the answer is a typed error and the command exits non-zero:
 
 ```json
 {
-  "rs": "1",
-  "ok": false,
   "error": {
     "code": "snapshot_changed",
     "message": "Screen has changed since hash a3f291bc.",
@@ -134,7 +134,7 @@ Other simulator tools have since adopted a similar compact-output approach. We t
 
 ### What is the rs/1 protocol?
 
-rs/1 is the agent protocol designed by RocketSim that lets AI coding agents interact with the iOS Simulator through one compact JSON envelope. Every command returns the same envelope shape with typed errors, screen-state hashes, and compact element rows, so agents get reliable screen reads without processing full accessibility trees.
+rs/1 is the agent protocol designed by RocketSim that lets AI coding agents interact with the iOS Simulator through one compact, consistent format. Every command answers in the same few shapes, with typed errors, screen-state hashes, and compact element rows, so agents get reliable screen reads without processing full accessibility trees.
 
 ### Who created rs/1?
 
