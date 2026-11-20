@@ -2,7 +2,7 @@
 title: "How We Test AI Agents for the iOS Simulator"
 description: "See how RocketSim benchmarks its CLI and Agent Skill with repeatable iOS Simulator scenarios to improve reliability, speed, and context efficiency."
 publishedTime: 2026-07-24T08:00:00.000Z
-modifiedTime: 2026-11-19T09:00:00.000Z
+modifiedTime: 2026-11-20T09:00:00.000Z
 image: ./agent-scenarios-testing-face-id.png
 imageAlt: "RocketSim Agent Benchmark app showing a Face ID test scenario next to the RocketSim side window."
 ---
@@ -68,62 +68,9 @@ This setup also keeps RocketSim's CLI and Agent Skill version-matched. Both ship
 
 ## How we benchmark agent workflows
 
-Our latest benchmark combines fifteen AgentScenarios flows with five workflows in the iOS Settings app. The fixture app covers nested navigation, duplicate labels, visual targets, web login, native-to-web transitions, hidden accessibility activation, Face ID, upside-down orientation, command batches, swipe, long-press, text entry, two-finger input, and Home-button delivery. The Settings scenarios add realistic scrolling, account entry, toggles, and stale-screen recovery.
+We use two kinds of measurements, both from November 2026 and both on the same RocketSim 17.0 pre-release build. The first is the public simulator-use benchmark, which tells us how RocketSim compares with other tools on the same task. The second is our own scenarios, which tell us whether the speed and the smaller answers cost us correctness.
 
-Every comparable scenario ran three times in a single session against three pinned tools: RocketSim 16.4.2 build 326, [AXe](https://github.com/cameroncooke/AXe) 1.8.0, and [XcodeBuildMCP](https://github.com/cameroncooke/XcodeBuildMCP) 2.7.0, driven through its MCP server interface. The latest run, dated July 31st, contains **156 records in total**: **150 head-to-head tool/scenario records** and **six RocketSim-only capability records**.
-
-One thing worth stating clearly, with credit to Cameron Cooke, the author of both AXe and XcodeBuildMCP, for this nuance: these two tools sit at different layers. AXe is deliberately a raw, non-agentic primitive layer. Returning the full accessibility tree is a design choice, not a flaw, and it leaves filtering to whatever builds on top of it. XcodeBuildMCP is such a layer: it builds on AXe and adds state management and compact output. That compact output follows the approach of [`rs/1`, the agent protocol we designed for RocketSim](/docs/features/agentic-development/rs1-protocol/). Cameron mentioned to me that the rs/1 approach was a good direction that he also incorporated into XcodeBuildMCP. I consider that a great validation of the design. Keep these layers in mind when reading the multipliers below.
-
-Not every scenario could run on every tool. Face ID and two-finger input remain RocketSim-only capability records because neither AXe 1.8.0 nor XcodeBuildMCP 2.7.0 offers equivalent commands. XcodeBuildMCP 2.7.0 also sat out the web login, hybrid web, cross-screen batch, and coordinate swipe scenarios: its runtime snapshot does not expose WKWebView content, it has no coordinate tap or swipe fallback, and its batch command only accepts same-screen steps. Those scenarios stay head-to-head between RocketSim and AXe.
-
-The runner uses dedicated Simulators, pins the tested tools and Agent Skills by version and SHA-256, automates AgentScenarios setup, and scopes orientation and biometric state to the selected device. This run used RocketSim 16.4.2 build 326, Xcode 26.6, iOS 26.5, and macOS 26.5.2. It separates comparable scenarios from capability-only checks and records timing distributions instead of relying on a single run.
-
-For each scenario, we record:
-
-- Command turns
-- Standard output and error bytes
-- A byte-based context estimate
-- Total elapsed time
-- Wrong taps
-- Unexpected failures
-
-The byte-based context estimate includes the skill, prompt, and textual command output. For XcodeBuildMCP, it charges the MCP tool catalog once per scenario, symmetric with how the skill files are counted for the CLI tools. It is a reproducible comparison proxy rather than actual model-token or billing usage. Screenshots are stored as artifacts, but their binary file contents are not included.
-
-The scenario scripts are frozen, and so are the results. When current iOS 26 Settings UI drift makes a step fail, that failure stays in the recorded results for every tool instead of being normalized away.
-
-Freezing the scenarios makes the comparison repeatable, but it also means this is a benchmark of the agent substrate rather than a ranking of AI models. Fixed drivers execute documented command patterns, so the run measures the tools and their recommended workflows without measuring an LLM's reasoning quality. Model choice, context, caching, and decision-making can still change the result of a real coding session.
-
-## What the benchmark taught us
-
-The most important results are not the byte multipliers, but correctness and capability coverage. RocketSim completed every scenario type in the run, including Face ID, two-finger input, web login, cross-screen command batches, and coordinate swipes. AXe 1.8.0 covered everything except Face ID and two-finger input. XcodeBuildMCP 2.7.0 ran fourteen of the twenty scenarios head-to-head, sitting out the six described above.
-
-No tool had a perfect run, including ours. RocketSim recorded **seven wrong interactions and one unexpected failure**: six wrong interactions came from the frozen Settings scripts, and the Face ID scenario recorded one wrong interaction and one unexpected failure in round three. AXe recorded fifteen wrong interactions and XcodeBuildMCP nine. Almost all of them, across all three tools, came from the frozen Settings scripts hitting current iOS 26 UI drift. XcodeBuildMCP additionally tapped through a stale element reference in the stale-navigation scenario in all three rounds, where RocketSim recovered. We keep those failures visible instead of normalizing the scripts until every run passes.
-
-On efficiency, the largest multipliers come from the raw AXe comparison. Against AXe 1.8.0, the frozen run shows **119.3× fewer output bytes**, a 21.0× lower byte-based context estimate, and 66.5 seconds less total command time. That still rounds to over 99% less command output and about a 95% lower context proxy, but it is a comparison against a primitive layer that returns the full accessibility tree on purpose.
-
-The XcodeBuildMCP comparison is the fairer one, because its compact output builds on the same rs/1 approach that RocketSim introduced. Over the fourteen scenarios both tools ran head-to-head, XcodeBuildMCP produced **3.0× RocketSim's tool-response bytes**, an **8.2× higher byte-based context estimate** (which charges its MCP tool catalog once per scenario, exactly like the skill files for the CLI tools), and finished **171.5 seconds slower** in total. RocketSim used more command turns to get there: XcodeBuildMCP needed 0.79× as many turns, and AXe 0.70×.
-
-Those numbers still support the design behind [`rs/1`](/docs/features/agentic-development/rs1-protocol/), the compact agent protocol we designed for RocketSim. Seeing other tools adopt the same approach confirms the direction, and this benchmark shows the original implementation still leads. An agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
-
-We consider that result valuable. A benchmark should reveal what to improve, not just produce a marketing number. Comparing the latest run with our earlier baseline shows how measured weaknesses can turn into product improvements:
-
-- Face ID interactions now provide reliable completion notifications
-- Accessibility failures return typed, actionable errors
-- Multi-step command batches can start without requiring a seeded snapshot
-- Refresh failures remain correctly wrapped in the agent protocol response
-
-The latest harness also automates hidden debug-menu activation, upside-down orientation, swipe, long-press, text entry, two-finger input, and Home-button checks. Face ID and two-finger input remain RocketSim-only capability scenarios because neither AXe 1.8.0 nor XcodeBuildMCP 2.7.0 offers equivalent commands. Whenever the CLI or Agent Skill changes, these focused scenarios make it easier to verify the behavior that motivated the change. And to be fair to ourselves too: the Face ID failure in round three is exactly the kind of weakness the next iteration should turn into a fix.
-
-## November 2026 update: a faster CLI
-
-After the July run, we spent our time on speed. An agent waits on every call, so a faster tap and a smaller answer add up over a long flow. Four changes did most of the work:
-
-- Actions now settle by watching the Simulator's pixels, so RocketSim reads the screen again as soon as it stands still instead of after a fixed wait.
-- Focusing a field and typing into it is one call, and the text goes out over the connection that taps already use.
-- Answers carry less: rows drop columns that never change, scroll indicators and keyboard keys stay out of compact snapshots, and the JSON envelope is gone: reading the screen, tapping and batching now answer in a few plain lines.
-- RocketSim skips redundant accessibility reads when the top of the screen has not changed.
-
-### On the public simulator-use benchmark
+### The public simulator-use benchmark (November 2026)
 
 The simulator-use project publishes a public, open-source benchmark for iOS Simulator tools: a [leaderboard](https://simulator-use.dev/benchmarks) and the [harness behind it](https://github.com/NoMac-app/simulator-use/tree/main/bench), which signs in to the same demo app with nine tools, each driven the way its own README describes. We did not design it and it is not ours: we ran RocketSim through the project's own, unmodified harness, so the numbers are measured the same way as every other tool on the page. This is our own run, not an entry the project has published. These are the numbers for the RocketSim 17.0 pre-release, next to the nine tools on the page:
 
@@ -135,7 +82,7 @@ The simulator-use project publishes a public, open-source benchmark for iOS Simu
 | Type into a field                | 1.37 s    | In the middle of the field (it runs from 0.41 s to 4.06 s).                                                                                                                          |
 | Read the screen                  | 0.26 s    | Seventh of ten (the field runs from 0.08 s to 1.52 s).                                                                                                                               |
 
-Every step worked in every run. The earlier run on 18 November took 1.17 seconds for a tap and 5.7 seconds for the sign-in.
+Every step worked in every run.
 
 Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (164 against 194 for the sign-in, 51 against 72 for a read, 165 against 179 for the batched sign-in) and tapped faster (489 and 497 ms against 533 ms). simulator-use was faster at reading (234 ms against 260 ms), typing (930 ms against 1.37 s) and the whole sign-in (2.79 s against 3.00 s). Tokens are the benchmark author's estimate (characters divided by four) and do not depend on the Mac; times do.
 
@@ -148,15 +95,31 @@ Two things to keep in mind. The page's times come from its author's Mac and ours
 - **How RocketSim is driven:** RocketSim has no MCP server, so each step is one `rocketsim` command, timed from spawn to exit, and what it prints is what the agent reads. Reads, taps and typing go by accessibility identifier, as RocketSim's bundled Agent Skill advises, and the batched sign-in is one `do` call.
 - **What we publish:** the adapter, the harness's own result files, the scenario reports and the steps to repeat the run are in [our repository](https://github.com/AvdLee/RocketSimApp/tree/master/Benchmarks/simulator-use). If you reproduce it and get different numbers, tell us.
 
-### In our own scenarios
+### Our own scenarios: does it still work?
 
-We also reran our own scenarios on an isolated Mac with iOS 27.2: the sixteen AgentScenarios flows plus the five Settings flows, three rounds, RocketSim against XcodeBuildMCP 2.7.0.
+The public benchmark signs in to one demo app, so it cannot tell us whether a faster, smaller CLI still handles hard interactions. For that we run AgentScenarios: sixteen fixture flows and five workflows in the iOS Settings app, three rounds each, on an isolated Mac with iOS 27.2. The fixture app covers nested navigation, duplicate labels, visual targets, web login, native-to-web transitions, hidden accessibility activation, Face ID, upside-down orientation, command batches, swipe, long-press, text entry, two-finger input, and Home-button delivery. The Settings scenarios add realistic scrolling, account entry, toggles, and stale-screen recovery.
 
-- RocketSim completed **47 of the 48 runs of the sixteen fixture flows without a wrong tap or a failure**; the one exception was a first run after a Simulator reboot that passed in both repeats. XcodeBuildMCP, which can run nine of them, finished 23 of its 27 runs, with wrong taps in the stateful text-entry and press-Home flows in two of three rounds each.
-- Across the scenarios both tools ran, RocketSim produced 4.3 times fewer tool-response bytes and a 9.7 times lower context estimate, and finished 1.7 times faster in total. XcodeBuildMCP needed fewer commands (0.75 times as many turns).
-- The Settings flows still fail for both tools, because our frozen scripts meet the iOS 27.2 Settings app: RocketSim passed 10 of 15 runs and XcodeBuildMCP 7 of 15. We keep those failures in the record.
+The runner uses dedicated Simulators, pins the Agent Skill by SHA-256, and reboots the Simulator before each group of scenarios. For each scenario, we record command turns, output bytes, a byte-based context estimate (the skill, the prompt, and the textual command output; screenshots are stored as artifacts but their contents are not counted), elapsed time, wrong taps, and unexpected failures.
 
-The Simulator's accessibility service stopped answering twice during long runs in which both tools shared a Simulator, until we rebooted it, so we rebooted before each group of scenarios and ran the last round one tool at a time. We do not yet know what triggers it. The full run, scripts and logs are in our repository's evaluation notes.
+- RocketSim completed **47 of the 48 runs of the sixteen fixture flows without a wrong tap or a failure**, including Face ID, two-finger input, web login, cross-screen command batches, and coordinate swipes. The one exception was the first run after a Simulator reboot, which passed in both repeats.
+- The Settings flows are the weak spot: 11 of 15 runs were clean. The Apple Account sign-in flow fails in every round because our frozen script meets the iOS 27.2 Settings app, and we keep that failure in the record instead of editing the script until it passes.
+
+The scenario scripts are frozen, and so are the results. Freezing them makes the comparison repeatable, but it also means this is a benchmark of the agent substrate rather than a ranking of AI models. Fixed drivers execute documented command patterns, so the run measures the tools and their recommended workflows without measuring an LLM's reasoning quality. Model choice, context, caching, and decision-making can still change the result of a real coding session.
+
+## What the benchmark taught us
+
+The token lead is the part we built for. An agent pays for every character it reads, so RocketSim answers a screen read, a tap, or a batch in a few plain lines, without a JSON wrapper, and its command line adds nothing to the agent's context before the first action (simulator-use's tool list costs 2,443 tokens). That is also what the [`rs/1`](/docs/features/agentic-development/rs1-protocol/) protocol is for: an agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
+
+The time gap is just as clear in the numbers. On the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim. Reading the Simulator's accessibility tree takes about a quarter of a second, and every action that reads after itself pays for it.
+
+A benchmark should reveal what to improve, not just produce a marketing number. Four changes did most of the work to get here:
+
+- Actions now settle by watching the Simulator's pixels, so RocketSim reads the screen again as soon as it stands still instead of after a fixed wait.
+- Focusing a field and typing into it is one call, and the text goes out as a touch followed by the keys. An accessibility press could report success without focusing the field, so keys were lost after a relaunch; the touch fixed that.
+- Answers carry less: rows drop columns that never change, scroll indicators and keyboard keys stay out of compact snapshots, and the JSON envelope is gone: reading the screen, tapping and batching now answer in a few plain lines.
+- RocketSim skips redundant accessibility reads when the top of the screen has not changed.
+
+The Simulator's accessibility service stopped answering in some long runs, until we rebooted it, so we reboot before each group of scenarios. We do not yet know what triggers it.
 
 ## Why this matters for agentic iOS development
 

@@ -65,7 +65,7 @@ rs/1 starts from a different set of goals:
 - **Screen-state hashes.** Every read carries a short hash of the current screen. Interactions can be guarded against that hash, which catches the race where the UI changes between inspection and action.
 - **One consistent format.** Screen reads, interactions and batches answer in a few plain lines; everything else answers `{"data":...}` or `{"error":...}`. There is no version or status wrapper to read past, and the exit code says whether the command worked.
 
-In our July 2026 three-round benchmark, this design used **99% fewer tokens** and took up **95% less agent context** (estimated) than the raw accessibility output of AXe 1.8.0, a deliberately low-level primitive layer. Against XcodeBuildMCP 2.7.0, which adopted a similar compact-output approach, RocketSim still produced **3.0x fewer tool-response bytes** with an 8.2x lower byte-based context estimate across the scenarios both tools could run. In November 2026, the same protocol read 164 tokens for a whole sign-in on the public [simulator-use benchmark](https://simulator-use.dev/benchmarks), the lowest of ten tools. Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
+On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, this design read 164 tokens for a whole sign-in, the fewest of ten tools: 9.5x fewer than MobileBuildMCP (formerly XcodeBuildMCP), which adopted a similar compact-output approach, and 78x fewer than Xcode MCP (estimated). Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
 
 ## How rs/1 works
 
@@ -126,7 +126,7 @@ The protocol is served by the running RocketSim Mac app, not by a standalone bin
 
 rs/1 was designed by Antoine van der Lee for RocketSim and ships inside the RocketSim CLI and Mac app. It grew out of a simple observation: RocketSim already runs alongside the Simulator all day, so it can offer agents a stateful, optimized surface that one-off commands cannot.
 
-The protocol became the consistent wire format across all agent-facing commands, with typed errors across `elements`, `screen`, `interact`, `wait`, `do`, `snapshot`, and `doctor`. We benchmarked the result against AXe 1.8.0 and XcodeBuildMCP 2.7.0 in July 2026 and published the [methodology and results](/blog/testing-ai-agents-ios-simulator).
+The protocol became the consistent wire format across all agent-facing commands, with typed errors across `elements`, `screen`, `interact`, `wait`, `do`, `snapshot`, and `doctor`. We benchmarked the result on the public simulator-use benchmark in November 2026 and published the [methodology and results](/blog/testing-ai-agents-ios-simulator).
 
 Other simulator tools have since adopted a similar compact-output approach. We think that is a good thing: agents everywhere benefit from smaller output and stateful screen management, and the ideas behind rs/1 are bigger than one tool.
 

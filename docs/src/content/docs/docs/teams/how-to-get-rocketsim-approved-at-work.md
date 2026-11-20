@@ -61,7 +61,7 @@ This breadth matters when you build a business case. The license does not depend
 
 More than **250 teams** use RocketSim, including Meta, Strava, and Google.
 
-Developers report becoming **up to 2× faster** with RocketSim. For AI-assisted workflows, our published benchmark found [99% fewer tokens, 95% less agent context, and 24% faster](/blog/testing-ai-agents-ios-simulator/) than other Simulator tools (estimated). On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks), the current CLI signs in on 164 tokens, the lowest of ten tools, and taps in 0.49 seconds.
+Developers report becoming **up to 2× faster** with RocketSim. For AI-assisted workflows, on the public [simulator-use benchmark](/blog/testing-ai-agents-ios-simulator/) in November 2026, RocketSim's CLI signs in on 164 tokens, the lowest of ten tools, and taps in 0.49 seconds (estimated).
 
 ### Local by default
 

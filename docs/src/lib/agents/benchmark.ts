@@ -59,7 +59,7 @@ export const benchmarkRows: BenchmarkRow[] = [
 ];
 
 /**
- * Tools on the leaderboard, plus RocketSim. AXe (130,766 tokens, 5.9 s) is counted
+ * Tools on the leaderboard, plus RocketSim. One more tool (130,766 tokens, 5.9 s) is counted
  * but not drawn: its bar would flatten every other bar in the chart.
  */
 export const benchmarkToolCount = benchmarkRows.length + 1;
