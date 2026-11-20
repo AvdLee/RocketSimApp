@@ -125,7 +125,7 @@ After the July run, we spent our time on speed. An agent waits on every call, so
 
 ### On the public simulator-use benchmark
 
-[simulator-use](https://simulator-use.dev/benchmarks) publishes an open-source harness and a leaderboard that signs in to the same app with nine tools, each driven the way its README describes. We ran RocketSim through the same harness. These are the numbers for the RocketSim 17.0 pre-release, next to the nine tools on the page:
+The simulator-use project publishes a public, open-source benchmark for iOS Simulator tools: a [leaderboard](https://simulator-use.dev/benchmarks) and the [harness behind it](https://github.com/NoMac-app/simulator-use/tree/main/bench), which signs in to the same demo app with nine tools, each driven the way its own README describes. We did not design it and it is not ours: we ran RocketSim through the project's own, unmodified harness, so the numbers are measured the same way as every other tool on the page. This is our own run, not an entry the project has published. These are the numbers for the RocketSim 17.0 pre-release, next to the nine tools on the page:
 
 | Measure                          | RocketSim | Where it lands among the ten tools                                                                                                                                                   |
 | -------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -137,7 +137,16 @@ After the July run, we spent our time on speed. An agent waits on every call, so
 
 Every step worked in every run. The earlier run on 18 November took 1.17 seconds for a tap and 5.7 seconds for the sign-in.
 
-Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (164 against 194 for the sign-in, 51 against 72 for a read, 165 against 179 for the batched sign-in) and tapped faster (489 and 497 ms against 533 ms). simulator-use was faster at reading (234 ms against 260 ms), typing (930 ms against 1.37 s) and the whole sign-in (2.79 s against 3.00 s). Tokens are the benchmark author's estimate (characters divided by four).
+Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (164 against 194 for the sign-in, 51 against 72 for a read, 165 against 179 for the batched sign-in) and tapped faster (489 and 497 ms against 533 ms). simulator-use was faster at reading (234 ms against 260 ms), typing (930 ms against 1.37 s) and the whole sign-in (2.79 s against 3.00 s). Tokens are the benchmark author's estimate (characters divided by four) and do not depend on the Mac; times do.
+
+#### How we ran it
+
+- **Harness:** `NoMac-app/simulator-use` at commit `d75ef5e`, `bench/run.mjs` and `bench/summarize.mjs`, unchanged. The only addition is a RocketSim adapter in `bench/tools/`, written the way the other adapters are.
+- **Machine:** one fresh cloud Mac ([NoMac](https://nomac.app), macOS 26.6.2, Xcode 27.2), a new iPhone 17 Pro Simulator on iOS 27.2 and the harness's demo app, with nothing else running.
+- **Tools:** the RocketSim 17.0 pre-release build (Pro licence, started headless) and simulator-use 0.15.3, the version preinstalled on that Mac, both on the same Mac in the same session. RocketSim ran twice and simulator-use once, and simulator-use ran last because the Simulator's accessibility service sometimes stops answering after it.
+- **Samples:** medians of 20 reads, 20 taps, 10 typings, 10 step-by-step sign-ins and 10 batched sign-ins.
+- **How RocketSim is driven:** RocketSim has no MCP server, so each step is one `rocketsim` command, timed from spawn to exit, and what it prints is what the agent reads. Reads, taps and typing go by accessibility identifier, as RocketSim's bundled Agent Skill advises, and the batched sign-in is one `do` call.
+- **What we publish:** the adapter, the harness's own result files, the scenario reports and the steps to repeat the run are in [our repository](https://github.com/AvdLee/RocketSimApp/tree/master/Benchmarks/simulator-use). If you reproduce it and get different numbers, tell us.
 
 ### In our own scenarios
 
