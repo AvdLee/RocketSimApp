@@ -86,7 +86,7 @@ We benchmarked RocketSim 16.4.2 build 326 against [AXe](https://github.com/camer
 
 Over the fourteen scenarios both tools ran head-to-head, XcodeBuildMCP produced 3.0× RocketSim's tool-response bytes, an 8.2× higher byte-based context estimate, and finished 171.5 seconds slower in total. That means RocketSim took a smaller share of your agent's context in these scenarios. RocketSim used more command turns: XcodeBuildMCP needed 0.79× as many turns.
 
-Capability coverage differed too. Face ID and two-finger input were RocketSim-only, and XcodeBuildMCP 2.7.0 sat out six of the twenty scenarios. No tool had a perfect run, including RocketSim. The context figure is a byte-based estimate, not actual model tokens, and the benchmark covers version 2.7.0 only. I have not measured later versions. In November 2026, RocketSim also ran through the public [simulator-use benchmark](https://simulator-use.dev/benchmarks), where MobileBuildMCP (formerly XcodeBuildMCP) 2.7.1 is listed at 1,560 tokens and 17.6 seconds to sign in. RocketSim's faster CLI signs in on 164 tokens in 3 seconds. Details are in [the benchmark article](/blog/testing-ai-agents-ios-simulator/).
+Capability coverage differed too. Face ID and two-finger input were RocketSim-only, and XcodeBuildMCP 2.7.0 sat out six of the twenty scenarios. No tool had a perfect run, including RocketSim. The context figure is a byte-based estimate, not actual model tokens, and the benchmark covers version 2.7.0 only. I have not measured later versions.
 
 XcodeBuildMCP builds on AXe and adds state management and compact output, and credit goes to its author for that design. The comparison above is about Simulator interaction. It says nothing about building, testing, or debugging, which RocketSim does not do.
 
