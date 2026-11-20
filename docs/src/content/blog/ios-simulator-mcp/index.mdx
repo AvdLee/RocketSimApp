@@ -60,7 +60,23 @@ The right column only describes RocketSim. For any MCP server, read its own docu
 
 The simulator-use project publishes a public, open-source [benchmark](https://simulator-use.dev/benchmarks) that signs in to the same demo app with nine iOS Simulator tools, MCP servers and command line tools alike. In November 2026 we ran RocketSim through the project's own harness, next to those nine tools. How we ran it is described in [How We Test AI Agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator/).
 
-- **Tokens read over a whole sign-in:** RocketSim 164, simulator-use 194, MobileBuildMCP (formerly XcodeBuildMCP) 2.7.1 1,560, Maestro MCP 2,987, ios-simulator-mcp 5,248, Argent 7,061, and Xcode MCP 12,732. RocketSim reads the fewest of the ten tools.
+| Tool                    | Tokens | Sign-in (s) | Read (s) | Tap (s) | Type (s) | Tool list |
+| ----------------------- | -----: | ----------: | -------: | ------: | -------: | --------: |
+| **RocketSim**           |    164 |        3.00 |     0.26 |    0.49 |     1.37 |         0 |
+| simulator-use 0.15.1    |    194 |        4.28 |     0.30 |    0.72 |     1.21 |     2,443 |
+| agent-device 0.21.36    |    664 |        7.62 |     0.08 |    1.31 |     2.59 |    47,544 |
+| mobile-mcp 1.0.16       |    980 |        6.32 |     0.19 |    0.55 |     2.31 |     7,169 |
+| MobileBuildMCP 2.7.1    |  1,560 |       17.58 |     1.52 |    3.30 |     4.06 |     6,193 |
+| Maestro MCP 2.12.1      |  2,987 |       10.21 |     0.16 |    1.70 |     4.00 |     3,063 |
+| ios-simulator-mcp 2.2.0 |  5,248 |        2.08 |     0.23 |    0.20 |     0.41 |     2,655 |
+| Argent 0.32.0           |  7,061 |        6.98 |     0.20 |    0.94 |     3.83 |    44,045 |
+| Xcode MCP 27.0          | 12,732 |        4.18 |     0.14 |    0.72 |     1.14 |    19,620 |
+
+_Tokens: everything the agent reads over a whole sign-in. Sign-in: the step-by-step sign-in. Read, Tap and Type: medians. Tool list: the tokens an MCP server's tool catalog puts into the agent's context before the first action; RocketSim has none. MobileBuildMCP was called XcodeBuildMCP until version 2.7.1. RocketSim's row is from our own run; the other rows are from the leaderboard, so times come from different Macs. The tenth tool on the page, a raw accessibility tree dump that reads 130,766 tokens to sign in, is left out._
+
+What the table shows:
+
+- **Tokens:** RocketSim reads the fewest of the ten tools. The next lowest, simulator-use, reads 194, and the MCP servers read between 1,560 and 12,732.
 - **Tool catalogs:** an MCP server puts its tool list into the agent's context before the first action: 2,443 tokens for simulator-use, 2,655 for ios-simulator-mcp, 6,193 for MobileBuildMCP, and 19,620 for Xcode MCP. RocketSim's command line adds none.
 - **Sign-in time:** RocketSim finishes the step-by-step sign-in in 3.0 seconds, the second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there and never shows what a tap did.
 - **Where RocketSim is slower:** on the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim.

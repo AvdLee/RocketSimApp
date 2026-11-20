@@ -122,9 +122,14 @@ The scenario scripts are frozen, and so are the results. Freezing them makes the
 
 ## What the benchmark taught us
 
-The token lead is the part we built for. An agent pays for every character it reads, so RocketSim answers a screen read, a tap, or a batch in a few plain lines, without a JSON wrapper, and its command line adds nothing to the agent's context before the first action (simulator-use's tool list costs 2,443 tokens). That is also what the [`rs/1`](/docs/features/agentic-development/rs1-protocol/) protocol is for: an agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
+Our goal is the most reliable and most efficient CLI for agents, not the fastest single command. The numbers show that choice. RocketSim reads the fewest tokens of the ten tools and taps in 0.49 s, and on the same Mac it is a little slower than simulator-use at reading, typing and the whole sign-in.
 
-The time gap is just as clear in the numbers. On the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim, so speed is where this benchmark shows us the most room.
+We accept that trade because a command's duration is only part of what an agent spends. A fast command that returns too little leaves the agent guessing: it reads again, taps again or recovers from a miss, and every extra round trip costs tokens and a model turn that takes seconds, far more than the few hundred milliseconds between two commands. The benchmark times commands rather than model turns, so it does not show that effect directly, but the public data points the same way:
+
+- **Taps that report what happened:** the tap answers of four of the eight other tools in the table never say what changed (0 of 20 for mobile-mcp, Maestro MCP and MobileBuildMCP, and 0 of 18 for ios-simulator-mcp). RocketSim's answer to a tap is the screen it landed on and what appeared, so the agent can move on without a read.
+- **Taps that land:** every RocketSim step worked in every run, 20 of 20 taps and 10 of 10 sign-ins. ios-simulator-mcp is the fastest tapper at 0.20 s, but 2 of its 20 taps missed.
+- **Answers an agent can act on:** RocketSim answers a screen read, a tap, or a batch in a few plain lines, without a JSON wrapper, and its command line adds nothing to the agent's context before the first action (simulator-use's tool list costs 2,443 tokens). That is what the [`rs/1`](/docs/features/agentic-development/rs1-protocol/) protocol is for: an agent usually does not need a full accessibility tree for every step. It needs enough information to identify the target, interact safely, and verify what changed.
+- **Hard interactions:** the scenarios above cover cases a demo sign-in never reaches, such as Face ID, two-finger input, web login and cross-screen batches, and RocketSim completed 47 of the 48 fixture-flow runs cleanly.
 
 A benchmark should reveal what to improve, not just produce a marketing number. This one shaped how we made reading, tapping and typing faster and smaller, and we re-ran our own scenarios after every change to check that nothing broke. The Simulator's accessibility service stopped answering in some long runs until we rebooted it, so we reboot before each group of scenarios.
 
