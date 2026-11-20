@@ -79,7 +79,7 @@ What the table shows:
 - **Tokens:** RocketSim reads the fewest of the ten tools. The next lowest, simulator-use, reads 194, and the MCP servers read between 1,560 and 12,732.
 - **Tool catalogs:** an MCP server puts its tool list into the agent's context before the first action: 2,443 tokens for simulator-use, 2,655 for ios-simulator-mcp, 6,193 for MobileBuildMCP, and 19,620 for Xcode MCP. RocketSim's command line adds none.
 - **Sign-in time:** RocketSim finishes the step-by-step sign-in in 3.0 seconds, the second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there and never shows what a tap did.
-- **Where RocketSim is slower:** on the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim.
+- **Where RocketSim is slower:** on the same Mac, simulator-use reads the screen, types and finishes the sign-in faster than RocketSim. However, RocketSim is also slower since we do specific checks, which eventually results in more successful navigations and, with that, less round trips for your agents. Eventually, on longer navigation runs, this could actually speed up things.
 
 Two caveats matter. The token counts are the benchmark author's estimate (characters divided by four), not actual model tokens or billing, and times depend on the Mac they were measured on. And this is a benchmark of tools and their recommended workflows, not a ranking of AI models.
 
