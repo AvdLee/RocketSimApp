@@ -58,6 +58,12 @@ export const benchmarkRows: BenchmarkRow[] = [
   { tool: "Xcode MCP", detail: "27.0", tokens: 12732, signInSeconds: 4.18 },
 ];
 
+/**
+ * Tools on the leaderboard, plus RocketSim. AXe (130,766 tokens, 5.9 s) is counted
+ * but not drawn: its bar would flatten every other bar in the chart.
+ */
+export const benchmarkToolCount = benchmarkRows.length + 1;
+
 const own = benchmarkRows.find((row) => row.tool === OWN_TOOL);
 if (!own) throw new Error(`benchmark.ts has no row for ${OWN_TOOL}`);
 const ownRow: BenchmarkRow = own;
@@ -94,6 +100,6 @@ const signInRank = rankBy("signInSeconds");
 export const benchmarkSummary =
   `On the public simulator-use.dev benchmark, RocketSim reads ` +
   `${ownRow.tokens} tokens to sign in, ${lowest(tokenRank)} of ` +
-  `${benchmarkRows.length} tools, and finishes the sign-in in ` +
+  `${benchmarkToolCount} tools, and finishes the sign-in in ` +
   `${ownRow.signInSeconds.toFixed(1)} s, ${fastest(signInRank)}. ` +
   `Its tap takes ${ownTapSeconds.toFixed(2)} s, the quickest of the tools whose tap reports the result.`;
