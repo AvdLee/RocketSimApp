@@ -111,7 +111,7 @@ Before auditing, RocketSim waits (about 2 seconds at most) for the screen to sto
 
 Some accessibility problems can't be detected from the screen alone, and some checks are skipped when they can't be done reliably. The audit lists these in a **not covered** section so you know what to review manually. A `not_covered` entry means the check was skipped or couldn't be verified. It doesn't mean the check passed.
 
-The CLI reports these entries in `data.not_covered`:
+The CLI reports these entries in `not_covered`:
 
 | Entry                        | Meaning                                                                                                                 |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |

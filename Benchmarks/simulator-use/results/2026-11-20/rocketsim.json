@@ -1,0 +1,5213 @@
+{
+ "tool": "rocketsim",
+ "label": null,
+ "name": "RocketSim",
+ "interface": "cli",
+ "startedAt": "2026-11-20T08:49:30.643Z",
+ "counts": {
+  "reads": 20,
+  "taps": 20,
+  "types": 10,
+  "flows": 10
+ },
+ "notes": [
+  "RocketSim has no MCP server: each step is one `rocketsim` process talking to the running RocketSim app, timed from spawn to exit; its output is what the agent reads.",
+  "Targets are chosen by accessibility identifier with `--screen latest`, as the bundled skill advises; a batch is `rocketsim do --step ...`.",
+  "After each app relaunch the harness's untimed reset also runs `rocketsim wait element`, because the first seconds after a launch read as an empty screen."
+ ],
+ "ops": [
+  {
+   "op": "setup",
+   "ok": true,
+   "error": null,
+   "wallMs": 0.030458,
+   "ms": 0,
+   "calls": [],
+   "tokens": 0
+  },
+  {
+   "op": "warmup",
+   "ok": true,
+   "error": null,
+   "wallMs": 347.276792,
+   "ms": 347.2055,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 347.2055,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #844\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 0,
+   "ok": true,
+   "error": null,
+   "wallMs": 271.327292,
+   "ms": 271.255667,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 271.255667,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #844\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 1,
+   "ok": true,
+   "error": null,
+   "wallMs": 258.360542,
+   "ms": 258.329625,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 258.329625,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #844\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 2,
+   "ok": true,
+   "error": null,
+   "wallMs": 252.524167,
+   "ms": 252.4965,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 252.4965,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #844\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 3,
+   "ok": true,
+   "error": null,
+   "wallMs": 417.368459,
+   "ms": 417.339084,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 417.339084,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #845\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 4,
+   "ok": true,
+   "error": null,
+   "wallMs": 107.589125,
+   "ms": 107.555792,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 107.555792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #845\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 5,
+   "ok": true,
+   "error": null,
+   "wallMs": 260.839,
+   "ms": 260.800958,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 260.800958,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #845\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 6,
+   "ok": true,
+   "error": null,
+   "wallMs": 266.544792,
+   "ms": 266.497166,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 266.497166,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #845\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 7,
+   "ok": true,
+   "error": null,
+   "wallMs": 256.051542,
+   "ms": 256.016209,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 256.016209,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #845\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 8,
+   "ok": true,
+   "error": null,
+   "wallMs": 464.124208,
+   "ms": 464.095709,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 464.095709,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #846\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 9,
+   "ok": true,
+   "error": null,
+   "wallMs": 60.001041,
+   "ms": 59.979083,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 59.979083,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #846\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 10,
+   "ok": true,
+   "error": null,
+   "wallMs": 250.587333,
+   "ms": 250.564833,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 250.564833,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #846\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 11,
+   "ok": true,
+   "error": null,
+   "wallMs": 266.801333,
+   "ms": 266.779083,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 266.779083,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #846\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 12,
+   "ok": true,
+   "error": null,
+   "wallMs": 266.556,
+   "ms": 266.534709,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 266.534709,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #846\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 13,
+   "ok": true,
+   "error": null,
+   "wallMs": 380.287125,
+   "ms": 380.265875,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 380.265875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #847\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 14,
+   "ok": true,
+   "error": null,
+   "wallMs": 144.1575,
+   "ms": 144.139083,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 144.139083,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #847\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 15,
+   "ok": true,
+   "error": null,
+   "wallMs": 252.847166,
+   "ms": 252.827458,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 252.827458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #847\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 16,
+   "ok": true,
+   "error": null,
+   "wallMs": 259.835375,
+   "ms": 259.815958,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 259.815958,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #847\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 17,
+   "ok": true,
+   "error": null,
+   "wallMs": 266.461709,
+   "ms": 266.441417,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 266.441417,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #847\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 18,
+   "ok": true,
+   "error": null,
+   "wallMs": 448.678917,
+   "ms": 448.659375,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 448.659375,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #848\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "read",
+   "i": 19,
+   "ok": true,
+   "error": null,
+   "wallMs": 82.065792,
+   "ms": 82.049542,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 82.049542,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #848\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 51,
+   "verify": {
+    "sawSignIn": true,
+    "sawEmail": true
+   }
+  },
+  {
+   "op": "tap",
+   "i": 0,
+   "ok": true,
+   "error": null,
+   "wallMs": 403.57675,
+   "ms": 403.5155,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 403.5155,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 241.754958,
+    "ms": 241.732166,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 241.732166,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #857\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 1,
+   "ok": true,
+   "error": null,
+   "wallMs": 380.384208,
+   "ms": 380.359666,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 380.359666,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 404.605458,
+    "ms": 404.580292,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 404.580292,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #866\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 2,
+   "ok": true,
+   "error": null,
+   "wallMs": 516.098334,
+   "ms": 516.072333,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 516.072333,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 401.28075,
+    "ms": 401.262333,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 401.262333,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #869\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 3,
+   "ok": true,
+   "error": null,
+   "wallMs": 358.015083,
+   "ms": 357.988167,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 357.988167,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 481.670542,
+    "ms": 481.616125,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 481.616125,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #878\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 4,
+   "ok": true,
+   "error": null,
+   "wallMs": 488.749583,
+   "ms": 488.718458,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 488.718458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 391.936083,
+    "ms": 391.916125,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 391.916125,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #881\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 5,
+   "ok": true,
+   "error": null,
+   "wallMs": 461.892875,
+   "ms": 461.866625,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 461.866625,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 404.357375,
+    "ms": 404.338167,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 404.338167,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #884\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 6,
+   "ok": true,
+   "error": null,
+   "wallMs": 484.414083,
+   "ms": 484.38825,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 484.38825,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 397.582375,
+    "ms": 397.563458,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 397.563458,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #887\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 7,
+   "ok": true,
+   "error": null,
+   "wallMs": 485.029917,
+   "ms": 485.006416,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 485.006416,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 399.84125,
+    "ms": 399.822,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 399.822,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #890\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 8,
+   "ok": true,
+   "error": null,
+   "wallMs": 507.451417,
+   "ms": 507.424916,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 507.424916,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 393.641583,
+    "ms": 393.621458,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 393.621458,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #893\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 9,
+   "ok": true,
+   "error": null,
+   "wallMs": 489.126375,
+   "ms": 489.10225,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 489.10225,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 379.43025,
+    "ms": 379.409625,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 379.409625,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #896\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 10,
+   "ok": true,
+   "error": null,
+   "wallMs": 496.160042,
+   "ms": 496.137041,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 496.137041,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 367.302541,
+    "ms": 367.281417,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 367.281417,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #899\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 11,
+   "ok": true,
+   "error": null,
+   "wallMs": 505.104292,
+   "ms": 505.081667,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 505.081667,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 395.032291,
+    "ms": 395.012416,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 395.012416,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #902\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 12,
+   "ok": true,
+   "error": null,
+   "wallMs": 513.229375,
+   "ms": 513.206917,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 513.206917,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 355.717,
+    "ms": 355.697458,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 355.697458,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #905\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 13,
+   "ok": true,
+   "error": null,
+   "wallMs": 489.587,
+   "ms": 489.566333,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 489.566333,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 388.877916,
+    "ms": 388.8555,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 388.8555,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #908\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 14,
+   "ok": true,
+   "error": null,
+   "wallMs": 344.7145,
+   "ms": 344.692417,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 344.692417,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 325.956083,
+    "ms": 325.901959,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 325.901959,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #915\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 15,
+   "ok": true,
+   "error": null,
+   "wallMs": 509.466209,
+   "ms": 509.444292,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 509.444292,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 395.14475,
+    "ms": 395.124584,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 395.124584,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #918\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 16,
+   "ok": true,
+   "error": null,
+   "wallMs": 564.343666,
+   "ms": 564.321584,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 564.321584,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 369.931542,
+    "ms": 369.911542,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 369.911542,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #921\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 17,
+   "ok": true,
+   "error": null,
+   "wallMs": 348.759,
+   "ms": 348.737666,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 348.737666,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 503.603542,
+    "ms": 503.574292,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 503.574292,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #928\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 18,
+   "ok": true,
+   "error": null,
+   "wallMs": 480.297417,
+   "ms": 480.280208,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 480.280208,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 366.30225,
+    "ms": 366.281917,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 366.281917,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #931\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "tap",
+   "i": 19,
+   "ok": true,
+   "error": null,
+   "wallMs": 503.689417,
+   "ms": 503.666709,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 503.666709,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@0f9eb917\n+8|staticText|Invalid email or password\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 13,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 357.178166,
+    "ms": 357.157083,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 357.157083,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #934\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "appSawTap": true,
+    "reportsChange": true,
+    "returnsImage": false
+   }
+  },
+  {
+   "op": "type",
+   "i": 0,
+   "ok": true,
+   "error": null,
+   "wallMs": 1951.460667,
+   "ms": 1951.385625,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1951.385625,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 369.076458,
+    "ms": 369.0555,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 369.0555,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #937\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 82.039291,
+    "ms": 82.018584,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 82.018584,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #938 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 1,
+   "ok": true,
+   "error": null,
+   "wallMs": 1344.327667,
+   "ms": 1344.303125,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1344.303125,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 347.984875,
+    "ms": 347.954875,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 347.954875,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #944\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 17.100167,
+    "ms": 17.084542,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 17.084542,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #945 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 2,
+   "ok": true,
+   "error": null,
+   "wallMs": 1485.611333,
+   "ms": 1485.584458,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1485.584458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 366.98825,
+    "ms": 366.92825,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 366.92825,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #947\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 32.511417,
+    "ms": 32.496375,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 32.496375,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #948 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 3,
+   "ok": true,
+   "error": null,
+   "wallMs": 1476.771291,
+   "ms": 1476.744375,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1476.744375,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 391.412667,
+    "ms": 391.391209,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 391.391209,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #950\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 253.01725,
+    "ms": 252.994709,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 252.994709,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #951 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 4,
+   "ok": true,
+   "error": null,
+   "wallMs": 1338.107583,
+   "ms": 1338.083875,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1338.083875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 280.931833,
+    "ms": 280.900833,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 280.900833,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #959\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 42.534458,
+    "ms": 42.518125,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 42.518125,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #960 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 5,
+   "ok": true,
+   "error": null,
+   "wallMs": 1332.585792,
+   "ms": 1332.556875,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1332.556875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 335.738125,
+    "ms": 335.706125,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 335.706125,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #966\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 26.431583,
+    "ms": 26.416792,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 26.416792,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #967 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 6,
+   "ok": true,
+   "error": null,
+   "wallMs": 1495.657583,
+   "ms": 1495.628917,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1495.628917,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 371.9445,
+    "ms": 371.906125,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 371.906125,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #969\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 49.223583,
+    "ms": 49.203458,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 49.203458,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #970 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 7,
+   "ok": true,
+   "error": null,
+   "wallMs": 1346.72625,
+   "ms": 1346.690125,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1346.690125,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 322.532542,
+    "ms": 322.496041,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 322.496041,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #976\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 258.572166,
+    "ms": 258.552042,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 258.552042,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #977 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 8,
+   "ok": true,
+   "error": null,
+   "wallMs": 1389.496459,
+   "ms": 1389.471834,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1389.471834,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 330.839042,
+    "ms": 330.818542,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 330.818542,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #983\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 270.755,
+    "ms": 270.6985,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 270.6985,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #984 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 9,
+   "ok": true,
+   "error": null,
+   "wallMs": 1334.459458,
+   "ms": 1334.428625,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1334.428625,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 12,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 324.946875,
+    "ms": 324.908959,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "nav",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 324.908959,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@58d57f0b #990\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 51,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 31.988417,
+    "ms": 31.972541,
+    "calls": [
+     {
+      "kind": "cli",
+      "tool": "rocketsim elements",
+      "args": [
+       "elements",
+       "--agent",
+       "--agent-mode",
+       "act",
+       "--udid",
+       "C41351C9-7059-4BFE-B548-8814E351FF53"
+      ],
+      "ms": 31.972541,
+      "isError": false,
+      "exitCode": 0,
+      "text": "@b8539780 #991 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+      "chars": 293,
+      "images": [],
+      "stderrChars": 0
+     }
+    ],
+    "tokens": 74,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "flow",
+   "i": 0,
+   "ok": true,
+   "error": null,
+   "wallMs": 3429.785417,
+   "ms": 3429.404833,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 348.825541,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #993\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1584.597792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 757.29875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 587.645416,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 151.037334,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #996 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 304,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 163,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 1,
+   "ok": true,
+   "error": null,
+   "wallMs": 3547.440708,
+   "ms": 3547.2830010000002,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 340.242209,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1002\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1379.583958,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1048.336792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 624.193875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 154.926167,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1005 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 2,
+   "ok": true,
+   "error": null,
+   "wallMs": 3004.116417,
+   "ms": 3003.943417,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 339.900792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1011\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1304.092834,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 623.703333,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 595.907083,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 140.339375,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1014 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 3,
+   "ok": true,
+   "error": null,
+   "wallMs": 3068.580834,
+   "ms": 3068.3945839999997,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 395.512917,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1022\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1330.296334,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 591.041125,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 599.247666,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 152.296542,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1025 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 4,
+   "ok": true,
+   "error": null,
+   "wallMs": 2954.656,
+   "ms": 2954.4507919999996,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 297.614042,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1031\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1314.762875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 603.803458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 566.642625,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 171.627792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1034 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 5,
+   "ok": true,
+   "error": null,
+   "wallMs": 2985.733541,
+   "ms": 2985.534833,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 274.691042,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1040\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1343.456667,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 790.875583,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 392.782583,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 183.728958,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1043 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 6,
+   "ok": true,
+   "error": null,
+   "wallMs": 2948.593375,
+   "ms": 2948.4394580000003,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 234.611417,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1049\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1337.127375,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 611.731708,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 605.135917,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 159.833041,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1052 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 7,
+   "ok": true,
+   "error": null,
+   "wallMs": 2992.661083,
+   "ms": 2992.5096670000003,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 344.050458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1058\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1314.694125,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 586.553583,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 593.955459,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 153.256042,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1061 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 8,
+   "ok": true,
+   "error": null,
+   "wallMs": 2919.613333,
+   "ms": 2919.455418,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 248.913584,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1067\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1333.862334,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 574.535917,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 602.602416,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 159.541167,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1070 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow",
+   "i": 9,
+   "ok": true,
+   "error": null,
+   "wallMs": 3038.91775,
+   "ms": 3038.765,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 353.936792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1076\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "gary@example.com",
+      "--identifier",
+      "email",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 1302.384458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@b8539780\n~2|textField|email|gary@example.com\n",
+     "chars": 46,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "type",
+      "secret1",
+      "--identifier",
+      "password",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 663.822875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@8caaacfa\n~3|secureTextField|password|••••\n",
+     "chars": 43,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim interact",
+     "args": [
+      "interact",
+      "tap",
+      "--identifier",
+      "signIn",
+      "--screen",
+      "latest",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 566.562875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 50,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 152.058,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1079 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 164,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 5
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 0,
+   "ok": true,
+   "error": null,
+   "wallMs": 2803.926042,
+   "ms": 2801.5215000000003,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 401.717541,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1085\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2232.466417,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 167.337542,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1091 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n!preview http://127.0.0.1:4995/?token=47820acc7fd146b189de39a3d0e5d42b\n",
+     "chars": 376,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 182,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 1,
+   "ok": true,
+   "error": null,
+   "wallMs": 2729.786542,
+   "ms": 2729.67825,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 314.726084,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1097\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2269.016833,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 145.935333,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1103 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 2,
+   "ok": true,
+   "error": null,
+   "wallMs": 2742.614375,
+   "ms": 2742.506375,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 306.330792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1109\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2261.654083,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 174.5215,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1115 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 3,
+   "ok": true,
+   "error": null,
+   "wallMs": 2794.156625,
+   "ms": 2794.062834,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 389.662167,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1121\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2248.210792,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 156.189875,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1127 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 4,
+   "ok": true,
+   "error": null,
+   "wallMs": 3008.6825,
+   "ms": 3008.512751,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 363.682459,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1133\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2414.718375,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 230.111917,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1139 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 5,
+   "ok": true,
+   "error": null,
+   "wallMs": 2724.891208,
+   "ms": 2724.778751,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 326.242375,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1145\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2219.323167,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 179.213209,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1151 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 6,
+   "ok": true,
+   "error": null,
+   "wallMs": 2633.782791,
+   "ms": 2633.6732500000003,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 245.34925,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1159\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2220.113709,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 168.210291,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1165 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 7,
+   "ok": true,
+   "error": null,
+   "wallMs": 2743.365834,
+   "ms": 2743.2678330000003,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 331.323958,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1171\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2226.713583,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 185.230292,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1177 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 8,
+   "ok": true,
+   "error": null,
+   "wallMs": 2659.227042,
+   "ms": 2659.1456249999997,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 220.348208,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1183\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2338.280708,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 100.516709,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1189 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  },
+  {
+   "op": "flow-batch",
+   "i": 9,
+   "ok": true,
+   "error": null,
+   "wallMs": 2770.61575,
+   "ms": 2770.5213740000004,
+   "calls": [
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "nav",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 376.50075,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@58d57f0b #1195\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 203,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim do",
+     "args": [
+      "do",
+      "--refresh-policy",
+      "smart",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53",
+      "--step",
+      "interact type 'gary@example.com' --identifier email --screen latest",
+      "--step",
+      "interact type 'secret1' --identifier password --screen latest",
+      "--step",
+      "interact tap --identifier signIn --screen latest"
+     ],
+     "ms": 2245.537166,
+     "isError": false,
+     "exitCode": 0,
+     "text": "1: @b8539780\n~2|textField|email|gary@example.com\n2: @8caaacfa\n~3|secureTextField|password|••••\n3: @f2046cc6\n+8|staticText|Welcome, gary@example.com\n",
+     "chars": 148,
+     "images": [],
+     "stderrChars": 0
+    },
+    {
+     "kind": "cli",
+     "tool": "rocketsim elements",
+     "args": [
+      "elements",
+      "--agent",
+      "--agent-mode",
+      "act",
+      "--udid",
+      "C41351C9-7059-4BFE-B548-8814E351FF53"
+     ],
+     "ms": 148.483458,
+     "isError": false,
+     "exitCode": 0,
+     "text": "@f2046cc6 #1201 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
+     "chars": 305,
+     "images": [],
+     "stderrChars": 0
+    }
+   ],
+   "tokens": 165,
+   "verify": {
+    "sawWelcome": true,
+    "appSignedIn": true,
+    "calls": 3
+   }
+  }
+ ],
+ "condition": {
+  "deviceHubAsked": false,
+  "deviceHubRunning": false,
+  "simulator": "headless (simctl boot, no Device Hub)"
+ },
+ "environment": {
+  "date": "2026-11-20T08:50:11.168Z",
+  "macos": "26.6.2 (25G83)",
+  "hardware": {
+   "model": "VirtualMac2,1",
+   "cpu": "Apple M6 (Virtual)",
+   "cores": 6,
+   "memoryGB": 8
+  },
+  "xcode": "Xcode 27.2, Build version 27B52",
+  "node": "v24.20.0",
+  "simulator": {
+   "udid": "C41351C9-7059-4BFE-B548-8814E351FF53",
+   "name": "Bench iPhone 17 Pro",
+   "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro",
+   "runtime": "iOS 27.2 (24B8117)"
+  }
+ },
+ "version": "16.8.0 (339) 17.0.0 pre-release",
+ "server": {
+  "toolCount": 0,
+  "definitionsChars": 0,
+  "instructionsChars": 0,
+  "note": "command line, no MCP server"
+ },
+ "leftoversKilled": [],
+ "finishedAt": "2026-11-20T08:54:38.148Z",
+ "mcpNotifications": 0,
+ "strayStdout": [],
+ "quick": {
+  "warmup": {
+   "n": 1,
+   "ok": 1,
+   "medianMs": 347.2055,
+   "p90Ms": 347.2055,
+   "medianTokens": 51
+  },
+  "read": {
+   "n": 20,
+   "ok": 20,
+   "medianMs": 260.308458,
+   "p90Ms": 417.339084,
+   "medianTokens": 51
+  },
+  "tap": {
+   "n": 20,
+   "ok": 20,
+   "medianMs": 488.910354,
+   "p90Ms": 513.206917,
+   "medianTokens": 13
+  },
+  "type": {
+   "n": 10,
+   "ok": 10,
+   "medianMs": 1368.0809795,
+   "p90Ms": 1495.628917,
+   "medianTokens": 12
+  },
+  "flow": {
+   "n": 10,
+   "ok": 10,
+   "medianMs": 2998.2265420000003,
+   "p90Ms": 3429.404833,
+   "medianTokens": 164
+  },
+  "flowBatch": {
+   "n": 10,
+   "ok": 10,
+   "medianMs": 2742.8871040000004,
+   "p90Ms": 2801.5215000000003,
+   "medianTokens": 165
+  }
+ },
+ "conditionAtEnd": {
+  "deviceHubRunning": false
+ }
+}
