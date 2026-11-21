@@ -1,3 +1,20 @@
+# 17.0.0 (341)
+
+**Improved:**
+
+- RocketSim now requires macOS 26.0 or later.
+
+**Fixed:**
+
+- CLI: `rocketsim video record` with the plain style now rotates landscape and mid-recording-rotation recordings correctly, and no longer leaves temporary files behind.
+- Network conditions: RocketSim's network filter only accepts commands from RocketSim, and releases the filtered apps when RocketSim quits.
+- Thumbnails: the capture thumbnail and the magnifier no longer leave keyboard and scroll monitors running after they close.
+- Performance traces: cancelling a trace while RocketSim waits for RocketTrace no longer leaves the trace button stuck.
+- Storage inspector: saving user defaults with accented or non-Latin text now stores the text as typed.
+- Reliability: improved stability of the CLI connection, process output with non-ASCII text, keychain edits of iCloud items, and floating thumbnails on multi-monitor setups.
+
+# 16.8.0
+
 # 17.0.0
 
 **New:**
@@ -9,13 +26,22 @@
 - Environment Toggles: preview how people with color blindness see your app. Pick Protanopia, Deuteranopia, Tritanopia, their milder variants, or Achromatopsia under Color Blindness Simulation, and RocketSim shows a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
 - CLI: `rocketsim location` lets agents list the locations you saved under App Actions (`location list`), apply one by name or identifier or set coordinates (`location set`), stop simulating (`location clear`), and check the last location RocketSim applied (`location current`). (Thanks, M. Lin!)
 - CLI: `rocketsim interact rotate --orientation <portrait|portraitUpsideDown|landscapeLeft|landscapeRight>` rotates an iPhone or iPad Simulator and returns once the rotation is applied, so scripts can capture the landscape screen right away. It also works as a step in `rocketsim do`. (Thanks, P. van den Hamer!)
+- CLI: agent taps and typing are faster. Typing no longer waits a fixed fifth of a second after the keys are sent, and screen reads skip navigation-bar checks that found nothing on the screen they last looked at.
+- CLI: reads, taps, typing, and `rocketsim do` batches now answer in plain lines instead of JSON: a screen read is `@<screen>` plus one row per element, and an action answers with the new screen and only what changed on it. A full sign-in costs agents well under 200 tokens to read, less than half of before. Other commands keep their JSON, without the version and success fields that carried no news.
+- CLI: commands that answer in JSON (`screen`, `wait`, `status`, `accessibility-audit`, `preview`, ...) now print their result directly instead of wrapping it in a `data` object, so agents read fewer characters and `url`, `findings`, or `not_covered` sit at the top level. Failures still answer `{"error":{...}}` and exit with code 1.
+- CLI: screen reads no longer list the keyboard's own keys, its typing-predictions bar, or what the keyboard covers.
+- CLI: `rocketsim elements` answers are shorter, so agents spend fewer tokens per screen read. Rows no longer repeat that an element is enabled, scroll bars are left out, and the answer skips details an agent already knows.
 - CLI: `rocketsim elements` can filter its output with `--match`, `--role`, `--fields`, `--max-label`, `--exclude-chrome`, and `--merge-twins`, so agents only receive the rows they need and use fewer tokens. (Thanks, P. Krassay!)
 
 **Improved:**
 
 - CLI: password fields are now reported to agents as secure text fields, so they are recognized as sensitive. `--type textField` still matches them.
 - CLI: improved reliability when agents replay and repair flows.
-- CLI: actions return faster once the screen has settled.
+- CLI: actions return as soon as the screen stops moving. Taps, typing, and `rocketsim do` batches finish in a third of the time, and a typical tap now answers in under a second. RocketSim follows the Simulator's screen directly, without an extra video stream.
+- CLI: after an action, `rocketsim` tells the agent the new text on screen, such as a status message or an error, so it often does not need another read. Keyboard keys and off-screen rows no longer pad the answer.
+- CLI: typing into a field with an accessibility identifier is one step (`rocketsim interact type "text" --identifier name --screen latest`) and answers with the text the field now shows. Answers leave out empty lists and zero counts, so agents read fewer tokens.
+- CLI: improved reliability when the Simulator shuts down or reboots while `rocketsim` is watching it.
+- CLI: apps that are not ready for accessibility yet are read again instead of being reported as an empty screen.
 - CLI: `rocketsim do --refresh-policy smart` finishes batches of coordinate taps and swipes about 35% faster, and typing text is faster as well.
 - CLI: new `--settle quick|none` option on interact commands for agents that prefer speed over waiting for the screen to settle. Selectors now wait up to 1.5 seconds for their element by default.
 - CLI: the bundled agent skill no longer asks agents to save the accessibility snapshot to a file first, which saves a step per screen read.
@@ -84,11 +110,19 @@
 - CLI: `rocketsim screenshot` and `rocketsim video record` accept the mesh gradients from the background picker, for example `--background aurora-drift`, `pastel-foam`, `lava-bloom`, or `indigo-nightfall`. An unknown name lists the valid ones.
 - CLI: `--metadata` now renders the app icon, title, and subtitle badge, like the Post Editor does, from the most recent build on the Simulator. Use `--metadata-title`, `--metadata-subtitle` (an empty value hides the subtitle), and `--metadata-app <bundle-id>` to override the text or pick another installed app. The badge needs `--ratio` other than `auto`; RocketSim now says so, or that no app could be found, instead of leaving the badge out.
 - Captures: customize screenshot and recording file names with pills for capture type, device, app name, inches, and date, in Settings > Captures. (Thanks, K. Strasser!)
+- Capture editor: iPhone Duo screenshots get a strip of pose presets at the top of the Device section, drawn from your own screenshot. Pick Angled, Book, Laptop, Desk, or Tent in one click; the presets that show depend on whether you captured the Duo closed, half-folded, or open, and in which orientation.
+- Capture editor: undo and redo (Cmd+Z) now work for every change in the editor, not only the 3D device: background, device bezel, frame color, touches, output settings, metadata, and the trim handles.
+- Capture editor: the window shows the edited dot in its close button once you change something. Closing it with the red button, Cmd+W, or Escape then asks "Do you want to apply your changes?" with Apply, Discard, and Cancel. Without changes, Escape closes the editor right away. Discard also puts the remembered styling and touch settings back to what they were when you opened the editor.
 
 **Improved:**
 
 - Onboarding: a refreshed first-run flow with an optional email step on Welcome, a short demo of the RocketSim CLI and Agent Skill, and a guided CLI and Agent Skill install step that only continues once an Agent Skill is installed. Onboarding no longer ends on an empty window after a permission or install step.
 - iPhone Duo: screenshots and recordings now show the device from straight on, like the Simulator and Device Hub, instead of from a slight angle. The fold still follows the hinge angle, from closed through book to open.
+- iPhone Duo: the Horizontal Angle and Vertical Angle sliders now go all the way around the device: horizontal from -180° to 180° (180° shows the back) and vertical from -90° to 90° (straight down on the top or bottom edge). Dragging the preview turns the device faster, and `rocketsim screenshot --device-angle <yaw>,<pitch>` accepts the same ranges.
+- iPhone Duo: new captures always open in the editor straight on, even if you turned the device in an earlier capture, and `rocketsim screenshot` defaults to straight on too. Change the angle in the editor or with `--device-angle`; Reset View Angle returns to straight on.
+- Capture editor: the preview now fills the whole preview area, keeping the aspect ratio of the output, instead of leaving a margin or staying at its original size.
+- Capture export: screenshots and recordings are always drawn on the GPU, including App Store Connect sizes, rotating recordings, and the Simulator bezel. If the GPU cannot draw an export, RocketSim now shows the reason instead of silently exporting a slower, lower-quality version.
+- Capture editor: previews of screenshots and recordings now show exactly what the export produces, because both are drawn on the GPU. This includes recordings where you rotated the device, which preview with the device turning smoothly, and App Store Connect sizes. The timeline thumbnails use the same styling too. If the GPU cannot draw a preview, the editor now says why instead of showing a different-looking one.
 
 **Fixed:**
 
@@ -100,6 +134,7 @@
 **New:**
 
 - iPhone Duo: choose the Star White or Night Sky finish in the Device Bezel picker for screenshots and recordings. Screenshots can switch finish in the editor, and a recording keeps the finish it was captured in. CLI: `--device-color <star-white|night-sky>` with `--bezel`.
+- iPhone Duo: the capture editor previews screenshots live in 3D. Drag to turn and tilt the device, scroll or pinch to resize it, and double-click to reset the angle. The new Device section changes the fold, view angle, device size, and rotation. Arrow keys turn and tilt, `[` and `]` fold, and `0` resets the angle; VoiceOver describes the pose and can adjust it, and Edit > Undo reverts each change. CLI: `rocketsim screenshot --bezel device3d --device-angle <studio|front|yaw,pitch>` renders an iPhone Duo screenshot at a chosen angle; recordings ignore it.
 
 **Improved:**
 
@@ -120,6 +155,7 @@
 - Fixed a rare crash when RocketSim looked up a Simulator from two places at once, for example while changing the iPhone Duo fold pose during a recording.
 - iPhone Duo: screenshots and videos with a device bezel could come out much darker than the Simulator on macOS 27 beta. RocketSim now checks how the system renders the device and corrects the colors when needed.
 - iPhone Duo: a missing 3D model in the selected Xcode is no longer reported as an error, and a failed Duo conversion now shows why it failed and suggests recording again.
+- iPhone Duo: the editor's live video preview, which is still off by default, shows the device at its exported size, about 13% larger than the current recording preview.
 
 # 16.7.0 (337)
 
