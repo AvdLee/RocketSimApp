@@ -3,7 +3,7 @@
  "label": null,
  "name": "simulator-use",
  "interface": "mcp",
- "startedAt": "2026-11-20T23:24:45.649Z",
+ "startedAt": "2026-11-21T15:39:57.637Z",
  "counts": {
   "reads": 20,
   "taps": 20,
@@ -16,20 +16,20 @@
    "op": "setup",
    "ok": true,
    "error": null,
-   "wallMs": 256.45775,
-   "ms": 256.181667,
+   "wallMs": 179.305334,
+   "ms": 178.939458,
    "calls": [
     {
      "kind": "mcp",
      "tool": "device_use",
      "args": {
-      "device": "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "device": "4D870CFB-22E9-4D79-A75A-E133543149D2"
      },
-     "ms": 256.181667,
+     "ms": 178.939458,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "Using Bench iPhone 17 Pro (iOS 27.2, D90B8CA7-FEF0-4775-9624-1105E0F51689); the other tools use it from now on.",
+     "text": "Using Bench iPhone 17 Pro (iOS 27.2, 4D870CFB-22E9-4D79-A75A-E133543149D2); the other tools use it from now on.",
      "chars": 111,
      "images": [],
      "other": [],
@@ -42,14 +42,14 @@
    "op": "warmup",
    "ok": true,
    "error": null,
-   "wallMs": 27902.980666,
-   "ms": 27902.492084,
+   "wallMs": 14524.291,
+   "ms": 14523.73575,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 27902.492084,
+     "ms": 14523.73575,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -71,14 +71,14 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 332.526666,
-   "ms": 332.361417,
+   "wallMs": 1037.353334,
+   "ms": 1036.511167,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 332.361417,
+     "ms": 1036.511167,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -100,14 +100,14 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 307.817167,
-   "ms": 307.699792,
+   "wallMs": 616.3495,
+   "ms": 616.156709,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 307.699792,
+     "ms": 616.156709,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -129,14 +129,14 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 250.383417,
-   "ms": 250.299916,
+   "wallMs": 830.699666,
+   "ms": 830.592875,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 250.299916,
+     "ms": 830.592875,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -158,14 +158,14 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 192.693,
-   "ms": 192.6125,
+   "wallMs": 468.980417,
+   "ms": 468.887042,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 192.6125,
+     "ms": 468.887042,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -187,14 +187,14 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 215.350791,
-   "ms": 215.266875,
+   "wallMs": 414.125459,
+   "ms": 414.018792,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 215.266875,
+     "ms": 414.018792,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -216,14 +216,14 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 223.514375,
-   "ms": 223.417208,
+   "wallMs": 332.371292,
+   "ms": 332.275,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 223.417208,
+     "ms": 332.275,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -245,14 +245,14 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 207.045083,
-   "ms": 206.933791,
+   "wallMs": 394.977834,
+   "ms": 394.887125,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 206.933791,
+     "ms": 394.887125,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -274,14 +274,14 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 204.085292,
-   "ms": 203.993334,
+   "wallMs": 313.704667,
+   "ms": 313.619083,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 203.993334,
+     "ms": 313.619083,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -303,14 +303,14 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 215.338542,
-   "ms": 215.283333,
+   "wallMs": 508.749958,
+   "ms": 508.685625,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 215.283333,
+     "ms": 508.685625,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -332,14 +332,14 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 225.102416,
-   "ms": 225.056833,
+   "wallMs": 360.502917,
+   "ms": 360.4305,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 225.056833,
+     "ms": 360.4305,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -361,14 +361,14 @@
    "i": 10,
    "ok": true,
    "error": null,
-   "wallMs": 235.278458,
-   "ms": 235.219333,
+   "wallMs": 415.067208,
+   "ms": 414.985917,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 235.219333,
+     "ms": 414.985917,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -390,14 +390,14 @@
    "i": 11,
    "ok": true,
    "error": null,
-   "wallMs": 228.618917,
-   "ms": 228.573334,
+   "wallMs": 702.718084,
+   "ms": 702.588125,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 228.573334,
+     "ms": 702.588125,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -419,14 +419,14 @@
    "i": 12,
    "ok": true,
    "error": null,
-   "wallMs": 212.005292,
-   "ms": 211.950375,
+   "wallMs": 324.271,
+   "ms": 324.056375,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 211.950375,
+     "ms": 324.056375,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -448,14 +448,14 @@
    "i": 13,
    "ok": true,
    "error": null,
-   "wallMs": 234.649584,
-   "ms": 234.60325,
+   "wallMs": 465.880208,
+   "ms": 465.813834,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 234.60325,
+     "ms": 465.813834,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -477,14 +477,14 @@
    "i": 14,
    "ok": true,
    "error": null,
-   "wallMs": 220.309125,
-   "ms": 220.237125,
+   "wallMs": 294.393459,
+   "ms": 294.307,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 220.237125,
+     "ms": 294.307,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -506,14 +506,14 @@
    "i": 15,
    "ok": true,
    "error": null,
-   "wallMs": 228.299625,
-   "ms": 228.243542,
+   "wallMs": 332.367417,
+   "ms": 332.30825,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 228.243542,
+     "ms": 332.30825,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -535,14 +535,14 @@
    "i": 16,
    "ok": true,
    "error": null,
-   "wallMs": 215.895292,
-   "ms": 215.824125,
+   "wallMs": 279.567833,
+   "ms": 279.520583,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 215.824125,
+     "ms": 279.520583,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -564,14 +564,14 @@
    "i": 17,
    "ok": true,
    "error": null,
-   "wallMs": 241.757208,
-   "ms": 241.682667,
+   "wallMs": 257.34925,
+   "ms": 257.286375,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 241.682667,
+     "ms": 257.286375,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -593,14 +593,14 @@
    "i": 18,
    "ok": true,
    "error": null,
-   "wallMs": 216.428209,
-   "ms": 216.384375,
+   "wallMs": 307.034959,
+   "ms": 306.973834,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 216.384375,
+     "ms": 306.973834,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -622,14 +622,14 @@
    "i": 19,
    "ok": true,
    "error": null,
-   "wallMs": 181.705541,
-   "ms": 181.664083,
+   "wallMs": 265.298167,
+   "ms": 265.250125,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 181.664083,
+     "ms": 265.250125,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -651,8 +651,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 655.567917,
-   "ms": 655.480917,
+   "wallMs": 834.953291,
+   "ms": 834.778583,
    "calls": [
     {
      "kind": "mcp",
@@ -662,11 +662,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 655.480917,
+     "ms": 834.778583,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.8 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -678,14 +678,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 684.921125,
-    "ms": 684.859292,
+    "wallMs": 2558.522833,
+    "ms": 2558.464667,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 684.859292,
+      "ms": 2558.464667,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -713,8 +713,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 628.062084,
-   "ms": 628.008833,
+   "wallMs": 849.053959,
+   "ms": 848.99725,
    "calls": [
     {
      "kind": "mcp",
@@ -724,11 +724,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 628.008833,
+     "ms": 848.99725,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -740,14 +740,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 647.371791,
-    "ms": 647.318041,
+    "wallMs": 1392.500375,
+    "ms": 1392.43425,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 647.318041,
+      "ms": 1392.43425,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -775,8 +775,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 636.71075,
-   "ms": 636.662458,
+   "wallMs": 714.9335,
+   "ms": 714.86025,
    "calls": [
     {
      "kind": "mcp",
@@ -786,11 +786,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 636.662458,
+     "ms": 714.86025,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -802,14 +802,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 734.76975,
-    "ms": 734.719542,
+    "wallMs": 1836.545084,
+    "ms": 1836.452375,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 734.719542,
+      "ms": 1836.452375,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -837,8 +837,8 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 638.305375,
-   "ms": 638.254334,
+   "wallMs": 711.546584,
+   "ms": 711.462291,
    "calls": [
     {
      "kind": "mcp",
@@ -848,11 +848,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 638.254334,
+     "ms": 711.462291,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -864,14 +864,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 637.81475,
-    "ms": 637.760333,
+    "wallMs": 1103.858875,
+    "ms": 1103.794584,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 637.760333,
+      "ms": 1103.794584,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -899,8 +899,8 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 626.803333,
-   "ms": 626.758458,
+   "wallMs": 710.475791,
+   "ms": 710.42425,
    "calls": [
     {
      "kind": "mcp",
@@ -910,11 +910,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 626.758458,
+     "ms": 710.42425,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -926,14 +926,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 655.436583,
-    "ms": 655.364834,
+    "wallMs": 1187.032542,
+    "ms": 1186.973959,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 655.364834,
+      "ms": 1186.973959,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -961,8 +961,8 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 617.937167,
-   "ms": 617.885083,
+   "wallMs": 694.1345,
+   "ms": 694.078625,
    "calls": [
     {
      "kind": "mcp",
@@ -972,11 +972,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 617.885083,
+     "ms": 694.078625,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -988,14 +988,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 634.553416,
-    "ms": 634.504916,
+    "wallMs": 1136.953375,
+    "ms": 1136.89675,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 634.504916,
+      "ms": 1136.89675,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1023,8 +1023,8 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 670.221709,
-   "ms": 670.16075,
+   "wallMs": 716.493958,
+   "ms": 716.431,
    "calls": [
     {
      "kind": "mcp",
@@ -1034,7 +1034,7 @@
        "tap #signIn"
       ]
      },
-     "ms": 670.16075,
+     "ms": 716.431,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -1050,14 +1050,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 641.333541,
-    "ms": 641.276584,
+    "wallMs": 1050.580917,
+    "ms": 1050.506916,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 641.276584,
+      "ms": 1050.506916,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1085,8 +1085,8 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 625.575667,
-   "ms": 625.506958,
+   "wallMs": 685.095917,
+   "ms": 685.038958,
    "calls": [
     {
      "kind": "mcp",
@@ -1096,11 +1096,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 625.506958,
+     "ms": 685.038958,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1112,14 +1112,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 679.287125,
-    "ms": 679.217458,
+    "wallMs": 1103.719834,
+    "ms": 1103.662916,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 679.217458,
+      "ms": 1103.662916,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1147,8 +1147,8 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 645.946334,
-   "ms": 645.896167,
+   "wallMs": 715.023,
+   "ms": 714.953458,
    "calls": [
     {
      "kind": "mcp",
@@ -1158,11 +1158,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 645.896167,
+     "ms": 714.953458,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1174,14 +1174,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 648.07225,
-    "ms": 648.024917,
+    "wallMs": 1176.320042,
+    "ms": 1176.266292,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 648.024917,
+      "ms": 1176.266292,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1209,8 +1209,8 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 616.587167,
-   "ms": 616.531584,
+   "wallMs": 700.904583,
+   "ms": 700.828584,
    "calls": [
     {
      "kind": "mcp",
@@ -1220,11 +1220,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 616.531584,
+     "ms": 700.828584,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1236,14 +1236,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 598.63125,
-    "ms": 598.570958,
+    "wallMs": 1123.579625,
+    "ms": 1123.503,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 598.570958,
+      "ms": 1123.503,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1271,8 +1271,8 @@
    "i": 10,
    "ok": true,
    "error": null,
-   "wallMs": 611.218375,
-   "ms": 611.159,
+   "wallMs": 700.644875,
+   "ms": 700.592792,
    "calls": [
     {
      "kind": "mcp",
@@ -1282,11 +1282,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 611.159,
+     "ms": 700.592792,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1298,14 +1298,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 657.620667,
-    "ms": 657.569125,
+    "wallMs": 1204.530458,
+    "ms": 1204.478292,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 657.569125,
+      "ms": 1204.478292,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1333,8 +1333,8 @@
    "i": 11,
    "ok": true,
    "error": null,
-   "wallMs": 621.710666,
-   "ms": 621.647125,
+   "wallMs": 729.058792,
+   "ms": 729.004334,
    "calls": [
     {
      "kind": "mcp",
@@ -1344,11 +1344,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 621.647125,
+     "ms": 729.004334,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1360,14 +1360,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 592.821375,
-    "ms": 592.773167,
+    "wallMs": 1060.536875,
+    "ms": 1060.478125,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 592.773167,
+      "ms": 1060.478125,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1395,8 +1395,8 @@
    "i": 12,
    "ok": true,
    "error": null,
-   "wallMs": 619.314958,
-   "ms": 619.262416,
+   "wallMs": 702.713083,
+   "ms": 702.662333,
    "calls": [
     {
      "kind": "mcp",
@@ -1406,11 +1406,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 619.262416,
+     "ms": 702.662333,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1422,14 +1422,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 614.035833,
-    "ms": 613.9825,
+    "wallMs": 1203.613833,
+    "ms": 1203.562333,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 613.9825,
+      "ms": 1203.562333,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1457,8 +1457,8 @@
    "i": 13,
    "ok": true,
    "error": null,
-   "wallMs": 618.13375,
-   "ms": 618.074208,
+   "wallMs": 689.149125,
+   "ms": 689.090917,
    "calls": [
     {
      "kind": "mcp",
@@ -1468,11 +1468,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 618.074208,
+     "ms": 689.090917,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1484,14 +1484,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 626.951958,
-    "ms": 626.905375,
+    "wallMs": 1159.412334,
+    "ms": 1159.351292,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 626.905375,
+      "ms": 1159.351292,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1519,8 +1519,8 @@
    "i": 14,
    "ok": true,
    "error": null,
-   "wallMs": 610.437958,
-   "ms": 610.38925,
+   "wallMs": 681.83675,
+   "ms": 681.787375,
    "calls": [
     {
      "kind": "mcp",
@@ -1530,11 +1530,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 610.38925,
+     "ms": 681.787375,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1546,14 +1546,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 698.190417,
-    "ms": 698.136333,
+    "wallMs": 1141.43225,
+    "ms": 1141.379625,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 698.136333,
+      "ms": 1141.379625,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1581,8 +1581,8 @@
    "i": 15,
    "ok": true,
    "error": null,
-   "wallMs": 624.905834,
-   "ms": 624.853542,
+   "wallMs": 714.265,
+   "ms": 714.215208,
    "calls": [
     {
      "kind": "mcp",
@@ -1592,11 +1592,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 624.853542,
+     "ms": 714.215208,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1608,14 +1608,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 639.029167,
-    "ms": 638.9795,
+    "wallMs": 1056.003333,
+    "ms": 1055.947834,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 638.9795,
+      "ms": 1055.947834,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1643,8 +1643,8 @@
    "i": 16,
    "ok": true,
    "error": null,
-   "wallMs": 635.78475,
-   "ms": 635.738584,
+   "wallMs": 728.391,
+   "ms": 728.341667,
    "calls": [
     {
      "kind": "mcp",
@@ -1654,11 +1654,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 635.738584,
+     "ms": 728.341667,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1670,14 +1670,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 633.027958,
-    "ms": 632.979542,
+    "wallMs": 1134.327791,
+    "ms": 1134.269291,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 632.979542,
+      "ms": 1134.269291,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1705,8 +1705,8 @@
    "i": 17,
    "ok": true,
    "error": null,
-   "wallMs": 610.201459,
-   "ms": 610.150375,
+   "wallMs": 690.325792,
+   "ms": 690.271083,
    "calls": [
     {
      "kind": "mcp",
@@ -1716,11 +1716,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 610.150375,
+     "ms": 690.271083,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1732,14 +1732,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 707.8935,
-    "ms": 707.837375,
+    "wallMs": 1136.486167,
+    "ms": 1136.427334,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 707.837375,
+      "ms": 1136.427334,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1767,8 +1767,8 @@
    "i": 18,
    "ok": true,
    "error": null,
-   "wallMs": 610.397208,
-   "ms": 610.345666,
+   "wallMs": 718.648375,
+   "ms": 718.57175,
    "calls": [
     {
      "kind": "mcp",
@@ -1778,11 +1778,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 610.345666,
+     "ms": 718.57175,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1794,14 +1794,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 630.696333,
-    "ms": 630.64325,
+    "wallMs": 1096.992458,
+    "ms": 1096.937167,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 630.64325,
+      "ms": 1096.937167,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1829,8 +1829,8 @@
    "i": 19,
    "ok": true,
    "error": null,
-   "wallMs": 617.469083,
-   "ms": 617.421541,
+   "wallMs": 701.350917,
+   "ms": 701.28725,
    "calls": [
     {
      "kind": "mcp",
@@ -1840,11 +1840,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 617.421541,
+     "ms": 701.28725,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Invalid email or password\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Invalid email or password\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -1856,14 +1856,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 645.385542,
-    "ms": 645.335292,
+    "wallMs": 1177.915333,
+    "ms": 1177.860375,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 645.335292,
+      "ms": 1177.860375,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1891,8 +1891,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 1816.602916,
-   "ms": 1816.493666,
+   "wallMs": 2034.075292,
+   "ms": 2033.930458,
    "calls": [
     {
      "kind": "mcp",
@@ -1902,11 +1902,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1816.493666,
+     "ms": 2033.930458,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.8 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 2.0 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -1918,14 +1918,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 627.989875,
-    "ms": 627.943125,
+    "wallMs": 1155.083542,
+    "ms": 1155.030083,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 627.943125,
+      "ms": 1155.030083,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1946,14 +1946,14 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 293.907458,
-    "ms": 293.853167,
+    "wallMs": 478.491208,
+    "ms": 478.440875,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 293.853167,
+      "ms": 478.440875,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -1979,8 +1979,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 1220.9315,
-   "ms": 1220.880917,
+   "wallMs": 1368.225167,
+   "ms": 1368.165,
    "calls": [
     {
      "kind": "mcp",
@@ -1990,11 +1990,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1220.880917,
+     "ms": 1368.165,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.4 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -2006,14 +2006,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 642.24,
-    "ms": 642.193333,
+    "wallMs": 1110.640625,
+    "ms": 1110.5845,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 642.193333,
+      "ms": 1110.5845,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -2034,14 +2034,14 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 307.662666,
-    "ms": 307.623958,
+    "wallMs": 348.578833,
+    "ms": 348.53625,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 307.623958,
+      "ms": 348.53625,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -2067,8 +2067,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 1085.145,
-   "ms": 1085.093417,
+   "wallMs": 1244.632625,
+   "ms": 1244.572667,
    "calls": [
     {
      "kind": "mcp",
@@ -2078,623 +2078,7 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1085.093417,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 780.042084,
-    "ms": 779.991208,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 779.991208,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 400.610333,
-    "ms": 400.569125,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 400.569125,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 3,
-   "ok": true,
-   "error": null,
-   "wallMs": 1092.085375,
-   "ms": 1092.027542,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1092.027542,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 670.097625,
-    "ms": 670.043917,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 670.043917,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 300.526125,
-    "ms": 300.484417,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 300.484417,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 4,
-   "ok": true,
-   "error": null,
-   "wallMs": 1074.053667,
-   "ms": 1074.00225,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1074.00225,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 675.619875,
-    "ms": 675.572,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 675.572,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 293.89375,
-    "ms": 293.851625,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 293.851625,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 5,
-   "ok": true,
-   "error": null,
-   "wallMs": 1027.455625,
-   "ms": 1027.405333,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1027.405333,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.0 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 691.456667,
-    "ms": 691.407458,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 691.407458,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 391.286625,
-    "ms": 391.243375,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 391.243375,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 6,
-   "ok": true,
-   "error": null,
-   "wallMs": 1089.876125,
-   "ms": 1089.824708,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1089.824708,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 607.065292,
-    "ms": 607.01625,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 607.01625,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 294.603,
-    "ms": 294.562917,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 294.562917,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 7,
-   "ok": true,
-   "error": null,
-   "wallMs": 1107.288917,
-   "ms": 1107.236125,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1107.236125,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 629.714084,
-    "ms": 629.666417,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 629.666417,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 308.754666,
-    "ms": 308.715125,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 308.715125,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 8,
-   "ok": true,
-   "error": null,
-   "wallMs": 1085.424875,
-   "ms": 1085.363209,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1085.363209,
-     "isError": false,
-     "error": null,
-     "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
-     "chars": 55,
-     "images": [],
-     "other": [],
-     "structuredChars": 0
-    }
-   ],
-   "tokens": 14,
-   "prep": {
-    "op": "pre-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 649.51625,
-    "ms": 649.465416,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 649.465416,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 287,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 72,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "post": {
-    "op": "post-read",
-    "ok": true,
-    "error": null,
-    "wallMs": 391.194542,
-    "ms": 391.130958,
-    "calls": [
-     {
-      "kind": "mcp",
-      "tool": "ui_look",
-      "args": {},
-      "ms": 391.130958,
-      "isError": false,
-      "error": null,
-      "timedOut": false,
-      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
-      "chars": 298,
-      "images": [],
-      "other": [],
-      "structuredChars": 0
-     }
-    ],
-    "tokens": 75,
-    "verify": {
-     "sawSignIn": true,
-     "sawEmail": true
-    }
-   },
-   "verify": {
-    "fieldShowsText": true
-   }
-  },
-  {
-   "op": "type",
-   "i": 9,
-   "ok": true,
-   "error": null,
-   "wallMs": 1227.785834,
-   "ms": 1227.729667,
-   "calls": [
-    {
-     "kind": "mcp",
-     "tool": "ui_act",
-     "args": {
-      "steps": [
-       "fill #email gary@example.com"
-      ]
-     },
-     "ms": 1227.729667,
+     "ms": 1244.572667,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2710,14 +2094,14 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 690.427208,
-    "ms": 690.373583,
+    "wallMs": 1133.468417,
+    "ms": 1133.414125,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 690.373583,
+      "ms": 1133.414125,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -2738,14 +2122,630 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 286.004791,
-    "ms": 285.963917,
+    "wallMs": 348.82675,
+    "ms": 348.776125,
     "calls": [
      {
       "kind": "mcp",
       "tool": "ui_look",
       "args": {},
-      "ms": 285.963917,
+      "ms": 348.776125,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 3,
+   "ok": true,
+   "error": null,
+   "wallMs": 1412.134667,
+   "ms": 1412.081084,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1412.081084,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.3 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 1087.473958,
+    "ms": 1087.419917,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 1087.419917,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 344.342166,
+    "ms": 344.29375,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 344.29375,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 4,
+   "ok": true,
+   "error": null,
+   "wallMs": 1227.606583,
+   "ms": 1227.552375,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1227.552375,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 1171.249833,
+    "ms": 1171.189666,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 1171.189666,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 471.14675,
+    "ms": 471.101958,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 471.101958,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 5,
+   "ok": true,
+   "error": null,
+   "wallMs": 1352.381625,
+   "ms": 1352.3225,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1352.3225,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.4 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 1062.002458,
+    "ms": 1061.950084,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 1061.950084,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 349.231167,
+    "ms": 349.187,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 349.187,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 6,
+   "ok": true,
+   "error": null,
+   "wallMs": 1222.006083,
+   "ms": 1221.949459,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1221.949459,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 1165.979584,
+    "ms": 1165.924375,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 1165.924375,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 355.780333,
+    "ms": 355.733916,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 355.733916,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 7,
+   "ok": true,
+   "error": null,
+   "wallMs": 1344.170834,
+   "ms": 1344.120834,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1344.120834,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 2263.954375,
+    "ms": 2263.896167,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 2263.896167,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 356.558042,
+    "ms": 356.494375,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 356.494375,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 8,
+   "ok": true,
+   "error": null,
+   "wallMs": 1223.492875,
+   "ms": 1223.427125,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1223.427125,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 1160.364167,
+    "ms": 1160.307667,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 1160.307667,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 466.031959,
+    "ms": 465.9845,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 465.9845,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"gary@example.com\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 298,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 75,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "verify": {
+    "fieldShowsText": true
+   }
+  },
+  {
+   "op": "type",
+   "i": 9,
+   "ok": true,
+   "error": null,
+   "wallMs": 1223.681584,
+   "ms": 1223.620709,
+   "calls": [
+    {
+     "kind": "mcp",
+     "tool": "ui_act",
+     "args": {
+      "steps": [
+       "fill #email gary@example.com"
+      ]
+     },
+     "ms": 1223.620709,
+     "isError": false,
+     "error": null,
+     "timedOut": false,
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
+     "chars": 55,
+     "images": [],
+     "other": [],
+     "structuredChars": 0
+    }
+   ],
+   "tokens": 14,
+   "prep": {
+    "op": "pre-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 1136.833208,
+    "ms": 1136.779625,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 1136.779625,
+      "isError": false,
+      "error": null,
+      "timedOut": false,
+      "text": "Demo · Sign In · Bench iPhone 17 Pro (iOS 27.2)\ntextfield \"Email\" #email @201,194\nsecurefield \"Password\" #password @201,246\nswitch \"Remember me\" #remember off @337,298\nbutton \"Sign In\" #signIn @201,350\ntext \"Not signed in\" #status @201,402\ntabs: Login (selected) @158,822, Items @244,822",
+      "chars": 287,
+      "images": [],
+      "other": [],
+      "structuredChars": 0
+     }
+    ],
+    "tokens": 72,
+    "verify": {
+     "sawSignIn": true,
+     "sawEmail": true
+    }
+   },
+   "post": {
+    "op": "post-read",
+    "ok": true,
+    "error": null,
+    "wallMs": 360.901667,
+    "ms": 360.852542,
+    "calls": [
+     {
+      "kind": "mcp",
+      "tool": "ui_look",
+      "args": {},
+      "ms": 360.852542,
       "isError": false,
       "error": null,
       "timedOut": false,
@@ -2771,14 +2771,14 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 3351.210916,
-   "ms": 3350.7786249999995,
+   "wallMs": 4583.215167,
+   "ms": 4582.694792,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 791.256458,
+     "ms": 1045.78075,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2796,11 +2796,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1068.288458,
+     "ms": 1352.259667,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.4 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -2814,11 +2814,11 @@
        "fill #password secret1"
       ]
      },
-     "ms": 654.186542,
+     "ms": 1170.110375,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.7 s\nchanged: #password \"•••••••\"",
+     "text": "1 step done in 1.2 s\nchanged: #password \"•••••••\"",
      "chars": 49,
      "images": [],
      "other": [],
@@ -2832,11 +2832,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 553.162,
+     "ms": 679.844542,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -2846,7 +2846,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 283.885167,
+     "ms": 334.699458,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2869,14 +2869,14 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 3812.15525,
-   "ms": 3811.8978760000005,
+   "wallMs": 4706.483459,
+   "ms": 4706.1975410000005,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 628.668292,
+     "ms": 1114.005916,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2894,11 +2894,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1656.541625,
+     "ms": 1828.222833,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.6 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.8 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -2912,7 +2912,7 @@
        "fill #password secret1"
       ]
      },
-     "ms": 654.815292,
+     "ms": 729.186083,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2930,11 +2930,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 593.560292,
+     "ms": 689.245709,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -2944,7 +2944,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 278.312375,
+     "ms": 345.537,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2967,14 +2967,14 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 3328.134542,
-   "ms": 3327.8715410000004,
+   "wallMs": 4256.071291,
+   "ms": 4255.789792,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 659.32375,
+     "ms": 1120.318167,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -2992,11 +2992,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1177.380958,
+     "ms": 1232.312125,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3010,11 +3010,11 @@
        "fill #password secret1"
       ]
      },
-     "ms": 659.203709,
+     "ms": 887.904666,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.7 s\nchanged: #password \"•••••••\"",
+     "text": "1 step done in 0.9 s\nchanged: #password \"•••••••\"",
      "chars": 49,
      "images": [],
      "other": [],
@@ -3028,11 +3028,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 552.130833,
+     "ms": 660.691959,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3042,7 +3042,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 279.832291,
+     "ms": 354.562875,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3065,14 +3065,14 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 3352.747542,
-   "ms": 3352.469875,
+   "wallMs": 4774.348208,
+   "ms": 4774.018207,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 695.468,
+     "ms": 1249.266041,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3090,11 +3090,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1039.223459,
+     "ms": 1360.193041,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.0 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.4 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3108,11 +3108,11 @@
        "fill #password secret1"
       ]
      },
-     "ms": 776.535042,
+     "ms": 1101.017292,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.7 s\nchanged: #password \"•••••••\"",
+     "text": "1 step done in 1.1 s\nchanged: #password \"•••••••\"",
      "chars": 49,
      "images": [],
      "other": [],
@@ -3126,11 +3126,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 552.965708,
+     "ms": 718.818667,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3140,7 +3140,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 288.277666,
+     "ms": 344.723166,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3163,14 +3163,14 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 3383.818042,
-   "ms": 3383.554959,
+   "wallMs": 4268.852958,
+   "ms": 4268.528459,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 611.623916,
+     "ms": 1148.239,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3188,11 +3188,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1118.897584,
+     "ms": 1223.9475,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3206,11 +3206,11 @@
        "fill #password secret1"
       ]
      },
-     "ms": 652.772666,
+     "ms": 889.826125,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.7 s\nchanged: #password \"•••••••\"",
+     "text": "1 step done in 0.9 s\nchanged: #password \"•••••••\"",
      "chars": 49,
      "images": [],
      "other": [],
@@ -3224,11 +3224,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 718.282209,
+     "ms": 663.510792,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3238,7 +3238,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 281.978584,
+     "ms": 343.005042,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3261,14 +3261,14 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 3414.63,
-   "ms": 3414.322169,
+   "wallMs": 4147.746917,
+   "ms": 4147.460875,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 706.685542,
+     "ms": 1151.136958,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3286,11 +3286,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1030.048167,
+     "ms": 1228.204667,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.0 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3304,7 +3304,7 @@
        "fill #password secret1"
       ]
      },
-     "ms": 663.921334,
+     "ms": 725.662375,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3322,11 +3322,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 691.138959,
+     "ms": 705.282667,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3336,7 +3336,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 322.528167,
+     "ms": 337.174208,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3359,14 +3359,14 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 3749.988916,
-   "ms": 3749.7415000000005,
+   "wallMs": 5402.367,
+   "ms": 5402.109125000001,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 611.931042,
+     "ms": 1093.305875,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3384,11 +3384,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1498.414917,
+     "ms": 1937.4385,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.5 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.9 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3402,11 +3402,11 @@
        "fill #password secret1"
       ]
      },
-     "ms": 640.603917,
+     "ms": 1049.810625,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #password \"•••••••\"",
+     "text": "1 step done in 1.0 s\nchanged: #password \"•••••••\"",
      "chars": 49,
      "images": [],
      "other": [],
@@ -3420,11 +3420,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 713.221041,
+     "ms": 963.561292,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 1.0 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3434,7 +3434,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 285.570583,
+     "ms": 357.992833,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3457,14 +3457,14 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 3383.516125,
-   "ms": 3383.245544,
+   "wallMs": 4157.595417,
+   "ms": 4157.307833,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 604.133667,
+     "ms": 1167.276917,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3482,11 +3482,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1131.097542,
+     "ms": 1234.477041,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3500,7 +3500,7 @@
        "fill #password secret1"
       ]
      },
-     "ms": 672.629584,
+     "ms": 737.490875,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3518,11 +3518,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 695.318459,
+     "ms": 683.4565,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3532,7 +3532,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 280.066292,
+     "ms": 334.6065,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3555,14 +3555,14 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 3321.951625,
-   "ms": 3321.699792,
+   "wallMs": 4155.441792,
+   "ms": 4155.130249,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 620.400167,
+     "ms": 1135.847208,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3580,11 +3580,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1080.276917,
+     "ms": 1243.71425,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3598,7 +3598,7 @@
        "fill #password secret1"
       ]
      },
-     "ms": 687.940417,
+     "ms": 750.177166,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3616,11 +3616,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 555.473375,
+     "ms": 681.913166,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 0.6 s\nchanged: #status \"Welcome, gary@example.com\"",
+     "text": "1 step done in 0.7 s\nchanged: #status \"Welcome, gary@example.com\"",
      "chars": 65,
      "images": [],
      "other": [],
@@ -3630,7 +3630,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 377.608916,
+     "ms": 343.478459,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3653,14 +3653,14 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 3214.995833,
-   "ms": 3214.7573340000004,
+   "wallMs": 4058.664666,
+   "ms": 4058.4011670000004,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 616.578208,
+     "ms": 1143.832958,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3678,11 +3678,11 @@
        "fill #email gary@example.com"
       ]
      },
-     "ms": 1068.042625,
+     "ms": 1201.592625,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "1 step done in 1.1 s\nchanged: #email \"gary@example.com\"",
+     "text": "1 step done in 1.2 s\nchanged: #email \"gary@example.com\"",
      "chars": 55,
      "images": [],
      "other": [],
@@ -3696,7 +3696,7 @@
        "fill #password secret1"
       ]
      },
-     "ms": 651.890084,
+     "ms": 723.430209,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3714,7 +3714,7 @@
        "tap #signIn"
       ]
      },
-     "ms": 592.649542,
+     "ms": 636.608208,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3728,7 +3728,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 285.596875,
+     "ms": 352.937167,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3751,14 +3751,14 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 2440.519625,
-   "ms": 2440.245626,
+   "wallMs": 3103.968916,
+   "ms": 3103.6746250000006,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 643.31275,
+     "ms": 1099.94875,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3778,11 +3778,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1499.702584,
+     "ms": 1669.216458,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 1.7 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -3792,7 +3792,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 297.230292,
+     "ms": 334.509417,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3815,14 +3815,14 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 2546.748834,
-   "ms": 2546.5891260000003,
+   "wallMs": 3634.319084,
+   "ms": 3634.1494589999998,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 645.443792,
+     "ms": 1216.995708,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3842,11 +3842,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1514.323709,
+     "ms": 2078.524042,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -3856,7 +3856,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 386.821625,
+     "ms": 338.629709,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3879,14 +3879,14 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 3130.285584,
-   "ms": 3130.1269589999997,
+   "wallMs": 4072.620292,
+   "ms": 4072.4378349999997,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 1068.783084,
+     "ms": 1612.121542,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3906,11 +3906,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1774.892417,
+     "ms": 2103.034084,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.8 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -3920,7 +3920,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 286.451458,
+     "ms": 357.282209,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3943,14 +3943,14 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 2436.352542,
-   "ms": 2436.1992910000004,
+   "wallMs": 3549.637958,
+   "ms": 3549.4771659999997,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 631.972875,
+     "ms": 1138.415458,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -3970,11 +3970,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1516.577833,
+     "ms": 2067.210416,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -3984,7 +3984,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 287.648583,
+     "ms": 343.851292,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4007,14 +4007,14 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 2498.420125,
-   "ms": 2498.2687509999996,
+   "wallMs": 3579.495375,
+   "ms": 3579.330291,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 609.375792,
+     "ms": 1103.333833,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4034,11 +4034,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1506.930625,
+     "ms": 2136.603041,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -4048,7 +4048,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 381.962334,
+     "ms": 339.393417,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4071,14 +4071,14 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 2398.54325,
-   "ms": 2398.391,
+   "wallMs": 3254.100542,
+   "ms": 3253.931501,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 632.660917,
+     "ms": 1085.494459,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4098,11 +4098,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1483.218125,
+     "ms": 1830.228125,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 1.7 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -4112,7 +4112,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 282.511958,
+     "ms": 338.208917,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4135,14 +4135,14 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 2425.839583,
-   "ms": 2425.645375,
+   "wallMs": 3562.005959,
+   "ms": 3561.847249,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 638.060333,
+     "ms": 1106.188875,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4162,11 +4162,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1500.353875,
+     "ms": 2000.694458,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -4176,7 +4176,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 287.231167,
+     "ms": 454.963916,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4199,14 +4199,14 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 2849.649459,
-   "ms": 2849.4447910000004,
+   "wallMs": 3594.496084,
+   "ms": 3594.3263739999998,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 629.212583,
+     "ms": 1164.760791,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4226,11 +4226,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1829.711125,
+     "ms": 1965.787625,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.8 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -4240,7 +4240,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 390.521083,
+     "ms": 463.777958,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4263,14 +4263,14 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 2877.721625,
-   "ms": 2877.560459,
+   "wallMs": 4100.6605,
+   "ms": 4100.495875,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 680.794125,
+     "ms": 1707.329833,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4290,7 +4290,7 @@
        "tap #signIn"
       ]
      },
-     "ms": 1907.905667,
+     "ms": 1926.005209,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4304,7 +4304,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 288.860667,
+     "ms": 467.160833,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4327,14 +4327,14 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 2411.512416,
-   "ms": 2411.347209,
+   "wallMs": 3577.250041,
+   "ms": 3577.077126,
    "calls": [
     {
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 629.482125,
+     "ms": 1142.393792,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4354,11 +4354,11 @@
        "tap #signIn"
       ]
      },
-     "ms": 1494.877125,
+     "ms": 1969.891875,
      "isError": false,
      "error": null,
      "timedOut": false,
-     "text": "3 steps done in 1.5 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
+     "text": "3 steps done in 2.0 s\nchanged: #email \"gary@example.com\" · #password \"•••••••\" · #status \"Welcome, gary@example.com\"",
      "chars": 116,
      "images": [],
      "other": [],
@@ -4368,7 +4368,7 @@
      "kind": "mcp",
      "tool": "ui_look",
      "args": {},
-     "ms": 286.987959,
+     "ms": 464.791459,
      "isError": false,
      "error": null,
      "timedOut": false,
@@ -4393,18 +4393,18 @@
   "simulator": "headless (simctl boot, no Device Hub)"
  },
  "environment": {
-  "date": "2026-11-20T23:25:15.971Z",
+  "date": "2026-11-21T15:40:27.992Z",
   "macos": "26.6.2 (25G83)",
   "hardware": {
    "model": "VirtualMac2,1",
-   "cpu": "Apple M5 Pro (Virtual)",
+   "cpu": "Apple M4 Pro (Virtual)",
    "cores": 6,
    "memoryGB": 8
   },
   "xcode": "Xcode 27.2, Build version 27B52",
   "node": "v24.20.0",
   "simulator": {
-   "udid": "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+   "udid": "4D870CFB-22E9-4D79-A75A-E133543149D2",
    "name": "Bench iPhone 17 Pro",
    "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro",
    "runtime": "iOS 27.2 (24B8117)"
@@ -4412,9 +4412,9 @@
  },
  "version": "0.15.3",
  "server": {
-  "startToListMs": 557.644041,
-  "initMs": 555.082292,
-  "listMs": 0.252708,
+  "startToListMs": 83.596667,
+  "initMs": 80.75975,
+  "listMs": 0.279291,
   "protocolVersion": "2025-06-18",
   "serverInfo": {
    "name": "simulator-use",
@@ -4442,50 +4442,50 @@
   "command": "simulator-use mcp"
  },
  "leftoversKilled": [],
- "finishedAt": "2026-11-20T23:29:12.772Z",
+ "finishedAt": "2026-11-21T15:45:13.827Z",
  "mcpNotifications": 0,
  "strayStdout": [],
  "quick": {
   "warmup": {
    "n": 1,
    "ok": 1,
-   "medianMs": 27902.492084,
-   "p90Ms": 27902.492084,
+   "medianMs": 14523.73575,
+   "p90Ms": 14523.73575,
    "medianTokens": 72
   },
   "read": {
    "n": 20,
    "ok": 20,
-   "medianMs": 221.82716649999998,
-   "p90Ms": 250.299916,
+   "medianMs": 377.6588125,
+   "p90Ms": 702.588125,
    "medianTokens": 72
   },
   "tap": {
    "n": 20,
    "ok": 20,
-   "medianMs": 623.2503334999999,
-   "p90Ms": 645.896167,
+   "medianMs": 710.9432705,
+   "p90Ms": 729.004334,
    "medianTokens": 17
   },
   "type": {
    "n": 10,
    "ok": 10,
-   "medianMs": 1090.926125,
-   "p90Ms": 1227.729667,
+   "medianMs": 1294.3467504999999,
+   "p90Ms": 1412.081084,
    "medianTokens": 14
   },
   "flow": {
    "n": 10,
    "ok": 10,
-   "medianMs": 3367.8577095,
-   "p90Ms": 3749.7415000000005,
+   "medianMs": 4262.1591255,
+   "p90Ms": 4774.018207,
    "medianTokens": 194
   },
   "flowBatch": {
    "n": 10,
    "ok": 10,
-   "medianMs": 2469.2571884999998,
-   "p90Ms": 2877.560459,
+   "medianMs": 3578.2037085,
+   "p90Ms": 4072.4378349999997,
    "medianTokens": 179
   }
  },

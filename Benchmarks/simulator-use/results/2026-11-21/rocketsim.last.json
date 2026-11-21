@@ -3,7 +3,7 @@
  "label": "last",
  "name": "RocketSim",
  "interface": "cli",
- "startedAt": "2026-11-20T23:20:20.827Z",
+ "startedAt": "2026-11-21T15:32:50.022Z",
  "counts": {
   "reads": 20,
   "taps": 20,
@@ -20,7 +20,7 @@
    "op": "setup",
    "ok": true,
    "error": null,
-   "wallMs": 0.03725,
+   "wallMs": 0.042542,
    "ms": 0,
    "calls": [],
    "tokens": 0
@@ -29,8 +29,8 @@
    "op": "warmup",
    "ok": true,
    "error": null,
-   "wallMs": 424.402625,
-   "ms": 424.338625,
+   "wallMs": 316.7885,
+   "ms": 316.506542,
    "calls": [
     {
      "kind": "cli",
@@ -41,13 +41,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 424.338625,
+     "ms": 316.506542,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -63,8 +63,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 49.917666,
-   "ms": 49.798292,
+   "wallMs": 38.2075,
+   "ms": 38.175417,
    "calls": [
     {
      "kind": "cli",
@@ -75,13 +75,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 49.798292,
+     "ms": 38.175417,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -97,8 +97,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 37.931917,
-   "ms": 37.8835,
+   "wallMs": 30.526709,
+   "ms": 30.497625,
    "calls": [
     {
      "kind": "cli",
@@ -109,13 +109,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 37.8835,
+     "ms": 30.497625,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -131,8 +131,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 31.241333,
-   "ms": 31.211542,
+   "wallMs": 41.185875,
+   "ms": 41.155458,
    "calls": [
     {
      "kind": "cli",
@@ -143,13 +143,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 31.211542,
+     "ms": 41.155458,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -165,8 +165,8 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 27.650667,
-   "ms": 27.62425,
+   "wallMs": 46.450875,
+   "ms": 46.391792,
    "calls": [
     {
      "kind": "cli",
@@ -177,13 +177,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 27.62425,
+     "ms": 46.391792,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -199,8 +199,8 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 45.472625,
-   "ms": 45.428709,
+   "wallMs": 29.519708,
+   "ms": 29.4755,
    "calls": [
     {
      "kind": "cli",
@@ -211,13 +211,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 45.428709,
+     "ms": 29.4755,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -233,8 +233,8 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 32.532042,
-   "ms": 32.493625,
+   "wallMs": 30.2535,
+   "ms": 30.2195,
    "calls": [
     {
      "kind": "cli",
@@ -245,13 +245,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 32.493625,
+     "ms": 30.2195,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -267,8 +267,8 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 37.755917,
-   "ms": 37.696209,
+   "wallMs": 27.316542,
+   "ms": 27.270459,
    "calls": [
     {
      "kind": "cli",
@@ -279,13 +279,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 37.696209,
+     "ms": 27.270459,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -301,8 +301,8 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 34.190542,
-   "ms": 34.15175,
+   "wallMs": 33.194709,
+   "ms": 33.160458,
    "calls": [
     {
      "kind": "cli",
@@ -313,13 +313,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 34.15175,
+     "ms": 33.160458,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -335,8 +335,8 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 52.582625,
-   "ms": 52.557208,
+   "wallMs": 31.253833,
+   "ms": 31.227,
    "calls": [
     {
      "kind": "cli",
@@ -347,13 +347,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 52.557208,
+     "ms": 31.227,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -369,8 +369,8 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 61.565542,
-   "ms": 61.545333,
+   "wallMs": 28.165959,
+   "ms": 28.13325,
    "calls": [
     {
      "kind": "cli",
@@ -381,13 +381,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 61.545333,
+     "ms": 28.13325,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -403,8 +403,8 @@
    "i": 10,
    "ok": true,
    "error": null,
-   "wallMs": 32.813834,
-   "ms": 32.792542,
+   "wallMs": 32.44825,
+   "ms": 32.428583,
    "calls": [
     {
      "kind": "cli",
@@ -415,13 +415,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 32.792542,
+     "ms": 32.428583,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -437,8 +437,8 @@
    "i": 11,
    "ok": true,
    "error": null,
-   "wallMs": 25.149083,
-   "ms": 25.130334,
+   "wallMs": 32.759584,
+   "ms": 32.740625,
    "calls": [
     {
      "kind": "cli",
@@ -449,13 +449,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 25.130334,
+     "ms": 32.740625,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -471,8 +471,8 @@
    "i": 12,
    "ok": true,
    "error": null,
-   "wallMs": 31.442208,
-   "ms": 31.423083,
+   "wallMs": 45.748208,
+   "ms": 45.728583,
    "calls": [
     {
      "kind": "cli",
@@ -483,13 +483,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 31.423083,
+     "ms": 45.728583,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -505,8 +505,8 @@
    "i": 13,
    "ok": true,
    "error": null,
-   "wallMs": 30.655792,
-   "ms": 30.633792,
+   "wallMs": 31.990625,
+   "ms": 31.96725,
    "calls": [
     {
      "kind": "cli",
@@ -517,13 +517,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 30.633792,
+     "ms": 31.96725,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -539,8 +539,8 @@
    "i": 14,
    "ok": true,
    "error": null,
-   "wallMs": 39.518709,
-   "ms": 39.497917,
+   "wallMs": 34.999291,
+   "ms": 34.974916,
    "calls": [
     {
      "kind": "cli",
@@ -551,13 +551,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 39.497917,
+     "ms": 34.974916,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -573,8 +573,8 @@
    "i": 15,
    "ok": true,
    "error": null,
-   "wallMs": 33.017166,
-   "ms": 32.997833,
+   "wallMs": 31.629625,
+   "ms": 31.607666,
    "calls": [
     {
      "kind": "cli",
@@ -585,13 +585,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 32.997833,
+     "ms": 31.607666,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -607,8 +607,8 @@
    "i": 16,
    "ok": true,
    "error": null,
-   "wallMs": 29.042875,
-   "ms": 29.022709,
+   "wallMs": 31.331375,
+   "ms": 31.312166,
    "calls": [
     {
      "kind": "cli",
@@ -619,13 +619,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 29.022709,
+     "ms": 31.312166,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -641,8 +641,8 @@
    "i": 17,
    "ok": true,
    "error": null,
-   "wallMs": 25.025917,
-   "ms": 25.005625,
+   "wallMs": 33.32275,
+   "ms": 33.284875,
    "calls": [
     {
      "kind": "cli",
@@ -653,13 +653,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 25.005625,
+     "ms": 33.284875,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -675,8 +675,8 @@
    "i": 18,
    "ok": true,
    "error": null,
-   "wallMs": 30.458417,
-   "ms": 30.434708,
+   "wallMs": 25.814583,
+   "ms": 25.794209,
    "calls": [
     {
      "kind": "cli",
@@ -687,13 +687,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 30.434708,
+     "ms": 25.794209,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -709,8 +709,8 @@
    "i": 19,
    "ok": true,
    "error": null,
-   "wallMs": 54.64475,
-   "ms": 54.620666,
+   "wallMs": 53.132708,
+   "ms": 53.10925,
    "calls": [
     {
      "kind": "cli",
@@ -721,13 +721,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 54.620666,
+     "ms": 53.10925,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5108\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #559\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     }
@@ -743,8 +743,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 1647.360917,
-   "ms": 1647.251667,
+   "wallMs": 483.749208,
+   "ms": 483.653458,
    "calls": [
     {
      "kind": "cli",
@@ -757,12 +757,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1647.251667,
+     "ms": 483.653458,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -773,8 +773,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 528.091458,
-    "ms": 528.059459,
+    "wallMs": 492.351125,
+    "ms": 492.32225,
     "calls": [
      {
       "kind": "cli",
@@ -785,13 +785,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 528.059459,
+      "ms": 492.32225,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5116\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #586\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -813,8 +813,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 392.396292,
-   "ms": 392.368667,
+   "wallMs": 488.36875,
+   "ms": 488.339292,
    "calls": [
     {
      "kind": "cli",
@@ -827,12 +827,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 392.368667,
+     "ms": 488.339292,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -843,8 +843,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 274.36775,
-    "ms": 274.340583,
+    "wallMs": 294.755625,
+    "ms": 294.728167,
     "calls": [
      {
       "kind": "cli",
@@ -855,13 +855,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 274.340583,
+      "ms": 294.728167,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5125\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #597\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -883,8 +883,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 360.792541,
-   "ms": 360.761625,
+   "wallMs": 346.374125,
+   "ms": 346.305958,
    "calls": [
     {
      "kind": "cli",
@@ -897,12 +897,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 360.761625,
+     "ms": 346.305958,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -913,8 +913,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 1020.059292,
-    "ms": 1020.001166,
+    "wallMs": 259.944042,
+    "ms": 259.921958,
     "calls": [
      {
       "kind": "cli",
@@ -925,13 +925,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 1020.001166,
+      "ms": 259.921958,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5128\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #608\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -953,8 +953,8 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 432.019792,
-   "ms": 431.98625,
+   "wallMs": 356.99475,
+   "ms": 356.964042,
    "calls": [
     {
      "kind": "cli",
@@ -967,12 +967,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 431.98625,
+     "ms": 356.964042,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -983,8 +983,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 869.7965,
-    "ms": 869.773167,
+    "wallMs": 288.139583,
+    "ms": 288.098917,
     "calls": [
      {
       "kind": "cli",
@@ -995,13 +995,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 869.773167,
+      "ms": 288.098917,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5131\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #617\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1023,8 +1023,8 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 408.994,
-   "ms": 408.959375,
+   "wallMs": 362.970083,
+   "ms": 362.91975,
    "calls": [
     {
      "kind": "cli",
@@ -1037,12 +1037,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 408.959375,
+     "ms": 362.91975,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1053,8 +1053,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 646.596458,
-    "ms": 646.574417,
+    "wallMs": 266.062958,
+    "ms": 265.988083,
     "calls": [
      {
       "kind": "cli",
@@ -1065,13 +1065,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 646.574417,
+      "ms": 265.988083,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5134\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #626\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1093,8 +1093,8 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 408.096709,
-   "ms": 408.069625,
+   "wallMs": 333.687542,
+   "ms": 333.654708,
    "calls": [
     {
      "kind": "cli",
@@ -1107,12 +1107,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 408.069625,
+     "ms": 333.654708,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1123,8 +1123,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 610.88025,
-    "ms": 610.859041,
+    "wallMs": 243.547542,
+    "ms": 243.526167,
     "calls": [
      {
       "kind": "cli",
@@ -1135,13 +1135,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 610.859041,
+      "ms": 243.526167,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5137\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #635\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1163,8 +1163,8 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 400.570334,
-   "ms": 400.543959,
+   "wallMs": 342.4455,
+   "ms": 342.421834,
    "calls": [
     {
      "kind": "cli",
@@ -1177,12 +1177,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 400.543959,
+     "ms": 342.421834,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1193,8 +1193,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 639.071542,
-    "ms": 639.043,
+    "wallMs": 238.917917,
+    "ms": 238.889209,
     "calls": [
      {
       "kind": "cli",
@@ -1205,13 +1205,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 639.043,
+      "ms": 238.889209,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5140\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #644\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1233,8 +1233,8 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 430.270792,
-   "ms": 430.24425,
+   "wallMs": 345.193875,
+   "ms": 345.164208,
    "calls": [
     {
      "kind": "cli",
@@ -1247,12 +1247,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 430.24425,
+     "ms": 345.164208,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1263,8 +1263,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 622.405667,
-    "ms": 622.383875,
+    "wallMs": 256.427042,
+    "ms": 256.404667,
     "calls": [
      {
       "kind": "cli",
@@ -1275,13 +1275,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 622.383875,
+      "ms": 256.404667,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5143\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #653\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1303,8 +1303,8 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 338.447958,
-   "ms": 338.423625,
+   "wallMs": 349.619041,
+   "ms": 349.594792,
    "calls": [
     {
      "kind": "cli",
@@ -1317,12 +1317,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 338.423625,
+     "ms": 349.594792,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1333,8 +1333,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 728.039666,
-    "ms": 728.016083,
+    "wallMs": 241.029916,
+    "ms": 241.005083,
     "calls": [
      {
       "kind": "cli",
@@ -1345,13 +1345,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 728.016083,
+      "ms": 241.005083,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5146\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #662\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1373,8 +1373,8 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 481.066584,
-   "ms": 481.038041,
+   "wallMs": 346.670959,
+   "ms": 346.643208,
    "calls": [
     {
      "kind": "cli",
@@ -1387,12 +1387,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 481.038041,
+     "ms": 346.643208,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1403,8 +1403,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 723.541958,
-    "ms": 723.519792,
+    "wallMs": 240.886875,
+    "ms": 240.8615,
     "calls": [
      {
       "kind": "cli",
@@ -1415,13 +1415,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 723.519792,
+      "ms": 240.8615,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5149\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #671\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1443,8 +1443,8 @@
    "i": 10,
    "ok": true,
    "error": null,
-   "wallMs": 416.801791,
-   "ms": 416.780333,
+   "wallMs": 356.948792,
+   "ms": 356.92575,
    "calls": [
     {
      "kind": "cli",
@@ -1457,12 +1457,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 416.780333,
+     "ms": 356.92575,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1473,8 +1473,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 609.692083,
-    "ms": 609.670083,
+    "wallMs": 248.876666,
+    "ms": 248.845958,
     "calls": [
      {
       "kind": "cli",
@@ -1485,13 +1485,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 609.670083,
+      "ms": 248.845958,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5152\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #680\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1513,8 +1513,8 @@
    "i": 11,
    "ok": true,
    "error": null,
-   "wallMs": 394.007792,
-   "ms": 393.983792,
+   "wallMs": 345.388041,
+   "ms": 345.364417,
    "calls": [
     {
      "kind": "cli",
@@ -1527,12 +1527,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 393.983792,
+     "ms": 345.364417,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1543,8 +1543,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 658.063375,
-    "ms": 658.040709,
+    "wallMs": 253.84575,
+    "ms": 253.819833,
     "calls": [
      {
       "kind": "cli",
@@ -1555,13 +1555,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 658.040709,
+      "ms": 253.819833,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5155\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #689\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1583,8 +1583,8 @@
    "i": 12,
    "ok": true,
    "error": null,
-   "wallMs": 404.732583,
-   "ms": 404.709584,
+   "wallMs": 368.291208,
+   "ms": 368.267208,
    "calls": [
     {
      "kind": "cli",
@@ -1597,12 +1597,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 404.709584,
+     "ms": 368.267208,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1613,8 +1613,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 622.47175,
-    "ms": 622.449875,
+    "wallMs": 254.800917,
+    "ms": 254.777625,
     "calls": [
      {
       "kind": "cli",
@@ -1625,13 +1625,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 622.449875,
+      "ms": 254.777625,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5158\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #698\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1653,8 +1653,8 @@
    "i": 13,
    "ok": true,
    "error": null,
-   "wallMs": 392.199,
-   "ms": 392.176125,
+   "wallMs": 342.298708,
+   "ms": 342.274958,
    "calls": [
     {
      "kind": "cli",
@@ -1667,12 +1667,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 392.176125,
+     "ms": 342.274958,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1683,8 +1683,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 719.917292,
-    "ms": 719.895083,
+    "wallMs": 247.342416,
+    "ms": 247.318083,
     "calls": [
      {
       "kind": "cli",
@@ -1695,13 +1695,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 719.895083,
+      "ms": 247.318083,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5161\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #707\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1723,8 +1723,8 @@
    "i": 14,
    "ok": true,
    "error": null,
-   "wallMs": 393.203083,
-   "ms": 393.179458,
+   "wallMs": 355.022625,
+   "ms": 354.99975,
    "calls": [
     {
      "kind": "cli",
@@ -1737,12 +1737,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 393.179458,
+     "ms": 354.99975,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1753,8 +1753,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 623.618583,
-    "ms": 623.571083,
+    "wallMs": 250.79475,
+    "ms": 250.741041,
     "calls": [
      {
       "kind": "cli",
@@ -1765,13 +1765,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 623.571083,
+      "ms": 250.741041,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5164\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #716\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1793,8 +1793,8 @@
    "i": 15,
    "ok": true,
    "error": null,
-   "wallMs": 398.967625,
-   "ms": 398.943584,
+   "wallMs": 347.13475,
+   "ms": 347.106792,
    "calls": [
     {
      "kind": "cli",
@@ -1807,12 +1807,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 398.943584,
+     "ms": 347.106792,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1823,8 +1823,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 670.7125,
-    "ms": 670.690375,
+    "wallMs": 264.868583,
+    "ms": 264.830334,
     "calls": [
      {
       "kind": "cli",
@@ -1835,18 +1835,18 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 670.690375,
+      "ms": 264.830334,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5167\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #725\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n!preview http://127.0.0.1:4995/?token=82179399cc4a4236a9b76dfd920973ce\n",
+      "chars": 273,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 51,
+    "tokens": 69,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -1863,8 +1863,8 @@
    "i": 16,
    "ok": true,
    "error": null,
-   "wallMs": 385.326542,
-   "ms": 385.303,
+   "wallMs": 345.201667,
+   "ms": 345.179209,
    "calls": [
     {
      "kind": "cli",
@@ -1877,12 +1877,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 385.303,
+     "ms": 345.179209,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1893,8 +1893,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 611.32375,
-    "ms": 611.302,
+    "wallMs": 251.971792,
+    "ms": 251.94925,
     "calls": [
      {
       "kind": "cli",
@@ -1905,13 +1905,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 611.302,
+      "ms": 251.94925,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5170\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #734\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -1933,8 +1933,8 @@
    "i": 17,
    "ok": true,
    "error": null,
-   "wallMs": 382.62625,
-   "ms": 382.603041,
+   "wallMs": 346.171042,
+   "ms": 346.148333,
    "calls": [
     {
      "kind": "cli",
@@ -1947,12 +1947,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 382.603041,
+     "ms": 346.148333,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -1963,8 +1963,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 627.250167,
-    "ms": 627.2265,
+    "wallMs": 248.228333,
+    "ms": 248.204042,
     "calls": [
      {
       "kind": "cli",
@@ -1975,13 +1975,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 627.2265,
+      "ms": 248.204042,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5173\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #743\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2003,8 +2003,8 @@
    "i": 18,
    "ok": true,
    "error": null,
-   "wallMs": 410.051333,
-   "ms": 410.027416,
+   "wallMs": 351.197958,
+   "ms": 351.173667,
    "calls": [
     {
      "kind": "cli",
@@ -2017,12 +2017,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 410.027416,
+     "ms": 351.173667,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -2033,8 +2033,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 626.040125,
-    "ms": 626.017583,
+    "wallMs": 261.314083,
+    "ms": 261.286958,
     "calls": [
      {
       "kind": "cli",
@@ -2045,13 +2045,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 626.017583,
+      "ms": 261.286958,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5176\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #752\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2073,8 +2073,8 @@
    "i": 19,
    "ok": true,
    "error": null,
-   "wallMs": 415.998375,
-   "ms": 415.975959,
+   "wallMs": 360.100958,
+   "ms": 360.076875,
    "calls": [
     {
      "kind": "cli",
@@ -2087,12 +2087,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 415.975959,
+     "ms": 360.076875,
      "isError": false,
      "exitCode": 0,
-     "text": "@0c13e249\n+8|staticText|Invalid email or password\n",
+     "text": "@0023850f\n+8|staticText|Invalid email or password\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -2103,8 +2103,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 606.710834,
-    "ms": 606.687917,
+    "wallMs": 258.8655,
+    "ms": 258.838625,
     "calls": [
      {
       "kind": "cli",
@@ -2115,13 +2115,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 606.687917,
+      "ms": 258.838625,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5179\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #761\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2143,8 +2143,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 2275.061666,
-   "ms": 2274.966709,
+   "wallMs": 2318.940667,
+   "ms": 2318.853458,
    "calls": [
     {
      "kind": "cli",
@@ -2158,12 +2158,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 2274.966709,
+     "ms": 2318.853458,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2174,8 +2174,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 609.35825,
-    "ms": 609.337625,
+    "wallMs": 278.414083,
+    "ms": 278.3745,
     "calls": [
      {
       "kind": "cli",
@@ -2186,13 +2186,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 609.337625,
+      "ms": 278.3745,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5182\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #770\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2207,8 +2207,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 19.562708,
-    "ms": 19.539584,
+    "wallMs": 21.427541,
+    "ms": 21.403167,
     "calls": [
      {
       "kind": "cli",
@@ -2219,18 +2219,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 19.539584,
+      "ms": 21.403167,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5183 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #771 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2245,8 +2245,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 1730.425625,
-   "ms": 1730.394458,
+   "wallMs": 1792.612958,
+   "ms": 1792.579917,
    "calls": [
     {
      "kind": "cli",
@@ -2260,12 +2260,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1730.394458,
+     "ms": 1792.579917,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2276,8 +2276,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 624.127667,
-    "ms": 624.105334,
+    "wallMs": 278.443417,
+    "ms": 278.404875,
     "calls": [
      {
       "kind": "cli",
@@ -2288,13 +2288,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 624.105334,
+      "ms": 278.404875,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5185\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #779\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2309,8 +2309,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 19.771542,
-    "ms": 19.746,
+    "wallMs": 18.760167,
+    "ms": 18.742417,
     "calls": [
      {
       "kind": "cli",
@@ -2321,18 +2321,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 19.746,
+      "ms": 18.742417,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5187 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #781 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2347,8 +2347,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 1422.797709,
-   "ms": 1422.76725,
+   "wallMs": 1434.104292,
+   "ms": 1434.074875,
    "calls": [
     {
      "kind": "cli",
@@ -2362,12 +2362,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1422.76725,
+     "ms": 1434.074875,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2378,8 +2378,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 637.888792,
-    "ms": 637.866042,
+    "wallMs": 279.106792,
+    "ms": 279.065542,
     "calls": [
      {
       "kind": "cli",
@@ -2390,13 +2390,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 637.866042,
+      "ms": 279.065542,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5189\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #789\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2411,8 +2411,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 17.930625,
-    "ms": 17.910166,
+    "wallMs": 21.282958,
+    "ms": 21.264875,
     "calls": [
      {
       "kind": "cli",
@@ -2423,18 +2423,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 17.910166,
+      "ms": 21.264875,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5190 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #790 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2449,8 +2449,8 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 1449.446333,
-   "ms": 1449.415375,
+   "wallMs": 1724.885292,
+   "ms": 1724.856584,
    "calls": [
     {
      "kind": "cli",
@@ -2464,12 +2464,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1449.415375,
+     "ms": 1724.856584,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2480,8 +2480,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 646.557,
-    "ms": 646.534375,
+    "wallMs": 271.85775,
+    "ms": 271.81925,
     "calls": [
      {
       "kind": "cli",
@@ -2492,13 +2492,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 646.534375,
+      "ms": 271.81925,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5192\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #798\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2513,8 +2513,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 19.271791,
-    "ms": 19.25375,
+    "wallMs": 17.742042,
+    "ms": 17.724291,
     "calls": [
      {
       "kind": "cli",
@@ -2525,18 +2525,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 19.25375,
+      "ms": 17.724291,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5193 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #800 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2551,8 +2551,8 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 1425.561333,
-   "ms": 1425.531,
+   "wallMs": 1738.39875,
+   "ms": 1738.364875,
    "calls": [
     {
      "kind": "cli",
@@ -2566,12 +2566,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1425.531,
+     "ms": 1738.364875,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2582,8 +2582,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 635.672667,
-    "ms": 635.648166,
+    "wallMs": 278.999375,
+    "ms": 278.960917,
     "calls": [
      {
       "kind": "cli",
@@ -2594,13 +2594,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 635.648166,
+      "ms": 278.960917,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5195\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #808\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2615,8 +2615,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 22.795792,
-    "ms": 22.774709,
+    "wallMs": 19.828708,
+    "ms": 19.809458,
     "calls": [
      {
       "kind": "cli",
@@ -2627,18 +2627,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 22.774709,
+      "ms": 19.809458,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5196 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #810 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2653,8 +2653,8 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 1414.799,
-   "ms": 1414.76875,
+   "wallMs": 1441.711875,
+   "ms": 1441.678042,
    "calls": [
     {
      "kind": "cli",
@@ -2668,12 +2668,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1414.76875,
+     "ms": 1441.678042,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2684,8 +2684,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 635.600958,
-    "ms": 635.579084,
+    "wallMs": 285.218,
+    "ms": 285.173584,
     "calls": [
      {
       "kind": "cli",
@@ -2696,13 +2696,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 635.579084,
+      "ms": 285.173584,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5198\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #818\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2717,8 +2717,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 19.275541,
-    "ms": 19.250375,
+    "wallMs": 20.004833,
+    "ms": 19.983791,
     "calls": [
      {
       "kind": "cli",
@@ -2729,18 +2729,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 19.250375,
+      "ms": 19.983791,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5199 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #819 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2755,8 +2755,8 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 1462.583333,
-   "ms": 1462.549834,
+   "wallMs": 1423.909875,
+   "ms": 1423.874833,
    "calls": [
     {
      "kind": "cli",
@@ -2770,12 +2770,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1462.549834,
+     "ms": 1423.874833,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2786,8 +2786,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 627.122583,
-    "ms": 627.095833,
+    "wallMs": 250.61125,
+    "ms": 250.579875,
     "calls": [
      {
       "kind": "cli",
@@ -2798,13 +2798,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 627.095833,
+      "ms": 250.579875,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5201\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #827\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2819,8 +2819,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 19.906333,
-    "ms": 19.885875,
+    "wallMs": 19.408459,
+    "ms": 19.391667,
     "calls": [
      {
       "kind": "cli",
@@ -2831,18 +2831,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 19.885875,
+      "ms": 19.391667,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5202 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #828 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2857,8 +2857,8 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 1436.809084,
-   "ms": 1436.773417,
+   "wallMs": 1436.309709,
+   "ms": 1436.270958,
    "calls": [
     {
      "kind": "cli",
@@ -2872,12 +2872,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1436.773417,
+     "ms": 1436.270958,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2888,8 +2888,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 600.327625,
-    "ms": 600.304833,
+    "wallMs": 235.34825,
+    "ms": 235.318375,
     "calls": [
      {
       "kind": "cli",
@@ -2900,13 +2900,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 600.304833,
+      "ms": 235.318375,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5204\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #836\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -2921,8 +2921,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 21.103958,
-    "ms": 21.083458,
+    "wallMs": 18.878375,
+    "ms": 18.859875,
     "calls": [
      {
       "kind": "cli",
@@ -2933,18 +2933,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 21.083458,
+      "ms": 18.859875,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5205 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #837 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -2959,8 +2959,8 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 1751.351541,
-   "ms": 1751.325417,
+   "wallMs": 1460.476208,
+   "ms": 1460.446167,
    "calls": [
     {
      "kind": "cli",
@@ -2974,12 +2974,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1751.325417,
+     "ms": 1460.446167,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -2990,8 +2990,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 622.515083,
-    "ms": 622.492583,
+    "wallMs": 266.946333,
+    "ms": 266.922875,
     "calls": [
      {
       "kind": "cli",
@@ -3002,13 +3002,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 622.492583,
+      "ms": 266.922875,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5207\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #845\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -3023,8 +3023,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 21.166,
-    "ms": 21.148666,
+    "wallMs": 19.111416,
+    "ms": 19.090583,
     "calls": [
      {
       "kind": "cli",
@@ -3035,18 +3035,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 21.148666,
+      "ms": 19.090583,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5209 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #846 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -3061,8 +3061,8 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 1751.810083,
-   "ms": 1751.780458,
+   "wallMs": 1444.993792,
+   "ms": 1444.96625,
    "calls": [
     {
      "kind": "cli",
@@ -3076,12 +3076,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1751.780458,
+     "ms": 1444.96625,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3092,8 +3092,8 @@
     "op": "pre-read",
     "ok": true,
     "error": null,
-    "wallMs": 677.847292,
-    "ms": 677.824417,
+    "wallMs": 277.665292,
+    "ms": 277.625791,
     "calls": [
      {
       "kind": "cli",
@@ -3104,13 +3104,13 @@
        "--agent-mode",
        "nav",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 677.824417,
+      "ms": 277.625791,
       "isError": false,
       "exitCode": 0,
-      "text": "@97acea00 #5211\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-      "chars": 203,
+      "text": "@52da5ad2 #854\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 202,
       "images": [],
       "stderrChars": 0
      }
@@ -3125,8 +3125,8 @@
     "op": "post-read",
     "ok": true,
     "error": null,
-    "wallMs": 17.693209,
-    "ms": 17.6705,
+    "wallMs": 19.292958,
+    "ms": 19.274375,
     "calls": [
      {
       "kind": "cli",
@@ -3137,18 +3137,18 @@
        "--agent-mode",
        "act",
        "--udid",
-       "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+       "4D870CFB-22E9-4D79-A75A-E133543149D2"
       ],
-      "ms": 17.6705,
+      "ms": 19.274375,
       "isError": false,
       "exitCode": 0,
-      "text": "@3902e07f #5213 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-      "chars": 294,
+      "text": "@921562fc #855 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||Password|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Not signed in||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+      "chars": 282,
       "images": [],
       "stderrChars": 0
      }
     ],
-    "tokens": 74,
+    "tokens": 71,
     "verify": {
      "sawSignIn": true,
      "sawEmail": true
@@ -3163,8 +3163,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 3265.28175,
-   "ms": 3264.8570820000004,
+   "wallMs": 2772.860958,
+   "ms": 2772.3747909999997,
    "calls": [
     {
      "kind": "cli",
@@ -3175,13 +3175,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 612.742583,
+     "ms": 251.977292,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5215\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #861\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3197,12 +3197,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1494.645625,
+     "ms": 1466.792333,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3219,12 +3219,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 683.172625,
+     "ms": 648.757458,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3240,12 +3240,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 456.481833,
+     "ms": 385.346208,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3259,18 +3259,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 17.814416,
+     "ms": 19.5015,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5218 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #864 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3282,8 +3282,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 3200.098167,
-   "ms": 3199.936249,
+   "wallMs": 2750.109125,
+   "ms": 2749.919836,
    "calls": [
     {
      "kind": "cli",
@@ -3294,13 +3294,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 643.82625,
+     "ms": 278.780834,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5220\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #872\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3316,12 +3316,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1417.776375,
+     "ms": 1425.845042,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3338,12 +3338,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 673.464,
+     "ms": 625.760542,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3359,12 +3359,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 447.389416,
+     "ms": 398.319334,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3378,18 +3378,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 17.480208,
+     "ms": 21.214084,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5223 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #875 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3401,8 +3401,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 3664.75575,
-   "ms": 3664.594666,
+   "wallMs": 2855.170959,
+   "ms": 2854.9923740000004,
    "calls": [
     {
      "kind": "cli",
@@ -3413,13 +3413,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 716.118333,
+     "ms": 353.219167,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5225\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #883\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3435,12 +3435,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1408.445708,
+     "ms": 1470.05175,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3457,12 +3457,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1074.670667,
+     "ms": 630.629791,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3478,12 +3478,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 443.36325,
+     "ms": 383.059333,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3497,18 +3497,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.996708,
+     "ms": 18.032333,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5228 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #886 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3520,8 +3520,8 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 3201.226292,
-   "ms": 3201.0395,
+   "wallMs": 2697.784,
+   "ms": 2697.594292,
    "calls": [
     {
      "kind": "cli",
@@ -3532,13 +3532,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 611.8055,
+     "ms": 238.258542,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5230\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #894\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3554,12 +3554,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1417.427541,
+     "ms": 1414.771708,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3576,12 +3576,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 672.493042,
+     "ms": 626.173792,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3597,12 +3597,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 477.54625,
+     "ms": 399.18725,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3616,18 +3616,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.767167,
+     "ms": 19.203,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5233 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #897 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3639,8 +3639,8 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 3209.1705,
-   "ms": 3209.014167,
+   "wallMs": 3125.6485,
+   "ms": 3125.3982920000003,
    "calls": [
     {
      "kind": "cli",
@@ -3651,13 +3651,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 623.454916,
+     "ms": 278.899042,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5235\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #905\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3673,12 +3673,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1433.35825,
+     "ms": 1791.360042,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3695,12 +3695,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 676.236959,
+     "ms": 629.3845,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3716,12 +3716,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 453.907959,
+     "ms": 407.093833,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3735,18 +3735,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 22.056083,
+     "ms": 18.660875,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5238 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #909 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3758,8 +3758,8 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 3257.600375,
-   "ms": 3257.447499,
+   "wallMs": 2741.72075,
+   "ms": 2741.5563740000002,
    "calls": [
     {
      "kind": "cli",
@@ -3770,13 +3770,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 644.515708,
+     "ms": 279.806833,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5240\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #917\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3792,12 +3792,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1443.450375,
+     "ms": 1411.135542,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3814,12 +3814,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 676.08275,
+     "ms": 624.3155,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3835,12 +3835,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 470.813166,
+     "ms": 406.975916,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3854,18 +3854,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 22.5855,
+     "ms": 19.322583,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5243 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #920 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3877,8 +3877,8 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 3205.918167,
-   "ms": 3205.759124,
+   "wallMs": 2755.366958,
+   "ms": 2755.2037920000002,
    "calls": [
     {
      "kind": "cli",
@@ -3889,13 +3889,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 610.660458,
+     "ms": 258.19825,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5245\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #928\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -3911,12 +3911,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1448.841875,
+     "ms": 1457.653375,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -3933,12 +3933,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 677.973625,
+     "ms": 634.658,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -3954,12 +3954,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 446.900083,
+     "ms": 386.065375,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -3973,18 +3973,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.383083,
+     "ms": 18.628792,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5248 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #931 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -3996,8 +3996,8 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 3244.81625,
-   "ms": 3244.6727910000004,
+   "wallMs": 2765.75775,
+   "ms": 2765.600417,
    "calls": [
     {
      "kind": "cli",
@@ -4008,13 +4008,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 668.41275,
+     "ms": 279.566,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5250\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #939\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -4030,12 +4030,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1434.711708,
+     "ms": 1446.954875,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -4052,12 +4052,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 677.174708,
+     "ms": 613.235083,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -4073,12 +4073,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 447.796208,
+     "ms": 405.4965,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -4092,18 +4092,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 16.577417,
+     "ms": 20.347959,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5253 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #942 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4115,8 +4115,8 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 3651.416375,
-   "ms": 3651.260958,
+   "wallMs": 2781.766584,
+   "ms": 2781.6177079999993,
    "calls": [
     {
      "kind": "cli",
@@ -4127,13 +4127,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1080.701834,
+     "ms": 274.493084,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5255\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #950\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -4149,12 +4149,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1403.342958,
+     "ms": 1473.843416,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -4171,12 +4171,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 699.242333,
+     "ms": 618.001,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -4192,12 +4192,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 446.4875,
+     "ms": 397.427292,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -4211,18 +4211,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.486333,
+     "ms": 17.852916,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5258 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #953 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4234,8 +4234,8 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 3187.478791,
-   "ms": 3187.34254,
+   "wallMs": 3106.3705,
+   "ms": 3106.2052919999996,
    "calls": [
     {
      "kind": "cli",
@@ -4246,13 +4246,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 610.128208,
+     "ms": 293.99575,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5260\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #961\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -4268,12 +4268,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 1421.020125,
+     "ms": 1706.593792,
      "isError": false,
      "exitCode": 0,
-     "text": "@3902e07f\n~2|textField|email|gary@example.com\n",
+     "text": "@921562fc\n~2|textField|email|gary@example.com\n",
      "chars": 46,
      "images": [],
      "stderrChars": 0
@@ -4290,12 +4290,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 665.737708,
+     "ms": 705.909458,
      "isError": false,
      "exitCode": 0,
-     "text": "@137a8812\n~3|secureTextField|password|••••\n",
+     "text": "@12e0ebb0\n~3|secureTextField|password|••••\n",
      "chars": 43,
      "images": [],
      "stderrChars": 0
@@ -4311,12 +4311,12 @@
       "--screen",
       "latest",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 469.432958,
+     "ms": 380.265875,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45\n+8|staticText|Welcome, gary@example.com\n",
+     "text": "@ba181e33\n+8|staticText|Welcome, gary@example.com\n",
      "chars": 50,
      "images": [],
      "stderrChars": 0
@@ -4330,18 +4330,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.023541,
+     "ms": 19.440417,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5263 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #965 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 164,
+   "tokens": 161,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4353,8 +4353,8 @@
    "i": 0,
    "ok": true,
    "error": null,
-   "wallMs": 3171.256584,
-   "ms": 3168.249,
+   "wallMs": 2715.388709,
+   "ms": 2713.999374,
    "calls": [
     {
      "kind": "cli",
@@ -4365,13 +4365,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 632.456875,
+     "ms": 244.126041,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5265\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #973\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -4383,7 +4383,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4391,11 +4391,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2518.589334,
+     "ms": 2451.404333,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4408,18 +4408,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 17.202791,
+     "ms": 18.469,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5271 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #978 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4431,8 +4431,8 @@
    "i": 1,
    "ok": true,
    "error": null,
-   "wallMs": 3103.169459,
-   "ms": 3103.065375,
+   "wallMs": 2494.465583,
+   "ms": 2494.3487910000003,
    "calls": [
     {
      "kind": "cli",
@@ -4443,13 +4443,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 611.048834,
+     "ms": 275.723958,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5273\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #986\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -4461,7 +4461,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4469,11 +4469,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2471.319875,
+     "ms": 2200.927583,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4486,18 +4486,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 20.696666,
+     "ms": 17.69725,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5279 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #990 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 293,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4509,8 +4509,8 @@
    "i": 2,
    "ok": true,
    "error": null,
-   "wallMs": 3240.68775,
-   "ms": 3240.591209,
+   "wallMs": 3054.432083,
+   "ms": 3054.326583,
    "calls": [
     {
      "kind": "cli",
@@ -4521,13 +4521,13 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 618.076375,
+     "ms": 242.867583,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5281\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
-     "chars": 203,
+     "text": "@52da5ad2 #998\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 202,
      "images": [],
      "stderrChars": 0
     },
@@ -4539,7 +4539,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4547,11 +4547,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2601.458209,
+     "ms": 2793.446125,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4564,18 +4564,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.056625,
+     "ms": 18.012875,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5287 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1004 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4587,8 +4587,8 @@
    "i": 3,
    "ok": true,
    "error": null,
-   "wallMs": 3557.319875,
-   "ms": 3557.215583,
+   "wallMs": 2460.364333,
+   "ms": 2460.247041,
    "calls": [
     {
      "kind": "cli",
@@ -4599,12 +4599,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 620.707542,
+     "ms": 273.918917,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5289\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1010\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -4617,7 +4617,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4625,11 +4625,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2918.532208,
+     "ms": 2168.288208,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4642,18 +4642,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 17.975833,
+     "ms": 18.039916,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5295 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1014 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4665,8 +4665,8 @@
    "i": 4,
    "ok": true,
    "error": null,
-   "wallMs": 3169.699417,
-   "ms": 3169.5991249999997,
+   "wallMs": 2395.892042,
+   "ms": 2395.7869170000004,
    "calls": [
     {
      "kind": "cli",
@@ -4677,12 +4677,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 609.929542,
+     "ms": 244.116417,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5297\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1022\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -4695,7 +4695,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4703,11 +4703,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2538.602458,
+     "ms": 2133.677833,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4720,18 +4720,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.067125,
+     "ms": 17.992667,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5303 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1026 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4743,8 +4743,8 @@
    "i": 5,
    "ok": true,
    "error": null,
-   "wallMs": 3147.438334,
-   "ms": 3147.3483749999996,
+   "wallMs": 2448.245625,
+   "ms": 2448.1466670000004,
    "calls": [
     {
      "kind": "cli",
@@ -4755,12 +4755,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 635.452292,
+     "ms": 253.908334,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5305\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1034\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -4773,7 +4773,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4781,11 +4781,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2491.359208,
+     "ms": 2174.976333,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4798,18 +4798,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 20.536875,
+     "ms": 19.262,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5311 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1038 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4821,8 +4821,8 @@
    "i": 6,
    "ok": true,
    "error": null,
-   "wallMs": 3236.6405,
-   "ms": 3236.547959,
+   "wallMs": 2704.581958,
+   "ms": 2704.4869169999997,
    "calls": [
     {
      "kind": "cli",
@@ -4833,12 +4833,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 632.707958,
+     "ms": 247.4365,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5313\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1046\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -4851,7 +4851,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4859,11 +4859,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2582.699959,
+     "ms": 2439.78325,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4876,18 +4876,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.140042,
+     "ms": 17.267167,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5319 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1051 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4899,8 +4899,8 @@
    "i": 7,
    "ok": true,
    "error": null,
-   "wallMs": 3213.305875,
-   "ms": 3213.2132920000004,
+   "wallMs": 2444.840833,
+   "ms": 2444.726916,
    "calls": [
     {
      "kind": "cli",
@@ -4911,12 +4911,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 671.893542,
+     "ms": 272.649375,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5321\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1059\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -4929,7 +4929,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -4937,11 +4937,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2519.853208,
+     "ms": 2154.829791,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -4954,18 +4954,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 21.466542,
+     "ms": 17.24775,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5327 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1063 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -4977,8 +4977,8 @@
    "i": 8,
    "ok": true,
    "error": null,
-   "wallMs": 3504.28175,
-   "ms": 3504.188917,
+   "wallMs": 2724.157917,
+   "ms": 2724.0611659999995,
    "calls": [
     {
      "kind": "cli",
@@ -4989,12 +4989,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 588.445709,
+     "ms": 239.381708,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5329\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1071\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -5007,7 +5007,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -5015,11 +5015,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2894.924458,
+     "ms": 2464.9545,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -5032,18 +5032,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 20.81875,
+     "ms": 19.724958,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5335 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1076 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -5055,8 +5055,8 @@
    "i": 9,
    "ok": true,
    "error": null,
-   "wallMs": 3113.980125,
-   "ms": 3113.8915829999996,
+   "wallMs": 2441.92825,
+   "ms": 2441.814833,
    "calls": [
     {
      "kind": "cli",
@@ -5067,12 +5067,12 @@
       "--agent-mode",
       "nav",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 607.372458,
+     "ms": 273.0105,
      "isError": false,
      "exitCode": 0,
-     "text": "@97acea00 #5337\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
+     "text": "@52da5ad2 #1084\n1|heading|Sign In\n2|textField|\n3|secureTextField|\n4|checkBox|Remember me\n6|checkBox|\n7|button|Sign In\n12|radioButton|Login\n13|radioButton|Items\n!identifier|2|email\n!identifier|3|password\n",
      "chars": 203,
      "images": [],
      "stderrChars": 0
@@ -5085,7 +5085,7 @@
       "--refresh-policy",
       "smart",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+      "4D870CFB-22E9-4D79-A75A-E133543149D2",
       "--step",
       "interact type 'gary@example.com' --identifier email --screen latest",
       "--step",
@@ -5093,11 +5093,11 @@
       "--step",
       "interact tap --identifier signIn --screen latest"
      ],
-     "ms": 2485.715292,
+     "ms": 2150.043917,
      "isError": false,
      "exitCode": 0,
-     "text": "1: @3902e07f\n~2|textField|email|gary@example.com\n2: @137a8812\n~3|secureTextField|password|••••\n3: @190cbb45\n+8|staticText|Welcome, gary@example.com\n",
-     "chars": 148,
+     "text": "1: @921562fc\n~2|textField|email|gary@example.com\n2: ?\n3: @ba181e33\n+8|staticText|Welcome, gary@example.com\n~3|secureTextField|password|••••\n",
+     "chars": 140,
      "images": [],
      "stderrChars": 0
     },
@@ -5110,18 +5110,18 @@
       "--agent-mode",
       "act",
       "--udid",
-      "D90B8CA7-FEF0-4775-9624-1105E0F51689"
+      "4D870CFB-22E9-4D79-A75A-E133543149D2"
      ],
-     "ms": 20.803833,
+     "ms": 18.760416,
      "isError": false,
      "exitCode": 0,
-     "text": "@190cbb45 #5343 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n!omitted|6\n",
-     "chars": 305,
+     "text": "@ba181e33 #1088 keyboard\n1|heading|Sign In||\n2|textField||gary@example.com|\n3|secureTextField||•••••••|\n4|checkBox|Remember me|0|\n5|staticText|Remember me||\n6|checkBox||0|\n7|button|Sign In||\n8|staticText|Welcome, gary@example.com||\n11|group|Toolbar||\n!identifier|2|email\n!identifier|3|password\n",
+     "chars": 294,
      "images": [],
      "stderrChars": 0
     }
    ],
-   "tokens": 165,
+   "tokens": 160,
    "verify": {
     "sawWelcome": true,
     "appSignedIn": true,
@@ -5135,18 +5135,18 @@
   "simulator": "headless (simctl boot, no Device Hub)"
  },
  "environment": {
-  "date": "2026-11-20T23:20:49.827Z",
+  "date": "2026-11-21T15:33:20.480Z",
   "macos": "26.6.2 (25G83)",
   "hardware": {
    "model": "VirtualMac2,1",
-   "cpu": "Apple M5 Pro (Virtual)",
+   "cpu": "Apple M4 Pro (Virtual)",
    "cores": 6,
    "memoryGB": 8
   },
   "xcode": "Xcode 27.2, Build version 27B52",
   "node": "v24.20.0",
   "simulator": {
-   "udid": "D90B8CA7-FEF0-4775-9624-1105E0F51689",
+   "udid": "4D870CFB-22E9-4D79-A75A-E133543149D2",
    "name": "Bench iPhone 17 Pro",
    "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro",
    "runtime": "iOS 27.2 (24B8117)"
@@ -5160,51 +5160,51 @@
   "note": "command line, no MCP server"
  },
  "leftoversKilled": [],
- "finishedAt": "2026-11-20T23:24:45.596Z",
+ "finishedAt": "2026-11-21T15:39:57.578Z",
  "mcpNotifications": 0,
  "strayStdout": [],
  "quick": {
   "warmup": {
    "n": 1,
    "ok": 1,
-   "medianMs": 424.338625,
-   "p90Ms": 424.338625,
+   "medianMs": 316.506542,
+   "p90Ms": 316.506542,
    "medianTokens": 51
   },
   "read": {
    "n": 20,
    "ok": 20,
-   "medianMs": 32.8951875,
-   "p90Ms": 52.557208,
+   "medianMs": 32.197916500000005,
+   "p90Ms": 45.728583,
    "medianTokens": 51
   },
   "tap": {
    "n": 20,
    "ok": 20,
-   "medianMs": 402.6267715,
-   "p90Ms": 431.98625,
+   "medianMs": 348.35079199999996,
+   "p90Ms": 368.267208,
    "medianTokens": 13
   },
   "type": {
    "n": 10,
    "ok": 10,
-   "medianMs": 1455.9826045,
-   "p90Ms": 1751.780458,
+   "medianMs": 1452.7062085,
+   "p90Ms": 1792.579917,
    "medianTokens": 12
   },
   "flow": {
    "n": 10,
    "ok": 10,
-   "medianMs": 3226.843479,
-   "p90Ms": 3651.260958,
-   "medianTokens": 164
+   "medianMs": 2768.987604,
+   "p90Ms": 3106.2052919999996,
+   "medianTokens": 161
   },
   "flowBatch": {
    "n": 10,
    "ok": 10,
-   "medianMs": 3191.4062085,
-   "p90Ms": 3504.188917,
-   "medianTokens": 165
+   "medianMs": 2477.2979160000004,
+   "p90Ms": 2724.0611659999995,
+   "medianTokens": 160
   }
  },
  "conditionAtEnd": {

@@ -65,7 +65,7 @@ rs/1 starts from a different set of goals:
 - **Screen-state hashes.** Every read carries a short hash of the current screen. Interactions can be guarded against that hash, which catches the race where the UI changes between inspection and action.
 - **One consistent format.** Screen reads, interactions and batches answer in a few plain lines; everything else answers with its JSON result or `{"error":...}`. There is no version or status wrapper to read past, and the exit code says whether the command worked.
 
-On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, this design read 164 tokens for a whole sign-in, the fewest of ten tools: 9.5x fewer than MobileBuildMCP (formerly XcodeBuildMCP), which adopted a similar compact-output approach, and 78x fewer than Xcode MCP (estimated). Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
+On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, this design read 161 tokens for a whole sign-in, the fewest of ten tools: 9.7x fewer than MobileBuildMCP (formerly XcodeBuildMCP), which adopted a similar compact-output approach, and 79x fewer than Xcode MCP (estimated). Read [how we test AI agents for the iOS Simulator](/blog/testing-ai-agents-ios-simulator) for the scenarios and methodology.
 
 ## How rs/1 works
 

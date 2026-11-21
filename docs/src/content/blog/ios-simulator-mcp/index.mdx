@@ -62,7 +62,7 @@ The simulator-use project publishes a public, open-source [benchmark](https://si
 
 | Tool                    | Tokens | Sign-in (s) | Read (s) | Tap (s) | Type (s) | Tool list |
 | ----------------------- | -----: | ----------: | -------: | ------: | -------: | --------: |
-| **RocketSim**           |    164 |        3.22 |     0.04 |    0.40 |     1.43 |         0 |
+| **RocketSim**           |    161 |        2.74 |     0.03 |    0.35 |     1.49 |         0 |
 | simulator-use 0.15.1    |    194 |        4.28 |     0.30 |    0.72 |     1.21 |     2,443 |
 | agent-device 0.21.36    |    664 |        7.62 |     0.08 |    1.31 |     2.59 |    47,544 |
 | mobile-mcp 1.0.16       |    980 |        6.32 |     0.19 |    0.55 |     2.31 |     7,169 |
@@ -78,7 +78,7 @@ What the table shows:
 
 - **Tokens:** RocketSim reads the fewest of the ten tools. The next lowest, simulator-use, reads 194, and the MCP servers read between 1,560 and 12,732.
 - **Tool catalogs:** an MCP server puts its tool list into the agent's context before the first action: 2,443 tokens for simulator-use, 2,655 for ios-simulator-mcp, 6,193 for MobileBuildMCP, and 19,620 for Xcode MCP. RocketSim's command line adds none.
-- **Sign-in time:** RocketSim finishes the step-by-step sign-in in 3.2 seconds, the second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there and never shows what a tap did.
+- **Sign-in time:** RocketSim finishes the step-by-step sign-in in 2.7 seconds, the second fastest. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there and never shows what a tap did.
 - **Where RocketSim is slower:** on the same Mac, simulator-use types and runs the batched sign-in faster than RocketSim. RocketSim is slower there because it does specific checks, which eventually results in more successful navigations and, with that, less round trips for your agents. Eventually, on longer navigation runs, this could actually speed up things.
 
 Two caveats matter. The token counts are the benchmark author's estimate (characters divided by four), not actual model tokens or billing, and times depend on the Mac they were measured on. And this is a benchmark of tools and their recommended workflows, not a ranking of AI models.

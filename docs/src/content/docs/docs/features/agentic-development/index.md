@@ -74,7 +74,7 @@ Try these with any AI coding tool that has the RocketSim Agent Skill installed:
 
 RocketSim runs continuously alongside the Simulator. Because there is already a Mac app watching the active device, RocketSim can reuse state, cache expensive work, and optimize repeated agent loops in ways one-off commands cannot.
 
-On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **3.2 seconds on 164 tokens**, the lowest token count and the second fastest of ten tools: **9.5× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **78× fewer** than Xcode MCP. Its **0.40 second tap** is the quickest among the tools that report what the tap did.
+On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **2.7 seconds on 161 tokens**, the lowest token count and the second fastest of ten tools: **9.7× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **79× fewer** than Xcode MCP. Its **0.35 second tap** is the quickest among the tools that report what the tap did.
 
 Read [how we test and improve the RocketSim CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, limitations, and improvement findings.
 

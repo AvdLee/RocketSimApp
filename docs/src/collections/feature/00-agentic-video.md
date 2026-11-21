@@ -20,4 +20,4 @@ RocketSim ships a version-matched `rocketsim` CLI and Agent Skill so Cursor, Xco
 - Validate setup with `rocketsim doctor`
 - Keep the CLI and Agent Skill in sync through app updates
 
-On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **3.2 seconds on 164 tokens**, the lowest token count and the second fastest of ten tools: **9.5× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **78× fewer** than Xcode MCP. Its **0.40 second tap** is the quickest among the tools that report what the tap did.
+On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **2.7 seconds on 161 tokens**, the lowest token count and the second fastest of ten tools: **9.7× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **79× fewer** than Xcode MCP. Its **0.35 second tap** is the quickest among the tools that report what the tap did.

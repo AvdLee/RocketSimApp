@@ -76,7 +76,7 @@ The simulator-use project publishes a public, open-source benchmark for iOS Simu
 
 | Tool                    | Tokens | Sign-in (s) | Read (s) | Tap (s) | Type (s) | Tool list |
 | ----------------------- | -----: | ----------: | -------: | ------: | -------: | --------: |
-| **RocketSim**           |    164 |        3.22 |     0.04 |    0.40 |     1.43 |         0 |
+| **RocketSim**           |    161 |        2.74 |     0.03 |    0.35 |     1.49 |         0 |
 | simulator-use 0.15.1    |    194 |        4.28 |     0.30 |    0.72 |     1.21 |     2,443 |
 | agent-device 0.21.36    |    664 |        7.62 |     0.08 |    1.31 |     2.59 |    47,544 |
 | mobile-mcp 1.0.16       |    980 |        6.32 |     0.19 |    0.55 |     2.31 |     7,169 |
@@ -91,14 +91,14 @@ _Tokens: everything the agent reads over a whole sign-in. Sign-in: the step-by-s
 Here is where RocketSim lands:
 
 - **Tokens:** the lowest of the ten tools. The next lowest, simulator-use, reads 194.
-- **Whole sign-in:** second fastest, at 3.22 s. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.
-- **Tap:** 0.40 s, faster than simulator-use on the same Mac (0.62 s), and the answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed.
+- **Whole sign-in:** second fastest, at 2.74 s. Only ios-simulator-mcp is quicker (2.08 s), and it reads 5,248 tokens to get there.
+- **Tap:** 0.35 s, faster than simulator-use on the same Mac (0.71 s), and the answer shows what the tap did. ios-simulator-mcp taps in 0.20 s but never shows the result, and 2 of its 20 taps missed.
 - **Type:** in the middle of the field, which runs from 0.41 s to 4.06 s.
-- **Read:** first of ten, at 0.04 s, in a field that runs from 0.04 s to 1.52 s.
+- **Read:** first of ten, at 0.03 s, in a field that runs from 0.03 s to 1.52 s.
 
 Every step worked in every run.
 
-Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (164 against 194 for the sign-in, 51 against 72 for a read, 165 against 179 for the batched sign-in), and it was faster at reading (36 ms against 222 ms) and tapping (397 and 403 ms against 623 ms). The whole sign-in was level: 3.22 s and 3.23 s against 3.37 s here, and 3.00 s against 2.79 s in our earlier run on another Mac, so which of the two is quicker changes with the Mac. simulator-use was faster at typing (1.09 s against 1.43 s) and at the batched sign-in (2.47 s against 3.17 s). Tokens are the benchmark author's estimate (characters divided by four) and do not depend on the Mac; times do.
+Two things to keep in mind. The page's times come from its author's Mac and ours from a cloud Mac, so we also ran the harness next to simulator-use 0.15.3 on the same Mac in the same session. RocketSim read fewer tokens in every measure there (161 against 194 for the sign-in, 51 against 72 for a read, 160 against 179 for the batched sign-in), and it was faster at reading (34 ms against 378 ms) and tapping (355 and 348 ms against 711 ms). The whole sign-in was quicker too, 2.74 s and 2.77 s against 4.26 s, but that gap moves with the Mac: in earlier runs on other Macs the two were within 0.4 s of each other (3.07 s against 3.41 s, 3.22 s against 3.37 s), and simulator-use was ahead once (2.79 s against 3.00 s), so treat the sign-in times as level. simulator-use was faster at typing (1.29 s against 1.49 s and 1.45 s). Tokens are the benchmark author's estimate (characters divided by four) and do not depend on the Mac, apart from a few tokens as the snapshot counter grows (161 to 164 across our runs); times do.
 
 #### How we ran it
 
@@ -122,7 +122,7 @@ The scenario scripts are frozen, and so are the results. Freezing them makes the
 
 ## What the benchmark taught us
 
-Our goal is the most reliable and most efficient CLI for agents, not the fastest single command. The numbers show that choice. RocketSim reads the fewest tokens of the ten tools and taps in 0.40 s, and on the same Mac it is slower than simulator-use at typing and at the batched sign-in.
+Our goal is the most reliable and most efficient CLI for agents, not the fastest single command. The numbers show that choice. RocketSim reads the fewest tokens of the ten tools and taps in 0.35 s, and on the same Mac it is slower than simulator-use at typing.
 
 We accept that trade because a command's duration is only part of what an agent spends. A fast command that returns too little leaves the agent guessing: it reads again, taps again or recovers from a miss, and every extra round trip costs tokens and a model turn that takes seconds, far more than the few hundred milliseconds between two commands. The benchmark times commands rather than model turns, so it does not show that effect directly, but the public data points the same way:
 

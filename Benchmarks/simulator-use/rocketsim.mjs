@@ -13,7 +13,7 @@
 //          element_not_found in about 1 of 5 tries on the Mac (November 18, 2026), so it is not used here.
 //   batch: one `do --refresh-policy smart` call with every step of the sign-in (the skill's batch form); `interact` settles by itself, so there
 //          is no extra wait or read between the steps.
-//   reset: after the harness relaunches the app, `wait element` until the screen is readable, as the skill advises after
+//   reset: relaunch the app (after a pause, see the comment there), `wait element` until the screen is readable, as the skill advises after
 //          a launch. Untimed, like the harness's own reset.
 import { execFileSync } from "node:child_process";
 
@@ -56,7 +56,17 @@ export default {
   async reset(ctx) {
     ctx.state.checkValues = false;
     try { execFileSync("xcrun", ["simctl", "terminate", ctx.udid, ctx.bundleId], { stdio: "ignore" }); } catch { /* not running */ }
+    // A launch right after a terminate can attach to the dying process on a slow cloud Mac and leave no app, and
+    // `wait element` can then answer from the previous run's stored screen. So pause, launch, wait, and make sure the
+    // signed-out screen of the new process is what a read shows. All of it is untimed.
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     execFileSync("xcrun", ["simctl", "launch", ctx.udid, ctx.bundleId], { stdio: "ignore" });
     await ctx.cli(BIN, ["wait", "element", "--identifier", "signIn", "--timeout", "15", ...udid(ctx)]);
+    for (let attempt = 0; attempt < 30; attempt++) {
+      let text = "";
+      try { text = execFileSync(BIN, ["elements", "--agent", "--agent-mode", "act", ...udid(ctx)], { encoding: "utf8" }); } catch { /* retry */ }
+      if (text.includes("Not signed in")) return;
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
   },
 };
