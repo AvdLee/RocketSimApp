@@ -5,8 +5,8 @@
  *
  * Current figures: the public leaderboard at simulator-use.dev/benchmarks
  * (run on 6 Nov 2026), with RocketSim's own row (17.0 pre-release, measured
- * on 20 Nov 2026 through the same open-source harness on a different Mac; on that
- * same Mac simulator-use 0.15.3 read 194 tokens and took 2.79 s). The benchmark's
+ * on 21 Nov 2026 through the same open-source harness on a different Mac; on that
+ * same Mac simulator-use 0.15.3 read 194 tokens and took 4.26 s). The benchmark's
  * author estimates tokens as characters divided by 4.
  */
 interface BenchmarkRow {
@@ -35,8 +35,8 @@ export const benchmarkRows: BenchmarkRow[] = [
   {
     tool: "RocketSim",
     detail: "17.0 pre-release",
-    tokens: 164,
-    signInSeconds: 3.0,
+    tokens: 161,
+    signInSeconds: 2.7,
   },
   { tool: "simulator-use", detail: "0.15.1", tokens: 194, signInSeconds: 4.28 },
   { tool: "agent-device", detail: "0.21.36", tokens: 664, signInSeconds: 7.62 },
@@ -91,7 +91,7 @@ export function formatRatio(ratio: number): string {
 }
 
 /** Seconds for RocketSim's tap on the same benchmark. The only other taps that report the result take 0.72 s or more. */
-const ownTapSeconds = 0.49;
+const ownTapSeconds = 0.4;
 
 export const tokenRank = rankBy("tokens");
 const signInRank = rankBy("signInSeconds");

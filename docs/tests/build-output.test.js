@@ -749,8 +749,8 @@ test("homepage stat figures read naturally", () => {
   // Every shown figure has a spoken copy, and an approximate one such as
   // "~95%" is spoken as "About 95%" instead of "tilde 95 percent".
   const agents = homepageChapter("agents");
-  assert.match(agents.body, /<span[^>]*aria-hidden="true"[^>]*>164<\/span>/);
-  assert.match(agents.body, /<span class="sr-only">164<\/span>/);
+  assert.match(agents.body, /<span[^>]*aria-hidden="true"[^>]*>161<\/span>/);
+  assert.match(agents.body, /<span class="sr-only">161<\/span>/);
   assert.doesNotMatch(agents.body, /aria-hidden="true"[^>]*>~/);
 });
 
