@@ -3,6 +3,9 @@
 **Improved:**
 
 - RocketSim now requires macOS 26.0 or later.
+- CLI: every command now answers about 0.2 s sooner, for RocketSim, RocketTrace, and RocketData.
+- CLI: filling in a form with one `rocketsim do` batch, such as email, password, and Sign In, is about 20% faster, and screen reads on apps with a tab bar are quicker.
+- CLI: screen reads while the on-screen keyboard is showing are about 0.1 s quicker, because RocketSim no longer reads each key. Snapshots never list individual keyboard keys, so use `rocketsim interact type` to enter text.
 
 **Fixed:**
 
