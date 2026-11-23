@@ -2,10 +2,13 @@
 
 **Improved:**
 
+- Settings: the About page is now a "RocketSim Pro" page that shows your plan, team license details, and payment status in one place. About RocketSim opens a redesigned window with an "Our apps" section that introduces RocketTrace and RocketData.
+- Team licenses: improved reliability of license activation through a shared, redesigned activation window.
 - RocketSim now requires macOS 26.0 or later.
 - CLI: every command now answers about 0.2 s sooner, for RocketSim, RocketTrace, and RocketData.
 - CLI: filling in a form with one `rocketsim do` batch, such as email, password, and Sign In, is about 20% faster, and screen reads on apps with a tab bar are quicker.
 - CLI: screen reads while the on-screen keyboard is showing are about 0.1 s quicker, because RocketSim no longer reads each key. Snapshots never list individual keyboard keys, so use `rocketsim interact type` to enter text.
+- Capture editor: the Convert button has more horizontal padding, and the playhead in the thumbnail strip now has a subtle shadow so it stays visible over light recordings.
 
 **Fixed:**
 
