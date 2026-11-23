@@ -24,6 +24,20 @@ Agent tasks often restart the app or bounce between branches. Without flows, eve
 - You replay it with `rocketsim flow <name>` instead of many separate interact commands.
 - Leading `flow <prerequisite>` steps run only when needed, so shared setup stays DRY.
 
+## Flows show up on their own
+
+You do not have to ask for flows. When an agent uses RocketSim to navigate the Simulator, it saves the path as a flow
+once it works and ends its answer with a link to the flow review page. Mentioning "RocketSim" and "flows" in a prompt
+makes the agent record and replay them more eagerly. A typical prompt:
+
+```text
+Use RocketSim flows to sign in, open Settings, and change the display name. Save each part as a flow so we can replay
+it later, and share the review link when you are done.
+```
+
+RocketSim also nudges agents from the command line: once a couple of screen-changing steps are unsaved, the reply carries a short hint
+that names the save command, and the CLI & Agent settings and onboarding show the same example prompt.
+
 ## Discover and run flows
 
 List the flows RocketSim knows for the app in the foreground (or pass `--app <bundle-id>` to scope another app):
@@ -82,6 +96,37 @@ For secrets, prefer shell expansion so values do not land in agent transcripts:
 rocketsim flow login --param user=alice --param password=$TEST_PASSWORD
 ```
 
+## Author flows that work the first time
+
+Besides taps and typing, flows support steps for the cases that used to need rewrites:
+
+| Step                           | Use it for                                                             |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| `clear`                        | Empty the focused text field (also `rocketsim interact clear`)         |
+| `type '{name}' --replace`      | Clear the field, then type                                             |
+| `expect --type cell --index 2` | Check a role without a label, optionally the Nth match                 |
+| `wait settled [--ms 300]`      | Wait until the screen stops moving, instead of a fixed pause           |
+| `tap --at 0.5,0.3`             | Tap a spot as screen fractions, for content without accessibility rows |
+| `tap --grid 3x4 --cell 5`      | Tap the center of a cell of a whole-screen grid                        |
+
+`flow save` keeps `tap --at` and `--grid` steps with a warning, because a selector survives layout changes better.
+
+The system photo picker runs out of process, so `rocketsim elements` does not list its thumbnails. Use
+`rocketsim elements --at 0.2,0.3 --normalized` to name the thumbnail under a point and get its frame, then tap the
+center of that frame.
+
+### Keep flows in your project
+
+`rocketsim flow sync --dir <folder>` writes every `.rsflow` file in a folder into RocketSim's flow store, in dependency
+order, and skips flows that did not change. Use `--dry-run` to preview, `--app <bundle-id>` to target an app, and
+`--prune` to remove flows the folder no longer contains. Commit the folder with your project and run the sync in a
+fresh checkout or a new worktree.
+
+### Rewriting a flow keeps its runs
+
+Saving or writing a flow with the same steps and parameters keeps its recorded runs and screenshots. Changed steps
+replace them. The reply says which happened, so a small edit to the description no longer wipes the review page.
+
 ## Composition and prerequisites
 
 Flows can call other flows. **Leading** `flow <name>` lines before the first real step are **prerequisites**. At run time RocketSim skips a prerequisite when that flow's final `expect` already holds (for example you are already on the home screen after sign-in). Any `flow` line **after** the first non-`flow` step always runs.
@@ -118,7 +163,9 @@ When saving, bind literals to env names with `--secret-env name=ENVVAR` and repl
 A failed run stops at the first bad step and returns **one compact reply** (exit code 1) with the current screen in the same payload, so the agent can continue manually without restarting the app.
 
 - **Drift** (UI changed): the flow is marked **stale**. Navigate the corrected path, then run `rocketsim flow fix <name>` to merge your manual steps into the file. RocketSim may **heal** an unambiguous single-element rename automatically and persist the fix only if the rest of the run still passes.
-- **Environmental** blockers (alerts, wrong app in foreground, missing parameters): fix the blocker, then resume with `rocketsim flow <name> --from <step>`. Step numbers appear in the failure output and stay stable when prerequisites are skipped.
+- **Environmental** blockers (alerts, wrong app in foreground, a sheet that was dismissed, missing parameters): fix the blocker, then resume with `rocketsim flow <name> --from <step>`. Step numbers appear in the failure output and stay stable when prerequisites are skipped.
+
+When a step lands on a different screen than the previous step proved, the failure names the `expected_screen`, so an agent can tell a dismissed sheet from a changed element.
 
 `rocketsim flow verify` replays one or all flows proactively to catch drift before a task starts.
 
@@ -130,7 +177,7 @@ Flows live in RocketSim's sandbox on **this Mac**, under Application Support:
 
 They are per app bundle id, not per Xcode project or git branch. The same app on the same Mac shares flows across worktrees. `rocketsim flow list` is the supported way to see what is available; agents should not read `.rsflow` bodies for routine navigation.
 
-Sharing flows through a project repository is planned; today they stay local.
+Keep flows in your repository as `.rsflow` files and load them with `rocketsim flow sync`. `flow sync --dir` also reads folders outside RocketSim's sandbox, such as an agent's temporary folder: the `rocketsim` launcher copies the files in before the sandboxed helper reads them.
 
 ## Flow review page
 
@@ -141,11 +188,11 @@ rocketsim flow open
 rocketsim flow open login
 ```
 
-`flow open` returns a **token-protected localhost URL** on the same browser preview server as `rocketsim preview`. The link stays valid for the RocketSim preview **session** (it outlives a single agent task but not an app restart). A newly saved flow shows its steps until the first successful run adds screens.
+`flow open` returns a **token-protected localhost URL** on the same browser preview server as `rocketsim preview`. The link is read-only, only opens flow pages, and keeps working across RocketSim restarts, so you can keep the tab open while an agent works. The page refreshes by itself when a run adds screens. `rocketsim flow open --new-link` rotates the link; an old link then shows a page that says it expired instead of an error. A newly saved flow shows its steps until the first successful run adds screens.
 
 ![Stock Analyzer demo flow in Annotated mode with accessibility overlays and step arrows](./flows/flows-tour-annotated.webp)
 
-The overview board shows each distinct screen once, with connectors from the tapped element to the next screen. Toggle **Annotated** (default) or **Clean** routes, show or hide the device bezel, and turn accessibility overlays on or off. Hover and select elements to inspect labels and identifiers; the **Screens** sidebar lists the element tree with search and keyboard navigation.
+The board shows one card per recorded checkpoint, in order, so a screen that appears twice (for example before and after typing) keeps both screenshots. Add `?view=screens` to the URL to merge repeated screens into one card each. Connectors from the tapped element to the next screen. Toggle **Annotated** (default) or **Clean** routes, show or hide the device bezel, and turn accessibility overlays on or off. Hover and select elements to inspect labels and identifiers; the **Screens** sidebar lists the element tree with search and keyboard navigation.
 
 ![The same Stock Analyzer demo flow in Clean mode without overlays](./flows/flows-tour-clean.webp)
 
@@ -171,7 +218,7 @@ On the flow canvas (when focus is not in a text field):
 
 Double-click the canvas to fit the board. In comment mode, **Cmd/Ctrl+Enter** submits a new comment.
 
-Successful `flow save` and `flow run` replies may include `flow_url` the first time and again about every ten minutes—surface it once as `Flow review: <url>` for humans following along.
+Replies after navigation commands also carry a short `!flows <url>` line (and `!flow N steps recorded; save with: rocketsim flow save --name <name>` when steps are waiting to be saved). Successful `flow save` and `flow run` replies may include `flow_url` the first time and again about every ten minutes—surface it once as `Flow review: <url>` for humans following along.
 
 ## Limits and requirements
 
