@@ -96,37 +96,6 @@ For secrets, prefer shell expansion so values do not land in agent transcripts:
 rocketsim flow login --param user=alice --param password=$TEST_PASSWORD
 ```
 
-## Author flows that work the first time
-
-Besides taps and typing, flows support steps for the cases that used to need rewrites:
-
-| Step                           | Use it for                                                             |
-| ------------------------------ | ---------------------------------------------------------------------- |
-| `clear`                        | Empty the focused text field (also `rocketsim interact clear`)         |
-| `type '{name}' --replace`      | Clear the field, then type                                             |
-| `expect --type cell --index 2` | Check a role without a label, optionally the Nth match                 |
-| `wait settled [--ms 300]`      | Wait until the screen stops moving, instead of a fixed pause           |
-| `tap --at 0.5,0.3`             | Tap a spot as screen fractions, for content without accessibility rows |
-| `tap --grid 3x4 --cell 5`      | Tap the center of a cell of a whole-screen grid                        |
-
-`flow save` keeps `tap --at` and `--grid` steps with a warning, because a selector survives layout changes better.
-
-The system photo picker runs out of process, so `rocketsim elements` does not list its thumbnails. Use
-`rocketsim elements --at 0.2,0.3 --normalized` to name the thumbnail under a point and get its frame, then tap the
-center of that frame.
-
-### Keep flows in your project
-
-`rocketsim flow sync --dir <folder>` writes every `.rsflow` file in a folder into RocketSim's flow store, in dependency
-order, and skips flows that did not change. Use `--dry-run` to preview, `--app <bundle-id>` to target an app, and
-`--prune` to remove flows the folder no longer contains. Commit the folder with your project and run the sync in a
-fresh checkout or a new worktree.
-
-### Rewriting a flow keeps its runs
-
-Saving or writing a flow with the same steps and parameters keeps its recorded runs and screenshots. Changed steps
-replace them. The reply says which happened, so a small edit to the description no longer wipes the review page.
-
 ## Composition and prerequisites
 
 Flows can call other flows. **Leading** `flow <name>` lines before the first real step are **prerequisites**. At run time RocketSim skips a prerequisite when that flow's final `expect` already holds (for example you are already on the home screen after sign-in). Any `flow` line **after** the first non-`flow` step always runs.
@@ -177,7 +146,9 @@ Flows live in RocketSim's sandbox on **this Mac**, under Application Support:
 
 They are per app bundle id, not per Xcode project or git branch. The same app on the same Mac shares flows across worktrees. `rocketsim flow list` is the supported way to see what is available; agents should not read `.rsflow` bodies for routine navigation.
 
-Keep flows in your repository as `.rsflow` files and load them with `rocketsim flow sync`. `flow sync --dir` also reads folders outside RocketSim's sandbox, such as an agent's temporary folder: the `rocketsim` launcher copies the files in before the sandboxed helper reads them.
+Keep flows in your repository as `.rsflow` files and load them into RocketSim's flow store with `rocketsim flow sync --dir <folder>`. The sync writes every `.rsflow` file in dependency order and skips flows that did not change. Use `--dry-run` to preview, `--app <bundle-id>` to target an app, and `--prune` to remove flows the folder no longer contains. Commit the folder with your project and run the sync in a fresh checkout or a new worktree.
+
+`flow sync --dir` is the only command that reads files from outside RocketSim's sandbox, such as an agent's temporary folder: the `rocketsim` launcher copies the files in before the sandboxed helper reads them. `flow write` reads the flow from stdin only.
 
 ## Flow review page
 
