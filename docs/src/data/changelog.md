@@ -5,10 +5,26 @@
 - Settings: the About page is now a "RocketSim Pro" page that shows your plan, team license details, and payment status in one place. About RocketSim opens a redesigned window with an "Our apps" section that introduces RocketTrace and RocketData.
 - Team licenses: improved reliability of license activation through a shared, redesigned activation window.
 - RocketSim now requires macOS 26.0 or later.
+- Captures: the watermark is gone. Screenshots and GIF frames stay clean, and only recordings made with the free version end with a short RocketSim card; Pro removes it.
+- Thumbnails: the spacebar preview of a screenshot or recording now has a close button in its top-left corner, and recordings show playback controls with sound so you can play, pause, and scrub right from the preview.
 - CLI: every command now answers about 0.2 s sooner, for RocketSim, RocketTrace, and RocketData.
 - CLI: filling in a form with one `rocketsim do` batch, such as email, password, and Sign In, is about 20% faster, and screen reads on apps with a tab bar are quicker.
 - CLI: screen reads while the on-screen keyboard is showing are about 0.1 s quicker, because RocketSim no longer reads each key. Snapshots never list individual keyboard keys, so use `rocketsim interact type` to enter text.
+- CLI: the agent skill now guides agents to fall back to a screenshot when an item is visible on screen but missing from the accessibility tree, such as in document pickers, and explains the default capture style and how to run multi-screenshot journeys. Thanks to S. Ratcliffe-Koopmans for the detailed feedback.
 - Capture editor: the Convert button has more horizontal padding, and the playhead in the thumbnail strip now has a subtle shadow so it stays visible over light recordings.
+- CLI: `rocketsim interact clear` empties a text field, and `rocketsim interact type --replace` swaps its text in one step.
+- CLI: `rocketsim wait settled` waits until a sheet, picker, or navigation has stopped animating, and `wait element --type cell --index 3` waits for the third cell.
+- CLI: `rocketsim interact tap --at 0.5,0.3` and `--grid 4x6 --cell 1` tap a spot on screen without coordinates in points, for screens without accessibility elements, such as the photo picker.
+- CLI: `rocketsim elements --at 120,340` shows the element at one spot on screen, and `--normalized` takes fractions of the screen instead. It can find elements that a full screen read misses, such as content shown by the system.
+- Flows: saved flows keep text typed into a regular text field readable, `flow` commands find the app in front more reliably, and `--about` texts that are too long now say how long they may be.
+- Flows: `rocketsim flow sync --dir <folder>` keeps a folder of flows, such as one in your repository, in sync with RocketSim. It saves only the flows that changed, reports any file it could not save without stopping the others, and with `--prune` removes flows that are no longer in the folder. `--dry-run` shows what would change.
+- CLI: `--file` and `--dir` now work with files anywhere on your Mac, and a file RocketSim cannot read explains how to pass it instead.
+- Flows: the review page now shows one card per checkpoint in step order, and each image is the screen when the checkpoint passed. Use `?view=screens` for the previous one-card-per-screen board. (Thanks, Edward Sanchez!)
+- Flows: saving a flow again with the same steps keeps its recorded run, and the reply says whether the run was kept or discarded.
+- Flows: when something outside the flow closes a sheet mid-run, the failure now says the screen changed instead of reporting a missing element.
+- Flows: the review link keeps working after RocketSim restarts, the page refreshes while an agent records, and an old link explains how to get a new one. `rocketsim flow open --new-link` replaces it.
+- CLI: agents now get a hint to save a flow after navigating the Simulator, and a link to your saved flows, and the agent skill saves flows by default and shares the review link.
+- Flows: CLI & Agent onboarding and settings now explain flows and include a copyable example prompt so agents know to record navigation and share the review link.
 
 **Fixed:**
 
