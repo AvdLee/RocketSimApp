@@ -1,4 +1,4 @@
-# 17.0.0 (341)
+# 17.0.0 (343)
 
 **Improved:**
 
@@ -8,6 +8,8 @@
 - Captures: the watermark is gone. Screenshots and GIF frames stay clean, and only recordings made with the free version end with a short RocketSim card; Pro removes it.
 - Thumbnails: the spacebar preview of a screenshot or recording now has a close button in its top-left corner, and recordings show playback controls with sound so you can play, pause, and scrub right from the preview.
 - CLI: every command now answers about 0.2 s sooner, for RocketSim, RocketTrace, and RocketData.
+- Flows: switch between your recorded flows from the Screens sidebar of the flow page, without going back to the list. The board changes in place, and your view settings stay.
+- Flows: screens are spaced further apart on the flow page, so you can see the line leaving each screen before its label.
 - CLI: filling in a form with one `rocketsim do` batch, such as email, password, and Sign In, is about 20% faster, and screen reads on apps with a tab bar are quicker.
 - CLI: screen reads while the on-screen keyboard is showing are about 0.1 s quicker, because RocketSim no longer reads each key. Snapshots never list individual keyboard keys, so use `rocketsim interact type` to enter text.
 - CLI: the agent skill now guides agents to fall back to a screenshot when an item is visible on screen but missing from the accessibility tree, such as in document pickers, and explains the default capture style and how to run multi-screenshot journeys. Thanks to S. Ratcliffe-Koopmans for the detailed feedback.
@@ -25,17 +27,17 @@
 - Flows: the review link keeps working after RocketSim restarts, the page refreshes while an agent records, and an old link explains how to get a new one. `rocketsim flow open --new-link` replaces it.
 - CLI: agents now get a hint to save a flow after navigating the Simulator, and a link to your saved flows, and the agent skill saves flows by default and shares the review link.
 - Flows: CLI & Agent onboarding and settings now explain flows and include a copyable example prompt so agents know to record navigation and share the review link.
+- Flows: compare one flow in light and dark, with different text sizes, or in portrait and landscape. Add `variant: appearance = light, dark` to a flow, run `rocketsim flow <name> --all-variants` (or `--variant appearance=dark`), and the review page gets a Variant menu in the sidebar to switch between the runs. RocketSim puts the Simulator back afterwards.
 
 **Fixed:**
 
+- CLI: `rocketsim interact type` works again on Simulators whose first keyboard is the US English hardware keyboard, instead of refusing to type.
 - CLI: `rocketsim video record` with the plain style now rotates landscape and mid-recording-rotation recordings correctly, and no longer leaves temporary files behind.
 - Network conditions: RocketSim's network filter only accepts commands from RocketSim, and releases the filtered apps when RocketSim quits.
 - Thumbnails: the capture thumbnail and the magnifier no longer leave keyboard and scroll monitors running after they close.
 - Performance traces: cancelling a trace while RocketSim waits for RocketTrace no longer leaves the trace button stuck.
 - Storage inspector: saving user defaults with accented or non-Latin text now stores the text as typed.
 - Reliability: improved stability of the CLI connection, process output with non-ASCII text, keychain edits of iCloud items, and floating thumbnails on multi-monitor setups.
-
-# 16.8.0
 
 # 17.0.0
 
