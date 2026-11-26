@@ -21,11 +21,11 @@ const seo = {
   <section class="py-48 text-center">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl font-bold mb-4">Opening RocketSim...</h1>
-      <p class="text-xl text-gray-400 mb-8">
+      <p id="claim-offer-status" class="text-xl text-gray-400 mb-8">
         If RocketSim does not open automatically, you'll be redirected to the
         homepage shortly.
       </p>
-      <a href="/" class="btn btn-primary"
+      <a id="claim-offer-fallback" href="/" class="btn btn-primary"
         >If nothing happened, click here to visit RocketSim</a
       >
     </div>
@@ -33,12 +33,63 @@ const seo = {
 </Base>
 
 <script is:inline>
-  const deepLink = `rocketsim://open-offer${window.location.search}`;
-  const fallbackUrl = "https://www.rocketsim.app";
+  const CODE_PATTERN = /^[A-Za-z0-9]{1,64}$/;
+  const params = new URLSearchParams(window.location.search);
+  const rawCode = params.get("code");
+  const hasValidCode = rawCode !== null && CODE_PATTERN.test(rawCode);
 
+  const fallbackUrl = hasValidCode
+    ? `https://apps.apple.com/redeem?ctx=offercodes&id=1504940162&code=${encodeURIComponent(rawCode)}`
+    : "https://www.rocketsim.app";
+
+  const statusEl = document.getElementById("claim-offer-status");
+  const fallbackLink = document.getElementById("claim-offer-fallback");
+
+  if (fallbackLink) {
+    fallbackLink.href = fallbackUrl;
+  }
+
+  if (hasValidCode && statusEl) {
+    statusEl.textContent =
+      "If RocketSim does not open automatically, the App Store offer redemption page will open instead.";
+  }
+
+  if (hasValidCode && fallbackLink) {
+    fallbackLink.textContent =
+      "If nothing happened, click here to redeem your offer in the App Store";
+  }
+
+  const deepLink = `rocketsim://open-offer${window.location.search}`;
   window.location.href = deepLink;
 
-  window.setTimeout(() => {
+  let fallbackTimer;
+
+  const cleanup = () => {
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+    window.removeEventListener("blur", cancelFallback);
+    window.removeEventListener("pagehide", cancelFallback);
+  };
+
+  const cancelFallback = () => {
+    if (fallbackTimer !== undefined) {
+      window.clearTimeout(fallbackTimer);
+      fallbackTimer = undefined;
+    }
+    cleanup();
+  };
+
+  const onVisibilityChange = () => {
+    if (document.hidden) {
+      cancelFallback();
+    }
+  };
+
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  window.addEventListener("blur", cancelFallback);
+  window.addEventListener("pagehide", cancelFallback);
+
+  fallbackTimer = window.setTimeout(() => {
+    cleanup();
     window.location.replace(fallbackUrl);
   }, 2000);
 </script>
