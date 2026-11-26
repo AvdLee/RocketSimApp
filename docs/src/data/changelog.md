@@ -2,6 +2,8 @@
 
 **Improved:**
 
+- CLI: `rocketsim video record --flow <name> --touches --zoom > demo.mp4` records a polished demo video of a saved flow. The recording starts, the flow runs at a watchable pace with a pointer that glides from tap to tap, the video zooms into each tapped element, and the recording ends when the flow does. When your app changes, record the flow again to get an up-to-date video.
+- Upgrade offers: clearer wording for the real discount on a full year, and the renewal price after a promotional year.
 - Welcome-back offer: the offer now shows the real price, what a month works out to, and a discount that matches what the payment sheet shows. Returning subscribers are offered the yearly plan first.
 - Settings: the About page is now a "RocketSim Pro" page that shows your plan, team license details, and payment status in one place. About RocketSim opens a redesigned window with an "Our apps" section that introduces RocketTrace and RocketData.
 - Team licenses: improved reliability of license activation through a shared, redesigned activation window.
@@ -10,6 +12,8 @@
 - Thumbnails: the spacebar preview of a screenshot or recording now has a close button in its top-left corner, and recordings show playback controls with sound so you can play, pause, and scrub right from the preview.
 - CLI: every command now answers about 0.2 s sooner, for RocketSim, RocketTrace, and RocketData.
 - Flows: switch between your recorded flows from the Screens sidebar of the flow page, without going back to the list. The board changes in place, and your view settings stay.
+- Flows: flows that start with the same flow, such as pin, rename, and delete after "open the chat menu", now show as one tree on the flow page. Open the first flow and choose Tree to see every branch fan out from the screen they share, with a note for menu items that no flow covers yet. The branches of a fork stack under each other, so the tree reads as branches instead of one long flow. `rocketsim flow verify <name> --branches` replays the whole tree.
+- Flows: the flow page is now a live feedback canvas. Leave comments on screens and elements; when an agent is watching, the page shows it and each comment moves through Queued, Implementing and Done (or a question for you) as the agent works, with its notes next to the comment. No more copying prompts.
 - Flows: screens are spaced further apart on the flow page, so you can see the line leaving each screen before its label.
 - CLI: filling in a form with one `rocketsim do` batch, such as email, password, and Sign In, is about 20% faster, and screen reads on apps with a tab bar are quicker.
 - CLI: screen reads while the on-screen keyboard is showing are about 0.1 s quicker, because RocketSim no longer reads each key. Snapshots never list individual keyboard keys, so use `rocketsim interact type` to enter text.

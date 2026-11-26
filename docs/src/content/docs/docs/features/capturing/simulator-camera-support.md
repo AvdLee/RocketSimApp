@@ -47,6 +47,10 @@ Camera simulation is available from the Capture side window tab:
 4. Integrate RocketSim Connect following the in-app instructions. For more info, see [Setting up RocketSim Connect](/docs/getting-started/setting-up-rocketsim-connect)
 5. Start running your app
 
+## Camera availability checks
+
+Apps often check `UIImagePickerController.isSourceTypeAvailable(.camera)` before showing their camera button. With a Simulator Camera selected, RocketSim reports the camera as available, including the available media types and the front and rear camera checks, so camera flows are no longer hidden in the Simulator. Choosing **None** keeps reporting no camera.
+
 ## Testing no-camera fallbacks
 
 If you want your app to behave as if no Simulator Camera stream is available, select **None** in the Simulator Camera picker. RocketSim Connect remains active, but video camera discovery behaves as unavailable so apps can show their own fallback UI.
@@ -67,7 +71,7 @@ If you run into an edge case that isn’t supported yet, I’d love to fix it. C
 2. Relaunch your app and try to get Camera Simulation to work
    _Note: functionality won’t change, but you’ll have more debug logs_
 3. Copy the logs from your console
-4. Start a new email to me via Settings → About → Report a bug
+4. Start a new email to me via Settings → RocketSim Pro → Report a bug
 5. Add the copied logs
 6. Hit send!
 7. (Optional) if you can share me an Xcode project with your camera code in it, I’ll be able to fix your specific case much quicker

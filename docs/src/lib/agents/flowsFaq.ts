@@ -32,7 +32,22 @@ export const flowsFaq: { question: string; answer: string }[] = [
   {
     question: "Where are flows stored, and can my team share them?",
     answer:
-      "Flows are plain-text `.rsflow` files in RocketSim's Application Support folder on your Mac, grouped by app. They stay local today. Sharing flows through your repository is planned.",
+      "Flows are plain-text `.rsflow` files in RocketSim's Application Support folder on your Mac, grouped by app. To share them with your team, keep the files in your repository and load them with `rocketsim flow sync --dir <folder>`, which saves only the flows that changed.",
+  },
+  {
+    question: "Can I give feedback on a flow and let my agent apply it?",
+    answer:
+      "Yes. Open the flow review page, press C, and comment on any element. When an agent is watching the flow, each comment moves from Queued through Implementing to Done as the agent works, and the agent can ask you a question right in the comment. No copying between the page and your agent. Without a watching agent, Copy prompt turns your comments into one message.",
+  },
+  {
+    question: "Can I compare a flow in dark mode or a larger text size?",
+    answer:
+      "Yes. Add a `variant` line to a flow, such as `variant: appearance = light, dark`, and run `rocketsim flow <name> --all-variants`. RocketSim runs the flow in each combination of appearance, text size, and orientation, then puts your Simulator back. The review page has a Variant menu to switch between the runs.",
+  },
+  {
+    question: "Can I turn a flow into a demo video?",
+    answer:
+      "Yes. `rocketsim video record --flow <name> --touches --zoom` records the flow at a watchable pace with a gliding pointer, and zooms into each tapped element. Record it again whenever your app changes to get an up-to-date video.",
   },
   {
     question: "Do flows work with RocketTrace?",

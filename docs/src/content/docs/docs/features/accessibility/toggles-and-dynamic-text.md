@@ -34,6 +34,24 @@ Use the **Color Filter** menu to check whether your interface still works when c
 
 The color blindness filters have an **Intensity** slider from 25% to 100%, so you can compare a mild impairment with a strong one. Color filters require **Xcode 27 or later**.
 
+## Color blindness simulation
+
+Below the toggles, **Color Blindness Simulation** shows your app the way people with color blindness see it. Pick a type from the **Vision** menu, and RocketSim places a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
+
+| Type              | What it simulates                           |
+| ----------------- | ------------------------------------------- |
+| **Protanopia**    | No red perception                           |
+| **Protanomaly**   | Weak red perception                         |
+| **Deuteranopia**  | No green perception                         |
+| **Deuteranomaly** | Weak green perception, the most common type |
+| **Tritanopia**    | No blue perception                          |
+| **Tritanomaly**   | Weak blue perception                        |
+| **Achromatopsia** | No color perception at all                  |
+
+Choose **Off** to remove the overlay. The overlay is separate from the Simulator's own **Color Filter**, so it doesn't change any Simulator setting. It needs the Screen Recording permission to follow the Simulator's screen, and RocketSim shows a link to System Settings when the permission is missing.
+
+Use it to check whether status colors, charts, and error states still work when red and green, or blue and yellow, look alike.
+
 ## Liquid Glass
 
 When Liquid Glass was introduced, many developers quickly ran into accessibility concerns. The **Liquid Glass** section lets you test the two settings iOS offers to improve legibility:

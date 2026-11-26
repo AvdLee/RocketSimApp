@@ -49,6 +49,14 @@ RocketSim does not ship an MCP server. Read [iOS Simulator MCP vs CLI and Agent 
 
 On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **2.7 seconds on 161 tokens**, the lowest token count and the second fastest of ten tools: **9.7× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **79× fewer** than Xcode MCP. Its **0.35 second tap** is the quickest among the tools that report what the tap did. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the scenarios, methodology, and improvement findings.
 
+## Answers stay small
+
+`elements`, `interact`, and `do` answer in plain lines instead of JSON, so an agent spends fewer tokens on every step. A screen read is a header with the screen hash plus one row per element. An action answers with the new screen and only what changed on it, such as text that appeared, a text field whose value changed, or a status message and error. A full sign-in costs agents well under 200 tokens to read.
+
+Every other command prints its JSON result directly, without a wrapper, so `url`, `findings`, or `not_covered` sit at the top level. A failure answers `{"error":{...}}` and exits with code 1.
+
+Screen reads leave out the keyboard's own keys, its typing-predictions bar, and what the keyboard covers. Use `rocketsim interact type` to enter text instead of tapping keys.
+
 ## Key commands
 
 ### Doctor
@@ -92,6 +100,12 @@ The `--agent` flag is the recommended default for agent workflows. It returns co
 - `nav` focuses on headings, tabs, navigation bars, and top-level controls while omitting plain static text, images, and nested duplicate text composites
 - `act` includes interactive element identifiers, labels, roles, values, and state
 - `debug` returns the full hierarchy when an action fails or an element looks wrong
+
+Trim the answer to what the agent needs with `--match <regex>`, `--role <a,b>`, `--fields <id,role,label,...>`, `--max-label <n>`, `--exclude-chrome`, and `--merge-twins`. The filters only shorten the answer, so element ids stay stable for the next interaction. Add `--since <hash>` to get a one-line `unchanged` answer when the screen has not changed.
+
+To inspect one spot on the screen, use `rocketsim elements --at 120,340`. Add `--normalized` to pass fractions of the screen, such as `--at 0.17,0.3 --normalized`. This finds content that a full screen read misses, such as the system photo picker, which runs outside your app.
+
+Controls without an accessibility label, such as the back button in the iPhone Duo side rail, stay in the list. When they have an accessibility identifier, RocketSim adds a `!identifier|id|identifier` row so you can tap them with `--identifier`. Password fields are reported as secure text fields, so agents recognize them as sensitive; `--type textField` still matches them.
 
 Elements that expose custom accessibility actions get an extra `!actions|id|...` row. Every element, including the controls inside a combined row, stays tappable by id.
 
@@ -148,7 +162,7 @@ rocketsim screenshot \
 | `--device-shadow`        | Render a shadow behind the device frame.                                                                                                                                                                         |
 | `--ratio <ratio>`        | Output ratio: `auto`, `1:1`, `5:4`, `4:3`, `3:2`, or `16:9`.                                                                                                                                                     |
 | `--asc`                  | Optimize output dimensions for App Store Connect.                                                                                                                                                                |
-| `--watermark`            | Render the RocketSim watermark.                                                                                                                                                                                  |
+| `--watermark`            | Add the RocketSim end card to videos and GIFs. Screenshots have no end card, and RocketSim Pro removes it.                                                                                                       |
 | `--metadata`             | Render app metadata when available and supported by the selected ratio.                                                                                                                                          |
 | `--touches`              | Render captured touches.                                                                                                                                                                                         |
 | `--touch-color <value>`  | Touch color as a preset color or `#RRGGBB`.                                                                                                                                                                      |
@@ -190,6 +204,30 @@ rocketsim video record --touches --open-editor
 ```
 
 If the Simulator is rotated while a recording is running, the rotation is preserved and animated in the exported video.
+
+### Demo videos of a flow
+
+Record a polished demo video of a saved [flow](/docs/features/agentic-development/flows):
+
+```bash
+rocketsim video record --flow login --touches --zoom > demo.mp4
+```
+
+RocketSim starts the recording, runs the flow at a watchable pace with a pointer that glides from tap to tap, zooms into each tapped element, and stops the recording when the flow ends. When your app changes, record the flow again to get an up-to-date video. A flow that fails stops the recording without output. `--zoom` needs room around the device, so it defaults to the `1:1` ratio and cannot be combined with `--asc`.
+
+### Location
+
+Agents can use the locations you saved under **Settings → App Actions → Locations**:
+
+```bash
+rocketsim location list
+rocketsim location set "Office"
+rocketsim location set --latitude 52.37 --longitude 4.89
+rocketsim location current
+rocketsim location clear
+```
+
+`list` shows the saved locations for the app in front, `set` applies one by name or identifier or sets coordinates, `clear` stops simulating, and `current` returns the last location RocketSim applied. Pass `--bundle-id` to list the locations of another app and `--udid` to target a specific Simulator.
 
 ### iPhone Duo
 
@@ -288,7 +326,11 @@ rocketsim wait element --identifier "login.submit"
 rocketsim wait keyboard --state shown
 rocketsim wait keyboard --state hidden --timeout 1
 rocketsim wait time --ms 800
+rocketsim wait settled
+rocketsim wait element --type cell --index 3
 ```
+
+`wait settled` returns once no element or keyboard frame has moved for 300 ms, which is useful after a sheet, picker, or navigation animates in. `wait element --type cell --index 3` waits for the third cell.
 
 This keeps agent flows from racing ahead before the app has finished navigating or rendering. For keyboard waits, `shown` is an alias for `visible`; use `hidden` to wait for dismissal. Prefer observable waits; use the capped `wait time --ms <1...10000>` fallback only when no screen, element, or keyboard postcondition exists.
 
@@ -311,6 +353,11 @@ rocketsim interact scroll --label "Results" --direction up --pages 1 --screen la
 rocketsim interact focus --label "Email" --screen latest
 rocketsim interact type "hello@example.com"
 rocketsim interact type "Zoey_yz? café" --identifier "search.field" --screen latest
+rocketsim interact type "new text" --replace --identifier "search.field" --screen latest
+rocketsim interact clear --identifier "search.field" --screen latest
+rocketsim interact tap --at 0.5,0.3
+rocketsim interact tap --grid 4x6 --cell 1
+rocketsim interact rotate --orientation landscapeLeft
 rocketsim interact button home
 rocketsim interact biometric match
 rocketsim interact biometric nomatch
@@ -319,6 +366,14 @@ rocketsim interact biometric nomatch
 `interact` is designed to work with fresh screen state. After dispatching an interaction, RocketSim actively refreshes snapshots during a bounded settlement window before computing the result delta. The returned `screen_changed` value therefore reflects the post-interaction screen instead of a stale cached snapshot. Large `appeared` and `disappeared` detail arrays are capped while `appeared_count` and `disappeared_count` retain the complete totals.
 
 `interact type` presses the keys that produce each character on the keyboard layout of the Simulator, so text such as `Zoey_yz? café` comes out exactly as written on a German, French, British, Spanish, Italian, or another common layout. Pass `--identifier` or another selector together with `--screen` to focus a field first. When RocketSim can't type the text, the command fails with `invalid_argument` instead of reporting success. `context.reason` is `untypeable_characters` (with the characters the layout can't produce, for example emoji) or `unsupported_keyboard_layout` (a keyboard RocketSim has no verified mapping for). Switch the Simulator to a common layout in Settings, or enter the text another way and read the field back to verify.
+
+Use `interact clear` to empty a text field and `interact type --replace` to swap its text in one step.
+
+`interact tap --at 0.5,0.3` taps a fraction of the screen (`0,0` is the top left, `1,1` the bottom right). `--grid 4x6 --cell 1` taps the center of the first cell of a 4-by-6 grid over the whole screen, counted left to right, then top to bottom. Use them on screens without accessibility elements, such as the photo picker. Prefer a selector whenever the screen offers one.
+
+`interact rotate --orientation <portrait|portraitUpsideDown|landscapeLeft|landscapeRight>` rotates an iPhone or iPad Simulator and returns once the rotation is applied, so a script can capture the landscape screen right away. It also works as a step in `rocketsim do`. It is not available on iPhone Duo; use `duo pose` there.
+
+Every interact command accepts `--settle full|quick|none`. By default, RocketSim returns as soon as the screen stops moving, so a typical tap answers in under a second. Choose `quick` or `none` when speed matters more than waiting for the screen to settle. Selectors wait up to 1.5 seconds for their element by default.
 
 Use `interact activate` for an accessibility element that does not respond to coordinate taps, such as a hidden debug control. It performs an accessibility press on the resolved element instead of sending a HID tap.
 
@@ -341,6 +396,8 @@ rocketsim do \
 
 Prefer a concrete postcondition such as an element appearing or the keyboard hiding. Interaction responses already include a screen delta, so an extra screen-change wait is often unnecessary.
 
+With `--refresh-policy smart`, batches of coordinate taps and swipes finish about 35% faster, and filling in a form (email, password, and Sign In) is about 20% faster than with separate commands.
+
 Each step normally starts with `interact`, `wait`, `elements`, or `screen`. Interaction actions such as `tap`, `swipe`, and `focus` are also accepted directly as shorthand inside a batch.
 
 ## Why `--agent` matters
@@ -351,11 +408,11 @@ An `act` response looks like this:
 
 ```text
 @a3f291bc #4
-7|button|Continue||enabled
-8|textField|Email||enabled
+7|button|Continue
+8|textField|Email
 ```
 
-The first line is the screen hash and the sequence number; each row is an element id, role, label, value and state.
+The first line is the screen hash and the sequence number; each row is an element id, role, label, and, when there is one, value and state. Rows no longer repeat that an element is enabled.
 
 The identifiers are ephemeral and belong to that screen. Prefer a label selector, use 1-based `--index` for repeated labels, or use an identifier with `--screen latest` when duplicate labels make the selector ambiguous. Use `debug` mode or omit `--agent` when you need parent relationships, raw frames, scrollable-container metadata, or the complete hierarchy.
 
