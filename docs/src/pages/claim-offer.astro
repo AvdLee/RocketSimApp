@@ -7,89 +7,227 @@ const {
 } = config;
 
 const seo = {
-  title: "Opening RocketSim | RocketSim",
-  description: "Opening RocketSim and forwarding your offer details.",
+  title: "Claim your RocketSim offer | RocketSim",
+  description: "Download RocketSim and redeem your offer code.",
   canonical: `${base_url}/claim-offer`,
   robots: {
     index: false,
     follow: false,
   },
 };
+
+const downloadHref =
+  "https://apps.apple.com/app/apple-store/id1504940162?pt=117264678&ct=claim-offer&mt=8";
 ---
 
 <Base seo={seo}>
-  <section class="py-48 text-center">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-4">Opening RocketSim...</h1>
-      <p id="claim-offer-status" class="text-xl text-gray-400 mb-8">
-        If RocketSim does not open automatically, you'll be redirected to the
-        homepage shortly.
+  <section class="mx-auto max-w-[640px] px-5 pt-32 pb-section" data-claim-offer>
+    <!-- Shown by the script once the link's offer code is validated. -->
+    <div data-claim-ready hidden>
+      <div class="relative mx-auto mb-8 size-24" aria-hidden="true">
+        <img
+          src="/images/rocketsim-app-icon.png"
+          alt=""
+          width="96"
+          height="96"
+          class="absolute inset-0 size-full scale-110 opacity-70 blur-2xl"
+        />
+        <img
+          src="/images/rocketsim-app-icon.png"
+          alt=""
+          width="96"
+          height="96"
+          class="relative size-full"
+        />
+      </div>
+
+      <h1 class="text-title-3 text-center" data-claim-title>
+        Get RocketSim Pro with an offer code
+      </h1>
+      <p class="mx-auto mt-3 max-w-[460px] text-center text-intro text-muted">
+        Follow the two steps below to claim your discount on RocketSim Pro.
       </p>
-      <a id="claim-offer-fallback" href="/" class="btn btn-primary"
-        >If nothing happened, click here to visit RocketSim</a
+
+      <div
+        class="relative mx-auto mt-8 flex max-w-[420px] items-center justify-between gap-4 rounded-xl border border-line bg-black py-2 pr-2 pl-5"
+      >
+        <output
+          class="min-w-0 truncate text-title-4 tracking-wider text-white select-all"
+          data-claim-code
+          aria-label="Your offer code"></output>
+        <button
+          type="button"
+          class="shrink-0 cursor-pointer rounded-lg px-4 py-2 text-small font-semibold text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary"
+          data-claim-copy
+        >
+          Copy
+        </button>
+        <span
+          class="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-black text-small font-semibold text-white opacity-0 transition-opacity duration-200"
+          data-claim-copied
+          aria-live="polite"></span>
+      </div>
+
+      <ol class="mt-10 flex flex-col gap-4">
+        <li
+          class="flex flex-col items-start gap-4 rounded-2xl border border-line bg-surface p-6 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div class="flex items-start gap-4">
+            <span
+              class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-small font-semibold text-primary"
+              aria-hidden="true">1</span
+            >
+            <div>
+              <h2 class="text-copy font-semibold text-white">
+                Download RocketSim
+              </h2>
+              <p class="mt-1 text-small text-muted">
+                Get the app from the Mac App Store. Already installed? Skip to
+                step 2.
+              </p>
+            </div>
+          </div>
+          <a
+            href={downloadHref}
+            class="btn btn-sm shrink-0 border-line bg-white/5 px-5! py-2! text-small text-white normal-case hover:bg-white/10"
+            target="_blank"
+            rel="noopener">Download</a
+          >
+        </li>
+
+        <li
+          class="flex flex-col items-start gap-4 rounded-2xl border border-line bg-surface p-6 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div class="flex items-start gap-4">
+            <span
+              class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-small font-semibold text-primary"
+              aria-hidden="true">2</span
+            >
+            <div>
+              <h2 class="text-copy font-semibold text-white">Click redeem</h2>
+              <p class="mt-1 text-small text-muted">
+                RocketSim opens with your code. Choose "Claim the offer code" to
+                finish in the App Store.
+              </p>
+            </div>
+          </div>
+          <a
+            href="#"
+            class="btn btn-primary btn-sm shrink-0 px-5! py-2! text-small normal-case"
+            data-claim-open>Redeem in RocketSim</a
+          >
+        </li>
+      </ol>
+
+      <p class="mt-8 text-center text-small text-muted">
+        Nothing happens when you click redeem?
+        <a
+          href="#"
+          class="text-primary underline-offset-2 hover:underline"
+          data-claim-appstore>Redeem in the App Store instead</a
+        >.
+      </p>
+    </div>
+
+    <!-- Shown when the link has no usable offer code. -->
+    <div class="text-center" data-claim-invalid hidden>
+      <h1 class="text-title-3">This offer link is incomplete</h1>
+      <p class="mx-auto mt-3 max-w-[460px] text-intro text-muted">
+        The offer code is missing from this link. Open the link from your email
+        again, or visit the RocketSim homepage.
+      </p>
+      <a href="/" class="btn btn-primary mt-8 normal-case"
+        >Visit the RocketSim homepage</a
       >
     </div>
+
+    <noscript>
+      <p class="text-center text-intro text-muted">
+        Enable JavaScript to see your offer code.
+      </p>
+    </noscript>
   </section>
 </Base>
 
-<script is:inline>
+<script>
   const CODE_PATTERN = /^[A-Za-z0-9]{1,64}$/;
-  const params = new URLSearchParams(window.location.search);
-  const rawCode = params.get("code");
-  const hasValidCode = rawCode !== null && CODE_PATTERN.test(rawCode);
+  const COPIED_DURATION_MS = 2000;
+  const RUNNING_FLAG = "claimOfferReady";
 
-  const fallbackUrl = hasValidCode
-    ? `https://apps.apple.com/redeem?ctx=offercodes&id=1504940162&code=${encodeURIComponent(rawCode)}`
-    : "https://www.rocketsim.app";
+  function setUp() {
+    const root = document.querySelector<HTMLElement>("[data-claim-offer]");
+    if (!root || root.dataset[RUNNING_FLAG]) return;
+    root.dataset[RUNNING_FLAG] = "true";
 
-  const statusEl = document.getElementById("claim-offer-status");
-  const fallbackLink = document.getElementById("claim-offer-fallback");
-
-  if (fallbackLink) {
-    fallbackLink.href = fallbackUrl;
-  }
-
-  if (hasValidCode && statusEl) {
-    statusEl.textContent =
-      "If RocketSim does not open automatically, the App Store offer redemption page will open instead.";
-  }
-
-  if (hasValidCode && fallbackLink) {
-    fallbackLink.textContent =
-      "If nothing happened, click here to redeem your offer in the App Store";
-  }
-
-  const deepLink = `rocketsim://open-offer${window.location.search}`;
-  window.location.href = deepLink;
-
-  let fallbackTimer;
-
-  const cleanup = () => {
-    document.removeEventListener("visibilitychange", onVisibilityChange);
-    window.removeEventListener("blur", cancelFallback);
-    window.removeEventListener("pagehide", cancelFallback);
-  };
-
-  const cancelFallback = () => {
-    if (fallbackTimer !== undefined) {
-      window.clearTimeout(fallbackTimer);
-      fallbackTimer = undefined;
+    const ready = root.querySelector<HTMLElement>("[data-claim-ready]");
+    const invalid = root.querySelector<HTMLElement>("[data-claim-invalid]");
+    const titleEl = root.querySelector<HTMLElement>("[data-claim-title]");
+    const codeEl = root.querySelector<HTMLElement>("[data-claim-code]");
+    const copyButton =
+      root.querySelector<HTMLButtonElement>("[data-claim-copy]");
+    const copiedEl = root.querySelector<HTMLElement>("[data-claim-copied]");
+    const openLink = root.querySelector<HTMLAnchorElement>("[data-claim-open]");
+    const appStoreLink = root.querySelector<HTMLAnchorElement>(
+      "[data-claim-appstore]",
+    );
+    if (
+      !ready ||
+      !invalid ||
+      !titleEl ||
+      !codeEl ||
+      !copyButton ||
+      !copiedEl ||
+      !openLink ||
+      !appStoreLink
+    ) {
+      return;
     }
-    cleanup();
-  };
 
-  const onVisibilityChange = () => {
-    if (document.hidden) {
-      cancelFallback();
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    if (code === null || !CODE_PATTERN.test(code)) {
+      invalid.hidden = false;
+      return;
     }
-  };
 
-  document.addEventListener("visibilitychange", onVisibilityChange);
-  window.addEventListener("blur", cancelFallback);
-  window.addEventListener("pagehide", cancelFallback);
+    const discount = Number.parseInt(params.get("discount") ?? "", 10);
+    titleEl.textContent =
+      discount > 0 && discount < 100
+        ? `Get RocketSim Pro with a ${discount}% discount`
+        : "Get RocketSim Pro with an offer code";
 
-  fallbackTimer = window.setTimeout(() => {
-    cleanup();
-    window.location.replace(fallbackUrl);
-  }, 2000);
+    const displayCode = code.toUpperCase();
+    codeEl.textContent = displayCode;
+    openLink.href = `rocketsim://open-offer${window.location.search}`;
+    appStoreLink.href = `https://apps.apple.com/redeem?ctx=offercodes&id=1504940162&code=${encodeURIComponent(code)}`;
+    ready.hidden = false;
+
+    let copiedTimer: number | undefined;
+    const showCopied = (message: string) => {
+      copiedEl.textContent = message;
+      copiedEl.style.opacity = "1";
+      window.clearTimeout(copiedTimer);
+      copiedTimer = window.setTimeout(() => {
+        copiedEl.style.opacity = "0";
+      }, COPIED_DURATION_MS);
+    };
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(displayCode);
+        showCopied("Code copied!");
+      } catch {
+        // The clipboard is unavailable (insecure context or denied
+        // permission): select the code so the visitor can copy it by hand.
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(codeEl);
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        showCopied("Press ⌘C to copy");
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", setUp);
 </script>
