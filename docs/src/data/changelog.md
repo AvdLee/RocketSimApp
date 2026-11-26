@@ -2,6 +2,7 @@
 
 **Improved:**
 
+- Welcome-back offer: the offer now shows the real price, what a month works out to, and a discount that matches what the payment sheet shows. Returning subscribers are offered the yearly plan first.
 - Settings: the About page is now a "RocketSim Pro" page that shows your plan, team license details, and payment status in one place. About RocketSim opens a redesigned window with an "Our apps" section that introduces RocketTrace and RocketData.
 - Team licenses: improved reliability of license activation through a shared, redesigned activation window.
 - RocketSim now requires macOS 26.0 or later.
@@ -28,6 +29,7 @@
 - CLI: agents now get a hint to save a flow after navigating the Simulator, and a link to your saved flows, and the agent skill saves flows by default and shares the review link.
 - Flows: CLI & Agent onboarding and settings now explain flows and include a copyable example prompt so agents know to record navigation and share the review link.
 - Flows: compare one flow in light and dark, with different text sizes, or in portrait and landscape. Add `variant: appearance = light, dark` to a flow, run `rocketsim flow <name> --all-variants` (or `--variant appearance=dark`), and the review page gets a Variant menu in the sidebar to switch between the runs. RocketSim puts the Simulator back afterwards.
+- RocketData: User Defaults now include App Group suites, which you can browse and edit like the app's own defaults.
 
 **Fixed:**
 
@@ -38,6 +40,7 @@
 - Performance traces: cancelling a trace while RocketSim waits for RocketTrace no longer leaves the trace button stuck.
 - Storage inspector: saving user defaults with accented or non-Latin text now stores the text as typed.
 - Reliability: improved stability of the CLI connection, process output with non-ASCII text, keychain edits of iCloud items, and floating thumbnails on multi-monitor setups.
+- Network Monitoring: requests your app sends right at launch are now recorded, and apps that load RocketSim Connect twice no longer lose every request or crash.
 
 # 17.0.0
 
