@@ -21,7 +21,8 @@ The skill helps agents:
 - Prefer semantic interactions over fragile coordinate taps when possible
 - Work with RocketSim's [`rs/1` agent protocol](/docs/features/agentic-development/rs1-protocol) without needing to know its internals
 - Recover when a screen changes between inspection and interaction
-- Use screenshots when accessibility data is sparse or incomplete
+- Use screenshots when accessibility data is sparse or incomplete, such as in document pickers where an item is visible on screen but missing from the accessibility tree
+- Save the steps it takes as [navigation flows](/docs/features/agentic-development/flows) and share the flow review link with you
 - Run `rocketsim doctor` when setup needs to be checked
 
 On the public [simulator-use benchmark](https://simulator-use.dev/benchmarks) in November 2026, a RocketSim sign-in took **2.7 seconds on 161 tokens**, the lowest token count and the second fastest of ten tools: **9.7× fewer tokens** than XcodeBuildMCP (now MobileBuildMCP) and **79× fewer** than Xcode MCP. Its **0.35 second tap** is the quickest among the tools that report what the tap did. Read [how we test the CLI and Agent Skill](/blog/testing-ai-agents-ios-simulator) for the methodology and improvement findings.
@@ -62,9 +63,11 @@ For you as a developer, this means you only have to keep RocketSim updated to th
 
 The current skill teaches agents to start with a compact `nav` or `act` screen read, prefer labels or accessibility identifiers over coordinates, guard interactions with `--screen latest`, and combine known sequential actions with `rocketsim do`. It uses interaction deltas and concrete waits to avoid unnecessary screen reads. Debug snapshots and screenshots are fallbacks when normal accessibility output is insufficient.
 
-Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the command's `context.preview_url`, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
+Simulator-targeting commands also ensure a live, interactive browser preview is available. RocketSim includes its URL in the first answer and again every ten minutes or so, and the skill tells the agent to open that URL in a user-visible IDE browser and share it at the start and end of the task. This lets you follow the agent's work and click through the final Simulator state without switching away from your coding tool.
 
 For accessibility work, the skill points agents to a dedicated reference for fixing audit findings without changing your layout. The agent saves the element frames before the fix, rebuilds, and compares them afterwards so only the intended elements change. It then runs `rocketsim accessibility-audit` again to confirm the findings are gone. The skill also tells the agent to read `not_covered` as unchecked areas rather than passes, to review `label_review` for label meaning and localization, and to treat findings behind a visible modal as out of scope or dismiss the modal and audit again.
+
+The skill also saves flows by default. After an agent navigates your app, it saves the path as a named flow, replays it with `rocketsim flow <name>` the next time, and ends its answer with a link to the flow review page, where you can comment on screens and watch the agent apply your feedback. The skill explains the default capture style, how to run multi-screenshot journeys, and how to record a flow as a demo video with `rocketsim video record --flow`.
 
 The agent should run `rocketsim doctor` only when setup appears broken: the CLI cannot connect, no Simulator can be found, or perception and interactions fail unexpectedly. Routine navigation should start with `rocketsim screen` or `rocketsim elements --agent`.
 
@@ -75,7 +78,8 @@ Once the skill is installed and RocketSim is running, your agent can:
 - Read visible accessibility elements, including navigation and tab bar items
 - Tap, long-press, swipe, and type using labels or coordinates
 - Press simulator hardware buttons like Home, Lock, or Siri
-- Navigate multi-step app flows with fewer retries
+- Navigate multi-step app flows with fewer retries, and save them as [flows](/docs/features/agentic-development/flows) to replay with one command
+- Rotate iPhone and iPad Simulators and apply your saved locations
 - Use compact screen summaries to spend fewer tokens per screen read
 - Follow the live Simulator and review its final state in an IDE browser
 - Capture a screenshot when visual context is needed

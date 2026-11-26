@@ -165,7 +165,7 @@ compare_plans:
           free: false
           individual: true
           teams: true
-        - item: Remove Watermark
+        - item: Remove Video End Card
           free: false
           individual: true
           teams: true
@@ -203,10 +203,6 @@ compare_plans:
           teams: true
         - item: Aspect Ratio
           free: true
-          individual: true
-          teams: true
-        - item: Remove Watermark
-          free: false
           individual: true
           teams: true
         - item: App Store Connect Optimized

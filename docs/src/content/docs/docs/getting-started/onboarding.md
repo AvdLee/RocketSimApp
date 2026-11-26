@@ -5,6 +5,8 @@ sidebar:
   order: 2
 ---
 
+RocketSim 17 requires macOS 26.0 or later.
+
 During the first launch, you'll be asked to provide several permissions that are required for RocketSim to function properly. RocketSim is a sandboxed application, meaning it's secure but also requires explicit access to certain capabilities.
 
 ## Setting up permissions

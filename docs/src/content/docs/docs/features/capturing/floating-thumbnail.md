@@ -21,7 +21,7 @@ The real power is drag-and-drop. Drag the thumbnail directly into Slack, GitHub,
 
 ## Preview and dismiss
 
-Hover over the thumbnail and press Spacebar for a quick preview. Swipe the thumbnail to dismiss it.
+Hover over the thumbnail and press Spacebar for a quick preview. The preview has a close button in its top-left corner, and recordings show playback controls with sound, so you can play, pause, and scrub right from the preview. Swipe the thumbnail to dismiss it.
 
 ![Floating thumbnail preview opened with Spacebar for a quick larger look before dismissing it.](./floating-thumbnail/spacebar-preview-thumbnail.png)
 

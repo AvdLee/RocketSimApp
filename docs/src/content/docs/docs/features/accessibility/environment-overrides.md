@@ -1,6 +1,6 @@
 ---
 title: "Environment Overrides"
-description: "Toggle accessibility settings, Dark Mode, color filters, and Dynamic Type directly from RocketSim's side window. Test Increase Contrast, Reduce Motion, and more instantly."
+description: "Toggle accessibility settings, Dark Mode, color filters, color blindness simulation, and Dynamic Type directly from RocketSim's side window. Test Increase Contrast, Reduce Motion, and more instantly."
 sidebar:
   order: 4
 ---
@@ -16,6 +16,10 @@ Testing accessibility settings usually means navigating deep into Simulator Sett
 ## Accessibility toggles
 
 You get direct access to Increase Contrast, Reduce Transparency, Reduce Motion, Show Borders, and a Color Filter with grayscale and color blindness options (Xcode 27 or later). Simulators that run iOS 26 or earlier also offer Bold Text, On/Off Labels, Inverted Colors, and Differentiate without Color. Toggle any of them and see the effect immediately in your running app.
+
+## Color blindness simulation
+
+Preview how people with color blindness see your app. Choose Protanopia, Deuteranopia, Tritanopia, their milder variants, or Achromatopsia under **Color Blindness Simulation**, and RocketSim shows a live, recolored overlay on top of the Simulator. Your Simulator settings stay unchanged, and you keep interacting with your app as usual.
 
 ## Liquid Glass
 

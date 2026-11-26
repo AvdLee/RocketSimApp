@@ -13,6 +13,7 @@ asset:
 **Toggle accessibility features** like Increase Contrast, Reduce Motion, color filters, and Tinted Liquid Glass — and change Dynamic Type sizes — right from the side window, without navigating through Settings.
 
 - Simulate **color blindness** and grayscale with adjustable intensity
+- Preview protanopia, deuteranopia, tritanopia, and achromatopsia with a live **color blindness overlay**
 - Tint Liquid Glass and adjust its **opacity**
 - Show or hide **StandBy** on iPhone Simulators
 - Stay in sync when you change settings in the Simulator itself

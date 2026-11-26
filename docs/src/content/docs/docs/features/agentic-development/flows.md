@@ -136,7 +136,29 @@ A failed run stops at the first bad step and returns **one compact reply** (exit
 
 When a step lands on a different screen than the previous step proved, the failure names the `expected_screen`, so an agent can tell a dismissed sheet from a changed element.
 
-`rocketsim flow verify` replays one or all flows proactively to catch drift before a task starts.
+`rocketsim flow verify` replays one or all flows proactively to catch drift before a task starts. Add `--branches` to replay a flow and every flow that starts with it, trunk first.
+
+## Compare a flow in different looks
+
+Compare one flow in light and dark, with different text sizes, or in portrait and landscape. Add a `variant` header to the flow:
+
+```text
+name: open-settings
+about: Open the settings screen from home
+variant: appearance = light, dark
+flow login
+tap --label 'Settings'
+expect --identifier settings.title
+```
+
+Then run every combination or a single one:
+
+```bash
+rocketsim flow open-settings --all-variants
+rocketsim flow open-settings --variant appearance=dark
+```
+
+The axes are `appearance` (`light`, `dark`), `dynamic-type` (`extra-small` up to `accessibility-extra-extra-extra-large`), and `orientation` (`portrait`, `landscape`). A flow can use up to three axes and twelve combinations, and the first value is the baseline the flow is written for. RocketSim sets the Simulator, runs the flow, and puts the Simulator back afterwards. A failure in another variant is a finding about your app, not a stale flow, so it does not mark the flow as stale. The flow review page gets a **Variant** menu in the sidebar to switch between the runs.
 
 ## Where flows are stored
 
@@ -167,7 +189,23 @@ The board shows one card per recorded checkpoint, in order, so a screen that app
 
 ![The same Stock Analyzer demo flow in Clean mode without overlays](./flows/flows-tour-clean.webp)
 
-Pan and zoom the canvas with the mouse, trackpad, or keyboard. Comment mode (**C**) lets you attach notes to elements; pins appear on the screenshot. The **Comments** sidebar groups notes by screen, includes a prompt preview, and **Copy prompt** builds an agent-ready message from your comments. Comments are stored in the browser's `localStorage` for that flow run—they are not written into the flow store.
+Pan and zoom the canvas with the mouse, trackpad, or keyboard.
+
+### Switch between flows
+
+When an app has more than one flow, the **Screens** sidebar starts with a flow picker. Choose another flow and the board changes in place, without going back to the list, and your view settings stay. Screens are spaced further apart, so you can see the line leaving each screen before its label.
+
+### See several flows as a tree
+
+Flows that start with the same flow, such as pin, rename, and delete after "open the chat menu", show as one tree. Open the first flow and choose **Tree** to see every branch fan out from the screen they share. The branches of a fork stack under each other, and a note lists menu items that no flow covers yet. Replay the whole tree with `rocketsim flow verify <name> --branches`.
+
+### Give feedback and let your agent apply it
+
+The flow page is a live feedback canvas. Comment mode (**C**) lets you attach notes to elements, and pins appear on the screenshot. RocketSim keeps your comments, so they survive a reload. The **Comments** sidebar splits them into **Queued** and **Done**.
+
+When an agent is watching the flow, the page shows it, and each comment moves through Queued, Implementing, and Done as the agent works, with its notes next to the comment. When the agent needs more information, it asks a question in the comment and you answer in the page. Nothing needs to be copied between the page and your agent.
+
+Agents watch for comments with `rocketsim flow feedback <name> --watch`, apply them, and report back with `--resolve`. The [Agent Skill](/docs/features/agentic-development/agent-skill) teaches agents this loop. When no agent is watching, use **Copy prompt** to build an agent-ready message from your comments.
 
 ![Comments sidebar with prompt preview on the Stock Analyzer demo flow](./flows/flows-comments-sidebar.webp)
 
@@ -191,13 +229,23 @@ Double-click the canvas to fit the board. In comment mode, **Cmd/Ctrl+Enter** su
 
 Replies after navigation commands also carry a short `!flows <url>` line (and `!flow N steps recorded; save with: rocketsim flow save --name <name>` when steps are waiting to be saved). Successful `flow save` and `flow run` replies may include `flow_url` the first time and again about every ten minutes—surface it once as `Flow review: <url>` for humans following along.
 
+## Record a demo video
+
+Turn a flow into a polished demo video, for example for an App Store preview:
+
+```bash
+rocketsim video record --flow login --touches --zoom > demo.mp4
+```
+
+RocketSim starts the recording, runs the flow at a watchable pace with a pointer that glides from tap to tap, zooms into each tapped element, and ends the recording when the flow does. When your app changes, record the flow again to get an up-to-date video. See [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) for the styling options.
+
 ## Limits and requirements
 
 Flows need a **booted Simulator session** with your app reachable the same way as other `rocketsim` commands. `flow open` starts or reuses a browser preview tied to that Simulator; it cannot serve a flow page without a booted device.
 
 Flow commands count toward the same **agent-session allowance** as other interaction and capture commands. When the allowance is exhausted, RocketSim returns `quota_exceeded` and agents should stop further flow runs for that task; read-only inspection still works. Open **RocketSim → Settings → CLI & Agent** to view the allowance or upgrade to Pro.
 
-Keep individual flows to about **15 steps**; split longer paths with a leading `flow` prerequisite. Prefer descriptive names and `flow list` over hand-editing files—use `flow show` or `flow write` only when you need to author a flow manually.
+Keep individual flows to about **15 steps**, and keep the `about` summary to **80 characters**; split longer paths with a leading `flow` prerequisite. Prefer descriptive names and `flow list` over hand-editing files—use `flow show` or `flow write` only when you need to author a flow manually.
 
 ## Learn more
 

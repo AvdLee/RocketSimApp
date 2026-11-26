@@ -23,6 +23,8 @@ With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your
 - Open a live Browser Preview for hands-on testing and visual feedback
 - Audit accessibility on the visible screen, fix the findings, and validate the fixes
 - Capture and control iPhone Duo Simulators, including the hinge pose
+- Save the steps it takes as [flows](/docs/features/agentic-development/flows), replay them with one command, and apply your feedback from the flow review page (RocketSim 17.0.0)
+- Rotate iPhone and iPad Simulators and apply the locations you saved in RocketSim
 
 ## What you can do with it
 
@@ -33,6 +35,8 @@ Agentic development with RocketSim is useful whenever you want an agent to work 
 Ask your agent to move through multi-step flows like onboarding, login, settings, or purchase screens. RocketSim gives the agent a way to see what is on screen and interact with it step by step.
 
 Instead of relying only on screenshots or brittle coordinate taps, the agent can read accessibility elements and use semantic interactions whenever possible. That makes the loop much closer to how a developer would inspect the same screen manually.
+
+Once a path works, the agent saves it as a [flow](/docs/features/agentic-development/flows) and replays it with `rocketsim flow <name>` instead of tapping through every screen again. The flow review page shows real screenshots of each step, lets you comment on any element, and your agent applies the comments while the page shows its progress.
 
 ### Validate UI after code changes
 
