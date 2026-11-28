@@ -9,12 +9,12 @@ sidebar:
 ---
 
 ::::note[Coming soon to RocketSim 17]
-Navigation flows ship with RocketSim 17. The commands and the flow page on this page are not available in the current release.
+Navigation flows ship with RocketSim 17. The commands, the flow page, and online sharing on this page are not available in the current release.
 ::::
 
 Navigation **flows** ship with **RocketSim 17.0.0**. They save repeatable navigation paths for an app in the Simulator so agents (and you) do not rediscover the same taps on every task or relaunch. Each flow is a small `.rsflow` text file on your Mac, scoped to the app's bundle id.
 
-Flows run with the same reliability as `rocketsim do`, including checkpoints that catch wrong turns early. After a successful run, RocketSim can open a **flow review page** with real screenshots, arrows from tapped elements, and tools for visual feedback.
+Flows run with the same reliability as `rocketsim do`, including checkpoints that catch wrong turns early. After a successful run, RocketSim can open a **flow review page** with real screenshots, arrows from tapped elements, and tools for visual feedback. When you want someone else to look at a flow, such as a translator or a designer, you can [share it online](#share-a-flow-online) as a read-only page and collect their comments. Sharing is off until you turn it on.
 
 ## Why flows exist
 
@@ -229,6 +229,100 @@ Double-click the canvas to fit the board. In comment mode, **Cmd/Ctrl+Enter** su
 
 Replies after navigation commands also carry a short `!flows <url>` line (and `!flow N steps recorded; save with: rocketsim flow save --name <name>` when steps are waiting to be saved). Successful `flow save` and `flow run` replies may include `flow_url` the first time and again about every ten minutes—surface it once as `Flow review: <url>` for humans following along.
 
+## Share a flow online
+
+RocketSim can publish a read-only snapshot of a flow at `flows.rocketsim.app`, so a reviewer can open it in a browser and comment on screens, and your agent can apply the comments you approve. Sharing is strictly opt-in and off by default. Nothing leaves your Mac unless you turn sharing on and confirm a preview of what goes online.
+
+You manage sharing yourself on the flow page. Agents cannot publish, unpublish, or approve comments. Follow the [Share a flow and collect feedback](/tutorials/share-a-flow-for-feedback/) tutorial for a complete example.
+
+### Turn on sharing and publish
+
+Open the flow page with `rocketsim flow open <name>` and click the **Share** button in the toolbar. The **Share online** panel has three tabs: **Share**, **Reviews**, and **Settings**.
+
+1. **Unlock sharing.** The panel asks for Touch ID or your Mac password, so an agent that can open the page cannot publish or approve comments for you. The unlock lasts a short time. **Lock sharing now** in **Settings** ends it earlier.
+2. **Turn on online sharing.** The first time, a short disclosure explains what leaves your Mac. Confirm it with **Turn on**. You can also change this later with **Allow sharing flows online** in **Settings**.
+3. **Check the preview.** Before every publish, the panel shows each screen, what goes online, and what stays on your Mac. Uncheck a screen to leave it out, or mask a screen.
+4. **Confirm your email.** The first time, enter an owner email. RocketSim sends you a link to confirm it, and the flow goes live once you do.
+5. **Publish.** Choose **Publish version 1**. The panel then shows the link, with **Copy link**.
+
+![The Share online panel with a preview of the screens that go online, what stays on the Mac, and the owner email](./flows/flows-share-panel-preview.webp)
+
+If your team turned online sharing off for your Mac, the panel says so and offers no actions.
+
+### What is shared, and what is not
+
+- **Shared:** Screenshots, element labels, screen titles, and the app name, icon, and version.
+- **Not shared:** Your steps and commands, parameter values and defaults, secrets, the bundle ID, masked areas, and screens you leave out.
+
+Masks are applied to the screenshot on your Mac before upload, so RocketSim's servers never receive the masked pixels. Screenshots show whatever was on screen, including names and other test data you typed, so mask anything real before you publish.
+
+### The link and the viewer
+
+A published flow has a link such as `flows.rocketsim.app/<id>/<flow-name>`. The id is random, so the link cannot be guessed, and RocketSim does not list or index shared flows. Anyone you send the link to can look at the flow. The page is read-only and carries a **Made with RocketSim** badge. Only you can change it, by publishing a new version.
+
+### Reviewers confirm their email and comment
+
+A reviewer can look without an account. To comment, they enter their email address and an optional name, and RocketSim emails them a link to confirm it. Comments are plain text of up to 500 characters, and links in comments are rejected. Each reviewer sees only their own comments. You see all of them, with the reviewer's name and email address, in the **Reviews** tab. RocketSim emails you when new comments arrive, at most once per flow every six hours.
+
+![The shared flow in the browser, with the reviewer's comments on screens and the owner's Made with RocketSim badge](./flows/flows-shared-viewer-comments.webp)
+
+### Approve comments before your agent sees them
+
+Comments from reviewers are text from other people, so nothing reaches your agent until you approve it. Open the **Reviews** tab, then **Approve** or **Reject** each comment. **Undo** changes your mind, and **Approve all** approves what is pending.
+
+![The Reviews tab with pending comments to approve or reject and one approved comment](./flows/flows-share-reviews-tab.webp)
+
+Then ask your agent to apply the feedback. It runs `rocketsim flow share-feedback <name>`, which returns only the approved comments, as quoted app data and not as instructions. Your agent never sees reviewer emails or names, only labels such as "Reviewer 2".
+
+### Publish a new version
+
+Every publish creates a new immutable version, and the link always shows the latest one. Earlier versions stay viewable. Local changes to a flow never touch what you published. When you publish a new version, the approved comments are marked as resolved, and reviewers see **Fixed in version N** on their own comments, which they can reopen.
+
+### Unpublish a flow
+
+Choose **Unpublish** in the **Share** tab. The link stops working, and the flow, its versions, and its comments are deleted. An unpublished flow shows the same "not found" page as a link that never existed.
+
+### How long a flow stays online
+
+A shared flow goes offline 30 days after its last activity. A view, a comment, a new version, and a renewal count as activity. A view counts when someone opens the flow in a browser, at most once an hour, so link previews and crawlers do not keep a flow online. RocketSim emails you 7 days before a flow goes offline, with a link to renew it in one click. You can also renew it from your account page.
+
+### Your flows on the website
+
+At `flows.rocketsim.app`, you can log in with your email address and see your flows. RocketSim emails you a link to log in, or to register the first time. Each flow lists its status, latest version, last update, the date it goes offline, and the number of open comments.
+
+![The account page at flows.rocketsim.app with three shared flows and their status](./flows/flows-account-overview.webp)
+
+- **Open flow** opens the flow in owner view, with all comments.
+- **Copy link** copies the link to share.
+- **Keep online** renews the flow for another 30 days.
+
+The website never unpublishes or deletes a flow. Those actions stay on your Mac, in the Share panel.
+
+### Commands for shared flows
+
+| Command                                | What it does                                                                                         |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `rocketsim flow publish <name>`        | Opens the Share panel for the flow in your browser. You publish from there.                          |
+| `rocketsim flow unpublish <name>`      | Opens the Share panel in your browser. You unpublish from there.                                     |
+| `rocketsim flow share-status <name>`   | Opens the Share panel in your browser, which shows the status of the flow.                           |
+| `rocketsim flow share-feedback <name>` | Returns the reviewer comments you approved, as quoted data. Add `--app <bundle-id>` to scope an app. |
+
+The first three commands only open the Share panel, so a person always makes the decision. An agent cannot publish, unpublish, or approve comments with them.
+
+### Limits for online sharing
+
+- 5 live flows per owner
+- 10 versions per flow
+- 16 screens per version
+- 500 characters per comment
+- 50 comments per reviewer per version
+
+RocketSim also limits how often people can sign in and comment, to prevent abuse.
+
+### Privacy of shared flows
+
+Online sharing only applies when you choose to share a flow. Without it, flow data stays on your Mac, and opening a public flow link does not send anything from your Mac. When you do share, RocketSim processes your email address, the flow content you publish, and the email addresses and comments of reviewers. The [privacy statement](/privacy/#online-sharing) lists what we process, which providers we use, and how long we keep it.
+
 ## Record a demo video
 
 Turn a flow into a polished demo video, for example for an App Store preview:
@@ -252,4 +346,5 @@ Keep individual flows to about **15 steps**, and keep the `about` summary to **8
 - [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) — the broader command surface flows build on
 - [Browser Preview](/docs/features/agentic-development/browser-preview) — the localhost preview server flows reuse
 - [Agent Skill](/docs/features/agentic-development/agent-skill) — how agents discover `flow list`, handle failures, and use the flow review URL
+- [Share a flow and collect feedback](/tutorials/share-a-flow-for-feedback/): publish a flow, collect reviewer comments, and apply them with your agent
 - [CLI & Agent settings](/docs/settings/cli-and-agent) — install the CLI and check agent-session allowances

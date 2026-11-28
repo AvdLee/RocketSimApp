@@ -23,7 +23,7 @@ With the RocketSim Agent Skill installed from **Settings → CLI & Agent**, your
 - Open a live Browser Preview for hands-on testing and visual feedback
 - Audit accessibility on the visible screen, fix the findings, and validate the fixes
 - Capture and control iPhone Duo Simulators, including the hinge pose
-- Save the steps it takes as [flows](/docs/features/agentic-development/flows), replay them with one command, and apply your feedback from the flow review page (RocketSim 17.0.0)
+- Save the steps it takes as [flows](/docs/features/agentic-development/flows), replay them with one command, apply your feedback from the flow review page, and apply the comments of reviewers you shared a flow with online (RocketSim 17.0.0)
 - Rotate iPhone and iPad Simulators and apply the locations you saved in RocketSim
 
 ## What you can do with it

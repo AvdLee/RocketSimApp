@@ -40,6 +40,11 @@ export const flowsFaq: { question: string; answer: string }[] = [
       "Yes. Open the flow review page, press C, and comment on any element. When an agent is watching the flow, each comment moves from Queued through Implementing to Done as the agent works, and the agent can ask you a question right in the comment. No copying between the page and your agent. Without a watching agent, Copy prompt turns your comments into one message.",
   },
   {
+    question: "Can I share a flow with a reviewer and collect their comments?",
+    answer:
+      "Yes. When you turn on online sharing, which is off by default, RocketSim publishes a read-only copy of a flow at flows.rocketsim.app. Reviewers confirm their email and comment on screens, you approve their comments, and your agent applies the approved ones with `rocketsim flow share-feedback`. Agents cannot publish or approve comments. See [Share a flow online](/docs/features/agentic-development/flows/#share-a-flow-online).",
+  },
+  {
     question: "Can I compare a flow in dark mode or a larger text size?",
     answer:
       "Yes. Add a `variant` line to a flow, such as `variant: appearance = light, dark`, and run `rocketsim flow <name> --all-variants`. RocketSim runs the flow in each combination of appearance, text size, and orientation, then puts your Simulator back. The review page has a Variant menu to switch between the runs.",
