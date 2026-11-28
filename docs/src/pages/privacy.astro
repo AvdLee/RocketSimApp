@@ -362,26 +362,45 @@ const seo = {
             The comments a reviewer writes, with the screen and element they
             refer to
           </li>
-          <li>
-            A sign-in cookie on flows.rocketsim.app that keeps the reviewer
-            signed in for that flow
-          </li>
+          <li>A sign-in cookie, see “Cookies” below</li>
         </ul>
         <p>
-          The owner of the flow sees the reviewer's comments, name, and email
-          address. Other reviewers do not see them. A reviewer's email address
-          and name are never shown to an agent: agents only receive comments the
-          owner approved, without who wrote them. Viewing a flow without
-          commenting does not require an email address.
+          The owner of the flow sees the reviewer's comments and who wrote them,
+          by name or email address, in the email we send about new comments and
+          in the owner view on flows.rocketsim.app. Other reviewers do not see
+          them. A reviewer's email address and name are never shown to an agent:
+          agents only receive comments the owner approved, under an alias such
+          as “Reviewer 1”. Viewing a flow without commenting does not require an
+          email address.
         </p>
         <p><strong>Website account:</strong></p>
         <p>
           Owners can log in at flows.rocketsim.app with their email address to
-          see their flows. We process the email address and a session cookie.
-          The cookie is strictly necessary to keep you logged in, expires after
-          14 days, and is not used for advertising, analytics, or cross-site
-          tracking.
+          see their flows. We process the email address and a session cookie,
+          see “Cookies” below.
         </p>
+        <p><strong>Cookies:</strong></p>
+        <p>
+          We set three cookies on flows.rocketsim.app. They are strictly
+          necessary to provide the function you asked for, are only sent to
+          flows.rocketsim.app, and are not used for advertising, analytics, or
+          cross-site tracking.
+        </p>
+        <ul>
+          <li>
+            <code>rs_session</code>: keeps a reviewer signed in on one shared
+            flow after they confirm their email address. It lasts 30 days.
+          </li>
+          <li>
+            <code>rs_owner</code>: lets an owner see all comments on one shared
+            flow after opening it from a link in an email or from the account
+            page. It lasts 7 days.
+          </li>
+          <li>
+            <code>rs_account</code>: keeps an owner logged in to the account
+            page. It lasts 14 days.
+          </li>
+        </ul>
         <p><strong>Technical data:</strong></p>
         <p>
           To prevent abuse, we apply rate limits per IP address. We store the IP
@@ -390,7 +409,9 @@ const seo = {
           short time. Where you enter an email address on flows.rocketsim.app,
           Cloudflare Turnstile checks in the background that the request comes
           from a person and not a bot. Turnstile processes technical data such
-          as your IP address for that purpose.
+          as your IP address for that purpose. Cloudflare, as our hosting
+          provider, also processes IP addresses in its standard infrastructure
+          logs.
         </p>
         <p><strong>Service providers for online sharing:</strong></p>
         <ul>
@@ -398,7 +419,9 @@ const seo = {
             Cloudflare – to host the service and store shared flows in Western
             Europe, and to provide Turnstile bot protection
           </li>
-          <li>Resend – to send confirmation and notification emails</li>
+          <li>
+            Resend – to send confirmation, notification, and welcome emails
+          </li>
           <li>
             Kit – to send email about getting started with RocketSim, see below
           </li>
@@ -410,14 +433,16 @@ const seo = {
         </p>
         <p><strong>Email about getting started with RocketSim:</strong></p>
         <p>
-          If you register an account on flows.rocketsim.app, or confirm your
-          email address to comment on a shared flow, you may receive emails from
-          us about getting started with RocketSim. For this purpose, we process
-          your email address, and your first name if you gave one, in Kit. Every
-          email contains an unsubscribe link. We do not send these emails to the
-          email addresses of owners who only publish from the Mac app, and
-          confirmation and notification emails about your own flows are service
-          emails, not marketing.
+          If you confirm your email address to comment on a shared flow, we add
+          you to our email list in Kit, with your first name if you gave one,
+          and you receive an email with instructions to get started with
+          RocketSim. If you register an account on flows.rocketsim.app, we also
+          add you to Kit, so that we can send you email about RocketSim and see
+          where sign-ups come from. Your welcome email after registering is a
+          service email that we send through Resend. Every marketing email
+          contains an unsubscribe link. Owners who only publish from the Mac app
+          are not added to Kit. Confirmation and notification emails about your
+          own flows are service emails, not marketing.
         </p>
         <p><strong>Legal basis:</strong></p>
         <ul>
@@ -434,14 +459,17 @@ const seo = {
           </li>
         </ul>
         <p>
-          <strong>Retention period:</strong><br />A shared flow, its images,
-          versions, reviewers, and comments are deleted 30 days after the last
-          activity on the flow, or immediately when the owner unpublishes it.
-          Viewing the flow, commenting, publishing a new version, and renewing
-          the flow all count as activity. Owner email addresses and device keys
-          are kept while the owner uses the service and are deleted on request.
-          Subscriptions in Kit are kept until you unsubscribe. After you
-          unsubscribe, the personal data is securely deleted within 30 days.
+          <strong>Retention period:</strong><br />When the owner unpublishes a
+          flow, or 30 days after the last activity on it, we delete its images,
+          versions, reviewers (including their email addresses and names), and
+          comments. Viewing the flow, commenting, publishing a new version, and
+          renewing the flow all count as activity. We keep a minimal record of
+          the flow (its id, name, status, and the link to the owner) so that the
+          link shows the flow as removed. Finished Kit job records that contain
+          an email address are cleared within 30 days. Owner email addresses and
+          device keys are kept while the owner uses the service and are deleted
+          on request. Subscriptions in Kit are kept until you unsubscribe. After
+          you unsubscribe, the personal data is securely deleted within 30 days.
         </p>
         <p>
           <strong>Your rights:</strong> The rights described under “What are your
