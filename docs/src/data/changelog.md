@@ -1,7 +1,8 @@
-# 17.0.0 (343)
+# 17.0.0 (344)
 
 **Improved:**
 
+- Recordings and exported videos: whites stay white on macOS 27 instead of coming out slightly gray, and colors match what you see in the Simulator.
 - CLI: `rocketsim video record --flow <name> --touches --zoom > demo.mp4` records a polished demo video of a saved flow. The recording starts, the flow runs at a watchable pace with a pointer that glides from tap to tap, the video zooms into each tapped element, and the recording ends when the flow does. When your app changes, record the flow again to get an up-to-date video.
 - Upgrade offers: clearer wording for the real discount on a full year, and the renewal price after a promotional year.
 - Welcome-back offer: the offer now shows the real price, what a month works out to, and a discount that matches what the payment sheet shows. Returning subscribers are offered the yearly plan first.
