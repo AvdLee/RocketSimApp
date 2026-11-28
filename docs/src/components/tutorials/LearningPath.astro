@@ -1,0 +1,41 @@
+---
+import { tracks, tutorialPath, tutorials } from "@/lib/tutorials/tutorials";
+
+// Every tutorial in reading order along one line, colored by track, so a
+// visitor sees the whole route from the first command to flows.
+---
+
+<nav aria-label="Learning path" class="mx-auto max-w-[1120px] px-5" data-reveal>
+  <ol
+    class="m-0 grid list-none gap-x-6 gap-y-8 p-0 sm:grid-cols-2 lg:grid-cols-6 lg:gap-x-0"
+  >
+    {
+      tutorials.map((tutorial, index) => (
+        <li
+          class="relative lg:border-t lg:border-line lg:pt-7 lg:pr-5"
+          style={`--track: ${tracks[tutorial.track].color}`}
+        >
+          <span
+            class="absolute -top-[5px] left-0 hidden size-[9px] rounded-full bg-(--track) lg:block"
+            aria-hidden="true"
+          />
+          <a
+            href={tutorialPath(tutorial.slug)}
+            class="group block text-left no-underline"
+          >
+            <span class="block text-caption font-semibold text-(--track) tabular-nums">
+              {String(index + 1).padStart(2, "0")} ·{" "}
+              {tracks[tutorial.track].shortName}
+            </span>
+            <span class="mt-1.5 block text-copy font-semibold text-balance text-text-dark group-hover:underline group-hover:underline-offset-4">
+              {tutorial.title}
+            </span>
+            <span class="mt-1 block text-caption text-muted">
+              {tutorial.minutes} min
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

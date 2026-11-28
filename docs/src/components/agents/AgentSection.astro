@@ -5,15 +5,22 @@ interface Props {
   id: string;
   eyebrow: string;
   title: string;
+  // The section's label color, in the agents' purple unless given.
+  color?: string;
 }
 
-const { id, eyebrow, title } = Astro.props;
+const {
+  id,
+  eyebrow,
+  title,
+  color = "var(--color-chapter-agents)",
+} = Astro.props;
 ---
 
 <section
   id={id}
   class="mx-auto max-w-[1120px] px-5 pt-section scroll-mt-24"
-  style="--chapter: var(--color-chapter-agents)"
+  style={`--chapter: ${color}`}
   aria-labelledby={`${id}-title`}
 >
   <div

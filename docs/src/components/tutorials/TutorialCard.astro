@@ -1,0 +1,42 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import { tutorialPath, tracks, type Tutorial } from "@/lib/tutorials/tutorials";
+
+// A tutorial in a grid. The whole card is one link, reached through the title.
+interface Props {
+  tutorial: Tutorial;
+  // The tutorial's place in its track.
+  number: number;
+}
+
+const { tutorial, number } = Astro.props;
+const { color } = tracks[tutorial.track];
+---
+
+<li
+  class="group relative flex flex-col rounded-lg bg-surface p-6 transition-colors duration-300 hover:bg-surface-hover motion-reduce:transition-none"
+  style={`--chapter: ${color}`}
+>
+  <p class="m-0 text-small font-semibold text-(--chapter) tabular-nums">
+    {String(number).padStart(2, "0")}
+  </p>
+  <h3 class="mt-2 text-title-4">
+    <a
+      href={tutorialPath(tutorial.slug)}
+      class="text-text-dark no-underline after:absolute after:inset-0 after:rounded-lg focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-primary"
+    >
+      {tutorial.title}
+    </a>
+  </h3>
+  <p
+    class="mt-3 flex-1 text-copy text-muted"
+    set:html={markdownify(tutorial.summary)}
+  />
+  <div class="mt-6 flex items-center justify-between text-small text-muted">
+    <span>{tutorial.minutes} min · {tutorial.level}</span>
+    <span
+      class="text-primary transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+      aria-hidden="true">→</span
+    >
+  </div>
+</li>

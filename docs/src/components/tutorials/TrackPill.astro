@@ -1,0 +1,17 @@
+---
+import { tracks, type TutorialTrack } from "@/lib/tutorials/tutorials";
+
+// A tutorial's track, in the track's color.
+interface Props {
+  track: TutorialTrack;
+}
+
+const { name, color } = tracks[Astro.props.track];
+---
+
+<span
+  class="inline-flex rounded-full px-3 py-1 text-caption font-semibold text-(--track) inset-ring inset-ring-(--track)/40"
+  style={`--track: ${color}`}
+>
+  {name}
+</span>

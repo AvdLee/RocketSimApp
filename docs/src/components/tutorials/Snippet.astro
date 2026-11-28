@@ -1,0 +1,18 @@
+---
+// Text a reader compares against or copies, such as example output, a prompt,
+// or a flow file. Terminal commands use the shared Terminal component.
+interface Props {
+  label: string;
+  text: string;
+}
+
+const { label, text } = Astro.props;
+---
+
+<figure class="m-0">
+  <figcaption class="mb-2 text-caption font-semibold text-muted">
+    {label}
+  </figcaption>
+  <pre
+    class="m-0 overflow-x-auto rounded-lg bg-surface px-[18px] py-4 font-mono text-caption leading-relaxed tracking-normal whitespace-pre-wrap text-code"><code>{text}</code></pre>
+</figure>

@@ -1,0 +1,283 @@
+---
+// The tutorials hub: step-by-step guides for RocketSim and AI coding agents.
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import { downloadMicrocopy } from "@/lib/homepage";
+import { appStoreUrl } from "@/lib/utils/appStoreUrl";
+import {
+  tracks,
+  tutorialPath,
+  tutorials,
+  tutorialsInTrack,
+} from "@/lib/tutorials/tutorials";
+import { tutorialsFaq } from "@/lib/tutorials/tutorialsFaq";
+
+import Notification from "../../old/components/Notification.astro";
+import MobileDownloadLinkForm from "../../old/components/MobileDownloadLinkForm.astro";
+import HomeHeader from "../../components/home/HomeHeader.astro";
+import Button from "../../components/home/Button.astro";
+import Faq from "../../components/home/Faq.astro";
+import FinalCta from "../../components/home/FinalCta.astro";
+import Snippet from "../../components/tutorials/Snippet.astro";
+import Terminal from "../../components/home/extras/Terminal.astro";
+import AgentSection from "../../components/agents/AgentSection.astro";
+import LearningPath from "../../components/tutorials/LearningPath.astro";
+import TutorialCard from "../../components/tutorials/TutorialCard.astro";
+
+const {
+  site: { base_url },
+} = config;
+
+const seo = {
+  title: "RocketSim Tutorials: Agents and Flows, Step by Step",
+  description:
+    "Step-by-step tutorials for RocketSim and AI coding agents. Set up the Agent Skill, update AGENTS.md, let your agent drive the iOS Simulator, and replay flows.",
+  canonical: `${base_url}/tutorials/`,
+};
+
+const structuredData = {
+  type: "static" as const,
+  faq: tutorialsFaq,
+  page: {
+    name: "RocketSim Tutorials",
+    description: seo.description,
+    url: `${base_url}/tutorials/`,
+    pageType: "CollectionPage" as const,
+    breadcrumbName: "Tutorials",
+    about: [
+      "RocketSim Agent Skill",
+      "iOS Simulator",
+      "AI coding agents",
+      "Navigation flows",
+    ],
+    itemList: tutorials.map(({ slug, title, description }) => ({
+      name: title,
+      url: `${base_url}${tutorialPath(slug)}`,
+      description,
+    })),
+  },
+};
+
+const [start] = tutorials;
+const works = ["Cursor", "Codex", "Claude Code", "Xcode"];
+---
+
+<Base seo={seo} structuredData={structuredData} header="home">
+  <HomeHeader
+    slot="header"
+    title="Tutorials"
+    anchor="hero"
+    chapterMenu={false}
+    current="/tutorials/"
+  />
+  <Notification />
+
+  <section
+    id="hero"
+    class="mx-auto max-w-[1120px] px-5 pt-16 pb-10 text-center md:pt-24"
+    style="--chapter: var(--color-chapter-agents)"
+  >
+    <p
+      class="mx-auto mb-6 inline-flex rounded-full px-3 py-1 text-small font-semibold text-(--chapter) inset-ring inset-ring-(--chapter)/40"
+      data-hero-item
+      style="--hero-order: 0"
+    >
+      Tutorials
+    </p>
+    <h1
+      class="text-display text-balance text-text-dark"
+      data-hero-item
+      style="--hero-order: 1"
+    >
+      From first command<br />to flows that replay.
+    </h1>
+    <p
+      class="mx-auto mt-8 max-w-[36em] text-lead text-balance text-muted"
+      data-hero-item
+      style="--hero-order: 2"
+    >
+      Short, hands-on guides for setting up RocketSim with your AI coding agent,
+      and for saving paths it replays. Every step shows what to ask, and what
+      you should see when it works.
+    </p>
+    <div
+      class="mt-10 flex flex-wrap justify-center gap-3.5"
+      data-hero-item
+      style="--hero-order: 3"
+    >
+      <Button href={tutorialPath(start.slug)}>Start the first tutorial</Button>
+      <Button
+        variant="secondary"
+        href={appStoreUrl("tutorials-hero")}
+        class="plausible-event-name=App+Store+Install plausible-event-surface=tutorials plausible-event-placement=tutorials-hero plausible-event-format=button"
+        target="_blank"
+        rel="noopener"
+      >
+        Free download
+      </Button>
+    </div>
+    <p
+      class="mt-5 text-caption text-muted"
+      data-hero-item
+      style="--hero-order: 3"
+    >
+      {downloadMicrocopy}
+    </p>
+    <div
+      class="mt-8 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-small text-muted"
+      data-hero-item
+      style="--hero-order: 4"
+    >
+      <span>Works out of the box with</span>
+      {
+        works.map((name) => (
+          <span class="rounded-full bg-surface px-3 py-1 text-text-soft">
+            {name}
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  <LearningPath />
+
+  <AgentSection
+    id="start"
+    eyebrow="Start here"
+    title="Your first five minutes with an agent."
+    color={tracks.agents.color}
+  >
+    <Fragment slot="intro">
+      Install the command and the Agent Skill once, then ask your agent to
+      navigate. Everything after this tutorial builds on it.
+    </Fragment>
+    <div
+      class="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]"
+      style={`--chapter: ${tracks.agents.color}`}
+    >
+      <div class="flex flex-col gap-4">
+        <Snippet
+          label="You ask"
+          text="Use RocketSim to sign in with the test account and open Settings."
+        />
+        <div class="flex flex-1 flex-col">
+          <p class="mb-2 text-caption font-semibold text-muted">
+            Your agent runs
+          </p>
+          <Terminal
+            label="What the agent runs for the prompt"
+            commands={[
+              {
+                note: "Read the screen as a short list",
+                command: "rocketsim elements --agent",
+              },
+              {
+                note: "Act on an element by its label",
+                command: 'rocketsim interact tap --label "Sign In"',
+              },
+              {
+                note: "Verify the screen changed",
+                command: "rocketsim wait screen-changed",
+              },
+            ]}
+          />
+        </div>
+      </div>
+      <div class="flex flex-col justify-center gap-6 rounded-lg bg-surface p-8">
+        <div>
+          <p class="text-small font-semibold text-(--chapter)">
+            {tracks.agents.name} · {start.minutes} min · {start.level}
+          </p>
+          <h3 class="mt-2 text-title-3">{start.title}</h3>
+          <p class="mt-3 text-copy text-muted">{start.summary}</p>
+        </div>
+        <div>
+          <Button href={tutorialPath(start.slug)}>Start the tutorial</Button>
+        </div>
+      </div>
+    </div>
+  </AgentSection>
+
+  {
+    Object.values(tracks).map((track) => (
+      <AgentSection
+        id={track.id}
+        eyebrow={track.eyebrow}
+        title={track.title}
+        color={track.color}
+      >
+        <Fragment slot="intro">
+          {track.intro}
+          {track.version && (
+            <>
+              {" "}
+              These tutorials need <strong>{track.version}</strong>.
+            </>
+          )}
+        </Fragment>
+        <ol class="m-0 grid list-none gap-4 p-0 md:grid-cols-3">
+          {tutorialsInTrack(track.id).map((tutorial, index) => (
+            <TutorialCard tutorial={tutorial} number={index + 1} />
+          ))}
+        </ol>
+      </AgentSection>
+    ))
+  }
+
+  <section
+    class="mx-auto max-w-[1120px] px-5 pt-section"
+    style="--chapter: var(--color-chapter-agents)"
+    aria-labelledby="follow-along-title"
+  >
+    <div
+      data-reveal
+      class="grid items-center gap-x-12 gap-y-6 rounded-xl bg-surface p-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:p-10"
+    >
+      <div>
+        <p class="mb-3 text-intro font-semibold text-(--chapter)">
+          Follow along
+        </p>
+        <h2 id="follow-along-title" class="text-title-2 text-balance">
+          Install RocketSim, then follow along with your agent.
+        </h2>
+        <p class="mt-3 text-copy text-muted">
+          The CLI and the Agent Skill are built into the app, so one install
+          gives your agent every command in these tutorials.
+        </p>
+      </div>
+      <div class="flex flex-col items-start gap-3.5 md:items-end">
+        <Button
+          href={appStoreUrl("tutorials-follow-along")}
+          class="plausible-event-name=App+Store+Install plausible-event-surface=tutorials plausible-event-placement=tutorials-follow-along plausible-event-format=button"
+          target="_blank"
+          rel="noopener"
+        >
+          Free download
+        </Button>
+        <p class="text-caption text-muted">{downloadMicrocopy}</p>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    items={tutorialsFaq}
+    title="Questions about the tutorials."
+    intro="Short answers about the Agent Skill, AGENTS.md, the CLI, and Flows."
+  />
+  <FinalCta
+    heading={["Learn it in minutes.", "Use it on every task."]}
+    placement="tutorials-footer"
+    campaign="tutorials-footer"
+  />
+  <MobileDownloadLinkForm />
+</Base>
+
+<script>
+  import { onPage } from "@/lib/utils/pageLifecycle";
+  import { initReveals } from "@/lib/utils/reveal";
+
+  onPage(() => {
+    const stops = [initReveals()];
+    return () => stops.forEach((stop) => stop());
+  });
+</script>
