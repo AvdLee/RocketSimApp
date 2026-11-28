@@ -70,6 +70,8 @@ type StaticProps = {
     url: string;
     pageType?: WebPageType;
     breadcrumbName?: string;
+    // A level between Home and the page, such as "Tutorials" above a tutorial.
+    breadcrumbParent?: { name: string; url: string };
     about?: string[];
     itemList?: ItemListEntry[];
   };
@@ -425,9 +427,11 @@ function createSoftwareApplicationSchema({
 function createBreadcrumbSchema({
   url,
   name,
+  parent,
 }: {
   url: string;
   name: string;
+  parent?: { name: string; url: string };
 }): BreadcrumbListSchema {
   return {
     "@context": "https://schema.org",
@@ -440,9 +444,19 @@ function createBreadcrumbSchema({
         name: "Home",
         item: SITE_ROOT_URL,
       },
+      ...(parent
+        ? [
+            {
+              "@type": "ListItem" as const,
+              position: 2,
+              name: parent.name,
+              item: normalizeCanonicalUrl(parent.url),
+            },
+          ]
+        : []),
       {
         "@type": "ListItem",
-        position: 2,
+        position: parent ? 3 : 2,
         name,
         item: url,
       },
@@ -592,6 +606,7 @@ if (type === "static") {
       createBreadcrumbSchema({
         url: pageUrl,
         name: page.breadcrumbName ?? page.name,
+        parent: page.breadcrumbParent,
       }),
     );
 

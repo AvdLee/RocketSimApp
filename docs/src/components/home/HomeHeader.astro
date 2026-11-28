@@ -21,6 +21,8 @@ interface Props {
   // The main menu link of the section this page belongs to, marked as the
   // current one.
   current?: string;
+  // Whether `current` is the page itself, or a section the page belongs to.
+  currentKind?: "page" | "true";
 }
 
 const {
@@ -29,6 +31,7 @@ const {
   anchor = "glance",
   chapterMenu = true,
   current,
+  currentKind = "page",
 } = Astro.props;
 const chapters = [
   ...(
@@ -54,7 +57,7 @@ const currentClass =
   "aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
 // The main menu link of the page's own section.
 const sectionClass =
-  "aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px] aria-[current=page]:opacity-100";
+  "aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px] aria-[current=page]:opacity-100 aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
 ---
 
 <!-- Marks the top of the page: once it scrolls out of view, the header
@@ -97,7 +100,9 @@ const sectionClass =
                   <a
                     href={link.url}
                     class:list={[barLinkClass, sectionClass]}
-                    aria-current={link.url === current ? "page" : undefined}
+                    aria-current={
+                      link.url === current ? currentKind : undefined
+                    }
                   >
                     {link.name}
                   </a>
@@ -200,9 +205,9 @@ const sectionClass =
                 href={link.url}
                 class:list={[
                   panelLinkClass,
-                  "aria-[current=page]:bg-primary/5",
+                  "aria-[current=page]:bg-primary/5 aria-[current=true]:bg-primary/5",
                 ]}
-                aria-current={link.url === current ? "page" : undefined}
+                aria-current={link.url === current ? currentKind : undefined}
               >
                 {link.name}
               </a>

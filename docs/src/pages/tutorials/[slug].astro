@@ -58,6 +58,7 @@ const structuredData = {
     description: tutorial.description,
     url,
     breadcrumbName: tutorial.title,
+    breadcrumbParent: { name: "Tutorials", url: `${base_url}/tutorials/` },
     about: ["RocketSim", track.name, "iOS Simulator"],
   },
 };
@@ -70,6 +71,7 @@ const structuredData = {
     anchor="hero"
     chapterMenu={false}
     current="/tutorials/"
+    currentKind="true"
   />
   <Notification />
 
@@ -107,61 +109,27 @@ const structuredData = {
         style="--hero-order: 3"
         set:html={markdownify(tutorial.intro)}
       />
+      {
+        track.version && (
+          <p
+            class="mt-6 max-w-[34em] rounded-lg px-5 py-4 text-small text-muted inset-ring inset-ring-line"
+            data-hero-item
+            style="--hero-order: 4"
+          >
+            <strong class="text-(--chapter)">
+              Coming soon in {track.version}.
+            </strong>{" "}
+            The commands in this tutorial are not available in the current
+            release.
+          </p>
+        )
+      }
     </section>
 
     <div
       class="mx-auto grid max-w-[1120px] items-start gap-x-16 gap-y-10 px-5 pt-12 pb-section lg:grid-cols-[minmax(0,1fr)_300px]"
     >
-      <aside
-        class="order-last flex flex-col gap-5 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-1 lg:order-none"
-        aria-label="About this tutorial"
-      >
-        <nav
-          class="hidden rounded-lg bg-surface p-6 lg:block"
-          aria-labelledby="steps-title"
-        >
-          <p class="text-small font-semibold text-(--chapter)">
-            {track.name} · {position} of {siblings.length}
-          </p>
-          <h2 id="steps-title" class="mt-2 text-title-4">In this tutorial</h2>
-          <ol class="m-0 mt-4 flex list-none flex-col gap-1 p-0" data-steps>
-            {
-              tutorial.steps.map((step, index) => (
-                <li>
-                  <a
-                    href={`#step-${index + 1}`}
-                    class="flex gap-3 rounded-lg px-3 py-2 text-small text-muted no-underline transition-colors hover:text-text-dark aria-[current=step]:bg-primary/5 aria-[current=step]:text-text-dark motion-reduce:transition-none"
-                    data-step-link
-                  >
-                    <span class="text-(--chapter) tabular-nums">
-                      {index + 1}
-                    </span>
-                    <span>{step.title}</span>
-                  </a>
-                </li>
-              ))
-            }
-          </ol>
-        </nav>
-        <div class="rounded-lg bg-surface p-6">
-          <h2 class="text-title-4">Get RocketSim</h2>
-          <p class="mt-2 text-copy text-muted">
-            One install includes the CLI and the Agent Skill, so your agent can
-            run every command in this tutorial.
-          </p>
-          <Button
-            class="mt-5 plausible-event-name=App+Store+Install plausible-event-surface=tutorials plausible-event-placement=tutorial-sidebar plausible-event-format=button"
-            href={appStoreUrl(campaign)}
-            target="_blank"
-            rel="noopener"
-          >
-            Free download
-          </Button>
-          <p class="mt-3 text-caption text-muted">{downloadMicrocopy}</p>
-        </div>
-      </aside>
-
-      <ol class="m-0 list-none p-0">
+      <ol class="m-0 list-none p-0 lg:col-start-1 lg:row-start-1">
         {
           tutorial.steps.map((step, index) => (
             <li
@@ -232,6 +200,57 @@ const structuredData = {
           ))
         }
       </ol>
+
+      <aside
+        class="flex flex-col gap-5 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-1"
+        aria-label="About this tutorial"
+      >
+        <nav
+          class="hidden rounded-lg bg-surface p-6 lg:block"
+          aria-labelledby="steps-title"
+        >
+          <p class="text-small font-semibold text-(--chapter)">
+            {track.name} · {position} of {siblings.length}
+          </p>
+          <h2 id="steps-title" class="mt-2 text-title-4">In this tutorial</h2>
+          <ol class="m-0 mt-4 flex list-none flex-col gap-1 p-0" data-steps>
+            {
+              tutorial.steps.map((step, index) => (
+                <li>
+                  <a
+                    href={`#step-${index + 1}`}
+                    class="flex gap-3 rounded-lg px-3 py-2 text-small text-muted no-underline transition-colors hover:text-text-dark aria-[current=location]:bg-primary/5 aria-[current=location]:text-text-dark motion-reduce:transition-none"
+                    data-step-link
+                  >
+                    <span class="text-(--chapter) tabular-nums">
+                      {index + 1}
+                    </span>
+                    <span>{step.title}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+        <div class="rounded-lg bg-surface p-6">
+          <h2 class="text-title-4">Get RocketSim</h2>
+          <p class="mt-2 text-copy text-muted">
+            One install includes the CLI and the Agent Skill, so your agent can
+            run every command in this tutorial.{
+              track.version && ` Flows ship with ${track.version}.`
+            }
+          </p>
+          <Button
+            class="mt-5 plausible-event-name=App+Store+Install plausible-event-surface=tutorials plausible-event-placement=tutorial-sidebar plausible-event-format=button"
+            href={appStoreUrl(campaign)}
+            target="_blank"
+            rel="noopener"
+          >
+            Free download
+          </Button>
+          <p class="mt-3 text-caption text-muted">{downloadMicrocopy}</p>
+        </div>
+      </aside>
     </div>
 
     {
@@ -308,7 +327,7 @@ const structuredData = {
         });
         links.forEach((link) => {
           if (link.hash === `#${current}`) {
-            link.setAttribute("aria-current", "step");
+            link.setAttribute("aria-current", "location");
           } else {
             link.removeAttribute("aria-current");
           }

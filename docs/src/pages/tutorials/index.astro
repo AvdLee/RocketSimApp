@@ -29,7 +29,7 @@ const {
 } = config;
 
 const seo = {
-  title: "RocketSim Tutorials: Agents and Flows, Step by Step",
+  title: "Tutorials for AI Agents and Flows - RocketSim",
   description:
     "Step-by-step tutorials for RocketSim and AI coding agents. Set up the Agent Skill, update AGENTS.md, let your agent drive the iOS Simulator, and replay flows.",
   canonical: `${base_url}/tutorials/`,
@@ -176,8 +176,8 @@ const works = ["Cursor", "Codex", "Claude Code", "Xcode"];
                 command: 'rocketsim interact tap --label "Sign In"',
               },
               {
-                note: "Verify the screen changed",
-                command: "rocketsim wait screen-changed",
+                note: "Verify the next screen shows up",
+                command: 'rocketsim wait element --label "Home"',
               },
             ]}
           />
@@ -242,7 +242,8 @@ const works = ["Cursor", "Codex", "Claude Code", "Xcode"];
         </h2>
         <p class="mt-3 text-copy text-muted">
           The CLI and the Agent Skill are built into the app, so one install
-          gives your agent every command in these tutorials.
+          gives your agent every command in these tutorials. Flows ship with
+          RocketSim 17.
         </p>
       </div>
       <div class="flex flex-col items-start gap-3.5 md:items-end">

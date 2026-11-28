@@ -102,7 +102,7 @@ export const tutorials: Tutorial[] = [
     description:
       "Install the RocketSim CLI and Agent Skill once, so Cursor, Codex, Claude Code, or Xcode can navigate the iOS Simulator by themselves.",
     intro:
-      "RocketSim gives your AI coding agent the fastest way to navigate the iOS Simulator. You install the command line tool and the Agent Skill once from RocketSim's settings, and your agent runs every command for you.",
+      "RocketSim gives your AI coding agent a fast, token-efficient way to navigate the iOS Simulator. You install the command line tool and the Agent Skill once from RocketSim's settings, and your agent runs every command for you.",
     minutes: 3,
     level: "Beginner",
     summary:
@@ -155,7 +155,7 @@ export const tutorials: Tutorial[] = [
           },
         ],
         result:
-          "A result for every check. When something is missing, `doctor` names it and prints the command that fixes it, and your agent can run that command for you.",
+          "A result for every check. When something is missing, `doctor` reports it, so your agent can fix it or tell you what to change.",
       },
     ],
   },
@@ -196,12 +196,12 @@ export const tutorials: Tutorial[] = [
       },
       {
         title: "Review what it wrote",
-        text: "Check that the section says three things: use the RocketSim skill, do not tap from screenshots when RocketSim is available, and what to do when the command is missing. Edit it by hand if you prefer your own wording.",
+        text: "Check that the section says three things: use the RocketSim skill, do not tap from screenshots when RocketSim is available, and where to look when the command is missing. Edit it by hand if you prefer your own wording.",
         blocks: [
           {
             type: "snippet",
             label: "A section for AGENTS.md",
-            text: "## iOS Simulator\n- Use the RocketSim Agent Skill for all iOS Simulator navigation and UI checks: reading the screen, tapping, typing, and screenshots.\n- Do not guess coordinates from screenshots when RocketSim is available.\n- If the `rocketsim` command is not found, run `rocketsim doctor` and report what it says.",
+            text: "## iOS Simulator\n- Use the RocketSim Agent Skill for all iOS Simulator navigation and UI checks: reading the screen, tapping, typing, and screenshots.\n- Do not guess coordinates from screenshots when RocketSim is available.\n- If the `rocketsim` command is not found, check `/opt/homebrew/bin`, `/usr/local/bin`, and `~/.local/bin`, then ask me to reinstall it from RocketSim → Settings → CLI & Agent.",
           },
           {
             type: "note",
@@ -268,7 +268,10 @@ export const tutorials: Tutorial[] = [
                 note: "Act",
                 command: 'rocketsim interact tap --label "Continue"',
               },
-              { note: "Verify", command: "rocketsim wait screen-changed" },
+              {
+                note: "Verify",
+                command: 'rocketsim wait element --label "Welcome"',
+              },
             ],
           },
         ],
@@ -377,7 +380,7 @@ export const tutorials: Tutorial[] = [
       },
       {
         title: "Review the run",
-        text: "Ask for the review link. It opens the flow as a board: each screen once, with arrows from the tapped element to the next screen. Keep the tab open while your agent works. It refreshes by itself.",
+        text: "Ask for the review link. It opens the flow as a board with one card per checkpoint, and arrows from the tapped element to the next screen. Keep the tab open while your agent works. It refreshes by itself.",
         blocks: [
           {
             type: "snippet",
@@ -438,7 +441,10 @@ export const tutorials: Tutorial[] = [
             type: "terminal",
             label: "Setting values and replaying a flow with parameters",
             commands: [
-              { note: "You set these", command: "export TEST_USER=alice" },
+              {
+                note: "You set these",
+                command: "export TEST_USER=alice TEST_PASSWORD=...",
+              },
               {
                 note: "The agent replays with them",
                 command:
@@ -576,7 +582,7 @@ export const tutorials: Tutorial[] = [
             ],
           },
         ],
-        result: "The flow passes again, and it is no longer marked stale.",
+        result: "The flow passes from the failing step to its final check.",
       },
     ],
   },
