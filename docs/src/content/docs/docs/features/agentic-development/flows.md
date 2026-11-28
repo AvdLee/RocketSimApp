@@ -328,7 +328,7 @@ Turn a flow into a polished demo video, for example for an App Store preview:
 rocketsim video record --flow login --touches --zoom > demo.mp4
 ```
 
-RocketSim starts the recording, runs the flow at a watchable pace with a pointer that glides from tap to tap, zooms into each tapped element, and ends the recording when the flow does. When your app changes, record the flow again to get an up-to-date video. See [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) for the styling options.
+RocketSim starts the recording, runs the flow at a watchable pace with a human-like pointer that moves exactly with the sliders it drags, zooms into the small controls it taps, and ends the recording when the flow does. When your app changes, record the flow again to get an up-to-date video. See [RocketSim CLI](/docs/features/agentic-development/rocketsim-cli) for the styling options.
 
 ## Limits and requirements
 

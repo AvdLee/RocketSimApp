@@ -3,7 +3,8 @@
 **Improved:**
 
 - Recordings and exported videos: whites stay white on macOS 27 instead of coming out slightly gray, and colors match what you see in the Simulator.
-- CLI: `rocketsim video record --flow <name> --touches --zoom > demo.mp4` records a polished demo video of a saved flow. The recording starts, the flow runs at a watchable pace with a pointer that glides from tap to tap, the video zooms into each tapped element, and the recording ends when the flow does. When your app changes, record the flow again to get an up-to-date video.
+- CLI: `rocketsim video record --flow <name> --touches --zoom > demo.mp4` records a polished demo video of a saved flow. The recording starts, the flow runs at a watchable pace, a human-like pointer moves from tap to tap and exactly with the slider it drags, and the recording ends when the flow does. The camera zooms in only where it helps, such as small controls and sliders, keeps the headline and main button of tall screens in view, and leaves the app name badge in place. When your app changes, record the flow again to get an up-to-date video.
+- Recordings: swipes and drags sent by agents and flows now move in much finer steps, so sliders and scroll views follow the finger smoothly instead of jumping.
 - Upgrade offers: clearer wording for the real discount on a full year, and the renewal price after a promotional year.
 - Welcome-back offer: the offer now shows the real price, what a month works out to, and a discount that matches what the payment sheet shows. Returning subscribers are offered the yearly plan first.
 - Settings: the About page is now a "RocketSim Pro" page that shows your plan, team license details, and payment status in one place. About RocketSim opens a redesigned window with an "Our apps" section that introduces RocketTrace and RocketData.

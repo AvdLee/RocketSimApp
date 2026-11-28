@@ -213,7 +213,13 @@ Record a polished demo video of a saved [flow](/docs/features/agentic-developmen
 rocketsim video record --flow login --touches --zoom > demo.mp4
 ```
 
-RocketSim starts the recording, runs the flow at a watchable pace with a pointer that glides from tap to tap, zooms into each tapped element, and stops the recording when the flow ends. When your app changes, record the flow again to get an up-to-date video. A flow that fails stops the recording without output. `--zoom` needs room around the device, so it defaults to the `1:1` ratio and cannot be combined with `--asc`.
+RocketSim starts the recording, runs the flow at a watchable pace, and stops the recording when the flow ends. The video is made to look filmed by a person:
+
+- **Human-like pointer.** The pointer appears shortly before it touches the screen and leaves afterwards. On long reaches it sometimes heads a little the wrong way, or pauses, before it corrects itself.
+- **Smooth swipes and sliders.** Swipes and drags move in fine steps, and the pointer follows exactly the slider or scroll view it drags instead of running ahead of it.
+- **A camera that helps.** With `--zoom`, the camera zooms into small controls and sliders being dragged, not into full-width buttons. It keeps the headline and main button of tall screens in view, and the app name badge stays in place while the camera moves.
+
+When your app changes, record the flow again to get an up-to-date video. A flow that fails stops the recording without output. `--zoom` needs room around the device, so it defaults to the `1:1` ratio and cannot be combined with `--asc`.
 
 ### Location
 

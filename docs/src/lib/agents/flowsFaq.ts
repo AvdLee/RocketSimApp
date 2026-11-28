@@ -52,7 +52,7 @@ export const flowsFaq: { question: string; answer: string }[] = [
   {
     question: "Can I turn a flow into a demo video?",
     answer:
-      "Yes. `rocketsim video record --flow <name> --touches --zoom` records the flow at a watchable pace with a gliding pointer, and zooms into each tapped element. Record it again whenever your app changes to get an up-to-date video.",
+      "Yes. `rocketsim video record --flow <name> --touches --zoom` records the flow at a watchable pace with a human-like pointer that follows sliders smoothly, and zooms into the controls it taps. Record it again whenever your app changes to get an up-to-date video.",
   },
   {
     question: "Do flows work with RocketTrace?",
