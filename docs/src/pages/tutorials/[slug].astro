@@ -1,0 +1,348 @@
+---
+// One tutorial: numbered steps beside a sticky panel with the requirements,
+// the next tutorial, and the download.
+import { Image } from "astro:assets";
+
+import Base from "@/layouts/Base.astro";
+import config from "@/config/config.json";
+import { downloadMicrocopy } from "@/lib/homepage";
+import { appStoreUrl } from "@/lib/utils/appStoreUrl";
+import { markdownify } from "@/lib/utils/textConverter";
+import {
+  nextTutorial,
+  tracks,
+  tutorialPath,
+  tutorials,
+  tutorialsInTrack,
+} from "@/lib/tutorials/tutorials";
+
+import Notification from "../../old/components/Notification.astro";
+import MobileDownloadLinkForm from "../../old/components/MobileDownloadLinkForm.astro";
+import HomeHeader from "../../components/home/HomeHeader.astro";
+import Button from "../../components/home/Button.astro";
+import FinalCta from "../../components/home/FinalCta.astro";
+import Terminal from "../../components/home/extras/Terminal.astro";
+import Benchmark from "../../components/tutorials/Benchmark.astro";
+import Snippet from "../../components/tutorials/Snippet.astro";
+import TrackPill from "../../components/tutorials/TrackPill.astro";
+
+export function getStaticPaths() {
+  return tutorials.map((tutorial) => ({
+    params: { slug: tutorial.slug },
+    props: { tutorial },
+  }));
+}
+
+const { tutorial } = Astro.props;
+const {
+  site: { base_url },
+} = config;
+
+const track = tracks[tutorial.track];
+const siblings = tutorialsInTrack(tutorial.track);
+const position = siblings.findIndex(({ slug }) => slug === tutorial.slug) + 1;
+const next = nextTutorial(tutorial.slug);
+const campaign = `tutorial-${tutorial.slug}`;
+const url = `${base_url}${tutorialPath(tutorial.slug)}`;
+
+const seo = {
+  title: `${tutorial.metaTitle ?? tutorial.title} - RocketSim`,
+  description: tutorial.description,
+  canonical: url,
+};
+
+const structuredData = {
+  type: "static" as const,
+  page: {
+    name: tutorial.title,
+    description: tutorial.description,
+    url,
+    breadcrumbName: tutorial.title,
+    breadcrumbParent: { name: "Tutorials", url: `${base_url}/tutorials/` },
+    about: ["RocketSim", track.name, "iOS Simulator"],
+  },
+};
+---
+
+<Base seo={seo} structuredData={structuredData} header="home">
+  <HomeHeader
+    slot="header"
+    title="Tutorials"
+    anchor="hero"
+    chapterMenu={false}
+    current="/tutorials/"
+    currentKind="true"
+  />
+  <Notification />
+
+  <div style={`--chapter: ${track.color}`}>
+    <section id="hero" class="mx-auto max-w-[1120px] px-5 pt-16 pb-6 md:pt-24">
+      <nav aria-label="Breadcrumb" data-hero-item style="--hero-order: 0">
+        <a
+          href="/tutorials/"
+          class="text-small text-muted no-underline hover:text-text-dark"
+        >
+          <span aria-hidden="true">←</span> All tutorials
+        </a>
+      </nav>
+      <div
+        class="mt-8 flex flex-wrap items-center gap-3"
+        data-hero-item
+        style="--hero-order: 1"
+      >
+        <TrackPill track={tutorial.track} />
+        <span class="text-small text-muted">
+          {tutorial.minutes} min · {tutorial.level}
+          {track.version && ` · Needs ${track.version}`}
+        </span>
+      </div>
+      <h1
+        class="mt-6 max-w-[14em] text-title-1 text-balance text-text-dark"
+        data-hero-item
+        style="--hero-order: 2"
+      >
+        {tutorial.title}
+      </h1>
+      <p
+        class="mt-6 max-w-[34em] text-lead text-muted"
+        data-hero-item
+        style="--hero-order: 3"
+        set:html={markdownify(tutorial.intro)}
+      />
+      {
+        track.version && (
+          <p
+            class="mt-6 max-w-[34em] rounded-lg px-5 py-4 text-small text-muted inset-ring inset-ring-line"
+            data-hero-item
+            style="--hero-order: 4"
+          >
+            <strong class="text-(--chapter)">
+              Coming soon in {track.version}.
+            </strong>{" "}
+            The commands in this tutorial are not available in the current
+            release.
+          </p>
+        )
+      }
+    </section>
+
+    <div
+      class="mx-auto grid max-w-[1120px] items-start gap-x-16 gap-y-10 px-5 pt-12 pb-section lg:grid-cols-[minmax(0,1fr)_300px]"
+    >
+      <ol class="m-0 list-none p-0 lg:col-start-1 lg:row-start-1">
+        {
+          tutorial.steps.map((step, index) => (
+            <li
+              id={`step-${index + 1}`}
+              class="grid scroll-mt-28 grid-cols-[auto_minmax(0,1fr)] gap-x-5 md:gap-x-8"
+            >
+              <div class="flex flex-col items-center" aria-hidden="true">
+                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-surface text-small font-semibold text-(--chapter) tabular-nums inset-ring inset-ring-(--chapter)/40">
+                  {index + 1}
+                </span>
+                {index < tutorial.steps.length - 1 && (
+                  <span class="mt-3 w-px flex-1 bg-line" />
+                )}
+              </div>
+              <div class="pb-14" data-reveal>
+                <h2 class="pt-1 text-title-3 text-balance">{step.title}</h2>
+                <p
+                  class="mt-3 max-w-[38em] text-intro text-muted [&_a]:text-text-dark [&_a]:underline [&_a]:underline-offset-4 [&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-small [&_code]:text-code [&_strong]:text-text-dark"
+                  set:html={markdownify(step.text)}
+                />
+                {step.blocks?.map((block) => (
+                  <div class="mt-6">
+                    {block.type === "terminal" && (
+                      <>
+                        <p class="mb-2 text-caption font-semibold text-muted">
+                          What your agent runs
+                        </p>
+                        <Terminal
+                          label={block.label}
+                          commands={block.commands}
+                        />
+                      </>
+                    )}
+                    {block.type === "benchmark" && <Benchmark />}
+                    {block.type === "snippet" && (
+                      <Snippet label={block.label} text={block.text} />
+                    )}
+                    {block.type === "image" && (
+                      <Image
+                        src={block.image}
+                        alt={block.alt}
+                        widths={[640, 1120]}
+                        sizes="(min-width: 1024px) 700px, 100vw"
+                        class="h-auto w-full rounded-lg inset-ring inset-ring-line"
+                      />
+                    )}
+                    {block.type === "note" && (
+                      <p
+                        class="m-0 text-small text-muted [&_a]:text-text-dark [&_a]:underline [&_a]:underline-offset-4 [&_code]:font-mono [&_code]:text-code"
+                        set:html={markdownify(block.text)}
+                      />
+                    )}
+                  </div>
+                ))}
+                {step.result && (
+                  <p class="mt-6 flex gap-3 rounded-lg px-5 py-4 text-small text-muted inset-ring inset-ring-line">
+                    <span class="font-semibold whitespace-nowrap text-(--chapter)">
+                      You should see
+                    </span>
+                    <span
+                      class="[&_code]:font-mono [&_code]:text-code"
+                      set:html={markdownify(step.result)}
+                    />
+                  </p>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <aside
+        class="flex flex-col gap-5 lg:sticky lg:top-28 lg:col-start-2 lg:row-start-1"
+        aria-label="About this tutorial"
+      >
+        <nav
+          class="hidden rounded-lg bg-surface p-6 lg:block"
+          aria-labelledby="steps-title"
+        >
+          <p class="text-small font-semibold text-(--chapter)">
+            {track.name} · {position} of {siblings.length}
+          </p>
+          <h2 id="steps-title" class="mt-2 text-title-4">In this tutorial</h2>
+          <ol class="m-0 mt-4 flex list-none flex-col gap-1 p-0" data-steps>
+            {
+              tutorial.steps.map((step, index) => (
+                <li>
+                  <a
+                    href={`#step-${index + 1}`}
+                    class="flex gap-3 rounded-lg px-3 py-2 text-small text-muted no-underline transition-colors hover:text-text-dark aria-[current=location]:bg-primary/5 aria-[current=location]:text-text-dark motion-reduce:transition-none"
+                    data-step-link
+                  >
+                    <span class="text-(--chapter) tabular-nums">
+                      {index + 1}
+                    </span>
+                    <span>{step.title}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+        <div class="rounded-lg bg-surface p-6">
+          <h2 class="text-title-4">Get RocketSim</h2>
+          <p class="mt-2 text-copy text-muted">
+            One install includes the CLI and the Agent Skill, so your agent can
+            run every command in this tutorial.{
+              track.version && ` Flows ship with ${track.version}.`
+            }
+          </p>
+          <Button
+            class="mt-5 plausible-event-name=App+Store+Install plausible-event-surface=tutorials plausible-event-placement=tutorial-sidebar plausible-event-format=button"
+            href={appStoreUrl(campaign)}
+            target="_blank"
+            rel="noopener"
+          >
+            Free download
+          </Button>
+          <p class="mt-3 text-caption text-muted">{downloadMicrocopy}</p>
+        </div>
+      </aside>
+    </div>
+
+    {
+      next && (
+        <section
+          class="mx-auto max-w-[1120px] px-5"
+          aria-labelledby="up-next-title"
+          style={`--chapter: ${tracks[next.track].color}`}
+        >
+          <a
+            href={tutorialPath(next.slug)}
+            class="group grid items-center gap-x-10 gap-y-4 rounded-xl bg-surface p-8 no-underline transition-colors duration-300 hover:bg-surface-hover md:grid-cols-[minmax(0,1fr)_auto] md:p-10 motion-reduce:transition-none"
+          >
+            <div>
+              <p class="mb-3 text-intro font-semibold text-(--chapter)">
+                Up next · {tracks[next.track].name}
+              </p>
+              <h2
+                id="up-next-title"
+                class="text-title-2 text-balance text-text-dark"
+              >
+                {next.title}
+              </h2>
+              <p class="mt-3 max-w-[34em] text-copy text-muted">
+                {next.summary}
+              </p>
+            </div>
+            <span
+              class="text-title-2 text-primary transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </a>
+        </section>
+      )
+    }
+  </div>
+
+  <FinalCta
+    heading={["Learn it in minutes.", "Use it on every task."]}
+    placement="tutorial-footer"
+    campaign={`${campaign}-footer`}
+  />
+  <MobileDownloadLinkForm />
+</Base>
+
+<script>
+  import { chapterMenuState, READING_LINE } from "@/lib/utils/chapterMenu";
+  import { onPage } from "@/lib/utils/pageLifecycle";
+  import { initReveals } from "@/lib/utils/reveal";
+
+  // Marks the step being read in the sticky list, the way the homepage marks
+  // its chapter: the last step whose top has come up to the reading line.
+  const followSteps = () => {
+    const links = [
+      ...document.querySelectorAll<HTMLAnchorElement>("[data-step-link]"),
+    ];
+    const steps = links
+      .map((link) => document.getElementById(link.hash.slice(1)))
+      .filter((step) => step !== null);
+    const reached = new Map<string, boolean>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ target, isIntersecting }) =>
+          reached.set(target.id, isIntersecting),
+        );
+        const { current } = chapterMenuState({
+          pastGlance: true,
+          chapters: steps.map(({ id }) => ({
+            id,
+            reached: reached.get(id) ?? false,
+          })),
+        });
+        links.forEach((link) => {
+          if (link.hash === `#${current}`) {
+            link.setAttribute("aria-current", "location");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      },
+      // Each step is watched from far above the page down to the reading
+      // line, so a jump past the line cannot leave a stale answer.
+      { rootMargin: `10000% 0px -${(1 - READING_LINE) * 100}% 0px` },
+    );
+    steps.forEach((step) => observer.observe(step));
+    return () => observer.disconnect();
+  };
+
+  onPage(() => {
+    const stops = [initReveals(), followSteps()];
+    return () => stops.forEach((stop) => stop());
+  });
+</script>

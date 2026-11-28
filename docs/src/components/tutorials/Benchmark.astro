@@ -1,0 +1,49 @@
+---
+import { aiFundamentals } from "@/lib/tutorials/tutorials";
+
+// Why RocketSim is the most efficient way for an agent to navigate the
+// Simulator, set where a tutorial first sends the agent into the app. The
+// figures are from the public simulator-use benchmark, November 2026, and
+// match the RocketSim CLI docs.
+const figures = [
+  { value: "161", label: "tokens for a full sign-in, the fewest of ten tools" },
+  {
+    value: "9.7×",
+    label: "fewer tokens than XcodeBuildMCP (now MobileBuildMCP)",
+  },
+  { value: "79×", label: "fewer tokens than Xcode MCP" },
+];
+---
+
+<aside class="rounded-lg bg-surface p-6 md:p-8" aria-label="Why RocketSim">
+  <p class="text-small font-semibold text-(--chapter)">Why RocketSim</p>
+  <h3 class="mt-2 text-title-4 text-balance">
+    The most token-efficient way for an agent to navigate the Simulator.
+  </h3>
+  <dl class="m-0 mt-6 grid gap-6 sm:grid-cols-3">
+    {
+      figures.map(({ value, label }) => (
+        <div class="flex flex-col-reverse justify-end gap-1.5">
+          <dt class="text-small text-muted">{label}</dt>
+          <dd class="m-0 text-title-2 text-text-dark tabular-nums">{value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p
+    class="mt-6 border-t border-line pt-4 text-caption text-muted [&_a]:text-text-dark [&_a]:underline [&_a]:underline-offset-4"
+  >
+    From the public <a
+      href="https://simulator-use.dev/benchmarks"
+      target="_blank"
+      rel="noopener">simulator-use benchmark</a
+    > of ten tools in November 2026. Fewer tokens mean less context re-sent on every
+    call, which is
+    <a
+      href={aiFundamentals("context-engineering-for-coding-agents")}
+      target="_blank"
+      rel="noopener">what an agent session really costs</a
+    >. Read <a href="/blog/testing-ai-agents-ios-simulator/">how we test</a> for the
+    method.
+  </p>
+</aside>

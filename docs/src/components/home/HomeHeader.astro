@@ -15,9 +15,24 @@ interface Props {
   // main menu for it. The homepage's are "Features" and its glance grid.
   title?: string;
   anchor?: string;
+  // Whether scrolling past the anchor swaps the main menu for the chapter
+  // menu. A page without chapters keeps the main menu throughout.
+  chapterMenu?: boolean;
+  // The main menu link of the section this page belongs to, marked as the
+  // current one.
+  current?: string;
+  // Whether `current` is the page itself, or a section the page belongs to.
+  currentKind?: "page" | "true";
 }
 
-const { sections = [], title = "Features", anchor = "glance" } = Astro.props;
+const {
+  sections = [],
+  title = "Features",
+  anchor = "glance",
+  chapterMenu = true,
+  current,
+  currentKind = "page",
+} = Astro.props;
 const chapters = [
   ...(
     await Promise.all(
@@ -40,6 +55,9 @@ const layerClass =
 // The chapter being read, set by the script below.
 const currentClass =
   "aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
+// The main menu link of the page's own section.
+const sectionClass =
+  "aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px] aria-[current=page]:opacity-100 aria-[current=true]:underline aria-[current=true]:decoration-1 aria-[current=true]:underline-offset-[6px] aria-[current=true]:opacity-100";
 ---
 
 <!-- Marks the top of the page: once it scrolls out of view, the header
@@ -54,6 +72,7 @@ const currentClass =
   class="home-header sticky top-0 z-30 border-b border-transparent transition-[background-color,border-color] duration-300 data-scrolled:border-border data-scrolled:bg-body/30 data-scrolled:backdrop-blur-lg motion-reduce:transition-none has-[[aria-expanded=true]]:bg-body"
   data-home-header
   data-anchor={anchor}
+  data-chapter-menu={chapterMenu}
 >
   <a
     href="#main-content"
@@ -78,7 +97,13 @@ const currentClass =
             {
               menu.main.map((link) => (
                 <li>
-                  <a href={link.url} class={barLinkClass}>
+                  <a
+                    href={link.url}
+                    class:list={[barLinkClass, sectionClass]}
+                    aria-current={
+                      link.url === current ? currentKind : undefined
+                    }
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -118,6 +143,7 @@ const currentClass =
       <div
         class:list={[layerClass, "inert:translate-y-full"]}
         data-header-layer="chapters"
+        hidden={!chapterMenu}
         inert
       >
         <HeaderLogo />
@@ -175,7 +201,14 @@ const currentClass =
         {
           menu.main.map((link) => (
             <li>
-              <a href={link.url} class={panelLinkClass}>
+              <a
+                href={link.url}
+                class:list={[
+                  panelLinkClass,
+                  "aria-[current=page]:bg-primary/5 aria-[current=true]:bg-primary/5",
+                ]}
+                aria-current={link.url === current ? currentKind : undefined}
+              >
                 {link.name}
               </a>
             </li>
@@ -291,6 +324,22 @@ const currentClass =
       return observer;
     };
 
+    // Clear over the hero at the top of the page; a glass bar once the
+    // page scrolls under it.
+    const top = document.querySelector("[data-page-top]");
+    if (top) {
+      const scrolled = new IntersectionObserver((entries) => {
+        entries.forEach(({ isIntersecting }) => {
+          header.toggleAttribute("data-scrolled", !isIntersecting);
+        });
+      });
+      scrolled.observe(top);
+      observers.push(scrolled);
+    }
+
+    // A page without chapters keeps the main menu.
+    if (header.dataset.chapterMenu === "false") return stop;
+
     // Past the glance grid the chapter layer replaces the main layer, and
     // the chapter being read is highlighted in its menus.
     const glance = document.getElementById(header.dataset.anchor ?? "glance");
@@ -338,15 +387,6 @@ const currentClass =
         });
       }
     };
-
-    // Clear over the hero at the top of the page; a glass bar once the
-    // page scrolls under it.
-    const top = document.querySelector("[data-page-top]");
-    if (top) {
-      observe([top], {}, ({ isIntersecting }) => {
-        header.toggleAttribute("data-scrolled", !isIntersecting);
-      });
-    }
 
     // A chapter has reached the reading line once its top is above it.
     observe(

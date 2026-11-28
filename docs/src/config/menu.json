@@ -5,6 +5,10 @@
       "url": "/features/"
     },
     {
+      "name": "Tutorials",
+      "url": "/tutorials/"
+    },
+    {
       "name": "For Teams",
       "url": "/for-teams/"
     },
@@ -39,6 +43,10 @@
     {
       "name": "Features",
       "url": "/features/"
+    },
+    {
+      "name": "Tutorials",
+      "url": "/tutorials/"
     },
     {
       "name": "For Teams",
