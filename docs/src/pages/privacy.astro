@@ -69,7 +69,7 @@ const seo = {
       <section>
         <p>
           <em
-            >This privacy statement was most recently revised on 4 September
+            >This privacy statement was most recently revised on 28 November
             2026</em
           >
         </p>
@@ -312,6 +312,147 @@ const seo = {
           settings.
         </p>
       </section>
+      <section aria-labelledby="online-sharing">
+        <h3 id="online-sharing" class="title--underline">
+          <em>Online sharing of flows</em>
+        </h3>
+        <p>
+          <strong
+            >This section only applies if you choose to share a flow online.</strong
+          > Online sharing of flows is optional and turned off by default. You turn
+          it on yourself, you see a disclosure the first time, and you confirm a preview
+          before anything is published. If you do not share a flow, RocketSim does
+          not send any flow data anywhere. Opening a public flow link only shows you
+          the page. It does not send flow data from your Mac, and you do not need
+          RocketSim to view it. Flows are shared through flows.rocketsim.app.
+        </p>
+        <p>
+          <strong>Purpose:</strong> To let you publish a read-only snapshot of a flow,
+          collect comments from reviewers, and keep your shared flows available while
+          you use them.
+        </p>
+        <p><strong>Personal data we process when you share a flow:</strong></p>
+        <ul>
+          <li>
+            Your email address (the owner email), which you confirm by link
+          </li>
+          <li>
+            A public device key, generated on your Mac when you first publish.
+            The private key stays in the macOS Keychain on your Mac and is never
+            sent to us
+          </li>
+          <li>
+            The flow content you choose to publish: screenshots, element labels,
+            screen titles, and the app name, icon, and version. Screenshots show
+            whatever was on screen, so mask anything personal before you publish
+          </li>
+        </ul>
+        <p>
+          Your steps and commands, parameter values, secrets, the bundle ID, and
+          masked areas are never uploaded. Masks are applied on your Mac before
+          upload, so we never receive the masked pixels.
+        </p>
+        <p><strong>Personal data we process for reviewers:</strong></p>
+        <ul>
+          <li>
+            The email address a reviewer enters to comment, which they confirm
+            by link, and an optional name
+          </li>
+          <li>
+            The comments a reviewer writes, with the screen and element they
+            refer to
+          </li>
+          <li>
+            A sign-in cookie on flows.rocketsim.app that keeps the reviewer
+            signed in for that flow
+          </li>
+        </ul>
+        <p>
+          The owner of the flow sees the reviewer's comments, name, and email
+          address. Other reviewers do not see them. A reviewer's email address
+          and name are never shown to an agent: agents only receive comments the
+          owner approved, without who wrote them. Viewing a flow without
+          commenting does not require an email address.
+        </p>
+        <p><strong>Website account:</strong></p>
+        <p>
+          Owners can log in at flows.rocketsim.app with their email address to
+          see their flows. We process the email address and a session cookie.
+          The cookie is strictly necessary to keep you logged in, expires after
+          14 days, and is not used for advertising, analytics, or cross-site
+          tracking.
+        </p>
+        <p><strong>Technical data:</strong></p>
+        <p>
+          To prevent abuse, we apply rate limits per IP address. We store the IP
+          address only as a hash made with a secret, which cannot be used to
+          recover the address, and we clear these records automatically after a
+          short time. Where you enter an email address on flows.rocketsim.app,
+          Cloudflare Turnstile checks in the background that the request comes
+          from a person and not a bot. Turnstile processes technical data such
+          as your IP address for that purpose.
+        </p>
+        <p><strong>Service providers for online sharing:</strong></p>
+        <ul>
+          <li>
+            Cloudflare – to host the service and store shared flows in Western
+            Europe, and to provide Turnstile bot protection
+          </li>
+          <li>Resend – to send confirmation and notification emails</li>
+          <li>
+            Kit – to send email about getting started with RocketSim, see below
+          </li>
+        </ul>
+        <p>
+          These providers may process data outside the European Economic Area
+          (EEA). We only do so if there is an appropriate level of protection
+          for the processing of personal data.
+        </p>
+        <p><strong>Email about getting started with RocketSim:</strong></p>
+        <p>
+          If you register an account on flows.rocketsim.app, or confirm your
+          email address to comment on a shared flow, you may receive emails from
+          us about getting started with RocketSim. For this purpose, we process
+          your email address, and your first name if you gave one, in Kit. Every
+          email contains an unsubscribe link. We do not send these emails to the
+          email addresses of owners who only publish from the Mac app, and
+          confirmation and notification emails about your own flows are service
+          emails, not marketing.
+        </p>
+        <p><strong>Legal basis:</strong></p>
+        <ul>
+          <li>
+            Execution of an agreement with the data subject (owners who share a
+            flow or log in to the website account, and the service emails about
+            their flows);
+          </li>
+          <li>
+            Legitimate Interest (providing the commenting function to reviewers
+            on behalf of the owner, preventing abuse, and sending email about
+            getting started with RocketSim, which you can stop at any time with
+            the unsubscribe link).
+          </li>
+        </ul>
+        <p>
+          <strong>Retention period:</strong><br />A shared flow, its images,
+          versions, reviewers, and comments are deleted 30 days after the last
+          activity on the flow, or immediately when the owner unpublishes it.
+          Viewing the flow, commenting, publishing a new version, and renewing
+          the flow all count as activity. Owner email addresses and device keys
+          are kept while the owner uses the service and are deleted on request.
+          Subscriptions in Kit are kept until you unsubscribe. After you
+          unsubscribe, the personal data is securely deleted within 30 days.
+        </p>
+        <p>
+          <strong>Your rights:</strong> The rights described under “What are your
+          privacy rights?” apply to online sharing as well. You can ask us for access
+          to the personal data we hold about you, or for its deletion, by sending
+          an e-mail to
+          <a href="mailto:support@rocketsim.app">support@rocketsim.app</a>. If
+          you want a flow removed, or you want to report a flow, contact us at
+          the same address and we will remove it.
+        </p>
+      </section>
       <section aria-labelledby="contact">
         <h3 id="contact"><em>Contact</em></h3>
         <p>
@@ -395,6 +536,10 @@ const seo = {
           <li>
             Auth0 (by Okta) – to broker SSO authentication between RocketSim and
             the customer's identity provider
+          </li>
+          <li>
+            Cloudflare, Resend, and Kit – only if you share a flow online, as
+            described under “Online sharing of flows”
           </li>
         </ul>
         <p>
