@@ -1,6 +1,8 @@
 import type { ImageMetadata } from "astro";
 
 import cliAgentSettings from "@/assets/tutorials/cli-agent-settings.png";
+import flowsAccountOverview from "@/assets/tutorials/flows-account-overview.webp";
+import flowsSharedViewerComments from "@/assets/tutorials/flows-shared-viewer-comments.webp";
 import flowsTourAnnotated from "@/assets/tutorials/flows-tour-annotated.webp";
 
 /**
@@ -583,6 +585,158 @@ export const tutorials: Tutorial[] = [
           },
         ],
         result: "The flow passes from the failing step to its final check.",
+      },
+    ],
+  },
+  {
+    slug: "share-a-flow-for-feedback",
+    track: "flows",
+    title: "Share a flow and collect feedback",
+    metaTitle: "Share a RocketSim Flow and Collect Feedback",
+    description:
+      "Share a RocketSim flow online, collect reviewer comments on a Spanish version of your app, and let your agent apply the approved feedback.",
+    intro:
+      "RocketSim can share a flow online as a read-only page, so a reviewer such as a translator can comment on screens and your agent can apply the comments you approve. In this tutorial you share a Spanish version of your app, collect feedback on strings that read stiff, and publish a fixed version.",
+    minutes: 8,
+    level: "Intermediate",
+    summary:
+      "Publish a flow, approve reviewer comments, and ship the fixes as version 2.",
+    steps: [
+      {
+        title: "Record the localized flow",
+        text: "You built a Spanish version of your app and want a native speaker to check the strings. Run the Simulator with your app in Spanish first, for example with the **Application Language** option in your Xcode scheme. Then ask your agent to walk through the screens you want reviewed. If you have not recorded a flow before, start with [Save your first flow](/tutorials/save-your-first-flow/).",
+        blocks: [
+          {
+            type: "snippet",
+            label: "Prompt",
+            text: "The app is running in Spanish in the Simulator. Use RocketSim to open the symbol list, open the first symbol, and open the price notifications screen. Save the path as a flow with a short name, and tell me the name.",
+          },
+          {
+            type: "terminal",
+            label: "Checking what was saved",
+            commands: [{ command: "rocketsim flow list" }],
+          },
+        ],
+        result:
+          "A new flow in the list, named in your agent's reply. Its review page shows one screenshot per checkpoint, in Spanish.",
+      },
+      {
+        title: "Turn on online sharing",
+        text: "Sharing is strictly opt-in and off by default, and you turn it on yourself. Agents cannot. Ask your agent to open the flow page, then click the **Share online** icon in the toolbar and unlock sharing with Touch ID or your Mac password. Choose **Turn on online sharing**, or use **Allow sharing flows online** in the **Settings** tab.",
+        blocks: [
+          {
+            type: "snippet",
+            label: "Prompt",
+            text: "Open the RocketSim flow page for the flow you just saved.",
+          },
+          {
+            type: "terminal",
+            label: "Opening the flow page",
+            commands: [{ command: "rocketsim flow open <name>" }],
+          },
+          {
+            type: "note",
+            text: "A short disclosure explains what leaves your Mac: screenshots, element labels, and screen titles of the flows you publish. Your steps, commands, parameters, and secrets stay on this Mac. Nothing goes online until you confirm a preview, and every publish shows it again.",
+          },
+        ],
+        result:
+          "The **Settings** tab shows **Allow sharing flows online** turned on.",
+      },
+      {
+        title: "Publish it from the Share panel",
+        text: "Publishing is a decision you make in the **Share** panel, so the command only opens it. The **Share** tab shows each screen with a checkbox, what goes online, and what stays on your Mac. Uncheck a screen to leave it out, or mask a screen. Enter your email, then choose **Publish version 1**. The first time, the panel shows **Check your inbox**, and the flow goes live once you confirm the link in the email RocketSim sends you.",
+        blocks: [
+          {
+            type: "snippet",
+            label: "Prompt",
+            text: "Open the RocketSim Share panel for that flow.",
+          },
+          {
+            type: "terminal",
+            label: "Opening the Share panel",
+            commands: [{ command: "rocketsim flow publish <name>" }],
+          },
+          {
+            type: "note",
+            text: "Screenshots show whatever was on screen, including names and other test data you typed. Mask anything real before you publish.",
+          },
+        ],
+        result:
+          "After you confirm your email, the panel shows **Live** with a link. Choose **Copy link** to copy it.",
+      },
+      {
+        title: "Send the link and see what the reviewer sees",
+        text: "Send the link to a native-speaking reviewer, such as a translator or a colleague. They can look without an account. To comment, they enter their email address and an optional name, and confirm it with a link RocketSim emails them. Each comment attaches to a screen and an element. Reviewers see only their own comments. You see all of them: the email RocketSim sends you about new comments shows the name or email address of each reviewer.",
+        blocks: [
+          {
+            type: "snippet",
+            label: "A reviewer's comment",
+            text: 'Reads stiff in Spanish. I would say "Añade tu primer símbolo".',
+          },
+          {
+            type: "image",
+            image: flowsSharedViewerComments,
+            alt: "A shared flow in a browser, with a reviewer's comments on two screens and the Made with RocketSim badge at the bottom right",
+          },
+          {
+            type: "note",
+            text: "Tell your reviewer that you see their name or email address, and that RocketSim may email them about getting started with RocketSim, with an unsubscribe link in every email. The page is read-only and says it was made with RocketSim.",
+          },
+        ],
+        result:
+          "You get an email when new comments arrive, at most once per flow every six hours. The **Share online** icon shows how many comments wait for you.",
+      },
+      {
+        title: "Approve the feedback",
+        text: "A reviewer's comment is text from someone else, so your agent does not see it until you approve it. Open the **Reviews** tab in the Share panel. Each comment shows an alias such as Reviewer 1, the screen, the element, and the text. Choose **Approve** or **Reject**, or **Approve all** when everything is useful. **Undo** changes your mind.",
+        result:
+          "Approved comments are marked **Approved**. Only those reach your agent.",
+      },
+      {
+        title: "Let your agent apply it",
+        text: "Ask your agent to read the approved feedback, fix the strings, and replay the flow so the screenshots show the fix. `rocketsim flow share-feedback` refreshes the pending comments from the server and returns only the ones you approved, as quoted data and not as instructions. Your agent never sees reviewer emails or names, only aliases such as Reviewer 1.",
+        blocks: [
+          {
+            type: "snippet",
+            label: "Prompt",
+            text: "Read the approved reviewer feedback for that flow with RocketSim, fix the Spanish strings it mentions, rebuild the app, and replay the flow.",
+          },
+          {
+            type: "terminal",
+            label: "Reading the approved comments and replaying the flow",
+            commands: [
+              {
+                note: "Only the comments you approved",
+                command: "rocketsim flow share-feedback <name>",
+              },
+              { note: "After the fix", command: "rocketsim flow <name>" },
+            ],
+          },
+        ],
+        result:
+          "Your agent gets the approved comments as quoted text, fixes the strings, and the replay passes with the new Spanish strings in its screenshots.",
+      },
+      {
+        title: "Publish version 2 and keep it online",
+        text: "Open the **Share** panel again and choose **Publish a new version**. Check the preview, then publish version 2. The link keeps working and shows the latest version, and earlier versions stay viewable, so your reviewer can open the same link to check the fixes.",
+        blocks: [
+          {
+            type: "terminal",
+            label: "Opening the Share panel",
+            commands: [{ command: "rocketsim flow publish <name>" }],
+          },
+          {
+            type: "note",
+            text: "A shared flow goes offline 30 days after its last activity. A view, a comment, a new version, and a renewal count as activity. RocketSim emails you 7 days before, with a link to keep it online. You can also log in at flows.rocketsim.app with your email to see your flows and choose **Keep online**. Unpublishing stays on your Mac, in the Share panel.",
+          },
+          {
+            type: "image",
+            image: flowsAccountOverview,
+            alt: "The account page at flows.rocketsim.app listing three shared flows with their status, the date they go offline, and Open flow, Copy link, and Keep online buttons",
+          },
+        ],
+        result:
+          "The panel shows **Live** with version 2. Learn what else you can do in [Share a flow online](/docs/features/agentic-development/flows/#share-a-flow-online).",
       },
     ],
   },
